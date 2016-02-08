@@ -35,13 +35,33 @@ public class ControllerMonitor : MonoBehaviour
     void Update()
     {
         text = string.Format(
-			"above {0}\nbelow {1}\nleft {2}\nright {3}\nstate{4}\narea{5}\n",
+			"above {0}\n"+
+			"below {1}\n"+
+			"left {2}\n"+
+			"right {3}\n"+
+			"state{4}\n"+
+			"area{5}\n"+
+			"climbingSlope {6}\n"+
+			"descendingSlope {7}\n"+
+			"slopeAngle {8}\n"+
+			"slopeAngleOld {9}\n"+
+			"faceDir {10}\n"+
+			"fallingThroughPlatform {11}\n"+
+			"standingOnPlatform {12}\n",
             control.collisions.above,
             control.collisions.below,
             control.collisions.left,
             control.collisions.right,
 			player ? player.state.ToString() : "null",
-			player ? player.area.ToString() : "null"
+			player ? player.area.ToString() : "null",
+			control.collisions.climbingSlope,
+			control.collisions.descendingSlope,
+			control.collisions.slopeAngle,
+			control.collisions.slopeAngleOld,
+			control.collisions.faceDir,
+			control.collisions.fallingThroughPlatform,
+			control.collisions.standingOnPlatform
+
         );
     }
 }

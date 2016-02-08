@@ -2,18 +2,24 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// Custom update loop. This will avoid most of the problems of who is updated first
+/// in exchange of some manual work
+/// </summary>
 public class UpdateManager : MonoBehaviour {
 	List<PlateformerPlayer> players;
 	List<PlatformController> movingPlatforms;
 
-	// Use this for initialization
+	/// <summary>
+	/// Gather all stuff that need to be updated. Object must be tagged appropriately
+	/// </summary>
 	void Start () {
 		players = new List<PlateformerPlayer>();
 		movingPlatforms = new List<PlatformController>();
 		var objects = GameObject.FindGameObjectsWithTag(Controller2D.PLAYER_TAG);
 		foreach (var obj in objects) {
 			Debug.Log("Manage" + obj);
-			if (obj.active) {
+			if (obj.activeInHierarchy) {
 				players.Add (obj.GetComponent<PlateformerPlayer> ());
 			}
 		}
@@ -21,17 +27,23 @@ public class UpdateManager : MonoBehaviour {
 		objects = GameObject.FindGameObjectsWithTag(Controller2D.TROUGHT_TAG);
 		foreach (var obj in objects) {
 			Debug.Log("Manage" + obj);
-		    movingPlatforms.Add(obj.GetComponent<PlatformController>());
+			if (obj.activeInHierarchy) {
+				movingPlatforms.Add (obj.GetComponent<PlatformController> ());
+			}
 		}
 
 		objects = GameObject.FindGameObjectsWithTag(Controller2D.MOVINGPLATFORM_TAG);
 		foreach (var obj in objects) {
 			Debug.Log("Manage" + obj);
-		    movingPlatforms.Add(obj.GetComponent<PlatformController>());
+			if (obj.activeInHierarchy) {
+				movingPlatforms.Add (obj.GetComponent<PlatformController> ());
+			}
 		}
 	}
 
-	// Update is called once per frame
+	/// <summary>
+	/// Update those object we manage in order: MovingPlatdorms - players
+	/// </summary>
 	void Update () {
 		foreach(var obj in movingPlatforms) {
 			obj.ManagedUpdate();

@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Handles collisions
+/// </summary>
 public class Controller2D : RaycastController {
 	public const string PLAYER_TAG = "Player";
 	public const string TROUGHT_TAG = "MovingPlatformThrough";

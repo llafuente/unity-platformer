@@ -1,6 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// TODO double jump
+/// TODO Dash
+/// TODO Attack range
+/// TODO Attack melee
+/// TODO states and area are must be in Controller2D
+/// </summary>
 [RequireComponent (typeof (Controller2D))]
 public class PlateformerPlayer : MonoBehaviour {
 
@@ -56,6 +63,10 @@ public class PlateformerPlayer : MonoBehaviour {
 	}
 	public Areas area = Areas.None;
 
+	/// <summary>
+	/// This method precalculate some vars, but those value could change. This need to be refactored.
+	/// Maybe setters are the appropiate method to refactor this.
+	/// </summary>
 	void Start() {
 		controller = GetComponent<Controller2D> ();
 
@@ -65,6 +76,10 @@ public class PlateformerPlayer : MonoBehaviour {
 		print ("Gravity: " + gravity + "  Jump Velocity: " + maxJumpVelocity);
 	}
 
+	/// <summary>
+	/// Managed update called by UpdateManager
+	/// Transform Input into platformer magic :)
+	/// </summary>
 	public void ManagedUpdate() {
 		Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 		int wallDirX = (controller.collisions.left) ? -1 : 1;
