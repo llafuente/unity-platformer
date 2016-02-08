@@ -19,6 +19,7 @@ public class CameraFollow : MonoBehaviour {
 	float smoothVelocityY;
 
 	bool lookAheadStopped;
+	public bool debug = false;
 
 	void Start() {
 		focusArea = new FocusArea (target.collider.bounds, focusAreaSize);
@@ -52,8 +53,10 @@ public class CameraFollow : MonoBehaviour {
 	}
 
 	void OnDrawGizmos() {
-		Gizmos.color = new Color (1, 0, 0, .5f);
-		Gizmos.DrawCube (focusArea.centre, focusAreaSize);
+		if (debug) {
+			Gizmos.color = new Color (0, 1, 0, .25f);
+			Gizmos.DrawCube (focusArea.centre, focusAreaSize);
+		}
 	}
 
 	struct FocusArea {
@@ -75,6 +78,7 @@ public class CameraFollow : MonoBehaviour {
 
 		public void Update(Bounds targetBounds) {
 			float shiftX = 0;
+			Debug.Log (targetBounds.min.x + "::" + targetBounds.max.x);
 			if (targetBounds.min.x < left) {
 				shiftX = targetBounds.min.x - left;
 			} else if (targetBounds.max.x > right) {
