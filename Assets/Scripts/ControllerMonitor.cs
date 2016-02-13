@@ -35,10 +35,10 @@ public class ControllerMonitor : MonoBehaviour
     void Update()
     {
         text = string.Format(
-			"above {0}\n"+
-			"below {1}\n"+
-			"left {2}\n"+
-			"right {3}\n"+
+			"above {0} @ {13}\n"+
+			"below {1} @ {14}\n"+
+			"left {2} @ {15}\n"+
+			"right {3} @ {16}\n"+
 			"state{4}\n"+
 			"area{5}\n"+
 			"climbingSlope {6}\n"+
@@ -60,8 +60,11 @@ public class ControllerMonitor : MonoBehaviour
 			control.collisions.slopeAngleOld,
 			control.collisions.faceDir,
 			control.collisions.fallingThroughPlatform,
-			control.collisions.standingOnPlatform
-
+			control.collisions.standingOnPlatform,
+			control.collisions.lastAboveFrame,
+			control.collisions.lastBelowFrame,
+			control.collisions.lastLeftFrame,
+			control.collisions.lastRightFrame
         );
     }
 }

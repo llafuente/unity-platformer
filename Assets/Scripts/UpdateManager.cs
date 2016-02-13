@@ -7,6 +7,9 @@ using System.Collections.Generic;
 /// in exchange of some manual work
 /// </summary>
 public class UpdateManager : MonoBehaviour {
+	// to scale up/down
+	public float timeScale = 1;
+
 	List<PlateformerPlayer> players;
 	List<PlatformController> movingPlatforms;
 
@@ -17,10 +20,13 @@ public class UpdateManager : MonoBehaviour {
 		players = new List<PlateformerPlayer>();
 		movingPlatforms = new List<PlatformController>();
 		var objects = GameObject.FindGameObjectsWithTag(Controller2D.PLAYER_TAG);
+		PlateformerPlayer pp;
 		foreach (var obj in objects) {
 			Debug.Log("Manage" + obj);
 			if (obj.activeInHierarchy) {
-				players.Add (obj.GetComponent<PlateformerPlayer> ());
+				pp = obj.GetComponent<PlateformerPlayer> ();
+				players.Add (pp);
+				pp.Attach (this);
 			}
 		}
 
@@ -41,15 +47,27 @@ public class UpdateManager : MonoBehaviour {
 		}
 	}
 
+
+	public int GetFrameCount(float time) {
+		float frames = time / Time.fixedDeltaTime;
+		int roundedFrames = Mathf.RoundToInt(frames);
+
+		if (Mathf.Approximately(frames, roundedFrames)) {
+			return roundedFrames;
+		}
+
+		return Mathf.RoundToInt(Mathf.CeilToInt(frames) / timeScale);
+	}
+
 	/// <summary>
 	/// Update those object we manage in order: MovingPlatdorms - players
 	/// </summary>
-	void Update () {
+	void FixedUpdate() {
 		foreach(var obj in movingPlatforms) {
-			obj.ManagedUpdate();
+			obj.ManagedUpdate(Time.fixedDeltaTime);
 		}
 		foreach(var obj in players) {
-			obj.ManagedUpdate();
+			obj.ManagedUpdate(Time.fixedDeltaTime);
 		}
 	}
 }

@@ -7,12 +7,14 @@ using System.Collections;
 /// TODO Attack range
 /// TODO Attack melee
 /// TODO states and area are must be in Controller2D
+/// TODO create a platformer input, to handle all input, and store information here, LateUpdate is messing events
 /// </summary>
 [RequireComponent (typeof (Controller2D))]
 public class PlateformerPlayer : MonoBehaviour {
 
 	public float maxJumpHeight = 4;
 	public float minJumpHeight = 1;
+	public float graceJumpTime = 0.25f;
 	public float timeToJumpApex = .4f;
 	float accelerationTimeAirborne = .2f;
 	float accelerationTimeGrounded = .1f;
@@ -36,6 +38,8 @@ public class PlateformerPlayer : MonoBehaviour {
 	float ladderCenter;
 
 	Controller2D controller;
+
+	int _graceJumpFrames;
 
 	public enum States
 	{
@@ -76,11 +80,15 @@ public class PlateformerPlayer : MonoBehaviour {
 		print ("Gravity: " + gravity + "  Jump Velocity: " + maxJumpVelocity);
 	}
 
+	public void Attach(UpdateManager um) {
+		_graceJumpFrames = um.GetFrameCount (graceJumpTime);
+	}
+
 	/// <summary>
 	/// Managed update called by UpdateManager
 	/// Transform Input into platformer magic :)
 	/// </summary>
-	public void ManagedUpdate() {
+	public void ManagedUpdate(float delta) {
 		Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 		int wallDirX = (controller.collisions.left) ? -1 : 1;
 
@@ -105,7 +113,7 @@ public class PlateformerPlayer : MonoBehaviour {
 				velocity.x = 0;
 
 				if (input.x != wallDirX && input.x != 0) {
-					timeToWallUnstick -= Time.deltaTime;
+					timeToWallUnstick -= delta;
 				}
 				else {
 					timeToWallUnstick = wallStickTime;
@@ -118,6 +126,8 @@ public class PlateformerPlayer : MonoBehaviour {
 
 		// jump
 		if (Input.GetKeyDown (KeyCode.Space)) {
+			Debug.Log ("Jump!!");
+
 			if (wallSliding) {
 				if (wallDirX == input.x) {
 					velocity.x = -wallDirX * wallJumpClimb.x;
@@ -132,7 +142,9 @@ public class PlateformerPlayer : MonoBehaviour {
 					velocity.y = wallLeap.y;
 				}
 			}
-			if (controller.collisions.below) {
+			//if (controller.collisions.below) {
+			if (controller.IsOnGround(_graceJumpFrames)) {
+
 				velocity.y = maxJumpVelocity;
 			}
 		} else if (Input.GetKeyUp (KeyCode.Space)) {
@@ -146,14 +158,14 @@ public class PlateformerPlayer : MonoBehaviour {
 			disableGravity = true;
 			controller.disableWorldCollisions = true;
 			// instant move to the center of the ladder!
-			velocity.x = (ladderCenter - controller.GetComponent<BoxCollider2D>().bounds.center.x) / Time.deltaTime;
+			velocity.x = (ladderCenter - controller.GetComponent<BoxCollider2D>().bounds.center.x) / delta;
 		}
 
 		if (!disableGravity) {
-			velocity.y += gravity * Time.deltaTime;
+			velocity.y += gravity * delta;
 		}
 
-		controller.Move(velocity * Time.deltaTime, input);
+		controller.Move(velocity * delta, input);
 
 		if (controller.collisions.above || controller.collisions.below) {
 			velocity.y = 0;

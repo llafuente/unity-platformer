@@ -78,7 +78,7 @@ public class CameraFollow : MonoBehaviour {
 
 		public void Update(Bounds targetBounds) {
 			float shiftX = 0;
-			Debug.Log (targetBounds.min.x + "::" + targetBounds.max.x);
+			//Debug.Log (targetBounds.min.x + "::" + targetBounds.max.x);
 			if (targetBounds.min.x < left) {
 				shiftX = targetBounds.min.x - left;
 			} else if (targetBounds.max.x > right) {

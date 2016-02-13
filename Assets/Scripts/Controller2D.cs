@@ -57,6 +57,7 @@ public class Controller2D : RaycastController {
 		}
 
 		transform.Translate (velocity);
+		collisions.Consolidate ();
 	}
 
 	void HorizontalCollisions(ref Vector3 velocity) {
@@ -206,9 +207,25 @@ public class Controller2D : RaycastController {
 		collisions.fallingThroughPlatform = false;
 	}
 
+	public bool IsOnGround(int graceFrames = 0) {
+		if (graceFrames == 0) {
+			return collisions.below;
+		}
+
+		return collisions.below || collisions.lastBelowFrame < graceFrames;
+	}
+
 	public struct CollisionInfo {
 		public bool above, below;
 		public bool left, right;
+
+		public bool _above, _below;
+		public bool _left, _right;
+
+		public int lastAboveFrame;
+		public int lastBelowFrame;
+		public int lastLeftFrame;
+		public int lastRightFrame;
 
 		public bool climbingSlope;
 		public bool descendingSlope;
@@ -219,13 +236,29 @@ public class Controller2D : RaycastController {
 		public bool standingOnPlatform;
 
 		public void Reset() {
+			_above = above;
+			_below = below;
+			_left = left;
+			_right = right;
+
 			above = below = false;
 			left = right = false;
 			climbingSlope = false;
 			descendingSlope = false;
 
+			++lastAboveFrame;
+			++lastBelowFrame;
+			++lastLeftFrame;
+			++lastRightFrame;
+
 			slopeAngleOld = slopeAngle;
 			slopeAngle = 0;
+		}
+
+		public void Consolidate() {
+			if (!below && _below) {
+				lastBelowFrame = 0;
+			}
 		}
 	}
 

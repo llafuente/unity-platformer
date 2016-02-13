@@ -35,11 +35,11 @@ public class PlatformController : RaycastController {
 		}
 	}
 
-	public void ManagedUpdate () {
+	public void ManagedUpdate (float delta) {
 
 		UpdateRaycastOrigins ();
 
-		Vector3 velocity = CalculatePlatformMovement();
+		Vector3 velocity = CalculatePlatformMovement(delta);
 
 		CalculatePassengerMovement(velocity);
 
@@ -53,7 +53,7 @@ public class PlatformController : RaycastController {
 		return Mathf.Pow(x,a) / (Mathf.Pow(x,a) + Mathf.Pow(1-x,a));
 	}
 
-	Vector3 CalculatePlatformMovement() {
+	Vector3 CalculatePlatformMovement(float delta) {
 
 		if (Time.time < nextMoveTime) {
 			return Vector3.zero;
@@ -62,7 +62,7 @@ public class PlatformController : RaycastController {
 		fromWaypointIndex %= globalWaypoints.Length;
 		int toWaypointIndex = (fromWaypointIndex + 1) % globalWaypoints.Length;
 		float distanceBetweenWaypoints = Vector3.Distance (globalWaypoints [fromWaypointIndex], globalWaypoints [toWaypointIndex]);
-		percentBetweenWaypoints += Time.deltaTime * speed/distanceBetweenWaypoints;
+		percentBetweenWaypoints += delta * speed/distanceBetweenWaypoints;
 		percentBetweenWaypoints = Mathf.Clamp01 (percentBetweenWaypoints);
 		float easedPercentBetweenWaypoints = Ease (percentBetweenWaypoints);
 
