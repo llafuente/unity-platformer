@@ -12,16 +12,13 @@ public class ControllerMonitor : MonoBehaviour
     private GUIStyle guiStyle = new GUIStyle();
 
     Controller2D control;
-	PlateformerPlayer player;
 
     // Use this for initialization
-    void Start()
-    {
+    virtual public void Start() {
 		control = GetComponent<Controller2D> ();
-		player = GetComponent<PlateformerPlayer> ();
     }
 
-    void OnGUI() {
+	virtual public void OnGUI() {
         guiStyle.normal.textColor = textColor;
 
         GUILayout.BeginArea(new Rect(position.x, position.y, Screen.width - position.x, Screen.height - position.y));
@@ -32,28 +29,27 @@ public class ControllerMonitor : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+	virtual public void Update() {
         text = string.Format(
-			"above {0} @ {13}\n"+
-			"below {1} @ {14}\n"+
-			"left {2} @ {15}\n"+
-			"right {3} @ {16}\n"+
-			"state{4}\n"+
-			"area{5}\n"+
-			"climbingSlope {6}\n"+
-			"descendingSlope {7}\n"+
-			"slopeAngle {8}\n"+
-			"slopeAngleOld {9}\n"+
-			"faceDir {10}\n"+
-			"fallingThroughPlatform {11}\n"+
-			"standingOnPlatform {12}\n",
+			"above? {0} @ {13}\n"+
+			"below? {1} @ {14}\n"+
+			"left? {2} @ {15}\n"+
+			"right? {3} @ {16}\n"+
+			"state: {4}\n"+
+			"area: {5}\n"+
+			"climbingSlope? {6}\n"+
+			"descendingSlope? {7}\n"+
+			"slopeAngle: {8}\n"+
+			"slopeAngleOld: {9}\n"+
+			"faceDir: {10}\n"+
+			"fallingThroughPlatform: {11}\n"+
+			"standingOnPlatform: {12}\n",
             control.collisions.above,
             control.collisions.below,
             control.collisions.left,
             control.collisions.right,
-			player ? player.state.ToString() : "null",
-			player ? player.area.ToString() : "null",
+			control.state.ToString(),
+			control.area.ToString(),
 			control.collisions.climbingSlope,
 			control.collisions.descendingSlope,
 			control.collisions.slopeAngle,

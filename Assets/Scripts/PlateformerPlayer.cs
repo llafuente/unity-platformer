@@ -41,32 +41,6 @@ public class PlateformerPlayer : MonoBehaviour {
 
 	int _graceJumpFrames;
 
-	public enum States
-	{
-		None = 0,             // 0000000
-		OnGround = 1,         // 0000001
-		OnMovingPlatform = 3, // 0000011
-		OnSlope = 5,          // 0000100
-		Jumping = 8,          // 0001000
-		Falling = 16,         // 0010000
-		FallingFast = 48,     // 0110000
-		Ladder = 64,          // 1000000
-		//WallSliding,
-		//WallSticking,
-		//Dashing,
-		//Frozen,
-		//Slipping,
-		//FreedomState
-	}
-	public States state = States.None;
-
-	public enum Areas
-	{
-		None = 0x0,
-		Ladder = 0x01
-	}
-	public Areas area = Areas.None;
-
 	/// <summary>
 	/// This method precalculate some vars, but those value could change. This need to be refactored.
 	/// Maybe setters are the appropiate method to refactor this.
@@ -95,7 +69,7 @@ public class PlateformerPlayer : MonoBehaviour {
 		float targetVelocityX = input.x * moveSpeed;
 		velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
 
-		if (IsOnLadder () && IsOnState(States.Ladder)) {
+		if (IsOnLadder () && IsOnState(Controller2D.States.Ladder)) {
 			velocity.x = 0; // disable x movement
 			velocity.y = ladderMoveSpeed * input.y;
 		}
@@ -153,8 +127,8 @@ public class PlateformerPlayer : MonoBehaviour {
 			}
 		}
 
-		if (IsOnLadder () && input.y != 0 && !IsOnState (States.Ladder)) {
-			state |= States.Ladder;
+		if (IsOnLadder () && input.y != 0 && !IsOnState (Controller2D.States.Ladder)) {
+			controller.state |= Controller2D.States.Ladder;
 			disableGravity = true;
 			controller.disableWorldCollisions = true;
 			// instant move to the center of the ladder!
@@ -172,23 +146,23 @@ public class PlateformerPlayer : MonoBehaviour {
 		}
 	}
 
-	public bool IsOnState(States _state) {
-		return (state & _state) == _state;
+	public bool IsOnState(Controller2D.States _state) {
+		return (controller.state & _state) == _state;
 	}
 
 	public bool IsOnLadder() {
-		return (area & Areas.Ladder) == Areas.Ladder;
+		return (controller.area & Controller2D.Areas.Ladder) == Controller2D.Areas.Ladder;
 	}
 
 	public void EnterLadderArea(Bounds b) {
-		area |= Areas.Ladder;
+		controller.area |= Controller2D.Areas.Ladder;
 		ladderCenter = b.center.x;
 	}
 
 	public void ExitLadderArea(Bounds b) {
-		area &= ~Areas.Ladder;
-		if (IsOnState (States.Ladder)) {
-			state &= ~States.Ladder;
+		controller.area &= ~Controller2D.Areas.Ladder;
+		if (IsOnState (Controller2D.States.Ladder)) {
+			controller.state &= ~Controller2D.States.Ladder;
 			disableGravity = false;
 			controller.disableWorldCollisions = false;
 		}

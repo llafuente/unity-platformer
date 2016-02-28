@@ -12,6 +12,7 @@ public class UpdateManager : MonoBehaviour {
 
 	List<PlateformerPlayer> players;
 	List<PlatformController> movingPlatforms;
+	List<Enemy> enemies;
 
 	/// <summary>
 	/// Gather all stuff that need to be updated. Object must be tagged appropriately
@@ -19,14 +20,33 @@ public class UpdateManager : MonoBehaviour {
 	void Start () {
 		players = new List<PlateformerPlayer>();
 		movingPlatforms = new List<PlatformController>();
+		enemies =  new List<Enemy>();
+
 		var objects = GameObject.FindGameObjectsWithTag(Controller2D.PLAYER_TAG);
 		PlateformerPlayer pp;
 		foreach (var obj in objects) {
 			Debug.Log("Manage" + obj);
 			if (obj.activeInHierarchy) {
 				pp = obj.GetComponent<PlateformerPlayer> ();
+				if (!pp) {
+					Debug.LogWarning("Invalid PlateformerPlayer: " + obj);
+				}
 				players.Add (pp);
 				pp.Attach (this);
+			}
+		}
+
+		objects = GameObject.FindGameObjectsWithTag(Controller2D.ENEMY_TAG);
+		Enemy eny;
+		foreach (var obj in objects) {
+			Debug.Log("Manage" + obj);
+			if (obj.activeInHierarchy) {
+				eny = obj.GetComponent<Enemy> ();
+				if (!eny) {
+					Debug.LogWarning("Invalid Enemy: " + obj);
+				}
+				enemies.Add (eny);
+				//c2d.Attach (this);
 			}
 		}
 
@@ -67,6 +87,9 @@ public class UpdateManager : MonoBehaviour {
 			obj.ManagedUpdate(Time.fixedDeltaTime);
 		}
 		foreach(var obj in players) {
+			obj.ManagedUpdate(Time.fixedDeltaTime);
+		}
+		foreach(var obj in enemies) {
 			obj.ManagedUpdate(Time.fixedDeltaTime);
 		}
 	}

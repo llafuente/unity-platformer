@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
 /// <summary>
@@ -8,6 +9,8 @@ public class Controller2D : RaycastController {
 	public const string PLAYER_TAG = "Player";
 	public const string TROUGHT_TAG = "MovingPlatformThrough";
 	public const string MOVINGPLATFORM_TAG = "MovingPlatform";
+	public const string ENEMY_TAG = "Enemy";
+
 	public const float MIN_DISTANCE_TO_ENV = 0.1f;
 
 	// TODO this is buggy
@@ -15,6 +18,33 @@ public class Controller2D : RaycastController {
 	float maxDescendAngle = 30;
 
 	public CollisionInfo collisions;
+
+	public enum States
+	{
+		None = 0,             // 0000000
+		OnGround = 1,         // 0000001
+		OnMovingPlatform = 3, // 0000011
+		OnSlope = 5,          // 0000100
+		Jumping = 8,          // 0001000
+		Falling = 16,         // 0010000
+		FallingFast = 48,     // 0110000
+		Ladder = 64,          // 1000000
+		//WallSliding,
+		//WallSticking,
+		//Dashing,
+		//Frozen,
+		//Slipping,
+		//FreedomState
+	}
+	public States state = States.None;
+
+	public enum Areas
+	{
+		None = 0x0,
+		Ladder = 0x01
+	}
+	public Areas area = Areas.None;
+
 	[HideInInspector]
 	public Vector2 playerInput;
 
@@ -111,17 +141,30 @@ public class Controller2D : RaycastController {
 		}
 	}
 
+	public bool IsGroundOnLeft() {
+		Vector3 v = new Vector3(0, 0, 0);
+		float rayLength = skinWidth + MIN_DISTANCE_TO_ENV;
+  	    RaycastHit2D hit = DoVerticalRay (-1.0f, 0, rayLength, ref v);
+
+		return hit.collider != null;
+	}
+
+	public bool IsGroundOnRight() {
+		Vector3 v = new Vector3(0, 0, 0);
+		float rayLength = skinWidth + MIN_DISTANCE_TO_ENV;
+  	    RaycastHit2D hit = DoVerticalRay (-1.0f, verticalRayCount - 1, rayLength, ref v);
+		 
+		return hit.collider != null;
+	}
+
 	void VerticalCollisions(ref Vector3 velocity) {
 		float directionY = Mathf.Sign (velocity.y);
+
 		float rayLength = Mathf.Abs (velocity.y) + skinWidth + MIN_DISTANCE_TO_ENV;
 
 		for (int i = 0; i < verticalRayCount; i ++) {
 
-			Vector2 rayOrigin = (directionY == -1)?raycastOrigins.bottomLeft:raycastOrigins.topLeft;
-			rayOrigin += Vector2.right * (verticalRaySpacing * i + velocity.x);
-			RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask);
-
-			Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength,Color.red);
+			RaycastHit2D hit = DoVerticalRay (directionY, i, rayLength, ref velocity);
 
 			if (hit) {
 				if (hit.collider.tag == TROUGHT_TAG && !collisions.standingOnPlatform) {
@@ -235,6 +278,9 @@ public class Controller2D : RaycastController {
 		public bool fallingThroughPlatform;
 		public bool standingOnPlatform;
 
+		public Action OnRightWall;
+		public Action OnLeftWall;
+
 		public void Reset() {
 			_above = above;
 			_below = below;
@@ -258,6 +304,12 @@ public class Controller2D : RaycastController {
 		public void Consolidate() {
 			if (!below && _below) {
 				lastBelowFrame = 0;
+			}
+			if (right && !_right && OnRightWall != null) {
+				OnRightWall ();
+			}
+			if (left && !_left && OnLeftWall != null) {
+				OnLeftWall ();
 			}
 		}
 	}
