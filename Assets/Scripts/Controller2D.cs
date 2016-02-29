@@ -141,19 +141,19 @@ public class Controller2D : RaycastController {
 		}
 	}
 
-	public bool IsGroundOnLeft() {
+	public bool IsGroundOnLeft(float rayLengthFactor) {
 		Vector3 v = new Vector3(0, 0, 0);
-		float rayLength = skinWidth + MIN_DISTANCE_TO_ENV;
-  	    RaycastHit2D hit = DoVerticalRay (-1.0f, 0, rayLength, ref v);
+		float rayLength = (skinWidth + MIN_DISTANCE_TO_ENV) * rayLengthFactor;
+    RaycastHit2D hit = DoVerticalRay (-1.0f, 0, rayLength, ref v);
 
 		return hit.collider != null;
 	}
 
-	public bool IsGroundOnRight() {
+	public bool IsGroundOnRight(float rayLengthFactor) {
 		Vector3 v = new Vector3(0, 0, 0);
-		float rayLength = skinWidth + MIN_DISTANCE_TO_ENV;
-  	    RaycastHit2D hit = DoVerticalRay (-1.0f, verticalRayCount - 1, rayLength, ref v);
-		 
+		float rayLength = (skinWidth + MIN_DISTANCE_TO_ENV) * rayLengthFactor;
+    RaycastHit2D hit = DoVerticalRay (-1.0f, verticalRayCount - 1, rayLength, ref v);
+
 		return hit.collider != null;
 	}
 

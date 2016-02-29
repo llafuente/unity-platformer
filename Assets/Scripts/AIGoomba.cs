@@ -10,6 +10,9 @@ public class AIGoomba: Enemy
 
 	public Facing initialFacing;
 	public float velocityX;
+	// helps when Enemy standing on platform moving down.
+	// increase to allow further test
+	public float rayLengthFactor = 1.0f;
 
 	Facing facing;
 	Controller2D controller;
@@ -35,9 +38,9 @@ public class AIGoomba: Enemy
 	}
 
 	override public void ManagedUpdate(float delta) {
-		if (!controller.IsGroundOnLeft ()) {
+		if (!controller.IsGroundOnLeft (rayLengthFactor)) {
 			OnLeftWall ();
-		} else if (!controller.IsGroundOnRight ()) {
+		} else if (!controller.IsGroundOnRight (rayLengthFactor)) {
 			OnRightWall ();
 		}
 
@@ -48,4 +51,3 @@ public class AIGoomba: Enemy
 		controller.Move(v, false);
 	}
 }
-
