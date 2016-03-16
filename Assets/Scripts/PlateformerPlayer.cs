@@ -30,8 +30,7 @@ public class PlateformerPlayer : MonoBehaviour {
 	float timeToWallUnstick;
 
 	float gravity;
-	float maxJumpVelocity;
-	float minJumpVelocity;
+
 	Vector3 velocity;
 	float velocityXSmoothing;
 	bool disableGravity = false;
@@ -41,6 +40,8 @@ public class PlateformerPlayer : MonoBehaviour {
 
 	int _graceJumpFrames;
 
+	Jump jump;
+
 	/// <summary>
 	/// This method precalculate some vars, but those value could change. This need to be refactored.
 	/// Maybe setters are the appropiate method to refactor this.
@@ -49,9 +50,7 @@ public class PlateformerPlayer : MonoBehaviour {
 		controller = GetComponent<Controller2D> ();
 
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
-		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (gravity) * minJumpHeight);
-		print ("Gravity: " + gravity + "  Jump Velocity: " + maxJumpVelocity);
+		jump = new Jump(gravity, timeToJumpApex, minJumpHeight);
 	}
 
 	public void Attach(UpdateManager um) {
@@ -118,13 +117,10 @@ public class PlateformerPlayer : MonoBehaviour {
 			}
 			//if (controller.collisions.below) {
 			if (controller.IsOnGround(_graceJumpFrames)) {
-
-				velocity.y = maxJumpVelocity;
+				jump.StartJump(ref velocity);
 			}
 		} else if (Input.GetKeyUp (KeyCode.Space)) {
-			if (velocity.y > minJumpVelocity) {
-				velocity.y = minJumpVelocity;
-			}
+			jump.Jumping(ref velocity);
 		}
 
 		if (IsOnLadder () && input.y != 0 && !IsOnState (Controller2D.States.Ladder)) {
