@@ -10,9 +10,12 @@ public class UpdateManager : MonoBehaviour {
 	// to scale up/down
 	public float timeScale = 1;
 
-	List<PlateformerPlayer> players;
-	List<PlatformController> movingPlatforms;
-	List<Enemy> enemies;
+	[HideInInspector]
+	public static List<PlateformerPlayer> players;
+	[HideInInspector]
+	public static List<PlatformController> movingPlatforms;
+	[HideInInspector]
+	public static List<Enemy> enemies;
 
 	/// <summary>
 	/// Gather all stuff that need to be updated. Object must be tagged appropriately

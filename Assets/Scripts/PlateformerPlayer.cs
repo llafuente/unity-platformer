@@ -10,7 +10,7 @@ using System.Collections;
 /// TODO create a platformer input, to handle all input, and store information here, LateUpdate is messing events
 /// </summary>
 [RequireComponent (typeof (Controller2D))]
-public class PlateformerPlayer : MonoBehaviour {
+public class PlateformerPlayer : AliveEntity {
 
 	public float maxJumpHeight = 4;
 	public float minJumpHeight = 1;
@@ -162,5 +162,9 @@ public class PlateformerPlayer : MonoBehaviour {
 			disableGravity = false;
 			controller.disableWorldCollisions = false;
 		}
+	}
+
+	public override void Die() {
+		Debug.Log("Player die! play some fancy animation!");
 	}
 }

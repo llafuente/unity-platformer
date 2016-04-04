@@ -2,8 +2,10 @@
 using UnityEngine;
 
 
-public class Enemy: MonoBehaviour
+public class Enemy: AliveEntity
 {
-	virtual public void ManagedUpdate(float delta) {
+	override public void Die() {
+		UpdateManager.enemies.Remove (this);
+		base.Die();
 	}
 }

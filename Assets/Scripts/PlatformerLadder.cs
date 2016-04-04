@@ -28,6 +28,5 @@ public class PlatformerLadder : MonoBehaviour {
 
 	public void OnTriggerExit2D(Collider2D o) {
 		disableLadder (o);
-
 	}
 }
