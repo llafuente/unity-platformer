@@ -1,18 +1,19 @@
 ﻿using System;
 
-public class PlayerMonitor : ControllerMonitor
-{
-	PlateformerPlayer player;
+namespace UnityPlatformer {
+	public class PlayerMonitor : ControllerMonitor {
+		PlateformerPlayer player;
 
-	override public void Start() {
-		base.Start ();
-		player = GetComponent<PlateformerPlayer> ();
-	}
-	override public  void OnGUI() {
-		base.OnGUI ();
-	}
+		override public void Start() {
+			base.Start ();
+			player = GetComponent<PlateformerPlayer> ();
+		}
+		override public  void OnGUI() {
+			base.OnGUI ();
+		}
 
-	override public void Update() {
-		base.Update ();
+		override public void Update() {
+			base.Update ();
+		}
 	}
 }
