@@ -10,3 +10,12 @@ for kinetic objects
 * fix move down-slope and not jumping.  
 * add ladder (very simple)
 * add some distance to env, to better handle collisions, that gap it's really useful.
+
+TODO
+* Jump out of a ladder
+* climb down a ladder (can be done if the ladder is a bit `above` the ground)
+* Create a CharacterInput, that manage and map inputs.
+* Refactor movements as separate components.
+
+Known issues
+* Player con move thought a horizontal moving platform by pushing it...

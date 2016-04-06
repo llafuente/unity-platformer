@@ -2,11 +2,11 @@ using System;
 using UnityEngine;
 
 namespace UnityPlatformer {
-  /// <>
+  /// <summary>
   /// Tracks character health and lives.
   /// Triggers character death
   /// TODO handle lives
-  /// <>
+  /// </summary>
   public class CharacterHealth : MonoBehaviour
   {
     /// properties
@@ -34,12 +34,35 @@ namespace UnityPlatformer {
     /// Actions
     ///
 
+    /// <summary>
+    /// Give your character super powers!
+    /// </summary>
     public Action onMaxHealth;
+    /// <summary>
+    /// Flash it!
+    /// </summary>
     public Action onDamage;
+    /// <summary>
+    /// Display some greenish starts floating around!
+    /// </summary>
+    public Action onHeal;
+    /// <summary>
+    /// Play death animation, turn off the music... those sort of things
+    /// </summary>
     public Action onDeath;
+    /// <summary>
+    /// Credits...
+    /// </summary>
     public Action onGameOver;
-    // NOTE this can be fired many times before onInvulnerabilityEnd
+    //
+    /// <summary>
+    /// Play that funky music!
+    /// NOTE this can be fired many times before onInvulnerabilityEnd
+    /// </summary>
     public Action onInvulnerabilityStart;
+    /// <summary>
+    /// Stop that funky music!
+    /// </summary>
     public Action onInvulnerabilityEnd;
 
     /// private
@@ -60,6 +83,7 @@ namespace UnityPlatformer {
     }
 
     void LateUpdate() {
+      // NOTE do not use IsInvulnerable here...
       bool was_invulnerable = _invulnerable >= 0;
 
       _invulnerable -= Time.deltaTime;
@@ -71,10 +95,14 @@ namespace UnityPlatformer {
       }
     }
 
+    /// <summary>
+    /// Turns a character invulnerable, but still can be killed using Kill
+    /// NOTE use float.MaxValue for unlimited time
+    /// </summary>
     public CharacterHealth SetInvulnerable(float time) {
       _invulnerable = time;
 
-      if (_invulnerable > 0) {
+      if (_invulnerable > 0.0f) {
         if (onInvulnerabilityStart != null) {
           onInvulnerabilityStart();
         }
@@ -82,30 +110,46 @@ namespace UnityPlatformer {
 
       return this;
     }
-
+    /// <summary>
+    /// disable invulnerability
+    /// </summary>
     public CharacterHealth SetVulnerable() {
       _invulnerable = -1; // any negative value works :D
 
       return this;
     }
 
+    public bool IsInvulnerable() {
+      // is death? leave him alone...
+      return health <= 0 || _invulnerable > 0.0f;
+
+    }
+    /// <summary>
+    /// Kill the character even if it's invulnerable
+    /// </summary>
     public CharacterHealth Kill() {
       health = 0;
       Die();
 
       return this;
     }
-
+    /// <summary>
+    /// Kill the character even if it's invulnerable
+    /// TODO handle direction here or in the Hitbox but must be done :)
+    /// </summary>
     public CharacterHealth Damage(DamageType dt) {
       return Damage(dt.amount);
     }
-
+    /// <summary>
+    /// triggers onDamage
+    /// triggers onDeath
+    /// </summary>
     public CharacterHealth Damage(int amount = 1) {
       if (amount <= 0) {
         Debug.LogWarning("amount <= 0 ??");
       }
 
-      if (_invulnerable > 0) {
+      if (IsInvulnerable()) {
         Debug.Log(this.name + " is invulnerable, ignore damage");
 
         return this;
@@ -132,8 +176,15 @@ namespace UnityPlatformer {
       return health <= 0;
     }
 
-    virtual public void Heal(int amount = 1) {
+    /// <summary>
+    /// increse health character if possible maxHealth not reached.
+    /// Trigger onMaxHealth
+    /// </summary>
+    public void Heal(int amount = 1) {
       health += amount;
+      if (onHeal != null) {
+        onHeal();
+      }
 
       if (maxHealth != -1 && health >= maxHealth) {
         health = maxHealth;
@@ -143,8 +194,11 @@ namespace UnityPlatformer {
       }
     }
 
-    // TODO
-    virtual public void Die() {
+    /// <summary>
+    /// Disable Hitbox(es) and DamageType(s)
+    /// Trigger onDeath
+    /// </summary>
+    public void Die() {
       Debug.Log(this.name + " disable all Hitbox");
   	  var lch = GetComponentsInChildren<Hitbox> ();
       foreach (var x in lch) {
@@ -156,10 +210,11 @@ namespace UnityPlatformer {
       foreach (var x in ldt) {
   	     x.gameObject.SetActive(false);
       }
+
       //Destroy(gameObject);
 
       if (onDeath != null) {
-        Debug.Log(this.name + " ????");
+        Debug.Log(this.name + " died!");
         onDeath();
       }
     }
