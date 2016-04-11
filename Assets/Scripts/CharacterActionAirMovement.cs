@@ -34,7 +34,11 @@ namespace UnityPlatformer {
     /// TODO REVIEW Negative numbers are used to ignore fight, and execute.
     /// </summary>
     public int WantsToUpdate() {
-      return !controller.collisions.below ? -1 : 0;
+      if (controller.collisions.below) {
+        velocityXSmoothing = 0;
+        return 0;
+      }
+      return -1;
       // TODO REVIEW: return controller.IsOnGround(0) ? -1 : 0;
     }
 

@@ -34,7 +34,12 @@ namespace UnityPlatformer {
     /// TODO REVIEW Negative numbers are used to ignore fight, and execute.
     /// </summary>
     public int WantsToUpdate() {
-      return controller.collisions.below ? -1 : 0;
+      if (controller.collisions.below) {
+        return -1;
+      }
+
+      velocityXSmoothing = 0;
+      return 0;
       // TODO REVIEW: return controller.IsOnGround(0) ? -1 : 0;
     }
 
@@ -42,7 +47,7 @@ namespace UnityPlatformer {
       Vector2 in2d = input.GetAxisRaw();
 
       float targetVelocityX = in2d.x * speed;
-      // (controller.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne
+
       character.velocity.x = Mathf.SmoothDamp (
         character.velocity.x,
         targetVelocityX,

@@ -54,7 +54,7 @@ namespace UnityPlatformer {
         }
       }
 
-      Debug.LogWarning ("Cannot find acction: " + action);
+      Debug.LogWarning ("Cannot find action: " + action);
       return false;
     }
 
@@ -71,7 +71,7 @@ namespace UnityPlatformer {
         }
       }
 
-      Debug.LogWarning ("Cannot find acction: " + action);
+      Debug.LogWarning ("Cannot find action: " + action);
       return false;
     }
 

@@ -16,18 +16,6 @@ namespace UnityPlatformer {
   public class Character: MonoBehaviour, UpdateEntity {
     CharacterAction[] actions;
 
-		float accelerationTimeAirborne = .2f;
-
-	  float ladderMoveSpeed = 4;
-
-	  public Vector2 wallJumpClimb;
-	  public Vector2 wallJumpOff;
-	  public Vector2 wallLeap;
-
-	  public float wallSlideSpeedMax = 3;
-	  public float wallStickTime = .25f;
-	  float timeToWallUnstick;
-
 	  float gravity = -50;
 
 		//
@@ -53,11 +41,6 @@ namespace UnityPlatformer {
 			ch.onDeath += OnDeath;
     }
 
-    // TODO REVIEW FixedUpdate?
-    void Update() {
-
-    }
-
 	  public void Attach(UpdateManager um) {
 	    // TODO HACK WIP
 	    GetComponent<CharacterActionJump>().Attach(um);
@@ -68,57 +51,6 @@ namespace UnityPlatformer {
 	  /// Transform Input into platformer magic :)
 	  /// </summary>
 	  public void ManagedUpdate(float delta) {
-	    int wallDirX = (controller.collisions.left) ? -1 : 1;
-
-
-	    bool wallSliding = false;
-			/*
-	    if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0) {
-	      wallSliding = true;
-
-	      if (velocity.y < -wallSlideSpeedMax) {
-	        velocity.y = -wallSlideSpeedMax;
-	      }
-
-	      if (timeToWallUnstick > 0) {
-					// TODO ResetXSmoothing ??
-	        //velocityXSmoothing = 0;
-	        velocity.x = 0;
-
-	        if (input.x != wallDirX && input.x != 0) {
-	          timeToWallUnstick -= delta;
-	        }
-	        else {
-	          timeToWallUnstick = wallStickTime;
-	        }
-	      }
-	      else {
-	        timeToWallUnstick = wallStickTime;
-	      }
-	    }
-
-	    // jump
-	    if (Input.GetKeyDown (KeyCode.Space)) {
-	      if (wallSliding) {
-	        if (wallDirX == input.x) {
-	          velocity.x = -wallDirX * wallJumpClimb.x;
-	          velocity.y = wallJumpClimb.y;
-	        }
-	        else if (input.x == 0) {
-	          velocity.x = -wallDirX * wallJumpOff.x;
-	          velocity.y = wallJumpOff.y;
-	        }
-	        else {
-	          velocity.x = -wallDirX * wallLeap.x;
-	          velocity.y = wallLeap.y;
-	        }
-	      }
-
-	    }
-			*/
-
-
-
 			int prio = 0;
       int tmp;
       CharacterAction action = null;
