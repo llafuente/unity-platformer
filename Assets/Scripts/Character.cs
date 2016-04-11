@@ -30,12 +30,11 @@ namespace UnityPlatformer {
 
 	  float gravity = -50;
 
-	  bool disableGravity = false;
-	  float ladderCenter;
-
 		//
 		// ~private
 		//
+		[HideInInspector]
+		public float ladderCenter;
 		[HideInInspector]
 		public Vector3 velocity;
 
@@ -71,12 +70,6 @@ namespace UnityPlatformer {
 	  public void ManagedUpdate(float delta) {
 	    int wallDirX = (controller.collisions.left) ? -1 : 1;
 
-
-	    if (IsOnLadder () && IsOnState(Controller2D.States.Ladder)) {
-	      velocity.x = 0; // disable x movement
-	      //velocity.y = ladderMoveSpeed * input.y;
-	      velocity.y = ladderMoveSpeed * 1;
-	    }
 
 	    bool wallSliding = false;
 			/*
@@ -122,14 +115,6 @@ namespace UnityPlatformer {
 	      }
 
 	    }
-
-	    if (IsOnLadder () && input.y != 0 && !IsOnState (Controller2D.States.Ladder)) {
-	      controller.state |= Controller2D.States.Ladder;
-	      disableGravity = true;
-	      controller.disableWorldCollisions = true;
-	      // instant move to the center of the ladder!
-	      velocity.x = (ladderCenter - controller.GetComponent<BoxCollider2D>().bounds.center.x) / delta;
-	    }
 			*/
 
 
@@ -148,16 +133,26 @@ namespace UnityPlatformer {
         }
       }
 
+			controller.disableWorldCollisions = false;
+
+			PostUpdateActions a = PostUpdateActions.WORLD_COLLISIONS | PostUpdateActions.APPLY_GRAVITY;
+
       if (action != null) {
         action.PerformAction(Time.fixedDeltaTime);
+				a = action.GetPostUpdateActions();
       }
 
-	    if (!disableGravity) {
-	      velocity.y += gravity * delta;
-	    }
+			if (utils.biton((int)a, (int)PostUpdateActions.APPLY_GRAVITY)) {
+				velocity.y += gravity * delta;
+			}
+
+			if (!utils.biton((int)a, (int)PostUpdateActions.WORLD_COLLISIONS)) {
+				controller.disableWorldCollisions = true;
+			}
 
 	    controller.Move(velocity * delta, GetComponent<PlatformerController>().GetAxisRaw());
 
+			// this is meant to fix jump and falling hit something unexpected
 	    if (controller.collisions.above || controller.collisions.below) {
 	      velocity.y = 0;
 	    }
@@ -180,8 +175,6 @@ namespace UnityPlatformer {
 	    controller.area &= ~Controller2D.Areas.Ladder;
 	    if (IsOnState (Controller2D.States.Ladder)) {
 	      controller.state &= ~Controller2D.States.Ladder;
-	      disableGravity = false;
-	      controller.disableWorldCollisions = false;
 	    }
 	  }
 

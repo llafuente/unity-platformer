@@ -19,3 +19,5 @@ TODO
 
 Known issues
 * Player con move thought a horizontal moving platform by pushing it...
+* Fall down ladders
+* Small jump when leave ladders (top)

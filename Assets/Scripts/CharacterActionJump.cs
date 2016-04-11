@@ -60,7 +60,7 @@ namespace UnityPlatformer {
     }
 
     public PostUpdateActions GetPostUpdateActions() {
-      return PostUpdateActions.DO_BASE_COLLISIONS | PostUpdateActions.APPLY_GRAVITY;
+      return PostUpdateActions.WORLD_COLLISIONS | PostUpdateActions.APPLY_GRAVITY;
     }
   }
 }

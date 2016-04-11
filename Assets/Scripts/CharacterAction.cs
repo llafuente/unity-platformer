@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace UnityPlatformer {
   public enum PostUpdateActions {
-    NONE = 0x02,
+    NONE = 0x00,
     APPLY_GRAVITY = 0x01,
-    DO_BASE_COLLISIONS = 0x02,
+    WORLD_COLLISIONS = 0x02,
   };
   /// <summary>
   /// Perform an action over a character
