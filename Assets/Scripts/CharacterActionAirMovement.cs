@@ -8,10 +8,10 @@ namespace UnityPlatformer {
   [RequireComponent (typeof (PlatformerController))]
   [RequireComponent (typeof (Controller2D))]
   [RequireComponent (typeof (Character))]
-  public class CharacterActionGroundMovement: MonoBehaviour, CharacterAction, UpdateManagerAttach {
+  public class CharacterActionAirMovement: MonoBehaviour, CharacterAction, UpdateManagerAttach {
 
     public float speed = 6;
-    public float accelerationTime = .1f;
+    public float accelerationTime = .2f;
 
     float velocityXSmoothing;
 
@@ -34,7 +34,7 @@ namespace UnityPlatformer {
     /// TODO REVIEW Negative numbers are used to ignore fight, and execute.
     /// </summary>
     public int WantsToUpdate() {
-      return controller.collisions.below ? -1 : 0;
+      return !controller.collisions.below ? -1 : 0;
       // TODO REVIEW: return controller.IsOnGround(0) ? -1 : 0;
     }
 
