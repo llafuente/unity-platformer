@@ -17,8 +17,7 @@ namespace UnityPlatformer {
     CharacterAction[] actions;
 
 		float accelerationTimeAirborne = .2f;
-	  float accelerationTimeGrounded = .1f;
-	  float moveSpeed = 6;
+
 	  float ladderMoveSpeed = 4;
 
 	  public Vector2 wallJumpClimb;
@@ -31,8 +30,6 @@ namespace UnityPlatformer {
 
 	  float gravity = -50;
 
-
-	  float velocityXSmoothing;
 	  bool disableGravity = false;
 	  float ladderCenter;
 
@@ -72,18 +69,17 @@ namespace UnityPlatformer {
 	  /// Transform Input into platformer magic :)
 	  /// </summary>
 	  public void ManagedUpdate(float delta) {
-	    Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 	    int wallDirX = (controller.collisions.left) ? -1 : 1;
 
-	    float targetVelocityX = input.x * moveSpeed;
-	    velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
 
 	    if (IsOnLadder () && IsOnState(Controller2D.States.Ladder)) {
 	      velocity.x = 0; // disable x movement
-	      velocity.y = ladderMoveSpeed * input.y;
+	      //velocity.y = ladderMoveSpeed * input.y;
+	      velocity.y = ladderMoveSpeed * 1;
 	    }
 
 	    bool wallSliding = false;
+			/*
 	    if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0) {
 	      wallSliding = true;
 
@@ -92,7 +88,8 @@ namespace UnityPlatformer {
 	      }
 
 	      if (timeToWallUnstick > 0) {
-	        velocityXSmoothing = 0;
+					// TODO ResetXSmoothing ??
+	        //velocityXSmoothing = 0;
 	        velocity.x = 0;
 
 	        if (input.x != wallDirX && input.x != 0) {
@@ -109,8 +106,6 @@ namespace UnityPlatformer {
 
 	    // jump
 	    if (Input.GetKeyDown (KeyCode.Space)) {
-	      Debug.Log ("Jump!!");
-
 	      if (wallSliding) {
 	        if (wallDirX == input.x) {
 	          velocity.x = -wallDirX * wallJumpClimb.x;
@@ -135,6 +130,7 @@ namespace UnityPlatformer {
 	      // instant move to the center of the ladder!
 	      velocity.x = (ladderCenter - controller.GetComponent<BoxCollider2D>().bounds.center.x) / delta;
 	    }
+			*/
 
 
 
@@ -160,7 +156,7 @@ namespace UnityPlatformer {
 	      velocity.y += gravity * delta;
 	    }
 
-	    controller.Move(velocity * delta, input);
+	    controller.Move(velocity * delta, GetComponent<PlatformerController>().GetAxisRaw());
 
 	    if (controller.collisions.above || controller.collisions.below) {
 	      velocity.y = 0;
