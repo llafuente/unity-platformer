@@ -11,7 +11,7 @@ namespace UnityPlatformer {
 		public float timeScale = 1;
 
 		[HideInInspector]
-		public static List<PlateformerPlayer> players;
+		public static List<Character> players;
 		[HideInInspector]
 		public static List<PlatformController> movingPlatforms;
 		[HideInInspector]
@@ -21,18 +21,18 @@ namespace UnityPlatformer {
 		/// Gather all stuff that need to be updated. Object must be tagged appropriately
 		/// </summary>
 		void Start () {
-			players = new List<PlateformerPlayer>();
+			players = new List<Character>();
 			movingPlatforms = new List<PlatformController>();
 			enemies =  new List<Enemy>();
 
 			var objects = GameObject.FindGameObjectsWithTag(Controller2D.PLAYER_TAG);
-			PlateformerPlayer pp;
+			Character pp;
 			foreach (var obj in objects) {
 				Debug.Log("Manage" + obj);
 				if (obj.activeInHierarchy) {
-					pp = obj.GetComponent<PlateformerPlayer> ();
+					pp = obj.GetComponent<Character> ();
 					if (!pp) {
-						Debug.LogWarning("Invalid PlateformerPlayer: " + obj);
+						Debug.LogWarning("Invalid Character: " + obj);
 					}
 					players.Add (pp);
 					pp.Attach (this);

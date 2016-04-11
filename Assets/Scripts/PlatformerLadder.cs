@@ -4,7 +4,7 @@ using System.Collections;
 namespace UnityPlatformer {
 	public class PlatformerLadder : MonoBehaviour {
 		public void EnableLadder(Collider2D o) {
-			PlateformerPlayer p = o.GetComponent<PlateformerPlayer>();
+			Character p = o.GetComponent<Character>();
 			if (p) {
 				Collider2D col = GetComponent<Collider2D>();
 				p.EnterLadderArea(col.bounds);
@@ -12,7 +12,7 @@ namespace UnityPlatformer {
 		}
 
 		public void DisableLadder(Collider2D o) {
-			PlateformerPlayer p = o.GetComponent<PlateformerPlayer>();
+			Character p = o.GetComponent<Character>();
 			if (p) {
 				Collider2D col = GetComponent<Collider2D>();
 				p.ExitLadderArea(col.bounds);

@@ -24,20 +24,22 @@ namespace UnityPlatformer {
 
     PlatformerController input;
     Controller2D controller;
+    Character character;
     int _graceJumpFrames = 10;
 
     public void Start() {
       input = GetComponent<PlatformerController>();
       controller = GetComponent<Controller2D> ();
+      character = GetComponent<Character> ();
 
       gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 			jump = new Jump(gravity, timeToJumpApex, minJumpHeight);
-      Debug.LogFormat("(CharacterActionJump) gravity {0} timeToJumpApex {1} minJumpHeight", gravity, timeToJumpApex, minJumpHeight);
+      //!!! Debug.LogFormat("(CharacterActionJump) gravity {0} timeToJumpApex {1} minJumpHeight", gravity, timeToJumpApex, minJumpHeight);
     }
 
     public void Attach(UpdateManager um) {
       _graceJumpFrames = um.GetFrameCount (graceJumpTime);
-      Debug.Log("(CharacterActionJump) Attached" + _graceJumpFrames);
+      //!!! Debug.Log("(CharacterActionJump) Attached" + _graceJumpFrames);
     }
 
     /// <summary>
@@ -50,17 +52,11 @@ namespace UnityPlatformer {
     }
 
     public void PerformAction(float delta) {
-      Vector3 velocity = new Vector3 (0, 0, 0);
-      //if (controller.collisions.below) {
       if (controller.IsOnGround(_graceJumpFrames)) {
-        Debug.Log("StartJump");
-        jump.StartJump(ref velocity);
+        jump.StartJump(ref character.velocity);
       } else {
-        Debug.Log("Jumping");
-				jump.Jumping(ref velocity);
+				jump.Jumping(ref character.velocity);
 			}
-Debug.Log(velocity);
-      controller.Move(velocity * delta, Vector2.zero);
     }
 
     public PostUpdateActions GetPostUpdateActions() {

@@ -114,5 +114,29 @@ namespace UnityPlatformer {
 
       return Input.GetAxisRaw("Vertical") < 0;
     }
+
+    virtual public float GetAxisRawX() {
+      #if CN_INPUT_MANAGER
+      if (SystemInfo.deviceType == DeviceType.Handheld) {
+        return CnInputManager.GetAxis("Horizontal") < 0;
+      }
+      #endif
+
+      return Input.GetAxisRaw ("Horizontal");
+    }
+
+    virtual public float GetAxisRawY() {
+      #if CN_INPUT_MANAGER
+      if (SystemInfo.deviceType == DeviceType.Handheld) {
+        return CnInputManager.GetAxis("Vertical") < 0;
+      }
+      #endif
+
+      return Input.GetAxisRaw ("Vertical");
+    }
+
+    virtual public Vector2 GetAxisRaw() {
+      return new Vector2(GetAxisRawX(), GetAxisRawY());
+    }
   }
 }
