@@ -11,11 +11,11 @@ namespace UnityPlatformer {
   /// Perform an action over a character
   /// </summary>
   [RequireComponent (typeof (Character))]
-  public abstract class CharacterAction
+  public abstract class CharacterAction : MonoBehaviour
   {
-    PlatformerController input;
-    Controller2D controller;
-    Character character;
+    protected PlatformerController input;
+    protected Controller2D controller;
+    protected Character character;
 
     virtual public void Start() {
       input = GetComponent<PlatformerController>();
@@ -29,17 +29,17 @@ namespace UnityPlatformer {
     /// Negative numbers are used to ignore fight, and execute, but do not
     /// call GetPostUpdateActions().
     /// </summary>
-    abstract int WantsToUpdate();
+    public abstract int WantsToUpdate();
 
     /// <summary>
     /// Do your action here.
     /// </summary>
-    abstract void PerformAction(float delta);
+    public abstract void PerformAction(float delta);
 
     /// <summary>
     /// Return what to do next
     /// by default: APPLY_GRAVITY | WORLD_COLLISIONS
     /// </summary>
-    abstract PostUpdateActions GetPostUpdateActions();
+    public abstract PostUpdateActions GetPostUpdateActions();
   }
 }

@@ -8,7 +8,7 @@ namespace UnityPlatformer {
   [RequireComponent (typeof (PlatformerController))]
   [RequireComponent (typeof (Controller2D))]
   [RequireComponent (typeof (Character))]
-  public class CharacterActionLadder: MonoBehaviour, CharacterAction, UpdateManagerAttach {
+  public class CharacterActionLadder: CharacterAction, UpdateManagerAttach {
 
     public float speed = 6;
 
@@ -22,29 +22,29 @@ namespace UnityPlatformer {
     /// Positive numbers fight: Higher number wins
     /// TODO REVIEW Negative numbers are used to ignore fight, and execute.
     /// </summary>
-    public int WantsToUpdate() {
+    public override int WantsToUpdate() {
       // enter ladder condition
       if (character.IsOnLadder() &&
         input.GetAxisRawY() != 0 &&
-        !character.IsOnState(Controller2D.States.Ladder)
+        !character.IsOnState(Character.States.Ladder)
       ) {
-        controller.state |= Controller2D.States.Ladder;
+        character.state |= Character.States.Ladder;
         moveToCenter = true;
         return 10;
       }
 
       // in ladder state
-      if (character.IsOnState(Controller2D.States.Ladder)) {
+      if (character.IsOnState(Character.States.Ladder)) {
         return 10;
       }
 
       return 0;
     }
 
-    public void PerformAction(float delta) {
+    public override void PerformAction(float delta) {
       Vector2 in2d = input.GetAxisRaw();
 
-      if (character.IsOnLadder () && character.IsOnState(Controller2D.States.Ladder)) {
+      if (character.IsOnLadder () && character.IsOnState(Character.States.Ladder)) {
         // disable x movement
 	      character.velocity.x = 0;
 	      character.velocity.y = speed * in2d.y;
@@ -58,7 +58,7 @@ namespace UnityPlatformer {
 	    }
     }
 
-    public PostUpdateActions GetPostUpdateActions() {
+    public override PostUpdateActions GetPostUpdateActions() {
       return PostUpdateActions.NONE;
     }
   }

@@ -6,7 +6,7 @@ namespace UnityPlatformer {
   /// Perform an action over a character
   /// </summary>
   [RequireComponent (typeof (PlatformerController))]
-  public class CharacterActionGroundMovement: MonoBehaviour, CharacterAction, UpdateManagerAttach {
+  public class CharacterActionGroundMovement: CharacterAction, UpdateManagerAttach {
 
     [Comment("Movement speed")]
     public float speed = 6;
@@ -24,7 +24,7 @@ namespace UnityPlatformer {
     /// Positive numbers fight: Higher number wins
     /// TODO REVIEW Negative numbers are used to ignore fight, and execute.
     /// </summary>
-    public int WantsToUpdate() {
+    public override int WantsToUpdate() {
       if (controller.collisions.below) {
         return -1;
       }
@@ -34,7 +34,7 @@ namespace UnityPlatformer {
       // TODO REVIEW: return controller.IsOnGround(0) ? -1 : 0;
     }
 
-    public void PerformAction(float delta) {
+    public override void PerformAction(float delta) {
       Vector2 in2d = input.GetAxisRaw();
 
       float targetVelocityX = in2d.x * speed;
@@ -47,7 +47,7 @@ namespace UnityPlatformer {
       );
     }
 
-    public PostUpdateActions GetPostUpdateActions() {
+    public override PostUpdateActions GetPostUpdateActions() {
       return PostUpdateActions.WORLD_COLLISIONS | PostUpdateActions.APPLY_GRAVITY;
     }
   }

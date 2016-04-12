@@ -8,7 +8,7 @@ namespace UnityPlatformer {
   [RequireComponent (typeof (PlatformerController))]
   [RequireComponent (typeof (Controller2D))]
   [RequireComponent (typeof (Character))]
-  public class CharacterActionWallStick: MonoBehaviour, CharacterAction, UpdateManagerAttach {
+  public class CharacterActionWallStick: CharacterAction, UpdateManagerAttach {
     [Comment("Vertical terminal velocity while stick")]
 	  public float wallSlideSpeedMax = 3;
 
@@ -43,7 +43,7 @@ namespace UnityPlatformer {
     /// Positive numbers fight: Higher number wins
     /// TODO REVIEW Negative numbers are used to ignore fight, and execute.
     /// </summary>
-    public int WantsToUpdate() {
+    public override int WantsToUpdate() {
       return (
         (controller.collisions.left || controller.collisions.right) &&
         !controller.collisions.below &&
@@ -51,7 +51,7 @@ namespace UnityPlatformer {
         ) ? 7 : 0;
     }
 
-    public void PerformAction(float delta) {
+    public override void PerformAction(float delta) {
       int wallDirX = (controller.collisions.left) ? -1 : 1;
       float x = input.GetAxisRawX();
 
@@ -88,7 +88,7 @@ namespace UnityPlatformer {
       }
     }
 
-    public PostUpdateActions GetPostUpdateActions() {
+    public override PostUpdateActions GetPostUpdateActions() {
       return PostUpdateActions.WORLD_COLLISIONS | PostUpdateActions.APPLY_GRAVITY;
     }
   }

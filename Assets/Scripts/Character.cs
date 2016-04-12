@@ -46,9 +46,10 @@ namespace UnityPlatformer {
     public float ladderCenter;
     [HideInInspector]
     public Vector3 velocity;
-
-    Controller2D controller;
-    CharacterHealth health;
+    [HideInInspector]
+    public Controller2D controller;
+    [HideInInspector]
+    public CharacterHealth health;
 
     /// <summary>
     /// This method precalculate some vars, but those value could change. This need to be refactored.

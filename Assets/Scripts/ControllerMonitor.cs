@@ -10,11 +10,11 @@ namespace UnityPlatformer {
 
     private GUIStyle guiStyle = new GUIStyle();
 
-    Controller2D control;
+    Character character;
 
     // Use this for initialization
     virtual public void Start() {
-		    control = GetComponent<Controller2D> ();
+		    character = GetComponent<Character> ();
     }
 
   	virtual public void OnGUI() {
@@ -43,23 +43,23 @@ namespace UnityPlatformer {
   			"faceDir: {10}\n"+
   			"fallingThroughPlatform: {11}\n"+
   			"standingOnPlatform: {12}\n",
-        control.collisions.above,
-        control.collisions.below,
-        control.collisions.left,
-        control.collisions.right,
-  			control.state.ToString(),
-  			control.area.ToString(),
-  			control.collisions.climbingSlope,
-  			control.collisions.descendingSlope,
-  			control.collisions.slopeAngle,
-  			control.collisions.slopeAngleOld,
-  			control.collisions.faceDir,
-  			control.collisions.fallingThroughPlatform,
-  			control.collisions.standingOnPlatform,
-  			control.collisions.lastAboveFrame,
-  			control.collisions.lastBelowFrame,
-  			control.collisions.lastLeftFrame,
-  			control.collisions.lastRightFrame
+        character.controller.collisions.above,
+        character.controller.collisions.below,
+        character.controller.collisions.left,
+        character.controller.collisions.right,
+  			character.state.ToString(),
+  			character.area.ToString(),
+  			character.controller.collisions.climbingSlope,
+  			character.controller.collisions.descendingSlope,
+  			character.controller.collisions.slopeAngle,
+  			character.controller.collisions.slopeAngleOld,
+  			character.controller.collisions.faceDir,
+  			character.controller.collisions.fallingThroughPlatform,
+  			character.controller.collisions.standingOnPlatform,
+  			character.controller.collisions.lastAboveFrame,
+  			character.controller.collisions.lastBelowFrame,
+  			character.controller.collisions.lastLeftFrame,
+  			character.controller.collisions.lastRightFrame
       );
     }
   }

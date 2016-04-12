@@ -8,7 +8,7 @@ namespace UnityPlatformer {
   [RequireComponent (typeof (PlatformerController))]
   [RequireComponent (typeof (Controller2D))]
   [RequireComponent (typeof (Character))]
-  public class CharacterActionJump: MonoBehaviour, CharacterAction, UpdateManagerAttach {
+  public class CharacterActionJump: CharacterAction, UpdateManagerAttach {
     // TODO OnValidate check this!
     [Comment("Must match something in @PlatformerController")]
     public String action;
@@ -42,11 +42,11 @@ namespace UnityPlatformer {
     /// Positive numbers fight: Higher number wins
     /// TODO REVIEW Negative numbers are used to ignore fight, and execute.
     /// </summary>
-    public int WantsToUpdate() {
+    public override int WantsToUpdate() {
       return input.IsActionButtonDown(action) ? 5 : 0;
     }
 
-    public void PerformAction(float delta) {
+    public override void PerformAction(float delta) {
       if (controller.IsOnGround(_graceJumpFrames)) {
         jump.StartJump(ref character.velocity);
       } else {
@@ -54,7 +54,7 @@ namespace UnityPlatformer {
 			}
     }
 
-    public PostUpdateActions GetPostUpdateActions() {
+    public override PostUpdateActions GetPostUpdateActions() {
       return PostUpdateActions.WORLD_COLLISIONS | PostUpdateActions.APPLY_GRAVITY;
     }
   }
