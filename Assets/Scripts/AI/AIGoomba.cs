@@ -1,7 +1,8 @@
 ﻿using System;
 using UnityEngine;
+using UnityPlatformer.Characters;
 
-namespace UnityPlatformer {
+namespace UnityPlatformer.AI {
 	/// TODO use this must use: CharacterActionGroundMovement
 	public class AIGoomba: Enemy {
 		public enum Facing {
@@ -16,11 +17,9 @@ namespace UnityPlatformer {
 		public float rayLengthFactor = 1.0f;
 
 		Facing facing;
-		Controller2D controller;
 
 		public override void Start() {
 			base.Start();
-			controller = GetComponent<Controller2D> ();
 			controller.collisions.OnLeftWall += OnLeftWall;
 			controller.collisions.OnRightWall += OnRightWall;
 

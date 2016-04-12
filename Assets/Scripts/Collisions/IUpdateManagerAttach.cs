@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 namespace UnityPlatformer {
-	public interface UpdateManagerAttach {
+	public interface IUpdateManagerAttach {
     void Attach(UpdateManager um);
   }
 }

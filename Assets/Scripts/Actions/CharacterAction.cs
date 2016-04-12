@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
+using UnityPlatformer.Characters;
 
-namespace UnityPlatformer {
+namespace UnityPlatformer.Actions {
   public enum PostUpdateActions {
     NONE = 0x00,
     APPLY_GRAVITY = 0x01,
@@ -13,13 +14,13 @@ namespace UnityPlatformer {
   [RequireComponent (typeof (Character))]
   public abstract class CharacterAction : MonoBehaviour
   {
-    protected PlatformerController input;
-    protected Controller2D controller;
+    protected PlatformerInput input;
+    protected PlatformerCollider2D controller;
     protected Character character;
 
     virtual public void Start() {
-      input = GetComponent<PlatformerController>();
-      controller = GetComponent<Controller2D> ();
+      input = GetComponent<PlatformerInput>();
+      controller = GetComponent<PlatformerCollider2D> ();
       character = GetComponent<Character> ();
     }
 

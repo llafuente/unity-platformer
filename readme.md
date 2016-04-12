@@ -38,6 +38,11 @@ Known issues
 
 The following classes contains staff that could be useful to edit for your game.
 
+## Configuration.cs
+
+Contains some static const values. (maybe in the future can be attached
+to the scene)
+
 ## DamageType.cs
 
 Contains `DamageTypes` Enum.

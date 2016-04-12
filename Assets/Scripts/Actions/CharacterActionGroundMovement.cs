@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
+using UnityPlatformer.Characters;
 
-namespace UnityPlatformer {
+namespace UnityPlatformer.Actions {
   /// <summary>
   /// Perform an action over a character
   /// </summary>
-  [RequireComponent (typeof (PlatformerController))]
-  public class CharacterActionGroundMovement: CharacterAction, UpdateManagerAttach {
+  [RequireComponent (typeof (PlatformerInput))]
+  public class CharacterActionGroundMovement: CharacterAction, IUpdateManagerAttach {
 
     [Comment("Movement speed")]
     public float speed = 6;

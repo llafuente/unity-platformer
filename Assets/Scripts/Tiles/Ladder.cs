@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityPlatformer.Characters;
 
-namespace UnityPlatformer {
-	public class PlatformerLadder : MonoBehaviour {
+namespace UnityPlatformer.Tiles {
+	public class Ladder : MonoBehaviour {
 		public void EnableLadder(Collider2D o) {
 			Character p = o.GetComponent<Character>();
 			if (p) {

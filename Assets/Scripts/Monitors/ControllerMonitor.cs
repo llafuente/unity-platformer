@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
-namespace UnityPlatformer {
+using UnityPlatformer.Characters;
+
+namespace UnityPlatformer.Monitors {
   public class ControllerMonitor : MonoBehaviour {
     public Color textColor = Color.white;
     public int debugFontSize = 15;

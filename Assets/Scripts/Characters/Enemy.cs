@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace UnityPlatformer {
+namespace UnityPlatformer.Characters {
 	[RequireComponent (typeof (CharacterHealth))]
 	public class Enemy : Character {
 		public override void OnDeath() {

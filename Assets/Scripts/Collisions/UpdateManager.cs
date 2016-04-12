@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityPlatformer.Characters;
+using UnityPlatformer.Tiles;
+
 namespace UnityPlatformer {
 	/// <summary>
-	/// Custom update loop. This will avoid most of the problems of who is updated first
-	/// in exchange of some manual work
+	/// Custom update loop. This will avoid most of the problems of who is
+	/// updated first in exchange of some manual work / tagging
 	/// </summary>
 	public class UpdateManager : MonoBehaviour {
 		// to scale up/down
@@ -13,7 +16,7 @@ namespace UnityPlatformer {
 		[HideInInspector]
 		public static List<Character> players;
 		[HideInInspector]
-		public static List<PlatformController> movingPlatforms;
+		public static List<MovingPlatform> movingPlatforms;
 		[HideInInspector]
 		public static List<Enemy> enemies;
 
@@ -22,10 +25,10 @@ namespace UnityPlatformer {
 		/// </summary>
 		void Start () {
 			players = new List<Character>();
-			movingPlatforms = new List<PlatformController>();
+			movingPlatforms = new List<MovingPlatform>();
 			enemies =  new List<Enemy>();
 
-			var objects = GameObject.FindGameObjectsWithTag(Controller2D.PLAYER_TAG);
+			var objects = GameObject.FindGameObjectsWithTag(Configuration.PLAYER_TAG);
 			Character pp;
 			foreach (var obj in objects) {
 				Debug.Log("Manage" + obj);
@@ -39,7 +42,7 @@ namespace UnityPlatformer {
 				}
 			}
 
-			objects = GameObject.FindGameObjectsWithTag(Controller2D.ENEMY_TAG);
+			objects = GameObject.FindGameObjectsWithTag(Configuration.ENEMY_TAG);
 			Enemy eny;
 			foreach (var obj in objects) {
 				Debug.Log("Manage" + obj);
@@ -53,19 +56,19 @@ namespace UnityPlatformer {
 				}
 			}
 
-			objects = GameObject.FindGameObjectsWithTag(Controller2D.TROUGHT_TAG);
+			objects = GameObject.FindGameObjectsWithTag(Configuration.TROUGHT_TAG);
 			foreach (var obj in objects) {
 				Debug.Log("Manage" + obj);
 				if (obj.activeInHierarchy) {
-					movingPlatforms.Add (obj.GetComponent<PlatformController> ());
+					movingPlatforms.Add (obj.GetComponent<MovingPlatform> ());
 				}
 			}
 
-			objects = GameObject.FindGameObjectsWithTag(Controller2D.MOVINGPLATFORM_TAG);
+			objects = GameObject.FindGameObjectsWithTag(Configuration.MOVINGPLATFORM_TAG);
 			foreach (var obj in objects) {
 				Debug.Log("Manage" + obj);
 				if (obj.activeInHierarchy) {
-					movingPlatforms.Add (obj.GetComponent<PlatformController> ());
+					movingPlatforms.Add (obj.GetComponent<MovingPlatform> ());
 				}
 			}
 		}

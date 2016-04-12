@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace UnityPlatformer {
+namespace UnityPlatformer.Cameras {
 	public class CameraFollow : MonoBehaviour {
 
-		public Controller2D target;
+		public PlatformerCollider2D target;
 		public float verticalOffset;
 		public float lookAheadDstX;
 		public float lookSmoothTimeX;

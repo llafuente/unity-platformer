@@ -10,7 +10,7 @@ using System;
 namespace UnityPlatformer {
   /// <summary>
   /// </summary>
-  public class PlatformerController : MonoBehaviour
+  public class PlatformerInput : MonoBehaviour
   {
     [Serializable]
     public class InputMap {

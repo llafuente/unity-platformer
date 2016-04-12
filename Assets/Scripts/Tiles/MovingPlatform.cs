@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace UnityPlatformer {
-	public class PlatformController : RaycastController {
+namespace UnityPlatformer.Tiles {
+	public class MovingPlatform : RaycastController {
 
 		public LayerMask passengerMask;
 
@@ -24,8 +24,9 @@ namespace UnityPlatformer {
 
 		public override void Start () {
 			// check that gameObject has a valid tag!
-			if (this.tag != Controller2D.TROUGHT_TAG && this.tag != Controller2D.MOVINGPLATFORM_TAG) {
-				Debug.LogWarning("Found a PlatformController misstagged");
+			if (this.tag != Configuration.TROUGHT_TAG &&
+			  this.tag != Configuration.MOVINGPLATFORM_TAG) {
+				Debug.LogWarning("Found a MovingPlatform misstagged");
 			}
 
 			base.Start ();
@@ -88,7 +89,7 @@ namespace UnityPlatformer {
 		void MovePassengers(bool beforeMovePlatform) {
 			foreach (PassengerMovement passenger in passengerMovement) {
 				if (passenger.moveBeforePlatform == beforeMovePlatform) {
-					passenger.transform.GetComponent<Controller2D>().transform.Translate (passenger.velocity);
+					passenger.transform.GetComponent<PlatformerCollider2D>().transform.Translate (passenger.velocity);
 				}
 			}
 		}
@@ -102,7 +103,7 @@ namespace UnityPlatformer {
 
 			// Passenger on top of a horizontally or downward moving platform
 			if (directionY == -1 || velocity.y == 0 && velocity.x != 0) {
-				float rayLength = skinWidth * 2 + Controller2D.MIN_DISTANCE_TO_ENV;
+				float rayLength = skinWidth * 2 + Configuration.MIN_DISTANCE_TO_ENV;
 
 				for (int i = 0; i < verticalRayCount; i ++) {
 					Vector2 rayOrigin = raycastOrigins.topLeft + Vector2.right * (verticalRaySpacing * i);
@@ -124,7 +125,7 @@ namespace UnityPlatformer {
 
 			// Vertically moving platform
 			if (velocity.y != 0) {
-				float rayLength = Mathf.Abs (velocity.y) + skinWidth + Controller2D.MIN_DISTANCE_TO_ENV;
+				float rayLength = Mathf.Abs (velocity.y) + skinWidth + Configuration.MIN_DISTANCE_TO_ENV;
 
 				for (int i = 0; i < verticalRayCount; i ++) {
 					Vector2 rayOrigin = (directionY == -1)?raycastOrigins.bottomLeft:raycastOrigins.topLeft;
@@ -133,7 +134,7 @@ namespace UnityPlatformer {
 
 					if (hit && hit.distance != 0) {
 						if (!movedPassengers.Contains(hit.transform)) {
-							hit.collider.GetComponent<Controller2D>().collisions.standingOnPlatform = true;
+							hit.collider.GetComponent<PlatformerCollider2D>().collisions.standingOnPlatform = true;
 							movedPassengers.Add(hit.transform);
 							float pushX = (directionY == 1)?velocity.x:0;
 							float pushY = velocity.y - (hit.distance - skinWidth) * directionY;
@@ -145,7 +146,7 @@ namespace UnityPlatformer {
 
 			// Horizontally moving platform
 			if (velocity.x != 0) {
-				float rayLength = Mathf.Abs (velocity.x) + skinWidth + Controller2D.MIN_DISTANCE_TO_ENV;
+				float rayLength = Mathf.Abs (velocity.x) + skinWidth + Configuration.MIN_DISTANCE_TO_ENV;
 
 				for (int i = 0; i < horizontalRayCount; i ++) {
 					Vector2 rayOrigin = (directionX == -1)?raycastOrigins.bottomLeft:raycastOrigins.bottomRight;

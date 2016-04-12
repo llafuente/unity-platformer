@@ -1,16 +1,16 @@
 using System;
 using UnityEngine;
+using UnityPlatformer.Characters;
 
-namespace UnityPlatformer {
+namespace UnityPlatformer.Actions {
   /// <summary>
   /// Perform an action over a character
   /// </summary>
-  [RequireComponent (typeof (PlatformerController))]
-  [RequireComponent (typeof (Controller2D))]
+  [RequireComponent (typeof (PlatformerInput))]
   [RequireComponent (typeof (Character))]
-  public class CharacterActionJump: CharacterAction, UpdateManagerAttach {
+  public class CharacterActionJump: CharacterAction, IUpdateManagerAttach {
     // TODO OnValidate check this!
-    [Comment("Must match something in @PlatformerController")]
+    [Comment("Must match something in @PlatformerInput")]
     public String action;
 
     public float maxJumpHeight = 4;

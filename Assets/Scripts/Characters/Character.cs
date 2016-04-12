@@ -1,13 +1,14 @@
 using System;
 using UnityEngine;
+using UnityPlatformer.Actions;
 
-namespace UnityPlatformer {
+namespace UnityPlatformer.Characters {
   /// <summary>
   /// Base class for: Players, NPCs, enemies.
   /// </summary>
-  [RequireComponent (typeof (Controller2D))]
+  [RequireComponent (typeof (PlatformerCollider2D))]
   [RequireComponent (typeof (CharacterHealth))]
-  public class Character: MonoBehaviour, UpdateEntity {
+  public class Character: MonoBehaviour, IUpdateEntity {
     CharacterAction[] actions;
 
     // TODO REVIEW make a decision about it, calc from jump, make it public
@@ -47,7 +48,7 @@ namespace UnityPlatformer {
     [HideInInspector]
     public Vector3 velocity;
     [HideInInspector]
-    public Controller2D controller;
+    public PlatformerCollider2D controller;
     [HideInInspector]
     public CharacterHealth health;
 
@@ -56,7 +57,7 @@ namespace UnityPlatformer {
     /// Maybe setters are the appropiate method to refactor this.
     /// </summary>
     virtual public void Start() {
-      controller = GetComponent<Controller2D> ();
+      controller = GetComponent<PlatformerCollider2D> ();
       actions = GetComponents<CharacterAction>();
       health = GetComponent<CharacterHealth>();
 
@@ -96,15 +97,15 @@ namespace UnityPlatformer {
         a = action.GetPostUpdateActions();
       }
 
-      if (utils.biton((int)a, (int)PostUpdateActions.APPLY_GRAVITY)) {
+      if (Utils.biton((int)a, (int)PostUpdateActions.APPLY_GRAVITY)) {
         velocity.y += gravity * delta;
       }
 
-      if (!utils.biton((int)a, (int)PostUpdateActions.WORLD_COLLISIONS)) {
+      if (!Utils.biton((int)a, (int)PostUpdateActions.WORLD_COLLISIONS)) {
         controller.disableWorldCollisions = true;
       }
 
-      controller.Move(velocity * delta, GetComponent<PlatformerController>().GetAxisRaw());
+      controller.Move(velocity * delta, GetComponent<PlatformerInput>().GetAxisRaw());
 
       // this is meant to fix jump and falling hit something unexpected
       if (controller.collisions.above || controller.collisions.below) {
