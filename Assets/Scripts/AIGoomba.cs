@@ -2,6 +2,7 @@
 using UnityEngine;
 
 namespace UnityPlatformer {
+	/// TODO use this must use: CharacterActionGroundMovement
 	public class AIGoomba: Enemy {
 		public enum Facing {
 			Left = -1,

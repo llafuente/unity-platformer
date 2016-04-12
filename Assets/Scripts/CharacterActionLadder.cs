@@ -14,16 +14,6 @@ namespace UnityPlatformer {
 
     bool moveToCenter = false;
 
-    PlatformerController input;
-    Controller2D controller;
-    Character character;
-
-    public void Start() {
-      input = GetComponent<PlatformerController>();
-      controller = GetComponent<Controller2D> ();
-      character = GetComponent<Character> ();
-    }
-
     public void Attach(UpdateManager um) {
     }
 

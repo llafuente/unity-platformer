@@ -14,38 +14,13 @@ namespace UnityPlatformer {
 
 		public const float MIN_DISTANCE_TO_ENV = 0.1f;
 
-		// TODO this is buggy
+		// TODO REVIEW this is buggy
 		float maxClimbAngle = 30;
 		float maxDescendAngle = 30;
 
 		public CollisionInfo collisions;
 
-		public enum States
-		{
-			None = 0,             // 0000000
-			OnGround = 1,         // 0000001
-			OnMovingPlatform = 3, // 0000011
-			OnSlope = 5,          // 0000100
-			Jumping = 8,          // 0001000
-			Falling = 16,         // 0010000
-			FallingFast = 48,     // 0110000
-			Ladder = 64,          // 1000000
-			//WallSliding,
-			//WallSticking,
-			//Dashing,
-			//Frozen,
-			//Slipping,
-			//FreedomState
-		}
-		public States state = States.None;
-
-		public enum Areas
-		{
-			None = 0x0,
-			Ladder = 0x01
-		}
-		public Areas area = Areas.None;
-
+		// TODO this must be removed, when fallingThroughPlatform is refactored
 		[HideInInspector]
 		public Vector2 playerInput;
 
@@ -175,6 +150,7 @@ namespace UnityPlatformer {
 						if (collisions.fallingThroughPlatform) {
 							continue;
 						}
+						// TODO REVIEW this should be a CharacterAction
 						if (playerInput.y == -1) {
 							collisions.fallingThroughPlatform = true;
 							Invoke("ResetFallingThroughPlatform",.5f);
@@ -260,12 +236,15 @@ namespace UnityPlatformer {
 		}
 
 		public struct CollisionInfo {
+			// current
 			public bool above, below;
 			public bool left, right;
 
+			// before
 			public bool _above, _below;
 			public bool _left, _right;
 
+			// frame-counts
 			public int lastAboveFrame;
 			public int lastBelowFrame;
 			public int lastLeftFrame;
@@ -281,6 +260,7 @@ namespace UnityPlatformer {
 
 			public Action OnRightWall;
 			public Action OnLeftWall;
+			public Action OnLanding;
 
 			public void Reset() {
 				_above = above;
@@ -311,6 +291,9 @@ namespace UnityPlatformer {
 				}
 				if (left && !_left && OnLeftWall != null) {
 					OnLeftWall ();
+				}
+				if (below && !_below && OnLanding != null) {
+					OnLanding ();
 				}
 			}
 		}

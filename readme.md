@@ -17,7 +17,27 @@ TODO
 * Create a CharacterInput, that manage and map inputs.
 * Refactor movements as separate components.
 
+
+TODO (maybe)
+* double jump
+* Dash
+* Attack range
+* Attack melee
+* states and area are must be in Controller2D
+
+
+
 Known issues
 * Player con move thought a horizontal moving platform by pushing it...
 * Fall down ladders
 * Small jump when leave ladders (top)
+
+
+
+# Editable
+
+The following classes contains staff that could be useful to edit for your game.
+
+## DamageType.cs
+
+Contains `DamageTypes` Enum.

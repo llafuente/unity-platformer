@@ -22,15 +22,10 @@ namespace UnityPlatformer {
 
     Jump jump;
 
-    PlatformerController input;
-    Controller2D controller;
-    Character character;
     int _graceJumpFrames = 10;
 
-    public void Start() {
-      input = GetComponent<PlatformerController>();
-      controller = GetComponent<Controller2D> ();
-      character = GetComponent<Character> ();
+    public override void Start() {
+      base.Start();
 
       gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 			jump = new Jump(gravity, timeToJumpApex, minJumpHeight);

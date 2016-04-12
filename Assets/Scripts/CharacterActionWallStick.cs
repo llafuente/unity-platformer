@@ -29,14 +29,8 @@ namespace UnityPlatformer {
 
 	  float timeToWallStickLeave;
 
-    PlatformerController input;
-    Controller2D controller;
-    Character character;
-
-    public void Start() {
-      input = GetComponent<PlatformerController>();
-      controller = GetComponent<Controller2D> ();
-      character = GetComponent<Character> ();
+    public override void Start() {
+      base.Start();
 
       timeToWallStickLeave = wallStickLeaveTime;
     }

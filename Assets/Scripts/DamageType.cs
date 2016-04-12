@@ -1,22 +1,24 @@
 using UnityEngine;
 using UnityEngine.UI;
 namespace UnityPlatformer {
+  public enum DamageTypes {
+    DEFAULT,
+    PHYSICAL,
+    MAGICAL,
+    FIRE,
+    WATER,
+    ELECTRICAL,
+    POISON,
+    SHADOW
+    // Choose your pain!
+  };
+
   [RequireComponent (typeof (Rigidbody2D))]
   public class DamageType : MonoBehaviour {
-    public enum Type {
-      DEFAULT,
-      PHYSICAL,
-      MAGICAL,
-      FIRE,
-      WATER,
-      ELECTRICAL,
-      POISON,
-      SHADOW
-    };
 
     [Comment("Damage amount")]
     public int amount = 1;
-    public Type type = Type.DEFAULT;
+    public DamageTypes type = DamageTypes.DEFAULT;
     // TODO Causer / Owner
 
     [HideInInspector]

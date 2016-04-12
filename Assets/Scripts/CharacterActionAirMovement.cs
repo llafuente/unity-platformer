@@ -6,24 +6,15 @@ namespace UnityPlatformer {
   /// Perform an action over a character
   /// </summary>
   [RequireComponent (typeof (PlatformerController))]
-  [RequireComponent (typeof (Controller2D))]
-  [RequireComponent (typeof (Character))]
   public class CharacterActionAirMovement: MonoBehaviour, CharacterAction, UpdateManagerAttach {
 
+    [Comment("Movement speed")]
     public float speed = 6;
+
+    [Comment("Time to reach max speed")]
     public float accelerationTime = .2f;
 
     float velocityXSmoothing;
-
-    PlatformerController input;
-    Controller2D controller;
-    Character character;
-
-    public void Start() {
-      input = GetComponent<PlatformerController>();
-      controller = GetComponent<Controller2D> ();
-      character = GetComponent<Character> ();
-    }
 
     public void Attach(UpdateManager um) {
     }
