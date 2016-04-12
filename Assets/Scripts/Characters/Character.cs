@@ -10,6 +10,7 @@ namespace UnityPlatformer.Characters {
   [RequireComponent (typeof (CharacterHealth))]
   public class Character: MonoBehaviour, IUpdateEntity {
     CharacterAction[] actions;
+    CharacterAction lastAction;
 
     // TODO REVIEW make a decision about it, calc from jump, make it public
     float gravity = -50;
@@ -39,6 +40,10 @@ namespace UnityPlatformer.Characters {
 			Ladder = 0x01
 		}
 		public Areas area = Areas.None;
+
+    // Actions
+    public Action onEnterArea;
+    public Action onExitArea;
 
     //
     // ~private
@@ -93,6 +98,10 @@ namespace UnityPlatformer.Characters {
       PostUpdateActions a = PostUpdateActions.WORLD_COLLISIONS | PostUpdateActions.APPLY_GRAVITY;
 
       if (action != null) {
+        if (lastAction != null && lastAction != action) {
+          lastAction.GainControl();
+        }
+
         action.PerformAction(Time.fixedDeltaTime);
         a = action.GetPostUpdateActions();
       }
@@ -111,25 +120,42 @@ namespace UnityPlatformer.Characters {
       if (controller.collisions.above || controller.collisions.below) {
         velocity.y = 0;
       }
+
+      if (lastAction != null && lastAction != action) {
+        lastAction.LoseControl();
+      }
+
+      lastAction = action;
     }
 
     public bool IsOnState(States _state) {
       return (state & _state) == _state;
     }
 
-    public bool IsOnLadder() {
-      return (area & Areas.Ladder) == Areas.Ladder;
+    public bool IsOnArea(Areas area) {
+      return (area & area) == area;
     }
 
-    public void EnterLadderArea(Bounds b) {
-      area |= Areas.Ladder;
-      ladderCenter = b.center.x;
+    public void EnterArea(Bounds b, Areas a) {
+      area |= a;
+      // TODO this should be a map
+      if (a == Areas.Ladder) {
+        ladderCenter = b.center.x;
+      }
+
+      if (onEnterArea != null) {
+        onEnterArea(); // TODO send params?
+      }
     }
 
-    public void ExitLadderArea(Bounds b) {
-      area &= ~Areas.Ladder;
-      if (IsOnState (States.Ladder)) {
+    public void ExitArea(Bounds b, Areas a) {
+      area &= ~a;
+      if (a == Areas.Ladder && IsOnState (States.Ladder)) {
         state &= ~States.Ladder;
+      }
+
+      if (onExitArea != null) {
+        onExitArea(); // TODO send params?
       }
     }
 

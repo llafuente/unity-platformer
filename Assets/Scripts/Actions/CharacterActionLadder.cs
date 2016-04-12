@@ -24,7 +24,7 @@ namespace UnityPlatformer.Actions {
     /// </summary>
     public override int WantsToUpdate() {
       // enter ladder condition
-      if (character.IsOnLadder() &&
+      if (character.IsOnArea(Character.Areas.Ladder) &&
         input.GetAxisRawY() != 0 &&
         !character.IsOnState(Character.States.Ladder)
       ) {
@@ -44,7 +44,7 @@ namespace UnityPlatformer.Actions {
     public override void PerformAction(float delta) {
       Vector2 in2d = input.GetAxisRaw();
 
-      if (character.IsOnLadder () && character.IsOnState(Character.States.Ladder)) {
+      if (character.IsOnArea(Character.Areas.Ladder) && character.IsOnState(Character.States.Ladder)) {
         // disable x movement
 	      character.velocity.x = 0;
 	      character.velocity.y = speed * in2d.y;

@@ -8,7 +8,7 @@ namespace UnityPlatformer.Tiles {
 			Character p = o.GetComponent<Character>();
 			if (p) {
 				Collider2D col = GetComponent<Collider2D>();
-				p.EnterLadderArea(col.bounds);
+				p.EnterArea(col.bounds, Character.Areas.Ladder);
 			}
 		}
 
@@ -16,7 +16,7 @@ namespace UnityPlatformer.Tiles {
 			Character p = o.GetComponent<Character>();
 			if (p) {
 				Collider2D col = GetComponent<Collider2D>();
-				p.ExitLadderArea(col.bounds);
+				p.ExitArea(col.bounds, Character.Areas.Ladder);
 			}
 		}
 

@@ -14,14 +14,34 @@ namespace UnityPlatformer.Actions {
   [RequireComponent (typeof (Character))]
   public abstract class CharacterAction : MonoBehaviour
   {
+    public Action onGrainControl;
+    public Action onLoseControl;
+
     protected PlatformerInput input;
     protected PlatformerCollider2D controller;
     protected Character character;
+    protected bool hasControl = false;
 
     virtual public void Start() {
       input = GetComponent<PlatformerInput>();
       controller = GetComponent<PlatformerCollider2D> ();
       character = GetComponent<Character> ();
+
+      hasControl = false;
+    }
+
+    public void GainControl() {
+      if (!hasControl && onGrainControl != null) {
+        onGrainControl();
+      }
+
+      hasControl = true;
+    }
+    public void LoseControl() {
+      if (hasControl && onLoseControl != null) {
+        onLoseControl();
+      }
+      hasControl = false;
     }
 
     /// <summary>
