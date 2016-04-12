@@ -6,8 +6,6 @@ namespace UnityPlatformer.Actions {
   /// <summary>
   /// Perform an action over a character
   /// </summary>
-  [RequireComponent (typeof (PlatformerInput))]
-  [RequireComponent (typeof (Character))]
   public class CharacterActionJump: CharacterAction, IUpdateManagerAttach {
     // TODO OnValidate check this!
     [Comment("Must match something in @PlatformerInput")]

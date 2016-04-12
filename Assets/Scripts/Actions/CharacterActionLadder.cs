@@ -6,8 +6,6 @@ namespace UnityPlatformer.Actions {
   /// <summary>
   /// Perform an action over a character
   /// </summary>
-  [RequireComponent (typeof (PlatformerInput))]
-  [RequireComponent (typeof (Character))]
   public class CharacterActionLadder: CharacterAction, IUpdateManagerAttach {
 
     public float speed = 6;

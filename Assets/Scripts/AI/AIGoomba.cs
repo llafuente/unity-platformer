@@ -11,15 +11,15 @@ namespace UnityPlatformer.AI {
 		};
 
 		public Facing initialFacing;
-		public float velocityX;
-		// helps when Enemy standing on platform moving down.
-		// increase to allow further test
+		[Comment("Distance to test if ground is on left/right side. Helps when Enemy standing on platform moving down.")]
 		public float rayLengthFactor = 1.0f;
 
 		Facing facing;
+		AIInput input;
 
 		public override void Start() {
 			base.Start();
+			input = GetComponent<AIInput>();
 			controller.collisions.OnLeftWall += OnLeftWall;
 			controller.collisions.OnRightWall += OnRightWall;
 
@@ -28,14 +28,17 @@ namespace UnityPlatformer.AI {
 
 		void OnLeftWall() {
 			facing = Facing.Right;
+			input.SetX((float) facing);
 		}
 
 		void OnRightWall() {
 			facing = Facing.Left;
+			input.SetX((float) facing);
 		}
 
 		void Toogle() {
 			facing = facing == Facing.Left ? Facing.Right : Facing.Left;
+			input.SetX((float) facing);
 		}
 
 		public override void ManagedUpdate(float delta) {
@@ -45,11 +48,7 @@ namespace UnityPlatformer.AI {
 				OnRightWall ();
 			}
 
-			var v = new Vector3 (
-				velocityX * delta * (int)facing,
-				-5 * delta,
-				0);
-			controller.Move(v, false);
+			base.ManagedUpdate(delta);
 		}
 	}
 }

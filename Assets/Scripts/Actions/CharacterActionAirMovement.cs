@@ -6,7 +6,6 @@ namespace UnityPlatformer.Actions {
   /// <summary>
   /// Perform an action over a character
   /// </summary>
-  [RequireComponent (typeof (PlatformerInput))]
   public class CharacterActionAirMovement: CharacterAction, IUpdateManagerAttach {
 
     [Comment("Movement speed")]

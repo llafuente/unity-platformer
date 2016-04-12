@@ -12,6 +12,7 @@ namespace UnityPlatformer.Actions {
   /// Perform an action over a character
   /// </summary>
   [RequireComponent (typeof (Character))]
+  [RequireComponent (typeof (PlatformerInput))]
   public abstract class CharacterAction : MonoBehaviour
   {
     public Action onGrainControl;
