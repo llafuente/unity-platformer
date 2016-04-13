@@ -21,8 +21,8 @@ namespace UnityPlatformer.AI {
 			base.Start();
 			input = GetComponent<AIInput>();
       input.EnableAction("Jump");
-			controller.collisions.OnLeftWall += OnLeftWall;
-			controller.collisions.OnRightWall += OnRightWall;
+			controller.collisions.onLeftWall += OnLeftWall;
+			controller.collisions.onRightWall += OnRightWall;
 
 			facing = initialFacing;
       input.SetX((float) facing);

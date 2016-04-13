@@ -8,6 +8,7 @@ namespace UnityPlatformer.Characters {
   /// </summary>
   [RequireComponent (typeof (PlatformerCollider2D))]
   [RequireComponent (typeof (CharacterHealth))]
+  [RequireComponent (typeof (PlatformerInput))]
   public class Character: MonoBehaviour, IUpdateEntity {
     // TODO REVIEW make a decision about it, calc from jump, make it public
     float gravity = -50;
@@ -49,7 +50,7 @@ namespace UnityPlatformer.Characters {
     ///
     /// Actions
     ///
-    
+
     public Action onEnterArea;
     public Action onExitArea;
 
@@ -80,9 +81,10 @@ namespace UnityPlatformer.Characters {
     /// Maybe setters are the appropiate method to refactor this.
     /// </summary>
     virtual public void Start() {
+      Debug.Log("Start new Character: " + gameObject.name);
       controller = GetComponent<PlatformerCollider2D> ();
-      actions = GetComponents<CharacterAction>();
       health = GetComponent<CharacterHealth>();
+      actions = GetComponents<CharacterAction>();
 
       health.onDeath += OnDeath;
     }

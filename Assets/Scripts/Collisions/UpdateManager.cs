@@ -19,6 +19,8 @@ namespace UnityPlatformer {
 		public static List<MovingPlatform> movingPlatforms;
 		[HideInInspector]
 		public static List<Enemy> enemies;
+		[HideInInspector]
+		public static List<Projectile> projectiles;
 
 		/// <summary>
 		/// Gather all stuff that need to be updated. Object must be tagged appropriately
@@ -27,6 +29,7 @@ namespace UnityPlatformer {
 			players = new List<Character>();
 			movingPlatforms = new List<MovingPlatform>();
 			enemies =  new List<Enemy>();
+			projectiles =  new List<Projectile>();
 
 			var objects = GameObject.FindGameObjectsWithTag(Configuration.PLAYER_TAG);
 			Character pp;
@@ -71,6 +74,15 @@ namespace UnityPlatformer {
 					movingPlatforms.Add (obj.GetComponent<MovingPlatform> ());
 				}
 			}
+
+			objects = GameObject.FindGameObjectsWithTag(Configuration.PROJECTILE_TAG);
+			foreach (var obj in objects) {
+				Debug.Log("Manage" + obj);
+				Projectile projectile = obj.GetComponent<Projectile> ();
+				if (obj.activeInHierarchy) {
+					projectiles.Add (projectile);
+				}
+			}
 		}
 
 
@@ -96,6 +108,9 @@ namespace UnityPlatformer {
 				obj.ManagedUpdate(Time.fixedDeltaTime);
 			}
 			foreach(var obj in enemies) {
+				obj.ManagedUpdate(Time.fixedDeltaTime);
+			}
+			foreach(var obj in projectiles) {
 				obj.ManagedUpdate(Time.fixedDeltaTime);
 			}
 		}

@@ -54,7 +54,7 @@ namespace UnityPlatformer.Monitors {
   			character.controller.collisions.climbingSlope,
   			character.controller.collisions.descendingSlope,
   			character.controller.collisions.slopeAngle,
-  			character.controller.collisions.slopeAngleOld,
+  			character.controller.collisions.prevSlopeAngle,
   			character.controller.collisions.faceDir,
   			character.controller.collisions.fallingThroughPlatform,
   			character.controller.collisions.standingOnPlatform,

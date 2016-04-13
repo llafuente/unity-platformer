@@ -56,6 +56,8 @@ namespace UnityPlatformer.Characters {
     /// </summary>
     public Action onInvulnerabilityEnd;
 
+    #endregion
+    
     #region ~private
 
     // NOTE do not use setter/getter to trigger death, we need to preserve
