@@ -5,11 +5,12 @@ namespace UnityPlatformer.Characters {
   /// <summary>
   /// Tracks character health and lives.
   /// Triggers character death
-  /// TODO handle lives
+  /// TODO handle lives / Game over
   /// </summary>
-  public class CharacterHealth : MonoBehaviour
-  {
-    /// properties
+  public class CharacterHealth : MonoBehaviour {
+
+    #region public
+
     [Comment("Health the character will have when Start")]
     public int startingHealth = 1;
     [Comment("Max health. if startingHealth == maxHealth will trigger onMaxHealth on Start")]
@@ -20,15 +21,6 @@ namespace UnityPlatformer.Characters {
     public int maxLives = 1;
     [Comment("After any Damage how much time the character will be invulnerable to any Damage. -1 to disable")]
     public float invulnerabilityTimeAfterDamage = 2.0f;
-
-    /// internal but public
-
-    // NOTE do not use setter/getter to trigger death, we need to preserve
-    // logical Action dispacthing
-    [HideInInspector]
-    public int health = 0;
-    [HideInInspector]
-    public int lives = 0;
 
     ///
     /// Actions
@@ -54,7 +46,6 @@ namespace UnityPlatformer.Characters {
     /// Credits...
     /// </summary>
     public Action onGameOver;
-    //
     /// <summary>
     /// Play that funky music!
     /// NOTE this can be fired many times before onInvulnerabilityEnd
@@ -65,9 +56,22 @@ namespace UnityPlatformer.Characters {
     /// </summary>
     public Action onInvulnerabilityEnd;
 
-    /// private
+    #region ~private
+
+    // NOTE do not use setter/getter to trigger death, we need to preserve
+    // logical Action dispacthing
+    [HideInInspector]
+    public int health = 0;
+    [HideInInspector]
+    public int lives = 0;
+
+    #endregion
+
+    #region private
 
     float _invulnerable = 0;
+
+    #endregion
 
     void Start() {
       // check missconfiguration

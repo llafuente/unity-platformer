@@ -20,17 +20,17 @@ namespace UnityPlatformer.AI {
 
 		public override void Start() {
 			base.Start();
-			controller.collisions.OnLeftWall += OnLeftWall;
-			controller.collisions.OnRightWall += OnRightWall;
+			controller.collisions.onLeftWall += onLeftWall;
+			controller.collisions.onRightWall += onRightWall;
 
 			facing = initialFacing;
 		}
 
-		void OnLeftWall() {
+		void onLeftWall() {
 			facing = Facing.Right;
 		}
 
-		void OnRightWall() {
+		void onRightWall() {
 			facing = Facing.Left;
 		}
 
@@ -40,9 +40,9 @@ namespace UnityPlatformer.AI {
 
 		public override void ManagedUpdate(float delta) {
 			if (!controller.IsGroundOnLeft (rayLengthFactor)) {
-				OnLeftWall ();
+				onLeftWall ();
 			} else if (!controller.IsGroundOnRight (rayLengthFactor)) {
-				OnRightWall ();
+				onRightWall ();
 			}
 
 			var v = new Vector3 (
