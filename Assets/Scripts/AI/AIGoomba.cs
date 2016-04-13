@@ -20,8 +20,8 @@ namespace UnityPlatformer.AI {
 		public override void Start() {
 			base.Start();
 			input = GetComponent<AIInput>();
-			controller.collisions.OnLeftWall += OnLeftWall;
-			controller.collisions.OnRightWall += OnRightWall;
+			controller.collisions.onLeftWall += OnLeftWall;
+			controller.collisions.onRightWall += OnRightWall;
 
 			facing = initialFacing;
 		}

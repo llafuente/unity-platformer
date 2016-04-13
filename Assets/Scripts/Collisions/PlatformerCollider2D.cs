@@ -11,6 +11,7 @@ namespace UnityPlatformer {
 		float maxClimbAngle = 30;
 		float maxDescendAngle = 30;
 
+		[HideInInspector]
 		public CollisionInfo collisions;
 
 		// TODO this must be removed, when fallingThroughPlatform is refactored
@@ -33,7 +34,7 @@ namespace UnityPlatformer {
 		public void Move(Vector3 velocity, Vector2 input, bool standingOnPlatform = false) {
 			UpdateRaycastOrigins ();
 			collisions.Reset ();
-			collisions.velocityOld = velocity;
+			collisions.prevVelocity = velocity;
 			playerInput = input;
 
 			if (velocity.x != 0) {
@@ -84,10 +85,10 @@ namespace UnityPlatformer {
 					if (i == 0 && slopeAngle <= maxClimbAngle) {
 						if (collisions.descendingSlope) {
 							collisions.descendingSlope = false;
-							velocity = collisions.velocityOld;
+							velocity = collisions.prevVelocity;
 						}
 						float distanceToSlopeStart = 0;
-						if (slopeAngle != collisions.slopeAngleOld) {
+						if (slopeAngle != collisions.prevSlopeAngle) {
 							distanceToSlopeStart = hit.distance-skinWidth;
 							velocity.x -= distanceToSlopeStart * directionX;
 						}
@@ -232,10 +233,13 @@ namespace UnityPlatformer {
 			// current
 			public bool above, below;
 			public bool left, right;
+			public float slopeAngle;
 
-			// before
-			public bool _above, _below;
-			public bool _left, _right;
+			// previous frame values
+			public bool prevAbove, prevBelow;
+			public bool prevLeft, prevRight;
+			public float prevSlopeAngle;
+			public Vector3 prevVelocity;
 
 			// frame-counts
 			public int lastAboveFrame;
@@ -243,23 +247,25 @@ namespace UnityPlatformer {
 			public int lastLeftFrame;
 			public int lastRightFrame;
 
+			// other
 			public bool climbingSlope;
 			public bool descendingSlope;
-			public float slopeAngle, slopeAngleOld;
-			public Vector3 velocityOld;
 			public int faceDir;
 			public bool fallingThroughPlatform;
 			public bool standingOnPlatform;
 
-			public Action OnRightWall;
-			public Action OnLeftWall;
-			public Action OnLanding;
+			// callbacks
+			public Action onRightWall;
+			public Action onLeftWall;
+			public Action onLanding;
+			public Action onLeaveGround;
+			public Action onTop;
 
 			public void Reset() {
-				_above = above;
-				_below = below;
-				_left = left;
-				_right = right;
+				prevAbove = above;
+				prevBelow = below;
+				prevLeft = left;
+				prevRight = right;
 
 				above = below = false;
 				left = right = false;
@@ -271,22 +277,37 @@ namespace UnityPlatformer {
 				++lastLeftFrame;
 				++lastRightFrame;
 
-				slopeAngleOld = slopeAngle;
+				prevSlopeAngle = slopeAngle;
 				slopeAngle = 0;
 			}
 
 			public void Consolidate() {
-				if (!below && _below) {
+				if (right && !prevRight) {
+					lastRightFrame = 0;
+					if (onRightWall != null) {
+						onRightWall ();
+					}
+				}
+				if (left && !prevLeft) {
+					lastLeftFrame = 0;
+					if (onLeftWall != null) {
+						onLeftWall ();
+					}
+				}
+				if (above && !prevAbove) {
+					lastAboveFrame = 0;
+					if (onTop != null) {
+						onTop ();
+					}
+				}
+				if (!below && prevBelow) {
 					lastBelowFrame = 0;
+					if (onLeaveGround != null) {
+						onLeaveGround ();
+					}
 				}
-				if (right && !_right && OnRightWall != null) {
-					OnRightWall ();
-				}
-				if (left && !_left && OnLeftWall != null) {
-					OnLeftWall ();
-				}
-				if (below && !_below && OnLanding != null) {
-					OnLanding ();
+				if (below && !prevBelow && onLanding != null) {
+					onLanding ();
 				}
 			}
 		}

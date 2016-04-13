@@ -9,14 +9,16 @@ namespace UnityPlatformer.Characters {
   [RequireComponent (typeof (PlatformerCollider2D))]
   [RequireComponent (typeof (CharacterHealth))]
   public class Character: MonoBehaviour, IUpdateEntity {
-    CharacterAction[] actions;
-    CharacterAction lastAction;
-
     // TODO REVIEW make a decision about it, calc from jump, make it public
     float gravity = -50;
 
-    public enum States
-		{
+    #region public
+
+    /// <summary>
+    /// States in wich the Character can be.
+    /// Can be combine
+    /// </summary>
+    public enum States {
 			None = 0,             // 0000000
 			OnGround = 1,         // 0000001
 			OnMovingPlatform = 3, // 0000011
@@ -34,20 +36,27 @@ namespace UnityPlatformer.Characters {
 		}
 		public States state = States.None;
 
-		public enum Areas
-		{
+    /// <summary>
+    /// Areas in wich the Character can be.
+    /// REVIEW can this be used to handle hazardous areas?
+    /// </summary>
+		public enum Areas {
 			None = 0x0,
 			Ladder = 0x01
 		}
 		public Areas area = Areas.None;
 
-    // Actions
+    ///
+    /// Actions
+    ///
+    
     public Action onEnterArea;
     public Action onExitArea;
 
-    //
-    // ~private
-    //
+    #endregion
+
+    #region ~private
+
     [HideInInspector]
     public float ladderCenter;
     [HideInInspector]
@@ -56,6 +65,15 @@ namespace UnityPlatformer.Characters {
     public PlatformerCollider2D controller;
     [HideInInspector]
     public CharacterHealth health;
+
+    #endregion
+
+    #region private
+
+    CharacterAction[] actions;
+    CharacterAction lastAction;
+
+    #endregion
 
     /// <summary>
     /// This method precalculate some vars, but those value could change. This need to be refactored.
