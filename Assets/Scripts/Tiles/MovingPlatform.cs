@@ -24,8 +24,8 @@ namespace UnityPlatformer.Tiles {
 
 		public override void Start () {
 			// check that gameObject has a valid tag!
-			if (this.tag != Configuration.TROUGHT_TAG &&
-			  this.tag != Configuration.MOVINGPLATFORM_TAG) {
+			if (this.tag != Configuration.instance.movingPlatformThroughTag &&
+			  this.tag != Configuration.instance.movingPlatformTag) {
 				Debug.LogWarning("Found a MovingPlatform misstagged");
 			}
 
@@ -103,7 +103,7 @@ namespace UnityPlatformer.Tiles {
 
 			// Passenger on top of a horizontally or downward moving platform
 			if (directionY == -1 || velocity.y == 0 && velocity.x != 0) {
-				float rayLength = skinWidth * 2 + Configuration.MIN_DISTANCE_TO_ENV;
+				float rayLength = skinWidth * 2 + Configuration.instance.minDistanceToEnv;
 
 				for (int i = 0; i < verticalRayCount; i ++) {
 					Vector2 rayOrigin = raycastOrigins.topLeft + Vector2.right * (verticalRaySpacing * i);
@@ -125,7 +125,7 @@ namespace UnityPlatformer.Tiles {
 
 			// Vertically moving platform
 			if (velocity.y != 0) {
-				float rayLength = Mathf.Abs (velocity.y) + skinWidth + Configuration.MIN_DISTANCE_TO_ENV;
+				float rayLength = Mathf.Abs (velocity.y) + skinWidth + Configuration.instance.minDistanceToEnv;
 
 				for (int i = 0; i < verticalRayCount; i ++) {
 					Vector2 rayOrigin = (directionY == -1)?raycastOrigins.bottomLeft:raycastOrigins.topLeft;
@@ -146,7 +146,7 @@ namespace UnityPlatformer.Tiles {
 
 			// Horizontally moving platform
 			if (velocity.x != 0) {
-				float rayLength = Mathf.Abs (velocity.x) + skinWidth + Configuration.MIN_DISTANCE_TO_ENV;
+				float rayLength = Mathf.Abs (velocity.x) + skinWidth + Configuration.instance.minDistanceToEnv;
 
 				for (int i = 0; i < horizontalRayCount; i ++) {
 					Vector2 rayOrigin = (directionX == -1)?raycastOrigins.bottomLeft:raycastOrigins.bottomRight;

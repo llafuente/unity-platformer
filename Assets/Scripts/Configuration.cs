@@ -1,11 +1,24 @@
-namespace UnityPlatformer {
-  public class Configuration {
-    public const string PLAYER_TAG = "Player";
-    public const string TROUGHT_TAG = "MovingPlatformThrough";
-    public const string MOVINGPLATFORM_TAG = "MovingPlatform";
-    public const string ENEMY_TAG = "Enemy";
-    public const string PROJECTILE_TAG = "Projectile";
+using UnityEngine;
 
-    public const float MIN_DISTANCE_TO_ENV = 0.1f;
+namespace UnityPlatformer {
+  public class Configuration : MonoBehaviour {
+    public static Configuration instance;
+
+    public string playerTag = "Player";
+    public string movingPlatformThroughTag = "MovingPlatformThrough";
+    public string movingPlatformTag = "MovingPlatform";
+    public string enemyTag = "Enemy";
+    public string projectileTag = "Projectile";
+    public float minDistanceToEnv = 0.1f;
+
+
+    void Awake() {
+      if (Configuration.instance) {
+        Debug.LogError("Configuration must be instanced only once, this instance will be ignored.");
+        return;
+      }
+
+      Configuration.instance = this;
+    }
   }
 }

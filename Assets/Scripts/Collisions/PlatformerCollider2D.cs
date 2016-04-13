@@ -113,7 +113,7 @@ namespace UnityPlatformer {
 
 		public bool IsGroundOnLeft(float rayLengthFactor) {
 			Vector3 v = new Vector3(0, 0, 0);
-			float rayLength = (skinWidth + Configuration.MIN_DISTANCE_TO_ENV) * rayLengthFactor;
+			float rayLength = (skinWidth + Configuration.instance.minDistanceToEnv) * rayLengthFactor;
 	    RaycastHit2D hit = DoVerticalRay (-1.0f, 0, rayLength, ref v);
 
 			return hit.collider != null;
@@ -121,7 +121,7 @@ namespace UnityPlatformer {
 
 		public bool IsGroundOnRight(float rayLengthFactor) {
 			Vector3 v = new Vector3(0, 0, 0);
-			float rayLength = (skinWidth + Configuration.MIN_DISTANCE_TO_ENV) * rayLengthFactor;
+			float rayLength = (skinWidth + Configuration.instance.minDistanceToEnv) * rayLengthFactor;
 	    RaycastHit2D hit = DoVerticalRay (-1.0f, verticalRayCount - 1, rayLength, ref v);
 
 			return hit.collider != null;
@@ -130,14 +130,14 @@ namespace UnityPlatformer {
 		void VerticalCollisions(ref Vector3 velocity) {
 			float directionY = Mathf.Sign (velocity.y);
 
-			float rayLength = Mathf.Abs (velocity.y) + skinWidth + Configuration.MIN_DISTANCE_TO_ENV;
+			float rayLength = Mathf.Abs (velocity.y) + skinWidth + Configuration.instance.minDistanceToEnv;
 
 			for (int i = 0; i < verticalRayCount; i ++) {
 
 				RaycastHit2D hit = DoVerticalRay (directionY, i, rayLength, ref velocity);
 
 				if (hit) {
-					if (hit.collider.tag == Configuration.TROUGHT_TAG && !collisions.standingOnPlatform) {
+					if (hit.collider.tag == Configuration.instance.movingPlatformThroughTag && !collisions.standingOnPlatform) {
 						if (directionY == 1 || hit.distance == 0) {
 							continue;
 						}
@@ -152,7 +152,7 @@ namespace UnityPlatformer {
 						}
 					}
 
-					velocity.y = (hit.distance - skinWidth - Configuration.MIN_DISTANCE_TO_ENV) * directionY;
+					velocity.y = (hit.distance - skinWidth - Configuration.instance.minDistanceToEnv) * directionY;
 					rayLength = hit.distance;
 
 					if (collisions.climbingSlope) {

@@ -31,7 +31,7 @@ namespace UnityPlatformer {
 			enemies =  new List<Enemy>();
 			projectiles =  new List<Projectile>();
 
-			var objects = GameObject.FindGameObjectsWithTag(Configuration.PLAYER_TAG);
+			var objects = GameObject.FindGameObjectsWithTag(Configuration.instance.playerTag);
 			Character pp;
 			foreach (var obj in objects) {
 				Debug.Log("Manage" + obj);
@@ -45,7 +45,7 @@ namespace UnityPlatformer {
 				}
 			}
 
-			objects = GameObject.FindGameObjectsWithTag(Configuration.ENEMY_TAG);
+			objects = GameObject.FindGameObjectsWithTag(Configuration.instance.enemyTag);
 			Enemy eny;
 			foreach (var obj in objects) {
 				Debug.Log("Manage" + obj);
@@ -59,7 +59,7 @@ namespace UnityPlatformer {
 				}
 			}
 
-			objects = GameObject.FindGameObjectsWithTag(Configuration.TROUGHT_TAG);
+			objects = GameObject.FindGameObjectsWithTag(Configuration.instance.movingPlatformThroughTag);
 			foreach (var obj in objects) {
 				Debug.Log("Manage" + obj);
 				if (obj.activeInHierarchy) {
@@ -67,7 +67,7 @@ namespace UnityPlatformer {
 				}
 			}
 
-			objects = GameObject.FindGameObjectsWithTag(Configuration.MOVINGPLATFORM_TAG);
+			objects = GameObject.FindGameObjectsWithTag(Configuration.instance.movingPlatformTag);
 			foreach (var obj in objects) {
 				Debug.Log("Manage" + obj);
 				if (obj.activeInHierarchy) {
@@ -75,7 +75,7 @@ namespace UnityPlatformer {
 				}
 			}
 
-			objects = GameObject.FindGameObjectsWithTag(Configuration.PROJECTILE_TAG);
+			objects = GameObject.FindGameObjectsWithTag(Configuration.instance.projectileTag);
 			foreach (var obj in objects) {
 				Debug.Log("Manage" + obj);
 				Projectile projectile = obj.GetComponent<Projectile> ();
