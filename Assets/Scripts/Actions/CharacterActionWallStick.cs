@@ -4,26 +4,28 @@ using UnityPlatformer.Characters;
 
 namespace UnityPlatformer.Actions {
   /// <summary>
-  /// Perform an action over a character
+  /// Stick at walls. Also perform wall-jumps
   /// </summary>
   public class CharacterActionWallStick: CharacterAction, IUpdateManagerAttach {
+    #region public
+
     [Comment("Vertical terminal velocity while stick")]
 	  public float wallSlideSpeedMax = 3;
-
     [Comment("Time player need to oppose walkstick to leave / press in the other direction.")]
 	  public float wallStickLeaveTime = 0.25f;
-
     [Comment("If you want to enable Jumping. Use empty string to disable.")]
     public string jumpAction = "Jump";
-
     [Comment("Jump in the same direction as the wall. Climb")]
     public Vector2 wallJumpClimb = new Vector2(10, 35);
-
     [Comment("Jump with no direction pressed.")]
     public Vector2 wallJumpOff = new Vector2(20, 20);
-
     [Comment("Jump in the opposite direction")]
     public Vector2 wallLeap = new Vector2(20, 20);
+
+    [Comment("Remember: Higher priority wins. Modify with caution. Tip: Higher than Jump")]
+    public int priority = 7;
+
+    #endregion
 
 	  float timeToWallStickLeave;
 
@@ -37,16 +39,15 @@ namespace UnityPlatformer.Actions {
     }
 
     /// <summary>
-    /// Tells the character we want to take control
-    /// Positive numbers fight: Higher number wins
-    /// TODO REVIEW Negative numbers are used to ignore fight, and execute.
+    /// When Character is colliding left or right but now below
+    /// and falling! Stick!
     /// </summary>
     public override int WantsToUpdate() {
       return (
         (controller.collisions.left || controller.collisions.right) &&
         !controller.collisions.below &&
         character.velocity.y < 0
-        ) ? 7 : 0;
+        ) ? priority : 0;
     }
 
     public override void PerformAction(float delta) {
@@ -72,7 +73,7 @@ namespace UnityPlatformer.Actions {
       }
 
       // jump
-      if (input.IsActionButtonDown(jumpAction)) {
+      if (jumpAction.length && input.IsActionButtonDown(jumpAction)) {
         if (wallDirX == x) {
           character.velocity.x = -wallDirX * wallJumpClimb.x;
           character.velocity.y = wallJumpClimb.y;

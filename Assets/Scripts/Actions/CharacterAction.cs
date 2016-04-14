@@ -13,8 +13,7 @@ namespace UnityPlatformer.Actions {
   /// </summary>
   [RequireComponent (typeof (Character))]
   [RequireComponent (typeof (PlatformerInput))]
-  public abstract class CharacterAction : MonoBehaviour
-  {
+  public abstract class CharacterAction : MonoBehaviour {
     public Action onGrainControl;
     public Action onLoseControl;
 

@@ -7,26 +7,34 @@ namespace UnityPlatformer.Actions {
   /// Perform an action over a character
   /// </summary>
   public class CharacterActionJump: CharacterAction, IUpdateManagerAttach {
+    #region public
+
     // TODO OnValidate check this!
     [Comment("Must match something in @PlatformerInput")]
     public String action;
+    [Comment("Remember: Higher priority wins. Modify with caution")]
+    public int priority = 5;
 
     public float maxJumpHeight = 4;
-		public float minJumpHeight = 1;
-		public float graceJumpTime = 0.25f;
-		public float timeToJumpApex = .4f;
+    public float minJumpHeight = 1;
+    public float graceJumpTime = 0.25f;
+    public float timeToJumpApex = .4f;
+
+    #endregion
+
+    #region private
 
     float gravity;
-
     Jump jump;
-
     int _graceJumpFrames = 10;
+
+    #endregion
 
     public override void Start() {
       base.Start();
 
       gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
-			jump = new Jump(gravity, timeToJumpApex, minJumpHeight);
+      jump = new Jump(gravity, timeToJumpApex, minJumpHeight);
       //!!! Debug.LogFormat("(CharacterActionJump) gravity {0} timeToJumpApex {1} minJumpHeight", gravity, timeToJumpApex, minJumpHeight);
     }
 
@@ -36,20 +44,18 @@ namespace UnityPlatformer.Actions {
     }
 
     /// <summary>
-    /// Tells the charcater we want to take control
-    /// Positive numbers fight: Higher number wins
-    /// TODO REVIEW Negative numbers are used to ignore fight, and execute.
+    /// TODO REVIEW jump changes when moved to action, investigate
     /// </summary>
     public override int WantsToUpdate() {
-      return input.IsActionButtonDown(action) ? 5 : 0;
+      return input.IsActionButtonDown(action) ? priority : 0;
     }
 
     public override void PerformAction(float delta) {
       if (controller.IsOnGround(_graceJumpFrames)) {
         jump.StartJump(ref character.velocity);
       } else {
-				jump.Jumping(ref character.velocity);
-			}
+        jump.Jumping(ref character.velocity);
+      }
     }
 
     public override PostUpdateActions GetPostUpdateActions() {

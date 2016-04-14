@@ -7,18 +7,24 @@ namespace UnityPlatformer.Actions {
   /// Perform an action over a character
   /// </summary>
   public class CharacterActionLadder: CharacterAction, IUpdateManagerAttach {
+    #region public
 
+    [Comment("Ladder movement speed.")]
     public float speed = 6;
+    [Comment("Move character to the center of the ladder, instantly")]
+    public bool moveToCenter = false;
+    [Comment("Remember: Higher priority wins. Modify with caution")]
+    public int priority = 10;
 
-    bool moveToCenter = false;
+    #endregion
+
+    bool moveToCenterNow = false;
 
     public void Attach(UpdateManager um) {
     }
 
     /// <summary>
-    /// Tells the character we want to take control
-    /// Positive numbers fight: Higher number wins
-    /// TODO REVIEW Negative numbers are used to ignore fight, and execute.
+    /// Enter in ladder mode when user is in a ladder area and pressing up/down
     /// </summary>
     public override int WantsToUpdate() {
       // enter ladder condition
@@ -27,8 +33,8 @@ namespace UnityPlatformer.Actions {
         !character.IsOnState(Character.States.Ladder)
       ) {
         character.state |= Character.States.Ladder;
-        moveToCenter = true;
-        return 10;
+        moveToCenterNow = moveToCenter;
+        return priority;
       }
 
       // in ladder state
@@ -44,16 +50,16 @@ namespace UnityPlatformer.Actions {
 
       if (character.IsOnArea(Character.Areas.Ladder) && character.IsOnState(Character.States.Ladder)) {
         // disable x movement
-	      character.velocity.x = 0;
-	      character.velocity.y = speed * in2d.y;
-	    }
+        character.velocity.x = 0;
+        character.velocity.y = speed * in2d.y;
+      }
 
       // TODO transition
-      if (moveToCenter) {
-	      // instant move to the center of the ladder!
-	      character.velocity.x = (character.ladderCenter - controller.GetComponent<BoxCollider2D>().bounds.center.x) / delta;
-        moveToCenter = false;
-	    }
+      if (moveToCenterNow) {
+        // instant move to the center of the ladder!
+        character.velocity.x = (character.ladderCenter - controller.GetComponent<BoxCollider2D>().bounds.center.x) / delta;
+        moveToCenterNow = false;
+      }
     }
 
     public override PostUpdateActions GetPostUpdateActions() {

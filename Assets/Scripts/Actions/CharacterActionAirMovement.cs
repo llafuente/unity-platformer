@@ -7,12 +7,14 @@ namespace UnityPlatformer.Actions {
   /// Perform an action over a character
   /// </summary>
   public class CharacterActionAirMovement: CharacterAction, IUpdateManagerAttach {
+    #region public
 
     [Comment("Movement speed")]
     public float speed = 6;
-
     [Comment("Time to reach max speed")]
     public float accelerationTime = .2f;
+
+    #endregion
 
     float velocityXSmoothing;
 
@@ -20,9 +22,7 @@ namespace UnityPlatformer.Actions {
     }
 
     /// <summary>
-    /// Tells the character we want to take control
-    /// Positive numbers fight: Higher number wins
-    /// TODO REVIEW Negative numbers are used to ignore fight, and execute.
+    /// Execute when no collision below.
     /// </summary>
     public override int WantsToUpdate() {
       if (controller.collisions.below) {

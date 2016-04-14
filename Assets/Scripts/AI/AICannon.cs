@@ -3,8 +3,14 @@ using UnityEngine;
 using UnityPlatformer.Characters;
 
 namespace UnityPlatformer.AI {
-	/// TODO use this must use: CharacterActionGroundMovement
-	public class AICannon: Enemy {
+  ///<summary>
+  /// Static cannon Artificial inteligence.
+  /// NOTE do not move.
+  /// TODO projectile should be a list
+  /// TODO offset list
+  /// TODO fireModes{ALL, ONE_BY_ONE}
+  ///</summary>
+  public class AICannon: Enemy {
     #region public
     [Comment("Projectile that will be cloned.")]
     public Projectile projectile;
@@ -15,18 +21,18 @@ namespace UnityPlatformer.AI {
 
     #region private
 
-		AIInput input;
+    AIInput input;
 
     float time;
 
     #endregion
 
-		public override void Start() {
+    public override void Start() {
       time = 0;
-			base.Start();
-		}
+      base.Start();
+    }
 
-		public override void ManagedUpdate(float delta) {
+    public override void ManagedUpdate(float delta) {
       time += delta;
       //Debug.LogFormat("time {0} fireDelay {1}", time, fireDelay);
       if (time > fireDelay) {
@@ -35,7 +41,7 @@ namespace UnityPlatformer.AI {
         projectile.Fire(projectile.transform.position);
       }
 
-			base.ManagedUpdate(delta);
-		}
-	}
+      base.ManagedUpdate(delta);
+    }
+  }
 }
