@@ -9,28 +9,23 @@ namespace UnityPlatformer {
 	/// Custom update loop. This will avoid most of the problems of who is
 	/// updated first in exchange of some manual work / tagging
 	/// </summary>
-	public class UpdateManager : MonoBehaviour {
+	public class UpdateManager : MBSingleton<UpdateManager> {
 		// to scale up/down
 		public float timeScale = 1;
 
 		[HideInInspector]
-		public static List<Character> players;
+		public List<Character> players = new List<Character>();
 		[HideInInspector]
-		public static List<MovingPlatform> movingPlatforms;
+		public List<MovingPlatform> movingPlatforms = new List<MovingPlatform>();
 		[HideInInspector]
-		public static List<Enemy> enemies;
+		public List<Enemy> enemies = new List<Enemy>();
 		[HideInInspector]
-		public static List<Projectile> projectiles;
+		public List<Projectile> projectiles = new List<Projectile>();
 
 		/// <summary>
 		/// Gather all stuff that need to be updated. Object must be tagged appropriately
 		/// </summary>
 		void Start () {
-			players = new List<Character>();
-			movingPlatforms = new List<MovingPlatform>();
-			enemies =  new List<Enemy>();
-			projectiles =  new List<Projectile>();
-
 			var objects = GameObject.FindGameObjectsWithTag(Configuration.instance.playerTag);
 			Character pp;
 			foreach (var obj in objects) {

@@ -5,7 +5,7 @@ namespace UnityPlatformer.Characters {
 	public class Enemy : Character {
 		public override void OnDeath() {
 			Debug.Log("stop enemy updating!");
-			UpdateManager.enemies.Remove (this);
+			UpdateManager.instance.enemies.Remove (this);
 		}
 	}
 }

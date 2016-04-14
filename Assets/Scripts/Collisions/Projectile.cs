@@ -62,7 +62,7 @@ namespace UnityPlatformer {
         return null;
       }
 
-      UpdateManager.projectiles.Add(prj);
+      UpdateManager.instance.projectiles.Add(prj);
       return obj;
     }
 
@@ -97,7 +97,7 @@ namespace UnityPlatformer {
       }
     }
 
-    public virtual OnTriggerStay2D(Collider2D o) {
+    public virtual void OnTriggerStay2D(Collider2D o) {
       // TODO handle something
     }
 
@@ -117,7 +117,7 @@ namespace UnityPlatformer {
         yield return new WaitForSeconds(destroyDelay);
       }
 
-      UpdateManager.projectiles.Remove(this);
+      UpdateManager.instance.projectiles.Remove(this);
       Destroy (gameObject);
     }
   }

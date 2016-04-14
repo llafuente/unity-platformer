@@ -73,7 +73,7 @@ namespace UnityPlatformer.Actions {
       }
 
       // jump
-      if (jumpAction.length && input.IsActionButtonDown(jumpAction)) {
+      if (jumpAction.Length != 0 && input.IsActionButtonDown(jumpAction)) {
         if (wallDirX == x) {
           character.velocity.x = -wallDirX * wallJumpClimb.x;
           character.velocity.y = wallJumpClimb.y;
