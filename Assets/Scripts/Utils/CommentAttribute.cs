@@ -3,17 +3,18 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections;
 
+// TODO fix List problems
+
 // clang-format off
 
-public class CommentAttribute : PropertyAttribute
-{
+public class CommentAttribute : PropertyAttribute {
   public readonly string comment;
 
   public CommentAttribute(string comment) { this.comment = comment; }
 }
 
-[CustomPropertyDrawer(typeof(CommentAttribute))] public class CommentDrawer : PropertyDrawer
-{
+[CustomPropertyDrawer(typeof(CommentAttribute))]
+public class CommentDrawer : PropertyDrawer {
   protected float textHeight;
   // clang-format on
   CommentAttribute commentAttribute

@@ -6,7 +6,7 @@ namespace UnityPlatformer.Actions {
   /// <summary>
   /// Perform an action over a character
   /// </summary>
-  public class CharacterActionJump: CharacterAction, IUpdateManagerAttach {
+  public class CharacterActionJump: CharacterAction {
     #region public
 
     // TODO OnValidate check this!
@@ -36,17 +36,14 @@ namespace UnityPlatformer.Actions {
       gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
       jump = new Jump(gravity, timeToJumpApex, minJumpHeight);
       //!!! Debug.LogFormat("(CharacterActionJump) gravity {0} timeToJumpApex {1} minJumpHeight", gravity, timeToJumpApex, minJumpHeight);
-    }
 
-    public void Attach(UpdateManager um) {
-      _graceJumpFrames = um.GetFrameCount (graceJumpTime);
-      //!!! Debug.Log("(CharacterActionJump) Attached" + _graceJumpFrames);
+      _graceJumpFrames = UpdateManager.instance.GetFrameCount (graceJumpTime);
     }
 
     /// <summary>
     /// TODO REVIEW jump changes when moved to action, investigate
     /// </summary>
-    public override int WantsToUpdate() {
+    public override int WantsToUpdate(float delta) {
       return input.IsActionButtonDown(action) ? priority : 0;
     }
 

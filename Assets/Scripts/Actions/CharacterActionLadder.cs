@@ -26,7 +26,7 @@ namespace UnityPlatformer.Actions {
     /// <summary>
     /// Enter in ladder mode when user is in a ladder area and pressing up/down
     /// </summary>
-    public override int WantsToUpdate() {
+    public override int WantsToUpdate(float delta) {
       // enter ladder condition
       if (character.IsOnArea(Character.Areas.Ladder) &&
         input.GetAxisRawY() != 0 &&

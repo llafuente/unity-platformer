@@ -49,8 +49,9 @@ namespace UnityPlatformer.Actions {
     /// Positive numbers fight: Higher number wins
     /// Negative numbers are used to ignore fight, and execute, but do not
     /// call GetPostUpdateActions().
+    /// NOTE can be used as a replace for UpdateManager.ManagedUpdate
     /// </summary>
-    public abstract int WantsToUpdate();
+    public abstract int WantsToUpdate(float delta);
 
     /// <summary>
     /// Do your action here.

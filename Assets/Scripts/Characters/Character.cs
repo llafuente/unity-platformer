@@ -90,8 +90,6 @@ namespace UnityPlatformer.Characters {
     }
 
     public void Attach(UpdateManager um) {
-      // TODO HACK WIP
-      GetComponent<CharacterActionJump>().Attach(um);
     }
 
     /// <summary>
@@ -104,7 +102,7 @@ namespace UnityPlatformer.Characters {
       CharacterAction action = null;
 
       foreach (var i in actions) {
-        tmp = i.WantsToUpdate();
+        tmp = i.WantsToUpdate(delta);
         if (tmp < 0) {
           i.PerformAction(Time.fixedDeltaTime);
         } else if (prio < tmp) {
@@ -152,8 +150,8 @@ namespace UnityPlatformer.Characters {
       return (state & _state) == _state;
     }
 
-    public bool IsOnArea(Areas area) {
-      return (area & area) == area;
+    public bool IsOnArea(Areas _area) {
+      return (area & _area) == _area;
     }
 
     public void EnterArea(Bounds b, Areas a) {

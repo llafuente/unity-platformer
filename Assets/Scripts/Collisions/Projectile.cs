@@ -48,7 +48,7 @@ namespace UnityPlatformer {
     /// Clone the projectile, activate, add it to UpdateManager
     /// and return :)
     ///</summary>
-    public virtual GameObject Fire(Vector3 position) {
+    public virtual Projectile Fire(Vector3 position) {
       // TODO REVIEW WTF! all 4 lines are necessary?!
       gameObject.SetActive(true);
       GameObject obj = (GameObject) Instantiate(gameObject, position, Quaternion.identity);
@@ -63,7 +63,7 @@ namespace UnityPlatformer {
       }
 
       UpdateManager.instance.projectiles.Add(prj);
-      return obj;
+      return prj;
     }
 
     ///<summary>

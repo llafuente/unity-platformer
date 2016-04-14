@@ -23,25 +23,13 @@ namespace UnityPlatformer.AI {
 
     AIInput input;
 
-    float time;
-
     #endregion
 
     public override void Start() {
-      time = 0;
+      input = GetComponent<AIInput>();
+      input.EnableAction("Attack");
+
       base.Start();
-    }
-
-    public override void ManagedUpdate(float delta) {
-      time += delta;
-      //Debug.LogFormat("time {0} fireDelay {1}", time, fireDelay);
-      if (time > fireDelay) {
-        Debug.Log("FIRE!!!");
-        time -= fireDelay;
-        projectile.Fire(projectile.transform.position);
-      }
-
-      base.ManagedUpdate(delta);
     }
   }
 }

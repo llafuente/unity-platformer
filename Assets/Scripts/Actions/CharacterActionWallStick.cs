@@ -42,7 +42,7 @@ namespace UnityPlatformer.Actions {
     /// When Character is colliding left or right but now below
     /// and falling! Stick!
     /// </summary>
-    public override int WantsToUpdate() {
+    public override int WantsToUpdate(float delta) {
       return (
         (controller.collisions.left || controller.collisions.right) &&
         !controller.collisions.below &&

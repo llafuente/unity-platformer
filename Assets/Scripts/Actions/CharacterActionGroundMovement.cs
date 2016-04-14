@@ -24,7 +24,7 @@ namespace UnityPlatformer.Actions {
     /// <summary>
     /// Execute when collision below.
     /// </summary>
-    public override int WantsToUpdate() {
+    public override int WantsToUpdate(float delta) {
       if (controller.collisions.below) {
         return -1;
       }
