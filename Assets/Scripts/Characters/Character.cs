@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityPlatformer.Actions;
+using UnityPlatformer.Tiles;
 
 namespace UnityPlatformer.Characters {
   /// <summary>
@@ -20,32 +21,30 @@ namespace UnityPlatformer.Characters {
     /// Can be combine
     /// </summary>
     public enum States {
-			None = 0,             // 0000000
-			OnGround = 1,         // 0000001
-			OnMovingPlatform = 3, // 0000011
-			OnSlope = 5,          // 0000100
-			Jumping = 8,          // 0001000
-			Falling = 16,         // 0010000
-			FallingFast = 48,     // 0110000
-			Ladder = 64,          // 1000000
-			//WallSliding,
-			//WallSticking,
-			//Dashing,
-			//Frozen,
-			//Slipping,
-			//FreedomState
-		}
-		public States state = States.None;
+      None = 0,             // 0000000
+      OnGround = 1,         // 0000001
+      OnMovingPlatform = 3, // 0000011
+      OnSlope = 5,          // 0000100
+      Jumping = 8,          // 0001000
+      Falling = 16,         // 0010000
+      FallingFast = 48,     // 0110000
+      Ladder = 64,          // 1000000
+      //WallSliding,
+      //WallSticking,
+      //Dashing,
+      //Frozen,
+      //Slipping,
+      //FreedomState
+    }
 
     /// <summary>
     /// Areas in wich the Character can be.
     /// REVIEW can this be used to handle hazardous areas?
     /// </summary>
-		public enum Areas {
-			None = 0x0,
-			Ladder = 0x01
-		}
-		public Areas area = Areas.None;
+    public enum Areas {
+      None = 0x0,
+      Ladder = 0x01
+    }
 
     ///
     /// Actions
@@ -57,9 +56,14 @@ namespace UnityPlatformer.Characters {
     #endregion
 
     #region ~private
-
     [HideInInspector]
-    public float ladderCenter;
+    public States state = States.None;
+    [HideInInspector]
+    public Areas area = Areas.None;
+    [HideInInspector]
+    public BoxCollider2D body;
+    [HideInInspector]
+    public Ladder ladder;
     [HideInInspector]
     public Vector3 velocity;
     [HideInInspector]
@@ -85,6 +89,7 @@ namespace UnityPlatformer.Characters {
       controller = GetComponent<PlatformerCollider2D> ();
       health = GetComponent<CharacterHealth>();
       actions = GetComponents<CharacterAction>();
+      body = GetComponent<BoxCollider2D>();
 
       health.onDeath += OnDeath;
     }
@@ -154,23 +159,24 @@ namespace UnityPlatformer.Characters {
       return (area & _area) == _area;
     }
 
-    public void EnterArea(Bounds b, Areas a) {
+    public void EnterState(States a) {
+      state |= a;
+    }
+
+    public void ExitState(States a) {
+      state &= ~a;
+    }
+
+    public void EnterArea(Areas a) {
       area |= a;
-      // TODO this should be a map
-      if (a == Areas.Ladder) {
-        ladderCenter = b.center.x;
-      }
 
       if (onEnterArea != null) {
         onEnterArea(); // TODO send params?
       }
     }
 
-    public void ExitArea(Bounds b, Areas a) {
+    public void ExitArea(Areas a) {
       area &= ~a;
-      if (a == Areas.Ladder && IsOnState (States.Ladder)) {
-        state &= ~States.Ladder;
-      }
 
       if (onExitArea != null) {
         onExitArea(); // TODO send params?
@@ -179,6 +185,13 @@ namespace UnityPlatformer.Characters {
 
     virtual public void OnDeath() {
       Debug.Log("Player die! play some fancy animation!");
+    }
+
+    public virtual Vector3 GetFeetPosition() {
+      return body.bounds.center - new Vector3(
+        0,
+        (body.bounds.size.y + Configuration.instance.minDistanceToEnv) * 0.5f,
+        0);
     }
   }
 }

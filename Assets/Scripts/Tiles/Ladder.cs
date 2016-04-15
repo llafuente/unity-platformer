@@ -3,33 +3,57 @@ using System.Collections;
 using UnityPlatformer.Characters;
 
 namespace UnityPlatformer.Tiles {
-	public class Ladder : MonoBehaviour {
-		public void EnableLadder(Collider2D o) {
-			Character p = o.GetComponent<Character>();
-			if (p) {
-				Collider2D col = GetComponent<Collider2D>();
-				p.EnterArea(col.bounds, Character.Areas.Ladder);
-			}
-		}
+  [RequireComponent (typeof (BoxCollider2D))]
+  public class Ladder : MonoBehaviour {
+    // cache
+    public BoxCollider2D body;
 
-		public void DisableLadder(Collider2D o) {
-			Character p = o.GetComponent<Character>();
-			if (p) {
-				Collider2D col = GetComponent<Collider2D>();
-				p.ExitArea(col.bounds, Character.Areas.Ladder);
-			}
-		}
+    virtual public void Start() {
+      body = GetComponent<BoxCollider2D>();
+    }
 
-		void OnTriggerEnter2D(Collider2D o) {
-			EnableLadder (o);
-		}
+    virtual public Vector3 GetTop() {
+      return body.bounds.center + new Vector3(0, body.bounds.size.y * 0.5f, 0);
+    }
 
-		void OnTriggerStay2D(Collider2D o) {
-			EnableLadder (o);
-		}
+    virtual public Vector3 GetBottom() {
+      return body.bounds.center - new Vector3(0, body.bounds.size.y * 0.5f, 0);
+    }
 
-		public void OnTriggerExit2D(Collider2D o) {
-			DisableLadder (o);
-		}
-	}
+    virtual public void EnableLadder(Character p) {
+      p.EnterArea(Character.Areas.Ladder);
+      p.ladder = this;
+    }
+
+    virtual public void Dismount(Character p) {
+      p.ExitState(Character.States.Ladder);
+    }
+
+    virtual public void DisableLadder(Character p) {
+      Dismount(p);
+      p.ExitArea(Character.Areas.Ladder);
+      p.ladder = null;
+    }
+
+    public virtual void OnTriggerEnter2D(Collider2D o) {
+      Character p = o.GetComponent<Character>();
+      if (p) {
+        EnableLadder (p);
+      }
+    }
+
+    public virtual void OnTriggerStay2D(Collider2D o) {
+      Character p = o.GetComponent<Character>();
+      if (p) {
+        //EnableLadder (p);
+      }
+    }
+
+    public virtual void OnTriggerExit2D(Collider2D o) {
+      Character p = o.GetComponent<Character>();
+      if (p) {
+        //DisableLadder (p);
+      }
+    }
+  }
 }

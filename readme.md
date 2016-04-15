@@ -1,22 +1,24 @@
 unity-platformer (work name)
 ===
 
-It's based on https://github.com/SebLague/2DPlatformer-Tutorial
+Based on https://github.com/SebLague/2DPlatformer-Tutorial evolve in it's own creature.
 
-Expanded fixing some edge cases and improving overall experience.
-* Manually handle update order. Also do not use Update -> LateUpdate is better
-for kinetic objects
+Features
+* Manual update. Most of the problems in platformers are solved by sorting the updates
+* Use `FixedUpdate` and no `Update`, is better for kinetic objects.
 * fix MovingPlatform issues, that allow player to fall though
-* fix move down-slope and not jumping.  
-* add ladder (very simple)
-* add some distance to env, to better handle collisions, that gap it's really useful.
+* fix while moving down-slope charcater cannot jump. Adding some distance to env,
+for better collisions handling, that gap it's really useful.
+* Add Ladders
+* Add IA (Patrol, Projectiles, Jumpers, etc...)
+* Add better input handling
+* Character handle actions. Those actions are configured individially (Jump, Ladder, Air movement,
+Ground movement, etc...)
+* Add projectiles
 
 TODO
-* Jump out of a ladder
+* Jump out of a ladder as Action? / bool on Ladder
 * climb down a ladder (can be done if the ladder is a bit `above` the ground)
-* Create a CharacterInput, that manage and map inputs.
-* Refactor movements as separate components.
-
 
 TODO (maybe)
 * double jump
@@ -29,19 +31,23 @@ TODO (maybe)
 
 Known issues
 * Player con move thought a horizontal moving platform by pushing it...
-* Fall down ladders
-* Small jump when leave ladders (top)
+* Slope issues, this is just not very well handled yet.
+* Jump logic need review and more features to tweak it.
 
+# Usage
 
+It's recommended to use this same project configuration (Tags/Layers) gives some
+space for future additions if you need more.
 
-# Editable
+Setup prefab allow yoy to configure most of the project. Drop it a try it.
+
+# Manual Editable
 
 The following classes contains staff that could be useful to edit for your game.
 
-## Configuration.cs
+## Character.cs
 
-Contains some static const values. (maybe in the future can be attached
-to the scene)
+Contains `Areas` and `States`. Both useful for new Actions/Movements.
 
 ## DamageType.cs
 
