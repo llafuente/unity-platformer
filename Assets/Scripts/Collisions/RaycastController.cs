@@ -33,6 +33,7 @@ namespace UnityPlatformer {
 			bounds.Expand (skinWidth * -2);
 
 			raycastOrigins.bottomLeft = new Vector2 (bounds.min.x, bounds.min.y);
+			raycastOrigins.bottomCenter = new Vector2 (bounds.min.x + bounds.size.x * 0.5f, bounds.min.y);
 			raycastOrigins.bottomRight = new Vector2 (bounds.max.x, bounds.min.y);
 			raycastOrigins.topLeft = new Vector2 (bounds.min.x, bounds.max.y);
 			raycastOrigins.topRight = new Vector2 (bounds.max.x, bounds.max.y);
@@ -50,7 +51,7 @@ namespace UnityPlatformer {
 		}
 
 		public struct RaycastOrigins {
-			public Vector2 topLeft, topRight;
+			public Vector2 topLeft, bottomCenter, topRight;
 			public Vector2 bottomLeft, bottomRight;
 		}
 
@@ -65,6 +66,14 @@ namespace UnityPlatformer {
 				Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength,Color.red);
 
 				return hit;
-			}
+		}
+
+		public RaycastHit2D DoFeetRay(float rayLength, LayerMask mask) {
+			RaycastHit2D hit = Physics2D.Raycast(raycastOrigins.bottomCenter, Vector2.down, rayLength, mask);
+
+			Debug.DrawRay(raycastOrigins.bottomCenter, Vector2.down * rayLength, Color.blue);
+
+			return hit;
+		}
 	}
 }

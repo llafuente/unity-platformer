@@ -8,5 +8,6 @@ namespace UnityPlatformer {
     public string enemyTag = "Enemy";
     public string projectileTag = "Projectile";
     public float minDistanceToEnv = 0.1f;
+    public LayerMask laddersMask;
   }
 }

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityPlatformer.Characters;
+using UnityPlatformer.Tiles;
 
 namespace UnityPlatformer.Actions {
   /// <summary>
@@ -27,33 +28,74 @@ namespace UnityPlatformer.Actions {
     /// Enter in ladder mode when user is in a ladder area and pressing up/down
     /// </summary>
     public override int WantsToUpdate(float delta) {
+      bool onLadderState = character.IsOnState(Character.States.Ladder);
+      bool onLadderArea = character.IsOnArea(Character.Areas.Ladder);
+      // this means below my feet there is a ladder
+      Ladder ladder = null;
+
+      if (!onLadderArea) {
+        // check out feet, maybe there is a ladder below...
+        RaycastHit2D hit = character.controller.DoFeetRay(
+          Configuration.instance.minDistanceToEnv * 2,
+          Configuration.instance.laddersMask
+        );
+        if (hit) {
+          ladder = hit.collider.gameObject.GetComponent<Ladder>();
+          if (ladder == null) {
+            Debug.LogWarning(hit.collider.gameObject + " in ladder mask don't have a Ladder component!");
+          } else {
+            Debug.Log("below there is a ladder!!");
+            // deferred logic
+            // if you EnableLadder now, you enter an area but there is no 'outisde-check'
+            // so defer logic until also press down.
+            onLadderArea = true;
+          }
+        }
+      }
+
       // in ladder state
-      if (character.IsOnState(Character.States.Ladder)) {
+      if (onLadderState) {
         return priority;
       }
 
+      bool enter = false;
       // enter ladder condition
-      if (character.IsOnArea(Character.Areas.Ladder) &&
-        !character.IsOnState(Character.States.Ladder)
-      ) {
+      if (onLadderArea && !onLadderState) {
         float dir = input.GetAxisRawY();
-        if (dir > 0) {
-          character.EnterState(Character.States.Ladder);
-          moveToCenterNow = moveToCenter;
-          return priority;
+        // moving up, while inside a real LadderArea.
+        if (dir > 0 && ladder == null) {
+          enter = true;
         } else if (dir < 0) {
-          // check feet/bottom
-          float bottomLadderY = character.ladder.GetBottom().y;
-          // add minDistanceToEnv to give some extra margin
-          // and no enter ladder while on bottom ground
-          float feetY = character.GetFeetPosition().y - Configuration.instance.minDistanceToEnv;
+          // moving down: entering from the top
+          if (ladder != null) {
+            ladder.EnableLadder(character);
 
-          if (feetY > bottomLadderY) {
-            character.EnterState(Character.States.Ladder);
-            moveToCenterNow = moveToCenter;
-            return priority;
+            // move the player inside the ladder.
+            Vector3 pos = character.gameObject.transform.position;
+            pos.y -= Configuration.instance.minDistanceToEnv * 2;
+            character.gameObject.transform.position = pos;
+
+            enter = true;
+          } else {
+            // moving down: entering from the middle-bottom
+
+            // check feet/bottom
+            float bottomLadderY = character.ladder.GetBottom().y;
+            // add minDistanceToEnv to give some extra margin
+            float feetY = character.GetFeetPosition().y - Configuration.instance.minDistanceToEnv;
+
+            // do not enter the ladder while on ground - pressing down
+            if (feetY > bottomLadderY) {
+              enter = true;
+            }
           }
         }
+      }
+
+      if (enter) {
+        character.EnterState(Character.States.Ladder);
+        moveToCenterNow = moveToCenter;
+        return priority;
       }
 
       return 0;
@@ -81,7 +123,7 @@ namespace UnityPlatformer.Actions {
       Vector3 bottomLadder = character.ladder.GetBottom(); // TODO cache?
 
       //Utils.DrawPoint(topLadder);
-      //Utils.DrawPoint(character.GetFeetPosition());
+      Utils.DrawPoint(character.GetFeetPosition());
 
       //Debug.LogFormat("feet: {0} ladder {1}", character.GetFeetPosition(), topLadder);
       if (character.GetFeetPosition().y > topLadder.y) {

@@ -17,8 +17,9 @@ Ground movement, etc...)
 * Add projectiles
 
 TODO
-* Jump out of a ladder as Action? / bool on Ladder
-* climb down a ladder (can be done if the ladder is a bit `above` the ground)
+* Dismount ladder conditions?
+  * Left/Right
+  * Jump out of a ladder as Action? / bool on Ladder
 
 TODO (maybe)
 * double jump
