@@ -1,19 +1,18 @@
 using System;
 using UnityEngine;
 using UnityPlatformer.Characters;
+using UnityPlatformer.Actions;
 
 namespace UnityPlatformer.AI {
   ///<summary>
   /// Static cannon Artificial inteligence.
+  /// Projectile definition CharacterActionProjectile
   /// NOTE do not move.
-  /// TODO projectile should be a list
-  /// TODO offset list
-  /// TODO fireModes{ALL, ONE_BY_ONE}
   ///</summary>
+  [RequireComponent (typeof (CharacterActionProjectile))]
   public class AICannon: Enemy {
     #region public
-    [Comment("Projectile that will be cloned.")]
-    public Projectile projectile;
+
     [Comment("Reload time")]
     public float fireDelay = 5;
 
