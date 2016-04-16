@@ -7,7 +7,7 @@ namespace UnityPlatformer.Actions {
   /// <summary>
   /// Perform an action over a character
   /// </summary>
-  public class CharacterActionLadder: CharacterAction, IUpdateManagerAttach {
+  public class CharacterActionLadder: CharacterAction {
     #region public
 
     [Comment("Ladder movement speed.")]
@@ -21,9 +21,6 @@ namespace UnityPlatformer.Actions {
 
     bool moveToCenterNow = false;
 
-    public void Attach(UpdateManager um) {
-    }
-
     /// <summary>
     /// Enter in ladder mode when user is in a ladder area and pressing up/down
     /// </summary>
@@ -36,7 +33,7 @@ namespace UnityPlatformer.Actions {
       if (!onLadderArea) {
         // check out feet, maybe there is a ladder below...
         RaycastHit2D hit = character.controller.DoFeetRay(
-          Configuration.instance.minDistanceToEnv * 2,
+          character.controller.skinWidth * 2,
           Configuration.instance.laddersMask
         );
         if (hit) {
@@ -63,16 +60,15 @@ namespace UnityPlatformer.Actions {
       if (onLadderArea && !onLadderState) {
         float dir = input.GetAxisRawY();
         // moving up, while inside a real LadderArea.
-        if (dir > 0 && ladder == null) {
+        if (dir > 0 && !(ladder ?? character.ladder).IsAtTop(character)) {
           enter = true;
-        } else if (dir < 0) {
+        } else if (dir < 0 && !(ladder ?? character.ladder).IsAtBottom(character)) {
           // moving down: entering from the top
           if (ladder != null) {
             ladder.EnableLadder(character);
 
             // move the player inside the ladder.
             Vector3 pos = character.gameObject.transform.position;
-            pos.y -= Configuration.instance.minDistanceToEnv * 2;
             character.gameObject.transform.position = pos;
 
             enter = true;
@@ -81,8 +77,7 @@ namespace UnityPlatformer.Actions {
 
             // check feet/bottom
             float bottomLadderY = character.ladder.GetBottom().y;
-            // add minDistanceToEnv to give some extra margin
-            float feetY = character.GetFeetPosition().y - Configuration.instance.minDistanceToEnv;
+            float feetY = character.GetFeetPosition().y;
 
             // do not enter the ladder while on ground - pressing down
             if (feetY > bottomLadderY) {
@@ -118,29 +113,11 @@ namespace UnityPlatformer.Actions {
         moveToCenterNow = false;
       }
 
-      // check ladder top
-      Vector3 topLadder = character.ladder.GetTop(); // TODO cache?
-      Vector3 bottomLadder = character.ladder.GetBottom(); // TODO cache?
-
-      //Utils.DrawPoint(topLadder);
-      Utils.DrawPoint(character.GetFeetPosition());
-
-      //Debug.LogFormat("feet: {0} ladder {1}", character.GetFeetPosition(), topLadder);
-      if (character.GetFeetPosition().y > topLadder.y) {
-        //Debug.LogFormat("TOP REACHED!! feet: {0} ladder {1}", character.GetFeetPosition(), topLadder);
+      if (character.ladder.IsAtTop(character) && in2d.y > 0) {
         character.velocity = Vector2.zero;
-        //Vector3 pos = character.gameObject.transform.position;
-        //pos.y = topLadder.y;
-        //character.gameObject.transform.position = pos;
-        character.ladder.DisableLadder(character);
-      }
-
-      if (character.GetFeetPosition().y < bottomLadder.y) {
-        //Debug.LogFormat("BOTTOM REACHED!! feet: {0} ladder {1}", character.GetFeetPosition(), bottomLadder);
+        character.ladder.Dismount(character);
+      } else if (character.ladder.IsAtBottom(character) && in2d.y < 0) {
         character.velocity = Vector2.zero;
-        //Vector3 pos = character.gameObject.transform.position;
-        //pos.y = topLadder.y;
-        //character.gameObject.transform.position = pos;
         character.ladder.Dismount(character);
       }
     }

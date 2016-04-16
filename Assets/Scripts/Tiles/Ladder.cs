@@ -31,7 +31,7 @@ namespace UnityPlatformer.Tiles {
       float feetY = c.GetFeetPosition().y;
       float topY = GetTop().y;
 
-      return Mathf.Abs(feetY - topY) < 0.1;
+      return Mathf.Abs(feetY - topY) < c.controller.skinWidth;
     }
 
     virtual public bool IsBelowBottom(Character c) {
@@ -45,7 +45,7 @@ namespace UnityPlatformer.Tiles {
       float feetY = c.GetFeetPosition().y;
       float bottomY = GetBottom().y;
 
-      return Mathf.Abs(feetY - bottomY) < 0.1;
+      return Mathf.Abs(feetY - bottomY) < c.controller.skinWidth;
     }
 
     virtual public void EnableLadder(Character p) {
