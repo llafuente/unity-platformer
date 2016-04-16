@@ -6,7 +6,6 @@ namespace UnityPlatformer.Cameras {
 	public class CameraFollow : MonoBehaviour {
 
 		public Character target;
-		public PlatformerInput input;
 		public float verticalOffset;
 		public float lookAheadDstX;
 		public float lookSmoothTimeX;
@@ -23,6 +22,7 @@ namespace UnityPlatformer.Cameras {
 
 		bool lookAheadStopped;
 		public bool debug = false;
+		PlatformerInput input;
 
 		void Start() {
 			input = target.GetComponent<PlatformerInput>();

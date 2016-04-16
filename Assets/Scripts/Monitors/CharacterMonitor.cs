@@ -19,11 +19,13 @@ namespace UnityPlatformer.Monitors {
       text += string.Format(
         "Area: {0}\n"+
         "State: {1}\n"+
-        "Ladder: {2}\n" +
-        "Platform: {3}\n",
-        character.state.ToString(),
+        "Ladder: {2} IsAboveTop {3} IsBelowBottom {4}\n" +
+        "Platform: {5}\n",
         character.area.ToString(),
+        character.state.ToString(),
         character.ladder,
+        character.ladder ? character.ladder.IsAboveTop(character) : false,
+        character.ladder ? character.ladder.IsBelowBottom(character) : false,
         character.platform
       );
     }

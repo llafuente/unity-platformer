@@ -192,7 +192,7 @@ namespace UnityPlatformer.Characters {
     public virtual Vector3 GetFeetPosition() {
       return body.bounds.center - new Vector3(
         0,
-        (body.bounds.size.y + Configuration.instance.minDistanceToEnv) * 0.5f,
+        body.bounds.size.y * 0.5f,
         0);
     }
   }

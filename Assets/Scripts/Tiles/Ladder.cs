@@ -20,6 +20,34 @@ namespace UnityPlatformer.Tiles {
       return body.bounds.center - new Vector3(0, body.bounds.size.y * 0.5f, 0);
     }
 
+    virtual public bool IsAboveTop(Character c) {
+      float feetY = c.GetFeetPosition().y;
+      float topY = GetTop().y;
+
+      return feetY > topY;
+    }
+
+    virtual public bool IsAtTop(Character c) {
+      float feetY = c.GetFeetPosition().y;
+      float topY = GetTop().y;
+
+      return Mathf.Abs(feetY - topY) < 0.1;
+    }
+
+    virtual public bool IsBelowBottom(Character c) {
+      float feetY = c.GetFeetPosition().y;
+      float bottomY = GetBottom().y;
+
+      return feetY < bottomY;
+    }
+
+    virtual public bool IsAtBottom(Character c) {
+      float feetY = c.GetFeetPosition().y;
+      float bottomY = GetBottom().y;
+
+      return Mathf.Abs(feetY - bottomY) < 0.1;
+    }
+
     virtual public void EnableLadder(Character p) {
       p.EnterArea(Character.Areas.Ladder);
       p.ladder = this;
@@ -52,7 +80,7 @@ namespace UnityPlatformer.Tiles {
     public virtual void OnTriggerExit2D(Collider2D o) {
       Character p = o.GetComponent<Character>();
       if (p) {
-        //DisableLadder (p);
+        DisableLadder (p);
       }
     }
   }
