@@ -65,6 +65,8 @@ namespace UnityPlatformer.Characters {
     [HideInInspector]
     public Ladder ladder;
     [HideInInspector]
+    public MovingPlatform platform;
+    [HideInInspector]
     public Vector3 velocity;
     [HideInInspector]
     public PlatformerCollider2D controller;
@@ -137,7 +139,7 @@ namespace UnityPlatformer.Characters {
         controller.disableWorldCollisions = true;
       }
 
-      controller.Move(velocity * delta, GetComponent<PlatformerInput>().GetAxisRaw());
+      controller.Move(velocity * delta);
 
       // this is meant to fix jump and falling hit something unexpected
       if (controller.collisions.above || controller.collisions.below) {

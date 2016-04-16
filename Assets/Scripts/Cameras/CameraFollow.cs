@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityPlatformer.Characters;
 
 namespace UnityPlatformer.Cameras {
 	public class CameraFollow : MonoBehaviour {
 
-		public PlatformerCollider2D target;
+		public Character target;
+		public PlatformerInput input;
 		public float verticalOffset;
 		public float lookAheadDstX;
 		public float lookSmoothTimeX;
@@ -23,17 +25,19 @@ namespace UnityPlatformer.Cameras {
 		public bool debug = false;
 
 		void Start() {
-			focusArea = new FocusArea (target.box.bounds, focusAreaSize);
+			input = target.GetComponent<PlatformerInput>();
+			focusArea = new FocusArea (target.controller.box.bounds, focusAreaSize);
 		}
 
 		void LateUpdate() {
-			focusArea.Update (target.box.bounds);
+			focusArea.Update (target.controller.box.bounds);
 
 			Vector2 focusPosition = focusArea.centre + Vector2.up * verticalOffset;
 
 			if (focusArea.velocity.x != 0) {
 				lookAheadDirX = Mathf.Sign (focusArea.velocity.x);
-				if (Mathf.Sign(target.playerInput.x) == Mathf.Sign(focusArea.velocity.x) && target.playerInput.x != 0) {
+				float x = input.GetAxisRawX();
+				if (Mathf.Sign(x) == Mathf.Sign(focusArea.velocity.x) && x != 0) {
 					lookAheadStopped = false;
 					targetLookAheadX = lookAheadDirX * lookAheadDstX;
 				}

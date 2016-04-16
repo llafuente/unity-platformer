@@ -13,10 +13,6 @@ namespace UnityPlatformer {
     [HideInInspector]
     public CollisionInfo collisions;
 
-    // TODO this must be removed, when fallingThroughPlatform is refactored
-    [HideInInspector]
-    public Vector2 playerInput;
-
     [HideInInspector]
     public bool disableWorldCollisions = false;
 
@@ -26,15 +22,10 @@ namespace UnityPlatformer {
 
     }
 
-    public void Move(Vector3 velocity, bool standingOnPlatform) {
-      Move(velocity, Vector2.zero, standingOnPlatform);
-    }
-
-    public void Move(Vector3 velocity, Vector2 input, bool standingOnPlatform = false) {
+    public void Move(Vector3 velocity, bool standingOnPlatform = false) {
       UpdateRaycastOrigins ();
       collisions.Reset ();
       collisions.prevVelocity = velocity;
-      playerInput = input;
 
       if (velocity.x != 0) {
         collisions.faceDir = (int)Mathf.Sign(velocity.x);
@@ -130,21 +121,14 @@ namespace UnityPlatformer {
         RaycastHit2D hit = DoVerticalRay (directionY, i, rayLength, ref velocity);
 
         if (hit) {
-          if (hit.collider.tag == Configuration.instance.movingPlatformThroughTag && !collisions.standingOnPlatform) {
-            if (directionY == 1 || hit.distance == 0) {
-              continue;
-            }
-            if (collisions.fallingThroughPlatform) {
-              continue;
-            }
-            // TODO REVIEW this should be a CharacterAction
-            if (playerInput.y == -1) {
-              collisions.fallingThroughPlatform = true;
-              Invoke("ResetFallingThroughPlatform",.5f);
-              continue;
-            }
+          // fallingThroughPlatform ?
+          if (
+            hit.collider.tag == Configuration.instance.movingPlatformThroughTag &&
+            collisions.standingOnPlatform &&
+            collisions.fallingThroughPlatform
+          ) {
+            continue;
           }
-
           velocity.y = (hit.distance - skinWidth) * directionY;
           rayLength = hit.distance;
 
@@ -209,8 +193,17 @@ namespace UnityPlatformer {
         }
       }
     }
+    public void FallThroughPlatform(float resetDelay = 0.5f) {
+      // defense!
+      if (collisions.fallingThroughPlatform) {
+        return;
+      }
 
-    void ResetFallingThroughPlatform() {
+      collisions.fallingThroughPlatform = true;
+      Invoke("ResetFallingThroughPlatform", resetDelay);
+    }
+
+    public void ResetFallingThroughPlatform() {
       collisions.fallingThroughPlatform = false;
     }
 

@@ -8,18 +8,17 @@ namespace UnityPlatformer.Monitors {
     public int debugFontSize = 15;
     public Vector2 position = Vector2.zero;
 
-    private string text;
+    protected string text;
+    PlatformerCollider2D collider;
 
     private GUIStyle guiStyle = new GUIStyle();
 
-    Character character;
-
     // Use this for initialization
     virtual public void Start() {
-		    character = GetComponent<Character> ();
+        collider = GetComponent<PlatformerCollider2D> ();
     }
 
-  	virtual public void OnGUI() {
+    virtual public void OnGUI() {
       guiStyle.normal.textColor = textColor;
 
       GUILayout.BeginArea(new Rect(position.x, position.y, Screen.width - position.x, Screen.height - position.y));
@@ -30,38 +29,37 @@ namespace UnityPlatformer.Monitors {
     }
 
       // Update is called once per frame
-  	virtual public void Update() {
+    virtual public void Update() {
       text = string.Format(
-  			"above? {0} @ {13}\n"+
-  			"below? {1} @ {14}\n"+
-  			"left? {2} @ {15}\n"+
-  			"right? {3} @ {16}\n"+
-  			"state: {4}\n"+
-  			"area: {5}\n"+
-  			"climbingSlope? {6}\n"+
-  			"descendingSlope? {7}\n"+
-  			"slopeAngle: {8}\n"+
-  			"slopeAngleOld: {9}\n"+
-  			"faceDir: {10}\n"+
-  			"fallingThroughPlatform: {11}\n"+
-  			"standingOnPlatform: {12}\n",
-        character.controller.collisions.above,
-        character.controller.collisions.below,
-        character.controller.collisions.left,
-        character.controller.collisions.right,
-  			character.state.ToString(),
-  			character.area.ToString(),
-  			character.controller.collisions.climbingSlope,
-  			character.controller.collisions.descendingSlope,
-  			character.controller.collisions.slopeAngle,
-  			character.controller.collisions.prevSlopeAngle,
-  			character.controller.collisions.faceDir,
-  			character.controller.collisions.fallingThroughPlatform,
-  			character.controller.collisions.standingOnPlatform,
-  			character.controller.collisions.lastAboveFrame,
-  			character.controller.collisions.lastBelowFrame,
-  			character.controller.collisions.lastLeftFrame,
-  			character.controller.collisions.lastRightFrame
+        "above? {0} @ {4}\n"+
+        "below? {1} @ {5}\n"+
+        "left? {2} @ {6}\n"+
+        "right? {3} @ {7}\n"+
+
+        "climbingSlope? {8}\n"+
+        "descendingSlope? {9}\n"+
+        "slopeAngle: {10}\n"+
+        "slopeAngleOld: {11}\n"+
+        "faceDir: {12}\n"+
+        "fallingThroughPlatform: {13}\n"+
+        "standingOnPlatform: {14}\n",
+        collider.collisions.above,
+        collider.collisions.below,
+        collider.collisions.left,
+        collider.collisions.right,
+
+        collider.collisions.lastAboveFrame,
+        collider.collisions.lastBelowFrame,
+        collider.collisions.lastLeftFrame,
+        collider.collisions.lastRightFrame,
+
+        collider.collisions.climbingSlope,
+        collider.collisions.descendingSlope,
+        collider.collisions.slopeAngle,
+        collider.collisions.prevSlopeAngle,
+        collider.collisions.faceDir,
+        collider.collisions.fallingThroughPlatform,
+        collider.collisions.standingOnPlatform
       );
     }
   }
