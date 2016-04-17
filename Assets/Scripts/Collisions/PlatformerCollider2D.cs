@@ -19,15 +19,15 @@ namespace UnityPlatformer {
     public override void Start() {
       base.Start ();
       collisions.faceDir = 1;
-
     }
 
-    public void Move(Vector3 velocity, bool standingOnPlatform = false) {
+    public void Move(Vector3 velocity) {
       UpdateRaycastOrigins ();
       collisions.Reset ();
       collisions.prevVelocity = velocity;
 
       if (velocity.x != 0) {
+        Debug.LogFormat("MOVE?! {0}", velocity.x);
         collisions.faceDir = (int)Mathf.Sign(velocity.x);
       }
 
@@ -41,10 +41,6 @@ namespace UnityPlatformer {
         if (velocity.y != 0) {
           VerticalCollisions (ref velocity);
         }
-      }
-
-      if (standingOnPlatform) {
-        //collisions.below = true;
       }
 
       transform.Translate (velocity);
@@ -81,7 +77,9 @@ namespace UnityPlatformer {
           }
 
           if (!collisions.climbingSlope || slopeAngle > maxClimbAngle) {
-            velocity.x = (hit.distance - skinWidth) * directionX;
+            // Min fix an edge case, when collider is pushing same direction a slope is moving
+            // -> \
+            velocity.x = Mathf.Min(velocity.x, (hit.distance - skinWidth) * directionX);
             rayLength = hit.distance;
 
             if (collisions.climbingSlope) {

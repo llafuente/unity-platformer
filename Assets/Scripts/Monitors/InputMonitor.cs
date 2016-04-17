@@ -3,19 +3,17 @@ using UnityEngine.UI;
 using UnityPlatformer.Characters;
 
 namespace UnityPlatformer.Monitors {
-  [RequireComponent (typeof (PlatformerInput))]
-  [RequireComponent (typeof (Character))]
-  public class InputMonitor : MonoBehaviour {
+  public class InputMonitor : Monitor {
     public int length = 2;
-    PlatformerInput input;
-    Character character;
+    public PlatformerInput input;
+    public Character character;
 
-    public void Start() {
-		    input = GetComponent<PlatformerInput> ();
-		    character = GetComponent<Character> ();
-    }
+    public void Update() {
+      text = string.Format(
+        "Axis: {0}",
+        input.GetAxisRaw()
+      );
 
-  	public void Update() {
       Debug.DrawRay(
         character.transform.position,
         (Vector3)(input.GetAxisRaw() * length),

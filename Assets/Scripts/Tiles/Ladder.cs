@@ -22,7 +22,7 @@ namespace UnityPlatformer.Tiles {
 
     virtual public bool IsAboveTop(Character c) {
       float feetY = c.GetFeetPosition().y;
-      float topY = GetTop().y;
+      float topY = GetTop().y - c.controller.skinWidth;
 
       return feetY > topY;
     }
@@ -36,7 +36,7 @@ namespace UnityPlatformer.Tiles {
 
     virtual public bool IsBelowBottom(Character c) {
       float feetY = c.GetFeetPosition().y;
-      float bottomY = GetBottom().y;
+      float bottomY = GetBottom().y + c.controller.skinWidth;
 
       return feetY < bottomY;
     }

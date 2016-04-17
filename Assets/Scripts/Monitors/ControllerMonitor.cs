@@ -3,29 +3,11 @@ using UnityEngine.UI;
 using UnityPlatformer.Characters;
 
 namespace UnityPlatformer.Monitors {
-  public class ControllerMonitor : MonoBehaviour {
-    public Color textColor = Color.white;
-    public int debugFontSize = 15;
-    public Vector2 position = Vector2.zero;
-
-    protected string text;
+  public class ControllerMonitor : Monitor {
     PlatformerCollider2D collider;
-
-    private GUIStyle guiStyle = new GUIStyle();
-
     // Use this for initialization
     virtual public void Start() {
         collider = GetComponent<PlatformerCollider2D> ();
-    }
-
-    virtual public void OnGUI() {
-      guiStyle.normal.textColor = textColor;
-
-      GUILayout.BeginArea(new Rect(position.x, position.y, Screen.width - position.x, Screen.height - position.y));
-
-      guiStyle.fontSize = debugFontSize;
-      GUILayout.Label(text, guiStyle);
-      GUILayout.EndArea();
     }
 
       // Update is called once per frame
