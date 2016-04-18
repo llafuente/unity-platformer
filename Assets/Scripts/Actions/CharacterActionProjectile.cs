@@ -45,7 +45,7 @@ namespace UnityPlatformer.Actions {
     public override int WantsToUpdate(float delta) {
       time += delta;
       if (time > fireDelay) {
-        return input.IsActionButtonDown(action) ? priority : 0;
+        return input.IsActionDown(action) ? priority : 0;
       }
       return 0;
     }

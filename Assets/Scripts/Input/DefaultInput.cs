@@ -41,7 +41,7 @@ namespace UnityPlatformer {
       // TODO foreach input check if down, stored and allow "pressed"
     }
 
-    public override bool IsActionDown(string action) {
+    public override bool IsActionHeld(string action) {
       foreach (var i in inputsMap) {
         if (i.action == action) {
           #if CN_INPUT_MANAGER
@@ -58,7 +58,7 @@ namespace UnityPlatformer {
       return false;
     }
 
-    public override bool IsActionButtonDown(string action) {
+    public override bool IsActionDown(string action) {
       foreach (var i in inputsMap) {
         if (i.action == action) {
           #if CN_INPUT_MANAGER

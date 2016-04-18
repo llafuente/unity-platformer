@@ -31,10 +31,10 @@ namespace UnityPlatformer {
     public void SetY(float x) {
       axis.x = x;
     }
-    public override bool IsActionDown(string action) {
+    public override bool IsActionHeld(string action) {
       return actions[action];
     }
-    public override bool IsActionButtonDown(string action) {
+    public override bool IsActionDown(string action) {
       return actions[action];
     }
     public override bool IsLeftDown() {
