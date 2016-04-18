@@ -1,19 +1,25 @@
 using System;
 using UnityEngine;
+using UnityPlatformer.Characters;
 
 namespace UnityPlatformer {
   /// <summary>
   /// Math behind the Jump
   /// </summary>
   public class Jump {
-    float maxJumpVelocity;
-    float minJumpVelocity;
-    int hangFrames;
-    int ticks;
+    public float maxJumpVelocity;
+    public float minJumpVelocity;
+    public int hangFrames;
+    public int apexFrames;
+    public int ticks;
 
-    public Jump(float gravity, float timeToJumpApex, float minJumpHeight, float hangTime = 0) {
-      maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-      minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (gravity) * minJumpHeight);
+    Character character;
+
+    public Jump(Character _character, float timeToJumpApex, float minJumpHeight, float hangTime) {
+      character = _character;
+
+      maxJumpVelocity = Mathf.Abs(character.gravity.y) * timeToJumpApex;
+      minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (character.gravity.y) * minJumpHeight);
       apexFrames = UpdateManager.instance.GetFrameCount(timeToJumpApex);
       hangFrames = UpdateManager.instance.GetFrameCount(hangTime);
     }
@@ -29,14 +35,14 @@ namespace UnityPlatformer {
 
       if (apexFrames > ticks) {
         // jumping
-        if (velocity.y > minJumpVelocity) {
+        if (velocity.y < minJumpVelocity) {
           velocity.y = minJumpVelocity;
         }
         return true;
       }
-      if (apexFrames <= ticks) {
+      if (apexFrames + hangFrames > ticks) {
         // hang time
-        velocity.y = 0; // TODO this may vary a bit up/down
+        velocity.y = -character.gravity.y * Time.fixedDeltaTime;
         return true;
       }
 

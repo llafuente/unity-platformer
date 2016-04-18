@@ -11,8 +11,14 @@ namespace UnityPlatformer.Characters {
   [RequireComponent (typeof (CharacterHealth))]
   [RequireComponent (typeof (PlatformerInput))]
   public class Character: MonoBehaviour, IUpdateEntity {
-    // TODO REVIEW make a decision about it, calc from jump, make it public
-    float gravity = -50;
+
+    public Vector2 gravityOverride = Vector2.zero;
+
+    public Vector2 gravity {
+      get {
+        return gravityOverride == Vector2.zero ? Configuration.instance.gravity : gravityOverride;
+      }
+    }
 
     #region public
 
@@ -65,6 +71,14 @@ namespace UnityPlatformer.Characters {
     [HideInInspector]
     public Ladder ladder;
     [HideInInspector]
+    public Vector2 lastJumpDistance {
+      get {
+        return jumpEnd - jumpStart;
+      }
+    }
+    [HideInInspector]
+    public Vector2 fallDistance;
+    [HideInInspector]
     public MovingPlatform platform;
     [HideInInspector]
     public Vector3 velocity;
@@ -80,6 +94,9 @@ namespace UnityPlatformer.Characters {
     CharacterAction[] actions;
     CharacterAction lastAction;
 
+    Vector2 jumpStart;
+    Vector2 jumpEnd;
+
     #endregion
 
     /// <summary>
@@ -87,7 +104,7 @@ namespace UnityPlatformer.Characters {
     /// Maybe setters are the appropiate method to refactor this.
     /// </summary>
     virtual public void Start() {
-      Debug.Log("Start new Character: " + gameObject.name);
+      //Debug.Log("Start new Character: " + gameObject.name);
       controller = GetComponent<PlatformerCollider2D> ();
       health = GetComponent<CharacterHealth>();
       actions = GetComponents<CharacterAction>();
@@ -132,7 +149,8 @@ namespace UnityPlatformer.Characters {
       }
 
       if (Utils.biton((int)a, (int)PostUpdateActions.APPLY_GRAVITY)) {
-        velocity.y += gravity * delta;
+        // TODO REVIEW x/y gravity...
+        velocity.y += gravity.y * delta;
       }
 
       if (!Utils.biton((int)a, (int)PostUpdateActions.WORLD_COLLISIONS)) {
@@ -144,6 +162,16 @@ namespace UnityPlatformer.Characters {
       // this is meant to fix jump and falling hit something unexpected
       if (controller.collisions.above || controller.collisions.below) {
         velocity.y = 0;
+      }
+
+      if (controller.collisions.below) {
+        EnterState(States.OnGround);
+        ExitState(States.Falling);
+      } else {
+        ExitState(States.OnGround);
+        if (velocity.y < 0) {
+          EnterState(States.Falling);
+        }
       }
 
       if (lastAction != null && lastAction != action) {
@@ -162,10 +190,22 @@ namespace UnityPlatformer.Characters {
     }
 
     public void EnterState(States a) {
+      if (a == States.Falling && IsOnState(States.Jumping)) {
+        ExitState(States.Jumping);
+      }
+      if (a == States.Jumping && !IsOnState(States.Jumping)) {
+        jumpStart = transform.position;
+      }
+
       state |= a;
     }
 
     public void ExitState(States a) {
+
+      if (a == States.Jumping && IsOnState(States.Jumping)) {
+        jumpEnd = transform.position;
+      }
+
       state &= ~a;
     }
 

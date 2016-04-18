@@ -21,6 +21,8 @@ TODO
   * Left/Right
   * Jump out of a ladder as Action? / bool on Ladder
 
+* Use AI to do some automated-test.
+
 TODO (maybe)
 * double jump
 * Dash
@@ -29,11 +31,16 @@ TODO (maybe)
 * states and area are must be in Controller2D
 
 
+Caveats
+
+* If you want hanging in max Jump (like Peach in Mario Bross) with a little
+up/down movement, like the original, you have to do it in animation.
+
+  You can't do it in the Character/Action, otherwise Falling state will be set.
 
 Known issues
 * Player con move thought a horizontal moving platform by pushing it...
 * Slope issues, this is just not very well handled yet.
-* Jump logic need review and more features to tweak it.
 
 # Usage
 

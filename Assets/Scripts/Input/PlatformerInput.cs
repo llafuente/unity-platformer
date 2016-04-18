@@ -15,40 +15,40 @@ namespace UnityPlatformer {
   /// for example: Jump, keyboard: press Space. PS4: X etc...
   /// You map everything to the Jump action, extend the PlatformerInput to
   /// read input properly :)
-  /// NOTE onButtonUp, onButtonDown it's the recommended way to handle
+  /// NOTE onActionUp, onActionDown it's the recommended way to handle
   /// input rather than calling IsAction*, because you can miss a frame and
   /// don't catch IsActionDown. Or you can use a more reliable version: IsActionHeld
-  /// TODO IsActionButtonUp
+  /// TODO IsActionActionUp
   /// </summary>
   public abstract class PlatformerInput : MonoBehaviour
   {
     [Comment("List of actions that will fire events")]
-    public List<string> listenAction;
+    public List<string> listenActions = new List<string> {"Jump", "Attack"};
 
-    public delegate void ButtonDelegate(string button);
-    public ButtonDelegate onButtonUp;
-    public ButtonDelegate onButtonDown;
+    public delegate void InputActionDelegate(string button);
+    public InputActionDelegate onActionUp;
+    public InputActionDelegate onActionDown;
 
     // cache
     protected Dictionary<string, bool> actions = new Dictionary<string, bool>();
 
-    public Start() {
-      foreach (var button in listenAction) {
+    public void Start() {
+      foreach (var button in listenActions) {
         actions[button] = false;
       }
     }
 
-    public Update() {
-      foreach (var button in listenAction) {
+    public void Update() {
+      foreach (var button in listenActions) {
         if (IsActionHeld(button)) {
           if (!actions[button]) {
-            onButtonDown(button);
+            onActionDown(button);
           }
 
           actions[button] = true;
         } else {
           if (actions[button]) {
-            onButtonUp(button);
+            onActionUp(button);
           }
 
           actions[button] = false;

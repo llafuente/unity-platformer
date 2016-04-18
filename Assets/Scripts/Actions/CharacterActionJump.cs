@@ -20,56 +20,79 @@ namespace UnityPlatformer.Actions {
     public float maxJumpHeight = 4;
     public float minJumpHeight = 1;
     public float graceJumpTime = 0.25f;
-    public float timeToJumpApex = .4f;
+    public float timeToJumpApex = 0.4f;
+    public float hangTime = 0.0f;
 
     #endregion
 
     #region private
 
+    bool jumpHeld = false;
     bool jumping = false;
-    bool detachJumping = false;
 
-    float gravity;
     Jump jump;
-    int _graceJumpFrames = 10;
+    int _graceJumpFrames;
 
     #endregion
 
     public override void Start() {
       base.Start();
 
-      gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
-      jump = new Jump(gravity, timeToJumpApex, minJumpHeight);
-      //!!! Debug.LogFormat("(CharacterActionJump) gravity {0} timeToJumpApex {1} minJumpHeight", gravity, timeToJumpApex, minJumpHeight);
+      jump = new Jump(character, timeToJumpApex, minJumpHeight, hangTime);
 
       _graceJumpFrames = UpdateManager.instance.GetFrameCount (graceJumpTime);
       input.onActionUp += OnActionUp;
       input.onActionDown += OnActionDown;
     }
 
-    public void OnActionDown(string action) {
-      jumping = true;
+    public void OnActionDown(string _action) {
+      if (_action == action) {
+        jumpHeld = true;
+      }
     }
 
-    public void OnActionUp(string action) {
+    public void OnActionUp(string _action) {
       // when button is up, reset, and allow a new jump
-      jumping = false;
-      detachJumping = false;
+      if (_action == action) {
+        jumpHeld = false;
+        jumping = false; // jump stops
+        //character.ExitState(Character.States.Jumping);
+      }
     }
 
     /// <summary>
     /// TODO REVIEW jump changes when moved to action, investigate
     /// </summary>
     public override int WantsToUpdate(float delta) {
-      return !detachJumping && jumping ? priority : 0;
+      /* DEBUG
+      text = string.Format("jumpHeld {0}\n, onGround {1}\n, jumping {2}\n\n" +
+      "maxJumpVelocity: {3}\nminJumpVelocity: {4}\nhangFrames: {5}\napexFrames: {6}\nticks: {7}",
+        jumpHeld,
+        controller.IsOnGround(_graceJumpFrames),
+        jumping,
+
+        jump.maxJumpVelocity,
+        jump.minJumpVelocity,
+        jump.hangFrames,
+        jump.apexFrames,
+        jump.ticks
+      );
+      */
+
+      return jumpHeld && (
+        controller.IsOnGround(_graceJumpFrames) || jumping
+      ) ? priority : 0;
     }
 
     public override void PerformAction(float delta) {
-      if (controller.IsOnGround(_graceJumpFrames)) {
+      if (!jumping) {
         jump.StartJump(ref character.velocity);
+        jumping = true;
+        character.EnterState(Character.States.Jumping);
       } else {
-        if (!jump.Jumping(ref character.velocity)) {
-          detachJumping = true;
+        if (!jump.Jumping(ref character.velocity) || character.velocity.y < 0) {
+          jumping = false;
+          character.ExitState(Character.States.Jumping);
         }
       }
     }

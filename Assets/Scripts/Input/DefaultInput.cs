@@ -37,20 +37,16 @@ namespace UnityPlatformer {
       )
     };
 
-    void Update() {
-      // TODO foreach input check if down, stored and allow "pressed"
-    }
-
     public override bool IsActionHeld(string action) {
       foreach (var i in inputsMap) {
         if (i.action == action) {
           #if CN_INPUT_MANAGER
           if (SystemInfo.deviceType == DeviceType.Handheld) {
-            return CnInputManager.GetButtonDown(i.handheld);
+            return CnInputManager.GetButton(i.handheld);
           }
           #endif
 
-          return Input.GetButtonDown(i.keyboard);
+          return Input.GetButton(i.keyboard);
         }
       }
 
@@ -63,11 +59,11 @@ namespace UnityPlatformer {
         if (i.action == action) {
           #if CN_INPUT_MANAGER
           if (SystemInfo.deviceType == DeviceType.Handheld) {
-            return CnInputManager.GetButton(i.handheld);
+            return CnInputManager.GetButtonDown(i.handheld);
           }
           #endif
 
-          return Input.GetButton(i.keyboard);
+          return Input.GetButtonDown(i.keyboard);
         }
       }
 

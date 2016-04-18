@@ -27,7 +27,7 @@ namespace UnityPlatformer {
       collisions.prevVelocity = velocity;
 
       if (velocity.x != 0) {
-        Debug.LogFormat("MOVE?! {0}", velocity.x);
+        //Debug.LogFormat("MOVE?! {0}", velocity.x);
         collisions.faceDir = (int)Mathf.Sign(velocity.x);
       }
 

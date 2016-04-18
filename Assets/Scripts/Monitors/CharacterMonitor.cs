@@ -20,13 +20,15 @@ namespace UnityPlatformer.Monitors {
         "Area: {0}\n"+
         "State: {1}\n"+
         "Ladder: {2} IsAboveTop {3} IsBelowBottom {4}\n" +
-        "Platform: {5}\n",
+        "Platform: {5}\n" +
+        "Jump: {6}\n",
         character.area.ToString(),
         character.state.ToString(),
         character.ladder,
         character.ladder ? character.ladder.IsAboveTop(character) : false,
         character.ladder ? character.ladder.IsBelowBottom(character) : false,
-        character.platform
+        character.platform,
+        character.lastJumpDistance
       );
     }
   }

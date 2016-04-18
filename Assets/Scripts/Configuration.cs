@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace UnityPlatformer {
   public class Configuration : MBSingleton<Configuration> {
+    public Vector2 gravity = Vector2.zero;
     public string playerTag = "Player";
     public string movingPlatformThroughTag = "MovingPlatformThrough";
     public string movingPlatformTag = "MovingPlatform";

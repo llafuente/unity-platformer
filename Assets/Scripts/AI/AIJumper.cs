@@ -36,13 +36,11 @@ namespace UnityPlatformer.AI {
     }
 
     void OnLeftWall() {
-      Debug.Log("OnLeftWall");
       facing = Facing.Right;
       input.SetX((float) facing);
     }
 
     void OnRightWall() {
-      Debug.Log("OnRightWall");
       facing = Facing.Left;
       input.SetX((float) facing);
     }
