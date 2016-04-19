@@ -29,19 +29,31 @@ namespace UnityPlatformer {
       ticks = 0;
     }
 
+    public void EndJump(ref Vector3 velocity) {
+      if (velocity.y > minJumpVelocity) {
+        velocity.y = minJumpVelocity;
+      }
+    }
+
+    public bool IsBeforeApex() {
+      return apexFrames >= ticks;
+    }
+
+    public bool IsHanging() {
+      return apexFrames < ticks && apexFrames + hangFrames >= ticks;
+    }
+
     public bool Jumping(ref Vector3 velocity) {
       ++ticks;
       // jumps frames
 
-      if (apexFrames > ticks) {
+      if (IsBeforeApex()) {
         // jumping
-        if (velocity.y < minJumpVelocity) {
-          velocity.y = minJumpVelocity;
-        }
         return true;
       }
-      if (apexFrames + hangFrames > ticks) {
-        // hang time
+      if (IsHanging()) {
+        // hang time, opose Y gravity
+        // TODO REVIEW disable gravity ?
         velocity.y = -character.gravity.y * Time.fixedDeltaTime;
         return true;
       }

@@ -4,9 +4,9 @@ namespace UnityPlatformer.Characters {
   public class Hitbox : MonoBehaviour {
     #region public
 
-    [Comment("Required. Layers to detect collisions")]
+    [Comment("Who can deal damage to me?")]
     public LayerMask collideWith;
-    [Comment("Character that will recieve Damage")]
+    [Comment("Who am I?")]
     public CharacterHealth owner;
 
     #endregion

@@ -29,6 +29,7 @@ namespace UnityPlatformer.Actions {
 
     bool jumpHeld = false;
     bool jumping = false;
+    bool jumpStopped = false;
 
     Jump jump;
     int _graceJumpFrames;
@@ -56,6 +57,7 @@ namespace UnityPlatformer.Actions {
       if (_action == action) {
         jumpHeld = false;
         jumping = false; // jump stops
+        jumpStopped = true;
         //character.ExitState(Character.States.Jumping);
       }
     }
@@ -79,17 +81,29 @@ namespace UnityPlatformer.Actions {
       );
       */
 
-      return jumpHeld && (
-        controller.IsOnGround(_graceJumpFrames) || jumping
+      return jumpStopped || (
+        jumpHeld && (
+          controller.IsOnGround(_graceJumpFrames) || jumping
+        )
       ) ? priority : 0;
     }
 
     public override void PerformAction(float delta) {
+      // last update to set 'exit' velocity
+      if (jumpStopped) {
+        jumpStopped = false;
+        jump.EndJump(ref character.velocity);
+      }
+
       if (!jumping) {
         jump.StartJump(ref character.velocity);
         jumping = true;
         character.EnterState(Character.States.Jumping);
       } else {
+        if (jump.IsHanging()) {
+          character.EnterState(Character.States.Hanging);
+        }
+
         if (!jump.Jumping(ref character.velocity) || character.velocity.y < 0) {
           jumping = false;
           character.ExitState(Character.States.Jumping);

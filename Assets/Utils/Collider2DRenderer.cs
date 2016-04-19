@@ -2,8 +2,12 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.Rendering;
 
-// clang-format off
-[ExecuteInEditMode][RequireComponent(typeof(Collider2D))]
+/// <summary>
+/// Create a mesh for given Collider2D and apply material.
+/// NOTE: MeshFilter and MeshRenderer are hidden
+/// </summary>
+[ExecuteInEditMode]
+[RequireComponent(typeof(Collider2D))]
 public class Collider2DRenderer : MonoBehaviour
 {
   public Material material
@@ -25,6 +29,9 @@ public class Collider2DRenderer : MonoBehaviour
   void Start()
   {
 
+    var castedTarget = (target as TestHide);
+    castedTarget.GetComponent<BoxCollider>()
+
     if (_default_material == null)
     {
       // TODO fixit!
@@ -44,6 +51,7 @@ public class Collider2DRenderer : MonoBehaviour
     if (_mf == null)
     {
       _mf = gameObject.AddComponent<MeshFilter>();
+      _mf.hideFlags = HideFlags.HideInInspector;
     }
 
     _mr = GetComponent<MeshRenderer>();
@@ -55,6 +63,8 @@ public class Collider2DRenderer : MonoBehaviour
       _mr.receiveShadows = false;
       _mr.shadowCastingMode = ShadowCastingMode.Off;
       _mr.reflectionProbeUsage = ReflectionProbeUsage.Off;
+
+      _mr.hideFlags = HideFlags.HideInInspector;
     }
 
     Update();

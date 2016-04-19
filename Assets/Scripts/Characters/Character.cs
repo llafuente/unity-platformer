@@ -27,16 +27,17 @@ namespace UnityPlatformer.Characters {
     /// Can be combine
     /// </summary>
     public enum States {
-      None = 0,             // 0000000
-      OnGround = 1,         // 0000001
-      OnMovingPlatform = 3, // 0000011
-      OnSlope = 5,          // 0000100
-      Jumping = 8,          // 0001000
-      Falling = 16,         // 0010000
-      FallingFast = 48,     // 0110000
-      Ladder = 64,          // 1000000
-      //WallSliding,
-      //WallSticking,
+      None =                0,
+      OnGround =            1,
+      OnMovingPlatform =    3,
+      OnSlope =             1 << 2 | OnGround,
+      Jumping =             1 << 3,
+      Hanging =             1 << 4 | Jumping,
+      Falling =             1 << 5,
+      FallingFast =         1 << 6 | Falling,
+      Ladder =              1 << 7,
+      WallSliding =         1 << 8,
+      WallSticking =        1 << 9,
       //Dashing,
       //Frozen,
       //Slipping,
@@ -201,7 +202,7 @@ namespace UnityPlatformer.Characters {
     }
 
     public void ExitState(States a) {
-
+      // TODO REVIEW if Hanging include Jumping this fail...
       if (a == States.Jumping && IsOnState(States.Jumping)) {
         jumpEnd = transform.position;
       }
