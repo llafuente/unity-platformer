@@ -44,6 +44,11 @@ up/down movement, like the original, you have to do it in animation.
 
   You can't do it in the Character/Action, otherwise Falling state will be set, and you will have a hard time Animating.
 
+* If you want a double jump, do not increase graceJumpTime, because this not only affect
+jump + jump. it affect the time that the player can jump after leave the ground.
+
+atm: write your extend CharacterActionJump
+
 # Usage
 
 It's recommended to use the same project configuration (Tags/Layers).

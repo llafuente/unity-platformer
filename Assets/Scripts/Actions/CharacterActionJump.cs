@@ -56,8 +56,9 @@ namespace UnityPlatformer.Actions {
       // when button is up, reset, and allow a new jump
       if (_action == action) {
         jumpHeld = false;
-        jumping = false; // jump stops
-        jumpStopped = true;
+        if (jumping) { // jump stops?
+          jumpStopped = true;
+        }
         //character.ExitState(Character.States.Jumping);
       }
     }
@@ -67,11 +68,17 @@ namespace UnityPlatformer.Actions {
     /// </summary>
     public override int WantsToUpdate(float delta) {
       /* DEBUG
-      text = string.Format("jumpHeld {0}\n, onGround {1}\n, jumping {2}\n\n" +
-      "maxJumpVelocity: {3}\nminJumpVelocity: {4}\nhangFrames: {5}\napexFrames: {6}\nticks: {7}",
+      text = string.Format("jumpHeld: {0}\nonGround: {1}\njumping: {2}\njumpStopped: {3}\nCondition: {4}\n" +
+      "maxJumpVelocity: {5}\nminJumpVelocity: {6}\nhangFrames: {7}\napexFrames: {8}\nticks: {9}",
         jumpHeld,
         controller.IsOnGround(_graceJumpFrames),
         jumping,
+        jumpStopped,
+        jumpStopped || (
+          jumpHeld && (
+            controller.IsOnGround(_graceJumpFrames) || jumping
+          )
+        ),
 
         jump.maxJumpVelocity,
         jump.minJumpVelocity,
@@ -91,11 +98,11 @@ namespace UnityPlatformer.Actions {
     public override void PerformAction(float delta) {
       // last update to set 'exit' velocity
       if (jumpStopped) {
+        jumping = false;
         jumpStopped = false;
         jump.EndJump(ref character.velocity);
-      }
-
-      if (!jumping) {
+        jump.Reset();
+      } else if (!jumping) {
         jump.StartJump(ref character.velocity);
         jumping = true;
         character.EnterState(Character.States.Jumping);

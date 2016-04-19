@@ -21,17 +21,29 @@ public class Collider2DRenderer : MonoBehaviour
   }
 
   static protected Material _default_material;
+  [SerializeField]
   protected Material _material;
   protected MeshFilter _mf;
   protected MeshRenderer _mr;
 
+  #if UNITY_EDITOR
+  void OnValidate() {
+    if (_material && _mr) {
+      _mr.sharedMaterial = _material;
+    }
+    // this is needed to fix visibility when importing the prefab
+    if (_mf) {
+      _mf.hideFlags = HideFlags.HideInInspector;
+    }
+    if (_mr) {
+      _mr.hideFlags = HideFlags.HideInInspector;
+    }
+  }
+  #endif
+
   // clang-format on
   void Start()
   {
-
-    var castedTarget = (target as TestHide);
-    castedTarget.GetComponent<BoxCollider>()
-
     if (_default_material == null)
     {
       // TODO fixit!

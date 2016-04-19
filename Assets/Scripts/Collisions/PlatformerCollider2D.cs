@@ -79,7 +79,9 @@ namespace UnityPlatformer {
           if (!collisions.climbingSlope || slopeAngle > maxClimbAngle) {
             // Min fix an edge case, when collider is pushing same direction a slope is moving
             // -> \
-            velocity.x = Mathf.Min(velocity.x, (hit.distance - skinWidth) * directionX);
+            // This introduce so many more problems... need REVIEW
+            //velocity.x = Mathf.Min(velocity.x, (hit.distance - skinWidth) * directionX);
+            velocity.x = (hit.distance - skinWidth) * directionX;
             rayLength = hit.distance;
 
             if (collisions.climbingSlope) {

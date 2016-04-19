@@ -24,9 +24,13 @@ namespace UnityPlatformer {
       hangFrames = UpdateManager.instance.GetFrameCount(hangTime);
     }
 
-    public void StartJump(ref Vector3 velocity) {
-      velocity.y = maxJumpVelocity;
+    public void Reset() {
       ticks = 0;
+    }
+
+    public void StartJump(ref Vector3 velocity) {
+      Reset();
+      velocity.y = maxJumpVelocity;
     }
 
     public void EndJump(ref Vector3 velocity) {
