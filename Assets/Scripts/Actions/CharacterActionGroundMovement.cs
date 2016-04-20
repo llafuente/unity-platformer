@@ -5,6 +5,7 @@ using UnityPlatformer.Characters;
 namespace UnityPlatformer.Actions {
   /// <summary>
   /// Perform an action over a character
+  /// TODO slopeAccelerationFactor
   /// </summary>
   public class CharacterActionGroundMovement: CharacterAction, IUpdateManagerAttach {
     #region public

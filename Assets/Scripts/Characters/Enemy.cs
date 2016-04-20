@@ -2,10 +2,17 @@
 using UnityEngine;
 
 namespace UnityPlatformer.Characters {
-	public class Enemy : Character {
-		public override void OnDeath() {
-			Debug.Log("stop enemy updating!");
-			UpdateManager.instance.enemies.Remove (this);
-		}
-	}
+  [RequireComponent (typeof (AIInput))]
+  public class Enemy : Character {
+    AIInput input;
+    public override void Start() {
+      base.Start();
+
+      input = GetComponent<AIInput>();
+    }
+    public override void OnDeath() {
+      Debug.Log("stop enemy updating!");
+      UpdateManager.instance.enemies.Remove (this);
+    }
+  }
 }

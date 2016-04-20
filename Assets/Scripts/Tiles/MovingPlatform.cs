@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityPlatformer.Characters;
 
 namespace UnityPlatformer.Tiles {
+  /// <summary>
+  /// TODO Stop, Resume, Reverse, StopOnNextWaypoint
+  /// </summary>
   public class MovingPlatform : RaycastController {
 
     public LayerMask passengerMask;

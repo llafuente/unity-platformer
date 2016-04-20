@@ -5,10 +5,13 @@ using UnityPlatformer.Characters;
 namespace UnityPlatformer.AI {
   ///<summary>
   /// Patrol Artificial inteligence.
-  /// NOTE does not require anything but it's recommended:
-  /// CharacterActionAirMovement and CharacterActionGroundMovement
+  /// NOTE does not require Actions but it's recommended:
+  /// CharacterActionAirMovement and/or CharacterActionGroundMovement
   ///</summary>
+  [RequireComponent (typeof (Enemy))]
   public class AIGoomba: Enemy {
+    #region public
+
     public enum Facing {
       Left = -1,
       Right = 1
@@ -20,13 +23,17 @@ namespace UnityPlatformer.AI {
     [Comment("Do not fall on platform edge. Go back.")]
     public bool doNotFall = true;
 
+    #endregion
+
+    #region private
 
     Facing facing;
-    AIInput input;
+
+    #endregion
 
     public override void Start() {
       base.Start();
-      input = GetComponent<AIInput>();
+
       controller.collisions.onLeftWall += OnLeftWall;
       controller.collisions.onRightWall += OnRightWall;
 

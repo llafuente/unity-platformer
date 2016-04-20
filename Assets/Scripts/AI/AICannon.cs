@@ -6,9 +6,10 @@ using UnityPlatformer.Actions;
 namespace UnityPlatformer.AI {
   ///<summary>
   /// Static cannon Artificial inteligence.
-  /// Projectile definition CharacterActionProjectile
+  /// Projectile definition at CharacterActionProjectile
   /// NOTE do not move.
   ///</summary>
+  [RequireComponent (typeof (Enemy))]
   [RequireComponent (typeof (CharacterActionProjectile))]
   public class AICannon: Enemy {
     #region public
@@ -18,14 +19,7 @@ namespace UnityPlatformer.AI {
 
     #endregion
 
-    #region private
-
-    AIInput input;
-
-    #endregion
-
     public override void Start() {
-      input = GetComponent<AIInput>();
       input.EnableAction("Attack");
 
       base.Start();

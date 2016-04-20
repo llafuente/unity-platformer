@@ -12,6 +12,9 @@ namespace UnityPlatformer.Characters {
   [RequireComponent (typeof (PlatformerInput))]
   public class Character: MonoBehaviour, IUpdateEntity {
 
+    #region public
+
+    [Comment("Override Configuration.gravity, (0,0) means use global.")]
     public Vector2 gravityOverride = Vector2.zero;
 
     public Vector2 gravity {
@@ -19,8 +22,6 @@ namespace UnityPlatformer.Characters {
         return gravityOverride == Vector2.zero ? Configuration.instance.gravity : gravityOverride;
       }
     }
-
-    #region public
 
     /// <summary>
     /// States in wich the Character can be.
@@ -167,7 +168,6 @@ namespace UnityPlatformer.Characters {
 
       if (controller.collisions.below) {
         EnterState(States.OnGround);
-        ExitState(States.Falling);
       } else {
         ExitState(States.OnGround);
         if (velocity.y < 0) {
@@ -196,6 +196,9 @@ namespace UnityPlatformer.Characters {
       }
       if (a == States.Jumping && !IsOnState(States.Jumping)) {
         jumpStart = transform.position;
+      }
+      if (a == States.OnGround && IsOnState(States.Falling)) {
+        ExitState(States.Falling);
       }
 
       state |= a;

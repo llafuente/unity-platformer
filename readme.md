@@ -1,26 +1,31 @@
 # unity-platformer (work name)
 ===
 
-Based on https://github.com/SebLague/2DPlatformer-Tutorial evolve in it's own beast.
+Based on https://github.com/SebLague/2DPlatformer-Tutorial evolve
+in it's own beast.
 
 ## Features
 * Ladders
 * IA (Patrol, Projectiles, Jumpers, etc...)
 * Input abstraction (this will help if you add a pad or touch controls)
-* Character-handled-actions. Instead of a big class mapping all actions, each Action (Jump, Climb ladder, ground/air movement) it's a separate component.
+* Character-handled-actions. Instead of a big class mapping all actions,
+each Action (Jump, Climb ladder, ground/air movement) it's a separate component.
 * Projectiles
 
 ## Changes from the original & Thigs to know
-* Manual update. Most of the problems in platformers are solved by sorting the updates.
+* Manual update: Most of the problems in platformers are solved by
+sorting updates. UpdateManager is a singleton part of `Setup` prefab
 * Use `FixedUpdate` and no `Update`, is better for kinetic objects.
 * fix MovingPlatform issues, that allow player to fall though
 * fix while moving down-slope character cannot jump.
 
 
-## Known issues / TODO
+## Known issues
 
-* Bug: Player con move thought a horizontal moving platform by pushing it...
-* Bug: Slope issues the slope rotate in time.
+* Bug: Player con move thought a horizontal moving platform by pushing it.
+* Bug: Slope issues when the slope rotates, even climb up without player input.
+
+# TODO
 * Dismount ladder conditions?
   * Left/Right
   * Jump out of a ladder as Action? / bool on Ladder
@@ -28,36 +33,38 @@ Based on https://github.com/SebLague/2DPlatformer-Tutorial evolve in it's own be
 * Attack melee
 
 ## Whishlist
-* N-jump (double jump) with different heights
+* N-jump (double/triple/n jump) with different heights
 * Dash
 * Rope
 * Ledge
 
 
-## Caveats / FAQ
+## Caveats
 
-This list is not necessary limitations, also contains things
-you should know about how to do advanced things
+### Jump: hang time
 
-* If you want hanging in max Jump (like Peach in Mario Bross) with a little
-up/down movement, like the original, you have to do it in animation.
+If you want hanging in max Jump (like Peach in Mario Bross) with a little
+up/down movement, like the original, you have to do it in your animation.
 
-  You can't do it in the Character/Action, otherwise Falling state will be set, and you will have a hard time Animating.
+It can't be done at CharacterActionJump, because Falling state will be set,
+when moving down and it will be impossible to animate.
 
-* If you want a double jump, do not increase graceJumpTime, because this not only affect
-jump + jump. it affect the time that the player can jump after leave the ground.
+### Jump: grace jump time
 
-atm: write your extend CharacterActionJump
+Could be unexpected to see a double-jump just by increasing graceJumpTime.
+This value should be low enough: 0.2f
 
 # Usage
 
 It's recommended to use the same project configuration (Tags/Layers).
-If you need more gives some space for my future additions.
-
-`Setup` prefab allow you to configure most of the project. Drop it a try it. So it's not completely necessary.
+But it's not necessary, `Setup` prefab allow you to configure most of
+the project properties. Drop it a try it.
 
 Then you can drop `Basic Player` and start working.
 There are many test scenes to see how things are built.
+
+Most of the components are very reusable-chainable. The best example
+is IA, that it's implemented as a fake Input for a normal Character.
 
 # Manual Editable
 
