@@ -4,7 +4,7 @@ using UnityEngine;
 namespace UnityPlatformer.Characters {
   [RequireComponent (typeof (AIInput))]
   public class Enemy : Character {
-    AIInput input;
+    protected AIInput input;
     public override void Start() {
       base.Start();
 

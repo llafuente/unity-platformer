@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityPlatformer.Characters;
@@ -8,25 +9,43 @@ namespace UnityPlatformer.Tiles {
   /// TODO Stop, Resume, Reverse, StopOnNextWaypoint
   /// </summary>
   public class MovingPlatform : RaycastController {
+    #region public
 
+    [Comment("Who will move while in the platform.")]
     public LayerMask passengerMask;
-
+    //[Comment("Platform positions")]
     public Vector3[] localWaypoints;
-    Vector3[] globalWaypoints;
-
-    public float speed;
-    public bool cyclic;
-    public float waitTime;
+    public float speed = 2;
+    [Comment("Is a loop? (check) back and forth? (uncheck)")]
+    public bool cyclic = false;
+    [Comment("Delay after each waypoint")]
+    public float waitTime = 0;
     [Range(0,2)]
-    public float easeAmount;
+    public float easeAmount = 0;
+
+    public delegate void ReachWaypoint(int index);
+    /// <summary>
+    /// It's called just after select next waypoint and before apply waitTime
+    /// </summary>
+    public ReachWaypoint onReachWaypoint;
+    public Action onStop;
+    public Action onResume;
+
+    #endregion
+
+    #region private
+
+    [HideInInspector]
+    public Vector3[] globalWaypoints;
 
     int fromWaypointIndex;
     float percentBetweenWaypoints;
     float nextMoveTime;
-
     List<PassengerMovement> passengerMovement;
-
     HashSet<Transform> prevPassengers = null;
+    float currentSpeed;
+
+    #endregion
 
     public override void Start () {
       // check that gameObject has a valid tag!
@@ -41,6 +60,36 @@ namespace UnityPlatformer.Tiles {
       for (int i =0; i < localWaypoints.Length; i++) {
         globalWaypoints[i] = localWaypoints[i] + transform.position;
       }
+
+      Resume();
+    }
+
+    public void Stop() {
+      currentSpeed = 0;
+      if (onStop != null) {
+        onStop();
+      }
+    }
+
+    public void StopOn(int waypoints) {
+      //stopOnWaypoint = waypoints;
+    }
+
+    public void Resume() {
+      currentSpeed = speed;
+      if (onResume != null) {
+        onResume();
+      }
+    }
+
+    public void Reverse() {
+      System.Array.Reverse(globalWaypoints);
+      fromWaypointIndex = globalWaypoints.Length - 2 - fromWaypointIndex;
+      percentBetweenWaypoints = 1 - percentBetweenWaypoints;
+    }
+
+    public bool IsStopped() {
+      return currentSpeed == 0;
     }
 
     public void ManagedUpdate (float delta) {
@@ -67,10 +116,12 @@ namespace UnityPlatformer.Tiles {
         return Vector3.zero;
       }
 
+      Debug.Log(fromWaypointIndex);
+
       fromWaypointIndex %= globalWaypoints.Length;
       int toWaypointIndex = (fromWaypointIndex + 1) % globalWaypoints.Length;
       float distanceBetweenWaypoints = Vector3.Distance (globalWaypoints [fromWaypointIndex], globalWaypoints [toWaypointIndex]);
-      percentBetweenWaypoints += delta * speed/distanceBetweenWaypoints;
+      percentBetweenWaypoints += delta * currentSpeed / distanceBetweenWaypoints;
       percentBetweenWaypoints = Mathf.Clamp01 (percentBetweenWaypoints);
       float easedPercentBetweenWaypoints = Ease (percentBetweenWaypoints);
 
@@ -78,14 +129,19 @@ namespace UnityPlatformer.Tiles {
 
       if (percentBetweenWaypoints >= 1) {
         percentBetweenWaypoints = 0;
-        fromWaypointIndex ++;
+        ++fromWaypointIndex;
 
         if (!cyclic) {
-          if (fromWaypointIndex >= globalWaypoints.Length-1) {
+          if (fromWaypointIndex >= globalWaypoints.Length - 1) {
             fromWaypointIndex = 0;
             System.Array.Reverse(globalWaypoints);
           }
         }
+
+        if (onReachWaypoint != null) {
+          onReachWaypoint(fromWaypointIndex);
+        }
+
         nextMoveTime = Time.time + waitTime;
       }
 
@@ -200,19 +256,6 @@ namespace UnityPlatformer.Tiles {
         velocity = _velocity;
         standingOnPlatform = _standingOnPlatform;
         moveBeforePlatform = _moveBeforePlatform;
-      }
-    }
-
-    void OnDrawGizmos() {
-      if (localWaypoints != null) {
-        Gizmos.color = Color.red;
-        float size = .3f;
-
-        for (int i =0; i < localWaypoints.Length; i ++) {
-          Vector3 globalWaypointPos = (Application.isPlaying)?globalWaypoints[i] : localWaypoints[i] + transform.position;
-          Gizmos.DrawLine(globalWaypointPos - Vector3.up * size, globalWaypointPos + Vector3.up * size);
-          Gizmos.DrawLine(globalWaypointPos - Vector3.left * size, globalWaypointPos + Vector3.left * size);
-        }
       }
     }
   }
