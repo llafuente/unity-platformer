@@ -9,7 +9,7 @@ using System;
 
 namespace UnityPlatformer {
   /// <summary>
-  /// Handle input for: player and IA
+  /// Handle input for: Players and IA
   /// The Action concept is the same as button for keyboards
   /// but it's abstracted to handle the rest with just a single name.
   /// for example: Jump, keyboard: press Space. PS4: X etc...
@@ -64,6 +64,7 @@ namespace UnityPlatformer {
     /// Returns true the frame the Action(~Button) is down.
     /// </summary>
     public abstract bool IsActionDown(string action);
+    public abstract bool IsActionUp(string action);
     public abstract bool IsLeftDown();
     public abstract bool IsRightDown();
     public abstract bool IsUpDown();

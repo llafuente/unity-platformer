@@ -63,7 +63,9 @@ namespace UnityPlatformer.Tiles {
 
       Resume();
     }
-
+    /// <summary>
+    /// Stop MovingPlatform
+    /// </summary>
     public void Stop() {
       currentSpeed = 0;
       if (onStop != null) {

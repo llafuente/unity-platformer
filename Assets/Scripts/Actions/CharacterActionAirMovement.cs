@@ -25,12 +25,13 @@ namespace UnityPlatformer.Actions {
     /// Execute when no collision below.
     /// </summary>
     public override int WantsToUpdate(float delta) {
+      // NOTE if Air/Ground are very different maybe:
+      // if (controller.IsOnGround(<frames>)) it's better
       if (controller.collisions.below) {
         velocityXSmoothing = 0;
         return 0;
       }
       return -1;
-      // TODO REVIEW: return controller.IsOnGround(0) ? -1 : 0;
     }
 
     public override void PerformAction(float delta) {

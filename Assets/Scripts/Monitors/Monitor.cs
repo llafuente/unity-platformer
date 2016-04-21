@@ -3,7 +3,10 @@ using UnityEngine.UI;
 using UnityPlatformer.Characters;
 
 namespace UnityPlatformer.Monitors {
-  public abstract class Monitor : MonoBehaviour {
+  /// <summary>
+  /// Extend this class to print debug-info at screen
+  /// </summary>
+  public abstract class Monitor {
     public Color textColor = Color.white;
     public int debugFontSize = 15;
     public Vector2 position = Vector2.zero;

@@ -9,6 +9,9 @@ using System;
 
 namespace UnityPlatformer {
   /// <summary>
+  /// Keyboard and Touch (https://www.assetstore.unity3d.com/en/#!/content/15233)
+  /// All CnControls is enconsed in #ifdef.
+  /// If your project use CnControls define CN_INPUT_MANAGER to support it.
   /// </summary>
   public class DefaultInput : PlatformerInput
   {
@@ -64,6 +67,23 @@ namespace UnityPlatformer {
           #endif
 
           return Input.GetButtonDown(i.keyboard);
+        }
+      }
+
+      Debug.LogWarning ("Cannot find action: " + action);
+      return false;
+    }
+
+    public override bool IsActionUp(string action) {
+      foreach (var i in inputsMap) {
+        if (i.action == action) {
+          #if CN_INPUT_MANAGER
+          if (SystemInfo.deviceType == DeviceType.Handheld) {
+            return CnInputManager.GetButtonUp(i.handheld);
+          }
+          #endif
+
+          return Input.GetButtonUp(i.keyboard);
         }
       }
 

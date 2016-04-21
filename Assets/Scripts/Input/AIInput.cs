@@ -9,7 +9,8 @@ using System;
 
 namespace UnityPlatformer {
   /// <summary>
-  /// This class fake input allowing to manually(by code) control input.
+  /// Fake input for AI. Allow to manually (by code) control input/actions.
+  /// This way a AI is exactly like a character and no code duplication :)
   /// </summary>
   public class AIInput : PlatformerInput
   {
@@ -36,6 +37,9 @@ namespace UnityPlatformer {
     }
     public override bool IsActionDown(string action) {
       return actions[action];
+    }
+    public override bool IsActionUp(string action) {
+      return !actions[action];
     }
     public override bool IsLeftDown() {
       return axis.x > 0;

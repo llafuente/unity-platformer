@@ -14,8 +14,8 @@ namespace UnityPlatformer {
     public int ticks;
 
     Character character;
-
-    public Jump(Character _character, float timeToJumpApex, float minJumpHeight, float hangTime) {
+    // TODO FIXME maxJumpHeight is not used!!!
+    public Jump(Character _character, float timeToJumpApex, float minJumpHeight, float maxJumpHeight, float hangTime) {
       character = _character;
 
       maxJumpVelocity = Mathf.Abs(character.gravity.y) * timeToJumpApex;

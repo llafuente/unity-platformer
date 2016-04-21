@@ -5,24 +5,25 @@ using UnityPlatformer.Characters;
 namespace UnityPlatformer.Actions {
   /// <summary>
   /// Perform an action over a character
-  /// TODO Hangtime: The amount of time the player may spend hanging in
-  /// midair at the apex of her jump (while the jump is not canceled).
+  /// TODO support for custom jumps.
   /// </summary>
   public class CharacterActionJump: CharacterAction {
     #region public
 
     // TODO OnValidate check this!
-    [Comment("Must match something in @PlatformerInput")]
+    [Comment("Must match something @PlatformerInput")]
     public String action;
-    [Comment("Remember: Higher priority wins. Modify with caution")]
-    public int priority = 5;
-
     public float maxJumpHeight = 4;
     public float minJumpHeight = 1;
-    public float graceJumpTime = 0.25f;
+    [Comment("Time allowed to jump after leave ground")]
+    public float graceJumpTime = 0.15f;
+    [Comment("Time to reach maxJumpHeight")]
     public float timeToJumpApex = 0.4f;
+    [Comment("The amount of time may spend hanging in midair at the apex of her jump (while the jump is not canceled).")]
     public float hangTime = 0.0f;
 
+    [Comment("Remember: Higher priority wins. Modify with caution")]
+    public int priority = 5;
     #endregion
 
     #region private
@@ -39,7 +40,7 @@ namespace UnityPlatformer.Actions {
     public override void Start() {
       base.Start();
 
-      jump = new Jump(character, timeToJumpApex, minJumpHeight, hangTime);
+      jump = new Jump(character, timeToJumpApex, minJumpHeight, maxJumpHeight, hangTime);
 
       _graceJumpFrames = UpdateManager.instance.GetFrameCount (graceJumpTime);
       input.onActionUp += OnActionUp;
@@ -59,7 +60,6 @@ namespace UnityPlatformer.Actions {
         if (jumping) { // jump stops?
           jumpStopped = true;
         }
-        //character.ExitState(Character.States.Jumping);
       }
     }
 

@@ -8,13 +8,10 @@ using UnityEngine.Rendering;
 /// </summary>
 [ExecuteInEditMode]
 [RequireComponent(typeof(Collider2D))]
-public class Collider2DRenderer : MonoBehaviour
-{
-  public Material material
-  {
+public class Collider2DRenderer : MonoBehaviour {
+  public Material material {
     get { return _material; }
-    set
-    {
+    set {
       _material = value;
       _mr.sharedMaterial = _material;
     }
@@ -42,10 +39,8 @@ public class Collider2DRenderer : MonoBehaviour
   #endif
 
   // clang-format on
-  void Start()
-  {
-    if (_default_material == null)
-    {
+  void Start() {
+    if (_default_material == null) {
       // TODO fixit!
       //_default_material = Resources.Load("Transparent", typeof(Material)) as
       // Material;
@@ -54,21 +49,18 @@ public class Collider2DRenderer : MonoBehaviour
       //_default_material = new Material(Shader.Find("Transparent"));
     }
 
-    if (_default_material == null)
-    {
+    if (_default_material == null) {
       Debug.LogWarning("cannot load Transparent material!");
     }
 
     _mf = GetComponent<MeshFilter>();
-    if (_mf == null)
-    {
+    if (_mf == null) {
       _mf = gameObject.AddComponent<MeshFilter>();
       _mf.hideFlags = HideFlags.HideInInspector;
     }
 
     _mr = GetComponent<MeshRenderer>();
-    if (_mr == null)
-    {
+    if (_mr == null) {
       _mr = gameObject.AddComponent<MeshRenderer>();
 
       _mr.sharedMaterial = material != null ? material : _default_material;
@@ -82,8 +74,7 @@ public class Collider2DRenderer : MonoBehaviour
     Update();
   }
 
-  void Update()
-  {
+  void Update() {
     Mesh mesh = new Mesh();
 
     PolygonCollider2D _polygon2d = gameObject.GetComponent<PolygonCollider2D>();
@@ -91,15 +82,13 @@ public class Collider2DRenderer : MonoBehaviour
     CircleCollider2D _circle2d = gameObject.GetComponent<CircleCollider2D>();
     EdgeCollider2D _edge2d = gameObject.GetComponent<EdgeCollider2D>();
 
-    if (_polygon2d)
-    {
+    if (_polygon2d) {
       // points are alredy rotated :)
       int pointCount = _polygon2d.GetTotalPointCount();
       Vector2[] points = _polygon2d.points;
 
       Vector3[] vertices = new Vector3[pointCount];
-      for (int j = 0; j < pointCount; j++)
-      {
+      for (int j = 0; j < pointCount; j++) {
         Vector2 actual = points[j];
         vertices[j] = new Vector3(actual.x, actual.y, 0);
       }
@@ -109,21 +98,18 @@ public class Collider2DRenderer : MonoBehaviour
       mesh.triangles = triangles;
     }
 
-    if (_box2d)
-    {
+    if (_box2d) {
       mesh.vertices = GetBoxCorners(_box2d);
       int[] triangles = {0, 1, 2, 1, 3, 2};
       mesh.triangles = triangles;
     }
 
-    if (_circle2d)
-    {
+    if (_circle2d) {
       float scale = 1f / 16f;
 
       Vector3[] vertices = new Vector3[16];
       Vector2[] points = new Vector2[16];
-      for (int j = 0; j < 16; j++)
-      {
+      for (int j = 0; j < 16; j++) {
         float x = (_circle2d.offset.x +
                    Mathf.Cos(scale * j * 2 * Mathf.PI) * _circle2d.radius) *
                   _circle2d.transform.localScale.x;
@@ -139,8 +125,7 @@ public class Collider2DRenderer : MonoBehaviour
       mesh.triangles = triangles;
     }
 
-    if (_edge2d)
-    {
+    if (_edge2d) {
       Debug.LogWarning("EdgeCollider2D is not supported");
     }
 
@@ -148,8 +133,7 @@ public class Collider2DRenderer : MonoBehaviour
   }
 
   // Assign the collider in the inspector or elsewhere in your code
-  Vector3[] GetBoxCorners(BoxCollider2D box)
-  {
+  Vector3[] GetBoxCorners(BoxCollider2D box) {
 
     Transform bcTransform = box.transform;
 
@@ -191,8 +175,7 @@ public class Collider2DRenderer : MonoBehaviour
 
   // Helper method courtesy of @aldonaletto
   // http://answers.unity3d.com/questions/532297/rotate-a-vector-around-a-certain-point.html
-  Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Vector3 angles)
-  {
+  Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Vector3 angles) {
     Vector3 dir = point - pivot; // get point direction relative to pivot
     dir = Quaternion.Euler(angles) * dir; // rotate it
     point = dir + pivot;                  // calculate rotated point

@@ -4,8 +4,11 @@ using UnityPlatformer;
 
 // clang-format off
 namespace UnityPlatformer.Tiles {
-  [RequireComponent(typeof(BoxTrigger2D))]
-  public class MovingPlatformControllerTrigger : MonoBehaviour {
+  /// <summary>
+  /// Perform actions over a MovingPlatform.
+  /// </summary>
+  [RequireComponent(typeof(Trigger2D))]
+  public class MovingPlatformController : MonoBehaviour, ITriggerAble {
     #region public
 
     public enum Actions {
@@ -36,10 +39,10 @@ namespace UnityPlatformer.Tiles {
         return;
       }
 
-      Debug.Log("MovingPlatformControllerTrigger.DoAction: " + action);
+      //Debug.Log("MovingPlatformControllerTrigger.DoAction: " + action);
 
       foreach (MovingPlatform target in targets) {
-        Debug.Log("Do: " + action + " ON " + target.name);
+        //Debug.Log("Do: " + action + " ON " + target.name);
 
         switch (action) {
         case Actions.Resume:
