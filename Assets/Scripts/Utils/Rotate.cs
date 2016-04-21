@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Utils {
+namespace UnityPlatformer {
   public class Rotate : MonoBehaviour {
     [Comment("In Degrees")]
     public Vector3 rotationPerSecond;

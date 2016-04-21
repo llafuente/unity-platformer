@@ -6,7 +6,7 @@ namespace UnityPlatformer.Monitors {
   /// <summary>
   /// Extend this class to print debug-info at screen
   /// </summary>
-  public abstract class Monitor {
+  public abstract class Monitor : MonoBehaviour{
     public Color textColor = Color.white;
     public int debugFontSize = 15;
     public Vector2 position = Vector2.zero;
