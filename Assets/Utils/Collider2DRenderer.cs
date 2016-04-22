@@ -29,13 +29,26 @@ namespace UnityPlatformer {
       if (_material && _mr) {
         _mr.sharedMaterial = _material;
       }
-      // this is needed to fix visibility when importing the prefab
-      if (_mf) {
-        _mf.hideFlags = HideFlags.HideInInspector;
+      _mf = GetComponent<MeshFilter>();
+
+      if (_mf == null) {
+        _mf = gameObject.AddComponent<MeshFilter>();
       }
-      if (_mr) {
-        _mr.hideFlags = HideFlags.HideInInspector;
+
+      _mf.hideFlags = HideFlags.HideInInspector;
+
+      _mr = GetComponent<MeshRenderer>();
+
+      if (_mr == null) {
+        _mr = gameObject.AddComponent<MeshRenderer>();
+
+        _mr.sharedMaterial = material != null ? material : _default_material;
+        _mr.receiveShadows = false;
+        _mr.shadowCastingMode = ShadowCastingMode.Off;
+        _mr.reflectionProbeUsage = ReflectionProbeUsage.Off;
       }
+
+      _mr.hideFlags = HideFlags.HideInInspector;
     }
     #endif
 
@@ -54,28 +67,18 @@ namespace UnityPlatformer {
         Debug.LogWarning("cannot load Transparent material!");
       }
 
-      _mf = GetComponent<MeshFilter>();
-      if (_mf == null) {
-        _mf = gameObject.AddComponent<MeshFilter>();
-        _mf.hideFlags = HideFlags.HideInInspector;
-      }
-
-      _mr = GetComponent<MeshRenderer>();
-      if (_mr == null) {
-        _mr = gameObject.AddComponent<MeshRenderer>();
-
-        _mr.sharedMaterial = material != null ? material : _default_material;
-        _mr.receiveShadows = false;
-        _mr.shadowCastingMode = ShadowCastingMode.Off;
-        _mr.reflectionProbeUsage = ReflectionProbeUsage.Off;
-
-        _mr.hideFlags = HideFlags.HideInInspector;
-      }
+      #if UNITY_EDITOR
+      OnValidate();
+      #endif
 
       Update();
     }
 
     void Update() {
+      #if UNITY_EDITOR
+      OnValidate();
+      #endif
+
       Mesh mesh = new Mesh();
 
       PolygonCollider2D _polygon2d = gameObject.GetComponent<PolygonCollider2D>();
@@ -181,6 +184,21 @@ namespace UnityPlatformer {
       dir = Quaternion.Euler(angles) * dir; // rotate it
       point = dir + pivot;                  // calculate rotated point
       return point;                         // return it
+    }
+
+    void OnDisable() {
+      // remove components
+      #if UNITY_EDITOR
+      DestroyImmediate(_mf);
+      DestroyImmediate(_mr);
+      #endif
+
+      #if !UNITY_EDITOR
+      Destroy(_mf);
+      Destroy(_mr);
+      #endif
+      _mf = null;
+      _mr = null;
     }
   }
 }
