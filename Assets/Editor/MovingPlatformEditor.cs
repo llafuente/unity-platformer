@@ -4,9 +4,8 @@ using UnityEditor;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityPlatformer.Characters;
 
-namespace UnityPlatformer.Tiles {
+namespace UnityPlatformer {
   [CustomEditor(typeof(MovingPlatform))]
   class MovingPlatformEditor : Editor {
     void OnSceneGUI() {

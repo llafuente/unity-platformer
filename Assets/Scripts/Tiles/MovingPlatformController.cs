@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityPlatformer;
 
 // clang-format off
-namespace UnityPlatformer.Tiles {
+namespace UnityPlatformer {
   /// <summary>
   /// Perform actions over a MovingPlatform.
   /// </summary>

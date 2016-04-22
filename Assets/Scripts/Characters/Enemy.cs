@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace UnityPlatformer.Characters {
+namespace UnityPlatformer {
   [RequireComponent (typeof (AIInput))]
   public class Enemy : Character {
     protected AIInput input;

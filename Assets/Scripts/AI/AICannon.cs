@@ -1,9 +1,7 @@
 using System;
 using UnityEngine;
-using UnityPlatformer.Characters;
-using UnityPlatformer.Actions;
 
-namespace UnityPlatformer.AI {
+namespace UnityPlatformer {
   ///<summary>
   /// Static cannon Artificial inteligence.
   /// Projectile definition at CharacterActionProjectile

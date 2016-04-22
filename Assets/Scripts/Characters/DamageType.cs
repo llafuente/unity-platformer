@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UnityPlatformer.Characters {
+namespace UnityPlatformer {
   public enum DamageTypes {
     DEFAULT,
     PHYSICAL,

@@ -1,7 +1,6 @@
 using UnityEngine;
 using System;
 using System.Collections;
-using UnityPlatformer.Characters;
 
 namespace UnityPlatformer {
   /// <summary>

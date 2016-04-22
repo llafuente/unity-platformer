@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityPlatformer.Characters;
 
-namespace UnityPlatformer.Monitors {
+namespace UnityPlatformer {
   public class ControllerMonitor : Monitor {
     PlatformerCollider2D collider;
     // Use this for initialization

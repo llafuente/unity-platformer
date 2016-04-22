@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
-using UnityPlatformer.Actions;
-using UnityPlatformer.Tiles;
+using UnityPlatformer;
+using UnityPlatformer;
 
-namespace UnityPlatformer.Characters {
+namespace UnityPlatformer {
   /// <summary>
   /// Base class for: Players, NPCs, enemies.
   /// </summary>

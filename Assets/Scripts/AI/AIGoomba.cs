@@ -1,8 +1,7 @@
 ﻿using System;
 using UnityEngine;
-using UnityPlatformer.Characters;
 
-namespace UnityPlatformer.AI {
+namespace UnityPlatformer {
   ///<summary>
   /// Patrol Artificial inteligence.
   /// NOTE does not require Actions but it's recommended:

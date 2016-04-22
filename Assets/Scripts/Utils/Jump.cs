@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityPlatformer.Characters;
 
 namespace UnityPlatformer {
   /// <summary>

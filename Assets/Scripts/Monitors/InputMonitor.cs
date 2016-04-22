@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityPlatformer.Characters;
 
-namespace UnityPlatformer.Monitors {
+namespace UnityPlatformer {
   public class InputMonitor : Monitor {
     public int length = 2;
     public PlatformerInput input;

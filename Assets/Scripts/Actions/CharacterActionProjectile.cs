@@ -2,9 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityPlatformer.Characters;
 
-namespace UnityPlatformer.Actions {
+namespace UnityPlatformer {
   /// <summary>
   /// Fire projectiles (All or one by one), handles orientation based on
   /// the character collisions.faceDir

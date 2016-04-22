@@ -1,7 +1,6 @@
 ﻿using System;
-using UnityPlatformer.Characters;
 
-namespace UnityPlatformer.Monitors {
+namespace UnityPlatformer {
   public class CharacterMonitor : ControllerMonitor {
 
     Character character;

@@ -1,4 +1,4 @@
-# unity-platformer (work name)
+# unity-platformer
 ===
 
 Based on https://github.com/SebLague/2DPlatformer-Tutorial evolve

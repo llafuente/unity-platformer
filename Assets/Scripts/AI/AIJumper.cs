@@ -1,9 +1,7 @@
 using System;
 using UnityEngine;
-using UnityPlatformer.Characters;
-using UnityPlatformer.Actions;
 
-namespace UnityPlatformer.AI {
+namespace UnityPlatformer {
   ///<summary>
   /// Jump until obstacle.
   /// TODO follow player (turn always)

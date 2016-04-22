@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityPlatformer.Characters;
 
-namespace UnityPlatformer.Tiles {
+namespace UnityPlatformer {
   [RequireComponent (typeof (BoxCollider2D))]
   public class Ladder : MonoBehaviour {
     // cache

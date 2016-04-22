@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace UnityPlatformer.Characters {
+namespace UnityPlatformer {
   /// <summary>
   /// Tracks character health and lives.
   /// Triggers character death

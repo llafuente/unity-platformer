@@ -2,9 +2,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityPlatformer.Characters;
 
-namespace UnityPlatformer.Tiles {
+namespace UnityPlatformer {
   /// <summary>
   /// TODO Stop, Resume, Reverse, StopOnNextWaypoint
   /// </summary>

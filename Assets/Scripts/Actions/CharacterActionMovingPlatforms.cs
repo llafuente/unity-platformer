@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
-using UnityPlatformer.Characters;
 
-namespace UnityPlatformer.Actions {
+namespace UnityPlatformer {
   /// <summary>
   /// Falling through platforms while pressing down
   /// </summary>

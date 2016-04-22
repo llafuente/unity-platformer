@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
-using UnityPlatformer.Characters;
 
-namespace UnityPlatformer.Actions {
+namespace UnityPlatformer {
   public enum PostUpdateActions {
     NONE = 0x00,
     APPLY_GRAVITY = 0x01,

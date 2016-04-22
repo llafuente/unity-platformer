@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityPlatformer.Characters;
 
-namespace UnityPlatformer.Monitors {
+namespace UnityPlatformer {
   /// <summary>
   /// Extend this class to print debug-info at screen
   /// </summary>

@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityPlatformer.Characters;
 
-namespace UnityPlatformer.Cameras {
+namespace UnityPlatformer {
 	public class CameraFollow : MonoBehaviour {
 
 		public Character target;
