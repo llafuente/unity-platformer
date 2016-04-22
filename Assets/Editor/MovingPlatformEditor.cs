@@ -1,3 +1,5 @@
+/*
+NOT NEEDED ANYMORE, JUST FOR REFERENCE
 using UnityEditor;
 using UnityEngine;
 using System.Collections;
@@ -7,17 +9,6 @@ using UnityPlatformer.Characters;
 namespace UnityPlatformer.Tiles {
   [CustomEditor(typeof(MovingPlatform))]
   class MovingPlatformEditor : Editor {
-    /* TODO FIXME i want this to be displayed all the time not just when selected.
-    void OnEnable(){
-      SceneView.onSceneGUIDelegate += CustomSceneGUI;
-    }
-    void OnDisable(){
-      SceneView.onSceneGUIDelegate -= CustomSceneGUI;
-    }
-    void CustomSceneGUI(UnityEditor.SceneView sceneView) {
-    */
-
-
     void OnSceneGUI() {
       // Do your drawing here using Handles.
       //Handles.BeginGUI();
@@ -48,3 +39,4 @@ namespace UnityPlatformer.Tiles {
     }
   }
 }
+*/

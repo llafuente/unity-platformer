@@ -13,8 +13,7 @@ namespace UnityPlatformer.Tiles {
 
     [Comment("Who will move while in the platform.")]
     public LayerMask passengerMask;
-    //[Comment("Platform positions")]
-    public Vector3[] localWaypoints;
+    public Line path;
     public float speed = 2;
     [Comment("Is a loop? (check) back and forth? (uncheck)")]
     public bool cyclic = false;
@@ -55,10 +54,10 @@ namespace UnityPlatformer.Tiles {
       }
 
       base.Start ();
-
+      Vector3[] localWaypoints = path.points;
       globalWaypoints = new Vector3[localWaypoints.Length];
       for (int i =0; i < localWaypoints.Length; i++) {
-        globalWaypoints[i] = localWaypoints[i] + transform.position;
+        globalWaypoints[i] = localWaypoints[i] + path.transform.position;
       }
 
       Resume();
@@ -103,7 +102,7 @@ namespace UnityPlatformer.Tiles {
       CalculatePassengerMovement(velocity);
 
       MovePassengers (true);
-      transform.Translate (velocity);
+      transform.Translate (velocity, Space.World);
       MovePassengers (false);
     }
 
@@ -129,6 +128,16 @@ namespace UnityPlatformer.Tiles {
 
       Vector3 newPos = Vector3.Lerp (globalWaypoints [fromWaypointIndex], globalWaypoints [toWaypointIndex], easedPercentBetweenWaypoints);
 
+      /* TODO REVIEW this is not buggy, but Collider is with changing slopes, so disable
+      Vector3 diff = globalWaypoints [toWaypointIndex] - globalWaypoints [fromWaypointIndex];
+      diff.Normalize();
+      float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+      transform.localRotation = Quaternion.Euler(0f, 0f, rot_z);
+      if (diff.x < 0) {
+        transform.localRotation *= Quaternion.Euler(180, 0, 0);
+      }
+      */
+
       if (percentBetweenWaypoints >= 1) {
         percentBetweenWaypoints = 0;
         ++fromWaypointIndex;
@@ -153,7 +162,7 @@ namespace UnityPlatformer.Tiles {
     void MovePassengers(bool beforeMovePlatform) {
       foreach (PassengerMovement passenger in passengerMovement) {
         if (passenger.moveBeforePlatform == beforeMovePlatform) {
-          passenger.transform.GetComponent<PlatformerCollider2D>().transform.Translate (passenger.velocity);
+          passenger.transform.GetComponent<PlatformerCollider2D>().transform.Translate (passenger.velocity, Space.World);
         }
       }
     }
