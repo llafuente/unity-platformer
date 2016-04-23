@@ -43,6 +43,8 @@ namespace UnityPlatformer {
     HashSet<Transform> prevPassengers = null;
     float currentSpeed;
 
+    Vector3 lastPosition;
+
     #endregion
 
     public override void Start () {
@@ -53,11 +55,17 @@ namespace UnityPlatformer {
       }
 
       base.Start ();
-      Vector3[] localWaypoints = path.points;
-      globalWaypoints = new Vector3[localWaypoints.Length];
-      for (int i =0; i < localWaypoints.Length; i++) {
-        globalWaypoints[i] = localWaypoints[i] + path.transform.position;
+      if (path) {
+        Vector3[] localWaypoints = path.points;
+        globalWaypoints = new Vector3[localWaypoints.Length];
+        for (int i =0; i < localWaypoints.Length; i++) {
+          globalWaypoints[i] = localWaypoints[i] + path.transform.position;
+        }
+      } else {
+        globalWaypoints = null;
       }
+
+      lastPosition = transform.position;
 
       Resume();
     }
@@ -96,13 +104,25 @@ namespace UnityPlatformer {
 
       UpdateRaycastOrigins ();
 
-      Vector3 velocity = CalculatePlatformMovement(delta);
+      // there are two ways to move the platform
+      // built-in - speed/path based (path_velocity)
+      // platform inherit movement from a parent node (offset_velocity)
+      // we need both to be consistent
 
-      CalculatePassengerMovement(velocity);
+      Vector3 offset_velocity = transform.position - lastPosition;
+      Vector3 path_velocity = Vector3.zero;
+
+      if (globalWaypoints != null) {
+        path_velocity += CalculatePlatformMovement(delta);
+      }
+
+      CalculatePassengerMovement(path_velocity + offset_velocity);
 
       MovePassengers (true);
-      transform.Translate (velocity, Space.World);
+      transform.Translate (path_velocity, Space.World);
       MovePassengers (false);
+
+      lastPosition = transform.position;
     }
 
     float Ease(float x) {

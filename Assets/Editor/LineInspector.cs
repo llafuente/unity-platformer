@@ -17,6 +17,14 @@ public class LineInspector : Editor {
       line.points[line.points.Length -1] = line.points[line.points.Length -2] + new Vector3(1, 0, 0);
       EditorUtility.SetDirty(line);
     }
+
+    if (GUILayout.Button("Remove Last Point")) {
+      Undo.RecordObject(line, "Remove Point");
+      Array.Resize(ref line.points, line.points.Length - 1);
+      EditorUtility.SetDirty(line);
+    }
+
+    DrawDefaultInspector ();
   }
 
   private void OnSceneGUI () {
