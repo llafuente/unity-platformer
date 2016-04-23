@@ -116,8 +116,6 @@ namespace UnityPlatformer {
         return Vector3.zero;
       }
 
-      Debug.Log(fromWaypointIndex);
-
       fromWaypointIndex %= globalWaypoints.Length;
       int toWaypointIndex = (fromWaypointIndex + 1) % globalWaypoints.Length;
       float distanceBetweenWaypoints = Vector3.Distance (globalWaypoints [fromWaypointIndex], globalWaypoints [toWaypointIndex]);

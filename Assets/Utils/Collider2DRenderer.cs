@@ -187,18 +187,13 @@ namespace UnityPlatformer {
     }
 
     void OnDisable() {
-      // remove components
-      #if UNITY_EDITOR
-      DestroyImmediate(_mf);
-      DestroyImmediate(_mr);
-      #endif
+      //_mf.enabled = false;
+      _mr.enabled = false;
+    }
 
-      #if !UNITY_EDITOR
-      Destroy(_mf);
-      Destroy(_mr);
-      #endif
-      _mf = null;
-      _mr = null;
+    void OnEnable() {
+      //_mf.enabled = true;
+      _mr.enabled = true;
     }
   }
 }

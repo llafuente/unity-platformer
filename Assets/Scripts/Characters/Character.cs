@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityPlatformer;
 using UnityPlatformer;
@@ -9,7 +10,6 @@ namespace UnityPlatformer {
   /// </summary>
   [RequireComponent (typeof (PlatformerCollider2D))]
   [RequireComponent (typeof (CharacterHealth))]
-  [RequireComponent (typeof (PlatformerInput))]
   public class Character: MonoBehaviour, IUpdateEntity {
 
     #region public
@@ -64,6 +64,9 @@ namespace UnityPlatformer {
     #endregion
 
     #region ~private
+
+    [HideInInspector]
+    public List<CharacterAction> actions = new List<CharacterAction>();
     [HideInInspector]
     public States state = States.None;
     [HideInInspector]
@@ -93,7 +96,6 @@ namespace UnityPlatformer {
 
     #region private
 
-    CharacterAction[] actions;
     CharacterAction lastAction;
 
     Vector2 jumpStart;
@@ -105,11 +107,10 @@ namespace UnityPlatformer {
     /// This method precalculate some vars, but those value could change. This need to be refactored.
     /// Maybe setters are the appropiate method to refactor this.
     /// </summary>
-    virtual public void Start() {
+    virtual public void Awake() {
       //Debug.Log("Start new Character: " + gameObject.name);
       controller = GetComponent<PlatformerCollider2D> ();
       health = GetComponent<CharacterHealth>();
-      actions = GetComponents<CharacterAction>();
       body = GetComponent<BoxCollider2D>();
 
       health.onDeath += OnDeath;

@@ -33,13 +33,25 @@ namespace UnityPlatformer {
       axis.x = x;
     }
     public override bool IsActionHeld(string action) {
-      return actions[action];
+      bool value;
+      if (actions.TryGetValue(action, out value)) {
+        return value;
+      }
+      return false;
     }
     public override bool IsActionDown(string action) {
-      return actions[action];
+      bool value;
+      if (actions.TryGetValue(action, out value)) {
+        return value;
+      }
+      return false;
     }
     public override bool IsActionUp(string action) {
-      return !actions[action];
+      bool value;
+      if (actions.TryGetValue(action, out value)) {
+        return !value;
+      }
+      return false;
     }
     public override bool IsLeftDown() {
       return axis.x > 0;

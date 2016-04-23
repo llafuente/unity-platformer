@@ -30,7 +30,7 @@ namespace UnityPlatformer {
     [Comment("Remember: Higher priority wins. Modify with caution")]
     public int priority = 5;
 
-    [Comment("Fire all at once (with given delays): checked. Fire one by one: uncheck.")]
+    [Comment("checked: Fire all at once (with given delays). unchecked: Fire one by one")]
     public bool fireMode = false;
 
     #endregion

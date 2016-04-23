@@ -10,23 +10,37 @@ namespace UnityPlatformer {
   /// <summary>
   /// Perform an action over a character
   /// </summary>
-  [RequireComponent (typeof (Character))]
-  [RequireComponent (typeof (PlatformerInput))]
   public abstract class CharacterAction : MonoBehaviour {
+    public Character character;
+    public PlatformerInput input;
     public Action onGrainControl;
     public Action onLoseControl;
 
-    protected PlatformerInput input;
     protected PlatformerCollider2D controller;
-    protected Character character;
     protected bool hasControl = false;
 
     virtual public void Start() {
-      input = GetComponent<PlatformerInput>();
-      controller = GetComponent<PlatformerCollider2D> ();
-      character = GetComponent<Character> ();
+      if (character == null) {
+        Debug.LogError(gameObject.name + " contains an action without character property set");
+      }
+
+      if (input == null) {
+        Debug.LogError(gameObject.name + " contains an action without input property set");
+      }
+
+      controller = character.controller;
 
       hasControl = false;
+    }
+
+    virtual public void OnEnable() {
+      character.actions.Add(this);
+    }
+
+    virtual public void OnDisable() {
+      if (character != null) {
+        character.actions.Remove(this);
+      }
     }
 
     public void GainControl() {

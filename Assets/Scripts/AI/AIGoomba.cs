@@ -7,7 +7,6 @@ namespace UnityPlatformer {
   /// NOTE does not require Actions but it's recommended:
   /// CharacterActionAirMovement and/or CharacterActionGroundMovement
   ///</summary>
-  [RequireComponent (typeof (Enemy))]
   public class AIGoomba: Enemy {
     #region public
 
@@ -16,7 +15,7 @@ namespace UnityPlatformer {
       Right = 1
     };
 
-    public Facing initialFacing;
+    public Facing initialFacing = Facing.Left;
     [Comment("Distance to test if ground is on left/right side. Helps when Enemy standing on platform moving down.")]
     public float rayLengthFactor = 1.0f;
     [Comment("Do not fall on platform edge. Go back.")]
@@ -30,9 +29,7 @@ namespace UnityPlatformer {
 
     #endregion
 
-    public override void Start() {
-      base.Start();
-
+    public void Start() {
       controller.collisions.onLeftWall += OnLeftWall;
       controller.collisions.onRightWall += OnRightWall;
 

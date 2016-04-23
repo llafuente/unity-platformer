@@ -9,8 +9,6 @@ namespace UnityPlatformer {
   /// TODO can turn during jump
   /// NOTE if you want the Jumper to move on ground add: CharacterActionGroundMovement
   ///</summary>
-  [RequireComponent (typeof (CharacterActionAirMovement))]
-  [RequireComponent (typeof (CharacterActionJump))]
   public class AIJumper: Enemy {
     #region public
 
@@ -31,9 +29,7 @@ namespace UnityPlatformer {
 
     #endregion
 
-    public override void Start() {
-      base.Start();
-
+    public void Start() {
       input.EnableAction("Jump");
       controller.collisions.onLeftWall += OnLeftWall;
       controller.collisions.onRightWall += OnRightWall;

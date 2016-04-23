@@ -5,6 +5,8 @@ namespace UnityPlatformer {
 	public class CameraFollow : MonoBehaviour {
 
 		public Character target;
+		public PlatformerInput targetInput;
+
 		public float verticalOffset;
 		public float lookAheadDstX;
 		public float lookSmoothTimeX;
@@ -21,10 +23,8 @@ namespace UnityPlatformer {
 
 		bool lookAheadStopped;
 		public bool debug = false;
-		PlatformerInput input;
 
 		void Start() {
-			input = target.GetComponent<PlatformerInput>();
 			focusArea = new FocusArea (target.controller.box.bounds, focusAreaSize);
 		}
 
@@ -35,7 +35,7 @@ namespace UnityPlatformer {
 
 			if (focusArea.velocity.x != 0) {
 				lookAheadDirX = Mathf.Sign (focusArea.velocity.x);
-				float x = input.GetAxisRawX();
+				float x = targetInput.GetAxisRawX();
 				if (Mathf.Sign(x) == Mathf.Sign(focusArea.velocity.x) && x != 0) {
 					lookAheadStopped = false;
 					targetLookAheadX = lookAheadDirX * lookAheadDstX;

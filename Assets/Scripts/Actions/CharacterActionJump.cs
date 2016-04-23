@@ -11,7 +11,7 @@ namespace UnityPlatformer {
 
     // TODO OnValidate check this!
     [Comment("Must match something @PlatformerInput")]
-    public String action;
+    public String action = "Jump";
     public float maxJumpHeight = 4;
     public float minJumpHeight = 1;
     [Comment("Time allowed to jump after leave ground")]
@@ -39,6 +39,7 @@ namespace UnityPlatformer {
     public override void Start() {
       base.Start();
 
+      Debug.Log("character" + character);
       jump = new Jump(character, timeToJumpApex, minJumpHeight, maxJumpHeight, hangTime);
 
       _graceJumpFrames = UpdateManager.instance.GetFrameCount (graceJumpTime);

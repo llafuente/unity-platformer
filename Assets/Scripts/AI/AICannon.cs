@@ -7,8 +7,6 @@ namespace UnityPlatformer {
   /// Projectile definition at CharacterActionProjectile
   /// NOTE do not move.
   ///</summary>
-  [RequireComponent (typeof (Enemy))]
-  [RequireComponent (typeof (CharacterActionProjectile))]
   public class AICannon: Enemy {
     #region public
 
@@ -17,10 +15,8 @@ namespace UnityPlatformer {
 
     #endregion
 
-    public override void Start() {
+    public void Start() {
       input.EnableAction("Attack");
-
-      base.Start();
     }
   }
 }

@@ -42,13 +42,17 @@ namespace UnityPlatformer {
       foreach (var button in listenActions) {
         if (IsActionHeld(button)) {
           if (!actions[button]) {
-            onActionDown(button);
+            if (onActionDown != null) {
+              onActionDown(button);
+            }
           }
 
           actions[button] = true;
         } else {
           if (actions[button]) {
-            onActionUp(button);
+            if (onActionUp != null) {
+              onActionUp(button);
+            }
           }
 
           actions[button] = false;
