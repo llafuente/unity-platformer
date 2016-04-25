@@ -52,22 +52,6 @@ namespace UnityPlatformer {
 				}
 			}
 
-			objects = GameObject.FindGameObjectsWithTag(Configuration.instance.movingPlatformThroughTag);
-			foreach (var obj in objects) {
-				Debug.Log("Manage" + obj);
-				if (obj.activeInHierarchy) {
-					movingPlatforms.Add (obj.GetComponent<MovingPlatform> ());
-				}
-			}
-
-			objects = GameObject.FindGameObjectsWithTag(Configuration.instance.movingPlatformTag);
-			foreach (var obj in objects) {
-				Debug.Log("Manage" + obj);
-				if (obj.activeInHierarchy) {
-					movingPlatforms.Add (obj.GetComponent<MovingPlatform> ());
-				}
-			}
-
 			objects = GameObject.FindGameObjectsWithTag(Configuration.instance.projectileTag);
 			foreach (var obj in objects) {
 				Debug.Log("Manage" + obj);

@@ -197,9 +197,7 @@ namespace UnityPlatformer {
 
         for (int i = 0; i < verticalRayCount; i ++) {
           Vector2 rayOrigin = raycastOrigins.topLeft + Vector2.right * (verticalRaySpacing * i);
-          RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up, rayLength, passengerMask);
-
-          Debug.DrawRay(rayOrigin, Vector2.up * rayLength, Color.green);
+          RaycastHit2D hit = Raycast(rayOrigin, Vector2.up, rayLength, passengerMask, Color.green);
 
           if (hit && hit.distance != 0) {
             if (!movedPassengers.Contains(hit.transform)) {
@@ -214,13 +212,17 @@ namespace UnityPlatformer {
       }
 
       // Vertically moving platform
-      if (velocity.y != 0) {
+      // Disable for OWP moving down otherwise will push-down characters
+      if (
+        (velocity.y < 0 &&  !Configuration.IsOneWayPlatform(gameObject)) ||
+        velocity.y > 0
+      ) {
         float rayLength = Mathf.Abs (velocity.y) + skinWidth + Configuration.instance.minDistanceToEnv;
 
         for (int i = 0; i < verticalRayCount; i ++) {
           Vector2 rayOrigin = (directionY == -1)?raycastOrigins.bottomLeft:raycastOrigins.topLeft;
           rayOrigin += Vector2.right * (verticalRaySpacing * i);
-          RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, passengerMask);
+          RaycastHit2D hit = Raycast(rayOrigin, Vector2.up * directionY, rayLength, passengerMask, Color.red);
 
           if (hit && hit.distance != 0) {
             if (!movedPassengers.Contains(hit.transform)) {
@@ -235,13 +237,14 @@ namespace UnityPlatformer {
       }
 
       // Horizontally moving platform
-      if (velocity.x != 0) {
+      // Cannot be a OWP otherwise will push-right|left characters
+      if (velocity.x != 0 && !Configuration.IsOneWayPlatform(gameObject)) {
         float rayLength = Mathf.Abs (velocity.x) + skinWidth + Configuration.instance.minDistanceToEnv;
 
         for (int i = 0; i < horizontalRayCount; i ++) {
           Vector2 rayOrigin = (directionX == -1)?raycastOrigins.bottomLeft:raycastOrigins.bottomRight;
           rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-          RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, passengerMask);
+          RaycastHit2D hit = Raycast(rayOrigin, Vector2.right * directionX, rayLength, passengerMask, Color.yellow);
 
           if (hit && hit.distance != 0) {
             if (!movedPassengers.Contains(hit.transform)) {
@@ -271,6 +274,14 @@ namespace UnityPlatformer {
         c.platform = this;
       }
       prevPassengers = movedPassengers;
+    }
+
+    void OnEnable() {
+      UpdateManager.instance.movingPlatforms.Add(this);
+    }
+
+    void OnDisable() {
+      UpdateManager.instance.movingPlatforms.Remove(this);
     }
 
     struct PassengerMovement {

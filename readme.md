@@ -54,6 +54,26 @@ when moving down and it will be impossible to animate.
 Could be unexpected to see a double-jump just by increasing graceJumpTime.
 This value should be low enough: 0.2f
 
+### One Way Platforms (Height)
+
+The collider try to be simple enough. If OWP are thick you will see
+characters "climbing" when start falling and their feet are inside the OWP.
+
+OWP Height should be aounr Character.skinWidth ~ 0.1.
+
+## FAQ
+
+### I see some null access at the begining.
+
+Most provably caused by UpdateManager being initialized after other scripts.
+<a href="#execution-order">Follow this instructions to fixed it.</a>
+
+# MovingPlatforms don't always detect players
+
+Moving platforms use Raycast to detect passengers. If the Movingplatform is
+big, you need to increase the ray count to a number big enough that the
+minimum width of the player could be covered anytime.
+
 # Usage
 
 It's recommended to use the same project configuration (Tags/Layers).
@@ -66,14 +86,26 @@ There are many test scenes to see how things are built.
 Most of the components are very reusable-chainable. The best example
 is IA, that it's implemented as a fake Input for a normal Character.
 
-# Manual Editable
+[<a name="execution-order"]
+## Execution Order
+
+Configuration & UpdateManager need to be executed first, as they are
+Singletons, many classes rely on them being initialized first.
+
+Go to: Edit/ProjectSettings/Script Execution Order and add them with negative
+priority.
+
+This is already done in this project, Just for reference is you integrate
+the codebase in your project.
+
+## Manual Editable
 
 The following classes contains stuff that could be useful to edit for your game.
 
-## Character.cs
+### Character.cs
 
 Contains `Areas` and `States`. Both useful for new Actions/Movements/Animation.
 
-## DamageType.cs
+### DamageType.cs
 
 Contains `DamageTypes` Enum.

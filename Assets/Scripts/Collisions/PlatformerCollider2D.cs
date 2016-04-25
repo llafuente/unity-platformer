@@ -61,6 +61,11 @@ namespace UnityPlatformer {
         RaycastHit2D hit = Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask, Color.red);
 
         if (hit && hit.distance != 0) {
+          // ignore oneWayPlatforms, aren't walls
+          if (Configuration.IsOneWayPlatform(hit.collider)) {
+            continue;
+          }
+
           float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
           if (i == 0 && slopeAngle <= maxClimbAngle) {
             if (collisions.descendingSlope) {
@@ -129,6 +134,15 @@ namespace UnityPlatformer {
           ) {
             continue;
           }
+
+          // ignore oneWayPlatforms when not falling
+          if (
+            Configuration.IsOneWayPlatform(hit.collider) &&
+            velocity.y > 0
+          ) {
+            continue;
+          }
+
           velocity.y = (hit.distance - skinWidth) * directionY;
           rayLength = hit.distance;
 
