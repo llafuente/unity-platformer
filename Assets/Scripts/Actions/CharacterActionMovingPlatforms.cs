@@ -13,7 +13,7 @@ namespace UnityPlatformer {
       if (
         character.platform &&
         input.GetAxisRawY() < 0 &&
-        character.platform.gameObject.tag == Configuration.instance.movingPlatformThroughTag
+        Configuration.IsMovingPlatformThrough(character.platform.gameObject)
       ) {
         return -1;
       }

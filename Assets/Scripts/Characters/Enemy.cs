@@ -9,5 +9,13 @@ namespace UnityPlatformer {
       Debug.Log("stop enemy updating!");
       UpdateManager.instance.enemies.Remove (this);
     }
+
+    public override void OnEnable() {
+      UpdateManager.instance.enemies.Add(this);
+    }
+
+    public override void OnDisable() {
+      UpdateManager.instance.enemies.Remove(this);
+    }
   }
 }

@@ -49,8 +49,8 @@ namespace UnityPlatformer {
 
     public override void Start () {
       // check that gameObject has a valid tag!
-      if (this.tag != Configuration.instance.movingPlatformThroughTag &&
-        this.tag != Configuration.instance.movingPlatformTag) {
+      if (!Configuration.IsMovingPlatformThrough(gameObject) &&
+        !Configuration.IsMovingPlatform(gameObject)) {
         Debug.LogWarning("Found a MovingPlatform misstagged");
       }
 

@@ -128,7 +128,7 @@ namespace UnityPlatformer {
         if (hit) {
           // fallingThroughPlatform ?
           if (
-            hit.collider.tag == Configuration.instance.movingPlatformThroughTag &&
+            Configuration.IsMovingPlatformThrough(hit.collider) &&
             collisions.standingOnPlatform &&
             collisions.fallingThroughPlatform
           ) {

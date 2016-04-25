@@ -240,5 +240,13 @@ namespace UnityPlatformer {
         body.bounds.size.y * 0.5f,
         0);
     }
+
+    public virtual void OnEnable() {
+      UpdateManager.instance.characters.Add(this);
+    }
+
+    public virtual void OnDisable() {
+      UpdateManager.instance.characters.Remove(this);
+    }
   }
 }

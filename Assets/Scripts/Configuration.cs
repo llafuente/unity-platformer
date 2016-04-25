@@ -19,5 +19,21 @@ namespace UnityPlatformer {
     static public bool IsOneWayPlatform(Collider2D obj) {
       return obj.tag.IndexOf(Configuration.instance.oneWayPlatformsTag) != -1;
     }
+
+    static public bool IsMovingPlatformThrough(GameObject obj) {
+      return obj.tag.IndexOf(Configuration.instance.movingPlatformThroughTag) != -1;
+    }
+
+    static public bool IsMovingPlatformThrough(Collider2D obj) {
+      return obj.tag.IndexOf(Configuration.instance.movingPlatformThroughTag) != -1;
+    }
+
+    static public bool IsMovingPlatform(GameObject obj) {
+      return obj.tag.IndexOf(Configuration.instance.movingPlatformTag) != -1;
+    }
+
+    static public bool IsMovingPlatform(Collider2D obj) {
+      return obj.tag.IndexOf(Configuration.instance.movingPlatformTag) != -1;
+    }
   }
 }

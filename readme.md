@@ -98,6 +98,13 @@ priority.
 This is already done in this project, Just for reference is you integrate
 the codebase in your project.
 
+## Tagging
+
+Tags can be mixed to create hybrid behaviours: like moving platforms that are
+one way platforms.
+
+This is achieve having a tag that contains both names. ex: `MovingPlatform&OneWayPlatforms`
+
 ## Manual Editable
 
 The following classes contains stuff that could be useful to edit for your game.
