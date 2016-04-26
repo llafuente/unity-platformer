@@ -5,39 +5,26 @@ Based on https://github.com/SebLague/2DPlatformer-Tutorial evolve
 in it's own beast.
 
 ## Features
-* Ladders
+* MovingPlatforms.
+* One Way platforms.
+* Ladders.
 * IA (Patrol, Projectiles, Jumpers, etc...)
 * Input abstraction (this will help if you add a pad or touch controls)
 * Character-handled-actions. Instead of a big class mapping all actions,
 each Action (Jump, Climb ladder, ground/air movement) it's a separate component.
-* Projectiles
-
-## Changes from the original & Thigs to know
-* Manual update: Most of the problems in platformers are solved by
-sorting updates. UpdateManager is a singleton part of `Setup` prefab
-* Use `FixedUpdate` and no `Update`, is better for kinetic objects.
-* fix MovingPlatform issues, that allow player to fall though
-* fix while moving down-slope character cannot jump.
-
+* Projectiles.
+* Wallstick/WallJump.
+* Update everything in order (UpdateManager). This allow total control over
+who is updated first and act accordingly.
+* Slopes
 
 ## Known issues
 
-* Bug: Player con move thought a horizontal moving platform by pushing it.
-* Bug: Slope issues when the slope rotates, even climb up without player input.
+[https://github.com/llafuente/unity-platformer/labels/bug](https://github.com/llafuente/unity-platformer/labels/bug)
 
 # TODO
-* Dismount ladder conditions?
-  * Left/Right
-  * Jump out of a ladder as Action? / bool on Ladder
-* Use AI to do some automated-test.
-* Attack melee
 
-## Whishlist
-* N-jump (double/triple/n jump) with different heights
-* Dash
-* Rope
-* Ledge
-
+[https://github.com/llafuente/unity-platformer/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement](https://github.com/llafuente/unity-platformer/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement)
 
 ## Caveats
 
@@ -59,18 +46,22 @@ This value should be low enough: 0.2f
 The collider try to be simple enough. If OWP are thick you will see
 characters "climbing" when start falling and their feet are inside the OWP.
 
-OWP Height should be aounr Character.skinWidth ~ 0.1.
+OWP Height should be around Character.skinWidth ~ 0.1-0.2
 
 ## FAQ
 
 ### I see some null access at the begining.
 
-Most provably caused by UpdateManager being initialized after other scripts.
-<a href="#execution-order">Follow this instructions to fixed it.</a>
+`Setup` prefab is mandatory. Did you forget it?
 
-# MovingPlatforms don't always detect players
+If you dont use our project setting most provably caused by
+UpdateManager being initialized after other scripts.
 
-Moving platforms use Raycast to detect passengers. If the Movingplatform is
+See <a href="#execution-order">Usage - Execution Order</a> for instructions.
+
+### MovingPlatforms don't always detect players
+
+Moving platforms use Raycast to detect passengers. If the moving platform is
 big, you need to increase the ray count to a number big enough that the
 minimum width of the player could be covered anytime.
 
@@ -84,9 +75,10 @@ Then you can drop `Basic Player` and start working.
 There are many test scenes to see how things are built.
 
 Most of the components are very reusable-chainable. The best example
-is IA, that it's implemented as a fake Input for a normal Character.
+is IA, that it's implemented as a fake Input and depends on what
+action you add you can achieve many behaviors.
 
-[<a name="execution-order"]
+<a name="execution-order"></a>
 ## Execution Order
 
 Configuration & UpdateManager need to be executed first, as they are
@@ -116,3 +108,10 @@ Contains `Areas` and `States`. Both useful for new Actions/Movements/Animation.
 ### DamageType.cs
 
 Contains `DamageTypes` Enum.
+
+
+# License
+
+License is MIT Copyright © 2015 Luis Lafuente Morales <llafuente@noboxout.com>
+
+Except part of two files that are MIT Copyright (c) 2015 Sebastian (https://github.com/SebLague)
