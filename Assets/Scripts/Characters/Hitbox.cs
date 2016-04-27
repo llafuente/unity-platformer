@@ -18,9 +18,7 @@ namespace UnityPlatformer {
         if (dst == null) {
           Debug.LogWarning("Try to damage something that is not a: DamageType. Adjust collideWith");
         } else {
-          if (dst.causer != null) {
-            owner.Damage(dst);
-          }
+          owner.Damage(dst);
         }
       }
     }

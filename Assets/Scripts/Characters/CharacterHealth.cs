@@ -146,7 +146,7 @@ namespace UnityPlatformer {
     public void Damage(DamageType dt) {
       if (Damage(dt.amount)) {
         if (dt.causer != null && dt.causer.onHurtCharacter != null) {
-          causer.onHurtCharacter(dt, GetComponent<Character>());
+          dt.causer.onHurtCharacter(dt, GetComponent<Character>());
         }
       }
     }

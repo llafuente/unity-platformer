@@ -34,6 +34,7 @@ namespace UnityPlatformer {
       controller.collisions.onRightWall += OnRightWall;
 
       facing = initialFacing;
+      input.SetX((float) facing);
     }
 
     void OnLeftWall() {

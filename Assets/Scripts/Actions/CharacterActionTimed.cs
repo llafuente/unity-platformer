@@ -21,12 +21,12 @@ namespace UnityPlatformer {
 
     #region private
 
-    int castFrames = 0;
-    int durationFrames = 0;
-    int coldownFrames = 0;
+    protected int castFrames = 0;
+    protected int durationFrames = 0;
+    protected int coldownFrames = 0;
 
-    int actionCounter = 0;
-    int cdCounter = 0;
+    protected int actionCounter = 0;
+    protected int cdCounter = 0;
     #endregion
 
     public override void Start() {
@@ -85,6 +85,8 @@ namespace UnityPlatformer {
     public override int WantsToUpdate(float delta) {
       ++cdCounter; // update here, to handle coldown properly
       ++actionCounter;
+
+      return 0;
     }
   }
 }

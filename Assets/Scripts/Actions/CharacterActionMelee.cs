@@ -94,7 +94,7 @@ namespace UnityPlatformer {
 
     public override void PerformAction(float delta) {
       if (IsActionInProgress()) {
-        var offset = atCounter - castFrames;
+        var offset = actionCounter - castFrames;
         for (var i = 0; i < damageAreas.Length; ++i) {
           if (
             (i == damageAreas.Length -1 && offset >= damageAreas[i].offsetFrame) ||
