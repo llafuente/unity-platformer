@@ -57,7 +57,7 @@ namespace UnityPlatformer {
     public Action onInvulnerabilityEnd;
 
     #endregion
-    
+
     #region ~private
 
     // NOTE do not use setter/getter to trigger death, we need to preserve
@@ -143,22 +143,26 @@ namespace UnityPlatformer {
     /// Kill the character even if it's invulnerable
     /// TODO handle direction here or in the Hitbox but must be done :)
     /// </summary>
-    public CharacterHealth Damage(DamageType dt) {
-      return Damage(dt.amount);
+    public void Damage(DamageType dt) {
+      if (Damage(dt.amount)) {
+        if (dt.causer != null && dt.causer.onHurtCharacter != null) {
+          causer.onHurtCharacter(dt, GetComponent<Character>());
+        }
+      }
     }
     /// <summary>
     /// triggers onDamage
     /// triggers onDeath
+    /// NOTE this won't trigger onHurtCharacter
     /// </summary>
-    public CharacterHealth Damage(int amount = 1) {
+    public bool Damage(int amount = 1) {
       if (amount <= 0) {
         Debug.LogWarning("amount <= 0 ??");
       }
 
       if (IsInvulnerable()) {
         Debug.Log(this.name + " is invulnerable, ignore damage");
-
-        return this;
+        return false;
       }
 
       Debug.Log(this.name + " recieve damage " + amount);
@@ -175,7 +179,8 @@ namespace UnityPlatformer {
         Die();
       }
 
-      return this;
+      return true;
+
     }
 
     public bool isDead() {

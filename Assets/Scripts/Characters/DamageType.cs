@@ -20,7 +20,7 @@ namespace UnityPlatformer {
     [Comment("Damage amount")]
     public int amount = 1;
     public DamageTypes type = DamageTypes.DEFAULT;
-    // TODO Causer / Owner
+    public Character causer;
 
     [HideInInspector]
     // direction will be calc

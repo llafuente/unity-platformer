@@ -6,10 +6,12 @@ namespace UnityPlatformer {
   /// Melee attack
   /// NOTE Can't be interrupt
   /// </summary>
-  public class CharacterActionMelee: CharacterAction {
+  public class CharacterActionMelee: CharacterActionTimed {
     #region public
+
     [Serializable]
-    public class TriggersData {
+    public class DamageAreas {
+      // this must contains a DamageType
       public GameObject area;
       public float startAt = 0.0f;
 
@@ -19,12 +21,8 @@ namespace UnityPlatformer {
       public bool active = false;
     }
 
-    [Comment("Time before enable the first damage area")]
-    public float castTime = 0;
-    public float durationTime = 1.0f;
-    [Comment("Time since player start casting until being able to cast again")]
-    public float coldownTime  = 3.0f;
-    public TriggersData[] damageAreas = new TriggersData[1];
+
+    public DamageAreas[] damageAreas = new DamageAreas[1];
 
     public string action = "Attack";
     [Comment("Remember: Higher priority wins. Modify with caution")]
@@ -35,23 +33,12 @@ namespace UnityPlatformer {
 
     bool attackHeld = false;
 
-    int castFrames = 0;
-    int durationFrames = 0;
-    int coldownFrames = 0;
-
-    int atCounter = 0;
-    int cdCounter = 0;
-
     #endregion
 
     public override void Start() {
       base.Start();
 
       Debug.Log("character" + character);
-
-      castFrames = UpdateManager.instance.GetFrameCount (castTime);
-      durationFrames = UpdateManager.instance.GetFrameCount (durationTime);
-      coldownFrames = UpdateManager.instance.GetFrameCount (coldownTime);
 
       damageAreas[0].startAt = damageAreas[0].offsetFrame = 0;
       for (var i = 1; i < damageAreas.Length; ++i) {
@@ -62,8 +49,6 @@ namespace UnityPlatformer {
       input.onActionUp += OnActionUp;
       input.onActionDown += OnActionDown;
 
-      cdCounter = coldownFrames + 1;
-      atCounter = coldownFrames + 1;
       Reset();
     }
 
@@ -88,42 +73,13 @@ namespace UnityPlatformer {
       }
     }
 
-    public void StartAction() {
-      cdCounter = 0;
-      atCounter = 0;
-    }
-
-    /// <summary>
-    /// Casting time
-    /// </summary>
-    public bool IsCasting() {
-      return atCounter < castFrames;
-    }
-    /// <summary>
-    /// Attacking time
-    /// </summary>
-    public bool IsAttacking() {
-      return atCounter - castFrames < durationFrames;
-    }
-    /// <summary>
-    /// attack ended
-    /// </summary>
-    public bool IsAttackComplete() {
-      return atCounter - castFrames > durationFrames;
-    }
-
-    public bool IsColdown() {
-      return cdCounter < coldownFrames;
-    }
-
     /// <summary>
     /// TODO REVIEW jump changes when moved to action, investigate
     /// </summary>
     public override int WantsToUpdate(float delta) {
-      ++cdCounter; // update here, to handle coldown properly
-      ++atCounter;
+      base.WantsToUpdate(delta);
 
-      if (attackHeld || !IsAttackComplete()) {
+      if (attackHeld || !IsActionComplete()) {
         // attack starts!
         if (!IsColdown()) {
           StartAction();
@@ -137,7 +93,7 @@ namespace UnityPlatformer {
     }
 
     public override void PerformAction(float delta) {
-      if (IsAttacking()) {
+      if (IsActionInProgress()) {
         var offset = atCounter - castFrames;
         for (var i = 0; i < damageAreas.Length; ++i) {
           if (

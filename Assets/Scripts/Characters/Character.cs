@@ -60,6 +60,8 @@ namespace UnityPlatformer {
 
     public Action onEnterArea;
     public Action onExitArea;
+    public delegate void DealDamage(DamageType dt, CharacterHealth to);
+    public DealDamage onHurtCharacter;
 
     #endregion
 
