@@ -7,11 +7,12 @@ using UnityPlatformer;
 namespace UnityPlatformer {
   /// <summary>
   /// Base class for: Players, NPCs, enemies.
+  /// Handle all movement logic and transform collider information
+  /// into 'readable' information for animations.
   /// </summary>
   [RequireComponent (typeof (PlatformerCollider2D))]
   [RequireComponent (typeof (CharacterHealth))]
   public class Character: MonoBehaviour, IUpdateEntity {
-
     #region public
 
     [Comment("Override Configuration.gravity, (0,0) means use global.")]
@@ -22,6 +23,9 @@ namespace UnityPlatformer {
         return gravityOverride == Vector2.zero ? Configuration.instance.gravity : gravityOverride;
       }
     }
+
+    [Comment("Time to wait before change state to falling.")]
+    public float fallingTime = 0.1f;
 
     /// <summary>
     /// States in wich the Character can be.
@@ -55,13 +59,15 @@ namespace UnityPlatformer {
     }
 
     ///
-    /// Actions
+    /// Callbacks
     ///
 
     public Action onEnterArea;
     public Action onExitArea;
     public delegate void DealDamage(DamageType dt, Character to);
     public DealDamage onHurtCharacter;
+    public delegate void StateChange(States before, States after);
+    public StateChange onStateChange;
 
     #endregion
 
@@ -83,6 +89,11 @@ namespace UnityPlatformer {
         return jumpEnd - jumpStart;
       }
     }
+    public Vector2 lastFallDistance {
+      get {
+        return fallEnd - fallStart;
+      }
+    }
     [HideInInspector]
     public Vector2 fallDistance;
     [HideInInspector]
@@ -100,8 +111,14 @@ namespace UnityPlatformer {
 
     CharacterAction lastAction;
 
+    int framesBeforeFallingState;
+    int fallingFrames;
+
     Vector2 jumpStart;
     Vector2 jumpEnd;
+
+    Vector2 fallStart;
+    Vector2 fallEnd;
 
     #endregion
 
@@ -114,6 +131,8 @@ namespace UnityPlatformer {
       controller = GetComponent<PlatformerCollider2D> ();
       health = GetComponent<CharacterHealth>();
       body = GetComponent<BoxCollider2D>();
+
+      framesBeforeFallingState = UpdateManager.instance.GetFrameCount (fallingTime);
 
       health.onDeath += OnDeath;
     }
@@ -174,7 +193,10 @@ namespace UnityPlatformer {
       } else {
         ExitState(States.OnGround);
         if (velocity.y < 0) {
-          EnterState(States.Falling);
+          ++fallingFrames;
+          if (fallingFrames > framesBeforeFallingState) {
+            EnterState(States.Falling);
+          }
         }
       }
 
@@ -193,27 +215,64 @@ namespace UnityPlatformer {
       return (area & _area) == _area;
     }
 
-    public void EnterState(States a) {
-      if (a == States.Falling && IsOnState(States.Jumping)) {
-        ExitState(States.Jumping);
+    /// <summary>
+    /// Notify that Character enter a new state.
+    /// There are incompatible states, like jumping and falling,
+    /// You don't need to handle those manually, we will exit
+    /// any state needed here.
+    /// </summary>
+    /// <param name="a">State to enter.</param>
+    /// <param name="internal">Do call callbacks, changes will be batch into one call.</param>
+    public void EnterState(States a, bool internal = false) {
+      if (a == States.Falling && IsOnState(States.Falling)) {
+        fallStart = transform.position;
       }
       if (a == States.Jumping && !IsOnState(States.Jumping)) {
         jumpStart = transform.position;
       }
+
+      if (a == States.Falling && IsOnState(States.Jumping)) {
+        ExitState(States.Jumping, true);
+      }
+      if (a == States.Jumping && IsOnState(States.Falling)) {
+        ExitState(States.Falling, true);
+      }
       if (a == States.OnGround && IsOnState(States.Falling)) {
-        ExitState(States.Falling);
+        ExitState(States.Falling, true);
       }
 
+      States before = state;
       state |= a;
+
+      if (!internal && onStateChange != null && before != state) {
+        onStateChange(before, state);
+      }
     }
 
-    public void ExitState(States a) {
+    /// <summary>
+    /// Notify that Character enter a new state.
+    /// There are incompatible states, like jumping and falling,
+    /// You don't need to handle those manually, we will exit
+    /// any state needed here.
+    /// </summary>
+    /// <param name="a">State to enter.</param>
+    /// <param name="internal">Do call callbacks, changes will be batch into one call.</param>
+    public void ExitState(States a, bool internal = false) {
       // TODO REVIEW if Hanging include Jumping this fail...
+      if (a == States.Falling && IsOnState(States.Falling)) {
+        fallingFrames = 0;
+        fallEnd = transform.position;
+      }
       if (a == States.Jumping && IsOnState(States.Jumping)) {
         jumpEnd = transform.position;
       }
 
+      States before = state;
       state &= ~a;
+
+      if (!internal && onStateChange != null && before != state) {
+        onStateChange(before, state);
+      }
     }
 
     public void EnterArea(Areas a) {
