@@ -1,6 +1,13 @@
 # TODO temporal: remove until it's done
 Docs/
 
+/Assets/Spriter
+/Assets/Spriter.meta
+/Assets/SpriterDotNet
+/Assets/SpriterDotNet.meta
+/Assets/SpriterDotNetExamples
+/Assets/SpriterDotNetExamples.meta
+
 # https://github.com/github/gitignore/blob/master/Unity.gitignore
 /[Ll]ibrary/
 /[Tt]emp/
