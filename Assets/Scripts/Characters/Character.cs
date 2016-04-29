@@ -27,45 +27,16 @@ namespace UnityPlatformer {
     [Comment("Time to wait before change state to falling.")]
     public float fallingTime = 0.1f;
 
-    /// <summary>
-    /// States in wich the Character can be.
-    /// Can be combine
-    /// </summary>
-    public enum States {
-      None =                0,
-      OnGround =            1,
-      OnMovingPlatform =    3,
-      OnSlope =             1 << 2 | OnGround,
-      Jumping =             1 << 3,
-      Hanging =             1 << 4 | Jumping,
-      Falling =             1 << 5,
-      FallingFast =         1 << 6 | Falling,
-      Ladder =              1 << 7,
-      WallSliding =         1 << 8,
-      WallSticking =        1 << 9,
-      //Dashing,
-      //Frozen,
-      //Slipping,
-      //FreedomState
-    }
-
-    /// <summary>
-    /// Areas in wich the Character can be.
-    /// REVIEW can this be used to handle hazardous areas?
-    /// </summary>
-    public enum Areas {
-      None = 0x0,
-      Ladder = 0x01
-    }
+    public float minVelocity = 0.05f;
 
     ///
     /// Callbacks
     ///
 
-    public Action onEnterArea;
-    public Action onExitArea;
-    public delegate void DealDamage(DamageType dt, Character to);
-    public DealDamage onHurtCharacter;
+    public delegate void AreaChange(Areas before, Areas after);
+    public AreaChange onAreaChange;
+    public delegate void HurtCharacter(DamageType dt, Character to);
+    public HurtCharacter onHurtCharacter;
     public delegate void StateChange(States before, States after);
     public StateChange onStateChange;
 
@@ -144,7 +115,7 @@ namespace UnityPlatformer {
     /// Managed update called by UpdateManager
     /// Transform Input into platformer magic :)
     /// </summary>
-    virtual public void ManagedUpdate(float delta) {
+    public virtual void ManagedUpdate(float delta) {
       int prio = 0;
       int tmp;
       CharacterAction action = null;
@@ -179,6 +150,14 @@ namespace UnityPlatformer {
 
       if (!Utils.biton((int)a, (int)PostUpdateActions.WORLD_COLLISIONS)) {
         controller.disableWorldCollisions = true;
+      }
+
+      if (Mathf.Abs(velocity.x) < minVelocity) {
+        velocity.x = 0.0f;
+      }
+
+      if (Mathf.Abs(velocity.y) < minVelocity) {
+        velocity.y = 0.0f;
       }
 
       controller.Move(velocity * delta);
@@ -222,8 +201,8 @@ namespace UnityPlatformer {
     /// any state needed here.
     /// </summary>
     /// <param name="a">State to enter.</param>
-    /// <param name="internal">Do call callbacks, changes will be batch into one call.</param>
-    public void EnterState(States a, bool internal = false) {
+    /// <param name="privcall">Do call callbacks, changes will be batch into one call.</param>
+    public void EnterState(States a, bool privcall = false) {
       if (a == States.Falling && IsOnState(States.Falling)) {
         fallStart = transform.position;
       }
@@ -231,20 +210,20 @@ namespace UnityPlatformer {
         jumpStart = transform.position;
       }
 
-      if (a == States.Falling && IsOnState(States.Jumping)) {
-        ExitState(States.Jumping, true);
+      if (a == States.Falling) {
+        ExitState(States.Hanging, true);
       }
-      if (a == States.Jumping && IsOnState(States.Falling)) {
-        ExitState(States.Falling, true);
+      if (a == States.Jumping) {
+        ExitState(States.Falling | States.OnGround, true);
       }
-      if (a == States.OnGround && IsOnState(States.Falling)) {
-        ExitState(States.Falling, true);
+      if (a == States.OnGround) {
+        ExitState(States.Falling | States.Hanging, true);
       }
 
       States before = state;
       state |= a;
 
-      if (!internal && onStateChange != null && before != state) {
+      if (!privcall && onStateChange != null && before != state) {
         onStateChange(before, state);
       }
     }
@@ -256,8 +235,8 @@ namespace UnityPlatformer {
     /// any state needed here.
     /// </summary>
     /// <param name="a">State to enter.</param>
-    /// <param name="internal">Do call callbacks, changes will be batch into one call.</param>
-    public void ExitState(States a, bool internal = false) {
+    /// <param name="privcall">Do call callbacks, changes will be batch into one call.</param>
+    public void ExitState(States a, bool privcall = false) {
       // TODO REVIEW if Hanging include Jumping this fail...
       if (a == States.Falling && IsOnState(States.Falling)) {
         fallingFrames = 0;
@@ -270,24 +249,26 @@ namespace UnityPlatformer {
       States before = state;
       state &= ~a;
 
-      if (!internal && onStateChange != null && before != state) {
+      if (!privcall && onStateChange != null && before != state) {
         onStateChange(before, state);
       }
     }
 
     public void EnterArea(Areas a) {
+      Areas before = area;
       area |= a;
 
-      if (onEnterArea != null) {
-        onEnterArea(); // TODO send params?
+      if (before != area && onAreaChange != null) {
+        onAreaChange(before, area);
       }
     }
 
     public void ExitArea(Areas a) {
+      Areas before = area;
       area &= ~a;
 
-      if (onExitArea != null) {
-        onExitArea(); // TODO send params?
+      if (before != area && onAreaChange != null) {
+        onAreaChange(before, area);
       }
     }
 

@@ -105,15 +105,15 @@ namespace UnityPlatformer {
       } else if (!jumping) {
         jump.StartJump(ref character.velocity);
         jumping = true;
-        character.EnterState(Character.States.Jumping);
+        character.EnterState(States.Jumping);
       } else {
         if (jump.IsHanging()) {
-          character.EnterState(Character.States.Hanging);
+          character.EnterState(States.Hanging);
         }
 
         if (!jump.Jumping(ref character.velocity) || character.velocity.y < 0) {
           jumping = false;
-          character.ExitState(Character.States.Jumping);
+          character.ExitState(States.Jumping);
         }
       }
     }

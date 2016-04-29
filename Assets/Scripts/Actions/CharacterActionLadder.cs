@@ -23,8 +23,8 @@ namespace UnityPlatformer {
     /// Enter in ladder mode when user is in a ladder area and pressing up/down
     /// </summary>
     public override int WantsToUpdate(float delta) {
-      bool onLadderState = character.IsOnState(Character.States.Ladder);
-      bool onLadderArea = character.IsOnArea(Character.Areas.Ladder);
+      bool onLadderState = character.IsOnState(States.Ladder);
+      bool onLadderArea = character.IsOnArea(Areas.Ladder);
       // this means below my feet there is a ladder
       Ladder ladder = null;
 
@@ -86,7 +86,7 @@ namespace UnityPlatformer {
       }
 
       if (enter) {
-        character.EnterState(Character.States.Ladder);
+        character.EnterState(States.Ladder);
         moveToCenterNow = moveToCenter;
         return priority;
       }
@@ -97,7 +97,7 @@ namespace UnityPlatformer {
     public override void PerformAction(float delta) {
       Vector2 in2d = input.GetAxisRaw();
 
-      if (character.IsOnArea(Character.Areas.Ladder) && character.IsOnState(Character.States.Ladder)) {
+      if (character.IsOnArea(Areas.Ladder) && character.IsOnState(States.Ladder)) {
         // disable x movement
         character.velocity.x = 0;
         character.velocity.y = speed * in2d.y;

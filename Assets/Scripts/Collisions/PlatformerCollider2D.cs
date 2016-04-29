@@ -54,8 +54,12 @@ namespace UnityPlatformer {
       collisions.prevVelocity = velocity;
 
       if (velocity.x != 0) {
-        //Debug.LogFormat("MOVE?! {0}", velocity.x);
-        collisions.faceDir = (int)Mathf.Sign(velocity.x);
+        // collisions.faceDir = (int)Mathf.Sign(velocity.x);
+        if (velocity.x > 0.0f) {
+          collisions.faceDir = 1;
+        } else if (velocity.x < 0.0f) {
+          collisions.faceDir = -1;
+        } /* else, leave the last one :) */
       }
 
       // TODO PERF add: collisions.prevBelow, so wont be testing while falling

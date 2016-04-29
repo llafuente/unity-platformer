@@ -20,6 +20,8 @@ namespace UnityPlatformer {
     public List<Enemy> enemies = new List<Enemy>();
     [HideInInspector]
     public List<Projectile> projectiles = new List<Projectile>();
+    [HideInInspector]
+    public List<IUpdateEntity> others = new List<IUpdateEntity>();
 
 
     public int GetFrameCount(float time) {
@@ -51,6 +53,10 @@ namespace UnityPlatformer {
       foreach(var obj in projectiles) {
         obj.ManagedUpdate(delta);
       }
+      foreach(var obj in others) {
+        obj.ManagedUpdate(delta);
+      }
+
     }
   }
 }

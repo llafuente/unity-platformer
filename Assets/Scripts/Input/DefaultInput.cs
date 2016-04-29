@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-#if CN_INPUT_MANAGER
+#if UP_USE_CN_INPUT_MANAGER
   using CnControls;
 #endif
 
@@ -11,7 +11,7 @@ namespace UnityPlatformer {
   /// <summary>
   /// Keyboard and Touch (https://www.assetstore.unity3d.com/en/#!/content/15233)
   /// All CnControls is enconsed in #ifdef.
-  /// If your project use CnControls define CN_INPUT_MANAGER to support it.
+  /// If your project use CnControls define UP_USE_CN_INPUT_MANAGER to support it.
   /// </summary>
   public class DefaultInput : PlatformerInput
   {
@@ -43,7 +43,7 @@ namespace UnityPlatformer {
     public override bool IsActionHeld(string action) {
       foreach (var i in inputsMap) {
         if (i.action == action) {
-          #if CN_INPUT_MANAGER
+          #if UP_USE_CN_INPUT_MANAGER
           if (SystemInfo.deviceType == DeviceType.Handheld) {
             return CnInputManager.GetButton(i.handheld);
           }
@@ -60,7 +60,7 @@ namespace UnityPlatformer {
     public override bool IsActionDown(string action) {
       foreach (var i in inputsMap) {
         if (i.action == action) {
-          #if CN_INPUT_MANAGER
+          #if UP_USE_CN_INPUT_MANAGER
           if (SystemInfo.deviceType == DeviceType.Handheld) {
             return CnInputManager.GetButtonDown(i.handheld);
           }
@@ -77,7 +77,7 @@ namespace UnityPlatformer {
     public override bool IsActionUp(string action) {
       foreach (var i in inputsMap) {
         if (i.action == action) {
-          #if CN_INPUT_MANAGER
+          #if UP_USE_CN_INPUT_MANAGER
           if (SystemInfo.deviceType == DeviceType.Handheld) {
             return CnInputManager.GetButtonUp(i.handheld);
           }
@@ -92,7 +92,7 @@ namespace UnityPlatformer {
     }
 
     public override bool IsLeftDown() {
-      #if CN_INPUT_MANAGER
+      #if UP_USE_CN_INPUT_MANAGER
       if (SystemInfo.deviceType == DeviceType.Handheld) {
         return CnInputManager.GetAxis("Horizontal") > 0;
       }
@@ -102,7 +102,7 @@ namespace UnityPlatformer {
     }
 
     public override bool IsRightDown() {
-      #if CN_INPUT_MANAGER
+      #if UP_USE_CN_INPUT_MANAGER
       if (SystemInfo.deviceType == DeviceType.Handheld) {
         return CnInputManager.GetAxis("Horizontal") < 0;
       }
@@ -112,7 +112,7 @@ namespace UnityPlatformer {
     }
 
     public override bool IsUpDown() {
-      #if CN_INPUT_MANAGER
+      #if UP_USE_CN_INPUT_MANAGER
       if (SystemInfo.deviceType == DeviceType.Handheld) {
         return CnInputManager.GetAxis("Vertical") > 0;
       }
@@ -122,7 +122,7 @@ namespace UnityPlatformer {
     }
 
     public override bool IsDownDown() {
-      #if CN_INPUT_MANAGER
+      #if UP_USE_CN_INPUT_MANAGER
       if (SystemInfo.deviceType == DeviceType.Handheld) {
         return CnInputManager.GetAxis("Vertical") < 0;
       }
@@ -132,7 +132,7 @@ namespace UnityPlatformer {
     }
 
     public override float GetAxisRawX() {
-      #if CN_INPUT_MANAGER
+      #if UP_USE_CN_INPUT_MANAGER
       if (SystemInfo.deviceType == DeviceType.Handheld) {
         return CnInputManager.GetAxis("Horizontal") < 0;
       }
@@ -142,7 +142,7 @@ namespace UnityPlatformer {
     }
 
     public override float GetAxisRawY() {
-      #if CN_INPUT_MANAGER
+      #if UP_USE_CN_INPUT_MANAGER
       if (SystemInfo.deviceType == DeviceType.Handheld) {
         return CnInputManager.GetAxis("Vertical") < 0;
       }

@@ -48,17 +48,17 @@ namespace UnityPlatformer {
     }
 
     virtual public void EnableLadder(Character p) {
-      p.EnterArea(Character.Areas.Ladder);
+      p.EnterArea(Areas.Ladder);
       p.ladder = this;
     }
 
     virtual public void Dismount(Character p) {
-      p.ExitState(Character.States.Ladder);
+      p.ExitState(States.Ladder);
     }
 
     virtual public void DisableLadder(Character p) {
       Dismount(p);
-      p.ExitArea(Character.Areas.Ladder);
+      p.ExitArea(Areas.Ladder);
       p.ladder = null;
     }
 

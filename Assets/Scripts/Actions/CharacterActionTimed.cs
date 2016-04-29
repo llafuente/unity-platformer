@@ -40,9 +40,12 @@ namespace UnityPlatformer {
       actionCounter = coldownFrames + 1;
     }
 
-    public void StartAction() {
+    public virtual void StartAction() {
       cdCounter = 0;
       actionCounter = 0;
+    }
+
+    public virtual void EndAction() {
     }
 
     ///<summary>
@@ -57,6 +60,8 @@ namespace UnityPlatformer {
       if (resetCd) {
         cdCounter = coldownFrames + 1;
       }
+
+      EndAction();
     }
 
     /// <summary>
@@ -85,6 +90,11 @@ namespace UnityPlatformer {
     public override int WantsToUpdate(float delta) {
       ++cdCounter; // update here, to handle coldown properly
       ++actionCounter;
+
+      if (actionCounter == durationFrames + castFrames) {
+        Debug.Log("Attck ended!");
+        EndAction();
+      }
 
       return 0;
     }

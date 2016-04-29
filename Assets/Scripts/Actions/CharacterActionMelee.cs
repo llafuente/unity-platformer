@@ -72,6 +72,17 @@ namespace UnityPlatformer {
         damageAreas[i].area.active = false;
       }
     }
+    public override void StartAction() {
+      base.StartAction();
+
+      character.EnterState(States.MeleeAttack);
+    }
+    public override void EndAction() {
+      base.EndAction();
+
+      character.ExitState(States.MeleeAttack);
+    }
+
 
     /// <summary>
     /// TODO REVIEW jump changes when moved to action, investigate
