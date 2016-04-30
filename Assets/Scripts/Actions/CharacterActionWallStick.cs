@@ -12,7 +12,8 @@ namespace UnityPlatformer {
 	  public float wallSlideSpeedMax = 3;
     [Comment("Time player need to oppose walkstick to leave / press in the other direction.")]
 	  public float wallStickLeaveTime = 0.25f;
-    [Comment("If you want to enable Jumping. Use empty string to disable.")]
+    // TODO REVIEW this may be a boolean, and a pointer to a CharacterActionJump
+    [Comment("If you want to enable Jumping. Use empty string to disable. Must be the same as CharacterActionJump use")]
     public string jumpAction = "Jump";
     [Comment("Jump in the same direction as the wall. Climb")]
     public Vector2 wallJumpClimb = new Vector2(10, 35);

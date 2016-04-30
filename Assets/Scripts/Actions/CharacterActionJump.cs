@@ -9,18 +9,14 @@ namespace UnityPlatformer {
   public class CharacterActionJump: CharacterAction {
     #region public
 
+    public JumpProperties jumpProperties;
+
     // TODO OnValidate check this!
+    [Space(10)]
     [Comment("Must match something @PlatformerInput")]
     public String action = "Jump";
-    public float maxJumpHeight = 4;
-    public float minJumpHeight = 1;
-    [Comment("Time allowed to jump after leave ground")]
-    public float graceJumpTime = 0.15f;
-    [Comment("Time to reach maxJumpHeight")]
-    public float timeToJumpApex = 0.4f;
-    [Comment("The amount of time may spend hanging in midair at the apex of her jump (while the jump is not canceled).")]
-    public float hangTime = 0.0f;
 
+    [Space(10)]
     [Comment("Remember: Higher priority wins. Modify with caution")]
     public int priority = 5;
     #endregion
@@ -30,8 +26,10 @@ namespace UnityPlatformer {
     bool jumpHeld = false;
     bool jumping = false;
     bool jumpStopped = false;
+    bool customJump = false;
 
-    Jump jump;
+    Jump defaultJump;
+    Jump currentJump;
     int _graceJumpFrames;
 
     #endregion
@@ -40,9 +38,9 @@ namespace UnityPlatformer {
       base.Start();
 
       Debug.Log("character" + character);
-      jump = new Jump(character, timeToJumpApex, minJumpHeight, maxJumpHeight, hangTime);
+      defaultJump = new Jump(character, jumpProperties);
 
-      _graceJumpFrames = UpdateManager.instance.GetFrameCount (graceJumpTime);
+      _graceJumpFrames = UpdateManager.instance.GetFrameCount (jumpProperties.graceJumpTime);
       input.onActionUp += OnActionUp;
       input.onActionDown += OnActionDown;
     }
@@ -61,6 +59,11 @@ namespace UnityPlatformer {
           jumpStopped = true;
         }
       }
+    }
+
+    public void Jump(Jump j) {
+      jumping = true;
+      currentJump = j;
     }
 
     /// <summary>
@@ -88,11 +91,22 @@ namespace UnityPlatformer {
       );
       */
 
-      return jumpStopped || (
-        jumpHeld && (
-          controller.IsOnGround(_graceJumpFrames) || jumping
-        )
-      ) ? priority : 0;
+      if (jumpHeld) {
+        if (controller.IsOnGround(_graceJumpFrames) && !jumping) {
+          currentJump = defaultJump;
+          return priority;
+        }
+        if (jumping) {
+          return priority;
+        }
+      }
+
+      // jump stopped? run one last time to reset
+      if (jumpStopped) {
+        return priority;
+      }
+
+      return 0;
     }
 
     public override void PerformAction(float delta) {
@@ -100,18 +114,18 @@ namespace UnityPlatformer {
       if (jumpStopped) {
         jumping = false;
         jumpStopped = false;
-        jump.EndJump(ref character.velocity);
-        jump.Reset();
+        currentJump.EndJump(ref character.velocity);
+        currentJump.Reset();
       } else if (!jumping) {
-        jump.StartJump(ref character.velocity);
+        currentJump.StartJump(ref character.velocity);
         jumping = true;
         character.EnterState(States.Jumping);
       } else {
-        if (jump.IsHanging()) {
+        if (currentJump.IsHanging()) {
           character.EnterState(States.Hanging);
         }
 
-        if (!jump.Jumping(ref character.velocity) || character.velocity.y < 0) {
+        if (!currentJump.Jumping(ref character.velocity) || character.velocity.y < 0) {
           jumping = false;
           character.ExitState(States.Jumping);
         }
