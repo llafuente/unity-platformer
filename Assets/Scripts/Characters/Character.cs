@@ -171,7 +171,8 @@ namespace UnityPlatformer {
         EnterState(States.OnGround);
       } else {
         ExitState(States.OnGround);
-        if (velocity.y < 0) {
+        // falling but not wallsliding
+        if (velocity.y < 0 && !IsOnState(States.WallSliding)) {
           ++fallingFrames;
           if (fallingFrames > framesBeforeFallingState) {
             EnterState(States.Falling);
@@ -214,10 +215,13 @@ namespace UnityPlatformer {
         ExitState(States.Hanging, true);
       }
       if (a == States.Jumping) {
-        ExitState(States.Falling | States.OnGround, true);
+        ExitState(States.Falling | States.OnGround | States.WallSliding, true);
       }
       if (a == States.OnGround) {
-        ExitState(States.Falling | States.Hanging, true);
+        ExitState(States.Falling | States.Hanging | States.WallSliding, true);
+      }
+      if (a == States.WallSliding) {
+        ExitState(States.Falling | States.Hanging | States.Jumping, true);
       }
 
       States before = state;

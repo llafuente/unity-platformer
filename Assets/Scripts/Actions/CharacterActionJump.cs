@@ -9,7 +9,7 @@ namespace UnityPlatformer {
   public class CharacterActionJump: CharacterAction {
     #region public
 
-    public JumpProperties jumpProperties;
+    public JumpVariableHeightProperties jumpProperties;
 
     // TODO OnValidate check this!
     [Space(10)]
@@ -37,8 +37,7 @@ namespace UnityPlatformer {
     public override void Start() {
       base.Start();
 
-      Debug.Log("character" + character);
-      defaultJump = new Jump(character, jumpProperties);
+      defaultJump = new JumpVariableHeight(character, jumpProperties);
 
       _graceJumpFrames = UpdateManager.instance.GetFrameCount (jumpProperties.graceJumpTime);
       input.onActionUp += OnActionUp;
@@ -63,6 +62,7 @@ namespace UnityPlatformer {
 
     public void Jump(Jump j) {
       jumping = true;
+      customJump = true; // enable StartJump
       currentJump = j;
     }
 
@@ -110,15 +110,17 @@ namespace UnityPlatformer {
     }
 
     public override void PerformAction(float delta) {
+      //Debug.LogFormat("jumpStopped {0} jumping {1} customJump {2}", jumpStopped, jumping, customJump);
       // last update to set 'exit' velocity
       if (jumpStopped) {
         jumping = false;
         jumpStopped = false;
         currentJump.EndJump(ref character.velocity);
         currentJump.Reset();
-      } else if (!jumping) {
+      } else if (!jumping || (jumping && customJump)) {
         currentJump.StartJump(ref character.velocity);
         jumping = true;
+        customJump = false;
         character.EnterState(States.Jumping);
       } else {
         if (currentJump.IsHanging()) {

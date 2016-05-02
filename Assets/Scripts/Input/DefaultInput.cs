@@ -1,3 +1,5 @@
+// #def UP_USE_CN_INPUT_MANAGER
+
 using UnityEngine;
 using System.Collections.Generic;
 using System;

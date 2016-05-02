@@ -51,6 +51,11 @@ OWP Height should be around `Character.skinWidth` ~ 0.1-0.2
 
 ## FAQ
 
+### Compilation errors
+
+See [External libraries](#external-libraries)
+Just disable some `#def`
+
 ### I see some null access at the begining.
 
 `Setup` prefab is mandatory. Did you forget it?
@@ -78,6 +83,26 @@ There are many test scenes to see how things are built.
 Most of the components are very reusable-chainable. The best example
 is IA, that it's implemented as a fake Input and depends on what
 action you add you can achieve many behaviors.
+
+<a name="external-libraries"></a>
+### External libraries
+
+`unity-platformer` don't require any external library, but I used in my
+projects and shared the code here.
+
+When a class require a library everything is enclosed inside `#if/endif`
+that you will find in the first line.
+
+* `CharacterAnimatorSpriter.cs`  (UP_USE_SPRITER)
+
+  Enabled by default (sorry ^^)
+
+  Require [SpriterDotNet](https://github.com/loodakrawa/SpriterDotNet).Unity
+
+
+* `DefaultInput.cs` (UP_USE_CN_INPUT_MANAGER)
+
+  Require [CnControls](https://www.assetstore.unity3d.com/en/#!/content/15233) from the UnityStore.
 
 <a name="execution-order"></a>
 ### Execution Order
@@ -113,6 +138,6 @@ Contains `DamageTypes` Enum.
 
 # License
 
-License is MIT Copyright © 2015 Luis Lafuente Morales <llafuente@noboxout.com>
+License is MIT Copyright © 2016 Luis Lafuente Morales <llafuente@noboxout.com>
 
-Except part of two files that are MIT Copyright (c) 2015 Sebastian (https://github.com/SebLague)
+Except a few files that are shared with Sebastian (https://github.com/SebLague)
