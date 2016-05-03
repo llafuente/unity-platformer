@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace UnityPlatformer {
   /// <summary>
-  /// Perform an action over a character
-  /// TODO slopeAccelerationFactor
+  /// Movement while on ground
+  /// TODO slopeAccelerationFactor/slopeDeccelerationFactor
   /// </summary>
   public class CharacterActionGroundMovement: CharacterAction, IUpdateManagerAttach {
     #region public
@@ -35,6 +35,9 @@ namespace UnityPlatformer {
       return 0;
     }
 
+    /// <summary>
+    /// Horizontal movement
+    /// </summary>
     public override void PerformAction(float delta) {
       Vector2 in2d = input.GetAxisRaw();
 

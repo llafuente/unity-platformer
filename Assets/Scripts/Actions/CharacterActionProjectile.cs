@@ -7,6 +7,7 @@ namespace UnityPlatformer {
   /// <summary>
   /// Fire projectiles (All or one by one), handles orientation based on
   /// the character collisions.faceDir
+  /// TODO use: CharacterActionTimed
   /// </summary>
   public class CharacterActionProjectile: CharacterAction {
     #region public
@@ -33,18 +34,20 @@ namespace UnityPlatformer {
     [Comment("checked: Fire all at once (with given delays). unchecked: Fire one by one")]
     public bool fireMode = false;
 
+    public Action onFire;
+
     #endregion
 
     int currentIndex = 0;
     float time = 0;
 
     /// <summary>
-    /// TODO REVIEW jump changes when moved to action, investigate
+    ///
     /// </summary>
     public override int WantsToUpdate(float delta) {
       time += delta;
       if (time > fireDelay) {
-        return input.IsActionDown(action) ? priority : 0;
+        return input.IsActionHeld(action) ? priority : 0;
       }
       return 0;
     }
@@ -55,7 +58,8 @@ namespace UnityPlatformer {
     }
 
     ///<summary>
-    /// Destroy gameObject waiting destroyDelay
+    /// Fire projectiles, regardless the cooldown,
+    /// Call it after all checks
     ///</summary>
     public virtual void Fire() {
       if (fireMode) {
@@ -66,6 +70,10 @@ namespace UnityPlatformer {
         ProjectileCfg p = projectiles[currentIndex];
         p.delay = 0; // force no delay
         StartCoroutine(_Fire());
+      }
+
+      if (onFire != null) {
+        onFire();
       }
     }
 

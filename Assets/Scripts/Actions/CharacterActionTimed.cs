@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityPlatformer {
   /// <summary>
-  /// Manage actions that hast cast, duration and cooldown.
+  /// Manage actions that has cast, duration and cooldown.
   /// </summary>
   public abstract class CharacterActionTimed : CharacterAction {
     #region public

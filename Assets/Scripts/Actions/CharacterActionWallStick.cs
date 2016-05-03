@@ -5,7 +5,7 @@ namespace UnityPlatformer {
   /// <summary>
   /// Stick at walls. Also perform wall-jumps
   /// </summary>
-  public class CharacterActionWallStick: CharacterAction, IUpdateManagerAttach {
+  public class CharacterActionWallStick: CharacterAction {
     #region public
 
     [Comment("Vertical terminal velocity while stick")]
@@ -39,9 +39,11 @@ namespace UnityPlatformer {
 
       wallStickLeaveAgainFrames = UpdateManager.instance.GetFrameCount (wallStickLeaveAgain);
       wallStickLeaveAgainCounter = wallStickLeaveAgainFrames + 1; // can wallstick
-    }
 
-    public void Attach(UpdateManager um) {
+      if (enableWallJumps && actionJump == null) {
+        Debug.LogWarning("enableWallJumps is true but there is no actionJump selected!");
+      }
+
     }
 
     /// <summary>
@@ -75,9 +77,9 @@ namespace UnityPlatformer {
       float x = input.GetAxisRawX();
 
       // terminal velocity
-      // TODO when this happes, disable gravity
+      // NOTE apply -gravity to compensate
       if (character.velocity.y < -wallSlideSpeedMax) {
-        character.velocity.y = -wallSlideSpeedMax;
+        character.velocity.y = -wallSlideSpeedMax - character.gravity.y * delta;
       }
 
       // TODO manage in frames

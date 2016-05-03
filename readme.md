@@ -127,9 +127,14 @@ This is achieved having a tag that contains both names. ex: `MovingPlatform&OneW
 
 The following classes contains stuff that could be useful to edit for your game.
 
-#### Character.cs
+#### Areas.cs
 
-Contains `Areas` and `States`. Both useful for new Actions/Movements/Animation.
+Contains `Areas` that the character can be in.
+
+#### States.cs
+
+Contains `States` that the character can be in.
+This is crucial information for Animation.
 
 #### DamageType.cs
 

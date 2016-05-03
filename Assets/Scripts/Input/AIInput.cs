@@ -12,8 +12,7 @@ namespace UnityPlatformer {
   /// Fake input for AI. Allow to manually (by code) control input/actions.
   /// This way a AI is exactly like a character and no code duplication :)
   /// </summary>
-  public class AIInput : PlatformerInput
-  {
+  public class AIInput : PlatformerInput {
     Dictionary<string, bool> actions = new Dictionary<string, bool>();
     Vector2 axis = new Vector2(0, 0);
 

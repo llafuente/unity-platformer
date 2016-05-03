@@ -3,8 +3,12 @@ using UnityEngine;
 
 namespace UnityPlatformer {
   /// <summary>
-  /// Perform an action over a character
-  /// TODO support for custom jumps.
+  /// Jump while on ground.
+  /// The rest jumps, are managed here, but using jump properties/type
+  /// elsewhere, just by calling Jump()
+  /// NOTE unity-platformer support multiple types of jumps.
+  /// We just ship one type here, be free to extend!
+  /// TODO force one jump per press.
   /// </summary>
   public class CharacterActionJump: CharacterAction {
     #region public
@@ -67,7 +71,10 @@ namespace UnityPlatformer {
     }
 
     /// <summary>
-    /// TODO REVIEW jump changes when moved to action, investigate
+    /// Listen input and Select the current Jump
+    /// Other actions (with higher priority) can trigger Jumps
+    /// using Jump(), and the next Frame CharacterActionJump
+    /// willl take control!
     /// </summary>
     public override int WantsToUpdate(float delta) {
       /* DEBUG

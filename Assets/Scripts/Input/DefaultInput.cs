@@ -15,8 +15,7 @@ namespace UnityPlatformer {
   /// All CnControls is enconsed in #ifdef.
   /// If your project use CnControls define UP_USE_CN_INPUT_MANAGER to support it.
   /// </summary>
-  public class DefaultInput : PlatformerInput
-  {
+  public class DefaultInput : PlatformerInput {
     [Serializable]
     public class InputMap {
       public InputMap(String _action, String _handheld, String _keyboard) {

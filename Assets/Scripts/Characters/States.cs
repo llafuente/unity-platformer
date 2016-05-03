@@ -1,7 +1,7 @@
 namespace UnityPlatformer {
   /// <summary>
   /// States in wich the Character can be.
-  /// Can be combine
+  /// NOTE Some can overlap
   /// </summary>
   public enum States {
     None =                0,

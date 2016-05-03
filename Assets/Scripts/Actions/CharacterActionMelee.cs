@@ -4,7 +4,7 @@ using UnityEngine;
 namespace UnityPlatformer {
   /// <summary>
   /// Melee attack
-  /// NOTE Can't be interrupt
+  /// NOTE Can't be interrupted atm
   /// </summary>
   public class CharacterActionMelee: CharacterActionTimed {
     #region public
@@ -38,12 +38,10 @@ namespace UnityPlatformer {
     public override void Start() {
       base.Start();
 
-      Debug.Log("character" + character);
-
       damageAreas[0].startAt = damageAreas[0].offsetFrame = 0;
       for (var i = 1; i < damageAreas.Length; ++i) {
         damageAreas[i].offsetFrame = damageAreas[0].offsetFrame + UpdateManager.instance.GetFrameCount (damageAreas[i].startAt);
-        Debug.LogFormat("Offsetframes {0} - {1}", i, damageAreas[i].offsetFrame);
+        // Debug.LogFormat("Offsetframes {0} - {1}", i, damageAreas[i].offsetFrame);
       }
 
       input.onActionUp += OnActionUp;

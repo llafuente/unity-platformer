@@ -8,14 +8,31 @@ namespace UnityPlatformer {
     WORLD_COLLISIONS = 0x02,
   };
   /// <summary>
-  /// Perform an action over a character
+  /// Base class to perform an action over a character
   /// </summary>
   public abstract class CharacterAction : MonoBehaviour {
+    #region public
+
+    /// <summary>
+    /// Target character that will be affected by this movement
+    /// </summary>
     public Character character;
+    /// <summary>
+    /// Input to listen
+    /// </summary>
     public PlatformerInput input;
+    /// <summary>
+    /// Callback when this movement WantsToUpdate and has highest priority.
+    /// </summary>
     public Action onGrainControl;
+    /// <summary>
+    /// Callback when this movement don't WantsToUpdate or another movement has higher priority
+    /// </summary>
     public Action onLoseControl;
 
+    #endregion
+
+    // cache
     protected PlatformerCollider2D controller;
     protected bool hasControl = false;
 
@@ -60,8 +77,9 @@ namespace UnityPlatformer {
     /// <summary>
     /// Tells the character we want to take control
     /// Positive numbers fight: Higher number wins
-    /// Negative numbers are used to ignore fight, and execute, but do not
-    /// call GetPostUpdateActions().
+    /// Negative numbers are used to ignore fight, and just execute,
+    /// won't trigger onLoseControl or onGrainControl and GetPostUpdateActions
+    /// is ignored.
     /// NOTE can be used as a replace for UpdateManager.ManagedUpdate
     /// </summary>
     public abstract int WantsToUpdate(float delta);

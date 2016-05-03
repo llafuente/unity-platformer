@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityPlatformer {
   /// <summary>
-  /// Perform an action over a character
+  /// Movement while on air, despite beeing falling, jumping...
   /// </summary>
   public class CharacterActionAirMovement: CharacterAction, IUpdateManagerAttach {
     #region public
@@ -33,11 +33,14 @@ namespace UnityPlatformer {
       return -1;
     }
 
+    /// <summary>
+    /// Horizontal movement
+    /// </summary>
     public override void PerformAction(float delta) {
       Vector2 in2d = input.GetAxisRaw();
 
       float targetVelocityX = in2d.x * speed;
-      // (controller.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne
+
       character.velocity.x = Mathf.SmoothDamp (
         character.velocity.x,
         targetVelocityX,

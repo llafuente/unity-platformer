@@ -2,11 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-#if CN_INPUT_MANAGER
-  using CnControls;
-#endif
-
-
 namespace UnityPlatformer {
   /// <summary>
   /// Handle input for: Players and IA

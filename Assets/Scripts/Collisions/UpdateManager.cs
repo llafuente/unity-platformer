@@ -6,7 +6,7 @@ namespace UnityPlatformer {
   /// <summary>
   /// Custom update loop. This will avoid most of the problems of who is
   /// updated first in exchange of some manual work
-  /// TODO REVIEW custom update order ?!
+  /// TODO REVIEW use a priority queue to handle everything? put priority @Configuration
   /// </summary>
   public class UpdateManager : MBSingleton<UpdateManager> {
     // to scale up/down

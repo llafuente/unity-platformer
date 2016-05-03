@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace UnityPlatformer {
   /// <summary>
-  /// Perform an action over a character
+  /// Climb a ladder
+  /// TODO moveToCenterTime/Speed
   /// </summary>
   public class CharacterActionLadder: CharacterAction {
     #region public
