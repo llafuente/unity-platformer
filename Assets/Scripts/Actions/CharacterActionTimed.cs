@@ -15,7 +15,7 @@ namespace UnityPlatformer {
     [Comment("Time since player start casting until being able to cast again")]
     public float cooldownTime  = 3.0f;
 
-    Action onInterrupt;
+    public Action onInterrupt;
 
     #endregion
 

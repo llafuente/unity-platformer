@@ -56,8 +56,8 @@ namespace UnityPlatformer {
         return 0;
       }
 
-      if ((controller.collisions.left || controller.collisions.right) &&
-        !controller.collisions.below &&
+      if ((pc2d.collisions.left || pc2d.collisions.right) &&
+        !pc2d.collisions.below &&
         character.velocity.y < 0
       ) {
         return priority;
@@ -73,7 +73,7 @@ namespace UnityPlatformer {
       ++slidingFrames;
 
 
-      int wallDirX = (controller.collisions.left) ? -1 : 1;
+      int wallDirX = (pc2d.collisions.left) ? -1 : 1;
       float x = input.GetAxisRawX();
 
       // terminal velocity

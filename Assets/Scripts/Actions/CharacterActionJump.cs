@@ -81,12 +81,12 @@ namespace UnityPlatformer {
       text = string.Format("jumpHeld: {0}\nonGround: {1}\njumping: {2}\njumpStopped: {3}\nCondition: {4}\n" +
       "maxJumpVelocity: {5}\nminJumpVelocity: {6}\nhangFrames: {7}\napexFrames: {8}\nticks: {9}",
         jumpHeld,
-        controller.IsOnGround(_graceJumpFrames),
+        pc2d.IsOnGround(_graceJumpFrames),
         jumping,
         jumpStopped,
         jumpStopped || (
           jumpHeld && (
-            controller.IsOnGround(_graceJumpFrames) || jumping
+            pc2d.IsOnGround(_graceJumpFrames) || jumping
           )
         ),
 
@@ -99,7 +99,7 @@ namespace UnityPlatformer {
       */
 
       if (jumpHeld) {
-        if (controller.IsOnGround(_graceJumpFrames) && !jumping) {
+        if (pc2d.IsOnGround(_graceJumpFrames) && !jumping) {
           currentJump = defaultJump;
           return priority;
         }

@@ -24,7 +24,6 @@ namespace UnityPlatformer {
   public class JumpConstant : Jump {
     public Vector2 initialVelocity;
 
-    Character character;
     // TODO FIXME maxJumpHeight is not used!!!
     public JumpConstant(Character _character, Vector2 _initialVelocity) {
       character = _character;

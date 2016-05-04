@@ -22,6 +22,8 @@ namespace UnityPlatformer {
     [Comment("After any Damage how much time the character will be invulnerable to any Damage. -1 to disable")]
     public float invulnerabilityTimeAfterDamage = 2.0f;
 
+    [HideInInspector]
+    public Character character;
     ///
     /// Actions
     ///
@@ -76,6 +78,8 @@ namespace UnityPlatformer {
     #endregion
 
     void Start() {
+      character = GetComponent<Character>();
+
       // check missconfiguration
       if (startingHealth < maxHealth) {
         Debug.LogWarning(this.name + " startingHealth < maxHealth ?");

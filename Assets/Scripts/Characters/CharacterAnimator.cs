@@ -28,7 +28,7 @@ namespace UnityPlatformer {
     }
 
     public virtual void ManagedUpdate(float delta) {
-      if (character.controller.collisions.faceDir == 1) {
+      if (character.pc2d.collisions.faceDir == 1) {
         transform.localScale  = new Vector3(1, 1, 1);
       } else {
         transform.localScale  = new Vector3(-1, 1, 1);

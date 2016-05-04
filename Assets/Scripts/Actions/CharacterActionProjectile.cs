@@ -89,7 +89,7 @@ namespace UnityPlatformer {
         yield return new WaitForSeconds(p.delay);
       }
 
-      int dir = character.controller.collisions.faceDir;
+      int dir = pc2d.collisions.faceDir;
       Vector3 offset = (Vector3) p.offset;
       offset.x *= dir;
 

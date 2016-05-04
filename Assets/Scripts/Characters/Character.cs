@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityPlatformer;
-using UnityPlatformer;
 
 namespace UnityPlatformer {
   /// <summary>
@@ -55,6 +54,8 @@ namespace UnityPlatformer {
     [HideInInspector]
     public Ladder ladder;
     [HideInInspector]
+    public Grab grab;
+    [HideInInspector]
     public Vector2 lastJumpDistance {
       get {
         return jumpEnd - jumpStart;
@@ -72,7 +73,7 @@ namespace UnityPlatformer {
     [HideInInspector]
     public Vector3 velocity;
     [HideInInspector]
-    public PlatformerCollider2D controller;
+    public PlatformerCollider2D pc2d;
     [HideInInspector]
     public CharacterHealth health;
 
@@ -99,7 +100,7 @@ namespace UnityPlatformer {
     /// </summary>
     virtual public void Awake() {
       //Debug.Log("Start new Character: " + gameObject.name);
-      controller = GetComponent<PlatformerCollider2D> ();
+      pc2d = GetComponent<PlatformerCollider2D> ();
       health = GetComponent<CharacterHealth>();
       body = GetComponent<BoxCollider2D>();
 
@@ -131,7 +132,7 @@ namespace UnityPlatformer {
       }
 
       // reset / defaults
-      controller.disableWorldCollisions = false;
+      pc2d.disableWorldCollisions = false;
       PostUpdateActions a = PostUpdateActions.WORLD_COLLISIONS | PostUpdateActions.APPLY_GRAVITY;
 
       if (action != null) {
@@ -149,7 +150,7 @@ namespace UnityPlatformer {
       }
 
       if (!Utils.biton((int)a, (int)PostUpdateActions.WORLD_COLLISIONS)) {
-        controller.disableWorldCollisions = true;
+        pc2d.disableWorldCollisions = true;
       }
 
       if (Mathf.Abs(velocity.x) < minVelocity) {
@@ -160,14 +161,14 @@ namespace UnityPlatformer {
         velocity.y = 0.0f;
       }
 
-      controller.Move(velocity * delta);
+      pc2d.Move(velocity * delta);
 
       // this is meant to fix jump and falling hit something unexpected
-      if (controller.collisions.above || controller.collisions.below) {
+      if (pc2d.collisions.above || pc2d.collisions.below) {
         velocity.y = 0;
       }
 
-      if (controller.collisions.below) {
+      if (pc2d.collisions.below) {
         EnterState(States.OnGround);
       } else {
         ExitState(States.OnGround);
@@ -222,6 +223,14 @@ namespace UnityPlatformer {
       }
       if (a == States.WallSliding) {
         ExitState(States.Falling | States.Hanging | States.Jumping, true);
+      }
+      if (a == States.Grabbing) {
+        state = 0; // while grabbing, only grabbing...
+      }
+      if (state == States.Grabbing) {
+        // while grabbing cannot enter in another state
+        // we need to leave first
+        return;
       }
 
       States before = state;

@@ -31,8 +31,8 @@ namespace UnityPlatformer {
 
     public void Start() {
       input.EnableAction("Jump");
-      controller.collisions.onLeftWall += OnLeftWall;
-      controller.collisions.onRightWall += OnRightWall;
+      pc2d.collisions.onLeftWall += OnLeftWall;
+      pc2d.collisions.onRightWall += OnRightWall;
 
       facing = initialFacing;
       input.SetX((float) facing);

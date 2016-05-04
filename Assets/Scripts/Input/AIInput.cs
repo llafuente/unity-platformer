@@ -13,7 +13,6 @@ namespace UnityPlatformer {
   /// This way a AI is exactly like a character and no code duplication :)
   /// </summary>
   public class AIInput : PlatformerInput {
-    Dictionary<string, bool> actions = new Dictionary<string, bool>();
     Vector2 axis = new Vector2(0, 0);
 
     public void EnableAction(string action) {

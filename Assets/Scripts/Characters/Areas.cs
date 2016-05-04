@@ -3,7 +3,8 @@ namespace UnityPlatformer {
   /// Areas in wich the Character can be.
   /// </summary>
   public enum Areas {
-    None = 0x0,
-    Ladder = 0x01
+    None =                0,
+    Ladder =              1,
+    Grabbable =           1 << 2,
   }
 }

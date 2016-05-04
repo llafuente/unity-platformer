@@ -23,7 +23,6 @@ namespace UnityPlatformer {
     public int hangFrames;
     public int apexFrames;
 
-    Character character;
     // TODO FIXME maxJumpHeight is not used!!!
     public JumpVariableHeight(Character _character, float timeToJumpApex, float minJumpHeight, float maxJumpHeight, float hangTime) {
       character = _character;

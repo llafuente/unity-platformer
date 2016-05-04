@@ -21,7 +21,7 @@ namespace UnityPlatformer {
     }
 
     public override void PerformAction(float delta) {
-      character.controller.FallThroughPlatform();
+      pc2d.FallThroughPlatform();
     }
 
     public override PostUpdateActions GetPostUpdateActions() {

@@ -31,8 +31,8 @@ namespace UnityPlatformer {
 
       if (!onLadderArea) {
         // check out feet, maybe there is a ladder below...
-        RaycastHit2D hit = character.controller.DoFeetRay(
-          character.controller.skinWidth * 2,
+        RaycastHit2D hit = pc2d.DoFeetRay(
+          pc2d.skinWidth * 2,
           Configuration.instance.laddersMask
         );
         if (hit) {
@@ -108,7 +108,7 @@ namespace UnityPlatformer {
       if (moveToCenterNow) {
         float ladderCenter = character.ladder.body.bounds.center.x;
         // instant move to the center of the ladder!
-        character.velocity.x = (ladderCenter - controller.GetComponent<BoxCollider2D>().bounds.center.x) / delta;
+        character.velocity.x = (ladderCenter - pc2d.GetComponent<BoxCollider2D>().bounds.center.x) / delta;
         moveToCenterNow = false;
       }
 

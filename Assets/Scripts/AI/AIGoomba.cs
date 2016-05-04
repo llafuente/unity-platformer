@@ -30,8 +30,8 @@ namespace UnityPlatformer {
     #endregion
 
     public void Start() {
-      controller.collisions.onLeftWall += OnLeftWall;
-      controller.collisions.onRightWall += OnRightWall;
+      pc2d.collisions.onLeftWall += OnLeftWall;
+      pc2d.collisions.onRightWall += OnRightWall;
 
       facing = initialFacing;
       input.SetX((float) facing);
@@ -54,9 +54,9 @@ namespace UnityPlatformer {
 
     public override void ManagedUpdate(float delta) {
       if (doNotFall) {
-        if (!controller.IsGroundOnLeft (rayLengthFactor)) {
+        if (!pc2d.IsGroundOnLeft (rayLengthFactor)) {
           OnLeftWall ();
-        } else if (!controller.IsGroundOnRight (rayLengthFactor)) {
+        } else if (!pc2d.IsGroundOnRight (rayLengthFactor)) {
           OnRightWall ();
         }
       }

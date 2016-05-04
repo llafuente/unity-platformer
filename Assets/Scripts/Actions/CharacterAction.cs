@@ -33,7 +33,7 @@ namespace UnityPlatformer {
     #endregion
 
     // cache
-    protected PlatformerCollider2D controller;
+    protected PlatformerCollider2D pc2d;
     protected bool hasControl = false;
 
     virtual public void Start() {
@@ -45,7 +45,7 @@ namespace UnityPlatformer {
         Debug.LogError(gameObject.name + " contains an action without input property set");
       }
 
-      controller = character.controller;
+      pc2d = character.pc2d;
 
       hasControl = false;
     }

@@ -21,7 +21,7 @@ namespace UnityPlatformer {
 
     virtual public bool IsAboveTop(Character c) {
       float feetY = c.GetFeetPosition().y;
-      float topY = GetTop().y - c.controller.skinWidth;
+      float topY = GetTop().y - c.pc2d.skinWidth;
 
       return feetY > topY;
     }
@@ -30,12 +30,12 @@ namespace UnityPlatformer {
       float feetY = c.GetFeetPosition().y;
       float topY = GetTop().y;
 
-      return Mathf.Abs(feetY - topY) < c.controller.skinWidth;
+      return Mathf.Abs(feetY - topY) < c.pc2d.skinWidth;
     }
 
     virtual public bool IsBelowBottom(Character c) {
       float feetY = c.GetFeetPosition().y;
-      float bottomY = GetBottom().y + c.controller.skinWidth;
+      float bottomY = GetBottom().y + c.pc2d.skinWidth;
 
       return feetY < bottomY;
     }
@@ -44,7 +44,7 @@ namespace UnityPlatformer {
       float feetY = c.GetFeetPosition().y;
       float bottomY = GetBottom().y;
 
-      return Mathf.Abs(feetY - bottomY) < c.controller.skinWidth;
+      return Mathf.Abs(feetY - bottomY) < c.pc2d.skinWidth;
     }
 
     virtual public void EnableLadder(Character p) {

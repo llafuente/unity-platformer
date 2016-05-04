@@ -67,7 +67,7 @@ namespace UnityPlatformer {
 
     public void Reset() {
       for (var i = 0; i < damageAreas.Length; ++i) {
-        damageAreas[i].area.active = false;
+        damageAreas[i].area.SetActive(false);
       }
     }
     public override void StartAction() {
@@ -109,13 +109,13 @@ namespace UnityPlatformer {
             (i == damageAreas.Length -1 && offset >= damageAreas[i].offsetFrame) ||
             (offset >= damageAreas[i].offsetFrame && offset < damageAreas[i + 1].offsetFrame)
           ) {
-            damageAreas[i].area.active = true;
+            damageAreas[i].area.SetActive(true);
           } else {
-            damageAreas[i].area.active = false;
+            damageAreas[i].area.SetActive(false);
           }
         }
       } else {
-        damageAreas[damageAreas.Length -1].area.active = false;
+        damageAreas[damageAreas.Length -1].area.SetActive(false);
       }
     }
 

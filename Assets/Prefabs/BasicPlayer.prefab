@@ -396,10 +396,15 @@ MonoBehaviour:
   input: {fileID: 11430734}
   wallSlideSpeedMax: 3
   wallStickLeaveTime: 0.25
-  jumpAction: Jump
-  wallJumpClimb: {x: 10, y: 35}
-  wallJumpOff: {x: 20, y: 20}
-  wallLeap: {x: 20, y: 20}
+  wallStickLeaveAgain: 0.25
+  enableWallJumps: 1
+  actionJump: {fileID: 0}
+  wallJumpClimb:
+    initialVelocity: {x: 10, y: 35}
+  wallJumpOff:
+    initialVelocity: {x: 20, y: 20}
+  wallLeap:
+    initialVelocity: {x: 20, y: 20}
   priority: 7
 --- !u!114 &11410918
 MonoBehaviour:
@@ -414,12 +419,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 11457332}
   input: {fileID: 11430734}
+  jumpProperties:
+    maxJumpHeight: 4
+    minJumpHeight: 1
+    graceJumpTime: 0.15
+    timeToJumpApex: 0.4
+    hangTime: 0
   action: Jump
-  maxJumpHeight: 4
-  minJumpHeight: 1
-  graceJumpTime: 0.15
-  timeToJumpApex: 0.4
-  hangTime: 0
   priority: 5
 --- !u!114 &11416824
 MonoBehaviour:
@@ -524,10 +530,11 @@ MonoBehaviour:
   area: 0
   body: {fileID: 0}
   ladder: {fileID: 0}
+  grab: {fileID: 0}
   fallDistance: {x: 0, y: 0}
   platform: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
-  controller: {fileID: 0}
+  pc2d: {fileID: 0}
   health: {fileID: 0}
 --- !u!114 &11459990
 MonoBehaviour:
@@ -617,6 +624,7 @@ MonoBehaviour:
   startingLives: 1
   maxLives: 1
   invulnerabilityTimeAfterDamage: 2
+  character: {fileID: 0}
   health: 0
   lives: 0
 --- !u!114 &11495698

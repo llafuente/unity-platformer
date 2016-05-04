@@ -3,10 +3,10 @@ using UnityEngine.UI;
 
 namespace UnityPlatformer {
   public class ControllerMonitor : Monitor {
-    PlatformerCollider2D collider;
+    PlatformerCollider2D pc2d;
     // Use this for initialization
     virtual public void Start() {
-        collider = GetComponent<PlatformerCollider2D> ();
+        pc2d = GetComponent<PlatformerCollider2D> ();
     }
 
       // Update is called once per frame
@@ -24,23 +24,23 @@ namespace UnityPlatformer {
         "faceDir: {12}\n"+
         "fallingThroughPlatform: {13}\n"+
         "standingOnPlatform: {14}\n",
-        collider.collisions.above,
-        collider.collisions.below,
-        collider.collisions.left,
-        collider.collisions.right,
+        pc2d.collisions.above,
+        pc2d.collisions.below,
+        pc2d.collisions.left,
+        pc2d.collisions.right,
 
-        collider.collisions.lastAboveFrame,
-        collider.collisions.lastBelowFrame,
-        collider.collisions.lastLeftFrame,
-        collider.collisions.lastRightFrame,
+        pc2d.collisions.lastAboveFrame,
+        pc2d.collisions.lastBelowFrame,
+        pc2d.collisions.lastLeftFrame,
+        pc2d.collisions.lastRightFrame,
 
-        collider.collisions.climbingSlope,
-        collider.collisions.descendingSlope,
-        collider.collisions.slopeAngle,
-        collider.collisions.prevSlopeAngle,
-        collider.collisions.faceDir,
-        collider.collisions.fallingThroughPlatform,
-        collider.collisions.standingOnPlatform
+        pc2d.collisions.climbingSlope,
+        pc2d.collisions.descendingSlope,
+        pc2d.collisions.slopeAngle,
+        pc2d.collisions.prevSlopeAngle,
+        pc2d.collisions.faceDir,
+        pc2d.collisions.fallingThroughPlatform,
+        pc2d.collisions.standingOnPlatform
       );
     }
   }
