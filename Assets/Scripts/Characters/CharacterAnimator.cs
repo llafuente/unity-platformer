@@ -34,7 +34,9 @@ namespace UnityPlatformer {
         transform.localScale  = new Vector3(-1, 1, 1);
       }
 
-      if (character.IsOnState(States.MeleeAttack)) {
+      if (character.IsOnState(States.Grabbing)) {
+        Play("grabbing_loop");
+      } else if (character.IsOnState(States.MeleeAttack)) {
         Play("attack_melee");
       } else if (character.IsOnState(States.Ladder)) {
         Play("ladder");

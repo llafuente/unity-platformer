@@ -13,12 +13,17 @@ namespace UnityPlatformer {
     public float speed = 6;
     [Comment("Move character to the center of the ladder, instantly")]
     public bool moveToCenter = false;
+    [Comment("max speed to snap to the center.")]
+    public float towardsSpeed = 32;
+    [Comment("time to reach the center (if towardsSpeed is fast enough).")]
+    public float towardsTime = 0.1f;
     [Comment("Remember: Higher priority wins. Modify with caution")]
     public int priority = 10;
 
     #endregion
 
-    bool moveToCenterNow = false;
+    bool centering = false;
+
 
     /// <summary>
     /// Enter in ladder mode when user is in a ladder area and pressing up/down
@@ -88,7 +93,7 @@ namespace UnityPlatformer {
 
       if (enter) {
         character.EnterState(States.Ladder);
-        moveToCenterNow = moveToCenter;
+        centering = moveToCenter;
         return priority;
       }
 
@@ -105,11 +110,16 @@ namespace UnityPlatformer {
       }
 
       // TODO transition
-      if (moveToCenterNow) {
+      if (centering) {
         float ladderCenter = character.ladder.body.bounds.center.x;
-        // instant move to the center of the ladder!
-        character.velocity.x = (ladderCenter - pc2d.GetComponent<BoxCollider2D>().bounds.center.x) / delta;
-        moveToCenterNow = false;
+        float characterX = character.GetCenter().x;
+        if (Math.Abs(characterX - ladderCenter) < 0.05) {
+          centering = false;
+          character.velocity.x = 0;
+        } else {
+          // instant move to the center of the ladder!
+          Mathf.SmoothDamp(characterX, ladderCenter, ref character.velocity.x, towardsTime, towardsSpeed, delta);
+        }
       }
 
       if (character.ladder.IsAtTop(character) && in2d.y > 0) {

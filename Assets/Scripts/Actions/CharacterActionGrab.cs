@@ -82,21 +82,29 @@ namespace UnityPlatformer {
           towardsTime,
           towardsSpeed, //Mathf.Infinity,
           delta);
-      } else {
-        // check for dismount conditions
-        Debug.Log("wait for dismount!");
+      }
 
-        if (dismountJumping && input.IsActionHeld(actionJump.action)) {
-          canGrab.Reset();
-          character.ExitState(States.Grabbing);
+      // TODO REVIEW Dismount delay ?
 
-          actionJump.Jump(new JumpConstant(character,
-            jumpOff.Clone((int) Mathf.Sign(input.GetAxisRawX()))
-          ));
-        } else if (dismountPressingDown && input.GetAxisRawY() < 0) {
-          canGrab.Reset();
-          character.ExitState(States.Grabbing);
+      // check for dismount conditions
+      if (dismountJumping && input.IsActionHeld(actionJump.action)) {
+        canGrab.Reset();
+        character.ExitState(States.Grabbing);
+        float x = input.GetAxisRawX();
+        int faceDir;
+        //TODO REVIEW this lead to some problems with orientation...
+        if (x == 0) {
+          faceDir = 0;
+        } else {
+          character.pc2d.collisions.faceDir = faceDir = (int) Mathf.Sign(x);
         }
+
+        actionJump.Jump(new JumpConstant(character,
+          jumpOff.Clone(faceDir)
+        ));
+      } else if (dismountPressingDown && input.GetAxisRawY() < 0) {
+        canGrab.Reset();
+        character.ExitState(States.Grabbing);
       }
     }
 

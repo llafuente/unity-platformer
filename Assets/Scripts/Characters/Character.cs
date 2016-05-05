@@ -296,6 +296,10 @@ namespace UnityPlatformer {
         0);
     }
 
+    public virtual Vector3 GetCenter() {
+      return pc2d.GetComponent<BoxCollider2D>().bounds.center;
+    }
+
     public virtual void OnEnable() {
       UpdateManager.instance.characters.Add(this);
     }

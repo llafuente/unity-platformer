@@ -551,6 +551,8 @@ MonoBehaviour:
   input: {fileID: 11430734}
   speed: 6
   moveToCenter: 0
+  towardsSpeed: 32
+  towardsTime: 0.1
   priority: 10
 --- !u!114 &11461502
 MonoBehaviour:
