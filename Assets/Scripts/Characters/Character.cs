@@ -169,14 +169,15 @@ namespace UnityPlatformer {
       }
 
       if (pc2d.collisions.below) {
-        EnterState(States.OnGround);
+        fallingFrames = 0;
+        SolfEnterState(States.OnGround);
       } else {
         ExitState(States.OnGround);
         // falling but not wallsliding
         if (velocity.y < 0 && !IsOnState(States.WallSliding)) {
           ++fallingFrames;
           if (fallingFrames > framesBeforeFallingState) {
-            EnterState(States.Falling);
+            SolfEnterState(States.Falling);
           }
         }
       }
@@ -196,6 +197,15 @@ namespace UnityPlatformer {
       return (area & _area) == _area;
     }
 
+    /// <summary>
+    /// EnterState if it's not already in it
+    /// It a safe mechanism to not trigger the change
+    /// </summary>
+    public void SolfEnterState(States a) {
+      if (!IsOnState(a)) {
+        EnterState(a);
+      }
+    }
     /// <summary>
     /// Notify that Character enter a new state.
     /// There are incompatible states, like jumping and falling,
@@ -252,7 +262,6 @@ namespace UnityPlatformer {
     public void ExitState(States a, bool privcall = false) {
       // TODO REVIEW if Hanging include Jumping this fail...
       if (a == States.Falling && IsOnState(States.Falling)) {
-        fallingFrames = 0;
         fallEnd = transform.position;
       }
       if (a == States.Jumping && IsOnState(States.Jumping)) {
