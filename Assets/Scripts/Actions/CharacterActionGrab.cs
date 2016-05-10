@@ -84,25 +84,25 @@ namespace UnityPlatformer {
           delta);
       }
 
-      // TODO REVIEW Dismount delay ?
+      float x = input.GetAxisRawX();
+      int faceDir;
+      //TODO REVIEW this lead to some problems with orientation...
+      if (x == 0) {
+        faceDir = 0;
+      } else {
+        character.pc2d.collisions.faceDir = faceDir = (int) Mathf.Sign(x);
+      }
 
       // check for dismount conditions
       if (dismountJumping && input.IsActionHeld(actionJump.action)) {
         canGrab.Reset();
         character.ExitState(States.Grabbing);
-        float x = input.GetAxisRawX();
-        int faceDir;
-        //TODO REVIEW this lead to some problems with orientation...
-        if (x == 0) {
-          faceDir = 0;
-        } else {
-          character.pc2d.collisions.faceDir = faceDir = (int) Mathf.Sign(x);
-        }
 
         actionJump.Jump(new JumpConstant(character,
           jumpOff.Clone(faceDir)
         ));
       } else if (dismountPressingDown && input.GetAxisRawY() < 0) {
+        // TODO Dismount down delay ?
         canGrab.Reset();
         character.ExitState(States.Grabbing);
       }
