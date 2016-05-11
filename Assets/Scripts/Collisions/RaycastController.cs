@@ -91,13 +91,13 @@ namespace UnityPlatformer {
       public Vector2 bottomLeft, bottomRight;
     }
 
-    public RaycastHit2D DoVerticalRay(float directionY, int i, float rayLength, ref Vector3 velocity) {
+    public RaycastHit2D DoVerticalRay(float directionY, int i, float rayLength, ref Vector3 velocity, Color? c = null) {
         Vector2 rayOrigin = (directionY == -1) ?
           raycastOrigins.bottomLeft :
           raycastOrigins.topLeft;
 
         rayOrigin += Vector2.right * (verticalRaySpacing * i + velocity.x);
-        RaycastHit2D hit = Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask, Color.red);
+        RaycastHit2D hit = Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask, c ?? Color.red);
 
         return hit;
     }

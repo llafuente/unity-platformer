@@ -414,10 +414,11 @@ MonoBehaviour:
   area: 0
   body: {fileID: 0}
   ladder: {fileID: 0}
+  grab: {fileID: 0}
   fallDistance: {x: 0, y: 0}
   platform: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
-  controller: {fileID: 0}
+  pc2d: {fileID: 0}
   health: {fileID: 0}
   input: {fileID: 11421850}
   initialFacing: -1
@@ -540,6 +541,7 @@ MonoBehaviour:
   startingLives: 1
   maxLives: 1
   invulnerabilityTimeAfterDamage: 2
+  character: {fileID: 0}
   health: 0
   lives: 0
 --- !u!114 &11491250

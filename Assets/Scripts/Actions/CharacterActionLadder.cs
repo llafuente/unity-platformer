@@ -102,7 +102,7 @@ namespace UnityPlatformer {
     /// EnterState and start centering
     /// </summary>
     public override void GainControl(float delta) {
-      base.GainControl();
+      base.GainControl(delta);
 
       character.EnterState(States.Ladder);
       centering = moveToCenter;

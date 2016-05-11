@@ -62,10 +62,16 @@ namespace UnityPlatformer {
         } /* else, leave the last one :) */
       }
 
+      UpdateCurrentSlope(ref velocity);
+
       // TODO PERF add: collisions.prevBelow, so wont be testing while falling
-      if (velocity.y < 0) {
+      if (collisions.slopeAngle != 0) {
         DescendSlope(ref velocity);
+
+        ClimbSlope(ref velocity);
       }
+
+
 
       if (!disableWorldCollisions) {
         HorizontalCollisions (ref velocity);
@@ -78,6 +84,59 @@ namespace UnityPlatformer {
       collisions.Consolidate ();
     }
 
+    void UpdateCurrentSlope(ref Vector3 velocity) {
+      float rayLength = Mathf.Abs (velocity.y) + skinWidth; // TODO configurable
+
+      // get slopeAngle, should be inside 0-90
+      // consider only the maximum
+      float slopeAngle = 0.0f;
+      int sloperDir = 0;
+      RaycastHit2D? fhit = null;
+
+      for (int i = 0; i < verticalRayCount; ++i) {
+        RaycastHit2D hit = DoVerticalRay (-1, i, rayLength, ref velocity, Color.yellow);
+
+        if (hit) {
+          float a = Vector2.Angle(hit.normal, Vector2.up);
+          if (a > slopeAngle) {
+            fhit = hit;
+            slopeAngle = a;
+            sloperDir = (int)Mathf.Sign(-hit.normal.x);
+          }
+        }
+      }
+
+      rayLength = Mathf.Abs (velocity.x) + skinWidth; // TODO configurable
+
+      float directionX = collisions.faceDir;
+      for (int i = 0; i < 1; i ++) {
+        Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
+        rayOrigin += Vector2.up * (horizontalRaySpacing * i);
+        RaycastHit2D hit = Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask, Color.yellow);
+
+        if (hit) {
+          float a = Vector2.Angle(hit.normal, Vector2.up);
+          if (a > slopeAngle) {
+            fhit = hit;
+            slopeAngle = a;
+            sloperDir = (int)Mathf.Sign(-hit.normal.x);
+          }
+        }
+      }
+
+      collisions.slopeAngle = slopeAngle;
+      if (velocity.x != 0.0f) {
+        collisions.climbingSlope = sloperDir == Mathf.Sign(velocity.x);
+        collisions.descendingSlope = sloperDir != Mathf.Sign(velocity.x);
+      }
+
+      // handle the moment we change the slope
+      // TODO REVIEW this may lead to problems when a platforms rotates.
+      if (fhit != null && collisions.slopeAngle > collisions.prevSlopeAngle) {
+        collisions.distanceToSlopeStart = fhit.Value.distance - skinWidth;
+      }
+    }
+
     void HorizontalCollisions(ref Vector3 velocity) {
       float directionX = collisions.faceDir;
       float rayLength = Mathf.Abs (velocity.x) + skinWidth;
@@ -87,7 +146,7 @@ namespace UnityPlatformer {
       }
 
       for (int i = 0; i < horizontalRayCount; i ++) {
-        Vector2 rayOrigin = (directionX == -1)?raycastOrigins.bottomLeft:raycastOrigins.bottomRight;
+        Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
         rayOrigin += Vector2.up * (horizontalRaySpacing * i);
         RaycastHit2D hit = Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask, Color.red);
 
@@ -98,32 +157,7 @@ namespace UnityPlatformer {
           }
 
           float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
-          if (i == 0 && slopeAngle <= maxClimbAngle) {
-            if (collisions.descendingSlope) {
-              collisions.descendingSlope = false;
-              velocity = collisions.prevVelocity;
-            }
-            float distanceToSlopeStart = 0;
-            if (slopeAngle != collisions.prevSlopeAngle) {
-              distanceToSlopeStart = hit.distance-skinWidth;
-              velocity.x -= distanceToSlopeStart * directionX;
-            }
-            ClimbSlope(ref velocity, slopeAngle);
-            velocity.x += distanceToSlopeStart * directionX;
-          }
-
-          if (!collisions.climbingSlope || slopeAngle > maxClimbAngle) {
-            // Min fix an edge case, when collider is pushing same direction a slope is moving
-            // -> \
-            // This introduce so many more problems... need REVIEW
-            //velocity.x = Mathf.Min(velocity.x, (hit.distance - skinWidth) * directionX);
-            velocity.x = (hit.distance - skinWidth) * directionX;
-            rayLength = hit.distance;
-
-            if (collisions.climbingSlope) {
-              velocity.y = Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Abs(velocity.x);
-            }
-
+          if (slopeAngle > maxClimbAngle) {
             collisions.left = directionX == -1;
             collisions.right = directionX == 1;
           }
@@ -173,71 +207,46 @@ namespace UnityPlatformer {
           ) {
             continue;
           }
-
           velocity.y = (hit.distance - skinWidth) * directionY;
           rayLength = hit.distance;
-
-          if (collisions.climbingSlope) {
-            velocity.x = velocity.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(velocity.x);
-          }
 
           collisions.below = directionY == -1;
           collisions.above = directionY == 1;
         }
       }
-
-      if (collisions.climbingSlope) {
-        float directionX = Mathf.Sign(velocity.x);
-        rayLength = Mathf.Abs(velocity.x) + skinWidth;
-        Vector2 rayOrigin = ((directionX == -1)?raycastOrigins.bottomLeft:raycastOrigins.bottomRight) + Vector2.up * velocity.y;
-        RaycastHit2D hit = Raycast(rayOrigin,Vector2.right * directionX,rayLength,collisionMask, Color.magenta);
-
-        if (hit) {
-          float slopeAngle = Vector2.Angle(hit.normal,Vector2.up);
-          if (slopeAngle != collisions.slopeAngle) {
-            velocity.x = (hit.distance - skinWidth) * directionX;
-            collisions.slopeAngle = slopeAngle;
-          }
-        }
-      }
     }
 
-    void ClimbSlope(ref Vector3 velocity, float slopeAngle) {
-      float moveDistance = Mathf.Abs (velocity.x);
-      float climbVelocityY = Mathf.Sin (slopeAngle * Mathf.Deg2Rad) * moveDistance;
+    void ClimbSlope(ref Vector3 velocity) {
+      if (collisions.climbingSlope) {
+        if (collisions.slopeAngle > maxClimbAngle) {
+          velocity.x = 0;
+          return;
+        }
 
-      if (velocity.y <= climbVelocityY) {
-        velocity.y = climbVelocityY;
-        velocity.x = Mathf.Cos (slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign (velocity.x);
-        collisions.below = true;
-        collisions.climbingSlope = true;
-        collisions.slopeAngle = slopeAngle;
+        velocity.x -= collisions.distanceToSlopeStart * collisions.faceDir;
+
+        float moveDistance = Mathf.Abs (velocity.x);
+        float climbVelocityY = Mathf.Sin (collisions.slopeAngle * Mathf.Deg2Rad) * moveDistance;
+
+        if (velocity.y <= climbVelocityY) {
+          velocity.y = climbVelocityY;
+          velocity.x = Mathf.Cos (collisions.slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign (velocity.x);
+          collisions.below = true;
+        }
+
+        velocity.x += collisions.distanceToSlopeStart * collisions.faceDir;
       }
     }
 
     void DescendSlope(ref Vector3 velocity) {
-      float directionX = Mathf.Sign (velocity.x);
-      Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomRight : raycastOrigins.bottomLeft;
-      RaycastHit2D hit = Raycast (rayOrigin, -Vector2.up, 1000, collisionMask, Color.yellow);
-      Utils.DrawPoint(rayOrigin);
-      if (hit) {
-        float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
-        if (slopeAngle != 0 && slopeAngle <= maxDescendAngle) {
-          bool movingDownSlope = Mathf.Sign(hit.normal.x) == directionX;
-          bool slopeIsClose = hit.distance - skinWidth <= Mathf.Tan(slopeAngle * Mathf.Deg2Rad) * Mathf.Abs(velocity.x);
-          if (movingDownSlope && slopeIsClose) {
-            float moveDistance = Mathf.Abs(velocity.x);
-            float descendVelocityY = Mathf.Sin (slopeAngle * Mathf.Deg2Rad) * moveDistance;
-            velocity.x = Mathf.Cos (slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign (velocity.x);
-            velocity.y -= descendVelocityY;
-
-            collisions.slopeAngle = slopeAngle;
-            collisions.descendingSlope = true;
-            collisions.below = true;
-          }
-        }
+      if (collisions.descendingSlope && collisions.slopeAngle <= maxDescendAngle) {
+        float moveDistance = Mathf.Abs(velocity.x);
+        float descendVelocityY = Mathf.Sin (collisions.slopeAngle * Mathf.Deg2Rad) * moveDistance;
+        velocity.x = Mathf.Cos (collisions.slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign (velocity.x);
+        velocity.y -= descendVelocityY;
       }
     }
+
     public void FallThroughPlatform(float resetDelay = 0.5f) {
       // defense!
       if (collisions.fallingThroughPlatform) {
@@ -281,6 +290,7 @@ namespace UnityPlatformer {
       // other
       public bool climbingSlope;
       public bool descendingSlope;
+      public float distanceToSlopeStart;
       public int faceDir;
       public bool fallingThroughPlatform;
       public bool standingOnPlatform;
@@ -310,6 +320,7 @@ namespace UnityPlatformer {
 
         prevSlopeAngle = slopeAngle;
         slopeAngle = 0;
+        distanceToSlopeStart = 0;
       }
 
       public void Consolidate() {

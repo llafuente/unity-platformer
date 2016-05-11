@@ -74,10 +74,10 @@ namespace UnityPlatformer {
     /// Reset SmoothDamp
     /// </summary>
     public override void GainControl(float delta) {
-      base.GainControl();
+      base.GainControl(delta);
 
       character.EnterState(States.WallSliding);
-      slidingFrames = 0
+      slidingFrames = 0;
     }
 
     public override void PerformAction(float delta) {
