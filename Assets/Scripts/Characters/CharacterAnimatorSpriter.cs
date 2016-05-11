@@ -11,6 +11,7 @@ namespace UnityPlatformer {
 
   /// <summary>
   /// Animator using SpriterDotNet
+  /// TODO queue animation, support start-loop animation
   /// </summary>
   public class CharacterAnimatorSpriter: CharacterAnimator {
     public SpriterDotNetBehaviour behaviour;

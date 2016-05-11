@@ -32,30 +32,30 @@ namespace UnityPlatformer {
     Vector3 refVelocity;
     Cooldown canGrab;
 
-    /// <summary>
-    /// Enter in ladder mode when user is in a ladder area and pressing up/down
-    /// </summary>
     public override void Start() {
+      base.Start();
       canGrab = new Cooldown(grabAgainCooldown);
     }
 
     public override int WantsToUpdate(float delta) {
-      bool onGrabState = character.IsOnState(States.Grabbing);
       bool onGrabbableArea = character.IsOnArea(Areas.Grabbable);
       canGrab.Increment();
 
       if (onGrabbableArea && canGrab.Ready()) {
-        if (!onGrabState) {
-          character.EnterState(States.Grabbing);
-          refVelocity = character.velocity;
-          centering = true;
-        }
         return priority;
       }
-
-
-
       return 0;
+    }
+
+    /// <summary>
+    /// EnterState and start centering
+    /// </summary>
+    public override void GainControl(float delta) {
+      base.GainControl(delta);
+
+      character.EnterState(States.Grabbing);
+      refVelocity = character.velocity;
+      centering = true;
     }
 
     public override void PerformAction(float delta) {

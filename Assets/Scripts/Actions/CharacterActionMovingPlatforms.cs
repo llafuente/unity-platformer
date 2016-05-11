@@ -6,9 +6,7 @@ namespace UnityPlatformer {
   /// Falling through platforms while pressing down
   /// </summary>
   public class CharacterActionMovingPlatforms: CharacterAction {
-    /// <summary>
-    /// TODO REVIEW jump changes when moved to action, investigate
-    /// </summary>
+
     public override int WantsToUpdate(float delta) {
       if (
         character.platform &&

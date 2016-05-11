@@ -11,6 +11,7 @@ namespace UnityPlatformer {
   /// </summary>
   public class CharacterActionProjectile: CharacterAction {
     #region public
+
     [Serializable]
     public struct ProjectileCfg {
       public Projectile projectile;
@@ -24,13 +25,10 @@ namespace UnityPlatformer {
     [Comment("Must match something in @PlatformerInput")]
     public String action = "Attack";
     public List<ProjectileCfg> projectiles = new List<ProjectileCfg>();
-
     [Comment("Reload time")]
     public float fireDelay = 5;
-
     [Comment("Remember: Higher priority wins. Modify with caution")]
     public int priority = 5;
-
     [Comment("checked: Fire all at once (with given delays). unchecked: Fire one by one")]
     public bool fireMode = false;
 
@@ -42,7 +40,7 @@ namespace UnityPlatformer {
     float time = 0;
 
     /// <summary>
-    ///
+    /// TODO REVIEW continous fire?
     /// </summary>
     public override int WantsToUpdate(float delta) {
       time += delta;

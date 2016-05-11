@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 namespace UnityPlatformer {
+  /// <sumary>
+  /// Hitboxes
+  /// </sumary>
   public class Hitbox : MonoBehaviour {
     #region public
 

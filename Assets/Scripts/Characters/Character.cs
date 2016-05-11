@@ -136,8 +136,8 @@ namespace UnityPlatformer {
       PostUpdateActions a = PostUpdateActions.WORLD_COLLISIONS | PostUpdateActions.APPLY_GRAVITY;
 
       if (action != null) {
-        if (lastAction != null && lastAction != action) {
-          lastAction.GainControl();
+        if (lastAction != action) {
+          action.GainControl(delta);
         }
 
         action.PerformAction(Time.fixedDeltaTime);
@@ -183,7 +183,7 @@ namespace UnityPlatformer {
       }
 
       if (lastAction != null && lastAction != action) {
-        lastAction.LoseControl();
+        lastAction.LoseControl(delta);
       }
 
       lastAction = action;

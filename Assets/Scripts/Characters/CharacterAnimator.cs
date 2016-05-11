@@ -6,7 +6,7 @@ using SpriterDotNetUnity;
 
 namespace UnityPlatformer {
   /// <summary>
-  /// Animator class, read all infor available at character to play
+  /// Animator class, read all information available at character to play
   /// animations
   /// </summary>
   public abstract class CharacterAnimator: MonoBehaviour, IUpdateEntity {

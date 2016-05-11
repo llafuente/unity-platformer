@@ -27,10 +27,14 @@ namespace UnityPlatformer {
 
     #endregion
 
+    #region private
+
 	  float timeToWallStickLeave;
 	  int wallStickLeaveAgainFrames;
 	  int wallStickLeaveAgainCounter;
 	  int slidingFrames = 0;
+
+    #endregion
 
     public override void Start() {
       base.Start();
@@ -63,15 +67,21 @@ namespace UnityPlatformer {
         return priority;
       }
 
-      return slidingFrames = 0; // reset
+      return 0;
+    }
+
+    /// <summary>
+    /// Reset SmoothDamp
+    /// </summary>
+    public override void GainControl(float delta) {
+      base.GainControl();
+
+      character.EnterState(States.WallSliding);
+      slidingFrames = 0
     }
 
     public override void PerformAction(float delta) {
-      if (slidingFrames == 0) {
-        character.EnterState(States.WallSliding);
-      }
       ++slidingFrames;
-
 
       int wallDirX = (pc2d.collisions.left) ? -1 : 1;
       float x = input.GetAxisRawX();

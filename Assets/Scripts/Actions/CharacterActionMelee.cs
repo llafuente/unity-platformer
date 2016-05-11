@@ -21,12 +21,11 @@ namespace UnityPlatformer {
       public bool active = false;
     }
 
-
     public DamageAreas[] damageAreas = new DamageAreas[1];
-
     public string action = "Attack";
     [Comment("Remember: Higher priority wins. Modify with caution")]
     public int priority = 20;
+
     #endregion
 
     #region private
@@ -70,11 +69,13 @@ namespace UnityPlatformer {
         damageAreas[i].area.SetActive(false);
       }
     }
+
     public override void StartAction() {
       base.StartAction();
 
       character.EnterState(States.MeleeAttack);
     }
+
     public override void EndAction() {
       base.EndAction();
 
@@ -83,7 +84,7 @@ namespace UnityPlatformer {
 
 
     /// <summary>
-    /// TODO REVIEW jump changes when moved to action, investigate
+    /// TODO REVIEW continous attack ?
     /// </summary>
     public override int WantsToUpdate(float delta) {
       base.WantsToUpdate(delta);

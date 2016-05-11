@@ -92,12 +92,20 @@ namespace UnityPlatformer {
       }
 
       if (enter) {
-        character.EnterState(States.Ladder);
-        centering = moveToCenter;
         return priority;
       }
 
       return 0;
+    }
+
+    /// <summary>
+    /// EnterState and start centering
+    /// </summary>
+    public override void GainControl(float delta) {
+      base.GainControl();
+
+      character.EnterState(States.Ladder);
+      centering = moveToCenter;
     }
 
     public override void PerformAction(float delta) {

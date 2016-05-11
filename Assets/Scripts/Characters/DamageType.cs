@@ -23,7 +23,7 @@ namespace UnityPlatformer {
     public Character causer;
 
     [HideInInspector]
-    // direction will be calc
+    // TODO direction will be calc, someday :)
     public Vector3 direction;
   }
 }

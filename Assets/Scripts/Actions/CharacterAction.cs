@@ -36,7 +36,7 @@ namespace UnityPlatformer {
     protected PlatformerCollider2D pc2d;
     protected bool hasControl = false;
 
-    virtual public void Start() {
+    public virtual void Start() {
       if (character == null) {
         Debug.LogError(gameObject.name + " contains an action without character property set");
       }
@@ -50,24 +50,33 @@ namespace UnityPlatformer {
       hasControl = false;
     }
 
-    virtual public void OnEnable() {
+    public virtual void OnEnable() {
       character.actions.Add(this);
     }
 
-    virtual public void OnDisable() {
+    public virtual void OnDisable() {
       if (character != null) {
         character.actions.Remove(this);
       }
     }
 
-    public void GainControl() {
+    /// <summary>
+    /// Called once. Just Before the first PerformAction
+    /// </summary>
+    public virtual void GainControl(float delta) {
       if (!hasControl && onGrainControl != null) {
         onGrainControl();
       }
 
       hasControl = true;
     }
-    public void LoseControl() {
+
+    /// <summary>
+    /// Called once, when character.lastAction changed
+    /// The frame it's called PerformAction won't be called,
+    /// Can be used to clean up things if necessary
+    /// </summary>
+    public virtual void LoseControl(float delta) {
       if (hasControl && onLoseControl != null) {
         onLoseControl();
       }

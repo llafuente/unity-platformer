@@ -30,10 +30,17 @@ namespace UnityPlatformer {
       if (pc2d.collisions.below) {
         return -1;
       }
-
-      velocityXSmoothing = 0;
       return 0;
     }
+
+    /// <summary>
+    /// Reset SmoothDamp
+    /// </summary>
+    public override void GainControl(float delta) {
+      base.GainControl(delta);
+      velocityXSmoothing = 0;
+    }
+
 
     /// <summary>
     /// Horizontal movement
