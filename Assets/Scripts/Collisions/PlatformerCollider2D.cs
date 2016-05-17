@@ -31,11 +31,17 @@ using System.Collections;
 
 namespace UnityPlatformer {
   /// <summary>
-  /// Handles collisions
+  /// Handle collisions
   /// </summary>
   public class PlatformerCollider2D : RaycastController {
     public float maxClimbAngle = 30;
     public float maxDescendAngle = 30;
+
+    [HideInInspector]
+    /// <summary>
+    /// Ignore the decend angle, so always decend.
+    /// <summary>
+    public bool ignoreDescendAngle = false;
 
     [HideInInspector]
     public CollisionInfo collisions;
@@ -90,6 +96,7 @@ namespace UnityPlatformer {
       // get slopeAngle, should be inside 0-90
       // consider only the maximum
       float slopeAngle = 0.0f;
+      Vector3? slopeNormal = null;
       int sloperDir = 0;
       RaycastHit2D? fhit = null;
 
@@ -101,6 +108,7 @@ namespace UnityPlatformer {
           if (a > slopeAngle) {
             fhit = hit;
             slopeAngle = a;
+            slopeNormal = hit.normal;
             sloperDir = (int)Mathf.Sign(-hit.normal.x);
           }
         }
@@ -125,6 +133,9 @@ namespace UnityPlatformer {
       }
 
       collisions.slopeAngle = slopeAngle;
+      if (slopeNormal != null) {
+        collisions.slopeNormal = slopeNormal.Value;
+      }
       if (velocity.x != 0.0f) {
         collisions.climbingSlope = sloperDir == Mathf.Sign(velocity.x);
         collisions.descendingSlope = sloperDir != Mathf.Sign(velocity.x);
@@ -239,7 +250,9 @@ namespace UnityPlatformer {
     }
 
     void DescendSlope(ref Vector3 velocity) {
-      if (collisions.descendingSlope && collisions.slopeAngle <= maxDescendAngle) {
+      if (collisions.descendingSlope &&
+        (collisions.slopeAngle <= maxDescendAngle || ignoreDescendAngle)
+      ) {
         float moveDistance = Mathf.Abs(velocity.x);
         float descendVelocityY = Mathf.Sin (collisions.slopeAngle * Mathf.Deg2Rad) * moveDistance;
         velocity.x = Mathf.Cos (collisions.slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign (velocity.x);
@@ -269,11 +282,24 @@ namespace UnityPlatformer {
       return collisions.below || collisions.lastBelowFrame < graceFrames;
     }
 
+    public Vector3 GetDownSlopeDir() {
+      if (collisions.slopeAngle == 0){
+        return Vector3.zero;
+      }
+
+      return new Vector3(
+        Mathf.Sign(collisions.slopeNormal.x) * collisions.slopeNormal.y,
+        -Math.Abs(collisions.slopeNormal.x),
+        0
+      );
+    }
+
     public struct CollisionInfo {
       // current
       public bool above, below;
       public bool left, right;
       public float slopeAngle;
+      public Vector3 slopeNormal;
 
       // previous frame values
       public bool prevAbove, prevBelow;

@@ -17,9 +17,9 @@ namespace UnityPlatformer {
     WallSticking =        1 << 9,
     MeleeAttack =         1 << 10,
     Grabbing =            1 << 11,
+    Slipping =            1 << 12,
     //Dashing,
     //Frozen,
-    //Slipping,
     //FreedomState
   }
 }

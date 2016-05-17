@@ -1,10 +1,13 @@
-#define UP_USE_SPRITER
+//#define UP_USE_SPRITER
 
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityPlatformer;
+
+#if UP_USE_SPRITER
 using SpriterDotNetUnity;
+#endif
 
 namespace UnityPlatformer {
   #if UP_USE_SPRITER

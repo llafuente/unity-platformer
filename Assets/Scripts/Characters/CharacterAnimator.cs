@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityPlatformer;
-using SpriterDotNetUnity;
 
 namespace UnityPlatformer {
   /// <summary>
