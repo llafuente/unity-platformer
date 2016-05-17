@@ -1,4 +1,4 @@
-//#define UP_USE_SPRITER
+#define UP_USE_SPRITER
 
 using System;
 using System.Collections.Generic;
@@ -25,10 +25,11 @@ namespace UnityPlatformer {
       base.Start();
 
       animator = behaviour.Animator;
-
+      /* display all animations
       foreach (var i in animator.GetAnimations()) {
         Debug.Log(i);
       }
+      */
     }
 
     public override void Play(string animation) {

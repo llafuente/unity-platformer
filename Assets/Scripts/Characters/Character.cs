@@ -25,6 +25,8 @@ namespace UnityPlatformer {
 
     [Comment("Time to wait before change state to falling.")]
     public float fallingTime = 0.1f;
+    [Comment("Time before disable OnGround State.")]
+    public float groundGraceTime = 0.05f;
 
     public float minVelocity = 0.05f;
 
@@ -83,8 +85,8 @@ namespace UnityPlatformer {
 
     CharacterAction lastAction;
 
-    int framesBeforeFallingState;
-    int fallingFrames;
+    Cooldown fallingCD;
+    Cooldown groundCD;
 
     Vector2 jumpStart;
     Vector2 jumpEnd;
@@ -104,7 +106,8 @@ namespace UnityPlatformer {
       health = GetComponent<CharacterHealth>();
       body = GetComponent<BoxCollider2D>();
 
-      framesBeforeFallingState = UpdateManager.instance.GetFrameCount (fallingTime);
+      fallingCD = new Cooldown(fallingTime);
+      groundCD = new Cooldown(groundGraceTime);
 
       health.onDeath += OnDeath;
     }
@@ -169,14 +172,20 @@ namespace UnityPlatformer {
       }
 
       if (pc2d.collisions.below) {
-        fallingFrames = 0;
+        fallingCD.Reset();
+        groundCD.Reset();
         SolfEnterState(States.OnGround);
       } else {
-        ExitState(States.OnGround);
+        groundCD.Increment();
+        // give some margin
+        if (groundCD.Ready()) {
+          SolfExitState(States.OnGround);
+        }
+
         // falling but not wallsliding
         if (velocity.y < 0 && !IsOnState(States.WallSliding)) {
-          ++fallingFrames;
-          if (fallingFrames > framesBeforeFallingState) {
+          fallingCD.Increment();
+          if (fallingCD.Ready()) {
             SolfEnterState(States.Falling);
           }
         }
@@ -204,6 +213,15 @@ namespace UnityPlatformer {
     public void SolfEnterState(States a) {
       if (!IsOnState(a)) {
         EnterState(a);
+      }
+    }
+    /// <summary>
+    /// EnterState if it's not already in it
+    /// It a safe mechanism to not trigger the change
+    /// </summary>
+    public void SolfExitState(States a) {
+      if (IsOnState(a)) {
+        ExitState(a);
       }
     }
     /// <summary>

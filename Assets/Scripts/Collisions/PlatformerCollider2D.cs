@@ -115,36 +115,45 @@ namespace UnityPlatformer {
       }
 
       rayLength = Mathf.Abs (velocity.x) + skinWidth; // TODO configurable
+      RaycastHit2D rhit = Raycast(raycastOrigins.bottomRight, Vector2.right, rayLength, collisionMask, Color.yellow);
 
-      float directionX = collisions.faceDir;
-      for (int i = 0; i < 1; i ++) {
-        Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
-        rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-        RaycastHit2D hit = Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask, Color.yellow);
-
-        if (hit) {
-          float a = Vector2.Angle(hit.normal, Vector2.up);
-          if (a > slopeAngle) {
-            fhit = hit;
-            slopeAngle = a;
-            sloperDir = (int)Mathf.Sign(-hit.normal.x);
-          }
+      if (rhit) {
+        float a = Vector2.Angle(rhit.normal, Vector2.up);
+        if (a > slopeAngle) {
+          fhit = rhit;
+          slopeAngle = a;
+          sloperDir = (int)Mathf.Sign(-rhit.normal.x);
         }
       }
 
-      collisions.slopeAngle = slopeAngle;
-      if (slopeNormal != null) {
-        collisions.slopeNormal = slopeNormal.Value;
-      }
-      if (velocity.x != 0.0f) {
-        collisions.climbingSlope = sloperDir == Mathf.Sign(velocity.x);
-        collisions.descendingSlope = sloperDir != Mathf.Sign(velocity.x);
+      RaycastHit2D lhit = Raycast(raycastOrigins.bottomLeft, Vector2.left, rayLength, collisionMask, Color.yellow);
+
+      if (lhit) {
+        float a = Vector2.Angle(lhit.normal, Vector2.up);
+        if (a > slopeAngle) {
+          fhit = lhit;
+          slopeAngle = a;
+          sloperDir = (int)Mathf.Sign(-lhit.normal.x);
+        }
       }
 
-      // handle the moment we change the slope
-      // TODO REVIEW this may lead to problems when a platforms rotates.
-      if (fhit != null && collisions.slopeAngle > collisions.prevSlopeAngle) {
-        collisions.distanceToSlopeStart = fhit.Value.distance - skinWidth;
+      if (slopeAngle < 89.9f) {
+        collisions.slopeAngle = slopeAngle;
+        if (slopeNormal != null) {
+          collisions.slopeNormal = slopeNormal.Value;
+        }
+        if (velocity.x != 0.0f) {
+          collisions.climbingSlope = sloperDir == Mathf.Sign(velocity.x);
+          collisions.descendingSlope = sloperDir != Mathf.Sign(velocity.x);
+        }
+
+        // handle the moment we change the slope
+        // TODO REVIEW this may lead to problems when a platforms rotates.
+        if (fhit != null && collisions.slopeAngle > collisions.prevSlopeAngle) {
+          collisions.distanceToSlopeStart = fhit.Value.distance - skinWidth;
+        }
+      } else {
+        collisions.slopeAngle = 0.0f;
       }
     }
 

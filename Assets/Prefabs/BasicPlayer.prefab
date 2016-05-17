@@ -510,6 +510,7 @@ MonoBehaviour:
   box: {fileID: 0}
   maxClimbAngle: 30
   maxDescendAngle: 30
+  ignoreDescendAngle: 0
   disableWorldCollisions: 0
 --- !u!114 &11457332
 MonoBehaviour:
@@ -524,6 +525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravityOverride: {x: 0, y: 0}
   fallingTime: 0.1
+  groundGraceTime: 0.05
   minVelocity: 0.05
   actions: []
   state: 0
