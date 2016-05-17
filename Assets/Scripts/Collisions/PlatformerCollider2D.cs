@@ -180,6 +180,7 @@ namespace UnityPlatformer {
           if (slopeAngle > maxClimbAngle) {
             collisions.left = directionX == -1;
             collisions.right = directionX == 1;
+            velocity.x = (hit.distance - skinWidth) * directionX;
           }
         }
       }
