@@ -17,13 +17,9 @@ namespace UnityPlatformer {
       }
 
       if (actionJump != null) {
-        actionJump.Jump(new JumpConstant(c,
-          new JumpConstantProperties(new Vector2(20, 20))
-        ));
-
-        //actionJump.Jump(
-        //  new JumpConstantSpring(c, jumpProperties.Clone(1))
-        ///);
+        actionJump.ForceJump(
+          new JumpConstantSpring(c, jumpProperties.Clone(1))
+        );
       } else {
         Debug.LogWarning("character found without CharacterActionJump so ignore.");
       }

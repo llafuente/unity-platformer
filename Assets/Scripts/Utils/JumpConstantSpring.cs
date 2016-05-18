@@ -6,13 +6,16 @@ namespace UnityPlatformer {
   public class JumpConstantSpringProperties {
     public float initialVelocity = 20;
     public float penetration = 0.5f;
+    public float minPenetrationSpeed = 3;
 
-    public JumpConstantSpringProperties(float iv, float penetration) {
-      initialVelocity = iv;
+    public JumpConstantSpringProperties(float ivel, float pen, float mpenvel) {
+      initialVelocity = ivel;
+      penetration = pen;
+      minPenetrationSpeed = mpenvel;
     }
 
     public JumpConstantSpringProperties Clone(int faceDir) {
-      return new JumpConstantSpringProperties(initialVelocity, penetration);
+      return new JumpConstantSpringProperties(initialVelocity, penetration, minPenetrationSpeed);
     }
   };
 
@@ -22,8 +25,10 @@ namespace UnityPlatformer {
   public class JumpConstantSpring : Jump {
     public float initialVelocity;
     public float penetration = 0.5f;
+    public float minPenetrationSpeed = 3;
 
     float currentDeceleration = 0;
+    float initialYPos = 0;
 
     public JumpConstantSpring(Character _character, float _initialVelocity, float _penetration) {
       character = _character;
@@ -40,7 +45,9 @@ namespace UnityPlatformer {
     public override void StartJump(ref Vector3 velocity) {
       Reset();
       // TODO if you want 100% accuracy calc gravity here...
-      currentDeceleration = velocity.y * velocity.y / penetration * 2;
+      velocity.y = Mathf.Min(-minPenetrationSpeed, velocity.y);
+      currentDeceleration = (velocity.y * velocity.y) / (penetration * 2);
+      initialYPos = character.transform.position.y;
     }
 
     public override void EndJump(ref Vector3 velocity) {
@@ -60,14 +67,14 @@ namespace UnityPlatformer {
       base.Jumping(ref velocity, delta);
 
       // spring-penetration
-      if (velocity.y < 0) {
+      if (velocity.y < 0 && Math.Abs(initialYPos - character.transform.position.y) < penetration) {
         velocity.y += delta * currentDeceleration;
       } else {
         // jump
         if (currentDeceleration != 0) {
           currentDeceleration = 0;
           velocity.y = initialVelocity;
-        } else if (velocity.y < 0) {
+        } else if (velocity.y <= 0) {
           // jump ended
           return false;
         }

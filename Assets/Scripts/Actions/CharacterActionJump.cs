@@ -31,6 +31,7 @@ namespace UnityPlatformer {
     bool jumping = false;
     bool jumpStopped = false;
     bool customJump = false;
+    bool forceJump = false;
 
     Jump defaultJump;
     Jump currentJump;
@@ -62,6 +63,11 @@ namespace UnityPlatformer {
           jumpStopped = true;
         }
       }
+    }
+
+    public void ForceJump(Jump j) {
+      Jump(j);
+      forceJump = true;
     }
 
     public void Jump(Jump j) {
@@ -98,7 +104,7 @@ namespace UnityPlatformer {
       );
       */
 
-      if (jumping && customJump) {
+      if (forceJump) {
         return priority;
       }
 
@@ -138,8 +144,9 @@ namespace UnityPlatformer {
           character.EnterState(States.Hanging);
         }
 
-        if (!currentJump.Jumping(ref character.velocity, delta) || character.velocity.y < 0) {
+        if (!currentJump.Jumping(ref character.velocity, delta)) {
           jumping = false;
+          forceJump = false;
           character.ExitState(States.Jumping);
         }
       }
