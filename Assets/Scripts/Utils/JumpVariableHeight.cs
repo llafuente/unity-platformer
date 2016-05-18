@@ -61,8 +61,8 @@ namespace UnityPlatformer {
       return apexFrames < ticks && apexFrames + hangFrames >= ticks;
     }
 
-    public override bool Jumping(ref Vector3 velocity) {
-      base.Jumping(ref velocity);
+    public override bool Jumping(ref Vector3 velocity, float delta) {
+      base.Jumping(ref velocity, delta);
       // jumps frames
 
       if (IsBeforeApex()) {

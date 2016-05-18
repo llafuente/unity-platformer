@@ -18,7 +18,7 @@ namespace UnityPlatformer {
     public abstract bool IsBeforeApex();
     public abstract bool IsHanging();
 
-    public virtual bool Jumping(ref Vector3 velocity) {
+    public virtual bool Jumping(ref Vector3 velocity, float delta) {
       ++ticks;
 
       return false;

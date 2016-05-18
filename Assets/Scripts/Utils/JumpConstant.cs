@@ -54,8 +54,8 @@ namespace UnityPlatformer {
       return false;
     }
 
-    public override bool Jumping(ref Vector3 velocity) {
-      base.Jumping(ref velocity);
+    public override bool Jumping(ref Vector3 velocity, float delta) {
+      base.Jumping(ref velocity, delta);
       // jumps frames
 
       if (velocity.y > 0) { // TODO REVIEW is faked atm! should be IsBeforeApex()

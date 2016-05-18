@@ -98,6 +98,10 @@ namespace UnityPlatformer {
       );
       */
 
+      if (jumping && customJump) {
+        return priority;
+      }
+
       if (jumpHeld) {
         if (pc2d.IsOnGround(_graceJumpFrames) && !jumping) {
           currentJump = defaultJump;
@@ -134,7 +138,7 @@ namespace UnityPlatformer {
           character.EnterState(States.Hanging);
         }
 
-        if (!currentJump.Jumping(ref character.velocity) || character.velocity.y < 0) {
+        if (!currentJump.Jumping(ref character.velocity, delta) || character.velocity.y < 0) {
           jumping = false;
           character.ExitState(States.Jumping);
         }
