@@ -1,0 +1,2922 @@
+fileFormatVersion: 2
+guid: 8791302439e7552498614f632b823a02
+timeCreated: 1463683916
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: stripsheet_charbase_template_0
+    21300002: stripsheet_charbase_template_1
+    21300004: stripsheet_charbase_template_2
+    21300006: stripsheet_charbase_template_3
+    21300008: stripsheet_charbase_template_4
+    21300010: stripsheet_charbase_template_5
+    21300012: stripsheet_charbase_template_6
+    21300014: stripsheet_charbase_template_7
+    21300016: stripsheet_charbase_template_8
+    21300018: stripsheet_charbase_template_9
+    21300020: stripsheet_charbase_template_10
+    21300022: stripsheet_charbase_template_11
+    21300024: stripsheet_charbase_template_12
+    21300026: stripsheet_charbase_template_13
+    21300028: stripsheet_charbase_template_14
+    21300030: stripsheet_charbase_template_15
+    21300032: stripsheet_charbase_template_16
+    21300034: stripsheet_charbase_template_17
+    21300036: stripsheet_charbase_template_18
+    21300038: stripsheet_charbase_template_19
+    21300040: stripsheet_charbase_template_20
+    21300042: stripsheet_charbase_template_21
+    21300044: stripsheet_charbase_template_22
+    21300046: stripsheet_charbase_template_23
+    21300048: stripsheet_charbase_template_24
+    21300050: stripsheet_charbase_template_25
+    21300052: stripsheet_charbase_template_26
+    21300054: stripsheet_charbase_template_27
+    21300056: stripsheet_charbase_template_28
+    21300058: stripsheet_charbase_template_29
+    21300060: stripsheet_charbase_template_30
+    21300062: stripsheet_charbase_template_31
+    21300064: stripsheet_charbase_template_32
+    21300066: stripsheet_charbase_template_33
+    21300068: stripsheet_charbase_template_34
+    21300070: stripsheet_charbase_template_35
+    21300072: stripsheet_charbase_template_36
+    21300074: stripsheet_charbase_template_37
+    21300076: stripsheet_charbase_template_38
+    21300078: stripsheet_charbase_template_39
+    21300080: stripsheet_charbase_template_40
+    21300082: stripsheet_charbase_template_41
+    21300084: stripsheet_charbase_template_42
+    21300086: stripsheet_charbase_template_43
+    21300088: stripsheet_charbase_template_44
+    21300090: stripsheet_charbase_template_45
+    21300092: stripsheet_charbase_template_46
+    21300094: stripsheet_charbase_template_47
+    21300096: stripsheet_charbase_template_48
+    21300098: stripsheet_charbase_template_49
+    21300100: stripsheet_charbase_template_50
+    21300102: stripsheet_charbase_template_51
+    21300104: stripsheet_charbase_template_52
+    21300106: stripsheet_charbase_template_53
+    21300108: stripsheet_charbase_template_54
+    21300110: stripsheet_charbase_template_55
+    21300112: stripsheet_charbase_template_56
+    21300114: stripsheet_charbase_template_57
+    21300116: stripsheet_charbase_template_58
+    21300118: stripsheet_charbase_template_59
+    21300120: stripsheet_charbase_template_60
+    21300122: stripsheet_charbase_template_61
+    21300124: stripsheet_charbase_template_62
+    21300126: stripsheet_charbase_template_63
+    21300128: stripsheet_charbase_template_64
+    21300130: stripsheet_charbase_template_65
+    21300132: stripsheet_charbase_template_66
+    21300134: stripsheet_charbase_template_67
+    21300136: stripsheet_charbase_template_68
+    21300138: stripsheet_charbase_template_69
+    21300140: stripsheet_charbase_template_70
+    21300142: stripsheet_charbase_template_71
+    21300144: stripsheet_charbase_template_72
+    21300146: stripsheet_charbase_template_73
+    21300148: stripsheet_charbase_template_74
+    21300150: stripsheet_charbase_template_75
+    21300152: stripsheet_charbase_template_76
+    21300154: stripsheet_charbase_template_77
+    21300156: stripsheet_charbase_template_78
+    21300158: stripsheet_charbase_template_79
+    21300160: stripsheet_charbase_template_80
+    21300162: stripsheet_charbase_template_81
+    21300164: stripsheet_charbase_template_82
+    21300166: stripsheet_charbase_template_83
+    21300168: stripsheet_charbase_template_84
+    21300170: stripsheet_charbase_template_85
+    21300172: stripsheet_charbase_template_86
+    21300174: stripsheet_charbase_template_87
+    21300176: stripsheet_charbase_template_88
+    21300178: stripsheet_charbase_template_89
+    21300180: stripsheet_charbase_template_90
+    21300182: stripsheet_charbase_template_91
+    21300184: stripsheet_charbase_template_92
+    21300186: stripsheet_charbase_template_93
+    21300188: stripsheet_charbase_template_94
+    21300190: stripsheet_charbase_template_95
+    21300192: stripsheet_charbase_template_96
+    21300194: stripsheet_charbase_template_97
+    21300196: stripsheet_charbase_template_98
+    21300198: stripsheet_charbase_template_99
+    21300200: stripsheet_charbase_template_100
+    21300202: stripsheet_charbase_template_101
+    21300204: stripsheet_charbase_template_102
+    21300206: stripsheet_charbase_template_103
+    21300208: stripsheet_charbase_template_104
+    21300210: stripsheet_charbase_template_105
+    21300212: stripsheet_charbase_template_106
+    21300214: stripsheet_charbase_template_107
+    21300216: stripsheet_charbase_template_108
+    21300218: stripsheet_charbase_template_109
+    21300220: stripsheet_charbase_template_110
+    21300222: stripsheet_charbase_template_111
+    21300224: stripsheet_charbase_template_112
+    21300226: stripsheet_charbase_template_113
+    21300228: stripsheet_charbase_template_114
+    21300230: stripsheet_charbase_template_115
+    21300232: stripsheet_charbase_template_116
+    21300234: stripsheet_charbase_template_117
+    21300236: stripsheet_charbase_template_118
+    21300238: stripsheet_charbase_template_119
+    21300240: stripsheet_charbase_template_120
+    21300242: stripsheet_charbase_template_121
+    21300244: stripsheet_charbase_template_122
+    21300246: stripsheet_charbase_template_123
+    21300248: stripsheet_charbase_template_124
+    21300250: stripsheet_charbase_template_125
+    21300252: stripsheet_charbase_template_126
+    21300254: stripsheet_charbase_template_127
+    21300256: stripsheet_charbase_template_128
+    21300258: stripsheet_charbase_template_129
+    21300260: stripsheet_charbase_template_130
+    21300262: stripsheet_charbase_template_131
+    21300264: stripsheet_charbase_template_132
+    21300266: stripsheet_charbase_template_133
+    21300268: stripsheet_charbase_template_134
+    21300270: stripsheet_charbase_template_135
+    21300272: stripsheet_charbase_template_136
+    21300274: stripsheet_charbase_template_137
+    21300276: stripsheet_charbase_template_138
+    21300278: stripsheet_charbase_template_139
+    21300280: stripsheet_charbase_template_140
+    21300282: stripsheet_charbase_template_141
+    21300284: stripsheet_charbase_template_142
+    21300286: stripsheet_charbase_template_143
+    21300288: stripsheet_charbase_template_144
+    21300290: stripsheet_charbase_template_145
+    21300292: stripsheet_charbase_template_146
+    21300294: stripsheet_charbase_template_147
+    21300296: stripsheet_charbase_template_148
+    21300298: stripsheet_charbase_template_149
+    21300300: stripsheet_charbase_template_150
+    21300302: stripsheet_charbase_template_151
+    21300304: stripsheet_charbase_template_152
+    21300306: stripsheet_charbase_template_153
+    21300308: stripsheet_charbase_template_154
+    21300310: stripsheet_charbase_template_155
+    21300312: stripsheet_charbase_template_156
+    21300314: stripsheet_charbase_template_157
+    21300316: stripsheet_charbase_template_158
+    21300318: stripsheet_charbase_template_159
+    21300320: stripsheet_charbase_template_160
+    21300322: stripsheet_charbase_template_161
+    21300324: stripsheet_charbase_template_162
+    21300326: stripsheet_charbase_template_163
+    21300328: stripsheet_charbase_template_164
+    21300330: stripsheet_charbase_template_165
+    21300332: stripsheet_charbase_template_166
+    21300334: stripsheet_charbase_template_167
+    21300336: stripsheet_charbase_template_168
+    21300338: stripsheet_charbase_template_169
+    21300340: stripsheet_charbase_template_170
+    21300342: stripsheet_charbase_template_171
+    21300344: stripsheet_charbase_template_172
+    21300346: stripsheet_charbase_template_173
+    21300348: stripsheet_charbase_template_174
+    21300350: stripsheet_charbase_template_175
+    21300352: stripsheet_charbase_template_176
+    21300354: stripsheet_charbase_template_177
+    21300356: stripsheet_charbase_template_178
+    21300358: stripsheet_charbase_template_179
+    21300360: stripsheet_charbase_template_180
+    21300362: stripsheet_charbase_template_181
+    21300364: stripsheet_charbase_template_182
+    21300366: stripsheet_charbase_template_183
+    21300368: stripsheet_charbase_template_184
+    21300370: stripsheet_charbase_template_185
+    21300372: stripsheet_charbase_template_186
+    21300374: stripsheet_charbase_template_187
+    21300376: stripsheet_charbase_template_188
+    21300378: stripsheet_charbase_template_189
+    21300380: stripsheet_charbase_template_190
+    21300382: stripsheet_charbase_template_191
+    21300384: stripsheet_charbase_template_192
+    21300386: stripsheet_charbase_template_193
+    21300388: stripsheet_charbase_template_194
+    21300390: stripsheet_charbase_template_195
+    21300392: stripsheet_charbase_template_196
+    21300394: stripsheet_charbase_template_197
+    21300396: stripsheet_charbase_template_198
+    21300398: stripsheet_charbase_template_199
+    21300400: stripsheet_charbase_template_200
+    21300402: stripsheet_charbase_template_201
+    21300404: stripsheet_charbase_template_202
+    21300406: stripsheet_charbase_template_203
+    21300408: stripsheet_charbase_template_204
+    21300410: stripsheet_charbase_template_205
+    21300412: stripsheet_charbase_template_206
+    21300414: stripsheet_charbase_template_207
+    21300416: stripsheet_charbase_template_208
+    21300418: stripsheet_charbase_template_209
+    21300420: stripsheet_charbase_template_210
+    21300422: stripsheet_charbase_template_211
+    21300424: stripsheet_charbase_template_212
+    21300426: stripsheet_charbase_template_213
+    21300428: stripsheet_charbase_template_214
+    21300430: stripsheet_charbase_template_215
+    21300432: stripsheet_charbase_template_216
+    21300434: stripsheet_charbase_template_217
+    21300436: stripsheet_charbase_template_218
+    21300438: stripsheet_charbase_template_219
+    21300440: stripsheet_charbase_template_220
+    21300442: stripsheet_charbase_template_221
+    21300444: stripsheet_charbase_template_222
+    21300446: stripsheet_charbase_template_223
+    21300448: stripsheet_charbase_template_224
+    21300450: stripsheet_charbase_template_225
+    21300452: stripsheet_charbase_template_226
+    21300454: stripsheet_charbase_template_227
+    21300456: stripsheet_charbase_template_228
+    21300458: stripsheet_charbase_template_229
+    21300460: stripsheet_charbase_template_230
+    21300462: stripsheet_charbase_template_231
+    21300464: stripsheet_charbase_template_232
+    21300466: stripsheet_charbase_template_233
+    21300468: stripsheet_charbase_template_234
+    21300470: stripsheet_charbase_template_235
+    21300472: stripsheet_charbase_template_236
+    21300474: stripsheet_charbase_template_237
+    21300476: stripsheet_charbase_template_238
+    21300478: stripsheet_charbase_template_239
+    21300480: stripsheet_charbase_template_240
+    21300482: stripsheet_charbase_template_241
+    21300484: stripsheet_charbase_template_242
+    21300486: stripsheet_charbase_template_243
+    21300488: stripsheet_charbase_template_244
+    21300490: stripsheet_charbase_template_245
+    21300492: stripsheet_charbase_template_246
+    21300494: stripsheet_charbase_template_247
+    21300496: stripsheet_charbase_template_248
+    21300498: stripsheet_charbase_template_249
+    21300500: stripsheet_charbase_template_250
+    21300502: stripsheet_charbase_template_251
+    21300504: stripsheet_charbase_template_252
+    21300506: stripsheet_charbase_template_253
+    21300508: stripsheet_charbase_template_254
+    21300510: stripsheet_charbase_template_255
+    21300512: stripsheet_charbase_template_256
+    21300514: stripsheet_charbase_template_257
+    21300516: stripsheet_charbase_template_258
+    21300518: stripsheet_charbase_template_259
+    21300520: stripsheet_charbase_template_260
+    21300522: stripsheet_charbase_template_261
+    21300524: stripsheet_charbase_template_262
+    21300526: stripsheet_charbase_template_263
+    21300528: stripsheet_charbase_template_264
+    21300530: stripsheet_charbase_template_265
+    21300532: stripsheet_charbase_template_266
+    21300534: stripsheet_charbase_template_267
+    21300536: stripsheet_charbase_template_268
+    21300538: stripsheet_charbase_template_269
+    21300540: stripsheet_charbase_template_270
+    21300542: stripsheet_charbase_template_271
+    21300544: stripsheet_charbase_template_272
+    21300546: stripsheet_charbase_template_273
+    21300548: stripsheet_charbase_template_274
+    21300550: stripsheet_charbase_template_275
+    21300552: stripsheet_charbase_template_276
+    21300554: stripsheet_charbase_template_277
+    21300556: stripsheet_charbase_template_278
+    21300558: stripsheet_charbase_template_279
+    21300560: stripsheet_charbase_template_280
+    21300562: stripsheet_charbase_template_281
+    21300564: stripsheet_charbase_template_282
+    21300566: stripsheet_charbase_template_283
+    21300568: stripsheet_charbase_template_284
+    21300570: stripsheet_charbase_template_285
+    21300572: stripsheet_charbase_template_286
+    21300574: stripsheet_charbase_template_287
+    21300576: stripsheet_charbase_template_288
+    21300578: stripsheet_charbase_template_289
+    21300580: stripsheet_charbase_template_290
+    21300582: stripsheet_charbase_template_291
+    21300584: stripsheet_charbase_template_292
+    21300586: stripsheet_charbase_template_293
+    21300588: stripsheet_charbase_template_294
+    21300590: stripsheet_charbase_template_295
+    21300592: stripsheet_charbase_template_296
+    21300594: stripsheet_charbase_template_297
+    21300596: stripsheet_charbase_template_298
+    21300598: stripsheet_charbase_template_299
+    21300600: stripsheet_charbase_template_300
+    21300602: stripsheet_charbase_template_301
+    21300604: stripsheet_charbase_template_302
+    21300606: stripsheet_charbase_template_303
+    21300608: stripsheet_charbase_template_304
+    21300610: stripsheet_charbase_template_305
+    21300612: stripsheet_charbase_template_306
+    21300614: stripsheet_charbase_template_307
+    21300616: stripsheet_charbase_template_308
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 28
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: stripsheet_charbase_template_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1702
+        width: 800
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -400, y: 74}
+        - {x: -400, y: -74}
+        - {x: 400, y: -74}
+        - {x: 400, y: 74}
+    - name: stripsheet_charbase_template_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 1662
+        width: 48
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_2
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 1662
+        width: 45
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_3
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 1662
+        width: 43
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_4
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 1662
+        width: 42
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_5
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 1662
+        width: 43
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_6
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 1662
+        width: 45
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_7
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 1591
+        width: 27
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_8
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 1592
+        width: 25
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_9
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 1598
+        width: 25
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_10
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 1595
+        width: 28
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_11
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 1594
+        width: 25
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_12
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 1594
+        width: 26
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_13
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 1594
+        width: 27
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_14
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 1594
+        width: 25
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_15
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 1595
+        width: 25
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_16
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 1594
+        width: 26
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_17
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 1508
+        width: 27
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_18
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 1508
+        width: 31
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_19
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1508
+        width: 33
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 4.5, y: 21.5}
+        - {x: -16.5, y: 21.5}
+        - {x: -16.5, y: -20.5}
+        - {x: -15.5, y: -21.5}
+        - {x: 12.5, y: -21.5}
+        - {x: 14.5, y: -16.5}
+        - {x: 16.5, y: -8.5}
+        - {x: 16.5, y: 9.5}
+    - name: stripsheet_charbase_template_20
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 1508
+        width: 22
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_21
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 1508
+        width: 22
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_22
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 1508
+        width: 27
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_23
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 1508
+        width: 36
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -18, y: 28.5}
+        - {x: -18, y: -28.5}
+        - {x: 10, y: -28.5}
+        - {x: 18, y: -19.5}
+        - {x: 18, y: 26.5}
+        - {x: 17, y: 28.5}
+    - name: stripsheet_charbase_template_24
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 1508
+        width: 28
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_25
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 1508
+        width: 33
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16.5, y: 28}
+        - {x: -16.5, y: -28}
+        - {x: 13.5, y: -28}
+        - {x: 16.5, y: -15}
+        - {x: 16.5, y: 24}
+        - {x: 7.5, y: 28}
+    - name: stripsheet_charbase_template_26
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 1425
+        width: 31
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_27
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 1425
+        width: 28
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_28
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 1425
+        width: 22
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_29
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 1425
+        width: 27
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_30
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 1425
+        width: 29
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_31
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 1425
+        width: 21
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_32
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 1425
+        width: 22
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_33
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 1425
+        width: 18
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_34
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 1425
+        width: 18
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_35
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 1425
+        width: 21
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_36
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 1425
+        width: 18
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_37
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 1425
+        width: 18
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_38
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 1348
+        width: 31
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_39
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 1348
+        width: 29
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_40
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 1348
+        width: 24
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_41
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 1348
+        width: 27
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_42
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 1348
+        width: 29
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_43
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 1348
+        width: 23
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_44
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 1347
+        width: 40
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 14, y: 27.5}
+        - {x: -10, y: 27.5}
+        - {x: -17, y: 23.5}
+        - {x: -20, y: 4.5}
+        - {x: -20, y: -27.5}
+        - {x: -1, y: -27.5}
+        - {x: 12, y: -23.5}
+        - {x: 20, y: -12.5}
+        - {x: 20, y: 16.5}
+    - name: stripsheet_charbase_template_45
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 1347
+        width: 39
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -9.5, y: 27}
+        - {x: -12.5, y: 24}
+        - {x: -19.5, y: 12}
+        - {x: -19.5, y: -27}
+        - {x: 12.5, y: -27}
+        - {x: 19.5, y: -17}
+        - {x: 19.5, y: 17}
+        - {x: 13.5, y: 27}
+    - name: stripsheet_charbase_template_46
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 1347
+        width: 35
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 17.5, y: 14.5}
+        - {x: 6.5, y: 27.5}
+        - {x: -12.5, y: 27.5}
+        - {x: -17.5, y: 26.5}
+        - {x: -17.5, y: -26.5}
+        - {x: -15.5, y: -27.5}
+        - {x: -0.5, y: -27.5}
+        - {x: 0.5, y: -26.5}
+        - {x: 1.5, y: -22.5}
+        - {x: 17.5, y: 1.5}
+    - name: stripsheet_charbase_template_47
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 1347
+        width: 39
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -10.5, y: 27.5}
+        - {x: -16.5, y: 22.5}
+        - {x: -19.5, y: 10.5}
+        - {x: -19.5, y: -27.5}
+        - {x: 12.5, y: -27.5}
+        - {x: 19.5, y: -17.5}
+        - {x: 19.5, y: 20.5}
+        - {x: 15.5, y: 27.5}
+    - name: stripsheet_charbase_template_48
+      rect:
+        serializedVersion: 2
+        x: 377
+        y: 1347
+        width: 40
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 14, y: 27}
+        - {x: -17, y: 27}
+        - {x: -20, y: 18}
+        - {x: -20, y: -26}
+        - {x: -18, y: -27}
+        - {x: 13, y: -27}
+        - {x: 20, y: -16}
+        - {x: 20, y: 18}
+    - name: stripsheet_charbase_template_49
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 1347
+        width: 34
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: 27.5}
+        - {x: -16, y: 27.5}
+        - {x: -17, y: 26.5}
+        - {x: -17, y: -27.5}
+        - {x: -1, y: -27.5}
+        - {x: 0, y: -26.5}
+        - {x: 17, y: -11.5}
+        - {x: 17, y: 19.5}
+    - name: stripsheet_charbase_template_50
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 1266
+        width: 27
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_51
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 1266
+        width: 28
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_52
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 1266
+        width: 22
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_53
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 1266
+        width: 26
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_54
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 1266
+        width: 29
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_55
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 1266
+        width: 21
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_56
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 1266
+        width: 33
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 11.5, y: 25.5}
+        - {x: 10.5, y: 27.5}
+        - {x: -13.5, y: 27.5}
+        - {x: -16.5, y: 9.5}
+        - {x: -16.5, y: -27.5}
+        - {x: 2.5, y: -27.5}
+        - {x: 15.5, y: -23.5}
+        - {x: 16.5, y: -17.5}
+        - {x: 16.5, y: 8.5}
+    - name: stripsheet_charbase_template_57
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 1266
+        width: 32
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -8, y: 27}
+        - {x: -14, y: 15}
+        - {x: -16, y: 1}
+        - {x: -16, y: -26}
+        - {x: -14, y: -27}
+        - {x: 16, y: -27}
+        - {x: 16, y: 24}
+        - {x: 9, y: 27}
+    - name: stripsheet_charbase_template_58
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 1266
+        width: 28
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_59
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 1266
+        width: 32
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -15, y: 27.5}
+        - {x: -16, y: 16.5}
+        - {x: -16, y: -27.5}
+        - {x: 16, y: -27.5}
+        - {x: 16, y: 27.5}
+    - name: stripsheet_charbase_template_60
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 1266
+        width: 33
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -8.5, y: 27}
+        - {x: -14.5, y: 16}
+        - {x: -16.5, y: 4}
+        - {x: -16.5, y: -27}
+        - {x: 16.5, y: -27}
+        - {x: 16.5, y: 27}
+    - name: stripsheet_charbase_template_61
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 1266
+        width: 27
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_62
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 1194
+        width: 21
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_63
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 1197
+        width: 23
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_64
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 1200
+        width: 23
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_65
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 1194
+        width: 21
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_66
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 1197
+        width: 23
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_67
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 1200
+        width: 35
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 1.5, y: 25.5}
+        - {x: -17.5, y: 25.5}
+        - {x: -17.5, y: -25.5}
+        - {x: 5.5, y: -25.5}
+        - {x: 6.5, y: -9.5}
+        - {x: 6.5, y: 13.5}
+        - {x: 3.5, y: 23.5}
+      - - {x: 14.5, y: -8.5}
+        - {x: 16.5, y: -10.5}
+        - {x: 17.5, y: -10.5}
+        - {x: 17.5, y: -3.5}
+        - {x: 14.5, y: -4.5}
+    - name: stripsheet_charbase_template_68
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 1129
+        width: 45
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 22.5, y: 21}
+        - {x: 21.5, y: 24}
+        - {x: -4.5, y: 24}
+        - {x: -5.5, y: 23}
+        - {x: -22.5, y: -2}
+        - {x: -22.5, y: -24}
+        - {x: 22.5, y: -24}
+    - name: stripsheet_charbase_template_69
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 1128
+        width: 47
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11.5, y: 24}
+        - {x: -23.5, y: -1}
+        - {x: -23.5, y: -24}
+        - {x: 23.5, y: -24}
+        - {x: 23.5, y: 24}
+    - name: stripsheet_charbase_template_70
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 1120
+        width: 33
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -2.5, y: 27}
+        - {x: -5.5, y: 26}
+        - {x: -16.5, y: 7}
+        - {x: -16.5, y: -25}
+        - {x: -11.5, y: -27}
+        - {x: 16.5, y: -27}
+        - {x: 16.5, y: 27}
+    - name: stripsheet_charbase_template_71
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 1120
+        width: 30
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_72
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 1129
+        width: 44
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -1, y: 24}
+        - {x: -21, y: 4}
+        - {x: -20, y: -1}
+        - {x: -17, y: -4}
+        - {x: -13, y: -4}
+        - {x: -15, y: -4}
+        - {x: -22, y: -10}
+        - {x: -22, y: -24}
+        - {x: 22, y: -24}
+        - {x: 22, y: 24}
+    - name: stripsheet_charbase_template_73
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 1128
+        width: 46
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 13, y: 5}
+        - {x: 10, y: 3}
+        - {x: 17, y: 10}
+        - {x: 17, y: 23}
+        - {x: 15, y: 24}
+        - {x: -3, y: 24}
+        - {x: -23, y: 0}
+        - {x: -23, y: -24}
+        - {x: 21, y: -24}
+        - {x: 23, y: -21}
+        - {x: 23, y: -8}
+        - {x: 20, y: 10}
+    - name: stripsheet_charbase_template_74
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 1120
+        width: 34
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -2, y: 27}
+        - {x: -6, y: 26}
+        - {x: -17, y: 7}
+        - {x: -17, y: -27}
+        - {x: 17, y: -27}
+        - {x: 17, y: 25}
+        - {x: 16, y: 27}
+    - name: stripsheet_charbase_template_75
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 1120
+        width: 29
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_76
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 1048
+        width: 24
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_77
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 1048
+        width: 27
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_78
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 1048
+        width: 27
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_79
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 1048
+        width: 37
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16.5, y: 27.5}
+        - {x: -18.5, y: 23.5}
+        - {x: -18.5, y: -27.5}
+        - {x: -3.5, y: -27.5}
+        - {x: 18.5, y: -11.5}
+        - {x: 18.5, y: 22.5}
+        - {x: 15.5, y: 27.5}
+    - name: stripsheet_charbase_template_80
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 1048
+        width: 31
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_81
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 1048
+        width: 26
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_82
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 975
+        width: 24
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_83
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 975
+        width: 33
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 7.5, y: 28.5}
+        - {x: -9.5, y: 28.5}
+        - {x: -16.5, y: 18.5}
+        - {x: -16.5, y: -8.5}
+        - {x: -13.5, y: -28.5}
+        - {x: 6.5, y: -28.5}
+        - {x: 16.5, y: -19.5}
+        - {x: 16.5, y: 7.5}
+    - name: stripsheet_charbase_template_84
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 975
+        width: 40
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -12, y: 28.5}
+        - {x: -20, y: 25.5}
+        - {x: -20, y: -8.5}
+        - {x: -13, y: -28.5}
+        - {x: 8, y: -28.5}
+        - {x: 20, y: -22.5}
+        - {x: 20, y: 15.5}
+        - {x: 10, y: 28.5}
+    - name: stripsheet_charbase_template_85
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 975
+        width: 34
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -7, y: 27.5}
+        - {x: -13, y: 15.5}
+        - {x: -17, y: -10.5}
+        - {x: -17, y: -27.5}
+        - {x: 16, y: -27.5}
+        - {x: 17, y: -26.5}
+        - {x: 17, y: 24.5}
+        - {x: 11, y: 27.5}
+    - name: stripsheet_charbase_template_86
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 975
+        width: 41
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -17.5, y: 27}
+        - {x: -20.5, y: 6}
+        - {x: -20.5, y: -27}
+        - {x: 19.5, y: -27}
+        - {x: 20.5, y: -17}
+        - {x: 20.5, y: 6}
+        - {x: 7.5, y: 27}
+    - name: stripsheet_charbase_template_87
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 975
+        width: 26
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_88
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 905
+        width: 30
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_89
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 905
+        width: 33
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -8.5, y: 28.5}
+        - {x: -16.5, y: 23.5}
+        - {x: -16.5, y: -1.5}
+        - {x: -9.5, y: -3.5}
+        - {x: -13.5, y: -24.5}
+        - {x: -10.5, y: -28.5}
+        - {x: 12.5, y: -28.5}
+        - {x: 16.5, y: -23.5}
+        - {x: 16.5, y: 28.5}
+    - name: stripsheet_charbase_template_90
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 905
+        width: 39
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -19.5, y: 22.5}
+        - {x: -19.5, y: -26.5}
+        - {x: -17.5, y: -28.5}
+        - {x: 19.5, y: -28.5}
+        - {x: 19.5, y: 9.5}
+        - {x: 16.5, y: 26.5}
+        - {x: 12.5, y: 28.5}
+        - {x: -12.5, y: 28.5}
+    - name: stripsheet_charbase_template_91
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 905
+        width: 39
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12.5, y: 27.5}
+        - {x: -19.5, y: 27.5}
+        - {x: -19.5, y: -27.5}
+        - {x: 19.5, y: -27.5}
+        - {x: 19.5, y: -5.5}
+        - {x: 16.5, y: 13.5}
+    - name: stripsheet_charbase_template_92
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 905
+        width: 39
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12.5, y: 27}
+        - {x: -17.5, y: 27}
+        - {x: -19.5, y: 8}
+        - {x: -19.5, y: -27}
+        - {x: 19.5, y: -27}
+        - {x: 19.5, y: 11}
+        - {x: 15.5, y: 26}
+    - name: stripsheet_charbase_template_93
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 905
+        width: 39
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -19.5, y: -26.5}
+        - {x: 19.5, y: -26.5}
+        - {x: 19.5, y: 8.5}
+        - {x: 15.5, y: 25.5}
+        - {x: 13.5, y: 26.5}
+        - {x: -7.5, y: 26.5}
+        - {x: -19.5, y: -2.5}
+    - name: stripsheet_charbase_template_94
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 836
+        width: 24
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_95
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 836
+        width: 30
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_96
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 836
+        width: 36
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -13, y: 28.5}
+        - {x: -18, y: 15.5}
+        - {x: -18, y: -28.5}
+        - {x: 18, y: -28.5}
+        - {x: 18, y: 24.5}
+        - {x: 11, y: 28.5}
+    - name: stripsheet_charbase_template_97
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 836
+        width: 38
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 19, y: -6}
+        - {x: 15, y: 23}
+        - {x: 13, y: 27}
+        - {x: -5, y: 27}
+        - {x: -9, y: 26}
+        - {x: -8, y: 15}
+        - {x: -19, y: -9}
+        - {x: -19, y: -27}
+        - {x: -6, y: -27}
+        - {x: -6, y: -24}
+        - {x: 18, y: -25}
+        - {x: 19, y: -24}
+    - name: stripsheet_charbase_template_98
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 836
+        width: 44
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 22, y: 8}
+        - {x: 10, y: 26}
+        - {x: -11, y: 26}
+        - {x: -22, y: 18}
+        - {x: -22, y: -26}
+        - {x: 20, y: -26}
+        - {x: 21, y: -19}
+        - {x: 15, y: -10}
+        - {x: 22, y: -9}
+    - name: stripsheet_charbase_template_99
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 836
+        width: 42
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -5}
+        - {x: 15, y: -8}
+        - {x: 21, y: -8}
+        - {x: 21, y: 21}
+        - {x: 14, y: 26}
+        - {x: -12, y: 26}
+        - {x: -21, y: -1}
+        - {x: -21, y: -26}
+        - {x: 21, y: -26}
+        - {x: 21, y: -19}
+        - {x: 14, y: -11}
+        - {x: 8, y: -4}
+    - name: stripsheet_charbase_template_100
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 768
+        width: 24
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_101
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 768
+        width: 28
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_102
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 768
+        width: 31
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_103
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 768
+        width: 34
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -17, y: 29.5}
+        - {x: -17, y: -29.5}
+        - {x: 6, y: -29.5}
+        - {x: 17, y: -26.5}
+        - {x: 17, y: 10.5}
+        - {x: 6, y: 29.5}
+    - name: stripsheet_charbase_template_104
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 768
+        width: 36
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -1, y: 26.5}
+        - {x: -4, y: 23.5}
+        - {x: -18, y: -0.5}
+        - {x: -18, y: -26.5}
+        - {x: 18, y: -26.5}
+        - {x: 18, y: 26.5}
+    - name: stripsheet_charbase_template_105
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 768
+        width: 32
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -1, y: 27}
+        - {x: -3, y: 24}
+        - {x: -4, y: 21}
+        - {x: -14, y: 3}
+        - {x: -16, y: -14}
+        - {x: -16, y: -27}
+        - {x: 16, y: -27}
+        - {x: 16, y: 27}
+    - name: stripsheet_charbase_template_106
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 699
+        width: 25
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_107
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 699
+        width: 26
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_108
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 699
+        width: 27
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_109
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 699
+        width: 29
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_110
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 699
+        width: 40
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 12, y: 27}
+        - {x: -7, y: 27}
+        - {x: -12, y: 15}
+        - {x: -20, y: -9}
+        - {x: -20, y: -27}
+        - {x: 20, y: -27}
+        - {x: 20, y: 6}
+        - {x: 14, y: 26}
+    - name: stripsheet_charbase_template_111
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 699
+        width: 39
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -19.5, y: 16.5}
+        - {x: -19.5, y: -27.5}
+        - {x: 19.5, y: -27.5}
+        - {x: 19.5, y: 5.5}
+        - {x: 16.5, y: 24.5}
+        - {x: 13.5, y: 27.5}
+        - {x: -7.5, y: 27.5}
+        - {x: -11.5, y: 26.5}
+    - name: stripsheet_charbase_template_112
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 699
+        width: 34
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 17, y: -28.5}
+        - {x: 17, y: -5.5}
+        - {x: 14, y: 24.5}
+        - {x: 11, y: 28.5}
+        - {x: -8, y: 28.5}
+        - {x: -12, y: 27.5}
+        - {x: -11, y: 16.5}
+        - {x: -17, y: 4.5}
+        - {x: -17, y: -12.5}
+        - {x: -13, y: -25.5}
+        - {x: -11, y: -28.5}
+        - {x: 2, y: -28.5}
+        - {x: 2, y: -25.5}
+        - {x: 5, y: -27.5}
+        - {x: 12, y: -28.5}
+    - name: stripsheet_charbase_template_113
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 631
+        width: 34
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -17, y: -27.5}
+        - {x: 17, y: -27.5}
+        - {x: 17, y: -5.5}
+        - {x: 12, y: 27.5}
+        - {x: -11, y: 27.5}
+        - {x: -17, y: 12.5}
+    - name: stripsheet_charbase_template_114
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 631
+        width: 38
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -10, y: 27}
+        - {x: -13, y: 26}
+        - {x: -19, y: 5}
+        - {x: -19, y: -16}
+        - {x: -15, y: -27}
+        - {x: 19, y: -27}
+        - {x: 19, y: -9}
+        - {x: 10, y: 27}
+    - name: stripsheet_charbase_template_115
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 631
+        width: 32
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11, y: 26.5}
+        - {x: -16, y: 17.5}
+        - {x: -16, y: -26.5}
+        - {x: 16, y: -26.5}
+        - {x: 16, y: 1.5}
+        - {x: 8, y: 26.5}
+    - name: stripsheet_charbase_template_116
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 631
+        width: 33
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -6.5, y: 26.5}
+        - {x: -11.5, y: 20.5}
+        - {x: -16.5, y: -11.5}
+        - {x: -16.5, y: -26.5}
+        - {x: 16.5, y: -26.5}
+        - {x: 16.5, y: 26.5}
+    - name: stripsheet_charbase_template_117
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 631
+        width: 37
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 18.5, y: 28.5}
+        - {x: -7.5, y: 28.5}
+        - {x: -14.5, y: 23.5}
+        - {x: -18.5, y: 1.5}
+        - {x: -18.5, y: -28.5}
+        - {x: -6.5, y: -28.5}
+        - {x: -4.5, y: -26.5}
+        - {x: -2.5, y: -28.5}
+        - {x: 18.5, y: -28.5}
+    - name: stripsheet_charbase_template_118
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 631
+        width: 33
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -13.5, y: 28}
+        - {x: -16.5, y: 20}
+        - {x: -16.5, y: -28}
+        - {x: 16.5, y: -28}
+        - {x: 16.5, y: 17}
+        - {x: 14.5, y: 28}
+    - name: stripsheet_charbase_template_119
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 631
+        width: 33
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -15.5, y: 27.5}
+        - {x: -16.5, y: 26.5}
+        - {x: -16.5, y: -27.5}
+        - {x: 16.5, y: -27.5}
+        - {x: 16.5, y: 27.5}
+    - name: stripsheet_charbase_template_120
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 563
+        width: 49
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -7.5, y: 25}
+        - {x: -24.5, y: -4}
+        - {x: -24.5, y: -23}
+        - {x: -23.5, y: -25}
+        - {x: 20.5, y: -25}
+        - {x: 24.5, y: -8}
+        - {x: 24.5, y: 25}
+    - name: stripsheet_charbase_template_121
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 563
+        width: 46
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 13, y: 25}
+        - {x: -5, y: 25}
+        - {x: -8, y: 19}
+        - {x: -22, y: -6}
+        - {x: -23, y: -8}
+        - {x: -23, y: -24}
+        - {x: -22, y: -25}
+        - {x: 11, y: -25}
+        - {x: 12, y: -16}
+        - {x: 23, y: -9}
+        - {x: 23, y: 23}
+    - name: stripsheet_charbase_template_122
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 563
+        width: 37
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11.5, y: 25}
+        - {x: -17.5, y: 23}
+        - {x: -18.5, y: 18}
+        - {x: -18.5, y: -25}
+        - {x: 5.5, y: -25}
+        - {x: 18.5, y: -7}
+        - {x: 18.5, y: 20}
+        - {x: 12.5, y: 25}
+    - name: stripsheet_charbase_template_123
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 563
+        width: 44
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -22, y: 25}
+        - {x: -22, y: -25}
+        - {x: 22, y: -25}
+        - {x: 22, y: 21}
+        - {x: 19, y: 25}
+    - name: stripsheet_charbase_template_124
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 563
+        width: 47
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 14.5, y: 25}
+        - {x: -2.5, y: 25}
+        - {x: -7.5, y: 19}
+        - {x: -6.5, y: 14}
+        - {x: -23.5, y: -7}
+        - {x: -23.5, y: -25}
+        - {x: 18.5, y: -25}
+        - {x: 23.5, y: -18}
+        - {x: 23.5, y: 23}
+    - name: stripsheet_charbase_template_125
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 563
+        width: 47
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -2.5, y: 25}
+        - {x: -8.5, y: 20}
+        - {x: -23.5, y: -5}
+        - {x: -23.5, y: -25}
+        - {x: 23.5, y: -25}
+        - {x: 23.5, y: 22}
+        - {x: 21.5, y: 25}
+    - name: stripsheet_charbase_template_126
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 563
+        width: 34
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 17, y: 20}
+        - {x: 6, y: 25}
+        - {x: -9, y: 25}
+        - {x: -14, y: 19}
+        - {x: -17, y: 8}
+        - {x: -17, y: -25}
+        - {x: 0, y: -25}
+        - {x: 5, y: -16}
+        - {x: 4, y: -12}
+        - {x: 17, y: -6}
+    - name: stripsheet_charbase_template_127
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 563
+        width: 45
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 15.5, y: 25}
+        - {x: -5.5, y: 25}
+        - {x: -9.5, y: 24}
+        - {x: -22.5, y: -5}
+        - {x: -22.5, y: -25}
+        - {x: 16.5, y: -25}
+        - {x: 22.5, y: -17}
+        - {x: 22.5, y: 20}
+    - name: stripsheet_charbase_template_128
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 563
+        width: 48
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -9, y: 25}
+        - {x: -24, y: 2}
+        - {x: -24, y: -25}
+        - {x: 24, y: -25}
+        - {x: 24, y: 23}
+        - {x: 18, y: 25}
+    - name: stripsheet_charbase_template_129
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 487
+        width: 27
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_130
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 489
+        width: 25
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_131
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 494
+        width: 28
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_132
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 493
+        width: 33
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16.5, y: -21.5}
+        - {x: -13.5, y: -25.5}
+        - {x: 16.5, y: -25.5}
+        - {x: 16.5, y: 25.5}
+        - {x: -12.5, y: 25.5}
+        - {x: -16.5, y: 22.5}
+    - name: stripsheet_charbase_template_133
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 508
+        width: 40
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -17, y: 19}
+        - {x: -20, y: 8}
+        - {x: -20, y: -18}
+        - {x: -15, y: -18}
+        - {x: -12, y: -15}
+        - {x: -8, y: -19}
+        - {x: 3, y: -19}
+        - {x: 13, y: -10}
+        - {x: 20, y: -2}
+        - {x: 20, y: 19}
+    - name: stripsheet_charbase_template_134
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 502
+        width: 41
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 2.5, y: 21}
+        - {x: -20.5, y: 21}
+        - {x: -20.5, y: -17}
+        - {x: -18.5, y: -21}
+        - {x: 20.5, y: -21}
+        - {x: 20.5, y: 7}
+        - {x: 19.5, y: 11}
+    - name: stripsheet_charbase_template_135
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 501
+        width: 43
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -10.5, y: 20.5}
+        - {x: -21.5, y: 4.5}
+        - {x: -21.5, y: -20.5}
+        - {x: 4.5, y: -20.5}
+        - {x: 16.5, y: -14.5}
+        - {x: 21.5, y: 0.5}
+        - {x: 21.5, y: 20.5}
+    - name: stripsheet_charbase_template_136
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 495
+        width: 44
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 17, y: -15}
+        - {x: 22, y: -8}
+        - {x: 22, y: 2}
+        - {x: 21, y: 3}
+        - {x: 10, y: 25}
+        - {x: 6, y: 27}
+        - {x: -22, y: 27}
+        - {x: -22, y: 1}
+        - {x: -3, y: -27}
+        - {x: 9, y: -27}
+        - {x: 13, y: -22}
+        - {x: 13, y: -17}
+        - {x: 11, y: -15}
+    - name: stripsheet_charbase_template_137
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 488
+        width: 27
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_138
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 489
+        width: 27
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_139
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 417
+        width: 32
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16, y: 26.5}
+        - {x: -16, y: -26.5}
+        - {x: 16, y: -26.5}
+        - {x: 16, y: 19.5}
+        - {x: 9, y: 26.5}
+    - name: stripsheet_charbase_template_140
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 417
+        width: 33
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 1.5, y: 26.5}
+        - {x: -16.5, y: 26.5}
+        - {x: -16.5, y: -26.5}
+        - {x: 12.5, y: -26.5}
+        - {x: 16.5, y: -25.5}
+        - {x: 16.5, y: -12.5}
+        - {x: 4.5, y: 25.5}
+    - name: stripsheet_charbase_template_141
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 418
+        width: 43
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 16.5, y: -6}
+        - {x: 15.5, y: 2}
+        - {x: 8.5, y: 13}
+        - {x: -1.5, y: 26}
+        - {x: -21.5, y: 26}
+        - {x: -21.5, y: -4}
+        - {x: -17.5, y: -26}
+        - {x: 21.5, y: -26}
+        - {x: 21.5, y: -7}
+        - {x: 20.5, y: -6}
+    - name: stripsheet_charbase_template_142
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 426
+        width: 44
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 3, y: 21.5}
+        - {x: -22, y: 21.5}
+        - {x: -22, y: -1.5}
+        - {x: -16, y: -20.5}
+        - {x: -8, y: -21.5}
+        - {x: 18, y: -21.5}
+        - {x: 22, y: -18.5}
+        - {x: 22, y: 7.5}
+        - {x: 16, y: 18.5}
+    - name: stripsheet_charbase_template_143
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 432
+        width: 58
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_144
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 422
+        width: 57
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_145
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 420
+        width: 57
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_146
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 419
+        width: 57
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_147
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 344
+        width: 29
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_148
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 344
+        width: 31
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_149
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 344
+        width: 33
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11.5, y: 25.5}
+        - {x: -16.5, y: 14.5}
+        - {x: -16.5, y: -25.5}
+        - {x: 16.5, y: -25.5}
+        - {x: 16.5, y: 23.5}
+        - {x: 11.5, y: 25.5}
+    - name: stripsheet_charbase_template_150
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 344
+        width: 34
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 17, y: 5.5}
+        - {x: 8, y: 25.5}
+        - {x: -10, y: 25.5}
+        - {x: -17, y: 10.5}
+        - {x: -17, y: -25.5}
+        - {x: 17, y: -25.5}
+    - name: stripsheet_charbase_template_151
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 344
+        width: 34
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -9, y: 25.5}
+        - {x: -12, y: 19.5}
+        - {x: -11, y: 14.5}
+        - {x: -17, y: 1.5}
+        - {x: -17, y: -7.5}
+        - {x: -14, y: -10.5}
+        - {x: -17, y: -17.5}
+        - {x: -17, y: -25.5}
+        - {x: 17, y: -25.5}
+        - {x: 17, y: 13.5}
+        - {x: 11, y: 25.5}
+    - name: stripsheet_charbase_template_152
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 284
+        width: 35
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -17.5, y: 25.5}
+        - {x: -17.5, y: -25.5}
+        - {x: 17.5, y: -25.5}
+        - {x: 17.5, y: 5.5}
+        - {x: 10.5, y: 25.5}
+    - name: stripsheet_charbase_template_153
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 285
+        width: 37
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -5.5, y: 25}
+        - {x: -18.5, y: -7}
+        - {x: -18.5, y: -25}
+        - {x: -3.5, y: -25}
+        - {x: 12.5, y: -23}
+        - {x: 18.5, y: -15}
+        - {x: 18.5, y: 25}
+    - name: stripsheet_charbase_template_154
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 285
+        width: 48
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 19, y: 25}
+        - {x: -10, y: 25}
+        - {x: -24, y: -3}
+        - {x: -24, y: -25}
+        - {x: 2, y: -25}
+        - {x: 21, y: -23}
+        - {x: 24, y: -15}
+        - {x: 24, y: 21}
+    - name: stripsheet_charbase_template_155
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 283
+        width: 54
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -20, y: 25}
+        - {x: -27, y: 7}
+        - {x: -27, y: -25}
+        - {x: 27, y: -25}
+        - {x: 27, y: 23}
+        - {x: 19, y: 25}
+    - name: stripsheet_charbase_template_156
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 284
+        width: 42
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -5}
+        - {x: 15, y: -8}
+        - {x: 21, y: -8}
+        - {x: 21, y: 21}
+        - {x: 14, y: 26}
+        - {x: -12, y: 26}
+        - {x: -21, y: -1}
+        - {x: -21, y: -26}
+        - {x: 21, y: -26}
+        - {x: 21, y: -19}
+        - {x: 14, y: -11}
+        - {x: 8, y: -4}
+    - name: stripsheet_charbase_template_157
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 193
+        width: 27
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_158
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 193
+        width: 30
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_159
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 195
+        width: 32
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 16, y: 36.5}
+        - {x: -14, y: 36.5}
+        - {x: -16, y: 35.5}
+        - {x: -16, y: -36.5}
+        - {x: -7, y: -36.5}
+        - {x: -4, y: -33.5}
+        - {x: 2, y: -36.5}
+        - {x: 16, y: -36.5}
+    - name: stripsheet_charbase_template_160
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 195
+        width: 32
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16, y: 37}
+        - {x: -16, y: -37}
+        - {x: 16, y: -37}
+        - {x: 16, y: 37}
+    - name: stripsheet_charbase_template_161
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 194
+        width: 33
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16.5, y: 36.5}
+        - {x: -16.5, y: -36.5}
+        - {x: 16.5, y: -36.5}
+        - {x: 16.5, y: 36.5}
+    - name: stripsheet_charbase_template_162
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 195
+        width: 30
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_163
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 195
+        width: 29
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_164
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 41
+        width: 28
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_165
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 45
+        width: 27
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_166
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 57
+        width: 40
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -20, y: 29}
+        - {x: -20, y: -29}
+        - {x: 10, y: -29}
+        - {x: 20, y: -23}
+        - {x: 20, y: 29}
+    - name: stripsheet_charbase_template_167
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 60
+        width: 26
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_168
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 62
+        width: 26
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: stripsheet_charbase_template_169
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 81
+        width: 40
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -12, y: 25.5}
+        - {x: -20, y: 13.5}
+        - {x: -20, y: -2.5}
+        - {x: -15, y: -16.5}
+        - {x: -7, y: -25.5}
+        - {x: 19, y: -25.5}
+        - {x: 20, y: -17.5}
+        - {x: 20, y: 9.5}
+        - {x: 6, y: 25.5}
+    - name: stripsheet_charbase_template_170
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 91
+        width: 41
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -11.5, y: 24.5}
+        - {x: -20.5, y: 7.5}
+        - {x: -20.5, y: -12.5}
+        - {x: -15.5, y: -24.5}
+        - {x: 20.5, y: -24.5}
+        - {x: 20.5, y: 3.5}
+        - {x: 9.5, y: 24.5}
+    - name: stripsheet_charbase_template_171
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 100
+        width: 41
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 7.5, y: 23}
+        - {x: -10.5, y: 23}
+        - {x: -14.5, y: 22}
+        - {x: -20.5, y: -6}
+        - {x: -20.5, y: -15}
+        - {x: -4.5, y: -23}
+        - {x: 11.5, y: -23}
+        - {x: 20.5, y: -19}
+        - {x: 20.5, y: -5}
+        - {x: 8.5, y: 21}
+    - name: stripsheet_charbase_template_172
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 111
+        width: 41
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -5.5, y: 19.5}
+        - {x: -18.5, y: -3.5}
+        - {x: -20.5, y: -13.5}
+        - {x: -20.5, y: -19.5}
+        - {x: 20.5, y: -19.5}
+        - {x: 20.5, y: -12.5}
+        - {x: 15.5, y: 19.5}
+    - name: stripsheet_charbase_template_173
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 111
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -20.5, y: -10.5}
+        - {x: -20.5, y: -20.5}
+        - {x: 20.5, y: -20.5}
+        - {x: 20.5, y: -3.5}
+        - {x: 18.5, y: 19.5}
+        - {x: 17.5, y: 20.5}
+        - {x: -2.5, y: 20.5}
+        - {x: -6.5, y: 19.5}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

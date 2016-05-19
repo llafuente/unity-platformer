@@ -33,17 +33,21 @@ namespace UnityPlatformer {
         transform.localScale  = new Vector3(-1, 1, 1);
       }
 
-      if (character.IsOnState(States.Grabbing)) {
-        Play("grabbing_loop");
+      if (character.IsOnState(States.WallSliding)) {
+        Play("wallsliding");
+      } else if (character.IsOnState(States.Slipping)) {
+        Play("slipping");
+      } else if (character.IsOnState(States.Grabbing)) {
+        Play("grabbing");
       } else if (character.IsOnState(States.MeleeAttack)) {
         Play("attack_melee");
       } else if (character.IsOnState(States.Ladder)) {
         Play("ladder");
       } else if (character.IsOnState(States.Jumping)) {
         //Transition("jump_start", 0.1f);
-        Play("jump_loop");
+        Play("jump");
       } else if (character.IsOnState(States.Falling)) {
-        Play("fall_start");
+        Play("falling");
       } else {
         if (character.velocity.x != 0) {
           Play("walk");

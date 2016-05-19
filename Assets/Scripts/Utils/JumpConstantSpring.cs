@@ -74,6 +74,8 @@ namespace UnityPlatformer {
         if (currentDeceleration != 0) {
           currentDeceleration = 0;
           velocity.y = initialVelocity;
+          // need to enter again, because before we were falling!
+          character.EnterState(States.Jumping);
         } else if (velocity.y <= 0) {
           // jump ended
           return false;

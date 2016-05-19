@@ -53,3 +53,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background 03
+    uniqueID: 1947894711
+    locked: 0
+  - name: Background 02
+    uniqueID: 2510126577
+    locked: 0
+  - name: Background 01
+    uniqueID: 160902593
+    locked: 0
+  - name: Character
+    uniqueID: 3204620019
+    locked: 0
+  - name: Foregound 01
+    uniqueID: 3404760589
+    locked: 0
+  - name: Foregound 02
+    uniqueID: 3310861035
+    locked: 0
+  - name: Foregound 03
+    uniqueID: 1422456551
+    locked: 0

@@ -5,7 +5,7 @@ namespace UnityPlatformer {
   [RequireComponent (typeof (BoxCollider2D))]
   public class Grab : MonoBehaviour {
     // cache
-    public BoxCollider2D body;
+    BoxCollider2D body;
 
     virtual public void Start() {
       body = GetComponent<BoxCollider2D>();
