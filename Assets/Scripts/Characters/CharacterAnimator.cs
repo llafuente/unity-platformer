@@ -11,6 +11,7 @@ namespace UnityPlatformer {
   public abstract class CharacterAnimator: MonoBehaviour, IUpdateEntity {
 
     public Character character;
+    public bool rotateOnSlopes = true;
 
     public virtual void Start() {
       character.onAreaChange += OnAreaChange;
@@ -31,6 +32,17 @@ namespace UnityPlatformer {
         transform.localScale  = new Vector3(1, 1, 1);
       } else {
         transform.localScale  = new Vector3(-1, 1, 1);
+      }
+
+      if (rotateOnSlopes) {
+        if (character.pc2d.collisions.slopeAngle != 0) {
+          float angle = 90 - Mathf.Atan2(character.pc2d.collisions.slopeNormal.y,
+          -character.pc2d.collisions.slopeNormal.x) * Mathf.Rad2Deg;
+
+          transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        } else {
+          transform.rotation = Quaternion.identity;
+        }
       }
 
       if (character.IsOnState(States.WallSliding)) {
