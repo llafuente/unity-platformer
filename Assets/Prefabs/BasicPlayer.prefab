@@ -967,6 +967,8 @@ MonoBehaviour:
   moveToCenter: 1
   towardsSpeed: 32
   towardsTime: 0.05
+  leftRightDismount: 1
+  dismountTime: 0.2
   priority: 10
 --- !u!114 &11445470
 MonoBehaviour:

@@ -252,8 +252,9 @@ namespace UnityPlatformer {
       if (a == States.WallSliding) {
         ExitState(States.Falling | States.Hanging | States.Jumping, true);
       }
-      if (a == States.Grabbing) {
-        state = 0; // while grabbing, only grabbing...
+      // while grabbing or ladder, just do that!
+      if (a == States.Grabbing || a == States.Ladder) {
+        state = 0;
       }
       if (state == States.Grabbing) {
         // while grabbing cannot enter in another state

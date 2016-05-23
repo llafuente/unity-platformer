@@ -19,6 +19,11 @@ namespace UnityPlatformer {
       Reset();
     }
 
+    public bool IncReady() {
+      Increment();
+      return Ready();
+    }
+
     public bool Ready() {
       return counter >= limit;
     }

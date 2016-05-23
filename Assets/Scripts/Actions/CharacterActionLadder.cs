@@ -17,13 +17,22 @@ namespace UnityPlatformer {
     public float towardsSpeed = 32;
     [Comment("time to reach the center (if towardsSpeed is fast enough).")]
     public float towardsTime = 0.1f;
+    [Comment("Dismount pressing left/right")]
+    public bool leftRightDismount = true;
+    [Comment("Dismount pressing left/right")]
+    public float dismountTime = 0.2f;
     [Comment("Remember: Higher priority wins. Modify with caution")]
     public int priority = 10;
 
     #endregion
 
     bool centering = false;
+    Cooldown cdLeave;
 
+    public override void Start() {
+      base.Start();
+      cdLeave = new Cooldown(dismountTime);
+    }
 
     /// <summary>
     /// Enter in ladder mode when user is in a ladder area and pressing up/down
@@ -106,9 +115,16 @@ namespace UnityPlatformer {
 
       character.EnterState(States.Ladder);
       centering = moveToCenter;
+      cdLeave.Reset();
     }
 
     public override void PerformAction(float delta) {
+      if (character.ladder == null) {
+        //something goes wrong!
+        character.ExitState(States.Ladder);
+        return;
+      }
+
       Vector2 in2d = input.GetAxisRaw();
 
       if (character.IsOnArea(Areas.Ladder) && character.IsOnState(States.Ladder)) {
@@ -136,6 +152,14 @@ namespace UnityPlatformer {
       } else if (character.ladder.IsAtBottom(character) && in2d.y < 0) {
         character.velocity = Vector2.zero;
         character.ladder.Dismount(character);
+      }
+      if (in2d.x != 0) {
+        if (cdLeave.IncReady()) {
+          character.velocity = Vector2.zero;
+          character.ladder.Dismount(character);
+        }
+      } else {
+        cdLeave.Reset();
       }
     }
 
