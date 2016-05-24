@@ -20,12 +20,11 @@ namespace UnityPlatformer {
         "climbingSlope? {8}\n"+
         "descendingSlope? {9}\n"+
         "slopeAngle: {10}\n"+
-        "slopeAngleOld: {11}\n"+
-        "distanceToSlopeStart: {15}\n"+
-        "slopeNormal: {16}\n"+
-        "faceDir: {12}\n"+
-        "fallingThroughPlatform: {13}\n"+
-        "standingOnPlatform: {14}\n",
+        "distanceToSlopeStart: {14}\n"+
+        "slopeNormal: {15}\n"+
+        "faceDir: {11}\n"+
+        "fallingThroughPlatform: {12}\n"+
+        "standingOnPlatform: {13}\n",
         pc2d.collisions.above,
         pc2d.collisions.below,
         pc2d.collisions.left,
@@ -39,7 +38,6 @@ namespace UnityPlatformer {
         pc2d.collisions.climbingSlope,
         pc2d.collisions.descendingSlope,
         pc2d.collisions.slopeAngle,
-        pc2d.collisions.prevSlopeAngle,
         pc2d.collisions.faceDir,
         pc2d.collisions.fallingThroughPlatform,
         pc2d.collisions.standingOnPlatform,

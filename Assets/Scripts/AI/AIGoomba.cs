@@ -30,8 +30,8 @@ namespace UnityPlatformer {
     #endregion
 
     public void Start() {
-      pc2d.collisions.onLeftWall += OnLeftWall;
-      pc2d.collisions.onRightWall += OnRightWall;
+      pc2d.onLeftWall += OnLeftWall;
+      pc2d.onRightWall += OnRightWall;
 
       facing = initialFacing;
       input.SetX((float) facing);

@@ -18,6 +18,8 @@ namespace UnityPlatformer {
     MeleeAttack =         1 << 10,
     Grabbing =            1 << 11,
     Slipping =            1 << 12,
+    SlippingGrounded =    Slipping | OnGround,
+    SlippingSlopeGrounded =    Slipping | OnSlope | OnGround,
     //Dashing,
     //Frozen,
     //FreedomState

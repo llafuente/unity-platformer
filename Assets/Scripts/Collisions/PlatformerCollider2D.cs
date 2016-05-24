@@ -37,14 +37,23 @@ namespace UnityPlatformer {
     public float maxClimbAngle = 30;
     public float maxDescendAngle = 30;
 
-    [HideInInspector]
+    // callbacks
+    public Action onRightWall;
+    public Action onLeftWall;
+    public Action onLanding;
+    public Action onLeaveGround;
+    public Action onTop;
+
     /// <summary>
     /// Ignore the decend angle, so always decend.
     /// <summary>
+    [HideInInspector]
     public bool ignoreDescendAngle = false;
 
     [HideInInspector]
     public CollisionInfo collisions;
+    [HideInInspector]
+    public CollisionInfo pCollisions;
 
     [HideInInspector]
     public bool disableWorldCollisions = false;
@@ -56,8 +65,9 @@ namespace UnityPlatformer {
 
     public void Move(Vector3 velocity) {
       UpdateRaycastOrigins ();
+      pCollisions = collisions;
       collisions.Reset ();
-      collisions.prevVelocity = velocity;
+      collisions.velocity = velocity;
 
       if (velocity.x != 0) {
         // collisions.faceDir = (int)Mathf.Sign(velocity.x);
@@ -87,7 +97,7 @@ namespace UnityPlatformer {
       }
 
       transform.Translate (velocity);
-      collisions.Consolidate ();
+      ConsolidateCollisions ();
     }
 
     void UpdateCurrentSlope(ref Vector3 velocity) {
@@ -149,7 +159,7 @@ namespace UnityPlatformer {
 
         // handle the moment we change the slope
         // TODO REVIEW this may lead to problems when a platforms rotates.
-        if (fhit != null && collisions.slopeAngle > collisions.prevSlopeAngle) {
+        if (fhit != null && collisions.slopeAngle > pCollisions.slopeAngle) {
           collisions.distanceToSlopeStart = fhit.Value.distance - skinWidth;
         }
       } else {
@@ -304,18 +314,47 @@ namespace UnityPlatformer {
       );
     }
 
+    public void ConsolidateCollisions() {
+      if (collisions.right && !pCollisions.right) {
+        collisions.lastRightFrame = 0;
+        if (onRightWall != null) {
+          onRightWall ();
+        }
+      }
+
+      if (collisions.left && !pCollisions.left) {
+        collisions.lastLeftFrame = 0;
+        if (onLeftWall != null) {
+          onLeftWall ();
+        }
+      }
+
+      if (collisions.above && !pCollisions.above) {
+        collisions.lastAboveFrame = 0;
+        if (onTop != null) {
+          onTop ();
+        }
+      }
+
+      if (!collisions.below && pCollisions.below) {
+        collisions.lastBelowFrame = 0;
+        if (onLeaveGround != null) {
+          onLeaveGround ();
+        }
+      }
+
+      if (collisions.below && !pCollisions.below && onLanding != null) {
+        onLanding ();
+      }
+    }
+
     public struct CollisionInfo {
       // current
       public bool above, below;
       public bool left, right;
       public float slopeAngle;
       public Vector3 slopeNormal;
-
-      // previous frame values
-      public bool prevAbove, prevBelow;
-      public bool prevLeft, prevRight;
-      public float prevSlopeAngle;
-      public Vector3 prevVelocity;
+      public Vector3 velocity;
 
       // frame-counts
       public int lastAboveFrame;
@@ -331,19 +370,7 @@ namespace UnityPlatformer {
       public bool fallingThroughPlatform;
       public bool standingOnPlatform;
 
-      // callbacks
-      public Action onRightWall;
-      public Action onLeftWall;
-      public Action onLanding;
-      public Action onLeaveGround;
-      public Action onTop;
-
       public void Reset() {
-        prevAbove = above;
-        prevBelow = below;
-        prevLeft = left;
-        prevRight = right;
-
         above = below = false;
         left = right = false;
         climbingSlope = false;
@@ -354,39 +381,9 @@ namespace UnityPlatformer {
         ++lastLeftFrame;
         ++lastRightFrame;
 
-        prevSlopeAngle = slopeAngle;
         slopeAngle = 0;
+        slopeNormal = Vector3.zero;
         distanceToSlopeStart = 0;
-      }
-
-      public void Consolidate() {
-        if (right && !prevRight) {
-          lastRightFrame = 0;
-          if (onRightWall != null) {
-            onRightWall ();
-          }
-        }
-        if (left && !prevLeft) {
-          lastLeftFrame = 0;
-          if (onLeftWall != null) {
-            onLeftWall ();
-          }
-        }
-        if (above && !prevAbove) {
-          lastAboveFrame = 0;
-          if (onTop != null) {
-            onTop ();
-          }
-        }
-        if (!below && prevBelow) {
-          lastBelowFrame = 0;
-          if (onLeaveGround != null) {
-            onLeaveGround ();
-          }
-        }
-        if (below && !prevBelow && onLanding != null) {
-          onLanding ();
-        }
       }
     }
   }

@@ -21,7 +21,7 @@ namespace UnityPlatformer {
         "Ladder: {2} IsAboveTop {3} IsBelowBottom {4}\n" +
         "Platform: {5}\n" +
         "Jump: {6}\n" +
-        "Velocity: {7}\n",
+        "Velocity: {7} - {8}\n",
         character.area.ToString(),
         character.state.ToString(),
         character.ladder,
@@ -29,7 +29,7 @@ namespace UnityPlatformer {
         character.ladder ? character.ladder.IsBelowBottom(character) : false,
         character.platform,
         character.lastJumpDistance,
-        character.velocity
+        character.velocity.ToString("F4"), character.pc2d.pCollisions.velocity.ToString("F4")
       );
     }
   }
