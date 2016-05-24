@@ -29,7 +29,7 @@ namespace UnityPlatformer {
         character.ladder ? character.ladder.IsBelowBottom(character) : false,
         character.platform,
         character.lastJumpDistance,
-        character.velocity.ToString("F4"), character.pc2d.pCollisions.velocity.ToString("F4")
+        character.velocity.ToString("F4"), character.pc2d.collisions.velocity.ToString("F4")
       );
     }
   }

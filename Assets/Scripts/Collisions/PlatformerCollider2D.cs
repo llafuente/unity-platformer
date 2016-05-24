@@ -34,8 +34,10 @@ namespace UnityPlatformer {
   /// Handle collisions
   /// </summary>
   public class PlatformerCollider2D : RaycastController {
+    // public float minMovement = 0.0001f;
     public float maxClimbAngle = 30;
     public float maxDescendAngle = 30;
+    public bool enableSlopes = true;
 
     // callbacks
     public Action onRightWall;
@@ -49,6 +51,7 @@ namespace UnityPlatformer {
     /// <summary>
     [HideInInspector]
     public bool ignoreDescendAngle = false;
+
 
     [HideInInspector]
     public CollisionInfo collisions;
@@ -67,7 +70,8 @@ namespace UnityPlatformer {
       UpdateRaycastOrigins ();
       pCollisions = collisions;
       collisions.Reset ();
-      collisions.velocity = velocity;
+
+      //Debug.Log("velocity: " + velocity.ToString("F4"));
 
       if (velocity.x != 0) {
         // collisions.faceDir = (int)Mathf.Sign(velocity.x);
@@ -78,16 +82,16 @@ namespace UnityPlatformer {
         } /* else, leave the last one :) */
       }
 
-      UpdateCurrentSlope(ref velocity);
+      if (enableSlopes) {
+        UpdateCurrentSlope(ref velocity);
 
-      // TODO PERF add: collisions.prevBelow, so wont be testing while falling
-      if (collisions.slopeAngle != 0) {
-        DescendSlope(ref velocity);
-
-        ClimbSlope(ref velocity);
+        // TODO PERF add: pCcollisions.Below, so wont be testing while falling
+        // if (collisions.slopeAngle != 0 && pCollisions.below) {
+        if (collisions.slopeAngle != 0) {
+          ClimbSlope(ref velocity);
+          DescendSlope(ref velocity);
+        }
       }
-
-
 
       if (!disableWorldCollisions) {
         HorizontalCollisions (ref velocity);
@@ -95,8 +99,17 @@ namespace UnityPlatformer {
           VerticalCollisions (ref velocity);
         }
       }
+/*
+      if (velocity.x < minMovement) {
+        velocity.x = 0;
+      }
 
+      if (velocity.y < minMovement) {
+        velocity.y = 0;
+      }
+*/
       transform.Translate (velocity);
+      collisions.velocity = velocity;
       ConsolidateCollisions ();
     }
 
@@ -107,7 +120,6 @@ namespace UnityPlatformer {
       // consider only the maximum
       float slopeAngle = 0.0f;
       Vector3? slopeNormal = null;
-      int sloperDir = 0;
       RaycastHit2D? fhit = null;
 
       for (int i = 0; i < verticalRayCount; ++i) {
@@ -119,12 +131,11 @@ namespace UnityPlatformer {
             fhit = hit;
             slopeAngle = a;
             slopeNormal = hit.normal;
-            sloperDir = (int)Mathf.Sign(-hit.normal.x);
           }
         }
       }
 
-      rayLength = Mathf.Abs (velocity.x) + skinWidth; // TODO configurable
+      rayLength = Mathf.Abs (velocity.x) + skinWidth;
       RaycastHit2D rhit = Raycast(raycastOrigins.bottomRight, Vector2.right, rayLength, collisionMask, Color.yellow);
 
       if (rhit) {
@@ -132,7 +143,6 @@ namespace UnityPlatformer {
         if (a > slopeAngle) {
           fhit = rhit;
           slopeAngle = a;
-          sloperDir = (int)Mathf.Sign(-rhit.normal.x);
         }
       }
 
@@ -143,16 +153,16 @@ namespace UnityPlatformer {
         if (a > slopeAngle) {
           fhit = lhit;
           slopeAngle = a;
-          sloperDir = (int)Mathf.Sign(-lhit.normal.x);
         }
       }
 
-      if (slopeAngle < 89.9f) {
+      if (fhit != null && !Mathf.Approximately(slopeAngle, 90) && !Mathf.Approximately(slopeAngle, 0)) {
         collisions.slopeAngle = slopeAngle;
         if (slopeNormal != null) {
           collisions.slopeNormal = slopeNormal.Value;
         }
         if (velocity.x != 0.0f) {
+          int sloperDir = (int) Mathf.Sign(-fhit.Value.normal.x);
           collisions.climbingSlope = sloperDir == Mathf.Sign(velocity.x);
           collisions.descendingSlope = sloperDir != Mathf.Sign(velocity.x);
         }
@@ -172,7 +182,7 @@ namespace UnityPlatformer {
       float rayLength = Mathf.Abs (velocity.x) + skinWidth;
 
       if (Mathf.Abs(velocity.x) < skinWidth) {
-        rayLength = 2*skinWidth;
+        rayLength = 2 * skinWidth;
       }
 
       for (int i = 0; i < horizontalRayCount; i ++) {
@@ -215,7 +225,9 @@ namespace UnityPlatformer {
     void VerticalCollisions(ref Vector3 velocity) {
       float directionY = Mathf.Sign (velocity.y);
 
-      float rayLength = Mathf.Abs (velocity.y) + skinWidth;
+      // this ray needs to be a bit longer...
+      // this may need to be a parameter...
+      float rayLength = Mathf.Abs (velocity.y) + skinWidth * 2;
 
       for (int i = 0; i < verticalRayCount; i ++) {
 
@@ -238,7 +250,8 @@ namespace UnityPlatformer {
           ) {
             continue;
           }
-          velocity.y = (hit.distance - skinWidth) * directionY;
+
+          velocity.y = (hit.distance - minDistanceToEnv) * directionY;
           rayLength = hit.distance;
 
           collisions.below = directionY == -1;
@@ -273,11 +286,19 @@ namespace UnityPlatformer {
       if (collisions.descendingSlope &&
         (collisions.slopeAngle <= maxDescendAngle || ignoreDescendAngle)
       ) {
-        float moveDistance = Mathf.Abs(velocity.x);
-        float descendVelocityY = Mathf.Sin (collisions.slopeAngle * Mathf.Deg2Rad) * moveDistance;
-        velocity.x = Mathf.Cos (collisions.slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign (velocity.x);
-        velocity.y -= descendVelocityY;
+        Vector3 slopedir = GetDownSlopeDir();
+        velocity.y = Mathf.Abs(velocity.x) * slopedir.y;
+        collisions.below = true;
       }
+    }
+
+    public void DisableSlopes(float resetDelay = 0.5f) {
+      enableSlopes = false;
+      Invoke("EnableSlopes", resetDelay);
+    }
+
+    public void EnableSlopes() {
+      enableSlopes = true;
     }
 
     public void FallThroughPlatform(float resetDelay = 0.5f) {
@@ -315,29 +336,38 @@ namespace UnityPlatformer {
     }
 
     public void ConsolidateCollisions() {
-      if (collisions.right && !pCollisions.right) {
+      if (collisions.right) {
         collisions.lastRightFrame = 0;
+      }
+      if (collisions.left) {
+        collisions.lastLeftFrame = 0;
+      }
+      if (collisions.above) {
+        collisions.lastAboveFrame = 0;
+      }
+      if (collisions.below) {
+        collisions.lastBelowFrame = 0;
+      }
+
+      if (collisions.right && !pCollisions.right) {
         if (onRightWall != null) {
           onRightWall ();
         }
       }
 
       if (collisions.left && !pCollisions.left) {
-        collisions.lastLeftFrame = 0;
         if (onLeftWall != null) {
           onLeftWall ();
         }
       }
 
       if (collisions.above && !pCollisions.above) {
-        collisions.lastAboveFrame = 0;
         if (onTop != null) {
           onTop ();
         }
       }
 
       if (!collisions.below && pCollisions.below) {
-        collisions.lastBelowFrame = 0;
         if (onLeaveGround != null) {
           onLeaveGround ();
         }

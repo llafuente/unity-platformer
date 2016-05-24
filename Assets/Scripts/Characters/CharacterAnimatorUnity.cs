@@ -26,7 +26,7 @@ namespace UnityPlatformer {
         return;
       }
 
-      Debug.Log("play" + animation);
+      //Debug.LogFormat("play: {0}", animation);
       playing = animation;
       animator.Play(animation);
     }

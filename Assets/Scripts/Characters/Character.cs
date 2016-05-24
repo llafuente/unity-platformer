@@ -238,6 +238,9 @@ namespace UnityPlatformer {
       }
       if (a == States.Jumping && !IsOnState(States.Jumping)) {
         jumpStart = transform.position;
+        // temporary disable slopes
+        // jump initial velocity.y it's modified by climbingSlope and descendingSlope
+        pc2d.DisableSlopes(0.1f);
       }
 
       if (a == States.Falling) {

@@ -71,7 +71,7 @@ namespace UnityPlatformer {
     }
 
     public override PostUpdateActions GetPostUpdateActions() {
-      return PostUpdateActions.WORLD_COLLISIONS;
+      return PostUpdateActions.WORLD_COLLISIONS | PostUpdateActions.APPLY_GRAVITY;
     }
   }
 }

@@ -34,6 +34,7 @@ namespace UnityPlatformer {
 
     public LayerMask collisionMask;
 
+    public float minDistanceToEnv = 0.08f;
     public float skinWidth = 0.10f;
     public int horizontalRayCount = 4;
     public int verticalRayCount = 4;

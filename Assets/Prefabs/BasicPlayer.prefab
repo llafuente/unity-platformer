@@ -1017,6 +1017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7294c85c49e4c304d87d4204d51080c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: 
   collideWith:
     serializedVersion: 2
     m_Bits: 4096
@@ -1138,6 +1139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 11435812}
+  rotateOnSlopes: 1
   animator: {fileID: 9574616}
 --- !u!114 &11479932
 MonoBehaviour:
