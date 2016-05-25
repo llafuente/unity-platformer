@@ -34,18 +34,34 @@ namespace UnityPlatformer {
 
     public LayerMask collisionMask;
 
+    /// <summary>
+    /// How far from then env the Character must be.
+    /// NOTE: must be less than skinWidth, to allow continuous ground contact
+    /// </summary>
     public float minDistanceToEnv = 0.08f;
+    /// <summary>
+    /// Defines how far in from the edges of the collider rays are we going to cast from.
+    /// NOTE: This value must be geater than minDistanceToEnv
+    /// </summary>
     public float skinWidth = 0.10f;
+    /// <summary>
+    /// How many rays to check horizontal collisions
+    /// </summary>
     public int horizontalRayCount = 4;
+    /// <summary>
+    /// How many rays to check vertical collisions
+    /// </summary>
     public int verticalRayCount = 4;
 
     [HideInInspector]
     public float horizontalRaySpacing;
+
     [HideInInspector]
     public float verticalRaySpacing;
 
     [HideInInspector]
     public BoxCollider2D box;
+
     public RaycastOrigins raycastOrigins;
 
     public virtual void Awake() {
@@ -58,6 +74,7 @@ namespace UnityPlatformer {
 
     public void UpdateRaycastOrigins() {
       Bounds bounds = box.bounds;
+      // * 2 so it's shrink skinWidth by each side
       bounds.Expand (skinWidth * -2);
 
       // cache
@@ -71,11 +88,15 @@ namespace UnityPlatformer {
       raycastOrigins.topRight = new Vector2 (max.x, max.y);
     }
 
-     public RaycastHit2D Raycast(Vector2 origin, Vector2 direction, float rayLength, int mask, Color? color = null) {
+    public RaycastHit2D Raycast(Vector2 origin, Vector2 direction, float rayLength, int mask, Color? color = null) {
       Debug.DrawRay(origin, direction * rayLength, color ?? Color.red);
-       return Physics2D.Raycast(origin, direction, rayLength, mask);
-     }
 
+      return Physics2D.Raycast(origin, direction, rayLength, mask);
+    }
+
+    /// <summary>
+    /// Recalculate distance between rays (horizontalRaySpacing & verticalRaySpacing)
+    /// </summary>
     public void CalculateRaySpacing() {
       Bounds bounds = box.bounds;
       bounds.Expand (skinWidth * -2);
@@ -88,8 +109,11 @@ namespace UnityPlatformer {
     }
 
     public struct RaycastOrigins {
-      public Vector2 topLeft, bottomCenter, topRight;
-      public Vector2 bottomLeft, bottomRight;
+      public Vector2 topLeft;
+      public Vector2 topRight;
+      public Vector2 bottomLeft;
+      public Vector2 bottomCenter;
+      public Vector2 bottomRight;
     }
 
     public RaycastHit2D DoVerticalRay(float directionY, int i, float rayLength, ref Vector3 velocity, Color? c = null) {

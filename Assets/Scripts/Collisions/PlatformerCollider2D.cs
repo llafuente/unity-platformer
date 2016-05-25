@@ -34,10 +34,17 @@ namespace UnityPlatformer {
   /// Handle collisions
   /// </summary>
   public class PlatformerCollider2D : RaycastController {
-    // public float minMovement = 0.0001f;
-    public float maxClimbAngle = 30;
-    public float maxDescendAngle = 30;
+    public float maxClimbAngle = 45.0f;
+    public float maxDescendAngle = 45.0f;
     public bool enableSlopes = true;
+    ///<summary>
+    /// NOTE should be greater than skinWidth
+    ///</summary>
+    public float verticalRayLength = 0.2f;
+    ///<summary>
+    /// NOTE should be greater than skinWidth
+    ///</summary>
+    public float horizontalRayLength = 0.2f;
 
     // callbacks
     public Action onRightWall;
@@ -66,26 +73,29 @@ namespace UnityPlatformer {
       collisions.faceDir = 1;
     }
 
+    /// <summary>
+    /// Attempt to move the character to position + velocity.
+    /// Any colliders in the way will cause velocity to be modified
+    /// NOTE collisions.velocity has the real velocity applied
+    /// </summary>
     public void Move(Vector3 velocity) {
       UpdateRaycastOrigins ();
+      // set previous collisions and reset current one
       pCollisions = collisions;
       collisions.Reset ();
 
-      //Debug.Log("velocity: " + velocity.ToString("F4"));
+      // facing need to be reviewed. We should not rely on velocity.x
+      if (velocity.x > 0.0f) {
+        collisions.faceDir = 1;
+      } else if (velocity.x < 0.0f) {
+        collisions.faceDir = -1;
+      } // else, leave the last one :)
 
-      if (velocity.x != 0) {
-        // collisions.faceDir = (int)Mathf.Sign(velocity.x);
-        if (velocity.x > 0.0f) {
-          collisions.faceDir = 1;
-        } else if (velocity.x < 0.0f) {
-          collisions.faceDir = -1;
-        } /* else, leave the last one :) */
-      }
-
+      // Climb or descend a slope if in range
       if (enableSlopes) {
         UpdateCurrentSlope(ref velocity);
 
-        // TODO PERF add: pCcollisions.Below, so wont be testing while falling
+        // TODO PERF add: pCcollisions.below, so wont be testing while falling
         // if (collisions.slopeAngle != 0 && pCollisions.below) {
         if (collisions.slopeAngle != 0) {
           ClimbSlope(ref velocity);
@@ -93,33 +103,25 @@ namespace UnityPlatformer {
         }
       }
 
+      // be sure we stay outside others colliders
       if (!disableWorldCollisions) {
         HorizontalCollisions (ref velocity);
         if (velocity.y != 0) {
           VerticalCollisions (ref velocity);
         }
       }
-/*
-      if (velocity.x < minMovement) {
-        velocity.x = 0;
-      }
 
-      if (velocity.y < minMovement) {
-        velocity.y = 0;
-      }
-*/
       transform.Translate (velocity);
       collisions.velocity = velocity;
       ConsolidateCollisions ();
     }
 
+    /// <summary>
+    /// Launch rays below, left, right and get the maximum slope found
+    /// </summary>
     void UpdateCurrentSlope(ref Vector3 velocity) {
-      float rayLength = Mathf.Abs (velocity.y) + skinWidth; // TODO configurable
-
-      // get slopeAngle, should be inside 0-90
-      // consider only the maximum
+      float rayLength = Mathf.Abs (velocity.y) + skinWidth;
       float slopeAngle = 0.0f;
-      Vector3? slopeNormal = null;
       RaycastHit2D? fhit = null;
 
       for (int i = 0; i < verticalRayCount; ++i) {
@@ -130,7 +132,6 @@ namespace UnityPlatformer {
           if (a > slopeAngle) {
             fhit = hit;
             slopeAngle = a;
-            slopeNormal = hit.normal;
           }
         }
       }
@@ -158,9 +159,8 @@ namespace UnityPlatformer {
 
       if (fhit != null && !Mathf.Approximately(slopeAngle, 90) && !Mathf.Approximately(slopeAngle, 0)) {
         collisions.slopeAngle = slopeAngle;
-        if (slopeNormal != null) {
-          collisions.slopeNormal = slopeNormal.Value;
-        }
+        collisions.slopeNormal = fhit.Value.normal;
+
         if (velocity.x != 0.0f) {
           int sloperDir = (int) Mathf.Sign(-fhit.Value.normal.x);
           collisions.climbingSlope = sloperDir == Mathf.Sign(velocity.x);
@@ -179,11 +179,7 @@ namespace UnityPlatformer {
 
     void HorizontalCollisions(ref Vector3 velocity) {
       float directionX = collisions.faceDir;
-      float rayLength = Mathf.Abs (velocity.x) + skinWidth;
-
-      if (Mathf.Abs(velocity.x) < skinWidth) {
-        rayLength = 2 * skinWidth;
-      }
+      float rayLength = Mathf.Abs (velocity.x) + horizontalRayLength;
 
       for (int i = 0; i < horizontalRayCount; i ++) {
         Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
@@ -205,18 +201,25 @@ namespace UnityPlatformer {
         }
       }
     }
-
+    /// <summary>
+    /// Tell you if there is something on the left side
+    /// NOTE ray origin is raycastOrigins.bottomLeft
+    /// </summary>
     public bool IsGroundOnLeft(float rayLengthFactor) {
       Vector3 v = new Vector3(0, 0, 0);
-      float rayLength = skinWidth * rayLengthFactor;
+      float rayLength = verticalRayLength * rayLengthFactor;
       RaycastHit2D hit = DoVerticalRay (-1.0f, 0, rayLength, ref v);
 
       return hit.collider != null;
     }
 
+    /// <summary>
+    /// Tell you if there is something on the right side
+    /// NOTE ray origin is raycastOrigins.bottomRight
+    /// </summary>
     public bool IsGroundOnRight(float rayLengthFactor) {
       Vector3 v = new Vector3(0, 0, 0);
-      float rayLength = skinWidth * rayLengthFactor;
+      float rayLength = verticalRayLength * rayLengthFactor;
       RaycastHit2D hit = DoVerticalRay (-1.0f, verticalRayCount - 1, rayLength, ref v);
 
       return hit.collider != null;
@@ -227,7 +230,7 @@ namespace UnityPlatformer {
 
       // this ray needs to be a bit longer...
       // this may need to be a parameter...
-      float rayLength = Mathf.Abs (velocity.y) + skinWidth * 2;
+      float rayLength = Mathf.Abs (velocity.y) + verticalRayLength;
 
       for (int i = 0; i < verticalRayCount; i ++) {
 
@@ -292,6 +295,12 @@ namespace UnityPlatformer {
       }
     }
 
+    /// <summary>
+    /// Disable slopes, so no more ClimbSlope/DescendSlope
+    /// This is important, because while on slope, velocity.y will be modified
+    /// If you need your velocity to remain, you must disable slopes.
+    /// NOTE use it for jumping over a slope
+    /// </summary>
     public void DisableSlopes(float resetDelay = 0.5f) {
       enableSlopes = false;
       Invoke("EnableSlopes", resetDelay);
@@ -323,8 +332,11 @@ namespace UnityPlatformer {
       return collisions.below || collisions.lastBelowFrame < graceFrames;
     }
 
+    /// <summary>
+    /// Vector pointing were to descend / slip
+    /// </summary>
     public Vector3 GetDownSlopeDir() {
-      if (collisions.slopeAngle == 0){
+      if (collisions.slopeAngle == 0) {
         return Vector3.zero;
       }
 
@@ -335,6 +347,9 @@ namespace UnityPlatformer {
       );
     }
 
+    /// <summary>
+    /// After all work, notify changes
+    /// </summary>
     public void ConsolidateCollisions() {
       if (collisions.right) {
         collisions.lastRightFrame = 0;
