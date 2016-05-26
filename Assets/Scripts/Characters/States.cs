@@ -18,6 +18,7 @@ namespace UnityPlatformer {
     MeleeAttack =         1 << 10,
     Grabbing =            1 << 11,
     Slipping =            1 << 12,
+    Liquid =              1 << 13,
 
     // debug states, so it can be displayed as text
     SlippingGrounded =    Slipping | OnGround,

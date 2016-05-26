@@ -56,6 +56,8 @@ namespace UnityPlatformer {
     [HideInInspector]
     public Ladder ladder;
     [HideInInspector]
+    public Liquid liquid;    
+    [HideInInspector]
     public Grab grab;
     [HideInInspector]
     public Vector2 lastJumpDistance {
