@@ -24,11 +24,7 @@ namespace UnityPlatformer {
     protected MeshFilter _mf;
     protected MeshRenderer _mr;
 
-    #if UNITY_EDITOR
     void OnValidate() {
-      if (_material && _mr) {
-        _mr.sharedMaterial = _material;
-      }
       _mf = GetComponent<MeshFilter>();
 
       if (_mf == null) {
@@ -50,7 +46,6 @@ namespace UnityPlatformer {
 
       _mr.hideFlags = HideFlags.HideInInspector;
     }
-    #endif
 
     // clang-format on
     void Start() {
@@ -187,11 +182,13 @@ namespace UnityPlatformer {
     }
 
     void OnDisable() {
+      OnValidate();
       //_mf.enabled = false;
       _mr.enabled = false;
     }
 
     void OnEnable() {
+      OnValidate();
       //_mf.enabled = true;
       _mr.enabled = true;
     }
