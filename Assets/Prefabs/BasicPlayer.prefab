@@ -191,6 +191,7 @@ GameObject:
   - 114: {fileID: 11488770}
   - 114: {fileID: 11483384}
   - 114: {fileID: 11462242}
+  - 114: {fileID: 11457342}
   m_Layer: 8
   m_Name: Actions
   m_TagString: Untagged
@@ -241,7 +242,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192718}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 16.295736, y: 10.646436, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 469058}
@@ -898,6 +899,7 @@ MonoBehaviour:
   area: 0
   body: {fileID: 0}
   ladder: {fileID: 0}
+  liquid: {fileID: 0}
   grab: {fileID: 0}
   fallDistance: {x: 0, y: 0}
   platform: {fileID: 0}
@@ -1036,6 +1038,7 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 1536
+  minDistanceToEnv: 0.05
   skinWidth: 0.1
   horizontalRayCount: 4
   verticalRayCount: 4
@@ -1044,8 +1047,29 @@ MonoBehaviour:
   box: {fileID: 0}
   maxClimbAngle: 30
   maxDescendAngle: 45
+  enableSlopes: 1
+  verticalRayLength: 0.2
+  horizontalRayLength: 0.2
   ignoreDescendAngle: 0
   disableWorldCollisions: 0
+--- !u!114 &11457342
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c5f068aa241c4e12944cc8982db3c65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 11435812}
+  input: {fileID: 11422300}
+  speed: 6
+  accelerationTime: 0.1
+  surfaceLevel: 1.1
+  terminalYUP: 2
+  terminalYDown: 3
 --- !u!114 &11462242
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1304,7 +1328,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: surfaceLevel
+      value: 1.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 192718}

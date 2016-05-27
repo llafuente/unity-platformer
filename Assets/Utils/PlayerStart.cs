@@ -13,10 +13,8 @@ namespace UnityPlatformer {
       base.Awake();
 
       if (setupCameraFollow) {
-        Debug.Log("SETUP CAMRA!!!");
         Character[] chars = instance.gameObject.GetComponentsInChildren<Character>();
         PlatformerInput[] inputs = instance.gameObject.GetComponentsInChildren<PlatformerInput>();
-
 
         if (chars.Length != 1) {
           Debug.LogErrorFormat("Cannot setup camera: Found {0} Character(s)", chars.Length);

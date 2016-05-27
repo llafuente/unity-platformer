@@ -45,7 +45,9 @@ namespace UnityPlatformer {
         }
       }
 
-      if (character.IsOnState(States.WallSliding)) {
+      if (character.IsOnState(States.Liquid)) {
+        Play("swimming");
+      } else if (character.IsOnState(States.WallSliding)) {
         Play("wallsliding");
       } else if (character.IsOnState(States.Slipping)) {
         Play("slipping");

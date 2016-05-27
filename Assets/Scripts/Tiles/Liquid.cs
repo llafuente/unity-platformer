@@ -13,6 +13,7 @@ namespace UnityPlatformer {
     /// NOTE need to oppose gravity, so greater in other direction
     /// </summary>
     public Vector2 boyancy = Vector2.zero;
+    public float boyancySurfaceFactor = 0.5f;
     /// <summary>
     /// </summary>
     public float surfaceOffset = 0;
@@ -32,6 +33,12 @@ namespace UnityPlatformer {
       float char_surface_level = character.GetFeetPosition().y + offset + surfaceOffset;
       return char_surface_level < GetTop().y;
     }
+
+    public float DistanceToSurface(Character character, float offset) {
+      float char_surface_level = character.GetFeetPosition().y + offset + surfaceOffset;
+      return GetTop().y - char_surface_level;
+    }
+
 
     public virtual void OnTriggerEnter2D(Collider2D o) {
       Character p = o.GetComponent<Character>();

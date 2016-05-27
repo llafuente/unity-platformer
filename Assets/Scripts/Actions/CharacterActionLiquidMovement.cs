@@ -15,6 +15,8 @@ namespace UnityPlatformer {
     public float accelerationTime = .1f;
     [Comment("Distance from feet (up)")]
     public float surfaceLevel = 1.5f;
+    public float terminalYUP = 2f;
+    public float terminalYDown = 3f;
 
     #endregion
 
@@ -51,9 +53,20 @@ namespace UnityPlatformer {
 
       // Debug.Log("-->" + character.liquid.IsBelowSurface(character, surfaceLevel));
 
-      if (character.liquid.IsBelowSurface(character, surfaceLevel)) {
-        character.velocity.x += character.liquid.boyancy.x * delta;
-        character.velocity.y += character.liquid.boyancy.y * delta;
+      float d = character.liquid.DistanceToSurface(character, surfaceLevel);
+      if (d > 0) { // below
+        float factor = (1 + character.liquid.boyancySurfaceFactor * d) * delta;
+        //Debug.Log(factor);
+        character.velocity.x += character.liquid.boyancy.x * factor;
+        character.velocity.y += character.liquid.boyancy.y * factor;
+
+        if (character.velocity.y > terminalYUP) {
+          character.velocity.y = terminalYUP;
+        }
+        if (character.velocity.y < -terminalYDown) {
+          character.velocity.y = terminalYDown;
+        }
+
       }
     }
 
