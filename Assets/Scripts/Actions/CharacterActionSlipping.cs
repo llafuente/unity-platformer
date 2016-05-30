@@ -27,6 +27,10 @@ namespace UnityPlatformer {
     /// Execute when collision below.
     /// </summary>
     public override int WantsToUpdate(float delta) {
+      if (character.IsOnState(States.Liquid)) {
+        return 0;
+      }
+
       // NOTE if Air/Ground are very different maybe:
       // if (pc2d.IsOnGround(<frames>)) it's better
       if (character.IsOnState(States.OnGround) && pc2d.collisions.slopeAngle > pc2d.maxClimbAngle) {

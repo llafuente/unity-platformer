@@ -17,6 +17,9 @@ namespace UnityPlatformer {
     public float surfaceLevel = 1.5f;
     public float terminalYUP = 2f;
     public float terminalYDown = 3f;
+    public CharacterActionJump actionJump;
+    [Comment("Exit jump.")]
+    public JumpConstantProperties jumpOff = new JumpConstantProperties(new Vector2(20, 20));
 
     #endregion
 
@@ -37,7 +40,6 @@ namespace UnityPlatformer {
     }
 
     /// <summary>
-    /// Horizontal movement
     /// </summary>
     public override void PerformAction(float delta) {
       Vector2 in2d = input.GetAxisRaw();
@@ -55,6 +57,7 @@ namespace UnityPlatformer {
 
       float d = character.liquid.DistanceToSurface(character, surfaceLevel);
       if (d > 0) { // below
+        pc2d.enableSlopes = false;
         float factor = (1 + character.liquid.boyancySurfaceFactor * d) * delta;
         //Debug.Log(factor);
         character.velocity.x += character.liquid.boyancy.x * factor;
@@ -66,7 +69,24 @@ namespace UnityPlatformer {
         if (character.velocity.y < -terminalYDown) {
           character.velocity.y = terminalYDown;
         }
+      } else {
+        pc2d.enableSlopes = true;
+      }
 
+      //TODO REVIEW this lead to some problems with orientation...
+      int faceDir;
+      if (in2d.x == 0) {
+        faceDir = 0;
+      } else {
+        character.pc2d.collisions.faceDir = faceDir = (int) Mathf.Sign(in2d.x);
+      }
+
+      if (input.IsActionHeld(actionJump.action)) {
+        character.ExitState(States.Liquid);
+
+        actionJump.Jump(new JumpConstant(character,
+          jumpOff.Clone(faceDir)
+        ));
       }
     }
 

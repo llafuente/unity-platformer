@@ -44,6 +44,7 @@ namespace UnityPlatformer {
       Character p = o.GetComponent<Character>();
       if (p) {
         p.liquid = this;
+        p.EnterArea(Areas.Liquid);
       }
     }
 
@@ -51,6 +52,7 @@ namespace UnityPlatformer {
       Character p = o.GetComponent<Character>();
       if (p && p.liquid == this) {
         p.liquid = null;
+        p.ExitArea(Areas.Liquid);
       }
     }
   }

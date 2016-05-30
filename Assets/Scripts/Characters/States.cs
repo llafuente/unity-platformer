@@ -23,6 +23,9 @@ namespace UnityPlatformer {
     // debug states, so it can be displayed as text
     SlippingGrounded =    Slipping | OnGround,
     SlippingSlopeGrounded =    Slipping | OnSlope | OnGround,
+    FallingLiquid = Falling | Liquid,
+    OnGroundLiquid = OnGround | Liquid,
+
     //Dashing,
     //Frozen,
     //FreedomState

@@ -242,7 +242,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192718}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.295736, y: 10.646436, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 469058}
@@ -1070,6 +1070,9 @@ MonoBehaviour:
   surfaceLevel: 1.1
   terminalYUP: 2
   terminalYDown: 3
+  actionJump: {fileID: 11446736}
+  jumpOff:
+    initialVelocity: {x: 20, y: 20}
 --- !u!114 &11462242
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1332,6 +1335,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: surfaceLevel
       value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -14,7 +14,9 @@ namespace UnityPlatformer {
       get { return _material; }
       set {
         _material = value;
-        _mr.sharedMaterial = _material;
+        if (_mr == null) {
+          _mr.sharedMaterial = _material;
+        }
       }
     }
 
@@ -26,24 +28,22 @@ namespace UnityPlatformer {
 
     void OnValidate() {
       _mf = GetComponent<MeshFilter>();
+      _mr = GetComponent<MeshRenderer>();
 
       if (_mf == null) {
         _mf = gameObject.AddComponent<MeshFilter>();
       }
 
-      _mf.hideFlags = HideFlags.HideInInspector;
-
-      _mr = GetComponent<MeshRenderer>();
-
       if (_mr == null) {
         _mr = gameObject.AddComponent<MeshRenderer>();
-
-        _mr.sharedMaterial = material != null ? material : _default_material;
-        _mr.receiveShadows = false;
-        _mr.shadowCastingMode = ShadowCastingMode.Off;
-        _mr.reflectionProbeUsage = ReflectionProbeUsage.Off;
       }
 
+      _mr.receiveShadows = false;
+      _mr.shadowCastingMode = ShadowCastingMode.Off;
+      _mr.reflectionProbeUsage = ReflectionProbeUsage.Off;
+      _mr.sharedMaterial = material != null ? material : _default_material;
+
+      _mf.hideFlags = HideFlags.HideInInspector;
       _mr.hideFlags = HideFlags.HideInInspector;
     }
 

@@ -6,5 +6,6 @@ namespace UnityPlatformer {
     None =                0,
     Ladder =              1,
     Grabbable =           1 << 2,
+    Liquid =              1 << 3,
   }
 }

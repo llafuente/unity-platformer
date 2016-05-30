@@ -108,6 +108,12 @@ namespace UnityPlatformer {
         return priority;
       }
 
+      // while on a liquid player can be onGround, so it can jump...
+      // disable it
+      if (character.IsOnState(States.Liquid)) {
+        return 0;
+      }
+
       if (jumpHeld) {
         if (pc2d.IsOnGround(_graceJumpFrames) && !jumping) {
           currentJump = defaultJump;
