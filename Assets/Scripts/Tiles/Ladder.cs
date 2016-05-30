@@ -63,23 +63,16 @@ namespace UnityPlatformer {
     }
 
     public virtual void OnTriggerEnter2D(Collider2D o) {
-      Character p = o.GetComponent<Character>();
-      if (p) {
-        EnableLadder (p);
-      }
-    }
-
-    public virtual void OnTriggerStay2D(Collider2D o) {
-      Character p = o.GetComponent<Character>();
-      if (p) {
-        //EnableLadder (p);
+      HitBox h = o.GetComponent<HitBox>();
+      if (h && h.type == HitBoxType.EnterAreas) {
+        EnableLadder(h.owner.character);
       }
     }
 
     public virtual void OnTriggerExit2D(Collider2D o) {
-      Character p = o.GetComponent<Character>();
-      if (p) {
-        DisableLadder (p);
+      HitBox h = o.GetComponent<HitBox>();
+      if (h && h.type == HitBoxType.EnterAreas) {
+        DisableLadder(h.owner.character);
       }
     }
   }

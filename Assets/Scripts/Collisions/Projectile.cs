@@ -80,7 +80,7 @@ namespace UnityPlatformer {
     public virtual void OnTriggerEnter2D(Collider2D o) {
       //Debug.Log(this.name + " collide with: " + o.gameObject + "@" + o.gameObject.layer);
       if (Utils.layermask_contains(collisionMask, o.gameObject.layer)) {
-        var dst = o.gameObject.GetComponent<Hitbox> ();
+        var dst = o.gameObject.GetComponent<HitBox> ();
         if (dst == null) {
           //Debug.LogWarning("Destroy projectile");
         } else {

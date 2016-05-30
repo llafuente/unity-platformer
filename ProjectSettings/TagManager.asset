@@ -29,10 +29,10 @@ TagManager:
   - StaticGeometry
   - MovingPlatforms
   - Enemy
-  - Hitboxes
+  - HitBoxes
   - Ladders
   - Grabable
-  - 
+  - Liquids
   - 
   - 
   - 

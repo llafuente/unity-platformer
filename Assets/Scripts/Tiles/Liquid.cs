@@ -41,18 +41,22 @@ namespace UnityPlatformer {
 
 
     public virtual void OnTriggerEnter2D(Collider2D o) {
-      Character p = o.GetComponent<Character>();
-      if (p) {
+      HitBox h = o.GetComponent<HitBox>();
+      if (h && h.type == HitBoxType.EnterAreas) {
+        Character p = h.owner.character;
         p.liquid = this;
         p.EnterArea(Areas.Liquid);
       }
     }
 
     public virtual void OnTriggerExit2D(Collider2D o) {
-      Character p = o.GetComponent<Character>();
-      if (p && p.liquid == this) {
-        p.liquid = null;
-        p.ExitArea(Areas.Liquid);
+      HitBox h = o.GetComponent<HitBox>();
+      if (h && h.type == HitBoxType.EnterAreas) {
+        Character p = h.owner.character;
+        if (p.liquid == this) { // REVIEW with this liquid should overlap
+          p.liquid = null;
+          p.ExitArea(Areas.Liquid);
+        }
       }
     }
   }

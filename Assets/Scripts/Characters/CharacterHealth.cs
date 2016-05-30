@@ -145,7 +145,7 @@ namespace UnityPlatformer {
     }
     /// <summary>
     /// Kill the character even if it's invulnerable
-    /// TODO handle direction here or in the Hitbox but must be done :)
+    /// TODO handle direction here or in the HitBox but must be done :)
     /// </summary>
     public void Damage(DamageType dt) {
       if (Damage(dt.amount)) {
@@ -210,12 +210,12 @@ namespace UnityPlatformer {
     }
 
     /// <summary>
-    /// Disable Hitbox(es) and DamageType(s)
+    /// Disable HitBox(es) and DamageType(s)
     /// Trigger onDeath
     /// </summary>
     public void Die() {
-      Debug.Log(this.name + " disable all Hitbox");
-  	  var lch = GetComponentsInChildren<Hitbox> ();
+      Debug.Log(this.name + " disable all HitBox");
+  	  var lch = GetComponentsInChildren<HitBox> ();
       foreach (var x in lch) {
   	     x.gameObject.SetActive(false);
       }

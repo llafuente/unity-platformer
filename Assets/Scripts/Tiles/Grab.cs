@@ -39,29 +39,16 @@ namespace UnityPlatformer {
     }
 
     public virtual void OnTriggerEnter2D(Collider2D o) {
-      Hitbox h = o.GetComponent<Hitbox>();
-      if (h) {
-        EnableGrab (h.owner.character);
-      } else {
-        Character p = o.GetComponent<Character>();
-        if (p) {
-          EnableGrab (p);
-        }
+      HitBox h = o.GetComponent<HitBox>();
+      if (h && h.type == HitBoxType.EnterAreas) {
+        EnableGrab(h.owner.character);
       }
     }
 
-    public virtual void OnTriggerStay2D(Collider2D o) {
-    }
-
     public virtual void OnTriggerExit2D(Collider2D o) {
-      Hitbox h = o.GetComponent<Hitbox>();
-      if (h) {
-        DisableGrab (h.owner.character);
-      } else {
-        Character p = o.GetComponent<Character>();
-        if (p) {
-          DisableGrab (p);
-        }
+      HitBox h = o.GetComponent<HitBox>();
+      if (h && h.type == HitBoxType.EnterAreas) {
+        DisableGrab(h.owner.character);
       }
     }
   }
