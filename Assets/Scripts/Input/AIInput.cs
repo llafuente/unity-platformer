@@ -15,11 +15,15 @@ namespace UnityPlatformer {
   public class AIInput : PlatformerInput {
     Vector2 axis = new Vector2(0, 0);
 
+    public override void Update() {
+      base.Update();
+      actions = actions;
+    }
     public void EnableAction(string action) {
-      actions[action] = true;
+      actions[action] = InputStates.On;
     }
     public void DisableAction(string action) {
-      actions[action] = false;
+      actions[action] = InputStates.Off;
     }
     public void SetAxis(Vector2 v) {
       axis = v;
@@ -31,23 +35,23 @@ namespace UnityPlatformer {
       axis.x = x;
     }
     public override bool IsActionHeld(string action) {
-      bool value;
+      InputStates value;
       if (actions.TryGetValue(action, out value)) {
-        return value;
+        return value > InputStates.Off;
       }
       return false;
     }
     public override bool IsActionDown(string action) {
-      bool value;
+      InputStates value;
       if (actions.TryGetValue(action, out value)) {
-        return value;
+        return value == InputStates.On;
       }
       return false;
     }
     public override bool IsActionUp(string action) {
-      bool value;
+      InputStates value;
       if (actions.TryGetValue(action, out value)) {
-        return !value;
+        return value == InputStates.Off;
       }
       return false;
     }

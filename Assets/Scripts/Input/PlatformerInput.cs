@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using System;
 
 namespace UnityPlatformer {
+  public enum InputStates {
+    Off = 0,
+    On = 1,
+    Held = 2,
+  }
+
   /// <summary>
   /// Handle input for: Players and IA
   /// The Action concept is the same as button for keyboards
@@ -17,6 +23,7 @@ namespace UnityPlatformer {
   /// </summary>
   public abstract class PlatformerInput : MonoBehaviour
   {
+
     [Comment("List of actions that will fire events")]
     public List<string> listenActions = new List<string> {"Jump", "Attack"};
 
@@ -25,32 +32,32 @@ namespace UnityPlatformer {
     public InputActionDelegate onActionDown;
 
     // cache
-    protected Dictionary<string, bool> actions = new Dictionary<string, bool>();
+    protected Dictionary<string, InputStates> actions = new Dictionary<string, InputStates>();
 
     public void Start() {
       foreach (var button in listenActions) {
-        actions[button] = false;
+        actions[button] = InputStates.Off;
       }
     }
 
-    public void Update() {
+    public virtual void Update() {
       foreach (var button in listenActions) {
         if (IsActionHeld(button)) {
-          if (!actions[button]) {
+          if (actions[button] != InputStates.Held) {
             if (onActionDown != null) {
               onActionDown(button);
             }
           }
 
-          actions[button] = true;
+          actions[button] = InputStates.Held;
         } else {
-          if (actions[button]) {
+          if (actions[button] != InputStates.Off) {
             if (onActionUp != null) {
               onActionUp(button);
             }
           }
 
-          actions[button] = false;
+          actions[button] = InputStates.Off;
         }
       }
     }

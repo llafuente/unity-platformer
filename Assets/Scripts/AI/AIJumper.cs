@@ -17,7 +17,7 @@ namespace UnityPlatformer {
       Right = 1
     };
 
-    public Facing initialFacing;
+    public Facing initialFacing = Facing.Left;
     [Comment("Distance to test if ground is on left/right side. Helps when Enemy standing on platform moving down.")]
     public float rayLengthFactor = 1.0f;
 
@@ -30,7 +30,6 @@ namespace UnityPlatformer {
     #endregion
 
     public void Start() {
-      input.EnableAction("Jump");
       pc2d.onLeftWall += OnLeftWall;
       pc2d.onRightWall += OnRightWall;
 
@@ -54,6 +53,10 @@ namespace UnityPlatformer {
     }
 
     public override void ManagedUpdate(float delta) {
+      if (!input.IsActionHeld("Jump")) {
+        input.EnableAction("Jump");
+      }
+
       base.ManagedUpdate(delta);
     }
   }

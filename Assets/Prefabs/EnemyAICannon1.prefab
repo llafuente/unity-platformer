@@ -99,7 +99,7 @@ GameObject:
   - 33: {fileID: 3390558}
   - 23: {fileID: 2343480}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: HitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -314,7 +314,7 @@ MeshRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 2100000, guid: b8c5e6f7b98848843a56c1c10d293a59, type: 2}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -543,6 +543,7 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 1536
+  minDistanceToEnv: 0.08
   skinWidth: 0.1
   horizontalRayCount: 4
   verticalRayCount: 4
@@ -551,6 +552,10 @@ MonoBehaviour:
   box: {fileID: 0}
   maxClimbAngle: 30
   maxDescendAngle: 30
+  enableSlopes: 1
+  verticalRayLength: 0.2
+  horizontalRayLength: 0.2
+  ignoreDescendAngle: 0
   disableWorldCollisions: 0
 --- !u!114 &11435234
 MonoBehaviour:
@@ -631,10 +636,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7294c85c49e4c304d87d4204d51080c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  part: 0
   collideWith:
     serializedVersion: 2
     m_Bits: 4096
   owner: {fileID: 11465536}
+  type: 0
 --- !u!114 &11465536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -651,6 +658,7 @@ MonoBehaviour:
   startingLives: 1
   maxLives: 1
   invulnerabilityTimeAfterDamage: 2
+  character: {fileID: 0}
   health: 0
   lives: 0
 --- !u!114 &11474962
@@ -666,16 +674,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravityOverride: {x: 0, y: 0}
   fallingTime: 0.1
+  groundGraceTime: 0.05
   minVelocity: 0.05
   actions: []
   state: 0
   area: 0
   body: {fileID: 0}
   ladder: {fileID: 0}
+  liquid: {fileID: 0}
+  grab: {fileID: 0}
   fallDistance: {x: 0, y: 0}
   platform: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
-  controller: {fileID: 0}
+  pc2d: {fileID: 0}
   health: {fileID: 0}
   input: {fileID: 11454956}
   fireDelay: 5
