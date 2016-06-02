@@ -1,5 +1,9 @@
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine.UI;
+
 namespace UnityPlatformer {
   public enum CharacterPart {
     None =          0,
@@ -33,6 +37,27 @@ namespace UnityPlatformer {
     public HitBoxType type = HitBoxType.DealDamage;
 
     #endregion
+
+#if UNITY_EDITOR
+    [DrawGizmo(GizmoType.InSelectionHierarchy | GizmoType.NotInSelectionHierarchy)]
+    void OnDrawGizmos() {
+
+        switch(type) {
+        case HitBoxType.DealDamage:
+          Gizmos.color = Color.red;
+          break;
+        case HitBoxType.RecieveDamage:
+          Gizmos.color = Color.yellow;
+          break;
+        case HitBoxType.EnterAreas:
+          Gizmos.color = Color.green;
+          break;
+        }
+
+        BoxCollider2D box = GetComponent<BoxCollider2D>();
+        Gizmos.DrawWireCube(transform.position + (Vector3)box.offset, box.size);
+    }
+#endif
 
     void OnTriggerEnter2D(Collider2D o) {
       //Debug.Log(this.name + " collide with: " + o.gameObject);
