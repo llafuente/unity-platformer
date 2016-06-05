@@ -440,7 +440,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eb37470eb85c734695f61d06d6bf5b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityOverride: {x: 0, y: 0}
   fallingTime: 0.1
   groundGraceTime: 0.05
   minVelocity: 0.05
@@ -481,11 +480,13 @@ MonoBehaviour:
   horizontalRaySpacing: 0
   verticalRaySpacing: 0
   box: {fileID: 0}
+  gravityOverride: {x: 0, y: 0}
   maxClimbAngle: 30
   maxDescendAngle: 30
   enableSlopes: 1
   verticalRayLength: 0.2
   horizontalRayLength: 0.2
+  minTranslation: 0.01
   ignoreDescendAngle: 0
   disableWorldCollisions: 0
 --- !u!114 &11421618
