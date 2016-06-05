@@ -62,12 +62,19 @@ namespace UnityPlatformer {
     void OnTriggerEnter2D(Collider2D o) {
       //Debug.Log(this.name + " collide with: " + o.gameObject);
       if (Utils.layermask_contains(collideWith, o.gameObject.layer)) {
-        var dst = o.gameObject.GetComponent<DamageType> ();
-        if (dst == null) {
-          Debug.LogWarning("Try to damage something that is not a: DamageType. Adjust collideWith");
-        } else {
-          owner.Damage(dst);
+        var dst_hb = o.gameObject.GetComponent<HitBox> ();
+
+        // do not deal damage to 'myself' and hitbox deal damage
+        //if (dst_hb && dst_hb.owner != owner && dst_hb.type == HitBoxType.DealDamage) {
+        if (dst_hb && dst_hb.type == HitBoxType.DealDamage) {
+          var dst = o.gameObject.GetComponent<DamageType> ();
+          if (dst == null) {
+            Debug.LogWarning("Try to damage something that is not a: DamageType. Adjust collideWith or type (HitBoxType.DealDamage)");
+          } else if (owner != dst.causer) {
+            owner.Damage(dst);
+          }
         }
+
       }
     }
 

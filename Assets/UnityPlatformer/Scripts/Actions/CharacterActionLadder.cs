@@ -135,7 +135,7 @@ namespace UnityPlatformer {
 
       // TODO transition
       if (centering) {
-        float ladderCenter = character.ladder.body.bounds.center.x;
+        float ladderCenter = character.ladder.GetComponent<BoxCollider2D>().bounds.center.x;
         float characterX = character.GetCenter().x;
         if (Math.Abs(characterX - ladderCenter) < 0.05) {
           centering = false;

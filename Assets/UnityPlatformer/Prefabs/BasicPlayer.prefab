@@ -34,7 +34,7 @@ GameObject:
   - 114: {fileID: 11422012}
   - 61: {fileID: 6177668}
   - 50: {fileID: 5070364}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EnterArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -752,7 +752,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 1.7}
+  m_Size: {x: 0.9, y: 0.25}
 --- !u!61 &6142532
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -794,7 +794,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 1.7}
+  m_Size: {x: 0.9, y: 1.6}
 --- !u!95 &9574616
 Animator:
   serializedVersion: 3
@@ -961,7 +961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b112fb41d3e3c438570b33e6158a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _size: {x: 0.9, y: 1.7}
+  _size: {x: 0.9, y: 1.6}
 --- !u!114 &11435812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1235,7 +1235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b112fb41d3e3c438570b33e6158a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _size: {x: 0.9, y: 1.7}
+  _size: {x: 0.9, y: 0.25}
 --- !u!114 &11479932
 MonoBehaviour:
   m_ObjectHideFlags: 1

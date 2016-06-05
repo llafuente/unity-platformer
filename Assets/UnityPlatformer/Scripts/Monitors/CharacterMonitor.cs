@@ -25,7 +25,7 @@ namespace UnityPlatformer {
         "Velocity: {7} - {8}\n",
         character.area.ToString(),
         character.state.ToString(),
-        character.ladder,
+        character.ladder ? character.ladder.gameObject : null,
         character.ladder ? character.ladder.IsAboveTop(character) : false,
         character.ladder ? character.ladder.IsBelowBottom(character) : false,
         character.platform,
