@@ -14,8 +14,8 @@ namespace UnityPlatformer {
       text = string.Format(
         "above? {0} @ {4}\n"+
         "below? {1} @ {5}\n"+
-        "left? {2} @ {6}\n"+
-        "right? {3} @ {7}\n"+
+        "left? {2}({16}) @ {6}\n"+
+        "right? {3}({17}) @ {7}\n"+
 
         "climbingSlope? {8}\n"+
         "descendingSlope? {9}\n"+
@@ -42,7 +42,9 @@ namespace UnityPlatformer {
         pc2d.collisions.fallingThroughPlatform,
         pc2d.collisions.standingOnPlatform,
         pc2d.collisions.distanceToSlopeStart,
-        pc2d.collisions.slopeNormal
+        pc2d.collisions.slopeNormal,
+        pc2d.collisions.leftHitsIdx,
+        pc2d.collisions.rightHitsIdx
       );
     }
   }

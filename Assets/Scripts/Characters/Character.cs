@@ -14,15 +14,6 @@ namespace UnityPlatformer {
   public class Character: MonoBehaviour, IUpdateEntity {
     #region public
 
-    [Comment("Override Configuration.gravity, (0,0) means use global.")]
-    public Vector2 gravityOverride = Vector2.zero;
-
-    public Vector2 gravity {
-      get {
-        return gravityOverride == Vector2.zero ? Configuration.instance.gravity : gravityOverride;
-      }
-    }
-
     [Comment("Time to wait before change state to falling.")]
     public float fallingTime = 0.1f;
     [Comment("Time before disable OnGround State.")]
@@ -40,6 +31,9 @@ namespace UnityPlatformer {
     public HurtCharacter onHurtCharacter;
     public delegate void StateChange(States before, States after);
     public StateChange onStateChange;
+    public delegate void CharacterDelegate(Character character, float delta);
+    public CharacterDelegate onBeforeMove;
+    public CharacterDelegate onAfterMove;
 
     #endregion
 
@@ -56,7 +50,7 @@ namespace UnityPlatformer {
     [HideInInspector]
     public Ladder ladder;
     [HideInInspector]
-    public Liquid liquid;    
+    public Liquid liquid;
     [HideInInspector]
     public Grab grab;
     [HideInInspector]
@@ -151,7 +145,7 @@ namespace UnityPlatformer {
 
       if (Utils.biton((int)a, (int)PostUpdateActions.APPLY_GRAVITY)) {
         // TODO REVIEW x/y gravity...
-        velocity.y += gravity.y * delta;
+        velocity.y += pc2d.gravity.y * delta;
       }
 
       if (!Utils.biton((int)a, (int)PostUpdateActions.WORLD_COLLISIONS)) {
@@ -166,7 +160,16 @@ namespace UnityPlatformer {
         velocity.y = 0.0f;
       }
 
+      if (onBeforeMove != null) {
+        onBeforeMove(this, delta);
+      }
+
       pc2d.Move(velocity * delta);
+
+      if (onAfterMove != null) {
+        onAfterMove(this, delta);
+      }
+
 
       // this is meant to fix jump and falling hit something unexpected
       if (pc2d.collisions.above || pc2d.collisions.below) {

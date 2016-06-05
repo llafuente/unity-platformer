@@ -13,9 +13,10 @@ TagManager:
   - OneWayPlatforms
   - MovingPlatform&OneWayPlatforms
   - MovingPlatformThrough&OneWayPlatforms
-  - TestTag1
+  - Boxes
   - TestTag2
   - TestTag3
+  - New Tag
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - Ladders
   - Grabable
   - Liquids
-  - 
+  - Box
   - 
   - 
   - 

@@ -20,6 +20,7 @@ namespace UnityPlatformer {
     public float waitTime = 0;
     [Range(0,2)]
     public float easeAmount = 0;
+    bool disableDownRayCast = false;
 
     public delegate void ReachWaypoint(int index);
     /// <summary>
@@ -214,7 +215,7 @@ namespace UnityPlatformer {
       // Vertically moving platform
       // Disable for OWP moving down otherwise will push-down characters
       if (
-        (velocity.y < 0 &&  !Configuration.IsOneWayPlatform(gameObject)) ||
+        (velocity.y < 0 &&  !Configuration.IsOneWayPlatform(gameObject) && !disableDownRayCast) ||
         velocity.y > 0
       ) {
         float rayLength = Mathf.Abs (velocity.y) + skinWidth + Configuration.instance.minDistanceToEnv;
@@ -265,13 +266,21 @@ namespace UnityPlatformer {
         // what stays is out of the platform now: null
         foreach (var i in prevPassengers) {
           Character c = i.gameObject.GetComponent<Character>();
-          c.platform = null;
+          if (c == null) {
+            Debug.LogWarning("Found a passenger that is not a character!", i.gameObject);
+          } else {
+            c.platform = null;
+          }
         }
       }
       // what is updated, is on the platform: set
       foreach (var i in movedPassengers) {
         Character c = i.gameObject.GetComponent<Character>();
-        c.platform = this;
+        if (c == null) {
+          Debug.LogWarning("Found a passenger that is not a character!", i.gameObject);
+        } else {
+          c.platform = this;
+        }
       }
       prevPassengers = movedPassengers;
     }

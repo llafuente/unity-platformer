@@ -28,12 +28,24 @@ SOFTWARE.
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace UnityPlatformer {
   /// <summary>
   /// Handle collisions
   /// </summary>
   public class PlatformerCollider2D : RaycastController {
+    #region public
+
+    [Comment("Override Configuration.gravity, (0,0) means use global.")]
+    public Vector2 gravityOverride = Vector2.zero;
+
+    public Vector2 gravity {
+      get {
+        return gravityOverride == Vector2.zero ? Configuration.instance.gravity : gravityOverride;
+      }
+    }
+
     public float maxClimbAngle = 45.0f;
     public float maxDescendAngle = 45.0f;
     public bool enableSlopes = true;
@@ -45,6 +57,10 @@ namespace UnityPlatformer {
     /// NOTE should be greater than skinWidth
     ///</summary>
     public float horizontalRayLength = 0.2f;
+    ///<summary>
+    /// This prevent unwanted micro changes in orientation/falling for example...
+    ///</summary>
+    public float minTranslation = 0.01f;
 
     // callbacks
     public Action onRightWall;
@@ -58,18 +74,21 @@ namespace UnityPlatformer {
     /// <summary>
     [HideInInspector]
     public bool ignoreDescendAngle = false;
-
-
     [HideInInspector]
     public CollisionInfo collisions;
     [HideInInspector]
     public CollisionInfo pCollisions;
-
     [HideInInspector]
     public bool disableWorldCollisions = false;
 
+    #endregion
+
+    int previousLayer;
+
     public override void Start() {
       base.Start ();
+      collisions = new CollisionInfo();
+      pCollisions = new CollisionInfo();
       collisions.faceDir = 1;
     }
 
@@ -79,6 +98,11 @@ namespace UnityPlatformer {
     /// NOTE collisions.velocity has the real velocity applied
     /// </summary>
     public void Move(Vector3 velocity) {
+      // swap layers, this makes possible to collide with something inside my own layer
+      // like boxes
+      previousLayer = gameObject.layer;
+      gameObject.layer = 2; // Ignore Raycast
+
       UpdateRaycastOrigins ();
       // set previous collisions and reset current one
       pCollisions = collisions;
@@ -111,9 +135,18 @@ namespace UnityPlatformer {
         }
       }
 
+      if (Math.Abs(velocity.x) < minTranslation) {
+        velocity.x = 0;
+      }
+      if (Math.Abs(velocity.y) < minTranslation) {
+        velocity.y = 0;
+      }
+
       transform.Translate (velocity);
       collisions.velocity = velocity;
       ConsolidateCollisions ();
+
+      gameObject.layer = previousLayer;
     }
 
     /// <summary>
@@ -190,6 +223,12 @@ namespace UnityPlatformer {
           // ignore oneWayPlatforms, aren't walls
           if (Configuration.IsOneWayPlatform(hit.collider)) {
             continue;
+          }
+
+          if (directionX == -1) {
+            collisions.PushLeftCollider(hit);
+          } else {
+            collisions.PushRightCollider(hit);
           }
 
           float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
@@ -393,7 +432,7 @@ namespace UnityPlatformer {
       }
     }
 
-    public struct CollisionInfo {
+    public class CollisionInfo {
       // current
       public bool above, below;
       public bool left, right;
@@ -415,6 +454,23 @@ namespace UnityPlatformer {
       public bool fallingThroughPlatform;
       public bool standingOnPlatform;
 
+      // colliders
+      const int MAX_COLLIDERS = 3;
+      public RaycastHit2D[] leftHits;
+      public int leftHitsIdx;
+      public RaycastHit2D[] rightHits;
+      public int rightHitsIdx;
+
+      public CollisionInfo() {
+        leftHits = new RaycastHit2D[MAX_COLLIDERS];
+        rightHits = new RaycastHit2D[MAX_COLLIDERS];
+
+        for (int i = 0; i < leftHitsIdx; ++i) {
+          leftHits[i] = new RaycastHit2D();
+          rightHits[i] = new RaycastHit2D();
+        }
+      }
+
       public void Reset() {
         above = below = false;
         left = right = false;
@@ -429,6 +485,47 @@ namespace UnityPlatformer {
         slopeAngle = 0;
         slopeNormal = Vector3.zero;
         distanceToSlopeStart = 0;
+
+        leftHitsIdx = 0;
+        rightHitsIdx = 0;
+      }
+
+      public RaycastHit2D GetRightCollider(int i) {
+        return i < rightHitsIdx ? rightHits[i] : new RaycastHit2D();
+      }
+
+      public RaycastHit2D GetLeftCollider(int i) {
+        return i < leftHitsIdx ? leftHits[i] : new RaycastHit2D();
+      }
+
+      public void PushLeftCollider(RaycastHit2D c) {
+        if (leftHitsIdx == MAX_COLLIDERS) {
+          return; // max reached
+        }
+
+        // no duplicates
+        for (int i = 0; i < leftHitsIdx; ++i) {
+          if (leftHits[i].collider == c.collider) {
+            return;
+          }
+        }
+
+        leftHits[leftHitsIdx++] = c;
+      }
+
+      public void PushRightCollider(RaycastHit2D c) {
+        if (rightHitsIdx == MAX_COLLIDERS) {
+          return; // max reached
+        }
+
+        // no duplicates
+        for (int i = 0; i < rightHitsIdx; ++i) {
+          if (rightHits[i].collider == c.collider) {
+            return;
+          }
+        }
+
+        rightHits[rightHitsIdx++] = c;
       }
     }
   }

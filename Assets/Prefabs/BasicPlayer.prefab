@@ -224,6 +224,7 @@ GameObject:
   - 114: {fileID: 11483384}
   - 114: {fileID: 11462242}
   - 114: {fileID: 11457342}
+  - 114: {fileID: 11413326}
   m_Layer: 8
   m_Name: Actions
   m_TagString: Untagged
@@ -751,7 +752,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.1}
+  m_Size: {x: 0.9, y: 1.7}
 --- !u!61 &6142532
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -834,6 +835,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _size: {x: 0.8, y: 1.8}
+--- !u!114 &11413326
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 155ad8469f58cca4ca105cee6085ab67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 11435812}
+  input: {fileID: 11422300}
+  speed: 4
+  pushingStartTime: 0.5
+  priority: 20
 --- !u!114 &11421328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -956,7 +973,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555ac947cf7104549a98e34d122f32ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityOverride: {x: 0, y: 0}
   fallingTime: 0.1
   groundGraceTime: 0.05
   minVelocity: 0.05
@@ -1095,11 +1111,13 @@ MonoBehaviour:
   horizontalRaySpacing: 0
   verticalRaySpacing: 0
   box: {fileID: 0}
+  gravityOverride: {x: 0, y: 0}
   maxClimbAngle: 30
   maxDescendAngle: 45
   enableSlopes: 1
   verticalRayLength: 0.2
   horizontalRayLength: 0.2
+  minTranslation: 0.01
   ignoreDescendAngle: 0
   disableWorldCollisions: 0
 --- !u!114 &11457342

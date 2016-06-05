@@ -89,7 +89,7 @@ namespace UnityPlatformer {
       // terminal velocity
       // NOTE apply -gravity to compensate
       if (character.velocity.y < -wallSlideSpeedMax) {
-        character.velocity.y = -wallSlideSpeedMax - character.gravity.y * delta;
+        character.velocity.y = -wallSlideSpeedMax - character.pc2d.gravity.y * delta;
       }
 
       // TODO manage in frames
