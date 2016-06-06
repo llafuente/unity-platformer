@@ -1,4 +1,4 @@
-#define UP_USE_SPRITER
+//#define UP_USE_SPRITER
 
 using System;
 using System.Collections.Generic;

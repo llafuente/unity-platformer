@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityPlatformer {
   /// <summary>
-  /// Falling through platforms while pressing down
+  /// Fall through platforms while pressing down
   /// </summary>
   public class CharacterActionMovingPlatforms: CharacterAction {
 

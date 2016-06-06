@@ -5,6 +5,7 @@ namespace UnityPlatformer {
   /// <summary>
   /// Melee attack
   /// NOTE Can't be interrupted atm
+  /// TODO animationName (so it supports multiple melee attacks)
   /// </summary>
   public class CharacterActionMelee: CharacterActionTimed {
     #region public

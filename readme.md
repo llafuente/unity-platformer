@@ -5,19 +5,22 @@ Based on https://github.com/SebLague/2DPlatformer-Tutorial evolve
 in it's own beast.
 
 ## Features
-* Moving platforms.
-* One way platforms.
-* Ladders.
+* Moving platforms
+* One way platforms
+* Ladders
 * AI (Patrol, Projectiles, Jumpers, etc...)
 * Input abstraction (this will help if you add a pad or touch controls)
 * Character-handled-actions. Instead of a big class mapping all actions,
 each Action (Jump, Climb ladder, ground/air movement) it's a separate component.
-* Projectiles.
+* Projectiles
 * Melee attacks
-* Wallstick/WallJump.
-* Update everything in order (UpdateManager). This allow total control over
-who is updated first and act accordingly.
+* Wallstick/WallJump
+* Update everything in order (UpdateManager).
+
+  This allow total control over who is updated first and act accordingly
+
 * Slopes
+* Water (liquid)
 
 ## Known issues
 
@@ -29,25 +32,101 @@ who is updated first and act accordingly.
 
 ## Caveats
 
-### Jump: hang time
+[https://github.com/llafuente/unity-platformer/labels/caveat](https://github.com/llafuente/unity-platformer/labels/caveat)
 
-If you want hanging in max Jump (like Peach in Mario Bross) with a little
-up/down movement, like the original, you have to do it in your animation.
+## Character Setup
 
-It can't be done at CharacterActionJump, because Falling state will be set,
-when moving down and it will be impossible to animate.
+### Body
 
-### Jump: grace jump time
+#### Physics body (BoxCollider2D: used for collisions)
 
-Could be unexpected to see a double-jump just by increasing graceJumpTime.
-This value should be low enough: 0.2f
+How much the real body extend, used to calculate collisions, raycast, etc.
 
-### One Way Platforms (Height)
+#### Real body (HitBox: EnterAreas)
 
-The collider try to be simple enough. If OWP are thick you will see
-characters "climbing" when start falling and their feet are inside the OWP.
+This is the body used to check where the character is in Ladders, Grabbables, Liquids...
 
-OWP Height should be around `Character.skinWidth` ~ 0.1-0.2
+#### HitBox: Recieve damage / Deal Damage
+
+Where Character recieve or deal damage. *NOTE* Cannot overlap.
+
+
+### Actions
+
+* GroundMovement
+
+  Ground horizontal movement. keyboard: right-left while OnGround
+
+  *NOTE*: Slope rules are not here, are part of PlatformCollider2D
+
+* AirMovement
+
+  Airborne horizontal movement. keyboard: right-left while not "OnGround"
+
+* Jump
+
+  Variable Jump, also handle the rest of custom jumps. keyboard: space
+
+* Grab
+
+  When Character enter a Grabbable area, first position player in the "desired position".
+
+  Then Stop all movement.
+
+  To Dismount press Down, or jump.
+
+* Ladder
+
+  When a Character enter a Ladder and is pressing Up/Down, start climbing the
+  ladder. keyboard: up/down
+
+  Dismount pressing left/right or jumping.
+
+* LiquidMovement
+
+  When a Character enter "enough" in a Liquid Liquid the liquid will
+  oppose gravity and give the Bouyancy sensation.
+
+  Character can move horizontally and exit Jumping or runnning in a slope.
+
+* Melee
+
+  When an action (button) is held perform and attack.
+
+  It's basically a succession of DamageArea overtime.
+
+* MovingPlatforms
+
+  Fall through platforms while pressing down.
+
+* Projectile
+
+  Fire projectiles with given offest and difference fire modes.
+
+* Slipping
+
+  Slip when slope can't be climbed.
+
+  While slipping player cannot move horizontally, it's forced down slope.
+
+* WallStick
+
+  Stick to walls, and perform wall-jumps.
+
+
+### Input
+
+### DefaultInput
+
+Keyboard and CnControls.
+
+### AIInput
+
+Fake input used by AI to perform actions.
+This make very easy to code AI because you just need to think in key press/up,
+and configure the AI the same way you main character works.
+
+
 
 ## FAQ
 
@@ -82,7 +161,7 @@ There are many test scenes to see how things are built.
 
 Most of the components are very reusable-chainable. The best example
 is IA, that it's implemented as a fake Input and depends on what
-action you add you can achieve many behaviors.
+action you add you can achieve many different behaviors with no extra code.
 
 <a name="external-libraries"></a>
 ### External libraries
@@ -95,10 +174,7 @@ that you will find in the first line.
 
 * `CharacterAnimatorSpriter.cs`  (UP_USE_SPRITER)
 
-  Enabled by default (sorry ^^)
-
   Require [SpriterDotNet](https://github.com/loodakrawa/SpriterDotNet).Unity
-
 
 * `DefaultInput.cs` (UP_USE_CN_INPUT_MANAGER)
 
@@ -113,27 +189,32 @@ Singletons, many classes rely on them being initialized first.
 Go to: Edit/ProjectSettings/Script Execution Order and add them with negative
 priority.
 
-This is already done in this project, Just for reference is you integrate
-the codebase in your project.
+This is already done in this project, but don't forget it if you use your custom
+project setting.
 
 ### Tagging
 
 Tags can be mixed to create hybrid behaviours: like moving platforms that are
 one way platforms.
 
-This is achieved having a tag that contains both names. ex: `MovingPlatform&OneWayPlatforms`
+This is achieved having a tag that contains both names. ex: `MovingPlatform&OneWayPlatforms`, & is not mandatory I use it for readability
+purposes.
 
 ### Manual Editable
 
-The following classes contains stuff that could be useful to edit for your game.
+The following classes contains stuff that could be useful to edit for your game
+and cannot be extended.
 
 #### Areas.cs
 
-Contains `Areas` that the character can be in.
+Contains `Areas` Enum. Where the characters can be in.
 
 #### States.cs
 
-Contains `States` that the character can be in.
+Contains `States` Enum. States the Character can be.
+When you add c State remember to invalidate other states the Character can be
+at the same time `Character.EnterState`& `Character.ExistState`.
+
 This is crucial information for Animation.
 
 #### DamageType.cs
