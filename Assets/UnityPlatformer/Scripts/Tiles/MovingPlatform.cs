@@ -4,6 +4,17 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace UnityPlatformer {
+  public enum MovingPlatformActions {
+    Nothing,
+    Resume,
+    ResumeAndStop,
+    ReverseAndResume,
+    ReverseAndResumeAndStop,
+    Stop,
+    StopOnNext,
+    IfStoppedReverse
+  };
+
   /// <summary>
   /// TODO Stop, Resume, Reverse, StopOnNextWaypoint
   /// </summary>
@@ -20,7 +31,8 @@ namespace UnityPlatformer {
     public float waitTime = 0;
     [Range(0,2)]
     public float easeAmount = 0;
-    bool disableDownRayCast = false;
+    public bool disableDownRayCast = false;
+    public bool startStopped = false;
 
     public delegate void ReachWaypoint(int index);
     /// <summary>
@@ -68,7 +80,11 @@ namespace UnityPlatformer {
 
       lastPosition = transform.position;
 
-      Resume();
+      if (startStopped) {
+        Stop();
+      } else {
+        Resume();
+      }
     }
     /// <summary>
     /// Stop MovingPlatform
@@ -283,6 +299,39 @@ namespace UnityPlatformer {
         }
       }
       prevPassengers = movedPassengers;
+    }
+
+    public void DoAction(MovingPlatformActions action) {
+      switch (action) {
+      case MovingPlatformActions.Resume:
+        Resume();
+        break;
+      case MovingPlatformActions.ResumeAndStop:
+        Resume();
+        StopOn(1);
+        break;
+      case MovingPlatformActions.ReverseAndResume:
+        Reverse();
+        Resume();
+        break;
+      case MovingPlatformActions.ReverseAndResumeAndStop:
+        Reverse();
+        Resume();
+        StopOn(1);
+        break;
+      case MovingPlatformActions.Stop:
+        Stop();
+        break;
+      case MovingPlatformActions.StopOnNext:
+        StopOn(1);
+        break;
+      case MovingPlatformActions.IfStoppedReverse:
+        if (IsStopped()) {
+          Resume();
+          StopOn(2);
+        }
+        break;
+      }
     }
 
     void OnEnable() {

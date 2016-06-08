@@ -313,6 +313,8 @@ MonoBehaviour:
   cyclic: 0
   waitTime: 0
   easeAmount: 0
+  disableDownRayCast: 0
+  startStopped: 0
   globalWaypoints: []
 --- !u!114 &11414688
 MonoBehaviour:
@@ -361,6 +363,7 @@ MonoBehaviour:
   body: {fileID: 0}
   ladder: {fileID: 0}
   liquid: {fileID: 0}
+  item: {fileID: 0}
   grab: {fileID: 0}
   fallDistance: {x: 0, y: 0}
   platform: {fileID: 0}

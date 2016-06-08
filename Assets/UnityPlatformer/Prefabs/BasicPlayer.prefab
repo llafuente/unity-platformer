@@ -225,6 +225,7 @@ GameObject:
   - 114: {fileID: 11462242}
   - 114: {fileID: 11457342}
   - 114: {fileID: 11413326}
+  - 114: {fileID: 11490564}
   m_Layer: 8
   m_Name: Actions
   m_TagString: Untagged
@@ -898,12 +899,16 @@ MonoBehaviour:
   listenActions:
   - Jump
   - Attack
+  - Use
   inputsMap:
   - action: Jump
     handheld: Jump
     keyboard: Jump
   - action: Attack
     handheld: Attack
+    keyboard: Fire1
+  - action: Use
+    handheld: Use
     keyboard: Fire2
 --- !u!114 &11428056
 MonoBehaviour:
@@ -983,6 +988,7 @@ MonoBehaviour:
   body: {fileID: 0}
   ladder: {fileID: 0}
   liquid: {fileID: 0}
+  item: {fileID: 0}
   grab: {fileID: 0}
   fallDistance: {x: 0, y: 0}
   platform: {fileID: 0}
@@ -1368,6 +1374,22 @@ MonoBehaviour:
     active: 0
   action: Attack
   priority: 20
+--- !u!114 &11490564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21cb0dcdd7f51048978a8ed38ca207d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 11435812}
+  input: {fileID: 11422300}
+  characterOffset: {x: 0, y: 0, z: 0}
+  actionUse: Use
+  priority: 30
 --- !u!114 &11491996
 MonoBehaviour:
   m_ObjectHideFlags: 1

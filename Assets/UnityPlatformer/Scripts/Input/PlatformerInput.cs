@@ -25,7 +25,7 @@ namespace UnityPlatformer {
   {
 
     [Comment("List of actions that will fire events")]
-    public List<string> listenActions = new List<string> {"Jump", "Attack"};
+    public List<string> listenActions = new List<string> {"Jump", "Attack", "Use"};
 
     public delegate void InputActionDelegate(string button);
     public InputActionDelegate onActionUp;
