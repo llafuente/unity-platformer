@@ -33,6 +33,7 @@ namespace UnityPlatformer {
       base.Start();
       pushingCD = new Cooldown(pushingStartTime);
       groundMovement = character.GetAction<CharacterActionGroundMovement>();
+      Debug.Log("groundMovement" + groundMovement);
 
       character.onBeforeMove += OnBeforeMove;
     }
@@ -73,7 +74,7 @@ namespace UnityPlatformer {
         Box b = hits[i].collider.gameObject.GetComponent<Box>();
         if (b != null) {
           // guard against dark arts
-          if (Configuration.IsBox(b.collider.gameObject)) {
+          if (Configuration.IsBox(b.boxCharacter.gameObject)) {
             return true;
           }
         }
@@ -123,22 +124,28 @@ namespace UnityPlatformer {
     }
 
     public void PushBox(Vector3 velocity, ref RaycastHit2D[] hits, int count) {
-      Debug.Log(velocity.ToString("F4"));
-      int idx = -1;
-      float yPos = float.PositiveInfinity;
+      // push any box that is not on a platform that it's already a box
+      // and just one (the first one)
+
       for (int i = 0; i < count; ++i) {
         Box b = hits[i].collider.gameObject.GetComponent<Box>();
         if (b != null) {
           // guard against dark arts
-          if (Configuration.IsBox(b.collider.gameObject) && yPos > b.transform.position.y) {
-            yPos = b.transform.position.y;
-            idx = i;
+          if (Configuration.IsBox(b.boxCharacter.gameObject)) {
+            if (!b.boxCharacter.platform) {
+              b.boxCharacter.pc2d.Move(velocity);
+              return;
+            }
+
+            Box b2 = b.boxCharacter.platform.GetComponent<Box>();
+            if (b2 != null && !Configuration.IsBox(b2.boxCharacter.gameObject)) {
+              b.boxCharacter.pc2d.Move(velocity);
+              return;
+            }
+          } else {
+            Debug.LogWarning("Found an Character that should be a box", b.boxCharacter.gameObject);
           }
         }
-      }
-
-      if (idx != -1) {
-        hits[idx].collider.gameObject.GetComponent<Box>().collider.Move(velocity);
       }
     }
 

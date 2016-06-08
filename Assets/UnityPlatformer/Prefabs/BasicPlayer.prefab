@@ -849,7 +849,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 11435812}
   input: {fileID: 11422300}
-  speed: 4
+  speed: 2
   accelerationTime: 0.1
   pushingStartTime: 0.5
   priority: 20

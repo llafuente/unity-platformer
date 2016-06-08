@@ -135,7 +135,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140502}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.85, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 494380}
@@ -307,13 +307,13 @@ MonoBehaviour:
   box: {fileID: 0}
   passengerMask:
     serializedVersion: 2
-    m_Bits: 2304
+    m_Bits: 67840
   path: {fileID: 0}
   speed: 2
   cyclic: 0
   waitTime: 0
   easeAmount: 0
-  disableDownRayCast: 0
+  disableDownRayCast: 1
   startStopped: 0
   globalWaypoints: []
 --- !u!114 &11414688
@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cece352814697a4c8b7723678821300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 11461834}
+  boxCharacter: {fileID: 11455562}
 --- !u!114 &11444830
 MonoBehaviour:
   m_ObjectHideFlags: 1

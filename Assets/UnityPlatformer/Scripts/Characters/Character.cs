@@ -112,8 +112,7 @@ namespace UnityPlatformer {
 
     public T GetAction<T>() {
       foreach (var i in actions) {
-        if (i.GetType().IsInstanceOfType(typeof(T))){
-          //return (T) i;
+        if (i.GetType() == typeof(T)) {
           return (T) Convert.ChangeType(i, typeof(T));
         }
       }
