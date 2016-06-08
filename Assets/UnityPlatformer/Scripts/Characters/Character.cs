@@ -108,6 +108,17 @@ namespace UnityPlatformer {
       health.onDeath += OnDeath;
     }
 
+    public T GetAction<T>() {
+      foreach (var i in actions) {
+        if (i.GetType().IsInstanceOfType(typeof(T))){
+          //return (T) i;
+          return (T) Convert.ChangeType(i, typeof(T));
+        }
+      }
+
+      return default(T);
+    }
+
     public void Attach(UpdateManager um) {
     }
 

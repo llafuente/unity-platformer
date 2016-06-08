@@ -48,7 +48,7 @@ This is the body used to check where the character is in Ladders, Grabbables, Li
 
 #### HitBox: Recieve damage / Deal Damage
 
-Where Character recieve or deal damage. *NOTE* Cannot overlap.
+Where Character recieve or deal damage. *NOTE*: Cannot overlap.
 
 
 ### Actions
@@ -112,6 +112,12 @@ Where Character recieve or deal damage. *NOTE* Cannot overlap.
 * WallStick
 
   Stick to walls, and perform wall-jumps.
+
+* Push
+
+  Push objects (Box)
+
+  *NOTE*: Require CharacterActionGroundMovement
 
 
 ### Input

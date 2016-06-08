@@ -849,6 +849,7 @@ MonoBehaviour:
   character: {fileID: 11435812}
   input: {fileID: 11422300}
   speed: 4
+  accelerationTime: 0.1
   pushingStartTime: 0.5
   priority: 20
 --- !u!114 &11421328

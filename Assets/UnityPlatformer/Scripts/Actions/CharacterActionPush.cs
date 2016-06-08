@@ -4,13 +4,17 @@ using UnityEngine;
 
 namespace UnityPlatformer {
   /// <summary>
-  /// Climb a ladder
-  /// TODO moveToCenterTime/Speed
+  /// Push objects (Box)
+  /// NOTE require CharacterActionGroundMovement
   /// </summary>
   public class CharacterActionPush: CharacterAction {
     #region public
 
-    public float speed = 4;
+    [Comment("Movement speed")]
+    public float speed = 3;
+    [Comment("Time to reach max speed")]
+    public float accelerationTime = .1f;
+    [Comment("Time to pushing before start moving the object")]
     public float pushingStartTime = 0.5f;
     //public float maxWeight =4f;
 
@@ -22,9 +26,13 @@ namespace UnityPlatformer {
     int faceDir = 0;
     Cooldown pushingCD;
 
+    float velocityXSmoothing;
+    CharacterActionGroundMovement groundMovement;
+
     public override void Start() {
       base.Start();
       pushingCD = new Cooldown(pushingStartTime);
+      groundMovement = character.GetAction<CharacterActionGroundMovement>();
 
       character.onBeforeMove += OnBeforeMove;
     }
@@ -101,6 +109,7 @@ namespace UnityPlatformer {
     }
 
     public override void PerformAction(float delta) {
+      groundMovement.Move(speed, ref velocityXSmoothing, accelerationTime);
     }
 
     public void OnBeforeMove(Character ch, float delta) {
@@ -115,16 +124,21 @@ namespace UnityPlatformer {
 
     public void PushBox(Vector3 velocity, ref RaycastHit2D[] hits, int count) {
       Debug.Log(velocity.ToString("F4"));
-
+      int idx = -1;
+      float yPos = float.PositiveInfinity;
       for (int i = 0; i < count; ++i) {
         Box b = hits[i].collider.gameObject.GetComponent<Box>();
         if (b != null) {
           // guard against dark arts
-          if (Configuration.IsBox(b.collider.gameObject)) {
-            b.collider.Move(velocity);
-            return;
+          if (Configuration.IsBox(b.collider.gameObject) && yPos > b.transform.position.y) {
+            yPos = b.transform.position.y;
+            idx = i;
           }
         }
+      }
+
+      if (idx != -1) {
+        hits[idx].collider.gameObject.GetComponent<Box>().collider.Move(velocity);
       }
     }
 

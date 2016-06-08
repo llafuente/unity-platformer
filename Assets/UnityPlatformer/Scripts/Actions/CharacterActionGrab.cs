@@ -75,7 +75,7 @@ namespace UnityPlatformer {
       // close the gap a little more
       if (centering) {
         // centering phase
-        Vector3 pos = Vector3.SmoothDamp(
+        Vector3.SmoothDamp(
           ori,
           target,
           ref character.velocity, //ref refVelocity,
