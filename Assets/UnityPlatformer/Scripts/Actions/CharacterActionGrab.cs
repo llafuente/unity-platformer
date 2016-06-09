@@ -29,7 +29,6 @@ namespace UnityPlatformer {
     #endregion
 
     bool centering = false;
-    Vector3 refVelocity;
     Cooldown canGrab;
 
     public override void Start() {
@@ -54,7 +53,6 @@ namespace UnityPlatformer {
       base.GainControl(delta);
 
       character.EnterState(States.Grabbing);
-      refVelocity = character.velocity;
       centering = true;
     }
 
@@ -78,7 +76,7 @@ namespace UnityPlatformer {
         Vector3.SmoothDamp(
           ori,
           target,
-          ref character.velocity, //ref refVelocity,
+          ref character.velocity,
           towardsTime,
           towardsSpeed, //Mathf.Infinity,
           delta);

@@ -88,7 +88,6 @@ namespace UnityPlatformer {
     public override void Start() {
       base.Start ();
       collisions = new CollisionInfo();
-      pCollisions = new CollisionInfo();
       collisions.faceDir = 1;
     }
 
@@ -105,7 +104,7 @@ namespace UnityPlatformer {
 
       UpdateRaycastOrigins ();
       // set previous collisions and reset current one
-      pCollisions = collisions;
+      pCollisions = collisions.Clone();
       collisions.Reset ();
 
       // facing need to be reviewed. We should not rely on velocity.x
@@ -432,6 +431,7 @@ namespace UnityPlatformer {
       }
     }
 
+    //[Serializable]
     public class CollisionInfo {
       // current
       public bool above, below;
@@ -469,6 +469,10 @@ namespace UnityPlatformer {
           leftHits[i] = new RaycastHit2D();
           rightHits[i] = new RaycastHit2D();
         }
+      }
+
+      public CollisionInfo Clone() {
+        return (CollisionInfo) MemberwiseClone();
       }
 
       public void Reset() {

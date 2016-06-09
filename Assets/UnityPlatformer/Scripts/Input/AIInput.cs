@@ -15,10 +15,6 @@ namespace UnityPlatformer {
   public class AIInput : PlatformerInput {
     Vector2 axis = new Vector2(0, 0);
 
-    public override void Update() {
-      base.Update();
-      actions = actions;
-    }
     public void EnableAction(string action) {
       actions[action] = InputStates.On;
     }

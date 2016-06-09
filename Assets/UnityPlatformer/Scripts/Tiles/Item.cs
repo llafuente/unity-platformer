@@ -5,10 +5,10 @@ namespace UnityPlatformer {
   [RequireComponent (typeof (BoxTrigger2D))]
   public abstract class Item : MonoBehaviour {
     // cache
-    BoxCollider2D body;
+    // BoxCollider2D body;
 
     public virtual void Start() {
-      body = GetComponent<BoxCollider2D>();
+      //body = GetComponent<BoxCollider2D>();
     }
 
     public virtual void Enter(Character p) {
