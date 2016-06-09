@@ -138,6 +138,7 @@ namespace UnityPlatformer {
       if (jumpStopped) {
         jumping = false;
         jumpStopped = false;
+        forceJump = false;
         currentJump.EndJump(ref character.velocity);
         currentJump.Reset();
       } else if (!jumping || (jumping && customJump)) {
