@@ -5,22 +5,24 @@ Based on https://github.com/SebLague/2DPlatformer-Tutorial evolve
 in it's own beast.
 
 ## Features
+
 * Moving platforms
 * One way platforms
 * Ladders
 * AI (Patrol, Projectiles, Jumpers, etc...)
-* Input abstraction (this will help if you add a pad or touch controls)
-* Character-handled-actions. Instead of a big class mapping all actions,
+* Component based Actions. Instead of a big class mapping all actions,
 each Action (Jump, Climb ladder, ground/air movement) it's a separate component.
 * Projectiles
 * Melee attacks
 * Wallstick/WallJump
+* Push boxes
+* Water (liquid) bouyancy
+* Climb/Descent Slopes
+
+* Input abstraction (this will help if you add a pad or touch controls)
 * Update everything in order (UpdateManager).
 
   This allow total control over who is updated first and act accordingly
-
-* Slopes
-* Water (liquid)
 
 ## Known issues
 

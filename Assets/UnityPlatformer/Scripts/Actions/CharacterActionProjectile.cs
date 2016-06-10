@@ -25,12 +25,15 @@ namespace UnityPlatformer {
     [Comment("Must match something in @PlatformerInput")]
     public String action = "Attack";
     public List<ProjectileCfg> projectiles = new List<ProjectileCfg>();
+    [Space(10)]
     [Comment("Reload time")]
     public float fireDelay = 5;
-    [Comment("Remember: Higher priority wins. Modify with caution")]
-    public int priority = 5;
     [Comment("checked: Fire all at once (with given delays). unchecked: Fire one by one")]
     public bool fireMode = false;
+
+    [Space(10)]
+    [Comment("Remember: Higher priority wins. Modify with caution")]
+    public int priority = 5;
 
     public Action onFire;
 

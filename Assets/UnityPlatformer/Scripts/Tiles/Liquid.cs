@@ -12,8 +12,8 @@ namespace UnityPlatformer {
     /// Velocity applied to the Character
     /// NOTE need to oppose gravity, so greater in other direction
     /// </summary>
-    public Vector2 boyancy = Vector2.zero;
-    public float boyancySurfaceFactor = 0.5f;
+    public Vector2 buoyancy = Vector2.zero;
+    public float buoyancySurfaceFactor = 0.5f;
     /// <summary>
     /// </summary>
     public float surfaceOffset = 0;

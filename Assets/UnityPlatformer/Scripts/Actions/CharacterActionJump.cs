@@ -5,10 +5,10 @@ namespace UnityPlatformer {
   /// <summary>
   /// Jump while on ground.
   /// The rest jumps, are managed here, but using jump properties/type
-  /// elsewhere, just by calling Jump()
+  /// elsewhere, just by calling Jump() / ForceJump()
   /// NOTE unity-platformer support multiple types of jumps.
   /// We just ship one type here, be free to extend!
-  /// TODO force one jump per press.
+  /// TODO force one jump per press, force to release before another jump
   /// </summary>
   public class CharacterActionJump: CharacterAction {
     #region public

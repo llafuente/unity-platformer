@@ -22,6 +22,7 @@ namespace UnityPlatformer {
     [Comment("Jump in the opposite direction")]
     public JumpConstantProperties wallLeap = new JumpConstantProperties(new Vector2(20, 20));
 
+    [Space(10)]
     [Comment("Remember: Higher priority wins. Modify with caution. Tip: Higher than Jump")]
     public int priority = 7;
 

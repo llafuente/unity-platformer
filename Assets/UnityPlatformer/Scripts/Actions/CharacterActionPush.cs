@@ -18,6 +18,7 @@ namespace UnityPlatformer {
     public float pushingStartTime = 0.5f;
     //public float maxWeight =4f;
 
+    [Space(10)]
     [Comment("Remember: Higher priority wins. Modify with caution")]
     public int priority = 20;
 

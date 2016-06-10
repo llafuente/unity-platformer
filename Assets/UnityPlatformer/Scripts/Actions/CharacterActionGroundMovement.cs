@@ -4,7 +4,6 @@ using UnityEngine;
 namespace UnityPlatformer {
   /// <summary>
   /// Movement while on ground and not slipping
-  /// TODO slopeAccelerationFactor/slopeDeccelerationFactor
   /// </summary>
   public class CharacterActionGroundMovement: CharacterAction {
     #region public
@@ -42,12 +41,15 @@ namespace UnityPlatformer {
 
 
     /// <summary>
-    /// Horizontal movement
+    /// Do horizontal movement
     /// </summary>
     public override void PerformAction(float delta) {
       Move(speed, ref velocityXSmoothing, accelerationTime);
     }
 
+    /// <summary>
+    /// Horizontal movement based on current input
+    /// </summary>
     public void Move(float spdy, ref float smoothing, float accTime) {
       float targetVelocityX = input.GetAxisRawX() * spdy;
 

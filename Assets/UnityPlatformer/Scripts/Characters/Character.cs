@@ -39,6 +39,9 @@ namespace UnityPlatformer {
 
     #region ~private
 
+    /// <summary>
+    /// List of enabled actions
+    /// </summary>
     [HideInInspector]
     public List<CharacterAction> actions = new List<CharacterAction>();
     [HideInInspector]

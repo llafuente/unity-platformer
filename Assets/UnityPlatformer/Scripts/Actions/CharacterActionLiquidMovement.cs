@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityPlatformer {
   /// <summary>
-  /// Movement while on ground and not slipping
+  /// Movement while below water surface (buoyancy)
   /// TODO slopeAccelerationFactor/slopeDeccelerationFactor
   /// </summary>
   public class CharacterActionLiquidMovement: CharacterAction {
@@ -58,10 +58,10 @@ namespace UnityPlatformer {
       float d = character.liquid.DistanceToSurface(character, surfaceLevel);
       if (d > 0) { // below
         pc2d.enableSlopes = false;
-        float factor = (1 + character.liquid.boyancySurfaceFactor * d) * delta;
+        float factor = (1 + character.liquid.buoyancySurfaceFactor * d) * delta;
         //Debug.Log(factor);
-        character.velocity.x += character.liquid.boyancy.x * factor;
-        character.velocity.y += character.liquid.boyancy.y * factor;
+        character.velocity.x += character.liquid.buoyancy.x * factor;
+        character.velocity.y += character.liquid.buoyancy.y * factor;
 
         if (character.velocity.y > terminalYUP) {
           character.velocity.y = terminalYUP;

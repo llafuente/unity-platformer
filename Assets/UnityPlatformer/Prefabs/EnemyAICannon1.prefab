@@ -683,6 +683,7 @@ MonoBehaviour:
   body: {fileID: 0}
   ladder: {fileID: 0}
   liquid: {fileID: 0}
+  item: {fileID: 0}
   grab: {fileID: 0}
   fallDistance: {x: 0, y: 0}
   platform: {fileID: 0}

@@ -4,7 +4,6 @@ using UnityEngine;
 namespace UnityPlatformer {
   /// <summary>
   /// Climb a ladder
-  /// TODO moveToCenterTime/Speed
   /// </summary>
   public class CharacterActionLadder: CharacterAction {
     #region public
@@ -17,21 +16,25 @@ namespace UnityPlatformer {
     public float towardsSpeed = 32;
     [Comment("time to reach the center (if towardsSpeed is fast enough).")]
     public float towardsTime = 0.1f;
+
+    [Space(10)]
     [Comment("Dismount pressing left/right")]
     public bool leftRightDismount = true;
     [Comment("Dismount pressing left/right")]
     public float dismountTime = 0.2f;
+
+    [Space(10)]
     [Comment("Remember: Higher priority wins. Modify with caution")]
     public int priority = 10;
 
     #endregion
 
     bool centering = false;
-    Cooldown cdLeave;
+    Cooldown dismount;
 
     public override void Start() {
       base.Start();
-      cdLeave = new Cooldown(dismountTime);
+      dismount = new Cooldown(dismountTime);
     }
 
     /// <summary>
@@ -115,7 +118,7 @@ namespace UnityPlatformer {
 
       character.EnterState(States.Ladder);
       centering = moveToCenter;
-      cdLeave.Reset();
+      dismount.Reset();
     }
 
     public override void PerformAction(float delta) {
@@ -154,12 +157,12 @@ namespace UnityPlatformer {
         character.ladder.Dismount(character);
       }
       if (in2d.x != 0) {
-        if (cdLeave.IncReady()) {
+        if (dismount.IncReady()) {
           character.velocity = Vector2.zero;
           character.ladder.Dismount(character);
         }
       } else {
-        cdLeave.Reset();
+        dismount.Reset();
       }
     }
 

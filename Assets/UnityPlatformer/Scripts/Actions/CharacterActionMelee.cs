@@ -5,13 +5,13 @@ namespace UnityPlatformer {
   /// <summary>
   /// Melee attack
   /// NOTE Can't be interrupted atm
-  /// TODO animationName (so it supports multiple melee attacks)
+  /// TODO animationName (so we could supports multiple melee attacks)
   /// </summary>
   public class CharacterActionMelee: CharacterActionTimed {
     #region public
 
     [Serializable]
-    public class DamageAreas {
+    public class MeleeDamage {
       // this must contains a DamageType
       public GameObject area;
       public float startAt = 0.0f;
@@ -22,8 +22,10 @@ namespace UnityPlatformer {
       public bool active = false;
     }
 
-    public DamageAreas[] damageAreas = new DamageAreas[1];
+    public MeleeDamage[] damageAreas = new MeleeDamage[1];
     public string action = "Attack";
+
+    [Space(10)]
     [Comment("Remember: Higher priority wins. Modify with caution")]
     public int priority = 20;
 

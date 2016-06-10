@@ -10,6 +10,8 @@ namespace UnityPlatformer {
 
     public Vector3 characterOffset = new Vector3(0, 0, 0);
     public string actionUse;
+
+    [Space(10)]
     [Comment("Remember: Higher priority wins. Modify with caution")]
     public int priority = 30;
 

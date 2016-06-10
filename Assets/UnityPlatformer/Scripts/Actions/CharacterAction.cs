@@ -50,6 +50,7 @@ namespace UnityPlatformer {
       hasControl = false;
     }
 
+    // keep character.actions in sync
     public virtual void OnEnable() {
       character.actions.Add(this);
     }
@@ -61,7 +62,7 @@ namespace UnityPlatformer {
     }
 
     /// <summary>
-    /// Called once. Just Before the first PerformAction
+    /// Called (once) when this action is going to be 'PerformAction' for first time
     /// </summary>
     public virtual void GainControl(float delta) {
       if (!hasControl && onGrainControl != null) {
@@ -72,8 +73,7 @@ namespace UnityPlatformer {
     }
 
     /// <summary>
-    /// Called once, when character.lastAction changed
-    /// The frame it's called PerformAction won't be called,
+    /// Called (once) when other action 'WantsToUpdate' or this action don't
     /// Can be used to clean up things if necessary
     /// </summary>
     public virtual void LoseControl(float delta) {
@@ -85,10 +85,10 @@ namespace UnityPlatformer {
 
     /// <summary>
     /// Tells the character we want to take control
-    /// Positive numbers fight: Higher number wins
-    /// Negative numbers are used to ignore fight, and just execute,
-    /// won't trigger onLoseControl or onGrainControl and GetPostUpdateActions
-    /// is ignored.
+    /// * Positive numbers fight: Higher number wins
+    /// * Negative numbers are used to ignore fight and force Character to call
+    /// PerformAction, but! because it doesn't win the fight onLoseControl,
+    /// onGrainControl and GetPostUpdateActions are ignored.
     /// NOTE can be used as a replace for UpdateManager.ManagedUpdate
     /// </summary>
     public abstract int WantsToUpdate(float delta);
