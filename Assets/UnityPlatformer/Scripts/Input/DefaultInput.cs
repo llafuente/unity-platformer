@@ -46,7 +46,6 @@ namespace UnityPlatformer {
     };
 
     public override bool IsActionHeld(string action) {
-      Debug.LogWarning ("IsActionHeld: " + action);
       foreach (var i in inputsMap) {
         if (i.action == action) {
           #if UP_USE_CN_INPUT_MANAGER

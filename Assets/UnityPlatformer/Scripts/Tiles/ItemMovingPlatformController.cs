@@ -12,6 +12,8 @@ namespace UnityPlatformer {
     }
 
     public override void Use(Character p) {
+      PositionCharacter(p);
+      p.SetOverrideAnimation(animationName, true);
       foreach (MovingPlatform target in targets) {
         target.DoAction(onUse);
       }

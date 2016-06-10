@@ -22,5 +22,17 @@ namespace UnityPlatformer {
       playing = animation;
       animator.Play(animation);
     }
+
+    public override float GetAnimationLength(string animation) {
+      RuntimeAnimatorController ac = animator.runtimeAnimatorController;
+      for(int i = 0; i<ac.animationClips.Length; i++) {
+        if(ac.animationClips[i].name == animation) {
+          return ac.animationClips[i].length;
+        }
+      }
+
+      return 0.0f;
+    }
+
   }
 }

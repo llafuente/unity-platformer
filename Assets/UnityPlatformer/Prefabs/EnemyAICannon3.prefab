@@ -775,6 +775,9 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   pc2d: {fileID: 0}
   health: {fileID: 0}
+  forceAnimation: 
+  frozen: -1
+  animator: {fileID: 0}
   input: {fileID: 11426646}
   fireDelay: 5
 --- !u!114 &11426646
@@ -834,8 +837,8 @@ MonoBehaviour:
     offset: {x: 0, y: 2}
     delay: 1
   fireDelay: 2
-  priority: 5
   fireMode: 1
+  priority: 5
 --- !u!114 &11438370
 MonoBehaviour:
   m_ObjectHideFlags: 1

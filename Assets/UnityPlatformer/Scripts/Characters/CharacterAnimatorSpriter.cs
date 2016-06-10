@@ -37,6 +37,12 @@ namespace UnityPlatformer {
         animator.Play(animation);
       }
     }
+
+    public override float GetAnimationLength(string animation) {
+      // TODO
+
+      return 0.0f;
+    }
   }
   #endif
 }

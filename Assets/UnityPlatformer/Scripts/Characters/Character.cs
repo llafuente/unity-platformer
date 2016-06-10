@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityPlatformer;
@@ -80,6 +81,23 @@ namespace UnityPlatformer {
     [HideInInspector]
     public CharacterHealth health;
 
+    /// <summary>
+    /// Force to play this animation
+    /// </summary>
+    [HideInInspector]
+    public string forceAnimation;
+    /// <summary>
+    /// Do not execute any Action, Character still moves, so set velocity to
+    /// Vector3.zero if necesarry
+    /// </summary>
+    [HideInInspector]
+    public float frozen = -1f;
+    /// <summary>
+    /// back reference to CharacterAnimator
+    /// </summary>
+    [HideInInspector]
+    public CharacterAnimator animator;
+
     #endregion
 
     #region private
@@ -95,6 +113,7 @@ namespace UnityPlatformer {
     Vector2 fallStart;
     Vector2 fallEnd;
 
+
     #endregion
 
     /// <summary>
@@ -102,6 +121,7 @@ namespace UnityPlatformer {
     /// Maybe setters are the appropiate method to refactor this.
     /// </summary>
     virtual public void Awake() {
+      forceAnimation = null;
       //Debug.Log("Start new Character: " + gameObject.name);
       pc2d = GetComponent<PlatformerCollider2D> ();
       health = GetComponent<CharacterHealth>();
@@ -131,17 +151,20 @@ namespace UnityPlatformer {
     /// Transform Input into platformer magic :)
     /// </summary>
     public virtual void ManagedUpdate(float delta) {
+      frozen -= delta;
       int prio = 0;
       int tmp;
       CharacterAction action = null;
 
-      foreach (var i in actions) {
-        tmp = i.WantsToUpdate(delta);
-        if (tmp < 0) {
-          i.PerformAction(Time.fixedDeltaTime);
-        } else if (prio < tmp) {
-          prio = tmp;
-          action = i;
+      if (frozen < 0) {
+        foreach (var i in actions) {
+          tmp = i.WantsToUpdate(delta);
+          if (tmp < 0) {
+            i.PerformAction(Time.fixedDeltaTime);
+          } else if (prio < tmp) {
+            prio = tmp;
+            action = i;
+          }
         }
       }
 
@@ -357,6 +380,31 @@ namespace UnityPlatformer {
 
     public virtual void OnDisable() {
       UpdateManager.instance.characters.Remove(this);
+    }
+
+    public void SetOverrideAnimation(string animation, bool freeze) {
+      if (animator == null) {
+        Debug.LogWarning("Cannot OverrideAnimation. There is no PlatformerAnimator linked to this Character", this);
+        return;
+      }
+
+      float delay = animator.GetAnimationLength(animation);
+
+      forceAnimation = animation;
+      if (freeze) {
+        frozen = delay;
+      }
+
+      StartCoroutine(_RestoreOverrideAnimation(delay));
+    }
+
+    IEnumerator _RestoreOverrideAnimation(float delay) {
+      yield return new WaitForSeconds(delay);
+      ClearOverrideAnimation();
+    }
+
+    public void ClearOverrideAnimation() {
+      forceAnimation = null;
     }
   }
 }

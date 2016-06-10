@@ -10,11 +10,6 @@ namespace UnityPlatformer {
   public class AIGoomba: Enemy {
     #region public
 
-    public enum Facing {
-      Left = -1,
-      Right = 1
-    };
-
     public Facing initialFacing = Facing.Left;
     [Comment("Distance to test if ground is on left/right side. Helps when Enemy standing on platform moving down.")]
     public float rayLengthFactor = 1.0f;

@@ -474,6 +474,9 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   pc2d: {fileID: 0}
   health: {fileID: 0}
+  forceAnimation: 
+  frozen: -1
+  animator: {fileID: 0}
   input: {fileID: 11448450}
   initialFacing: -1
   rayLengthFactor: 1

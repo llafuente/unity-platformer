@@ -14,6 +14,7 @@ namespace UnityPlatformer {
     public bool rotateOnSlopes = true;
 
     public virtual void Start() {
+      character.animator = this;
       character.onAreaChange += OnAreaChange;
       character.onHurtCharacter += OnHurtCharacter;
       character.onStateChange += OnStateChange;
@@ -45,7 +46,9 @@ namespace UnityPlatformer {
         }
       }
 
-      if (character.IsOnState(States.Pushing)) {
+      if (character.forceAnimation != null) {
+        Play(character.forceAnimation);
+      } else if (character.IsOnState(States.Pushing)) {
         Play("pushing");
       } else if (character.IsOnState(States.Liquid)) {
         Play("swimming");
@@ -74,6 +77,8 @@ namespace UnityPlatformer {
     }
 
     public abstract void Play(string animation);
+
+    public abstract float GetAnimationLength(string animation);
 
     public virtual void OnAreaChange(Areas before, Areas after) {
       //Debug.LogFormat("area change {1} vs {2}", before, after);

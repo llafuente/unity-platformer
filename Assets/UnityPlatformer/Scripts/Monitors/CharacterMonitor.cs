@@ -18,6 +18,7 @@ namespace UnityPlatformer {
       text += string.Format(
         "Area: {0}\n"+
         "State: {1}\n"+
+        "forceAnimation: {12}\n"+
         "Ladder: {2} IsAboveTop {3} IsBelowBottom {4}\n" +
         "Liquid: {9}  IsBelowSurface {10} / {11}\n" +
         "Platform: {5}\n" +
@@ -33,7 +34,8 @@ namespace UnityPlatformer {
         character.velocity.ToString("F4"), character.pc2d.collisions.velocity.ToString("F4"),
         character.liquid,
         character.liquid ? character.liquid.IsBelowSurface(character, 1.5f) : false,
-        character.liquid ? character.liquid.DistanceToSurface(character, 1.5f) : -1
+        character.liquid ? character.liquid.DistanceToSurface(character, 1.5f) : -1,
+        character.forceAnimation
       );
     }
   }
