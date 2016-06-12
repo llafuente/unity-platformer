@@ -4,7 +4,10 @@ namespace UnityPlatformer {
   public class Configuration : MBSingleton<Configuration> {
     public Vector2 gravity = Vector2.zero;
     public string playerTag = "Player";
-    public string oneWayPlatformsTag = "OneWayPlatforms";
+    public string oneWayPlatformUpTag = "OneWayPlatformUp";
+    public string oneWayPlatformDownTag = "OneWayPlatformDown";
+    public string oneWayWallLeftTag = "OneWayWallLeft";
+    public string onwWayWallRightTag = "OneWayWallRight";
     public string movingPlatformThroughTag = "MovingPlatformThrough";
     public string movingPlatformTag = "MovingPlatform";
     public string enemyTag = "Enemy";
@@ -13,12 +16,36 @@ namespace UnityPlatformer {
     public float minDistanceToEnv = 0.1f;
     public LayerMask laddersMask;
 
-    static public bool IsOneWayPlatform(GameObject obj) {
-      return obj.tag.IndexOf(Configuration.instance.oneWayPlatformsTag) != -1;
+    static public bool IsOneWayPlatformUp(GameObject obj) {
+      return obj.tag.IndexOf(Configuration.instance.oneWayPlatformUpTag) != -1;
     }
 
-    static public bool IsOneWayPlatform(Collider2D obj) {
-      return obj.tag.IndexOf(Configuration.instance.oneWayPlatformsTag) != -1;
+    static public bool IsOneWayPlatformUp(Collider2D obj) {
+      return obj.tag.IndexOf(Configuration.instance.oneWayPlatformUpTag) != -1;
+    }
+
+    static public bool IsOneWayPlatformDown(GameObject obj) {
+      return obj.tag.IndexOf(Configuration.instance.oneWayPlatformDownTag) != -1;
+    }
+
+    static public bool IsOneWayPlatformDown(Collider2D obj) {
+      return obj.tag.IndexOf(Configuration.instance.oneWayPlatformDownTag) != -1;
+    }
+
+    static public bool IsOneWayWallLeft(GameObject obj) {
+      return obj.tag.IndexOf(Configuration.instance.oneWayWallLeftTag) != -1;
+    }
+
+    static public bool IsOneWayWallLeft(Collider2D obj) {
+      return obj.tag.IndexOf(Configuration.instance.oneWayWallLeftTag) != -1;
+    }
+
+    static public bool IsOneWayWallRight(GameObject obj) {
+      return obj.tag.IndexOf(Configuration.instance.onwWayWallRightTag) != -1;
+    }
+
+    static public bool IsOneWayWallRight(Collider2D obj) {
+      return obj.tag.IndexOf(Configuration.instance.onwWayWallRightTag) != -1;
     }
 
     static public bool IsMovingPlatformThrough(GameObject obj) {

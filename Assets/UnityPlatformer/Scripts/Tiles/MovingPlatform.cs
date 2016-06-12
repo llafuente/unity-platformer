@@ -231,7 +231,7 @@ namespace UnityPlatformer {
       // Vertically moving platform
       // Disable for OWP moving down otherwise will push-down characters
       if (
-        (velocity.y < 0 &&  !Configuration.IsOneWayPlatform(gameObject) && !disableDownRayCast) ||
+        (velocity.y < 0 &&  !Configuration.IsOneWayPlatformUp(gameObject) && !disableDownRayCast) ||
         velocity.y > 0
       ) {
         float rayLength = Mathf.Abs (velocity.y) + skinWidth + Configuration.instance.minDistanceToEnv;
@@ -255,7 +255,7 @@ namespace UnityPlatformer {
 
       // Horizontally moving platform
       // Cannot be a OWP otherwise will push-right|left characters
-      if (velocity.x != 0 && !Configuration.IsOneWayPlatform(gameObject)) {
+      if (velocity.x != 0 && !Configuration.IsOneWayPlatformUp(gameObject)) {
         float rayLength = Mathf.Abs (velocity.x) + skinWidth + Configuration.instance.minDistanceToEnv;
 
         for (int i = 0; i < horizontalRayCount; i ++) {

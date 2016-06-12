@@ -58,11 +58,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravity: {x: 0, y: -50}
   playerTag: Player
-  oneWayPlatformsTag: OneWayPlatforms
+  oneWayPlatformUpTag: OneWayPlatformUp
+  oneWayPlatformDownTag: OneWayPlatformDown
+  oneWayWallLeftTag: OneWayWallLeft
+  onwWayWallRightTag: OneWayWallRight
   movingPlatformThroughTag: MovingPlatformThrough
   movingPlatformTag: MovingPlatform
   enemyTag: Enemy
   projectileTag: Projectile
+  boxTag: Box
   minDistanceToEnv: 0.1
   laddersMask:
     serializedVersion: 2

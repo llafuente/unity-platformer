@@ -2,7 +2,7 @@
 using System.Collections;
 
 namespace UnityPlatformer {
-  [RequireComponent (typeof (BoxCollider2D))]
+  [RequireComponent (typeof (BoxTrigger2D))]
   public class Grab : MonoBehaviour {
     // cache
     BoxCollider2D body;

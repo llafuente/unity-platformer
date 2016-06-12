@@ -10,13 +10,13 @@ TagManager:
   - Ladder
   - Enemy
   - Projectile
-  - OneWayPlatforms
-  - MovingPlatform&OneWayPlatforms
-  - MovingPlatformThrough&OneWayPlatforms
-  - Boxes
-  - TestTag2
-  - TestTag3
-  - New Tag
+  - OneWayPlatformUp
+  - MovingPlatform&OneWayPlatformsUp
+  - MovingPlatformThrough&OneWayPlatformsUp
+  - Box
+  - OneWayPlatformDown
+  - OneWayWallLeft
+  - OneWayWallRight
   layers:
   - Default
   - TransparentFX

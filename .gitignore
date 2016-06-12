@@ -1,6 +1,15 @@
 # TODO temporal: remove until it's done
 Docs/
 
+# this are internal staff for develop
+/Assets/Editor
+/Assets/Editor.meta
+/Assets/UnityPlatformer/Scenes/all-prefabs.unity
+/Assets/UnityPlatformer/Scenes/all-prefabs.unity.meta
+/Assets/UnityPlatformer/Scenes/physics.unity
+/Assets/UnityPlatformer/Scenes/physics.unity.meta
+
+# plugins
 /Assets/Spriter
 /Assets/Spriter.meta
 /Assets/SpriterDotNet
