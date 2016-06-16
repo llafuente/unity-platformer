@@ -767,7 +767,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 2}
+  m_Size: {x: 1, y: 2}
 --- !u!61 &6177668
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -1115,7 +1115,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1536
   minDistanceToEnv: 0.05
-  skinWidth: 0.1
+  skinWidth: 0.2
   horizontalRayCount: 4
   verticalRayCount: 4
   horizontalRaySpacing: 0
@@ -1128,6 +1128,7 @@ MonoBehaviour:
   verticalRayLength: 0.2
   horizontalRayLength: 0.2
   minTranslation: 0.01
+  useRigidbody2D: 0
   ignoreDescendAngle: 0
   disableWorldCollisions: 0
 --- !u!114 &11457342
@@ -1455,6 +1456,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: useRigidbody2D
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -62,6 +62,14 @@ namespace UnityPlatformer {
     ///</summary>
     public float minTranslation = 0.01f;
 
+    /// <summary>
+    /// TODO REMOVE
+    /// This is experimental staff, If we use RigidBody2D we are sure to never
+    /// enter another object by accident and we handle less collisions
+    /// but has many drawbacks, that can't be solved atm, like OneWayPlatforms
+    /// </summary>
+    bool useRigidbody2D = false;
+
     // callbacks
     public Action onRightWall;
     public Action onLeftWall;
@@ -84,11 +92,16 @@ namespace UnityPlatformer {
     #endregion
 
     int previousLayer;
+    Rigidbody2D rigidBody2D;
 
     public override void Start() {
       base.Start ();
       collisions = new CollisionInfo();
       collisions.faceDir = 1;
+
+      if (useRigidbody2D) {
+        rigidBody2D = GetComponent<Rigidbody2D>();
+      }
     }
 
     /// <summary>
@@ -96,7 +109,7 @@ namespace UnityPlatformer {
     /// Any colliders in the way will cause velocity to be modified
     /// NOTE collisions.velocity has the real velocity applied
     /// </summary>
-    public void Move(Vector3 velocity) {
+    public void Move(Vector3 velocity, float delta) {
       // swap layers, this makes possible to collide with something inside my own layer
       // like boxes
       previousLayer = gameObject.layer;
@@ -128,9 +141,15 @@ namespace UnityPlatformer {
 
       // be sure we stay outside others colliders
       if (!disableWorldCollisions) {
-        HorizontalCollisions (ref velocity);
-        if (velocity.y != 0) {
-          VerticalCollisions (ref velocity);
+        DiagonalCollisions(ref velocity);
+
+        HorizontalCollisions (-1, DoLeftRays(skinWidth, ref velocity), ref velocity);
+        HorizontalCollisions (1, DoRightRays(skinWidth, ref velocity), ref velocity);
+
+        if (velocity.y > 0) {
+          VerticalCollisions (1, DoHeadRays(verticalRayLength, ref velocity), ref velocity);
+        } else if (velocity.y < 0) {
+          VerticalCollisions (-1, DoFeetRays(verticalRayLength, ref velocity), ref velocity);
         }
       }
 
@@ -141,7 +160,11 @@ namespace UnityPlatformer {
         velocity.y = 0;
       }
 
-      transform.Translate (velocity);
+      if (useRigidbody2D) {
+        rigidBody2D.velocity = velocity / delta;
+      } else {
+        transform.Translate (velocity);
+      }
       collisions.velocity = velocity;
       ConsolidateCollisions ();
 
@@ -152,7 +175,7 @@ namespace UnityPlatformer {
     /// Launch rays below, left, right and get the maximum slope found
     /// </summary>
     void UpdateCurrentSlope(ref Vector3 velocity) {
-      float rayLength = Mathf.Abs (velocity.y) + skinWidth;
+      float rayLength = Mathf.Abs (velocity.y) + verticalRayLength;
       float slopeAngle = 0.0f;
       RaycastHit2D? fhit = null;
 
@@ -168,7 +191,7 @@ namespace UnityPlatformer {
         }
       }
 
-      rayLength = Mathf.Abs (velocity.x) + skinWidth;
+      rayLength = Mathf.Abs (velocity.x) + horizontalRayLength;
       RaycastHit2D rhit = Raycast(raycastOrigins.bottomRight, Vector2.right, rayLength, collisionMask, Color.yellow);
 
       if (rhit) {
@@ -201,53 +224,62 @@ namespace UnityPlatformer {
 
         // handle the moment we change the slope
         // TODO REVIEW this may lead to problems when a platforms rotates.
-        if (fhit != null && collisions.slopeAngle > pCollisions.slopeAngle) {
+        if (fhit != null && collisions.slopeAngle > pCollisions.slopeAngle && collisions.slope != fhit.Value.collider.gameObject) {
           collisions.distanceToSlopeStart = fhit.Value.distance - skinWidth;
         }
+        collisions.slope = fhit.Value.collider.gameObject;
       } else {
+        collisions.slope = null;
         collisions.slopeAngle = 0.0f;
       }
     }
 
-    void HorizontalCollisions(ref Vector3 velocity) {
-      float directionX = collisions.faceDir;
-      float rayLength = Mathf.Abs (velocity.x) + horizontalRayLength;
-
+    void HorizontalCollisions(int dir, RaycastHit2D[] rays, ref Vector3 velocity) {
       for (int i = 0; i < horizontalRayCount; i ++) {
-        Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
-        rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-        RaycastHit2D hit = Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask, Color.red);
-
-        if (hit && hit.distance != 0) {
+        if (rays[i] && rays[i].distance != 0) {
           // ignore oneWayPlatformsUp/Down, aren't walls
-          if (Configuration.IsOneWayPlatformUp(hit.collider) || Configuration.IsOneWayPlatformDown(hit.collider)) {
+          if (Configuration.IsOneWayPlatformUp(rays[i].collider) || Configuration.IsOneWayPlatformDown(rays[i].collider)) {
             continue;
           }
 
           if ((
             // ignore left wall while moving left
-            Configuration.IsOneWayWallLeft(hit.collider) &&
+            Configuration.IsOneWayWallLeft(rays[i].collider) &&
             velocity.x < 0
             ) || (
             // ignore right wall while moving right
-            Configuration.IsOneWayWallRight(hit.collider) &&
+            Configuration.IsOneWayWallRight(rays[i].collider) &&
             velocity.x > 0
           )) {
             continue;
           }
 
 
-          if (directionX == -1) {
-            collisions.PushLeftCollider(hit);
+          if (dir == -1) {
+            collisions.PushLeftCollider(rays[i]);
           } else {
-            collisions.PushRightCollider(hit);
+            collisions.PushRightCollider(rays[i]);
           }
 
-          float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
+          float slopeAngle = Vector2.Angle(rays[i].normal, Vector2.up);
           if (slopeAngle > maxClimbAngle) {
-            collisions.left = directionX == -1;
-            collisions.right = directionX == 1;
-            velocity.x = (hit.distance - skinWidth) * directionX;
+            if (dir == -1) {
+              collisions.left = true;
+              if (Mathf.Approximately(slopeAngle, 90)) {
+                collisions.leftIsWall = true;
+              }
+            }
+
+            if (dir == 1) {
+              collisions.right = true;
+              if (Mathf.Approximately(slopeAngle, 90)) {
+                collisions.rightIsWall = true;
+              }
+            }
+            // same dir.
+            if (velocity.x == 0 || dir == Mathf.Sign(velocity.x)) {
+              velocity.x = (rays[i].distance - skinWidth) * dir;
+            }
           }
         }
       }
@@ -276,16 +308,10 @@ namespace UnityPlatformer {
       return hit.collider != null;
     }
 
-    void VerticalCollisions(ref Vector3 velocity) {
-      float directionY = Mathf.Sign (velocity.y);
-
-      // this ray needs to be a bit longer...
-      // this may need to be a parameter...
-      float rayLength = Mathf.Abs (velocity.y) + verticalRayLength;
-
+    void VerticalCollisions(int dir, RaycastHit2D[] rays, ref Vector3 velocity) {
       for (int i = 0; i < verticalRayCount; i ++) {
 
-        RaycastHit2D hit = DoVerticalRay (directionY, i, rayLength, ref velocity);
+        RaycastHit2D hit = rays[i];
 
         if (hit) {
           // fallingThroughPlatform ?
@@ -314,14 +340,30 @@ namespace UnityPlatformer {
             continue;
           }
 
-          velocity.y = (hit.distance - minDistanceToEnv) * directionY;
-          rayLength = hit.distance;
-
-          collisions.below = directionY == -1;
-          collisions.above = directionY == 1;
+          velocity.y = (hit.distance - minDistanceToEnv) * dir;
+          collisions.above = dir == 1;
+          collisions.below = dir == -1;
         }
       }
     }
+
+    // this may be redundant
+    // if you are very short on performance, you can remove it
+    void DiagonalCollisions(ref Vector3 velocity) {
+      if (velocity.x == 0) return;
+
+      Vector3 origin = velocity.x > 0 ? raycastOrigins.bottomRight :  raycastOrigins.bottomLeft;
+      Vector2 dir = new Vector2(Mathf.Sign(velocity.x), -1);
+
+      RaycastHit2D ray = Physics2D.Raycast(origin, dir, skinWidth, collisionMask);
+      Debug.DrawRay(origin, dir * skinWidth, Color.red);
+
+      if (ray && ray.distance < skinWidth * skinWidth) {
+        Debug.Log(ray.distance);
+        velocity.x = 0;
+      }
+    }
+
 
     void ClimbSlope(ref Vector3 velocity) {
       if (collisions.climbingSlope) {
@@ -336,6 +378,7 @@ namespace UnityPlatformer {
         float climbVelocityY = Mathf.Sin (collisions.slopeAngle * Mathf.Deg2Rad) * moveDistance;
 
         if (velocity.y <= climbVelocityY) {
+          Debug.Log("CLIMB!");
           velocity.y = climbVelocityY;
           velocity.x = Mathf.Cos (collisions.slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign (velocity.x);
           collisions.below = true;
@@ -350,6 +393,7 @@ namespace UnityPlatformer {
         (collisions.slopeAngle <= maxDescendAngle || ignoreDescendAngle)
       ) {
         Vector3 slopedir = GetDownSlopeDir();
+        Debug.Log("DECEND!!");
         velocity.y = Mathf.Abs(velocity.x) * slopedir.y;
         collisions.below = true;
       }
@@ -458,6 +502,7 @@ namespace UnityPlatformer {
       // current
       public bool above, below;
       public bool left, right;
+      public bool leftIsWall, rightIsWall;
       public float slopeAngle;
       public Vector3 slopeNormal;
       public Vector3 velocity;
@@ -477,6 +522,7 @@ namespace UnityPlatformer {
       public bool standingOnPlatform;
 
       // colliders
+      public GameObject slope;
       const int MAX_COLLIDERS = 3;
       public RaycastHit2D[] leftHits;
       public int leftHitsIdx;
@@ -502,6 +548,7 @@ namespace UnityPlatformer {
         left = right = false;
         climbingSlope = false;
         descendingSlope = false;
+        leftIsWall = rightIsWall = false;
 
         ++lastAboveFrame;
         ++lastBelowFrame;

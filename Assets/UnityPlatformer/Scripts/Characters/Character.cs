@@ -202,7 +202,7 @@ namespace UnityPlatformer {
         onBeforeMove(this, delta);
       }
 
-      pc2d.Move(velocity * delta);
+      pc2d.Move(velocity * delta, delta);
 
       if (onAfterMove != null) {
         onAfterMove(this, delta);

@@ -64,12 +64,17 @@ namespace UnityPlatformer {
 
     public RaycastOrigins raycastOrigins;
 
+    RaycastHit2D[] horizontalRays;
+    RaycastHit2D[] verticalRays;
+
     public virtual void Awake() {
       box = GetComponent<BoxCollider2D> ();
     }
 
     public virtual void Start() {
       CalculateRaySpacing ();
+      horizontalRays = new RaycastHit2D[horizontalRayCount];
+      verticalRays = new RaycastHit2D[verticalRayCount];
     }
 
     public void UpdateRaycastOrigins() {
@@ -125,6 +130,42 @@ namespace UnityPlatformer {
         RaycastHit2D hit = Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask, c ?? Color.red);
 
         return hit;
+    }
+
+    public RaycastHit2D[] DoFeetRays(float rayLength, ref Vector3 velocity, Color? c = null) {
+      for (int i = 0; i < verticalRayCount; i ++) {
+        Vector3 origin = raycastOrigins.bottomLeft ; //+ (Vector2) velocity;
+        origin.x += verticalRaySpacing * i;
+        verticalRays[i] = Raycast(origin, Vector2.down, rayLength, collisionMask, Color.red);
+      }
+      return verticalRays;
+    }
+
+    public RaycastHit2D[] DoHeadRays(float rayLength, ref Vector3 velocity, Color? c = null) {
+      for (int i = 0; i < verticalRayCount; i ++) {
+        Vector3 origin = raycastOrigins.topLeft; // + (Vector2) velocity;
+        origin.x += verticalRaySpacing * i;
+        verticalRays[i] = Raycast(origin, Vector2.up, rayLength, collisionMask, Color.red);
+      }
+      return verticalRays;
+    }
+
+    public RaycastHit2D[] DoLeftRays(float rayLength, ref Vector3 velocity, Color? c = null) {
+      for (int i = 0; i < horizontalRayCount; i ++) {
+        Vector3 origin = raycastOrigins.bottomLeft; // + (Vector2) velocity;
+        origin.y += horizontalRaySpacing * i;
+        horizontalRays[i] = Raycast(origin, Vector2.left, rayLength, collisionMask, Color.red);
+      }
+      return horizontalRays;
+    }
+
+    public RaycastHit2D[] DoRightRays(float rayLength, ref Vector3 velocity, Color? c = null) {
+      for (int i = 0; i < horizontalRayCount; i ++) {
+        Vector3 origin = raycastOrigins.bottomRight; // + (Vector2) velocity;
+        origin.y += horizontalRaySpacing * i;
+        horizontalRays[i] = Raycast(origin, Vector2.right, rayLength, collisionMask, Color.red);
+      }
+      return horizontalRays;
     }
 
     public RaycastHit2D DoFeetRay(float rayLength, LayerMask mask) {

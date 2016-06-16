@@ -11,8 +11,8 @@ TagManager:
   - Enemy
   - Projectile
   - OneWayPlatformUp
-  - MovingPlatform&OneWayPlatformsUp
-  - MovingPlatformThrough&OneWayPlatformsUp
+  - MovingPlatform&OneWayPlatformUp
+  - MovingPlatformThrough&OneWayPlatformUp
   - Box
   - OneWayPlatformDown
   - OneWayWallLeft

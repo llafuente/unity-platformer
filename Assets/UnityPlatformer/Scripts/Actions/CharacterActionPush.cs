@@ -117,14 +117,14 @@ namespace UnityPlatformer {
     public void OnBeforeMove(Character ch, float delta) {
       if (ch.IsOnState(States.Pushing)) {
         if (ch.pc2d.collisions.faceDir == 1) {
-          PushBox(ch.velocity * delta, ref ch.pc2d.collisions.rightHits, ch.pc2d.collisions.rightHitsIdx);
+          PushBox(ch.velocity * delta, ref ch.pc2d.collisions.rightHits, ch.pc2d.collisions.rightHitsIdx, delta);
         } else {
-          PushBox(ch.velocity * delta, ref ch.pc2d.collisions.leftHits, ch.pc2d.collisions.leftHitsIdx);
+          PushBox(ch.velocity * delta, ref ch.pc2d.collisions.leftHits, ch.pc2d.collisions.leftHitsIdx, delta);
         }
       }
     }
 
-    public void PushBox(Vector3 velocity, ref RaycastHit2D[] hits, int count) {
+    public void PushBox(Vector3 velocity, ref RaycastHit2D[] hits, int count, float delta) {
       // push any box that is not on a platform that it's already a box
       // and just one (the first one)
 
@@ -134,13 +134,13 @@ namespace UnityPlatformer {
           // guard against dark arts
           if (Configuration.IsBox(b.boxCharacter.gameObject)) {
             if (!b.boxCharacter.platform) {
-              b.boxCharacter.pc2d.Move(velocity);
+              b.boxCharacter.pc2d.Move(velocity, delta);
               return;
             }
 
             Box b2 = b.boxCharacter.platform.GetComponent<Box>();
             if (b2 != null && !Configuration.IsBox(b2.boxCharacter.gameObject)) {
-              b.boxCharacter.pc2d.Move(velocity);
+              b.boxCharacter.pc2d.Move(velocity, delta);
               return;
             }
           } else {
