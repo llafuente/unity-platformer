@@ -90,6 +90,7 @@ namespace UnityPlatformer {
       raycastOrigins.bottomCenter = new Vector2 (min.x + bounds.size.x * 0.5f, min.y);
       raycastOrigins.bottomRight = new Vector2 (max.x, min.y);
       raycastOrigins.topLeft = new Vector2 (min.x, max.y);
+      raycastOrigins.topCenter = new Vector2 (min.x + bounds.size.x * 0.5f, max.y);
       raycastOrigins.topRight = new Vector2 (max.x, max.y);
     }
 
@@ -115,6 +116,7 @@ namespace UnityPlatformer {
 
     public struct RaycastOrigins {
       public Vector2 topLeft;
+      public Vector2 topCenter;
       public Vector2 topRight;
       public Vector2 bottomLeft;
       public Vector2 bottomCenter;
@@ -133,17 +135,20 @@ namespace UnityPlatformer {
     }
 
     public RaycastHit2D[] DoFeetRays(float rayLength, ref Vector3 velocity, Color? c = null) {
+      rayLength += Mathf.Abs(velocity.y);
       for (int i = 0; i < verticalRayCount; i ++) {
-        Vector3 origin = raycastOrigins.bottomLeft ; //+ (Vector2) velocity;
+        Vector3 origin = raycastOrigins.bottomLeft;
         origin.x += verticalRaySpacing * i;
         verticalRays[i] = Raycast(origin, Vector2.down, rayLength, collisionMask, Color.red);
+        //Debug.LogFormat("ray {0} distance {1}", i, verticalRays[i].distance);
       }
       return verticalRays;
     }
 
     public RaycastHit2D[] DoHeadRays(float rayLength, ref Vector3 velocity, Color? c = null) {
+      rayLength += Mathf.Abs(velocity.y);
       for (int i = 0; i < verticalRayCount; i ++) {
-        Vector3 origin = raycastOrigins.topLeft; // + (Vector2) velocity;
+        Vector3 origin = raycastOrigins.topLeft;
         origin.x += verticalRaySpacing * i;
         verticalRays[i] = Raycast(origin, Vector2.up, rayLength, collisionMask, Color.red);
       }

@@ -7,8 +7,12 @@ root = true
 # A newline ending every file
 # Use 2 spaces as indentation
 # Trim trailing whitespace
-[*]
-insert_final_newline = true
+[*.cs]
 indent_style = space
 indent_size = 2
+insert_final_newline = true
 trim_trailing_whitespace = true
+
+[*.{unity,prefab,meta,controller,anim,mat}]
+trim_trailing_whitespace = false
+insert_final_newline = false

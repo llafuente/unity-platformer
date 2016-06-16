@@ -18,7 +18,6 @@ namespace UnityPlatformer {
     public Vector3 grabbingOffset = new Vector3(0, 0, 0);
     public bool dismountPressingDown = true;
     public bool dismountJumping = true;
-    public CharacterActionJump actionJump;
     [Comment("Jump with no direction pressed.")]
     public JumpConstantProperties jumpOff = new JumpConstantProperties(new Vector2(20, 20));
 
@@ -30,11 +29,13 @@ namespace UnityPlatformer {
 
     #endregion
 
+    CharacterActionJump actionJump;
     bool centering = false;
     Cooldown canGrab;
 
     public override void Start() {
       base.Start();
+      actionJump = character.GetAction<CharacterActionJump>();
       canGrab = new Cooldown(grabAgainCooldown);
     }
 

@@ -1128,7 +1128,6 @@ MonoBehaviour:
   verticalRayLength: 0.2
   horizontalRayLength: 0.2
   minTranslation: 0.01
-  useRigidbody2D: 0
   ignoreDescendAngle: 0
   disableWorldCollisions: 0
 --- !u!114 &11457342
@@ -1298,7 +1297,6 @@ MonoBehaviour:
   grabbingOffset: {x: 0, y: 1.25, z: 0}
   dismountPressingDown: 1
   dismountJumping: 1
-  actionJump: {fileID: 11446736}
   jumpOff:
     initialVelocity: {x: 15, y: 15}
   priority: 10

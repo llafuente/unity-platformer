@@ -6,6 +6,8 @@ namespace UnityPlatformer {
   public class Ladder : MonoBehaviour {
     // cache
     BoxCollider2D body;
+    public bool topDismount = true;
+    public bool bottomDismount = true;
 
     virtual public void Start() {
       body = GetComponent<BoxCollider2D>();
@@ -19,32 +21,28 @@ namespace UnityPlatformer {
       return body.bounds.center - new Vector3(0, body.bounds.size.y * 0.5f, 0);
     }
 
-    virtual public bool IsAboveTop(Character c) {
-      float feetY = c.GetFeetPosition().y;
+    virtual public bool IsAboveTop(Character c, Vector2 pos) {
       float topY = GetTop().y - c.pc2d.skinWidth;
 
-      return feetY > topY;
+      return pos.y > topY;
     }
 
-    virtual public bool IsAtTop(Character c) {
-      float feetY = c.GetFeetPosition().y;
+    virtual public bool IsAtTop(Character c, Vector2 pos) {
       float topY = GetTop().y;
 
-      return Mathf.Abs(feetY - topY) < c.pc2d.skinWidth;
+      return Mathf.Abs(pos.y - topY) < c.pc2d.skinWidth;
     }
 
-    virtual public bool IsBelowBottom(Character c) {
-      float feetY = c.GetFeetPosition().y;
+    virtual public bool IsBelowBottom(Character c, Vector2 pos) {
       float bottomY = GetBottom().y + c.pc2d.skinWidth;
 
-      return feetY < bottomY;
+      return pos.y < bottomY;
     }
 
-    virtual public bool IsAtBottom(Character c) {
-      float feetY = c.GetFeetPosition().y;
+    virtual public bool IsAtBottom(Character c, Vector2 pos) {
       float bottomY = GetBottom().y;
 
-      return Mathf.Abs(feetY - bottomY) < c.pc2d.skinWidth;
+      return Mathf.Abs(pos.y - bottomY) < c.pc2d.skinWidth;
     }
 
     virtual public void EnableLadder(Character p) {

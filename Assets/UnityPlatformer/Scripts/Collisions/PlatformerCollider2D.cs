@@ -141,7 +141,7 @@ namespace UnityPlatformer {
 
       // be sure we stay outside others colliders
       if (!disableWorldCollisions) {
-        DiagonalCollisions(ref velocity);
+        //DiagonalCollisions(ref velocity);
 
         HorizontalCollisions (-1, DoLeftRays(skinWidth, ref velocity), ref velocity);
         HorizontalCollisions (1, DoRightRays(skinWidth, ref velocity), ref velocity);
@@ -316,8 +316,7 @@ namespace UnityPlatformer {
         if (hit) {
           // fallingThroughPlatform ?
           if (
-            Configuration.IsMovingPlatformThrough(hit.collider) &&
-            collisions.standingOnPlatform &&
+            Configuration.IsOneWayPlatformUp(hit.collider) &&
             collisions.fallingThroughPlatform
           ) {
             continue;
@@ -355,11 +354,20 @@ namespace UnityPlatformer {
       Vector3 origin = velocity.x > 0 ? raycastOrigins.bottomRight :  raycastOrigins.bottomLeft;
       Vector2 dir = new Vector2(Mathf.Sign(velocity.x), -1);
 
-      RaycastHit2D ray = Physics2D.Raycast(origin, dir, skinWidth, collisionMask);
+      RaycastHit2D hit = Physics2D.Raycast(origin, dir, skinWidth, collisionMask);
       Debug.DrawRay(origin, dir * skinWidth, Color.red);
 
-      if (ray && ray.distance < skinWidth * skinWidth) {
-        Debug.Log(ray.distance);
+      if (hit && hit.distance < skinWidth * skinWidth) {
+        // ignore all oneWay
+        if (
+          Configuration.IsOneWayWallLeft(hit.collider) ||
+          Configuration.IsOneWayWallRight(hit.collider) ||
+          Configuration.IsOneWayPlatformUp(hit.collider) ||
+          Configuration.IsOneWayPlatformDown(hit.collider)
+          ) {
+          return;
+        }
+
         velocity.x = 0;
       }
     }
@@ -519,7 +527,6 @@ namespace UnityPlatformer {
       public float distanceToSlopeStart;
       public int faceDir;
       public bool fallingThroughPlatform;
-      public bool standingOnPlatform;
 
       // colliders
       public GameObject slope;

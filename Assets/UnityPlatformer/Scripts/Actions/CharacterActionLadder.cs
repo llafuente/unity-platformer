@@ -76,9 +76,9 @@ namespace UnityPlatformer {
       if (onLadderArea && !onLadderState) {
         float dir = input.GetAxisRawY();
         // moving up, while inside a real LadderArea.
-        if (dir > 0 && !(ladder ?? character.ladder).IsAtTop(character)) {
+        if (dir > 0 && !(ladder ?? character.ladder).IsAtTop(character, character.feet)) {
           enter = true;
-        } else if (dir < 0 && !(ladder ?? character.ladder).IsAtBottom(character)) {
+        } else if (dir < 0 && !(ladder ?? character.ladder).IsAtBottom(character, character.feet)) {
           // moving down: entering from the top
           if (ladder != null) {
             ladder.EnableLadder(character);
@@ -93,7 +93,7 @@ namespace UnityPlatformer {
 
             // check feet/bottom
             float bottomLadderY = character.ladder.GetBottom().y;
-            float feetY = character.GetFeetPosition().y;
+            float feetY = character.feet.y;
 
             // do not enter the ladder while on ground - pressing down
             if (feetY > bottomLadderY) {
@@ -122,11 +122,12 @@ namespace UnityPlatformer {
     }
 
     public override void PerformAction(float delta) {
+      // guard: something goes wrong!
       if (character.ladder == null) {
-        //something goes wrong!
         character.ExitState(States.Ladder);
         return;
       }
+      Ladder ladder = character.ladder;
 
       Vector2 in2d = input.GetAxisRaw();
 
@@ -138,7 +139,7 @@ namespace UnityPlatformer {
 
       // TODO transition
       if (centering) {
-        float ladderCenter = character.ladder.GetComponent<BoxCollider2D>().bounds.center.x;
+        float ladderCenter = ladder.GetComponent<BoxCollider2D>().bounds.center.x;
         float characterX = character.GetCenter().x;
         if (Math.Abs(characterX - ladderCenter) < 0.05) {
           centering = false;
@@ -149,13 +150,20 @@ namespace UnityPlatformer {
         }
       }
 
-      if (character.ladder.IsAtTop(character) && in2d.y > 0) {
+      if (!ladder.topDismount && ladder.IsAtTop(character, character.head) && in2d.y > 0) {
+        // TOP no-dismount
         character.velocity = Vector2.zero;
-        character.ladder.Dismount(character);
-      } else if (character.ladder.IsAtBottom(character) && in2d.y < 0) {
+      } else if (ladder.topDismount && ladder.IsAtTop(character, character.feet) && in2d.y > 0) {
+        // TOP dismount
         character.velocity = Vector2.zero;
-        character.ladder.Dismount(character);
+        ladder.Dismount(character);
+      } else if (!ladder.bottomDismount && ladder.IsAtBottom(character, character.feet) && in2d.y < 0) {
+        character.velocity = Vector2.zero;
+      } else if (ladder.bottomDismount && ladder.IsAtBottom(character, character.feet) && in2d.y < 0) {
+        character.velocity = Vector2.zero;
+        ladder.Dismount(character);
       }
+
       if (in2d.x != 0) {
         if (dismount.IncReady()) {
           character.velocity = Vector2.zero;

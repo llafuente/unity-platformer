@@ -98,6 +98,17 @@ namespace UnityPlatformer {
     [HideInInspector]
     public CharacterAnimator animator;
 
+    public Vector2 head {
+      get {
+        return pc2d.raycastOrigins.topCenter;
+      }
+    }
+    public Vector2 feet {
+      get {
+        return pc2d.raycastOrigins.bottomCenter;
+      }
+    }
+
     #endregion
 
     #region private
@@ -361,13 +372,6 @@ namespace UnityPlatformer {
 
     virtual public void OnDeath() {
       Debug.Log("Player die! play some fancy animation!");
-    }
-
-    public virtual Vector3 GetFeetPosition() {
-      return body.bounds.center - new Vector3(
-        0,
-        body.bounds.size.y * 0.5f,
-        0);
     }
 
     public virtual Vector3 GetCenter() {

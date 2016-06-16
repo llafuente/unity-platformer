@@ -243,7 +243,6 @@ namespace UnityPlatformer {
 
           if (hit && hit.distance != 0) {
             if (!movedPassengers.Contains(hit.transform)) {
-              hit.collider.GetComponent<PlatformerCollider2D>().collisions.standingOnPlatform = true;
               movedPassengers.Add(hit.transform);
               float pushX = (directionY == 1)?velocity.x:0;
               float pushY = velocity.y - (hit.distance - skinWidth) * directionY;

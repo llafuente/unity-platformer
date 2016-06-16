@@ -30,12 +30,12 @@ namespace UnityPlatformer {
     }
 
     public bool IsBelowSurface(Character character, float offset) {
-      float char_surface_level = character.GetFeetPosition().y + offset + surfaceOffset;
+      float char_surface_level = character.feet.y + offset + surfaceOffset;
       return char_surface_level < GetTop().y;
     }
 
     public float DistanceToSurface(Character character, float offset) {
-      float char_surface_level = character.GetFeetPosition().y + offset + surfaceOffset;
+      float char_surface_level = character.feet.y + offset + surfaceOffset;
       return GetTop().y - char_surface_level;
     }
 
