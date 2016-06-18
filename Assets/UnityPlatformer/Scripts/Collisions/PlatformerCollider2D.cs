@@ -147,9 +147,10 @@ namespace UnityPlatformer {
         HorizontalCollisions (1, DoRightRays(skinWidth, ref velocity), ref velocity);
 
         if (velocity.y > 0) {
-          VerticalCollisions (1, DoHeadRays(verticalRayLength, ref velocity), ref velocity);
+          VerticalCollisions (-1, DoFeetRays(verticalRayLength, ref velocity), ref velocity, true);
+          VerticalCollisions (1, DoHeadRays(verticalRayLength, ref velocity), ref velocity, false);
         } else if (velocity.y < 0) {
-          VerticalCollisions (-1, DoFeetRays(verticalRayLength, ref velocity), ref velocity);
+          VerticalCollisions (-1, DoFeetRays(verticalRayLength, ref velocity), ref velocity, false);
         }
       }
 
@@ -308,7 +309,7 @@ namespace UnityPlatformer {
       return hit.collider != null;
     }
 
-    void VerticalCollisions(int dir, RaycastHit2D[] rays, ref Vector3 velocity) {
+    void VerticalCollisions(int dir, RaycastHit2D[] rays, ref Vector3 velocity, bool separate_only) {
       for (int i = 0; i < verticalRayCount; i ++) {
 
         RaycastHit2D hit = rays[i];
@@ -339,9 +340,17 @@ namespace UnityPlatformer {
             continue;
           }
 
-          velocity.y = (hit.distance - minDistanceToEnv) * dir;
-          collisions.above = dir == 1;
-          collisions.below = dir == -1;
+          if (separate_only) {
+            // this is an emergency separator, mostly for liquids, were
+            // character goes up/down and can enter a slope while moving up
+            if (hit.distance < minDistanceToEnv * 0.5f) {
+              velocity.y = (hit.distance - minDistanceToEnv) * dir;
+            }
+          } else {
+            velocity.y = (hit.distance - minDistanceToEnv) * dir;
+            collisions.above = dir == 1;
+            collisions.below = dir == -1;
+          }
         }
       }
     }
