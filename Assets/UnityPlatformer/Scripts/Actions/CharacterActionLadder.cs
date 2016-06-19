@@ -20,8 +20,11 @@ namespace UnityPlatformer {
     [Space(10)]
     [Comment("Dismount pressing left/right")]
     public bool leftRightDismount = true;
-    [Comment("Dismount pressing left/right")]
+    [Comment("Time left/right need to be pressed to dismount")]
     public float dismountTime = 0.2f;
+    public bool dismountJumping = true;
+    [Comment("Jump with no direction pressed.")]
+    public JumpConstantProperties jumpOff = new JumpConstantProperties(new Vector2(20, 20));
 
     [Space(10)]
     [Comment("Remember: Higher priority wins. Modify with caution")]
@@ -29,12 +32,14 @@ namespace UnityPlatformer {
 
     #endregion
 
+    CharacterActionJump actionJump;
     bool centering = false;
     Cooldown dismount;
 
     public override void Start() {
       base.Start();
       dismount = new Cooldown(dismountTime);
+      actionJump = character.GetAction<CharacterActionJump>();
     }
 
     /// <summary>
@@ -164,8 +169,26 @@ namespace UnityPlatformer {
         ladder.Dismount(character);
       }
 
+      int faceDir;
+      //TODO REVIEW this lead to some problems with orientation...
+      if (in2d.x == 0) {
+        faceDir = 0;
+      } else {
+        character.pc2d.collisions.faceDir = faceDir = (int) Mathf.Sign(in2d.x);
+      }
+
+      // check for dismount conditions
       if (in2d.x != 0) {
-        if (dismount.IncReady()) {
+        // do not allow to jump without telling the direction.
+        // move up if you want it
+        if (dismountJumping && input.IsActionHeld(actionJump.action)) {
+          dismount.Reset();
+          character.ladder.Dismount(character);
+
+          actionJump.Jump(new JumpConstant(character,
+            jumpOff.Clone(faceDir)
+          ));
+        } else if (dismount.IncReady()) {
           character.velocity = Vector2.zero;
           character.ladder.Dismount(character);
         }
