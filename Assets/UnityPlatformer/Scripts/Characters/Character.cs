@@ -60,6 +60,10 @@ namespace UnityPlatformer {
     [HideInInspector]
     public Grab grab;
     [HideInInspector]
+    public Rope rope;
+    [HideInInspector]
+    public int ropeIndex = -1;
+    [HideInInspector]
     public Vector2 lastJumpDistance {
       get {
         return jumpEnd - jumpStart;
@@ -237,7 +241,10 @@ namespace UnityPlatformer {
         }
 
         // falling but not wallsliding
-        if (velocity.y < 0 && !IsOnState(States.WallSliding)) {
+        if (velocity.y < 0 &&
+          !IsOnState(States.WallSliding) &&
+          !IsOnState(States.Liquid) &&
+          !IsOnState(States.Rope)) {
           fallingCD.Increment();
           if (fallingCD.Ready()) {
             SolfEnterState(States.Falling);

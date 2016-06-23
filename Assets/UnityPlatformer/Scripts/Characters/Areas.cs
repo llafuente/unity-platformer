@@ -8,5 +8,6 @@ namespace UnityPlatformer {
     Grabbable =           1 << 2,
     Liquid =              1 << 3,
     Item =                1 << 4,
+    Rope =                1 << 5,
   }
 }

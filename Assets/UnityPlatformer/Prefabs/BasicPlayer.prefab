@@ -226,6 +226,7 @@ GameObject:
   - 114: {fileID: 11457342}
   - 114: {fileID: 11413326}
   - 114: {fileID: 11490564}
+  - 114: {fileID: 11459062}
   m_Layer: 8
   m_Name: Actions
   m_TagString: Untagged
@@ -990,6 +991,8 @@ MonoBehaviour:
   liquid: {fileID: 0}
   item: {fileID: 0}
   grab: {fileID: 0}
+  rope: {fileID: 0}
+  ropeIndex: -1
   fallDistance: {x: 0, y: 0}
   platform: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
@@ -1063,6 +1066,9 @@ MonoBehaviour:
   towardsTime: 0.05
   leftRightDismount: 1
   dismountTime: 0.2
+  dismountJumping: 1
+  jumpOff:
+    initialVelocity: {x: 20, y: 20}
   priority: 10
 --- !u!114 &11445470
 MonoBehaviour:
@@ -1151,6 +1157,28 @@ MonoBehaviour:
   actionJump: {fileID: 11446736}
   jumpOff:
     initialVelocity: {x: 20, y: 20}
+--- !u!114 &11459062
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5895391b6d2246b4eb027574f197a719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 11435812}
+  input: {fileID: 11422300}
+  climbSpeed: 8
+  towardsSpeed: 32
+  towardsTime: 0.1
+  moveToCenter: 0
+  grabbingOffset: {x: 0, y: 0, z: 0}
+  jumpOff:
+    initialVelocity: {x: 20, y: 20}
+  priority: 20
+  grabAgainCooldown: 0.25
 --- !u!114 &11462242
 MonoBehaviour:
   m_ObjectHideFlags: 1

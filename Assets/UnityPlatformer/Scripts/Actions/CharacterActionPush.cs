@@ -34,7 +34,6 @@ namespace UnityPlatformer {
       base.Start();
       pushingCD = new Cooldown(pushingStartTime);
       groundMovement = character.GetAction<CharacterActionGroundMovement>();
-      Debug.Log("groundMovement" + groundMovement);
 
       character.onBeforeMove += OnBeforeMove;
     }

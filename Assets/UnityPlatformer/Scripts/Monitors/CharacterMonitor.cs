@@ -21,6 +21,7 @@ namespace UnityPlatformer {
         "forceAnimation: {12}\n"+
         "Ladder: {2} IsAboveTop {3} IsBelowBottom {4}\n" +
         "Liquid: {9}  IsBelowSurface {10} / {11}\n" +
+        "Rope: {13} @ {14}\n" +
         "Platform: {5}\n" +
         "Jump: {6}\n" +
         "Velocity: {7} - {8}\n",
@@ -35,7 +36,8 @@ namespace UnityPlatformer {
         character.liquid,
         character.liquid ? character.liquid.IsBelowSurface(character, 1.5f) : false,
         character.liquid ? character.liquid.DistanceToSurface(character, 1.5f) : -1,
-        character.forceAnimation
+        character.forceAnimation,
+        character.rope, character.ropeIndex
       );
     }
   }
