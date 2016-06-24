@@ -39,6 +39,12 @@ namespace UnityPlatformer {
     /// </summary>
     public float angularDrag = 1.0f;
 
+    public float faceDir {
+      get {
+        return Mathf.Sign(rotationSpeed);
+      }
+    }
+
     /// <summary>
     /// Rotation speed in degrees per second.
     /// </summary>

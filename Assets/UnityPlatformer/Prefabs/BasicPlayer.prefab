@@ -1174,7 +1174,7 @@ MonoBehaviour:
   towardsSpeed: 32
   towardsTime: 0.1
   moveToCenter: 0
-  grabbingOffset: {x: 0, y: 0, z: 0}
+  grabbingOffset: {x: 0.2, y: 0, z: 0}
   jumpOff:
     initialVelocity: {x: 20, y: 20}
   priority: 20

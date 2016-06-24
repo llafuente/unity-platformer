@@ -48,6 +48,11 @@ namespace UnityPlatformer {
 
       if (character.forceAnimation != null) {
         Play(character.forceAnimation);
+      } else if (character.IsOnState(States.Rope)) {
+        Play("rope");
+        // override rotation
+        float z = character.rope.sections[character.ropeIndex].transform.eulerAngles.z;
+        transform.rotation = Quaternion.AngleAxis(z, Vector3.forward);
       } else if (character.IsOnState(States.Pushing)) {
         Play("pushing");
       } else if (character.IsOnState(States.Liquid)) {

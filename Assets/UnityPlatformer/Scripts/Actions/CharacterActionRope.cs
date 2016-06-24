@@ -65,7 +65,7 @@ namespace UnityPlatformer {
     public override void PerformAction(float delta) {
       Vector3 ori = character.transform.position;
       Vector3 ropePosition = character.rope.sections[character.ropeIndex].GetComponent<RopeSection>().GetPositionInSection(positionOfSection);
-      Vector3 target = ropePosition - grabbingOffset;
+      Vector3 target = ropePosition + character.rope.faceDir * grabbingOffset;
 
       // close enough to our target position ?
       if (centering && Vector3.Distance(ori, target) < 0.1f) {
