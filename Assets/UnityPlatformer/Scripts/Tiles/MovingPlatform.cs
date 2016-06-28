@@ -18,7 +18,7 @@ namespace UnityPlatformer {
   /// <summary>
   /// TODO Stop, Resume, Reverse, StopOnNextWaypoint
   /// </summary>
-  public class MovingPlatform : RaycastController {
+  public class MovingPlatform : RaycastController, IUpdateEntity {
     #region public
 
     [Comment("Who will move while in the platform.")]
@@ -334,11 +334,11 @@ namespace UnityPlatformer {
     }
 
     void OnEnable() {
-      UpdateManager.instance.movingPlatforms.Add(this);
+      UpdateManager.instance.Push(this, Configuration.instance.defaultPriority);
     }
 
     void OnDisable() {
-      UpdateManager.instance.movingPlatforms.Remove(this);
+      UpdateManager.instance.Remove(this);
     }
 
     struct PassengerMovement {

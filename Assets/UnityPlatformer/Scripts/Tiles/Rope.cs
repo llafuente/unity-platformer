@@ -106,20 +106,20 @@ namespace UnityPlatformer {
       section.transform.parent = transform;
       section.transform.localPosition = new Vector3(0, currentLocalYPos, 0);
 
-      Rigidbody2D rb = Utils.GetOrAddComponent<Rigidbody2D>(section);
+      Rigidbody2D rb = section.GetOrAddComponent<Rigidbody2D>();
       rb.mass = ropeMass;
       // NOTE this is mandatory atm.
       // the rope movement it's a bit basic, because i cannot have a more stable
       // version
       rb.isKinematic = true;
 
-      BoxCollider2D bc2d = Utils.GetOrAddComponent<BoxCollider2D>(section);
+      BoxCollider2D bc2d = section.GetOrAddComponent<BoxCollider2D>();
       // Default to a 0.5f wide box collider
       bc2d.size = new Vector2(0.5f, segmentLength);
       bc2d.isTrigger = true;
 
       // Check Hinge Joint
-      HingeJoint2D hingeJoint = Utils.GetOrAddComponent<HingeJoint2D>(section);
+      HingeJoint2D hingeJoint = section.GetOrAddComponent<HingeJoint2D>();
       hingeJoint.anchor = new Vector2(0, 0.5f);
       hingeJoint.connectedAnchor = new Vector2(0, i == 0 ? 0.0f : -0.5f);
       hingeJoint.connectedBody = connectedBody;
@@ -148,7 +148,7 @@ namespace UnityPlatformer {
     void Start() {
       // create the rope from bottom to top
       // and chain them
-      Utils.DestroyImmediateChildren(gameObject.transform);
+      gameObject.transform.DestroyImmediateChildren();
 
       sections = new GameObject[segments];
 
@@ -186,11 +186,11 @@ namespace UnityPlatformer {
     }
 
     public virtual void OnEnable() {
-      UpdateManager.instance.others.Add(this);
+      UpdateManager.instance.Push(this, Configuration.instance.movingPlatformsPriority);
     }
 
     public virtual void OnDisable() {
-      UpdateManager.instance.others.Remove(this);
+      UpdateManager.instance.Remove(this);
     }
 
     /// <summary>
@@ -218,7 +218,7 @@ namespace UnityPlatformer {
         delta * actualSpeed
       );
       deg = Utils.NormalizeDegree(transform.eulerAngles.z);
-      //Utils.DrawZAngle(transform.position, deg);
+      //transform.position.DrawZAngle(deg);
 
       // go-back
       if (deg >= angleLimits) {

@@ -158,9 +158,6 @@ namespace UnityPlatformer {
       return default(T);
     }
 
-    public void Attach(UpdateManager um) {
-    }
-
     /// <summary>
     /// Managed update called by UpdateManager
     /// Transform Input into platformer magic :)
@@ -386,11 +383,11 @@ namespace UnityPlatformer {
     }
 
     public virtual void OnEnable() {
-      UpdateManager.instance.characters.Add(this);
+      UpdateManager.instance.Push(this, Configuration.instance.charactersPriority);
     }
 
     public virtual void OnDisable() {
-      UpdateManager.instance.characters.Remove(this);
+      UpdateManager.instance.Remove(this);
     }
 
     public void SetOverrideAnimation(string animation, bool freeze) {

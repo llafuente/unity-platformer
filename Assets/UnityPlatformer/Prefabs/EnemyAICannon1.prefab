@@ -685,6 +685,8 @@ MonoBehaviour:
   liquid: {fileID: 0}
   item: {fileID: 0}
   grab: {fileID: 0}
+  rope: {fileID: 0}
+  ropeIndex: -1
   fallDistance: {x: 0, y: 0}
   platform: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}

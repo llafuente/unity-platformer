@@ -38,21 +38,21 @@ namespace UnityPlatformer {
 
     public void OnTriggerEnter2D(Collider2D o) {
       //Debug.Log("MovingPlatformControllerTrigger.OnTriggerEnter2D: " + name);
-      if (Utils.layermask_contains(mask, o.gameObject.layer)) {
+      if (mask.Contains(o.gameObject.layer)) {
         DoAction(onEnter);
       }
     }
 
     public void OnTriggerExit2D(Collider2D o) {
       //Debug.Log("MovingPlatformControllerTrigger.OnTriggerExit2D: " + name);
-      if (Utils.layermask_contains(mask, o.gameObject.layer)) {
+      if (mask.Contains(o.gameObject.layer)) {
         DoAction(onExit);
       }
     }
 
     public void OnTriggerStay2D(Collider2D o) {
       // Debug.Log("MovingPlatformControllerTrigger.OnTriggerStay2D: " + name);
-      if (Utils.layermask_contains(mask, o.gameObject.layer)) {
+      if (mask.Contains(o.gameObject.layer)) {
         DoAction(onStay);
       }
     }

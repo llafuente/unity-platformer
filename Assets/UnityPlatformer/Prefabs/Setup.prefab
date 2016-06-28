@@ -41,10 +41,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeScale: 1
-  characters: []
-  movingPlatforms: []
-  enemies: []
-  projectiles: []
 --- !u!114 &11463972
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -71,6 +67,11 @@ MonoBehaviour:
   laddersMask:
     serializedVersion: 2
     m_Bits: 8192
+  movingPlatformsPriority: 50
+  charactersPriority: 40
+  enemiesPriority: 30
+  projectilesPriority: 20
+  defaultPriority: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -21,11 +21,11 @@ namespace UnityPlatformer {
     }
 
     public virtual void OnEnable() {
-      UpdateManager.instance.others.Add(this);
+      UpdateManager.instance.Push(this, Configuration.instance.defaultPriority);
     }
 
     public virtual void OnDisable() {
-      UpdateManager.instance.others.Remove(this);
+      UpdateManager.instance.Remove(this);
     }
 
     public virtual void ManagedUpdate(float delta) {

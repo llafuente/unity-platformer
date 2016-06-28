@@ -61,7 +61,7 @@ namespace UnityPlatformer {
 
     void OnTriggerEnter2D(Collider2D o) {
       //Debug.Log(this.name + " collide with: " + o.gameObject);
-      if (Utils.layermask_contains(collideWith, o.gameObject.layer)) {
+      if (collideWith.Contains(o.gameObject.layer)) {
         var dst_hb = o.gameObject.GetComponent<HitBox> ();
 
         // do not deal damage to 'myself' and hitbox deal damage

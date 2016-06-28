@@ -3,6 +3,11 @@ using UnityEngine;
 namespace UnityPlatformer {
   public class Configuration : MBSingleton<Configuration> {
     public Vector2 gravity = Vector2.zero;
+    public float minDistanceToEnv = 0.1f;
+    public LayerMask laddersMask;
+
+    [Space(20)]
+    [Header("Tags")]
     public string playerTag = "Player";
     public string oneWayPlatformUpTag = "OneWayPlatformUp";
     public string oneWayPlatformDownTag = "OneWayPlatformDown";
@@ -13,8 +18,15 @@ namespace UnityPlatformer {
     public string enemyTag = "Enemy";
     public string projectileTag = "Projectile";
     public string boxTag = "Box";
-    public float minDistanceToEnv = 0.1f;
-    public LayerMask laddersMask;
+
+    [Space(20)]
+    [Header("UpdateManager priorities")]
+    public int movingPlatformsPriority = 50;
+    public int charactersPriority = 30;
+    public int enemiesPriority = 30;
+    public int projectilesPriority = 20;
+    public int defaultPriority = 10;
+
 
     static public bool IsOneWayPlatformUp(GameObject obj) {
       return obj.tag.IndexOf(Configuration.instance.oneWayPlatformUpTag) != -1;

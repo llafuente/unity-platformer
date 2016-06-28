@@ -8,29 +8,33 @@ namespace UnityPlatformer {
     /// If you have your own camera, this should be false.
     /// </summary>
     public bool setupCameraFollow = true;
+    public bool monitor = false;
 
     public override void Awake() {
       base.Awake();
 
+      Character[] chars = instance.gameObject.GetComponentsInChildren<Character>();
+      if (chars.Length != 1) {
+        Debug.LogErrorFormat("Found {0} Character(s) expected 1", chars.Length);
+        return;
+      }
+
+      PlatformerInput[] inputs = instance.gameObject.GetComponentsInChildren<PlatformerInput>();
+
+      if (inputs.Length != 1) {
+        Debug.LogErrorFormat("Found {0} PlatformerInput(s) expected 1", inputs.Length);
+        return;
+      }
+
+      CharacterMonitor mon = chars[0].gameObject.GetOrAddComponent<CharacterMonitor>();
+      mon.enabled = monitor;
+
       if (setupCameraFollow) {
-        Character[] chars = instance.gameObject.GetComponentsInChildren<Character>();
-        PlatformerInput[] inputs = instance.gameObject.GetComponentsInChildren<PlatformerInput>();
-
-        if (chars.Length != 1) {
-          Debug.LogErrorFormat("Cannot setup camera: Found {0} Character(s)", chars.Length);
-          return;
-        }
-
-        if (inputs.Length != 1) {
-          Debug.LogErrorFormat("Cannot setup camera: Found {0} PlatformerInput(s)", inputs.Length);
-          return;
-        }
-
         var cams = Camera.allCameras;
 
         foreach (var c in cams) {
-
           CameraFollow cf = c.GetComponent<CameraFollow>();
+
           if (cf) {
             cf.target = chars[0];
             cf.targetInput = inputs[0];

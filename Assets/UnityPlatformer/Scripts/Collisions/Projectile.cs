@@ -61,7 +61,7 @@ namespace UnityPlatformer {
         return null;
       }
 
-      UpdateManager.instance.projectiles.Add(prj);
+      UpdateManager.instance.Push(this, Configuration.instance.projectilesPriority);
       return prj;
     }
 
@@ -79,7 +79,7 @@ namespace UnityPlatformer {
     ///</summary>
     public virtual void OnTriggerEnter2D(Collider2D o) {
       //Debug.Log(this.name + " collide with: " + o.gameObject + "@" + o.gameObject.layer);
-      if (Utils.layermask_contains(collisionMask, o.gameObject.layer)) {
+      if (collisionMask.Contains(o.gameObject.layer)) {
         var dst = o.gameObject.GetComponent<HitBox> ();
         if (dst == null) {
           //Debug.LogWarning("Destroy projectile");
@@ -116,7 +116,7 @@ namespace UnityPlatformer {
         yield return new WaitForSeconds(destroyDelay);
       }
 
-      UpdateManager.instance.projectiles.Remove(this);
+      UpdateManager.instance.Remove(this);
       Destroy (gameObject);
     }
   }

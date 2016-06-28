@@ -71,9 +71,9 @@ namespace UnityPlatformer {
 
     // debug
     //void OnDrawGizmos() {
-    //  Utils.DrawPoint(GetCenter(), 0.2f);
-    //  Utils.DrawPoint(GetTop(), 0.2f);
-    //  Utils.DrawPoint(GetBottom(), 0.2f);
+    //  GetCenter().Draw(0.2f);
+    //  GetTop().Draw(0.2f);
+    //  GetBottom().Draw(0.2f);
     //}
   }
 }
