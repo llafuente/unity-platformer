@@ -36,8 +36,9 @@ namespace UnityPlatformer {
     bool centering = false;
     Cooldown dismount;
 
-    public override void Start() {
-      base.Start();
+    public override void OnEnable() {
+      base.OnEnable();
+
       dismount = new Cooldown(dismountTime);
       actionJump = character.GetAction<CharacterActionJump>();
     }

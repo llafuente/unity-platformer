@@ -514,7 +514,7 @@ namespace UnityPlatformer {
       }
     }
 
-    //[Serializable]
+    [Serializable]
     public class CollisionInfo {
       // current
       public bool above, below;

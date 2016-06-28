@@ -33,8 +33,9 @@ namespace UnityPlatformer {
     bool centering = false;
     Cooldown canGrab;
 
-    public override void Start() {
-      base.Start();
+    public override void OnEnable() {
+      base.OnEnable();
+
       actionJump = character.GetAction<CharacterActionJump>();
       canGrab = new Cooldown(grabAgainCooldown);
     }

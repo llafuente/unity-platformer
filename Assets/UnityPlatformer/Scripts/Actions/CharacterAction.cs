@@ -10,6 +10,7 @@ namespace UnityPlatformer {
   /// <summary>
   /// Base class to perform an action over a character
   /// </summary>
+  [Serializable]
   public abstract class CharacterAction : MonoBehaviour {
     #region public
 
@@ -36,7 +37,8 @@ namespace UnityPlatformer {
     protected PlatformerCollider2D pc2d;
     protected bool hasControl = false;
 
-    public virtual void Start() {
+    // keep character.actions in sync
+    public virtual void OnEnable() {
       if (character == null) {
         Debug.LogError(gameObject.name + " contains an action without character property set");
       }
@@ -48,10 +50,7 @@ namespace UnityPlatformer {
       pc2d = character.pc2d;
 
       hasControl = false;
-    }
 
-    // keep character.actions in sync
-    public virtual void OnEnable() {
       character.actions.Add(this);
     }
 

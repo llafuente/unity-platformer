@@ -45,6 +45,11 @@ The wiki contains the documentation along with the issues above
 * [FAQ](/llafuente/unity-platformer/wiki/FAQ)
 * [Usage](/llafuente/unity-platformer/wiki/Usage)
 
+## Hotswapping
+
+`unity-platformer` support (mostly) hotswapping.
+
+There are some limitations, like the character current actions is lost: Example: If character is grabbing will fall.
 
 # License
 

@@ -37,8 +37,8 @@ namespace UnityPlatformer {
 
     #endregion
 
-    public override void Start() {
-      base.Start();
+    public override void OnEnable() {
+      base.OnEnable();
 
       damageAreas[0].startAt = damageAreas[0].offsetFrame = 0;
       for (var i = 1; i < damageAreas.Length; ++i) {

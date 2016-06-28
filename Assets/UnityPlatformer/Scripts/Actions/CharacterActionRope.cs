@@ -35,8 +35,9 @@ namespace UnityPlatformer {
     Cooldown canGrab;
     float positionOfSection = 0.5f;
 
-    public override void Start() {
-      base.Start();
+    public override void OnEnable() {
+      base.OnEnable();
+
       actionJump = character.GetAction<CharacterActionJump>();
       canGrab = new Cooldown(grabAgainCooldown);
     }

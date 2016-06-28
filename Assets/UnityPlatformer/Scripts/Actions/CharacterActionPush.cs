@@ -30,8 +30,9 @@ namespace UnityPlatformer {
     float velocityXSmoothing;
     CharacterActionGroundMovement groundMovement;
 
-    public override void Start() {
-      base.Start();
+    public override void OnEnable() {
+      base.OnEnable();
+
       pushingCD = new Cooldown(pushingStartTime);
       groundMovement = character.GetAction<CharacterActionGroundMovement>();
 

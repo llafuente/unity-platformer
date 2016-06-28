@@ -29,8 +29,8 @@ namespace UnityPlatformer {
     protected int cdCounter = 0;
     #endregion
 
-    public override void Start() {
-      base.Start();
+    public override void OnEnable() {
+      base.OnEnable();
 
       castFrames = UpdateManager.instance.GetFrameCount (castTime);
       durationFrames = UpdateManager.instance.GetFrameCount (durationTime);

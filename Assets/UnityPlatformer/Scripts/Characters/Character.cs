@@ -142,9 +142,14 @@ namespace UnityPlatformer {
       health = GetComponent<CharacterHealth>();
       body = GetComponent<BoxCollider2D>();
 
-      fallingCD = new Cooldown(fallingTime);
-      groundCD = new Cooldown(groundGraceTime);
+      if (fallingCD == null) {
+        fallingCD = new Cooldown(fallingTime);
+      }
 
+      if (groundCD == null) {
+        groundCD = new Cooldown(groundGraceTime);
+      }
+      //TODO review how hotswapping behave in this case ?!
       health.onDeath += OnDeath;
     }
 
@@ -383,6 +388,7 @@ namespace UnityPlatformer {
     }
 
     public virtual void OnEnable() {
+      Awake();
       UpdateManager.instance.Push(this, Configuration.instance.charactersPriority);
     }
 

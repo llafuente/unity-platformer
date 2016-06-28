@@ -26,6 +26,7 @@ SOFTWARE.
 **/
 
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 namespace UnityPlatformer {
@@ -58,7 +59,7 @@ namespace UnityPlatformer {
 		void LateUpdate() {
 			focusArea.Update (target.pc2d.box.bounds);
 
-			Vector2 focusPosition = focusArea.centre + Vector2.up * verticalOffset;
+			Vector3 focusPosition = focusArea.centre + Vector2.up * verticalOffset;
 
 			if (focusArea.velocity.x != 0) {
 				lookAheadDirX = Mathf.Sign (focusArea.velocity.x);
@@ -79,8 +80,9 @@ namespace UnityPlatformer {
 			currentLookAheadX = Mathf.SmoothDamp (currentLookAheadX, targetLookAheadX, ref smoothLookVelocityX, lookSmoothTimeX);
 
 			focusPosition.y = Mathf.SmoothDamp (transform.position.y, focusPosition.y, ref smoothVelocityY, verticalSmoothTime);
-			focusPosition += Vector2.right * currentLookAheadX;
-			transform.position = (Vector3)focusPosition + Vector3.forward * -10;
+			focusPosition.x += currentLookAheadX;
+			focusPosition.z = transform.position.z; // keep z
+			transform.position = focusPosition;
 		}
 
 		void OnDrawGizmos() {
@@ -90,6 +92,7 @@ namespace UnityPlatformer {
 			}
 		}
 
+		[Serializable]
 		struct FocusArea {
 			public Vector2 centre;
 			public Vector2 velocity;

@@ -333,7 +333,8 @@ namespace UnityPlatformer {
       }
     }
 
-    void OnEnable() {
+    public override void OnEnable() {
+      base.OnEnable();
       UpdateManager.instance.Push(this, Configuration.instance.defaultPriority);
     }
 

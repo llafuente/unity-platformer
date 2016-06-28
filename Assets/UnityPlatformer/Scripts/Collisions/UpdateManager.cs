@@ -17,9 +17,20 @@ namespace UnityPlatformer {
     }
 
     // Start with 10, and resize...
-    QueueItem[] sortedList = new QueueItem[1];
+    [SerializeField]
+    QueueItem[] sortedList;
+    [SerializeField]
     int used = 0;
 
+    void LazyInit() {
+      if (sortedList == null) {
+        Array.Resize(ref sortedList, 10);
+      }
+    }
+
+    public void OnEnable() {
+      LazyInit();
+    }
     public int GetFrameCount(float time) {
       float frames = time / Time.fixedDeltaTime;
       int roundedFrames = Mathf.RoundToInt(frames);
@@ -32,11 +43,15 @@ namespace UnityPlatformer {
     }
 
     public bool Push(IUpdateEntity entity, int priority) {
+      LazyInit();
+
       int idx = IndexOf(entity);
       if (idx == -1) {
+        Debug.LogFormat("Push idx {0} used {1}", idx, used);
         // resize before overflow!
         if (used == sortedList.Length) {
           Array.Resize(ref sortedList, used + 10);
+          Debug.Log("resize!" + sortedList.Length);
         }
 
         sortedList[used].entity = entity;
@@ -55,7 +70,9 @@ namespace UnityPlatformer {
     }
 
     public int IndexOf(IUpdateEntity entity) {
-      for (int i = 0; used < i; ++i) {
+      LazyInit();
+
+      for (int i = 0; i < used; ++i) {
         if (sortedList[i].entity == entity) {
           return i;
         }
@@ -63,15 +80,22 @@ namespace UnityPlatformer {
       return -1;
     }
 
-    public void Remove(IUpdateEntity entity) {
+    public bool Remove(IUpdateEntity entity) {
+      LazyInit();
+
       int idx = IndexOf(entity);
+      Debug.LogFormat("Remove! idx {0}!!", idx);
       if (idx != -1) {
         // sortedList.Splice(idx, 1);
         for (int i = idx; i < used; ++i) {
           sortedList[i] = sortedList[i + 1];
         }
         --used;
+        Debug.LogFormat("Remove! idx {0} used {1}", idx, used);
+
+        return true;
       }
+      return false;
     }
 
     /// <summary>

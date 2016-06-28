@@ -9,6 +9,10 @@ namespace UnityPlatformer {
         pc2d = GetComponent<PlatformerCollider2D> ();
     }
 
+    virtual public void OnEnable() {
+        Start();
+    }
+
       // Update is called once per frame
     virtual public void Update() {
       text = string.Format(

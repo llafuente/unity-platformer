@@ -25,6 +25,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 **/
 
+﻿using System;
 ﻿using UnityEngine;
 using System.Collections;
 
@@ -72,9 +73,18 @@ namespace UnityPlatformer {
     }
 
     public virtual void Start() {
+    }
+
+    public virtual void OnEnable() {
       CalculateRaySpacing ();
-      horizontalRays = new RaycastHit2D[horizontalRayCount];
-      verticalRays = new RaycastHit2D[verticalRayCount];
+
+      if (horizontalRays == null) {
+        horizontalRays = new RaycastHit2D[horizontalRayCount];
+      }
+
+      if (verticalRays == null) {
+        verticalRays = new RaycastHit2D[verticalRayCount];
+      }
     }
 
     public void UpdateRaycastOrigins() {
@@ -114,6 +124,7 @@ namespace UnityPlatformer {
       verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);
     }
 
+    [Serializable]
     public struct RaycastOrigins {
       public Vector2 topLeft;
       public Vector2 topCenter;

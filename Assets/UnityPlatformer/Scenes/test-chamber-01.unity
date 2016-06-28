@@ -5165,7 +5165,7 @@ GameObject:
   - 114: {fileID: 1933500176}
   m_Layer: 10
   m_Name: Floor (7)
-  m_TagString: MovingPlatformThrough&OneWayPlatformsUp
+  m_TagString: MovingPlatformThrough&OneWayPlatformUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

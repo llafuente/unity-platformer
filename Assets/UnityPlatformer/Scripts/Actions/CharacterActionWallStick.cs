@@ -37,8 +37,8 @@ namespace UnityPlatformer {
 
     #endregion
 
-    public override void Start() {
-      base.Start();
+    public override void OnEnable() {
+      base.OnEnable();
 
       timeToWallStickLeave = wallStickLeaveTime;
 

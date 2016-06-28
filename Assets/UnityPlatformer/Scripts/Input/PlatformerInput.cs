@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 
 namespace UnityPlatformer {
+  [Serializable]
   public enum InputStates {
     Off = 0,
     On = 1,
@@ -21,8 +22,7 @@ namespace UnityPlatformer {
   /// don't catch IsActionDown. Or you can use a more reliable version: IsActionHeld
   /// TODO IsActionActionUp
   /// </summary>
-  public abstract class PlatformerInput : MonoBehaviour
-  {
+  public abstract class PlatformerInput : MonoBehaviour {
 
     [Comment("List of actions that will fire events")]
     public List<string> listenActions = new List<string> {"Jump", "Attack", "Use"};
@@ -32,7 +32,10 @@ namespace UnityPlatformer {
     public InputActionDelegate onActionDown;
 
     // cache
-    protected Dictionary<string, InputStates> actions = new Dictionary<string, InputStates>();
+    [Serializable]
+    public class InputDictionary : SerializableDictionary<string, InputStates> {}
+    //public class InputDictionary : Dictionary<string, InputStates> {}
+    protected InputDictionary actions = new InputDictionary();
 
     public void Start() {
       foreach (var button in listenActions) {
