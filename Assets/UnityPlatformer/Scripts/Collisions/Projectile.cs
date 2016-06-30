@@ -108,14 +108,14 @@ namespace UnityPlatformer {
     /// Destroy gameObject waiting destroyDelay
     ///</summary>
     public virtual void Destroy() {
-      StartCoroutine(_destroy());
+      if (destroyDelay != 0f) {
+        UpdateManager.instance.SetTimeout(_Destroy, destroyDelay);
+        return;
+      }
+      _Destroy();
     }
 
-    protected virtual IEnumerator _destroy() {
-      if (destroyDelay >= 0) {
-        yield return new WaitForSeconds(destroyDelay);
-      }
-
+    protected void _Destroy() {
       UpdateManager.instance.Remove(this);
       Destroy (gameObject);
     }

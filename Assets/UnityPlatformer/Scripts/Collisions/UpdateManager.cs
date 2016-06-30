@@ -12,16 +12,22 @@ namespace UnityPlatformer {
     public float timeScale = 1;
     internal long frame = 0;
 
-    struct QueueItem {
+    struct ItemPrio {
       public IUpdateEntity entity;
       public int priority;
     }
 
     // Start with 10, and resize...
     [SerializeField]
-    QueueItem[] sortedList;
-    [SerializeField]
+    ItemPrio[] sortedList;
     int used = 0;
+
+    struct Callback {
+      public Action callback;
+      public float time;
+    }
+    Callback[] callbacks;
+    int usedCallbacks = 0;
 
     void LazyInit() {
       if (sortedList == null) {
@@ -58,7 +64,7 @@ namespace UnityPlatformer {
 
         ++used;
 
-        Array.Sort(sortedList, delegate(QueueItem a, QueueItem b) {
+        Array.Sort(sortedList, delegate(ItemPrio a, ItemPrio b) {
           return b.priority - a.priority;
         });
 
@@ -105,9 +111,35 @@ namespace UnityPlatformer {
     void FixedUpdate() {
       float delta = timeScale * Time.fixedDeltaTime;
 
+      // update entities
       for (int i = 0; i < used; ++i) {
         sortedList[i].entity.ManagedUpdate(delta);
       }
+
+      // call callbacks
+      for (int i = 0; i < usedCallbacks; ++i) {
+        callbacks[i].time -= delta;
+        if (callbacks[i].time <= 0) {
+          // trigger & 'splice'
+          callbacks[i].callback();
+          for (int j = i; j < usedCallbacks; ++j) {
+            sortedList[j] = sortedList[j + 1];
+          }
+          --usedCallbacks;
+          --i;
+        }
+      }
+    }
+
+    public void SetTimeout(Action method, float timeout) {
+      if (usedCallbacks == callbacks.Length) {
+        Array.Resize(ref callbacks, usedCallbacks + 10);
+      }
+
+      callbacks[usedCallbacks].callback = method;
+      callbacks[usedCallbacks].time = timeout;
+
+      ++usedCallbacks;
     }
   }
 }

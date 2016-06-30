@@ -411,12 +411,7 @@ namespace UnityPlatformer {
         frozen = delay;
       }
 
-      StartCoroutine(_RestoreOverrideAnimation(delay));
-    }
-
-    IEnumerator _RestoreOverrideAnimation(float delay) {
-      yield return new WaitForSeconds(delay);
-      ClearOverrideAnimation();
+      UpdateManager.instance.SetTimeout(ClearOverrideAnimation, delay);
     }
 
     public void ClearOverrideAnimation() {
