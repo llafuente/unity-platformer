@@ -411,6 +411,10 @@ MonoBehaviour:
   input: {fileID: 11448450}
   speed: 6
   accelerationTime: 0.2
+  runSpeed: 9
+  runAccelerationTime: 0.1
+  alwaysRun: 1
+  runAction: run
 --- !u!114 &11404398
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -716,6 +720,10 @@ MonoBehaviour:
   input: {fileID: 11448450}
   speed: 6
   accelerationTime: 0.1
+  runSpeed: 9
+  runAccelerationTime: 0.1
+  alwaysRun: 1
+  runAction: run
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
