@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 namespace UnityPlatformer {
-  [RequireComponent (typeof (BoxTrigger2D))]
+  [RequireComponent (typeof (BoxCollider2D))]
   public class ItemMovingPlatformController : Item {
     public MovingPlatformActions onUse = MovingPlatformActions.Nothing;
     public List<MovingPlatform> targets;

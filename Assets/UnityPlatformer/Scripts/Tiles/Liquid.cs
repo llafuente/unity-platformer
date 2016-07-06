@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 namespace UnityPlatformer {
-  [RequireComponent (typeof (BoxTrigger2D))]
+  [RequireComponent (typeof (BoxCollider2D))]
   public class Liquid : MonoBehaviour {
     /// <summary>
     /// Viscosity affect Character Liquid movement

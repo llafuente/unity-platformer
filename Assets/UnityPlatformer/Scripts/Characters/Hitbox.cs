@@ -25,7 +25,7 @@ namespace UnityPlatformer {
   /// <sumary>
   /// HitBoxes
   /// </sumary>
-  [RequireComponent (typeof (BoxTrigger2D))]
+  [RequireComponent (typeof (BoxCollider2D))]
   public class HitBox : MonoBehaviour {
     #region public
 

@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 namespace UnityPlatformer {
-  [RequireComponent (typeof (BoxTrigger2D))]
+  [RequireComponent (typeof (BoxCollider2D))]
   public abstract class Item : MonoBehaviour {
 
     public Vector3 offset;

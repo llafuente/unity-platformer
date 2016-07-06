@@ -17,6 +17,7 @@ namespace UnityPlatformer {
     public float surfaceLevel = 1.5f;
     public float terminalYUP = 2f;
     public float terminalYDown = 3f;
+    public float liquidMinHeight = 0.75f;
     public CharacterActionJump actionJump;
     [Comment("Exit jump.")]
     public JumpConstantProperties jumpOff = new JumpConstantProperties(new Vector2(20, 20));
@@ -32,7 +33,23 @@ namespace UnityPlatformer {
       // NOTE if Air/Ground are very different maybe:
       // if (pc2d.IsOnGround(<frames>)) it's better
       if (character.liquid) {
-        character.SolfEnterState(States.Liquid);
+        if (character.liquid.body.size.y < liquidMinHeight) {
+          character.SolfExitState(States.Liquid);
+          return 0;
+        }
+
+        if (character.liquid.IsBelowSurface(character, surfaceLevel)) {
+          // enter when 'below surface'
+          // this allow to walk-small-water
+          character.SolfEnterState(States.Liquid);
+          return -1;
+        } else if (character.pc2d.collisions.below) {
+          // is in the water, touching floor, enough part of the body above surface
+          character.SolfExitState(States.Liquid);
+          return 0;
+        }
+      }
+      if (character.IsOnState(States.Liquid)) {
         return -1;
       }
       character.SolfExitState(States.Liquid);
