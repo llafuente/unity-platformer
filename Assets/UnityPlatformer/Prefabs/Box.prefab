@@ -397,7 +397,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 67072
   minDistanceToEnv: 0.08
-  skinWidth: 0.1
+  skinWidth: 0.2
   horizontalRayCount: 4
   verticalRayCount: 4
   horizontalRaySpacing: 0

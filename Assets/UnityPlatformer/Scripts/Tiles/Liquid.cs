@@ -19,7 +19,7 @@ namespace UnityPlatformer {
     public float surfaceOffset = 0;
 
     // cache
-    BoxCollider2D body;
+    internal BoxCollider2D body;
 
     virtual public void Start() {
       body = GetComponent<BoxCollider2D>();
@@ -38,7 +38,6 @@ namespace UnityPlatformer {
       float char_surface_level = character.feet.y + offset + surfaceOffset;
       return GetTop().y - char_surface_level;
     }
-
 
     public virtual void OnTriggerEnter2D(Collider2D o) {
       HitBox h = o.GetComponent<HitBox>();

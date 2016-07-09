@@ -10,6 +10,7 @@ namespace UnityPlatformer {
   public class UpdateManager : MBSingleton<UpdateManager> {
     // to scale up/down
     public float timeScale = 1;
+    internal long frame = 0;
 
     struct QueueItem {
       public IUpdateEntity entity;
@@ -96,6 +97,10 @@ namespace UnityPlatformer {
         return true;
       }
       return false;
+    }
+
+    void Update() {
+      ++frame;
     }
 
     /// <summary>

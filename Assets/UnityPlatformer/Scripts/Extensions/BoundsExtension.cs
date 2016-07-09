@@ -43,7 +43,7 @@ namespace UnityPlatformer {
 
         //bottom rectangle
         i2 = 4 + (i+1)%4;
-        Debug.DrawRay(corners[i1], corners[i2] - corners[i], Color.red);
+        Debug.DrawRay(corners[i1], corners[i2] - corners[i1], Color.red);
       }
     }
   }

@@ -65,8 +65,10 @@ namespace UnityPlatformer {
 
     public RaycastOrigins raycastOrigins;
 
-    RaycastHit2D[] horizontalRays;
-    RaycastHit2D[] verticalRays;
+    internal RaycastHit2D[] horizontalRays;
+    internal RaycastHit2D[] verticalRays;
+
+    internal Bounds bounds;
 
     public virtual void Awake() {
       box = GetComponent<BoxCollider2D> ();
@@ -87,10 +89,14 @@ namespace UnityPlatformer {
       }
     }
 
-    public void UpdateRaycastOrigins() {
-      Bounds bounds = box.bounds;
+    public void UpdateBounds() {
+      bounds = box.bounds;
       // * 2 so it's shrink skinWidth by each side
       bounds.Expand (skinWidth * -2);
+    }
+
+    public void UpdateRaycastOrigins() {
+      UpdateBounds();
 
       // cache
       Vector3 min = bounds.min;
@@ -114,8 +120,7 @@ namespace UnityPlatformer {
     /// Recalculate distance between rays (horizontalRaySpacing & verticalRaySpacing)
     /// </summary>
     public void CalculateRaySpacing() {
-      Bounds bounds = box.bounds;
-      bounds.Expand (skinWidth * -2);
+      UpdateBounds();
 
       horizontalRayCount = Mathf.Clamp (horizontalRayCount, 2, int.MaxValue);
       verticalRayCount = Mathf.Clamp (verticalRayCount, 2, int.MaxValue);

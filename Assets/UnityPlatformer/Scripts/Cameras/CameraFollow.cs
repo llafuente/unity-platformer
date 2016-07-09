@@ -57,6 +57,9 @@ namespace UnityPlatformer {
 		}
 
 		void LateUpdate() {
+			if (target == null) {
+				return; // just ignore
+			}
 			focusArea.Update (target.pc2d.box.bounds);
 
 			Vector3 focusPosition = focusArea.centre + Vector2.up * verticalOffset;

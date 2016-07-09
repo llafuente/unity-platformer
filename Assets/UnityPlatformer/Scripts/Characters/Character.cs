@@ -220,6 +220,7 @@ namespace UnityPlatformer {
       }
 
       pc2d.Move(velocity * delta, delta);
+      pc2d.bounds.Draw(transform);
 
       if (onAfterMove != null) {
         onAfterMove(this, delta);
