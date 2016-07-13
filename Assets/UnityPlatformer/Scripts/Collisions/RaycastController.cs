@@ -42,7 +42,7 @@ namespace UnityPlatformer {
     public float minDistanceToEnv = 0.08f;
     /// <summary>
     /// Defines how far in from the edges of the collider rays are we going to cast from.
-    /// NOTE: This value must be geater than minDistanceToEnv
+    /// NOTE: This value must be greater than minDistanceToEnv
     /// </summary>
     public float skinWidth = 0.10f;
     /// <summary>
@@ -68,11 +68,14 @@ namespace UnityPlatformer {
     internal RaycastHit2D[] verticalRays;
 
     internal Bounds bounds;
+    internal float skinWidthMagnitude;
 
     public virtual void OnEnable() {
       box = GetComponent<BoxCollider2D> ();
       CalculateRaySpacing ();
       UpdateInnerBounds();
+
+      skinWidthMagnitude = Mathf.Sqrt(skinWidth + skinWidth);
 
       if (horizontalRays == null) {
         horizontalRays = new RaycastHit2D[horizontalRayCount];
@@ -113,8 +116,8 @@ namespace UnityPlatformer {
       horizontalRayCount = Mathf.Clamp (horizontalRayCount, 2, int.MaxValue);
       verticalRayCount = Mathf.Clamp (verticalRayCount, 2, int.MaxValue);
 
-      horizontalRaySpacing = bounds.size.x / (horizontalRayCount - 1);
-      verticalRaySpacing = bounds.size.y / (verticalRayCount - 1);
+      horizontalRaySpacing = bounds.size.y / (horizontalRayCount - 1);
+      verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);
     }
 
     public RaycastHit2D Raycast(Vector2 origin, Vector2 direction, float rayLength, int mask, Color? color = null) {
@@ -158,12 +161,12 @@ namespace UnityPlatformer {
       Vector3 origin = raycastOrigins.bottomRight;
       origin.y += velocity.y;
 
-      for (int i = 0; i < verticalRayCount; i ++) {
+      for (int i = 0; i < horizontalRayCount; i ++) {
 
-        verticalRays[i] = Raycast(origin, Vector2.right, rayLength, collisionMask, Color.magenta);
-        origin.y += verticalRaySpacing;
+        horizontalRays[i] = Raycast(origin, Vector2.right, rayLength, collisionMask, new Color(1, 0, 0, 0.5f));
+        origin.y += horizontalRaySpacing;
 
-        itr(ref verticalRays[i], ref velocity, 1, i);
+        itr(ref horizontalRays[i], ref velocity, 1, i);
       }
     }
 
@@ -175,12 +178,12 @@ namespace UnityPlatformer {
       Vector3 origin = raycastOrigins.bottomLeft;
       origin.y += velocity.y;
 
-      for (int i = 0; i < verticalRayCount; i ++) {
+      for (int i = 0; i < horizontalRayCount; i ++) {
 
-        verticalRays[i] = Raycast(origin, Vector2.left, rayLength, collisionMask, Color.magenta);
-        origin.y += verticalRaySpacing;
+        horizontalRays[i] = Raycast(origin, Vector2.left, rayLength, collisionMask, new Color(1, 0, 0, 0.5f));
+        origin.y += horizontalRaySpacing;
 
-        itr(ref verticalRays[i], ref velocity, -1, i);
+        itr(ref horizontalRays[i], ref velocity, -1, i);
       }
     }
 
@@ -192,29 +195,27 @@ namespace UnityPlatformer {
       Vector3 origin = raycastOrigins.topLeft;
       origin.x += velocity.x;
 
-      for (int i = 0; i < horizontalRayCount; i ++) {
+      for (int i = 0; i < verticalRayCount; i ++) {
 
-        horizontalRays[i] = Raycast(origin, Vector2.up, rayLength, collisionMask, Color.magenta);
-        origin.x += horizontalRaySpacing;
+        verticalRays[i] = Raycast(origin, Vector2.up, rayLength, collisionMask, new Color(1, 0, 0, 0.5f));
+        origin.x += verticalRaySpacing;
 
-        itr(ref horizontalRays[i], ref velocity, 1, i);
+        itr(ref verticalRays[i], ref velocity, 1, i);
       }
     }
 
     public void ForeachFeetRay(float rayLength, ref Vector3 velocity, RayItr itr) {
-      if (velocity.y < 0) {
-        rayLength -= velocity.y;
-      }
-
       Vector3 origin = raycastOrigins.bottomLeft;
       origin.x += velocity.x;
+      float length;
 
-      for (int i = 0; i < horizontalRayCount; i ++) {
+      for (int i = 0; i < verticalRayCount; i ++) {
+        length = velocity.y < 0 ? rayLength - velocity.y : rayLength;
 
-        horizontalRays[i] = Raycast(origin, Vector2.down, rayLength, collisionMask, Color.magenta);
-        origin.x += horizontalRaySpacing;
+        verticalRays[i] = Raycast(origin, Vector2.down, length, collisionMask, new Color(1, 0, 0, 0.5f));
+        origin.x += verticalRaySpacing;
 
-        itr(ref horizontalRays[i], ref velocity, -1, i);
+        itr(ref verticalRays[i], ref velocity, -1, i);
       }
     }
 
@@ -235,7 +236,7 @@ namespace UnityPlatformer {
       }
 
       Vector3 origin = raycastOrigins.bottomLeft;
-      origin.x += velocity.x + horizontalRaySpacing * horizontalRayCount;
+      origin.x += velocity.x + verticalRaySpacing * verticalRayCount;
 
       return Raycast(origin, Vector2.down, rayLength, collisionMask, Color.yellow);
     }

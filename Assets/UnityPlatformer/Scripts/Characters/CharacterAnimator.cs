@@ -12,6 +12,7 @@ namespace UnityPlatformer {
 
     public Character character;
     public bool rotateOnSlopes = true;
+    public float maxSlope = 70f;
 
     public virtual void Start() {
       character.animator = this;
@@ -36,7 +37,13 @@ namespace UnityPlatformer {
       }
 
       if (rotateOnSlopes) {
-        if (character.pc2d.collisions.slopeAngle != 0) {
+        if (
+          character.pc2d.collisions.slopeAngle != 0 &&
+          character.pc2d.collisions.below &&
+          !character.pc2d.collisions.left &&
+          !character.pc2d.collisions.right &&
+          maxSlope > character.pc2d.collisions.slopeAngle
+        ) {
           float angle = 90 - Mathf.Atan2(character.pc2d.collisions.slopeNormal.y,
           -character.pc2d.collisions.slopeNormal.x) * Mathf.Rad2Deg;
 

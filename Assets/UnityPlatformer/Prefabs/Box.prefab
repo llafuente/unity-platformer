@@ -437,7 +437,7 @@ MonoBehaviour:
     lastRightFrame: 0
     climbingSlope: 0
     descendingSlope: 0
-    distanceToSlopeStart: 0
+    slopeDistance: 0
     faceDir: 0
     fallingThroughPlatform: 0
     slope: {fileID: 0}
@@ -459,7 +459,7 @@ MonoBehaviour:
     lastRightFrame: 0
     climbingSlope: 0
     descendingSlope: 0
-    distanceToSlopeStart: 0
+    slopeDistance: 0
     faceDir: 0
     fallingThroughPlatform: 0
     slope: {fileID: 0}

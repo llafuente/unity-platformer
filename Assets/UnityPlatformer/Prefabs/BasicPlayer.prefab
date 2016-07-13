@@ -1167,7 +1167,7 @@ MonoBehaviour:
     lastRightFrame: 0
     climbingSlope: 0
     descendingSlope: 0
-    distanceToSlopeStart: 0
+    slopeDistance: 0
     faceDir: 0
     fallingThroughPlatform: 0
     slope: {fileID: 0}
@@ -1189,7 +1189,7 @@ MonoBehaviour:
     lastRightFrame: 0
     climbingSlope: 0
     descendingSlope: 0
-    distanceToSlopeStart: 0
+    slopeDistance: 0
     faceDir: 0
     fallingThroughPlatform: 0
     slope: {fileID: 0}
@@ -1322,6 +1322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 11435812}
   rotateOnSlopes: 1
+  maxSlope: 70
   animator: {fileID: 9574616}
 --- !u!114 &11479636
 MonoBehaviour:
