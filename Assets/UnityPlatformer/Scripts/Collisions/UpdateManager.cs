@@ -48,11 +48,9 @@ namespace UnityPlatformer {
 
       int idx = IndexOf(entity);
       if (idx == -1) {
-        Debug.LogFormat("Push idx {0} used {1}", idx, used);
         // resize before overflow!
         if (used == sortedList.Length) {
           Array.Resize(ref sortedList, used + 10);
-          Debug.Log("resize!" + sortedList.Length);
         }
 
         sortedList[used].entity = entity;
@@ -85,17 +83,15 @@ namespace UnityPlatformer {
       LazyInit();
 
       int idx = IndexOf(entity);
-      Debug.LogFormat("Remove! idx {0}!!", idx);
       if (idx != -1) {
         // sortedList.Splice(idx, 1);
         for (int i = idx; i < used; ++i) {
           sortedList[i] = sortedList[i + 1];
         }
         --used;
-        Debug.LogFormat("Remove! idx {0} used {1}", idx, used);
-
         return true;
       }
+
       return false;
     }
 

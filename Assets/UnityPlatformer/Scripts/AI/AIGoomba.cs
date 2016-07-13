@@ -49,9 +49,9 @@ namespace UnityPlatformer {
 
     public override void ManagedUpdate(float delta) {
       if (doNotFall) {
-        if (!pc2d.IsGroundOnLeft (rayLengthFactor)) {
+        if (!IsGroundOnLeft (rayLengthFactor, delta)) {
           OnLeftWall ();
-        } else if (!pc2d.IsGroundOnRight (rayLengthFactor)) {
+        } else if (!IsGroundOnRight (rayLengthFactor, delta)) {
           OnRightWall ();
         }
       }

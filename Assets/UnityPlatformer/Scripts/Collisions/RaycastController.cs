@@ -63,22 +63,16 @@ namespace UnityPlatformer {
     [HideInInspector]
     public BoxCollider2D box;
 
-    public RaycastOrigins raycastOrigins;
-
+    internal RaycastOrigins raycastOrigins;
     internal RaycastHit2D[] horizontalRays;
     internal RaycastHit2D[] verticalRays;
 
     internal Bounds bounds;
 
-    public virtual void Awake() {
-      box = GetComponent<BoxCollider2D> ();
-    }
-
-    public virtual void Start() {
-    }
-
     public virtual void OnEnable() {
+      box = GetComponent<BoxCollider2D> ();
       CalculateRaySpacing ();
+      UpdateInnerBounds();
 
       if (horizontalRays == null) {
         horizontalRays = new RaycastHit2D[horizontalRayCount];
@@ -89,44 +83,44 @@ namespace UnityPlatformer {
       }
     }
 
-    public void UpdateBounds() {
+    public void UpdateInnerBounds() {
       bounds = box.bounds;
       // * 2 so it's shrink skinWidth by each side
       bounds.Expand (skinWidth * -2);
     }
 
     public void UpdateRaycastOrigins() {
-      UpdateBounds();
+      UpdateInnerBounds();
+      CalculateRaySpacing();
 
       // cache
       Vector3 min = bounds.min;
       Vector3 max = bounds.max;
+      float half_width = bounds.size.x * 0.5f;
 
       raycastOrigins.bottomLeft = new Vector2 (min.x, min.y);
-      raycastOrigins.bottomCenter = new Vector2 (min.x + bounds.size.x * 0.5f, min.y);
+      raycastOrigins.bottomCenter = new Vector2 (min.x + half_width, min.y);
       raycastOrigins.bottomRight = new Vector2 (max.x, min.y);
       raycastOrigins.topLeft = new Vector2 (min.x, max.y);
-      raycastOrigins.topCenter = new Vector2 (min.x + bounds.size.x * 0.5f, max.y);
+      raycastOrigins.topCenter = new Vector2 (min.x + half_width, max.y);
       raycastOrigins.topRight = new Vector2 (max.x, max.y);
-    }
-
-    public RaycastHit2D Raycast(Vector2 origin, Vector2 direction, float rayLength, int mask, Color? color = null) {
-      Debug.DrawRay(origin, direction * rayLength, color ?? Color.red);
-
-      return Physics2D.Raycast(origin, direction, rayLength, mask);
     }
 
     /// <summary>
     /// Recalculate distance between rays (horizontalRaySpacing & verticalRaySpacing)
     /// </summary>
     public void CalculateRaySpacing() {
-      UpdateBounds();
-
       horizontalRayCount = Mathf.Clamp (horizontalRayCount, 2, int.MaxValue);
       verticalRayCount = Mathf.Clamp (verticalRayCount, 2, int.MaxValue);
 
-      horizontalRaySpacing = bounds.size.y / (horizontalRayCount - 1);
-      verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);
+      horizontalRaySpacing = bounds.size.x / (horizontalRayCount - 1);
+      verticalRaySpacing = bounds.size.y / (verticalRayCount - 1);
+    }
+
+    public RaycastHit2D Raycast(Vector2 origin, Vector2 direction, float rayLength, int mask, Color? color = null) {
+      Debug.DrawRay(origin, direction * rayLength, color ?? Color.red);
+
+      return Physics2D.Raycast(origin, direction, rayLength, mask);
     }
 
     [Serializable]
@@ -150,49 +144,100 @@ namespace UnityPlatformer {
         return hit;
     }
 
-    public RaycastHit2D[] DoFeetRays(float rayLength, ref Vector3 velocity, Color? c = null) {
-      rayLength += Mathf.Abs(velocity.y);
-      for (int i = 0; i < verticalRayCount; i ++) {
-        Vector3 origin = raycastOrigins.bottomLeft;
-        origin.x += verticalRaySpacing * i;
-        verticalRays[i] = Raycast(origin, Vector2.down, rayLength, collisionMask, Color.red);
-        //Debug.LogFormat("ray {0} distance {1}", i, verticalRays[i].distance);
-      }
-      return verticalRays;
-    }
-
-    public RaycastHit2D[] DoHeadRays(float rayLength, ref Vector3 velocity, Color? c = null) {
-      rayLength += Mathf.Abs(velocity.y);
-      for (int i = 0; i < verticalRayCount; i ++) {
-        Vector3 origin = raycastOrigins.topLeft;
-        origin.x += verticalRaySpacing * i;
-        verticalRays[i] = Raycast(origin, Vector2.up, rayLength, collisionMask, Color.red);
-      }
-      return verticalRays;
-    }
-
-    public RaycastHit2D[] DoLeftRays(float rayLength, ref Vector3 velocity, Color? c = null) {
-      for (int i = 0; i < horizontalRayCount; i ++) {
-        Vector3 origin = raycastOrigins.bottomLeft; // + (Vector2) velocity;
-        origin.y += horizontalRaySpacing * i;
-        horizontalRays[i] = Raycast(origin, Vector2.left, rayLength, collisionMask, Color.red);
-      }
-      return horizontalRays;
-    }
-
-    public RaycastHit2D[] DoRightRays(float rayLength, ref Vector3 velocity, Color? c = null) {
-      for (int i = 0; i < horizontalRayCount; i ++) {
-        Vector3 origin = raycastOrigins.bottomRight; // + (Vector2) velocity;
-        origin.y += horizontalRaySpacing * i;
-        horizontalRays[i] = Raycast(origin, Vector2.right, rayLength, collisionMask, Color.red);
-      }
-      return horizontalRays;
-    }
-
     public RaycastHit2D DoFeetRay(float rayLength, LayerMask mask) {
-      RaycastHit2D hit = Raycast(raycastOrigins.bottomCenter, Vector2.down, rayLength, mask, Color.blue);
+      return Raycast(raycastOrigins.bottomCenter, Vector2.down, rayLength, mask, Color.blue);
+    }
 
-      return hit;
+    public delegate void RayItr(ref RaycastHit2D hit, ref Vector3 velocity, int dir, int idx);
+
+    public void ForeachRightRay(float rayLength, ref Vector3 velocity, RayItr itr) {
+      if (velocity.x > 0) {
+        rayLength += velocity.x;
+      }
+
+      Vector3 origin = raycastOrigins.bottomRight;
+      origin.y += velocity.y;
+
+      for (int i = 0; i < verticalRayCount; i ++) {
+
+        verticalRays[i] = Raycast(origin, Vector2.right, rayLength, collisionMask, Color.magenta);
+        origin.y += verticalRaySpacing;
+
+        itr(ref verticalRays[i], ref velocity, 1, i);
+      }
+    }
+
+    public void ForeachLeftRay(float rayLength, ref Vector3 velocity, RayItr itr) {
+      if (velocity.x < 0) {
+        rayLength -= velocity.x;
+      }
+
+      Vector3 origin = raycastOrigins.bottomLeft;
+      origin.y += velocity.y;
+
+      for (int i = 0; i < verticalRayCount; i ++) {
+
+        verticalRays[i] = Raycast(origin, Vector2.left, rayLength, collisionMask, Color.magenta);
+        origin.y += verticalRaySpacing;
+
+        itr(ref verticalRays[i], ref velocity, -1, i);
+      }
+    }
+
+    public void ForeachHeadRay(float rayLength, ref Vector3 velocity, RayItr itr) {
+      if (velocity.y > 0) {
+        rayLength += velocity.y;
+      }
+
+      Vector3 origin = raycastOrigins.topLeft;
+      origin.x += velocity.x;
+
+      for (int i = 0; i < horizontalRayCount; i ++) {
+
+        horizontalRays[i] = Raycast(origin, Vector2.up, rayLength, collisionMask, Color.magenta);
+        origin.x += horizontalRaySpacing;
+
+        itr(ref horizontalRays[i], ref velocity, 1, i);
+      }
+    }
+
+    public void ForeachFeetRay(float rayLength, ref Vector3 velocity, RayItr itr) {
+      if (velocity.y < 0) {
+        rayLength -= velocity.y;
+      }
+
+      Vector3 origin = raycastOrigins.bottomLeft;
+      origin.x += velocity.x;
+
+      for (int i = 0; i < horizontalRayCount; i ++) {
+
+        horizontalRays[i] = Raycast(origin, Vector2.down, rayLength, collisionMask, Color.magenta);
+        origin.x += horizontalRaySpacing;
+
+        itr(ref horizontalRays[i], ref velocity, -1, i);
+      }
+    }
+
+    public RaycastHit2D LeftFeetRay(float rayLength, Vector3 velocity) {
+      if (velocity.y < 0) {
+        rayLength -= velocity.y;
+      }
+
+      Vector3 origin = raycastOrigins.bottomLeft;
+      origin.x += velocity.x;
+
+      return Raycast(origin, Vector2.down, rayLength, collisionMask, Color.yellow);
+    }
+
+    public RaycastHit2D RightFeetRay(float rayLength, Vector3 velocity) {
+      if (velocity.y < 0) {
+        rayLength -= velocity.y;
+      }
+
+      Vector3 origin = raycastOrigins.bottomLeft;
+      origin.x += velocity.x + horizontalRaySpacing * horizontalRayCount;
+
+      return Raycast(origin, Vector2.down, rayLength, collisionMask, Color.yellow);
     }
   }
 }

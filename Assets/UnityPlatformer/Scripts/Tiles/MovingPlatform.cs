@@ -60,14 +60,12 @@ namespace UnityPlatformer {
 
     #endregion
 
-    public override void Start () {
+    public virtual void Start () {
       // check that gameObject has a valid tag!
-      if (!Configuration.IsMovingPlatformThrough(gameObject) &&
-        !Configuration.IsMovingPlatform(gameObject)) {
+      if (!Configuration.IsMovingPlatform(gameObject)) {
         Debug.LogWarning("Found a MovingPlatform misstagged");
       }
 
-      base.Start ();
       if (path) {
         Vector3[] localWaypoints = path.points;
         globalWaypoints = new Vector3[localWaypoints.Length];
@@ -120,6 +118,7 @@ namespace UnityPlatformer {
     public void ManagedUpdate (float delta) {
 
       UpdateRaycastOrigins ();
+      bounds.Draw(transform);
 
       // there are two ways to move the platform
       // built-in - speed/path based (path_velocity)
@@ -207,72 +206,77 @@ namespace UnityPlatformer {
 
       float directionX = Mathf.Sign (velocity.x);
       float directionY = Mathf.Sign (velocity.y);
+      float rayLength = skinWidth * 2 + Configuration.instance.minDistanceToEnv;
+
+      collisionMask = passengerMask;
 
       // Passenger on top of a horizontally or downward moving platform
-      if (directionY == -1 || velocity.y == 0 && velocity.x != 0) {
-        float rayLength = skinWidth * 2 + Configuration.instance.minDistanceToEnv;
-
-        for (int i = 0; i < verticalRayCount; i ++) {
-          Vector2 rayOrigin = raycastOrigins.topLeft + Vector2.right * (verticalRaySpacing * i);
-          RaycastHit2D hit = Raycast(rayOrigin, Vector2.up, rayLength, passengerMask, Color.green);
-
-          if (hit && hit.distance != 0) {
-            if (!movedPassengers.Contains(hit.transform)) {
-              movedPassengers.Add(hit.transform);
+      if (velocity.y != 0 || velocity.x != 0) {
+        ForeachHeadRay(rayLength, ref velocity, (ref RaycastHit2D ray, ref Vector3 vel, int dir, int idx) => {
+          if (ray && ray.distance != 0) {
+            if (!movedPassengers.Contains(ray.transform)) {
+              movedPassengers.Add(ray.transform);
 
               passengerMovement.Add(
-                new PassengerMovement(hit.transform,
-                  new Vector3(velocity.x,velocity.y, 0), true, false));
+                new PassengerMovement(ray.transform,
+                  new Vector3(vel.x, vel.y, 0), true, false));
             }
           }
-        }
+        });
       }
 
       // Vertically moving platform
       // Disable for OWP moving down otherwise will push-down characters
       if (
-        (velocity.y < 0 &&  !Configuration.IsOneWayPlatformUp(gameObject) && !disableDownRayCast) ||
-        velocity.y > 0
+        // up
+        (directionY == 1)
+        && // down
+        (directionY == -1 && (!disableDownRayCast && !Configuration.IsOneWayPlatformUp(gameObject)))
       ) {
-        float rayLength = Mathf.Abs (velocity.y) + skinWidth + Configuration.instance.minDistanceToEnv;
-
-        for (int i = 0; i < verticalRayCount; i ++) {
-          Vector2 rayOrigin = (directionY == -1)?raycastOrigins.bottomLeft:raycastOrigins.topLeft;
-          rayOrigin += Vector2.right * (verticalRaySpacing * i);
-          RaycastHit2D hit = Raycast(rayOrigin, Vector2.up * directionY, rayLength, passengerMask, Color.red);
-
-          if (hit && hit.distance != 0) {
-            if (!movedPassengers.Contains(hit.transform)) {
-              movedPassengers.Add(hit.transform);
-              float pushX = (directionY == 1)?velocity.x:0;
-              float pushY = velocity.y - (hit.distance - skinWidth) * directionY;
-              passengerMovement.Add(new PassengerMovement(hit.transform,new Vector3(pushX,pushY), directionY == 1, true));
+        RayItr itr = (ref RaycastHit2D ray, ref Vector3 vel, int dir, int idx) => {
+          if (ray && ray.distance != 0) {
+            if (!movedPassengers.Contains(ray.transform)) {
+              movedPassengers.Add(ray.transform);
+              float pushX = (directionY == 1) ? vel.x : 0;
+              float pushY = vel.y - (ray.distance - skinWidth) * directionY;
+              passengerMovement.Add(new PassengerMovement(ray.transform,
+                new Vector3(pushX, pushY), directionY == 1, true));
             }
           }
+        };
+
+        if (directionY == 1) {
+          ForeachHeadRay(rayLength, ref velocity, itr);
+        } else {
+          Debug.Log(disableDownRayCast);
+          Debug.Log(Configuration.IsOneWayPlatformUp(gameObject));
+          Debug.Break();
+          ForeachFeetRay(rayLength, ref velocity, itr);
         }
       }
-
+/*
       // Horizontally moving platform
       // Cannot be a OWP otherwise will push-right|left characters
       if (velocity.x != 0 && !Configuration.IsOneWayPlatformUp(gameObject)) {
-        float rayLength = Mathf.Abs (velocity.x) + skinWidth + Configuration.instance.minDistanceToEnv;
-
-        for (int i = 0; i < horizontalRayCount; i ++) {
-          Vector2 rayOrigin = (directionX == -1)?raycastOrigins.bottomLeft:raycastOrigins.bottomRight;
-          rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-          RaycastHit2D hit = Raycast(rayOrigin, Vector2.right * directionX, rayLength, passengerMask, Color.yellow);
-
-          if (hit && hit.distance != 0) {
-            if (!movedPassengers.Contains(hit.transform)) {
-              movedPassengers.Add(hit.transform);
-              float pushX = velocity.x - (hit.distance - skinWidth) * directionX;
-              float pushY = -skinWidth;
-              passengerMovement.Add(new PassengerMovement(hit.transform,new Vector3(pushX,pushY), false, true));
+        RayItr itr = (ref RaycastHit2D ray, ref Vector3 vel, int dir, int idx) => {
+          if (ray && ray.distance != 0) {
+            if (!movedPassengers.Contains(ray.transform)) {
+              movedPassengers.Add(ray.transform);
+              passengerMovement.Add(new PassengerMovement(ray.transform,
+                new Vector3(directionX * (ray.distance - skinWidth), 0), false, true));
             }
           }
+        };
+
+        rayLength = skinWidth;
+
+        if (directionX == -1) {
+          ForeachLeftRay(rayLength, ref velocity, itr);
+        } else {
+          ForeachRightRay(rayLength, ref velocity, itr);
         }
       }
-
+*/
       if (prevPassengers != null) {
         // diff
         foreach (var i in movedPassengers) {

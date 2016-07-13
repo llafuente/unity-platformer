@@ -11,10 +11,12 @@ namespace UnityPlatformer {
     }
 
     public override void OnEnable() {
+      base.OnEnable();
       UpdateManager.instance.Push(this, Configuration.instance.enemiesPriority);
     }
 
     public override void OnDisable() {
+      base.OnDisable();
       UpdateManager.instance.Remove(this);
     }
   }

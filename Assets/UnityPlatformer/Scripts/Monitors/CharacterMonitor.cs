@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace UnityPlatformer {
   //[RequireComponent (typeof (Character))]
@@ -9,9 +10,14 @@ namespace UnityPlatformer {
     override public void Start() {
       base.Start ();
       character = GetComponent<Character> ();
+      character.onStateChange += LogStateChanges;
     }
     override public  void OnGUI() {
       base.OnGUI ();
+    }
+
+    void LogStateChanges(States before, States after) {
+      Debug.LogFormat("state before: {0} / after: {1}", before, after);
     }
 
     override public void Update() {

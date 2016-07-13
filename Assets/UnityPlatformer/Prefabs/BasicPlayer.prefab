@@ -35,7 +35,7 @@ GameObject:
   - 61: {fileID: 6177668}
   - 50: {fileID: 5070364}
   m_Layer: 12
-  m_Name: EnterArea
+  m_Name: BasicPlayer_EnterArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,7 @@ GameObject:
   - 4: {fileID: 423600}
   - 114: {fileID: 11422300}
   m_Layer: 8
-  m_Name: Input
+  m_Name: BasicPlayer_Input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ GameObject:
   - 4: {fileID: 465520}
   - 114: {fileID: 11474686}
   m_Layer: 8
-  m_Name: Visual
+  m_Name: BasicPlayer_Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,7 +82,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 469930}
   m_Layer: 8
-  m_Name: Melee
+  m_Name: BasicPlayer_Melee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,7 +106,7 @@ GameObject:
   - 114: {fileID: 11484966}
   - 114: {fileID: 11489022}
   m_Layer: 8
-  m_Name: Character
+  m_Name: BasicPlayer_Character
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,7 +123,7 @@ GameObject:
   - 95: {fileID: 9574616}
   - 212: {fileID: 21266804}
   m_Layer: 8
-  m_Name: Spriter
+  m_Name: BasicPlayer_Spriter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,7 +186,7 @@ GameObject:
   - 61: {fileID: 6197802}
   - 50: {fileID: 5064178}
   m_Layer: 12
-  m_Name: RecieveDamage
+  m_Name: BasicPlayer_RecieveDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,7 +201,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 491128}
   m_Layer: 8
-  m_Name: HitBoxes
+  m_Name: BasicPlayer_HitBoxes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -229,7 +229,7 @@ GameObject:
   - 114: {fileID: 11490564}
   - 114: {fileID: 11459062}
   m_Layer: 8
-  m_Name: Actions
+  m_Name: BasicPlayer_Actions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,7 +249,7 @@ GameObject:
   - 50: {fileID: 5083038}
   - 114: {fileID: 11421328}
   m_Layer: 12
-  m_Name: DealDamage
+  m_Name: BasicPlayer_DealDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -868,6 +868,7 @@ MonoBehaviour:
   speed: 2
   accelerationTime: 0.1
   pushingStartTime: 0.5
+  forbidVerticalPush: 1
   priority: 20
 --- !u!114 &11421328
 MonoBehaviour:
@@ -1142,13 +1143,6 @@ MonoBehaviour:
   horizontalRaySpacing: 0
   verticalRaySpacing: 0
   box: {fileID: 0}
-  raycastOrigins:
-    topLeft: {x: 0, y: 0}
-    topCenter: {x: 0, y: 0}
-    topRight: {x: 0, y: 0}
-    bottomLeft: {x: 0, y: 0}
-    bottomCenter: {x: 0, y: 0}
-    bottomRight: {x: 0, y: 0}
   gravityOverride: {x: 0, y: 0}
   maxClimbAngle: 30
   maxDescendAngle: 45

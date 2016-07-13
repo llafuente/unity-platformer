@@ -220,7 +220,6 @@ namespace UnityPlatformer {
       }
 
       pc2d.Move(velocity * delta, delta);
-      pc2d.bounds.Draw(transform);
 
       if (onAfterMove != null) {
         onAfterMove(this, delta);
@@ -394,6 +393,8 @@ namespace UnityPlatformer {
     }
 
     public virtual void OnDisable() {
+      fallingCD = null;
+      groundCD = null;
       UpdateManager.instance.Remove(this);
     }
 
@@ -420,6 +421,26 @@ namespace UnityPlatformer {
 
     public void ClearOverrideAnimation() {
       forceAnimation = null;
+    }
+
+    /// <summary>
+    /// Tell you if there is something on the left side
+    /// NOTE ray origin is raycastOrigins.bottomLeft
+    /// </summary>
+    public bool IsGroundOnLeft(float rayLengthFactor, float delta) {
+      RaycastHit2D hit = pc2d.LeftFeetRay(pc2d.verticalRayLength * rayLengthFactor, velocity * delta);
+
+      return hit.collider != null;
+    }
+
+    /// <summary>
+    /// Tell you if there is something on the right side
+    /// NOTE ray origin is raycastOrigins.bottomRight
+    /// </summary>
+    public bool IsGroundOnRight(float rayLengthFactor, float delta) {
+      RaycastHit2D hit = pc2d.RightFeetRay(pc2d.verticalRayLength * rayLengthFactor, velocity * delta);
+
+      return hit.collider != null;
     }
   }
 }

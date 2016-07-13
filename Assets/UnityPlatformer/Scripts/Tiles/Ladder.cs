@@ -30,7 +30,7 @@ namespace UnityPlatformer {
     virtual public bool IsAtTop(Character c, Vector2 pos) {
       float topY = GetTop().y;
 
-      return Mathf.Abs(pos.y - topY) < c.pc2d.skinWidth;
+      return Mathf.Abs(pos.y - topY) < c.pc2d.skinWidth * 0.5f;
     }
 
     virtual public bool IsBelowBottom(Character c, Vector2 pos) {

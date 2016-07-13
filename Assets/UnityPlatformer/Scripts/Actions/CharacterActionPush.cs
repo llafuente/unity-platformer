@@ -17,6 +17,8 @@ namespace UnityPlatformer {
     [Comment("Time to pushing before start moving the object")]
     public float pushingStartTime = 0.5f;
     //public float maxWeight =4f;
+    [Comment("Limit Push to X")]
+    public bool forbidVerticalPush = true;
 
     [Space(10)]
     [Comment("Remember: Higher priority wins. Modify with caution")]
@@ -125,28 +127,31 @@ namespace UnityPlatformer {
     }
 
     public void PushBox(Vector3 velocity, ref RaycastHit2D[] hits, int count, float delta) {
-      // push any box that is not on a platform that it's already a box
-      // and just one (the first one)
-
+      if (forbidVerticalPush) {
+        velocity.y = 0.0f;
+      }
+      // sarch the lowest box and push it
+      float minY = Mathf.Infinity;
+      int index = -1;
       for (int i = 0; i < count; ++i) {
         Box b = hits[i].collider.gameObject.GetComponent<Box>();
         if (b != null) {
-          // guard against dark arts
-          if (Configuration.IsBox(b.boxCharacter.gameObject)) {
-            if (!b.boxCharacter.platform) {
-              b.boxCharacter.pc2d.Move(velocity, delta);
-              return;
-            }
+          if (!Configuration.IsBox(b.boxCharacter.gameObject)) {
+            Debug.LogWarning("Found a Character that should be a box", b.boxCharacter.gameObject);
+            return;
+          }
 
-            Box b2 = b.boxCharacter.platform.GetComponent<Box>();
-            if (b2 != null && !Configuration.IsBox(b2.boxCharacter.gameObject)) {
-              b.boxCharacter.pc2d.Move(velocity, delta);
-              return;
-            }
-          } else {
-            Debug.LogWarning("Found an Character that should be a box", b.boxCharacter.gameObject);
+          float y = b.body.bounds.min.y;
+          if (y < minY) {
+            minY = y;
+            index = i;
           }
         }
+      }
+
+      if (index != -1) {
+        Box b = hits[index].collider.gameObject.GetComponent<Box>();
+        b.boxCharacter.pc2d.Move(velocity, delta);
       }
     }
 

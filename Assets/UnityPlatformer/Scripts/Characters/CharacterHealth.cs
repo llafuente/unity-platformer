@@ -148,6 +148,9 @@ namespace UnityPlatformer {
     /// TODO handle direction here or in the HitBox but must be done :)
     /// </summary>
     public void Damage(DamageType dt) {
+      Debug.LogFormat("Character: {0} recieve damage {1} health {2} from: {3}",
+        character.gameObject.name, dt.amount, health, dt.causer);
+
       if (Damage(dt.amount)) {
         if (dt.causer != null && dt.causer.onHurtCharacter != null) {
           dt.causer.onHurtCharacter(dt, GetComponent<Character>());
@@ -169,9 +172,7 @@ namespace UnityPlatformer {
         return false;
       }
 
-      Debug.Log(this.name + " recieve damage " + amount);
       health -= amount;
-      Debug.Log(this.name + " remaining health " + health);
 
       SetInvulnerable(invulnerabilityTimeAfterDamage);
 
