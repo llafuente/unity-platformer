@@ -25,6 +25,33 @@ namespace UnityPlatformer {
     #endregion
 
     float velocityXSmoothing;
+    bool insideWater = false;
+
+    public override void OnEnable() {
+      base.OnEnable();
+      character.onStateChange += OnEnterState;
+    }
+
+    void OnEnterState(States before, States after) {
+
+      int change = 0; // no
+      if (
+        ((before & States.Liquid) == States.Liquid) &&
+        ((after & States.Liquid) != States.Liquid)
+      ) {
+        change = 1; // lave
+      } else if (
+        ((before & States.Liquid) != States.Liquid) &&
+        ((after & States.Liquid) == States.Liquid)
+      ) {
+        change = 2; // enter
+      }
+
+      if (change > 0) {
+        pc2d.enableSlopes = change == 1;
+        pc2d.leavingGround = change == 2;
+      }
+    }
 
     /// <summary>
     /// Execute when collision below.
@@ -74,7 +101,6 @@ namespace UnityPlatformer {
 
       float d = character.liquid.DistanceToSurface(character, surfaceLevel);
       if (d > 0) { // below
-        pc2d.enableSlopes = false;
         float factor = (1 + character.liquid.buoyancySurfaceFactor * d) * delta;
         //Debug.Log(factor);
         character.velocity.x += character.liquid.buoyancy.x * factor;
@@ -86,8 +112,6 @@ namespace UnityPlatformer {
         if (character.velocity.y < -terminalYDown) {
           character.velocity.y = terminalYDown;
         }
-      } else {
-        pc2d.enableSlopes = true;
       }
 
       //TODO REVIEW this lead to some problems with orientation...

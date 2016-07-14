@@ -25,12 +25,10 @@ namespace UnityPlatformer {
     }
 
     void OnLeftWall() {
-      Debug.Log("TurnRight");
       inputMgr.SetX(1);
     }
 
     void OnRightWall() {
-      Debug.Log("TurnLeft");
       inputMgr.SetX(-1);
     }
   }
