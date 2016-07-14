@@ -9,9 +9,14 @@ namespace UnityPlatformer {
     public GameObject prefab;
     public bool attachToRoot = true; // false child
 
-    protected GameObject instance = null;
+    internal GameObject instance = null;
 
-    public virtual void Awake() {
+    // no virtual on purpose. override OnAwake
+    public void Awake() {
+      OnAwake();
+    }
+
+    public virtual void OnAwake(bool notify = true) {
       if (instance == null) {
         instance = Instantiate(prefab, transform.position, transform.rotation) as GameObject;
 
@@ -19,7 +24,12 @@ namespace UnityPlatformer {
            instance.transform.parent = gameObject.transform;
         }
       }
+
+      if (notify) {
+        SendMessage("OnInstancePrefab", this, SendMessageOptions.DontRequireReceiver);
+      }
     }
+
 
     #if UNITY_EDITOR
       public virtual void OnDrawGizmos() {

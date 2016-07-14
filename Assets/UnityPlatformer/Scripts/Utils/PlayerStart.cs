@@ -10,8 +10,10 @@ namespace UnityPlatformer {
     public bool setupCameraFollow = true;
     public bool monitor = false;
 
-    public override void Awake() {
-      base.Awake();
+    internal CharacterMonitor mon;
+
+    public override void OnAwake(bool notify = true) {
+      base.OnAwake(false); // notify below, maybe someone need mon
 
       Character[] chars = instance.gameObject.GetComponentsInChildren<Character>();
       if (chars.Length != 1) {
@@ -26,7 +28,7 @@ namespace UnityPlatformer {
         return;
       }
 
-      CharacterMonitor mon = chars[0].gameObject.GetOrAddComponent<CharacterMonitor>();
+      mon = chars[0].gameObject.GetOrAddComponent<CharacterMonitor>();
       mon.enabled = monitor;
 
       if (setupCameraFollow) {
@@ -41,6 +43,9 @@ namespace UnityPlatformer {
           }
         }
       }
+
+      // notify
+      SendMessage("OnInstancePrefab", this, SendMessageOptions.DontRequireReceiver);
     }
   }
 }
