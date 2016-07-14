@@ -10,6 +10,10 @@ namespace UnityPlatformer {
 
     public void OnInstancePrefab(InstancePrefab prefab) {
       inputMgr = prefab.instance.GetComponentInChildren<AIInput>();
+      if (inputMgr == null) {
+        Debug.LogWarning("AIInput is expected in the prefab");
+        return;
+      }
       inputMgr.SetX(-1);
     }
   }

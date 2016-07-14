@@ -4,9 +4,10 @@ using UnityPlatformer;
 
 namespace UnityPlatformer {
   //[RequireComponent (typeof (Character))]
-  public class TestInputRight : MonoBehaviour {
+  public class TestInputPatrol : MonoBehaviour {
 
     internal AIInput inputMgr;
+    internal PlatformerCollider2D pc2d;
 
     public void OnInstancePrefab(InstancePrefab prefab) {
       inputMgr = prefab.instance.GetComponentInChildren<AIInput>();
@@ -14,7 +15,23 @@ namespace UnityPlatformer {
         Debug.LogWarning("AIInput is expected in the prefab");
         return;
       }
+      pc2d = prefab.instance.GetComponentInChildren<PlatformerCollider2D>();
+
+
       inputMgr.SetX(1);
+
+      pc2d.onLeftWall += OnLeftWall;
+      pc2d.onRightWall += OnRightWall;
+    }
+
+    void OnLeftWall() {
+      Debug.Log("TurnRight");
+      inputMgr.SetX(1);
+    }
+
+    void OnRightWall() {
+      Debug.Log("TurnLeft");
+      inputMgr.SetX(-1);
     }
   }
 }

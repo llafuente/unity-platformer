@@ -27,7 +27,8 @@ namespace UnityPlatformer {
         "slopeDistance: {13}\n" +
         "slopeNormal: {14}\n"+
         "faceDir: {11}\n"+
-        "fallingThroughPlatform: {12}\n",
+        "fallingThroughPlatform: {12}\n" +
+        "enableSlopes: {17}\n",
         pc2d.collisions.above,
         pc2d.collisions.below,
         pc2d.collisions.left,
@@ -47,7 +48,8 @@ namespace UnityPlatformer {
         pc2d.collisions.slopeDistance,
         pc2d.collisions.slopeNormal,
         pc2d.collisions.leftHitsIdx,
-        pc2d.collisions.rightHitsIdx
+        pc2d.collisions.rightHitsIdx,
+        pc2d.enableSlopes
       );
     }
   }

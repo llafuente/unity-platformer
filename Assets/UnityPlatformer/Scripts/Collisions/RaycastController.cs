@@ -39,12 +39,12 @@ namespace UnityPlatformer {
     /// How far from then env the Character must be.
     /// NOTE: must be less than skinWidth, to allow continuous ground contact
     /// </summary>
-    public float minDistanceToEnv = 0.08f;
+    public float minDistanceToEnv = 0.1f;
     /// <summary>
     /// Defines how far in from the edges of the collider rays are we going to cast from.
     /// NOTE: This value must be greater than minDistanceToEnv
     /// </summary>
-    public float skinWidth = 0.10f;
+    public float skinWidth = 0.2f;
     /// <summary>
     /// How many rays to check horizontal collisions
     /// </summary>

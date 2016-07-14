@@ -34,9 +34,19 @@ namespace UnityPlatformer {
       return char_surface_level < GetTop().y;
     }
 
+    public bool IsSubmerged(Character character) {
+      return IsBelowSurface(character, character.height);
+    }
+
     public float DistanceToSurface(Character character, float offset) {
       float char_surface_level = character.feet.y + offset + surfaceOffset;
       return GetTop().y - char_surface_level;
+    }
+
+    void OnDrawGizmos() {
+      if (body) {
+        body.bounds.Draw(transform);
+      }
     }
 
     public virtual void OnTriggerEnter2D(Collider2D o) {

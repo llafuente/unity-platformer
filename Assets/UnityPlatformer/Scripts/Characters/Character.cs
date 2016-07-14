@@ -74,6 +74,13 @@ namespace UnityPlatformer {
         return fallEnd - fallStart;
       }
     }
+
+    public float height {
+      get {
+        return pc2d.GetComponent<BoxCollider2D>().bounds.size.y;
+      }
+    }
+
     [HideInInspector]
     public Vector2 fallDistance;
     [HideInInspector]
@@ -428,7 +435,7 @@ namespace UnityPlatformer {
     /// NOTE ray origin is raycastOrigins.bottomLeft
     /// </summary>
     public bool IsGroundOnLeft(float rayLengthFactor, float delta) {
-      RaycastHit2D hit = pc2d.LeftFeetRay(pc2d.verticalRayLength * rayLengthFactor, velocity * delta);
+      RaycastHit2D hit = pc2d.LeftFeetRay(pc2d.skinWidth * rayLengthFactor, velocity * delta);
 
       return hit.collider != null;
     }
@@ -438,7 +445,7 @@ namespace UnityPlatformer {
     /// NOTE ray origin is raycastOrigins.bottomRight
     /// </summary>
     public bool IsGroundOnRight(float rayLengthFactor, float delta) {
-      RaycastHit2D hit = pc2d.RightFeetRay(pc2d.verticalRayLength * rayLengthFactor, velocity * delta);
+      RaycastHit2D hit = pc2d.RightFeetRay(pc2d.skinWidth * rayLengthFactor, velocity * delta);
 
       return hit.collider != null;
     }

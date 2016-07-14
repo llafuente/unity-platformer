@@ -50,14 +50,6 @@ namespace UnityPlatformer {
     public float maxDescendAngle = 45.0f;
     public bool enableSlopes = true;
     ///<summary>
-    /// NOTE should be greater than skinWidth
-    ///</summary>
-    public float verticalRayLength = 0.2f;
-    ///<summary>
-    /// NOTE should be greater than skinWidth
-    ///</summary>
-    public float horizontalRayLength = 0.2f;
-    ///<summary>
     /// This prevent unwanted micro changes in orientation/falling for example...
     ///</summary>
     public float minTranslation = 0.01f;
@@ -157,14 +149,14 @@ namespace UnityPlatformer {
 
       // be sure we stay outside others colliders
       if (!disableWorldCollisions) {
-        ForeachLeftRay(horizontalRayLength, ref velocity, HorizontalCollisions);
-        ForeachRightRay(horizontalRayLength, ref velocity, HorizontalCollisions);
+        ForeachLeftRay(skinWidth, ref velocity, HorizontalCollisions);
+        ForeachRightRay(skinWidth, ref velocity, HorizontalCollisions);
 
         if (velocity.y > 0) {
-          ForeachFeetRay(verticalRayLength, ref velocity, VerticalCollisions);
-          ForeachHeadRay(verticalRayLength, ref velocity, VerticalCollisions);
+          ForeachFeetRay(skinWidth, ref velocity, VerticalCollisions);
+          ForeachHeadRay(skinWidth, ref velocity, VerticalCollisions);
         } else {
-          ForeachFeetRay(verticalRayLength, ref velocity, VerticalCollisions);
+          ForeachFeetRay(skinWidth, ref velocity, VerticalCollisions);
         }
       }
 
