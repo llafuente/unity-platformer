@@ -19,25 +19,33 @@ namespace UnityPlatformer {
 
     // Start with 10, and resize...
     [SerializeField]
-    ItemPrio[] sortedList;
-    int used = 0;
+    ItemPrio[] frameListeners;
+    int used;
 
     struct Callback {
       public Action callback;
       public float time;
     }
     Callback[] callbacks;
-    int usedCallbacks = 0;
+    int usedCallbacks;
 
     void LazyInit() {
-      if (sortedList == null) {
-        Array.Resize(ref sortedList, 10);
+      // NOTE this need to be initialized with new before resize, docs are wrong!
+      if (frameListeners == null) {
+        frameListeners = new ItemPrio[10];
+        used = 0;
+      }
+
+      if (callbacks == null) {
+        callbacks = new Callback[10];
+        usedCallbacks = 0;
       }
     }
 
     public void OnEnable() {
       LazyInit();
     }
+
     public int GetFrameCount(float time) {
       float frames = time / Time.fixedDeltaTime;
       int roundedFrames = Mathf.RoundToInt(frames);
@@ -55,16 +63,16 @@ namespace UnityPlatformer {
       int idx = IndexOf(entity);
       if (idx == -1) {
         // resize before overflow!
-        if (used == sortedList.Length) {
-          Array.Resize(ref sortedList, used + 10);
+        if (used == frameListeners.Length) {
+          Array.Resize(ref frameListeners, used + 10);
         }
 
-        sortedList[used].entity = entity;
-        sortedList[used].priority = priority;
+        frameListeners[used].entity = entity;
+        frameListeners[used].priority = priority;
 
         ++used;
 
-        Array.Sort(sortedList, delegate(ItemPrio a, ItemPrio b) {
+        Array.Sort(frameListeners, delegate(ItemPrio a, ItemPrio b) {
           return b.priority - a.priority;
         });
 
@@ -78,7 +86,7 @@ namespace UnityPlatformer {
       LazyInit();
 
       for (int i = 0; i < used; ++i) {
-        if (sortedList[i].entity == entity) {
+        if (frameListeners[i].entity == entity) {
           return i;
         }
       }
@@ -90,9 +98,9 @@ namespace UnityPlatformer {
 
       int idx = IndexOf(entity);
       if (idx != -1) {
-        // sortedList.Splice(idx, 1);
+        // frameListeners.Splice(idx, 1);
         for (int i = idx; i < used; ++i) {
-          sortedList[i] = sortedList[i + 1];
+          frameListeners[i] = frameListeners[i + 1];
         }
         --used;
         return true;
@@ -113,7 +121,7 @@ namespace UnityPlatformer {
 
       // update entities
       for (int i = 0; i < used; ++i) {
-        sortedList[i].entity.ManagedUpdate(delta);
+        frameListeners[i].entity.ManagedUpdate(delta);
       }
 
       // call callbacks
@@ -123,7 +131,7 @@ namespace UnityPlatformer {
           // trigger & 'splice'
           callbacks[i].callback();
           for (int j = i; j < usedCallbacks; ++j) {
-            sortedList[j] = sortedList[j + 1];
+            frameListeners[j] = frameListeners[j + 1];
           }
           --usedCallbacks;
           --i;
@@ -135,6 +143,7 @@ namespace UnityPlatformer {
       if (usedCallbacks == callbacks.Length) {
         Array.Resize(ref callbacks, usedCallbacks + 10);
       }
+      return;
 
       callbacks[usedCallbacks].callback = method;
       callbacks[usedCallbacks].time = timeout;

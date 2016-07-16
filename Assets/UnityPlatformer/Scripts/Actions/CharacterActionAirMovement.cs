@@ -13,6 +13,7 @@ namespace UnityPlatformer {
       // NOTE if Air/Ground are very different maybe:
       // if (pc2d.IsOnGround(<frames>)) it's better
       if (pc2d.collisions.below || character.IsOnState(States.Grabbing)) {
+        Reset();
         return 0;
       }
       return -1;

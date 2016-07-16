@@ -407,7 +407,9 @@ namespace UnityPlatformer {
     /// </summary>
     public void DisableSlopes(float resetDelay = 0.5f) {
       enableSlopes = false;
-      Invoke("EnableSlopes", resetDelay);
+      if (resetDelay > 0) {
+        UpdateManager.instance.SetTimeout(EnableSlopes, resetDelay);
+      }
     }
 
     public void EnableSlopes() {
@@ -421,11 +423,25 @@ namespace UnityPlatformer {
       }
 
       collisions.fallingThroughPlatform = true;
-      Invoke("ResetFallingThroughPlatform", resetDelay);
+      if (resetDelay > 0) {
+        UpdateManager.instance.SetTimeout(ResetFallingThroughPlatform, resetDelay);
+      }
     }
 
     public void ResetFallingThroughPlatform() {
       collisions.fallingThroughPlatform = false;
+    }
+
+    public void EnableLeaveGround(float resetDelay = 0.5f) {
+      leavingGround = true;
+
+      if (resetDelay > 0) {
+        UpdateManager.instance.SetTimeout(DisableLeaveGround, resetDelay);
+      }
+    }
+
+    public void DisableLeaveGround() {
+      leavingGround = false;
     }
 
     public bool IsOnGround(int graceFrames = 0) {

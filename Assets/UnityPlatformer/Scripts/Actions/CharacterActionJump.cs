@@ -150,7 +150,9 @@ namespace UnityPlatformer {
         jumping = true;
         customJump = false;
         character.EnterState(States.Jumping);
-        pc2d.leavingGround = true;
+        // leaving ground could lead to some inestability in the collider
+        // use a max delay to leave ground in case jump is disabled too fast
+        pc2d.EnableLeaveGround(0.25f);
       } else {
         if (currentJump.IsHanging()) {
           character.EnterState(States.Hanging);
