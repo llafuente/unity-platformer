@@ -917,16 +917,20 @@ MonoBehaviour:
   - Jump
   - Attack
   - Use
+  - Run
   inputsMap:
   - action: Jump
     handheld: Jump
     keyboard: Jump
   - action: Attack
     handheld: Attack
-    keyboard: Fire1
+    keyboard: Fire2
   - action: Use
     handheld: Use
-    keyboard: Fire2
+    keyboard: Fire1
+  - action: Run
+    handheld: Use
+    keyboard: Run
 --- !u!114 &11428056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1103,8 +1107,8 @@ MonoBehaviour:
   accelerationTime: 0.2
   runSpeed: 9
   runAccelerationTime: 0.1
-  alwaysRun: 1
-  runAction: run
+  alwaysRun: 0
+  runAction: Run
 --- !u!114 &11446736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1468,8 +1472,8 @@ MonoBehaviour:
   accelerationTime: 0.1
   runSpeed: 9
   runAccelerationTime: 0.1
-  alwaysRun: 1
-  runAction: run
+  alwaysRun: 0
+  runAction: Run
 --- !u!212 &21266804
 SpriteRenderer:
   m_ObjectHideFlags: 1

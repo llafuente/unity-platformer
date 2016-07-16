@@ -42,6 +42,10 @@ namespace UnityPlatformer {
         "Use",
         "Use",
         "Fire1"
+      ), new InputMap (
+        "Run",
+        "Use",
+        "Run"
       )
     };
 

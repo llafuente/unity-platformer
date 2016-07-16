@@ -17,6 +17,8 @@ namespace UnityPlatformer {
         !character.IsOnState(States.Pushing)) {
         return -1;
       }
+
+      Reset();
       return 0;
     }
   }

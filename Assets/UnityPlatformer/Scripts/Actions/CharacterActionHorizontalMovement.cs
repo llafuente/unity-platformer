@@ -21,7 +21,7 @@ namespace UnityPlatformer {
     public float runAccelerationTime = .1f;
 
     public bool alwaysRun = true;
-    public string runAction = "run";
+    public string runAction = "Run";
 
     #endregion
 
@@ -30,6 +30,8 @@ namespace UnityPlatformer {
     bool running = false;
 
     public override void OnEnable() {
+      base.OnEnable();
+
       input.onActionUp += OnActionUp;
       input.onActionDown += OnActionDown;
     }
@@ -49,8 +51,7 @@ namespace UnityPlatformer {
     /// <summary>
     /// Reset SmoothDamp
     /// </summary>
-    public override void GainControl(float delta) {
-      base.GainControl(delta);
+    public void Reset() {
       velocityXSmoothing = 0;
       runVelocityXSmoothing = 0;
     }
