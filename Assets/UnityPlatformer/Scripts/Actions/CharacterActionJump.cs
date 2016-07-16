@@ -135,7 +135,9 @@ namespace UnityPlatformer {
     public override void PerformAction(float delta) {
       //Debug.LogFormat("jumpStopped {0} jumping {1} customJump {2}", jumpStopped, jumping, customJump);
       // last update to set 'exit' velocity
-      pc2d.leavingGround = false;
+      if (pc2d.leavingGround && !pc2d.collisions.below) {
+        pc2d.leavingGround = false;
+      }
 
       if (jumpStopped) {
         jumping = false;

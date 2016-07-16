@@ -17,7 +17,8 @@ namespace UnityPlatformer {
     }
 
     void LogStateChanges(States before, States after) {
-      Debug.LogFormat("state before: {0} / after: {1}", before, after);
+      // this is a lot noisy, useful for debuging for nothing more...
+      //Debug.LogFormat("state before: {0} / after: {1}", before, after);
     }
 
     override public void Update() {

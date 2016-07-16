@@ -325,14 +325,19 @@ namespace UnityPlatformer {
           return;
         }
 
-        // Separate but only if we are not jumping
         if (!leavingGround) {
+          // Separate but only if we are not jumping
           velocity.y = (ray.distance - minDistanceToEnv) * dir;
           collisions.below = dir == -1;
-        } else if (ray.distance < minDistanceToEnv * 0.75f) {
-          // TODO is this safe?
-          velocity.y = (ray.distance - minDistanceToEnv) * dir;
-          collisions.below = dir == -1;
+        } else if (ray.distance < minDistanceToEnv * 0.5f) {
+          // we just want to override if we are not separating enough from
+          // ground also, do not set collision below until that moment or
+          // current jump will be stopped
+          float wanted = (ray.distance - minDistanceToEnv) * dir;
+          if (velocity.y < wanted) {
+            velocity.y = wanted;
+            collisions.below = dir == -1;
+          }
         }
 
         collisions.above = dir == 1;

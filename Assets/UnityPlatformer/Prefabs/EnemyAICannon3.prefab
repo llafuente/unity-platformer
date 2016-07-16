@@ -1021,7 +1021,7 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 1536
-  minDistanceToEnv: 0.08
+  minDistanceToEnv: 0.1
   skinWidth: 0.2
   horizontalRayCount: 4
   verticalRayCount: 4

@@ -1136,7 +1136,7 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 1536
-  minDistanceToEnv: 0.05
+  minDistanceToEnv: 0.1
   skinWidth: 0.2
   horizontalRayCount: 4
   verticalRayCount: 4
@@ -1147,8 +1147,6 @@ MonoBehaviour:
   maxClimbAngle: 30
   maxDescendAngle: 45
   enableSlopes: 1
-  verticalRayLength: 0.2
-  horizontalRayLength: 0.2
   minTranslation: 0.01
 --- !u!114 &11457342
 MonoBehaviour:
