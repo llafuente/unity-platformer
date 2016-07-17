@@ -48,7 +48,7 @@ namespace UnityPlatformer {
     }
 
     public override void ManagedUpdate(float delta) {
-      if (doNotFall) {
+      if (doNotFall && pc2d.collisions.below) {
         if (!IsGroundOnLeft (rayLengthFactor, delta)) {
           OnLeftWall ();
         } else if (!IsGroundOnRight (rayLengthFactor, delta)) {
