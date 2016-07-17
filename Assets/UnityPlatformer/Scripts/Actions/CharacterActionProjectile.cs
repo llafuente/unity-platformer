@@ -65,12 +65,12 @@ namespace UnityPlatformer {
     public virtual void Fire() {
       if (fireMode) {
         for (int i = 0; i < projectiles.Count; ++i) {
-          StartCoroutine(_Fire());
+          UpdateManager.instance.SetTimeout(_Fire, projectiles[i].delay);
         }
       } else {
         ProjectileCfg p = projectiles[currentIndex];
         p.delay = 0; // force no delay
-        StartCoroutine(_Fire());
+        _Fire();
       }
 
       if (onFire != null) {
@@ -78,16 +78,12 @@ namespace UnityPlatformer {
       }
     }
 
-    protected virtual IEnumerator _Fire() {
+    protected virtual void _Fire() {
       // select projectile
       ProjectileCfg p = projectiles[currentIndex++];
       // reach the end -> reset, do this fast :)
       if (currentIndex == projectiles.Count ) {
         currentIndex = 0;
-      }
-      // wait
-      if (p.delay >= 0) {
-        yield return new WaitForSeconds(p.delay);
       }
 
       int dir = pc2d.collisions.faceDir;

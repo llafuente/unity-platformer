@@ -10,6 +10,7 @@ namespace UnityPlatformer {
   public class UpdateManager : MBSingleton<UpdateManager> {
     // to scale up/down
     public float timeScale = 1;
+    internal float runningTime = 0;
     internal long frame = 0;
 
     struct ItemPrio {
@@ -118,6 +119,7 @@ namespace UnityPlatformer {
     /// </summary>
     void FixedUpdate() {
       float delta = timeScale * Time.fixedDeltaTime;
+      runningTime += delta;
 
       // update entities
       for (int i = 0; i < used; ++i) {
@@ -127,11 +129,12 @@ namespace UnityPlatformer {
       // call callbacks
       for (int i = 0; i < usedCallbacks; ++i) {
         callbacks[i].time -= delta;
+
         if (callbacks[i].time <= 0) {
           // trigger & 'splice'
           callbacks[i].callback();
-          for (int j = i; j < usedCallbacks; ++j) {
-            frameListeners[j] = frameListeners[j + 1];
+          for (int j = i; j < usedCallbacks - 1; ++j) {
+            callbacks[j] = callbacks[j + 1];
           }
           --usedCallbacks;
           --i;
@@ -143,7 +146,6 @@ namespace UnityPlatformer {
       if (usedCallbacks == callbacks.Length) {
         Array.Resize(ref callbacks, usedCallbacks + 10);
       }
-      return;
 
       callbacks[usedCallbacks].callback = method;
       callbacks[usedCallbacks].time = timeout;

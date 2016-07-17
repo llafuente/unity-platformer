@@ -47,6 +47,7 @@ namespace UnityPlatformer {
     /// Clone the projectile, activate, add it to UpdateManager
     /// and return :)
     ///</summary>
+    // TODO REVIEW onImpact & onDestroy are not cloned with Instantiate
     public virtual Projectile Fire(Vector3 position) {
       // TODO REVIEW WTF! all 4 lines are necessary?!
       gameObject.SetActive(true);
@@ -61,7 +62,7 @@ namespace UnityPlatformer {
         return null;
       }
 
-      UpdateManager.instance.Push(this, Configuration.instance.projectilesPriority);
+      UpdateManager.instance.Push(prj, Configuration.instance.projectilesPriority);
       return prj;
     }
 
