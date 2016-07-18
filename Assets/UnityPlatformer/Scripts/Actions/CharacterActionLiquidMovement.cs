@@ -18,11 +18,12 @@ namespace UnityPlatformer {
     public float terminalYUP = 2f;
     public float terminalYDown = 3f;
     public float liquidMinHeight = 0.75f;
-    public CharacterActionJump actionJump;
     [Comment("Exit jump.")]
     public JumpConstantProperties jumpOff = new JumpConstantProperties(new Vector2(20, 20));
 
     #endregion
+
+    internal CharacterActionJump actionJump;
 
     float velocityXSmoothing;
     bool insideWater = false;
@@ -30,6 +31,7 @@ namespace UnityPlatformer {
     public override void OnEnable() {
       base.OnEnable();
       character.onStateChange += OnEnterState;
+      actionJump = character.GetAction<CharacterActionJump>();
     }
 
     void OnEnterState(States before, States after) {

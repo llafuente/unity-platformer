@@ -22,21 +22,15 @@ namespace UnityPlatformer {
     }
 
     virtual public bool IsAboveTop(Character c, Vector2 pos) {
-      float topY = GetTop().y - c.pc2d.skinWidth;
-
-      return pos.y > topY;
+      return pos.y > (GetTop().y - c.pc2d.minDistanceToEnv) + 0.001f;
     }
 
     virtual public bool IsAtTop(Character c, Vector2 pos) {
-      float topY = GetTop().y;
-
-      return Mathf.Abs(pos.y - topY) < c.pc2d.skinWidth * 0.5f;
+      return Mathf.Abs(pos.y - GetTop().y) - c.pc2d.minDistanceToEnv < 0.001f;
     }
 
     virtual public bool IsBelowBottom(Character c, Vector2 pos) {
-      float bottomY = GetBottom().y + c.pc2d.skinWidth;
-
-      return pos.y < bottomY;
+      return pos.y < (GetBottom().y + c.pc2d.minDistanceToEnv) - 0.001f;
     }
 
     virtual public bool IsAtBottom(Character c, Vector2 pos) {
@@ -46,8 +40,8 @@ namespace UnityPlatformer {
     }
 
     virtual public void EnableLadder(Character p) {
-      p.EnterArea(Areas.Ladder);
       p.ladder = this;
+      p.EnterArea(Areas.Ladder);
     }
 
     virtual public void Dismount(Character p) {

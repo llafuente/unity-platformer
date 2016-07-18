@@ -1175,7 +1175,6 @@ MonoBehaviour:
   terminalYUP: 2
   terminalYDown: 3
   liquidMinHeight: 0.75
-  actionJump: {fileID: 11446736}
   jumpOff:
     initialVelocity: {x: 20, y: 20}
 --- !u!114 &11459062

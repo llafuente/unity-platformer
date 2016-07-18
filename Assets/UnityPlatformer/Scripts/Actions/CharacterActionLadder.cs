@@ -79,10 +79,12 @@ namespace UnityPlatformer {
 
       bool enter = false;
       // enter ladder condition
-      if (onLadderArea && !onLadderState) {
+      if (onLadderArea && !onLadderState && (ladder != null || character.ladder != null)) {
         float dir = input.GetAxisRawY();
+        Debug.Log("dir" + dir);
         // moving up, while inside a real LadderArea.
         if (dir > 0 && !(ladder ?? character.ladder).IsAtTop(character, character.feet)) {
+          Debug.Log("Enter up . no top");
           enter = true;
         } else if (dir < 0 && !(ladder ?? character.ladder).IsAtBottom(character, character.feet)) {
           // moving down: entering from the top
@@ -156,18 +158,21 @@ namespace UnityPlatformer {
         }
       }
 
-      if (!ladder.topDismount && ladder.IsAtTop(character, character.head) && in2d.y > 0) {
-        // TOP no-dismount
-        character.velocity = Vector2.zero;
-      } else if (ladder.topDismount && ladder.IsAtTop(character, character.feet) && in2d.y > 0) {
-        // TOP dismount
+      if (ladder.topDismount && ladder.IsAtTop(character, character.feet) && in2d.y > 0) {
+        // top dismount enabled and reached
         character.velocity = Vector2.zero;
         ladder.Dismount(character);
-      } else if (!ladder.bottomDismount && ladder.IsAtBottom(character, character.feet) && in2d.y < 0) {
-        character.velocity = Vector2.zero;
       } else if (ladder.bottomDismount && ladder.IsAtBottom(character, character.feet) && in2d.y < 0) {
+        // bottom dismount enabled and reached
         character.velocity = Vector2.zero;
         ladder.Dismount(character);
+      } else if (!ladder.topDismount && ladder.IsAboveTop(character, character.head) && in2d.y > 0) {
+        // can't dismount (vine) don't let the head 'overflow' the ladder
+        character.velocity = Vector2.zero;
+      } else if (!ladder.bottomDismount && ladder.IsAtBottom(character, character.feet) && in2d.y < 0) {
+        // can't dismount (vine) don't let the head 'overflow' the ladder
+        // caveat: Vine cannot be near ground
+        character.velocity = Vector2.zero;
       }
 
       int faceDir;
@@ -185,6 +190,7 @@ namespace UnityPlatformer {
         if (dismountJumping && input.IsActionHeld(actionJump.action)) {
           dismount.Reset();
           character.ladder.Dismount(character);
+          character.ladder = null;
 
           actionJump.Jump(new JumpConstant(character,
             jumpOff.Clone(faceDir)
@@ -192,6 +198,7 @@ namespace UnityPlatformer {
         } else if (dismount.IncReady()) {
           character.velocity = Vector2.zero;
           character.ladder.Dismount(character);
+          character.ladder = null;
         }
       } else {
         dismount.Reset();

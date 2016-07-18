@@ -27,8 +27,8 @@ namespace UnityPlatformer {
     public void SetX(float x) {
       axis.x = x;
     }
-    public void SetY(float x) {
-      axis.x = x;
+    public void SetY(float y) {
+      axis.y = y;
     }
     public override bool IsActionHeld(string action) {
       InputStates value;
