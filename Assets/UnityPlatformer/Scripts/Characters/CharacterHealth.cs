@@ -21,9 +21,9 @@ namespace UnityPlatformer {
     public int maxLives = 1;
     [Comment("After any Damage how much time the character will be invulnerable to any Damage. -1 to disable")]
     public float invulnerabilityTimeAfterDamage = 2.0f;
+    public DamageTypes immunity = 0;
 
-    [HideInInspector]
-    public Character character;
+    internal Character character;
     ///
     /// Actions
     ///
@@ -57,17 +57,18 @@ namespace UnityPlatformer {
     /// Stop that funky music!
     /// </summary>
     public Action onInvulnerabilityEnd;
-
+    /// <summary>
+    /// Stop that funky music!
+    /// </summary>
+    public Action onImmunity;
     #endregion
 
     #region ~private
 
     // NOTE do not use setter/getter to trigger death, we need to preserve
     // logical Action dispacthing
-    [HideInInspector]
-    public int health = 0;
-    [HideInInspector]
-    public int lives = 0;
+    internal int health = 0;
+    internal int lives = 0;
 
     #endregion
 
@@ -151,11 +152,20 @@ namespace UnityPlatformer {
       Debug.LogFormat("Character: {0} recieve damage {1} health {2} from: {3}",
         character.gameObject.name, dt.amount, health, dt.causer);
 
-      if (Damage(dt.amount)) {
+      if (Damage(dt.amount, dt.type)) {
         if (dt.causer != null && dt.causer.onHurtCharacter != null) {
           dt.causer.onHurtCharacter(dt, GetComponent<Character>());
         }
       }
+    }
+    public bool Damage(int amount, DamageTypes type) {
+      Debug.LogFormat("immunity {0} type {1}", immunity, type);
+      if ((immunity & type) == type) {
+        Debug.LogFormat("Inminute to {0} attacks", type);
+        return false;
+      }
+
+      return Damage(amount);
     }
     /// <summary>
     /// triggers onDamage

@@ -47,7 +47,7 @@ namespace UnityPlatformer {
         Debug.LogError(gameObject.name + " contains an action without input property set");
       }
 
-      pc2d = character.pc2d;
+      pc2d = character.gameObject.GetComponent<PlatformerCollider2D>();
 
       hasControl = false;
 

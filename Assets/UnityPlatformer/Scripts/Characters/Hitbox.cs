@@ -35,8 +35,18 @@ namespace UnityPlatformer {
     [Comment("Who am I?")]
     public CharacterHealth owner;
     public HitBoxType type = HitBoxType.DealDamage;
+    public bool dealDamageToSelf = false;
 
     #endregion
+
+    DamageType dt;
+
+    void Start() {
+      dt = GetComponent<DamageType> ();
+      if (type == HitBoxType.DealDamage && dt == null) {
+        Debug.LogWarning("Missing DamageType");
+      }
+    }
 
 #if UNITY_EDITOR
     [DrawGizmo(GizmoType.InSelectionHierarchy | GizmoType.NotInSelectionHierarchy)]
@@ -56,25 +66,26 @@ namespace UnityPlatformer {
 
         BoxCollider2D box = GetComponent<BoxCollider2D>();
         Gizmos.DrawWireCube(transform.position + (Vector3)box.offset, box.size);
+        Handles.Label(transform.position + new Vector3(-box.size.x * 0.5f, box.size.y * 0.5f, 0), "HitBox: " + type); 
     }
 #endif
 
     void OnTriggerEnter2D(Collider2D o) {
-      //Debug.Log(this.name + " collide with: " + o.gameObject);
-      if (collideWith.Contains(o.gameObject.layer)) {
-        var dst_hb = o.gameObject.GetComponent<HitBox> ();
+      if (type == HitBoxType.DealDamage) {
+        //Debug.LogFormat("me {0} of {1} collide with {2}@{3}", name, owner, o.gameObject, o.gameObject.layer);
 
-        // do not deal damage to 'myself' and hitbox deal damage
-        //if (dst_hb && dst_hb.owner != owner && dst_hb.type == HitBoxType.DealDamage) {
-        if (dst_hb && dst_hb.type == HitBoxType.DealDamage) {
-          var dst = o.gameObject.GetComponent<DamageType> ();
-          if (dst == null) {
-            Debug.LogWarning("Try to damage something that is not a: DamageType. Adjust collideWith or type (HitBoxType.DealDamage)");
-          } else if (owner != dst.causer) {
-            owner.Damage(dst);
+        if (collideWith.Contains(o.gameObject.layer)) {
+          var hitbox = o.gameObject.GetComponent<HitBox> ();
+
+          if (hitbox && hitbox.type == HitBoxType.RecieveDamage && dt != null) {
+            //Debug.LogFormat("Can Recieve damage - dealDamageToSelf {0} / {1}", dealDamageToSelf, hitbox.owner.character == dt.causer);
+            // TODO REVIEW maybe the causer and owner differs
+            // causer could be a sword and owner a character?
+            if (dealDamageToSelf || (!dealDamageToSelf && hitbox.owner.character != dt.causer)) {
+              hitbox.owner.Damage(dt);
+            }
           }
         }
-
       }
     }
 

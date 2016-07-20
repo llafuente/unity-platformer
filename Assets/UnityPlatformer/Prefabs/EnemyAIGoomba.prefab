@@ -652,9 +652,7 @@ MonoBehaviour:
   startingLives: 1
   maxLives: 1
   invulnerabilityTimeAfterDamage: 2
-  character: {fileID: 0}
-  health: 0
-  lives: 0
+  immunity: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
