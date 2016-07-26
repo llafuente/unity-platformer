@@ -24,6 +24,8 @@ namespace UnityPlatformer {
     }
 
     virtual public void EnableGrab(Character p) {
+      if (p == null) return;
+
       p.EnterArea(Areas.Grabbable);
       p.grab = this;
     }
@@ -33,6 +35,8 @@ namespace UnityPlatformer {
     }
 
     virtual public void DisableGrab(Character p) {
+      if (p == null) return;
+
       Dismount(p);
       p.ExitArea(Areas.Grabbable);
       p.grab = null;
@@ -41,14 +45,14 @@ namespace UnityPlatformer {
     public virtual void OnTriggerEnter2D(Collider2D o) {
       HitBox h = o.GetComponent<HitBox>();
       if (h && h.type == HitBoxType.EnterAreas) {
-        EnableGrab(h.owner.character);
+        EnableGrab(h.owner.GetComponent<Character>());
       }
     }
 
     public virtual void OnTriggerExit2D(Collider2D o) {
       HitBox h = o.GetComponent<HitBox>();
       if (h && h.type == HitBoxType.EnterAreas) {
-        DisableGrab(h.owner.character);
+        DisableGrab(h.owner.GetComponent<Character>());
       }
     }
   }

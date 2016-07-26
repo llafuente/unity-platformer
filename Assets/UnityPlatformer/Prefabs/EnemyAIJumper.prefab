@@ -432,6 +432,7 @@ MonoBehaviour:
     m_Bits: 4096
   owner: {fileID: 11484000}
   type: 1
+  dealDamageToSelf: 0
 --- !u!114 &11412258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -443,6 +444,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b112fb41d3e3c438570b33e6158a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 0
   _size: {x: 0.9, y: 0.9}
 --- !u!114 &11416952
 MonoBehaviour:
@@ -526,6 +530,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b112fb41d3e3c438570b33e6158a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 0
   _size: {x: 1, y: 1}
 --- !u!114 &11441606
 MonoBehaviour:
@@ -544,6 +551,7 @@ MonoBehaviour:
     m_Bits: 4096
   owner: {fileID: 11484000}
   type: 0
+  dealDamageToSelf: 0
 --- !u!114 &11448450
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -624,6 +632,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1b112fb41d3e3c438570b33e6158a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 0
   _size: {x: 0.8, y: 1.8}
 --- !u!114 &11487444
 MonoBehaviour:
@@ -655,6 +666,7 @@ MonoBehaviour:
     m_Bits: 57344
   owner: {fileID: 11484000}
   type: 2
+  dealDamageToSelf: 0
 --- !u!114 &11494846
 MonoBehaviour:
   m_ObjectHideFlags: 1

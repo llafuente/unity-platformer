@@ -2,8 +2,15 @@ using System;
 using UnityEngine;
 using System.Collections;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace UnityPlatformer {
   public class Rope : MonoBehaviour, IUpdateEntity {
+    public LayerMask passengers;
+    [Tooltip ("If you add a Health component the rope can be destroyed")]
+    public LayerMask recieveDamage;
     /// <summary>
     /// The number of segments..
     /// </summary>
@@ -33,23 +40,32 @@ namespace UnityPlatformer {
     /// Min rope angle.
     /// </summary>
     public float angleLimits = 0;
+    /// <summary>
+    /// rope rotation easing
+    /// </summary>
+    public EasingType easing = EasingType.Sine;
 
+    public bool stop = false;
+    [Range(0, 1)]
+    public float initialTime = 0;
+
+    /*
     /// <summary>
     /// Angluar drag per section.
     /// </summary>
     public float angularDrag = 1.0f;
-
+    */
     public float faceDir {
       get {
-        return Mathf.Sign(rotationSpeed);
+        return Mathf.Sign(lastAngle);
       }
     }
 
     /// <summary>
     /// Rotation speed in degrees per second.
     /// </summary>
-    [Tooltip ("Rotation speed in degrees per second.")]
-    public float rotationSpeed = 33.0f;
+    [Tooltip ("Time to complete a full rotation from -angleLimits to +angleLimits (seconds)")]
+    public float rotationTime = 3.0f;
 
     /// <summary>
     /// If true we move at a constant speed, false we slow down at the apex.
@@ -58,8 +74,16 @@ namespace UnityPlatformer {
     [Range(0,1)]
     public float slowDownModifier;
 
-    [HideInInspector]
-    public GameObject[] sections;
+    public delegate void RopeCallback(Rope rope);
+    public RopeCallback onSideReached;
+    public RopeCallback onBreakRope;
+
+    internal GameObject[] sections;
+
+    int timeSign = 1;
+    float time = 0;
+    float lastAngle = 0;
+    Health health;
 
 #if UNITY_EDITOR
     /// update the rope on each change...
@@ -136,6 +160,14 @@ namespace UnityPlatformer {
       rs.rope = this;
       rs.index = i;
 
+      if (health != null) {
+        // add the HitBox so it can be destroyed
+        HitBox hitbox = section.AddComponent<HitBox>();
+        hitbox.type = HitBoxType.RecieveDamage;
+        hitbox.owner = health;
+        hitbox.collideWith = recieveDamage;
+      }
+
       // Special case, for last section
       if (i == segments - 1) {
         rb.mass = ropeMass * 5;
@@ -150,6 +182,11 @@ namespace UnityPlatformer {
       // and chain them
       gameObject.transform.DestroyImmediateChildren();
 
+      health = GetComponent<Health>();
+      if (health != null) {
+        health.onDeath += BreakRope;
+      }
+
       sections = new GameObject[segments];
 
       GameObject anchor = CreateAnchor();
@@ -163,6 +200,12 @@ namespace UnityPlatformer {
         // Update for next loop
         nextConnectedBody = section.GetComponent<Rigidbody2D>();
       }
+
+      time = initialTime;
+      if (time == 1) {
+        timeSign = -1;
+      }
+      UpdateRotation();
     }
 
     /// <summary>
@@ -193,39 +236,75 @@ namespace UnityPlatformer {
       UpdateManager.instance.Remove(this);
     }
 
-    /// <summary>
-    /// Rope motion!
-    /// </summary>
-    public virtual void ManagedUpdate(float delta) {
+    public void UpdateRotation() {
       // rotate only top section
       // rope isKinematic atm, not realistic but works perfectly
       // movement need more work, but rotate the hinge it's a nightmare!
       GameObject obj = sections[0];
 
-      float deg;
-      float actualSpeed = rotationSpeed;
-      if (slowDownModifier > 0) {
-        deg = Utils.NormalizeDegree(transform.eulerAngles.z);
-        float modifier = (90.0f / angleLimits) * slowDownModifier;
-        float factor = Mathf.Abs(Mathf.Cos(deg * Mathf.Deg2Rad) * modifier);
-        actualSpeed *= factor;
+      if (time > 1) {
+        time = 1;
+        timeSign = -1;
+        if (onSideReached != null) {
+          onSideReached(this);
+        }
+      } else if (time < 0) {
+        time = 0;
+        timeSign = 1;
+        if (onSideReached != null) {
+          onSideReached(this);
+        }
       }
 
+      float factor = Easing.EaseInOut(time, easing);
+      lastAngle = factor * 2 * angleLimits - angleLimits;
 
+      // reset first
+      transform.rotation = Quaternion.identity;
       transform.RotateAround(
         obj.GetComponent<HingeJoint2D>().connectedBody.transform.position,
         new Vector3(0, 0, -1),
-        delta * actualSpeed
+        lastAngle
       );
-      deg = Utils.NormalizeDegree(transform.eulerAngles.z);
-      //transform.position.DrawZAngle(deg);
-
-      // go-back
-      if (deg >= angleLimits) {
-        rotationSpeed = Mathf.Sign(rotationSpeed) == 1 ? rotationSpeed : -rotationSpeed;
-      } else if (deg <= -angleLimits) {
-        rotationSpeed = Mathf.Sign(rotationSpeed) == -1 ? rotationSpeed : -rotationSpeed;
-      }
     }
+
+    /// <summary>
+    /// Rope motion!
+    /// </summary>
+    public virtual void ManagedUpdate(float delta) {
+      if (stop) return;
+
+      time += delta * timeSign / rotationTime;
+      UpdateRotation();
+    }
+
+    public void BreakRope() {
+      if (onBreakRope != null) {
+        onBreakRope(this);
+      }
+
+      Debug.Log("BreakRope");
+
+      stop = true;
+      gameObject.transform.DestroyImmediateChildren();
+    }
+
+
+    #if UNITY_EDITOR
+    [DrawGizmo(GizmoType.InSelectionHierarchy | GizmoType.NotInSelectionHierarchy)]
+    void OnDrawGizmos() {
+      Gizmos.color = Color.green;
+      float height = segments * segmentLength;
+
+      var c =  Mathf.Cos(angleLimits * Mathf.Deg2Rad);
+      var s =  Mathf.Sin(angleLimits * Mathf.Deg2Rad);
+
+      Gizmos.DrawLine(transform.position, transform.position - new Vector3(0, height));
+      Gizmos.DrawLine(transform.position,
+        transform.position + new Vector3(s * height, -c * height));
+      Gizmos.DrawLine(transform.position,
+        transform.position + new Vector3(-s * height, -c * height));
+    }
+    #endif
   }
 }

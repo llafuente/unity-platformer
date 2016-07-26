@@ -57,14 +57,14 @@ namespace UnityPlatformer {
     public virtual void OnTriggerEnter2D(Collider2D o) {
       HitBox h = o.GetComponent<HitBox>();
       if (h && h.type == HitBoxType.EnterAreas) {
-        EnableLadder(h.owner.character);
+        EnableLadder(h.owner.GetComponent<Character>());
       }
     }
 
     public virtual void OnTriggerExit2D(Collider2D o) {
       HitBox h = o.GetComponent<HitBox>();
       if (h && h.type == HitBoxType.EnterAreas) {
-        DisableLadder(h.owner.character);
+        DisableLadder(h.owner.GetComponent<Character>());
       }
     }
   }

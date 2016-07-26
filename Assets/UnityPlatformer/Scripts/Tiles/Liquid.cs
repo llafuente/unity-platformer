@@ -52,7 +52,7 @@ namespace UnityPlatformer {
     public virtual void OnTriggerEnter2D(Collider2D o) {
       HitBox h = o.GetComponent<HitBox>();
       if (h && h.type == HitBoxType.EnterAreas) {
-        Character p = h.owner.character;
+        Character p = h.owner.GetComponent<Character>();
         p.liquid = this;
         p.EnterArea(Areas.Liquid);
       }
@@ -61,7 +61,7 @@ namespace UnityPlatformer {
     public virtual void OnTriggerExit2D(Collider2D o) {
       HitBox h = o.GetComponent<HitBox>();
       if (h && h.type == HitBoxType.EnterAreas) {
-        Character p = h.owner.character;
+        Character p = h.owner.GetComponent<Character>();
         if (p.liquid == this) { // REVIEW with this liquid should overlap
           p.liquid = null;
           p.ExitArea(Areas.Liquid);

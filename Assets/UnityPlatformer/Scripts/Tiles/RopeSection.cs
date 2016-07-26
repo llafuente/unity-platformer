@@ -58,14 +58,14 @@ namespace UnityPlatformer {
     public virtual void OnTriggerEnter2D(Collider2D o) {
       HitBox h = o.GetComponent<HitBox>();
       if (h && h.type == HitBoxType.EnterAreas) {
-        EnableRope(h.owner.character);
+        EnableRope(h.owner.GetComponent<Character>());
       }
     }
 
     public virtual void OnTriggerExit2D(Collider2D o) {
       HitBox h = o.GetComponent<HitBox>();
       if (h && h.type == HitBoxType.EnterAreas) {
-        DisableRope(h.owner.character);
+        DisableRope(h.owner.GetComponent<Character>());
       }
     }
 

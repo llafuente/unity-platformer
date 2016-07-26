@@ -18,7 +18,7 @@ namespace UnityPlatformer {
     [Comment("Character offset position for centering")]
     public Vector3 grabbingOffset = new Vector3(0, 0, 0);
     //public bool dismountPressingDown = true;
-    //public bool dismountJumping = true;
+    public bool dismountJumping = true;
     [Comment("Jump with no direction pressed.")]
     public JumpConstantProperties jumpOff = new JumpConstantProperties(new Vector2(20, 20));
 
@@ -39,6 +39,9 @@ namespace UnityPlatformer {
       base.OnEnable();
 
       actionJump = character.GetAction<CharacterActionJump>();
+      if (actionJump == null && dismountJumping) {
+        Debug.LogWarning("CharacterActionJump is required in CharacterActionRope because dismountJumping is true");
+      }
       canGrab = new Cooldown(grabAgainCooldown);
     }
 
@@ -46,7 +49,7 @@ namespace UnityPlatformer {
       bool onGrabbableArea = character.IsOnArea(Areas.Rope);
       canGrab.Increment();
 
-      if (onGrabbableArea && canGrab.Ready()) {
+      if (onGrabbableArea && canGrab.Ready() && character.rope.passengers.Contains(character.gameObject.layer)) {
         return priority;
       }
       return 0;
@@ -114,7 +117,7 @@ namespace UnityPlatformer {
 
 
       // check for dismount conditions
-      if (/*dismountJumping && */input.IsActionHeld(actionJump.action)) {
+      if (dismountJumping && input.IsActionHeld(actionJump.action)) {
         canGrab.Reset();
         character.ExitState(States.Rope);
 

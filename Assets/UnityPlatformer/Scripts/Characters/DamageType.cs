@@ -21,7 +21,7 @@ namespace UnityPlatformer {
     [Comment("Damage amount")]
     public int amount = 1;
     public DamageTypes type = DamageTypes.Default;
-    public Character causer;
+    public Health causer;
 
     [HideInInspector]
     // TODO direction will be calc, someday :)

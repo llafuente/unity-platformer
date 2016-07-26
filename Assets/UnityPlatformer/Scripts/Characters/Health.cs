@@ -7,7 +7,7 @@ namespace UnityPlatformer {
   /// Triggers character death
   /// TODO handle lives / Game over
   /// </summary>
-  public class CharacterHealth : MonoBehaviour {
+  public class Health : MonoBehaviour {
 
     #region public
 
@@ -22,8 +22,6 @@ namespace UnityPlatformer {
     [Comment("After any Damage how much time the character will be invulnerable to any Damage. -1 to disable")]
     public float invulnerabilityTimeAfterDamage = 2.0f;
     public DamageTypes immunity = 0;
-
-    internal Character character;
     ///
     /// Actions
     ///
@@ -36,6 +34,8 @@ namespace UnityPlatformer {
     /// Flash it!
     /// </summary>
     public Action onDamage;
+    public delegate void HurtCallback(DamageType dt, Health to);
+    public HurtCallback onHurt;
     /// <summary>
     /// Display some greenish starts floating around!
     /// </summary>
@@ -79,8 +79,6 @@ namespace UnityPlatformer {
     #endregion
 
     void Start() {
-      character = GetComponent<Character>();
-
       // check missconfiguration
       if (startingHealth < maxHealth) {
         Debug.LogWarning(this.name + " startingHealth < maxHealth ?");
@@ -110,7 +108,7 @@ namespace UnityPlatformer {
     /// Turns a character invulnerable, but still can be killed using Kill
     /// NOTE use float.MaxValue for unlimited time
     /// </summary>
-    public CharacterHealth SetInvulnerable(float time) {
+    public Health SetInvulnerable(float time) {
       _invulnerable = time;
 
       if (_invulnerable > 0.0f) {
@@ -124,7 +122,7 @@ namespace UnityPlatformer {
     /// <summary>
     /// disable invulnerability
     /// </summary>
-    public CharacterHealth SetVulnerable() {
+    public Health SetVulnerable() {
       _invulnerable = -1; // any negative value works :D
 
       return this;
@@ -138,7 +136,7 @@ namespace UnityPlatformer {
     /// <summary>
     /// Kill the character even if it's invulnerable
     /// </summary>
-    public CharacterHealth Kill() {
+    public Health Kill() {
       health = 0;
       Die();
 
@@ -150,11 +148,11 @@ namespace UnityPlatformer {
     /// </summary>
     public void Damage(DamageType dt) {
       Debug.LogFormat("Character: {0} recieve damage {1} health {2} from: {3}",
-        character.gameObject.name, dt.amount, health, dt.causer);
+        gameObject.name, dt.amount, health, dt.causer);
 
       if (Damage(dt.amount, dt.type)) {
-        if (dt.causer != null && dt.causer.onHurtCharacter != null) {
-          dt.causer.onHurtCharacter(dt, GetComponent<Character>());
+        if (dt.causer != null && dt.causer.onHurt != null) {
+          dt.causer.onHurt(dt, this);
         }
       }
     }
@@ -188,6 +186,10 @@ namespace UnityPlatformer {
 
       if (onDamage != null) {
         onDamage();
+      }
+
+      if (onHurt != null) {
+        onHurt(null, this);
       }
 
       if (health <= 0) {

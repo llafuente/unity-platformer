@@ -11,7 +11,7 @@ namespace UnityPlatformer {
   /// into 'readable' information for animations.
   /// </summary>
   [RequireComponent (typeof (PlatformerCollider2D))]
-  [RequireComponent (typeof (CharacterHealth))]
+  [RequireComponent (typeof (Health))]
   public class Character: MonoBehaviour, IUpdateEntity {
     #region public
 
@@ -28,7 +28,7 @@ namespace UnityPlatformer {
 
     public delegate void AreaChange(Areas before, Areas after);
     public AreaChange onAreaChange;
-    public delegate void HurtCharacter(DamageType dt, Character to);
+    public delegate void HurtCharacter(DamageType dt, Health to, Character character);
     public HurtCharacter onHurtCharacter;
     public delegate void StateChange(States before, States after);
     public StateChange onStateChange;
@@ -90,7 +90,7 @@ namespace UnityPlatformer {
     [HideInInspector]
     public PlatformerCollider2D pc2d;
     [HideInInspector]
-    public CharacterHealth health;
+    public Health health;
 
     /// <summary>
     /// Force to play this animation
@@ -146,7 +146,8 @@ namespace UnityPlatformer {
       forceAnimation = null;
       //Debug.Log("Start new Character: " + gameObject.name);
       pc2d = GetComponent<PlatformerCollider2D> ();
-      health = GetComponent<CharacterHealth>();
+      health = GetComponent<Health>();
+      health.onHurt += OnHurt;
       body = GetComponent<BoxCollider2D>();
 
       if (fallingCD == null) {
@@ -158,6 +159,12 @@ namespace UnityPlatformer {
       }
       //TODO review how hotswapping behave in this case ?!
       health.onDeath += OnDeath;
+    }
+
+    void OnHurt(DamageType dt, Health to) {
+      if (dt != null && onHurtCharacter != null) {
+        onHurtCharacter(dt, to, this);
+      }
     }
 
     public T GetAction<T>() {

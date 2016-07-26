@@ -32,11 +32,15 @@ namespace UnityPlatformer {
     }
 
     public virtual void Enter(Character p) {
+      if (p == null) return;
+
       p.EnterArea(Areas.Item);
       p.item = this;
     }
 
     public virtual void Exit(Character p) {
+      if (p == null) return;
+
       p.ExitArea(Areas.Item);
       p.item = null;
     }
@@ -49,14 +53,14 @@ namespace UnityPlatformer {
     public virtual void OnTriggerEnter2D(Collider2D o) {
       HitBox h = o.GetComponent<HitBox>();
       if (h && h.type == HitBoxType.EnterAreas) {
-        Enter(h.owner.character);
+        Enter(h.owner.GetComponent<Character>());
       }
     }
 
     public virtual void OnTriggerExit2D(Collider2D o) {
       HitBox h = o.GetComponent<HitBox>();
       if (h && h.type == HitBoxType.EnterAreas) {
-        Exit(h.owner.character);
+        Exit(h.owner.GetComponent<Character>());
       }
     }
   }

@@ -19,10 +19,7 @@ namespace UnityPlatformer {
       actionJump = character.GetAction<CharacterActionJump>();
     }
 
-    void OnHurtCharacter(DamageType dt, Character to) {
-      Debug.Log(dt);
-      Debug.Log(to);
-
+    void OnHurtCharacter(DamageType dt, Health h, Character to) {
       actionJump.ForceJump(new JumpConstant(character,
         jumpProperties.Clone(character.pc2d.collisions.faceDir)
       ));

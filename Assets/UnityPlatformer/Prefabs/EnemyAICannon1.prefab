@@ -648,6 +648,7 @@ MonoBehaviour:
     m_Bits: 4096
   owner: {fileID: 11465536}
   type: 0
+  dealDamageToSelf: 0
 --- !u!114 &11465536
 MonoBehaviour:
   m_ObjectHideFlags: 1
