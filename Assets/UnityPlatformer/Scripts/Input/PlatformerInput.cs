@@ -5,6 +5,9 @@ using System;
 namespace UnityPlatformer {
   [Serializable]
   public enum InputStates {
+    // this state is a fake, just to turn the button off and fire the callback
+    Off2 = -1,
+
     Off = 0,
     On = 1,
     Held = 2,

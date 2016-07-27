@@ -40,11 +40,11 @@ namespace UnityPlatformer {
     // keep character.actions in sync
     public virtual void OnEnable() {
       if (character == null) {
-        Debug.LogError(gameObject.name + " contains an action without character property set");
+        Debug.LogError("Action character property is null", this);
       }
 
       if (input == null) {
-        Debug.LogError(gameObject.name + " contains an action without input property set");
+        Debug.LogError("Action input property is null", this);
       }
 
       pc2d = character.gameObject.GetComponent<PlatformerCollider2D>();

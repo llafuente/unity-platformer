@@ -19,7 +19,7 @@ namespace UnityPlatformer {
       actions[action] = InputStates.On;
     }
     public void DisableAction(string action) {
-      actions[action] = InputStates.Off;
+      actions[action] = InputStates.Off2;
     }
     public void SetAxis(Vector2 v) {
       axis = v;
