@@ -64,6 +64,21 @@ namespace UnityPlatformer {
       character.EnterState(States.Rope);
       centering = true;
       positionOfSection = 0.5f;
+
+      character.rope.onBreakRope += OnBreakRope;
+    }
+
+    public override void LoseControl(float delta) {
+      if (character.rope != null) {
+        character.rope.onBreakRope -= OnBreakRope;
+      }
+    }
+
+    void OnBreakRope(Rope rope) {
+      LoseControl(0.0f);
+      character.ExitState(States.Rope);
+      character.ExitArea(Areas.Rope);
+      character.rope = null;
     }
 
     public override void PerformAction(float delta) {

@@ -44,7 +44,7 @@ namespace UnityPlatformer {
     void Start() {
       dt = GetComponent<DamageType> ();
       if (type == HitBoxType.DealDamage && dt == null) {
-        Debug.LogWarning("Missing DamageType");
+        Debug.LogWarning("Missing DamageType", this);
       }
     }
 
@@ -66,7 +66,7 @@ namespace UnityPlatformer {
 
         BoxCollider2D box = GetComponent<BoxCollider2D>();
         Gizmos.DrawWireCube(transform.position + (Vector3)box.offset, box.size);
-        Handles.Label(transform.position + new Vector3(-box.size.x * 0.5f, box.size.y * 0.5f, 0), "HitBox: " + type);
+        //Handles.Label(transform.position + new Vector3(-box.size.x * 0.5f, box.size.y * 0.5f, 0), "HitBox: " + type);
     }
 #endif
 
@@ -74,13 +74,13 @@ namespace UnityPlatformer {
       if (type == HitBoxType.DealDamage) {
         //Debug.LogFormat("me {0} of {1} collide with {2}@{3}", name, owner, o.gameObject, o.gameObject.layer);
 
-        if (collideWith.Contains(o.gameObject.layer)) {
-          var hitbox = o.gameObject.GetComponent<HitBox> ();
+        var hitbox = o.gameObject.GetComponent<HitBox> ();
+        if (hitbox != null && hitbox.type == HitBoxType.RecieveDamage && dt != null) {
 
-          if (hitbox && hitbox.type == HitBoxType.RecieveDamage && dt != null) {
-            //Debug.LogFormat("Can Recieve damage - dealDamageToSelf {0} / {1}", dealDamageToSelf, hitbox.owner.character == dt.causer);
-            // TODO REVIEW maybe the causer and owner differs
-            // causer could be a sword and owner a character?
+          // can I deal damage to this HitBox?
+          // check layer
+          if (hitbox.collideWith.Contains(gameObject.layer)) {
+            // check we not the same, or i can damage to myself at lest
             if (dealDamageToSelf || (!dealDamageToSelf && hitbox.owner != dt.causer)) {
               hitbox.owner.Damage(dt);
             }

@@ -147,8 +147,8 @@ namespace UnityPlatformer {
     /// TODO handle direction here or in the HitBox but must be done :)
     /// </summary>
     public void Damage(DamageType dt) {
-      Debug.LogFormat("Character: {0} recieve damage {1} health {2} from: {3}",
-        gameObject.name, dt.amount, health, dt.causer);
+      Debug.LogFormat("Object: {0} recieve damage {1} health {2} from: {3}",
+        gameObject.name, dt.amount, health, dt.causer.gameObject.name);
 
       if (Damage(dt.amount, dt.type)) {
         if (dt.causer != null && dt.causer.onHurt != null) {

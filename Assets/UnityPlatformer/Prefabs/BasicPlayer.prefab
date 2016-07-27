@@ -885,7 +885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 1
-  type: 0
+  type: 4
   causer: {fileID: 11429098}
   direction: {x: 0, y: 0, z: 0}
 --- !u!114 &11422012

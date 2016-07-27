@@ -59,7 +59,7 @@ namespace UnityPlatformer {
       }
 
       if (_default_material == null) {
-        Debug.LogWarning("cannot load Transparent material!");
+        //Debug.LogWarning("cannot load Transparent material!");
       }
 
       #if UNITY_EDITOR

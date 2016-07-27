@@ -10,6 +10,11 @@ namespace UnityPlatformer {
       UpdateManager.instance.Remove (this);
     }
 
+    public virtual void Start() {
+      if (input == null) {
+        Debug.LogWarning("input cannot be null", this);
+      }
+    }
     public override void OnEnable() {
       base.OnEnable();
       UpdateManager.instance.Push(this, Configuration.instance.enemiesPriority);

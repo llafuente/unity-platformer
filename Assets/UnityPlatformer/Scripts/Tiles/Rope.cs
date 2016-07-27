@@ -9,8 +9,6 @@ using UnityEditor;
 namespace UnityPlatformer {
   public class Rope : MonoBehaviour, IUpdateEntity {
     public LayerMask passengers;
-    [Tooltip ("If you add a Health component the rope can be destroyed")]
-    public LayerMask recieveDamage;
     /// <summary>
     /// The number of segments..
     /// </summary>
@@ -84,6 +82,38 @@ namespace UnityPlatformer {
     float time = 0;
     float lastAngle = 0;
     Health health;
+
+    void Start() {
+      // create the rope from bottom to top
+      // and chain them
+      gameObject.transform.DestroyImmediateChildren();
+
+      health = GetComponent<Health>();
+      if (health != null) {
+        health.onDeath += BreakRope;
+      }
+
+      sections = new GameObject[segments];
+
+      GameObject anchor = CreateAnchor();
+
+      // Create segments
+      Rigidbody2D nextConnectedBody = anchor.GetComponent<Rigidbody2D>();
+
+      for (int i = 0; i < segments; i++) {
+        GameObject section = CreateSection(i, nextConnectedBody);
+
+        // Update for next loop
+        nextConnectedBody = section.GetComponent<Rigidbody2D>();
+      }
+
+      time = initialTime;
+      if (time == 1) {
+        timeSign = -1;
+      }
+      UpdateRotation();
+    }
+
 
 #if UNITY_EDITOR
     /// update the rope on each change...
@@ -161,11 +191,13 @@ namespace UnityPlatformer {
       rs.index = i;
 
       if (health != null) {
-        // add the HitBox so it can be destroyed
-        HitBox hitbox = section.AddComponent<HitBox>();
-        hitbox.type = HitBoxType.RecieveDamage;
+        // NOTE add/get the HitBox so it can be destroyed
+        // if we add a hitbox, it's just useless we need a proper collideWith
+        // configured
+        HitBox hitbox = section.GetOrAddComponent<HitBox>();
         hitbox.owner = health;
-        hitbox.collideWith = recieveDamage;
+        //hitbox.type = HitBoxType.RecieveDamage;
+        //hitbox.collideWith = recieveDamage;
       }
 
       // Special case, for last section
@@ -175,37 +207,6 @@ namespace UnityPlatformer {
 
       sections[i] = section;
       return section;
-    }
-
-    void Start() {
-      // create the rope from bottom to top
-      // and chain them
-      gameObject.transform.DestroyImmediateChildren();
-
-      health = GetComponent<Health>();
-      if (health != null) {
-        health.onDeath += BreakRope;
-      }
-
-      sections = new GameObject[segments];
-
-      GameObject anchor = CreateAnchor();
-
-      // Create segments
-      Rigidbody2D nextConnectedBody = anchor.GetComponent<Rigidbody2D>();
-
-      for (int i = 0; i < segments; i++) {
-        GameObject section = CreateSection(i, nextConnectedBody);
-
-        // Update for next loop
-        nextConnectedBody = section.GetComponent<Rigidbody2D>();
-      }
-
-      time = initialTime;
-      if (time == 1) {
-        timeSign = -1;
-      }
-      UpdateRotation();
     }
 
     /// <summary>
@@ -286,7 +287,8 @@ namespace UnityPlatformer {
       Debug.Log("BreakRope");
 
       stop = true;
-      gameObject.transform.DestroyImmediateChildren();
+
+      gameObject.transform.DestroyChildren();
     }
 
 

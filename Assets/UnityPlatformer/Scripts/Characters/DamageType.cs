@@ -15,7 +15,6 @@ namespace UnityPlatformer {
     // Choose your pain!
   };
 
-  [RequireComponent (typeof (Rigidbody2D))]
   public class DamageType : MonoBehaviour {
 
     [Comment("Damage amount")]
@@ -26,5 +25,11 @@ namespace UnityPlatformer {
     [HideInInspector]
     // TODO direction will be calc, someday :)
     public Vector3 direction;
+
+    void Start() {
+      if (causer == null) {
+        Debug.LogWarning("causer cannot be null", this);
+      }
+    }
   }
 }

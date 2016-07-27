@@ -39,7 +39,7 @@ namespace UnityPlatformer {
     #if UNITY_EDITOR
     [DrawGizmo(GizmoType.InSelectionHierarchy | GizmoType.NotInSelectionHierarchy)]
     void OnDrawGizmos() {
-      Handles.Label(transform.position + new Vector3(-_size.x * 0.5f, _size.y * 0.5f, 0), "Trigger: " + this.name);
+      //Handles.Label(transform.position + new Vector3(-_size.x * 0.5f, _size.y * 0.5f, 0), "Trigger: " + this.name);
 
       Vector3 pos = transform.position;
       Vector3[] verts = new Vector3[] {
