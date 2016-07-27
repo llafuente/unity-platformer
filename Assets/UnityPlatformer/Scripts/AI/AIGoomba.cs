@@ -18,13 +18,9 @@ namespace UnityPlatformer {
 
     #endregion
 
-    #region private
+    internal Facing facing;
 
-    Facing facing;
-
-    #endregion
-
-    public void Start() {
+    virtual public void Start() {
       pc2d.onLeftWall += OnLeftWall;
       pc2d.onRightWall += OnRightWall;
 
@@ -32,17 +28,17 @@ namespace UnityPlatformer {
       input.SetX((float) facing);
     }
 
-    void OnLeftWall() {
+    virtual public void OnLeftWall() {
       facing = Facing.Right;
       input.SetX((float) facing);
     }
 
-    void OnRightWall() {
+    virtual public void OnRightWall() {
       facing = Facing.Left;
       input.SetX((float) facing);
     }
 
-    void Toogle() {
+    virtual public void Toogle() {
       facing = facing == Facing.Left ? Facing.Right : Facing.Left;
       input.SetX((float) facing);
     }
