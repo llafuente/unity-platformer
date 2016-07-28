@@ -40,8 +40,9 @@ namespace UnityPlatformer {
     //public class InputDictionary : Dictionary<string, InputStates> {}
     protected InputDictionary actions = new InputDictionary();
 
-    public void Start() {
+    public virtual void Start() {
       foreach (var button in listenActions) {
+        Debug.Log("initialize button " + button);
         actions[button] = InputStates.Off;
       }
     }
