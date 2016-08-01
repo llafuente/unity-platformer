@@ -14,22 +14,24 @@ namespace UnityPlatformer {
 
   [CustomPropertyDrawer(typeof(CommentAttribute))]
   public class CommentDrawer : PropertyDrawer {
-    protected float textHeight;
+    protected float textHeight = 20.0f;
     // clang-format on
     CommentAttribute commentAttribute {
       get { return (CommentAttribute)attribute; }
     }
 
-    public override float GetPropertyHeight(SerializedProperty prop, GUIContent label) {
+    public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
       // TODO find a way to fix it and support multiple lines
       // Rect labelRect = GUILayoutUtility.GetRect(new
       // GUIContent(commentAttribute.comment), "label");
       // textHeight = labelRect.height;
       // textHeight = GUIStyle.CalcHeight(new
       // GUIContent(commentAttribute.comment));
-      textHeight = 20;
 
-      return textHeight + base.GetPropertyHeight(prop, label);
+      //textHeight = 20;
+      //return textHeight + base.GetPropertyHeight(property, label);
+
+      return textHeight + EditorGUI.GetPropertyHeight(property, label, true);
     }
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
@@ -38,9 +40,10 @@ namespace UnityPlatformer {
       position.y += textHeight;
       position.height -= textHeight;
 
+
       EditorGUI.PropertyField(position, property, label, true);
       // NOTE this is buggy! do not use it!
-      // base.OnGUI(position, prop, label);
+      //base.OnGUI(position, property, label);
     }
   }
 }
