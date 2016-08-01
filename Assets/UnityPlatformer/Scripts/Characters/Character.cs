@@ -43,33 +43,24 @@ namespace UnityPlatformer {
     /// <summary>
     /// List of enabled actions
     /// </summary>
-    [HideInInspector]
-    public List<CharacterAction> actions = new List<CharacterAction>();
-    [HideInInspector]
-    public States state = States.None;
-    [HideInInspector]
-    public Areas area = Areas.None;
-    [HideInInspector]
-    public BoxCollider2D body;
-    [HideInInspector]
-    public Ladder ladder;
-    [HideInInspector]
-    public Liquid liquid;
-    [HideInInspector]
-    public Item item;
-    [HideInInspector]
-    public Grab grab;
-    [HideInInspector]
-    public Rope rope;
-    [HideInInspector]
-    public int ropeIndex = -1;
-    [HideInInspector]
-    public Vector2 lastJumpDistance {
+    internal List<CharacterAction> actions = new List<CharacterAction>();
+    internal Facing faceDir;
+    internal States state = States.None;
+    internal Areas area = Areas.None;
+    internal BoxCollider2D body;
+    internal Ladder ladder;
+    internal Liquid liquid;
+    internal Item item;
+    internal Grab grab;
+    internal Rope rope;
+    internal Track track;
+    internal int ropeIndex = -1;
+    internal Vector2 lastJumpDistance {
       get {
         return jumpEnd - jumpStart;
       }
     }
-    public Vector2 lastFallDistance {
+    internal Vector2 lastFallDistance {
       get {
         return fallEnd - fallStart;
       }
@@ -81,33 +72,28 @@ namespace UnityPlatformer {
       }
     }
 
-    [HideInInspector]
-    public Vector2 fallDistance;
-    [HideInInspector]
-    public MovingPlatform platform;
-    [HideInInspector]
-    public Vector3 velocity;
-    [HideInInspector]
-    public PlatformerCollider2D pc2d;
-    [HideInInspector]
-    public Health health;
+    internal Vector2 fallDistance;
+    internal MovingPlatform platform;
+    // character velocity by itself. Movement
+    internal Vector3 velocity = Vector3.zero;
+    // World velocity, wind, tracks etc.
+    internal Vector3 worldVelocity = Vector3.zero;
+    internal PlatformerCollider2D pc2d;
+    internal Health health;
 
     /// <summary>
     /// Force to play this animation
     /// </summary>
-    [HideInInspector]
-    public string forceAnimation;
+    internal string forceAnimation;
     /// <summary>
     /// Do not execute any Action, Character still moves, so set velocity to
     /// Vector3.zero if necesarry
     /// </summary>
-    [HideInInspector]
-    public float frozen = -1f;
+    internal float frozen = -1f;
     /// <summary>
     /// back reference to CharacterAnimator
     /// </summary>
-    [HideInInspector]
-    public CharacterAnimator animator;
+    internal CharacterAnimator animator;
 
     public Vector2 head {
       get {
@@ -233,7 +219,7 @@ namespace UnityPlatformer {
         onBeforeMove(this, delta);
       }
 
-      pc2d.Move(velocity * delta, delta);
+      pc2d.Move((velocity + worldVelocity) * delta, delta);
 
       if (onAfterMove != null) {
         onAfterMove(this, delta);
@@ -450,6 +436,20 @@ namespace UnityPlatformer {
       RaycastHit2D hit = pc2d.RightFeetRay(pc2d.skinWidth * rayLengthFactor, velocity * delta);
 
       return hit.collider != null;
+    }
+
+    // TODO REVIEW necessary?
+    public void SetFacing(Facing f) {
+      faceDir = f;
+    }
+
+    public void SetFacing(float x) {
+      if (x == 0) {
+        faceDir = Facing.None;
+      } else {
+        x = Mathf.Sign(x);
+        faceDir = x == 1 ? Facing.Right : Facing.Left;
+      }
     }
   }
 }

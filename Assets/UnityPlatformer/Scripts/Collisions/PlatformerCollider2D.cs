@@ -85,7 +85,6 @@ namespace UnityPlatformer {
 
     public virtual void Start() {
       collisions = new CollisionInfo();
-      collisions.faceDir = 1;
 
       if (useRigidbody2D) {
         rigidBody2D = GetComponent<Rigidbody2D>();
@@ -121,13 +120,6 @@ namespace UnityPlatformer {
       // set previous collisions and reset current one
       pCollisions = collisions.Clone();
       collisions.Reset();
-
-      // facing need to be reviewed. We should not rely on velocity.x
-      if (velocity.x > 0.0f) {
-        collisions.faceDir = 1;
-      } else if (velocity.x < 0.0f) {
-        collisions.faceDir = -1;
-      } // else, leave the last one :)
 
       // Climb or descend a slope if in range
       if (enableSlopes) {
@@ -533,7 +525,6 @@ namespace UnityPlatformer {
       public bool climbingSlope;
       public bool descendingSlope;
       public float slopeDistance;
-      public int faceDir;
       public bool fallingThroughPlatform;
 
       // colliders

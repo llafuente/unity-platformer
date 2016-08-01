@@ -24,7 +24,7 @@ namespace UnityPlatformer {
     public virtual void PositionCharacter(Character p) {
       p.velocity = Vector3.zero;
       if (facing != Facing.None) {
-        p.pc2d.collisions.faceDir = (int)facing;
+        p.SetFacing(facing);
       }
       Vector3 pos = p.transform.position;
       pos.x = GetCenter().x + offset.x;

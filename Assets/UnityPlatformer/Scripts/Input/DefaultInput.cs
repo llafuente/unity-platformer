@@ -1,4 +1,4 @@
-//#define UP_USE_WII_INPUT_MANAGER
+// #define UP_USE_WII_INPUT_MANAGER
 // #define UP_USE_CN_INPUT_MANAGER
 
 using UnityEngine;
@@ -157,7 +157,6 @@ namespace UnityPlatformer {
 
     #if UP_USE_WII_INPUT_MANAGER
     bool GetWiiButton(WiiButtons btn) {
-      Debug.Log("GetWiiButton: " + btn);
       if (remote != null) {
         switch(btn) {
         case WiiButtons.WII_BUTTON_1:

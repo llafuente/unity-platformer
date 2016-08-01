@@ -72,7 +72,12 @@ namespace UnityPlatformer {
     /// Horizontal movement based on current input
     /// </summary>
     public void Move(float spdy, ref float smoothing, float accTime) {
-      float targetVelocityX = input.GetAxisRawX() * spdy;
+      float x = input.GetAxisRawX();
+      if (x != 0) { // do not modify if no key is pressed
+        character.SetFacing(x);
+      }
+
+      float targetVelocityX = x * spdy;
 
       character.velocity.x = Mathf.SmoothDamp (
         character.velocity.x,

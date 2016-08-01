@@ -116,19 +116,13 @@ namespace UnityPlatformer {
         }
       }
 
-      //TODO REVIEW this lead to some problems with orientation...
-      int faceDir;
-      if (in2d.x == 0) {
-        faceDir = 0;
-      } else {
-        character.pc2d.collisions.faceDir = faceDir = (int) Mathf.Sign(in2d.x);
-      }
+      character.SetFacing(in2d.x);
 
       if (input.IsActionHeld(actionJump.action)) {
         character.ExitState(States.Liquid);
 
         actionJump.Jump(new JumpConstant(character,
-          jumpOff.Clone(faceDir)
+          jumpOff.Clone((int) character.faceDir)
         ));
       }
     }

@@ -86,14 +86,7 @@ namespace UnityPlatformer {
           delta);
       }
 
-      float x = input.GetAxisRawX();
-      int faceDir;
-      //TODO REVIEW this lead to some problems with orientation...
-      if (x == 0) {
-        faceDir = 0;
-      } else {
-        character.pc2d.collisions.faceDir = faceDir = (int) Mathf.Sign(x);
-      }
+      character.SetFacing(input.GetAxisRawX());
 
       // check for dismount conditions
       if (dismountJumping && input.IsActionHeld(actionJump.action)) {
@@ -101,7 +94,7 @@ namespace UnityPlatformer {
         character.ExitState(States.Grabbing);
 
         actionJump.Jump(new JumpConstant(character,
-          jumpOff.Clone(faceDir)
+          jumpOff.Clone((int) character.faceDir)
         ));
       } else if (dismountPressingDown && input.GetAxisRawY() < 0) {
         // TODO Dismount down delay ?

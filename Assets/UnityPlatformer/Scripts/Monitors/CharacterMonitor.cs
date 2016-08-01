@@ -26,7 +26,7 @@ namespace UnityPlatformer {
       text += string.Format(
         "Area: {0}\n"+
         "State: {1}\n"+
-        "forceAnimation: {12}\n"+
+        "Facing: {15} ForceAni: {12}\n"+
         "Ladder: {2} IsAboveTop {3} IsBelowBottom {4}\n" +
         "Liquid: {9}  IsBelowSurface {10} / {11}\n" +
         "Rope: {13} @ {14}\n" +
@@ -45,7 +45,8 @@ namespace UnityPlatformer {
         character.liquid ? character.liquid.IsBelowSurface(character, 1.5f) : false,
         character.liquid ? character.liquid.DistanceToSurface(character, 1.5f) : -1,
         character.forceAnimation,
-        character.rope, character.ropeIndex
+        character.rope, character.ropeIndex,
+        character.faceDir
       );
     }
   }

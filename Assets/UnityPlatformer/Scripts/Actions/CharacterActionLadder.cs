@@ -175,13 +175,7 @@ namespace UnityPlatformer {
         character.velocity = Vector2.zero;
       }
 
-      int faceDir;
-      //TODO REVIEW this lead to some problems with orientation...
-      if (in2d.x == 0) {
-        faceDir = 0;
-      } else {
-        character.pc2d.collisions.faceDir = faceDir = (int) Mathf.Sign(in2d.x);
-      }
+      character.SetFacing(in2d.x);
 
       // check for dismount conditions
       if (in2d.x != 0) {
@@ -193,7 +187,7 @@ namespace UnityPlatformer {
           character.ladder = null;
 
           actionJump.Jump(new JumpConstant(character,
-            jumpOff.Clone(faceDir)
+            jumpOff.Clone((int) character.faceDir)
           ));
         } else if (dismount.IncReady()) {
           character.velocity = Vector2.zero;

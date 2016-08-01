@@ -86,7 +86,7 @@ namespace UnityPlatformer {
         currentIndex = 0;
       }
 
-      int dir = pc2d.collisions.faceDir;
+      int dir = (int) character.faceDir; // TODO REVIEW what happens when Facing.None ??!
       Vector3 offset = (Vector3) p.offset;
       offset.x *= dir;
 

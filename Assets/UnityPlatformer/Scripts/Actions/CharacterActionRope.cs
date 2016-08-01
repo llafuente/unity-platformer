@@ -137,7 +137,7 @@ namespace UnityPlatformer {
         character.ExitState(States.Rope);
 
         actionJump.Jump(new JumpConstant(character,
-          jumpOff.Clone(character.pc2d.collisions.faceDir)
+          jumpOff.Clone((int) character.faceDir)
         ));
       }
 

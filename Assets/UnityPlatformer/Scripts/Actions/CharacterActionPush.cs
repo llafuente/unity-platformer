@@ -118,7 +118,7 @@ namespace UnityPlatformer {
 
     public void OnBeforeMove(Character ch, float delta) {
       if (ch.IsOnState(States.Pushing)) {
-        if (ch.pc2d.collisions.faceDir == 1) {
+        if (ch.faceDir == Facing.Right) {
           PushBox(ch.velocity * delta, ref ch.pc2d.collisions.rightHits, ch.pc2d.collisions.rightHitsIdx, delta);
         } else {
           PushBox(ch.velocity * delta, ref ch.pc2d.collisions.leftHits, ch.pc2d.collisions.leftHitsIdx, delta);

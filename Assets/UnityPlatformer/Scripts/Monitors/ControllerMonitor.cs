@@ -18,18 +18,17 @@ namespace UnityPlatformer {
       text = string.Format(
         "above? {0} @ {4}\n"+
         "below? {1} @ {5}\n"+
-        "left? {2}({15}) @ {6}\n"+
-        "right? {3}({16}) @ {7}\n"+
+        "left? {2}({14}) @ {6}\n"+
+        "right? {3}({15}) @ {7}\n"+
 
         "climbingSlope? {8}\n"+
         "descendingSlope? {9}\n"+
         "slopeAngle: {10}\n"+
-        "slopeDistance: {13}\n" +
-        "slopeNormal: {14}\n"+
-        "faceDir: {11}\n"+
-        "fallingThroughPlatform: {12}\n" +
-        "enableSlopes: {17}\n" +
-        "leavingGround: {18}\n",
+        "slopeDistance: {12}\n" +
+        "slopeNormal: {13}\n"+
+        "fallingThroughPlatform: {11}\n" +
+        "enableSlopes: {16}\n" +
+        "leavingGround: {17}\n",
         pc2d.collisions.above,
         pc2d.collisions.below,
         pc2d.collisions.left,
@@ -43,7 +42,6 @@ namespace UnityPlatformer {
         pc2d.collisions.climbingSlope,
         pc2d.collisions.descendingSlope,
         pc2d.collisions.slopeAngle,
-        pc2d.collisions.faceDir,
         pc2d.collisions.fallingThroughPlatform,
 
         pc2d.collisions.slopeDistance,

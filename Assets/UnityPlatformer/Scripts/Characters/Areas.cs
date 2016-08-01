@@ -9,5 +9,6 @@ namespace UnityPlatformer {
     Liquid =              1 << 3,
     Item =                1 << 4,
     Rope =                1 << 5,
+    Track =               1 << 6,
   }
 }

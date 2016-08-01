@@ -462,24 +462,6 @@ MonoBehaviour:
   fallingTime: 0.1
   groundGraceTime: 0.05
   minVelocity: 0.05
-  actions: []
-  state: 0
-  area: 0
-  body: {fileID: 0}
-  ladder: {fileID: 0}
-  liquid: {fileID: 0}
-  item: {fileID: 0}
-  grab: {fileID: 0}
-  rope: {fileID: 0}
-  ropeIndex: -1
-  fallDistance: {x: 0, y: 0}
-  platform: {fileID: 0}
-  velocity: {x: 0, y: 0, z: 0}
-  pc2d: {fileID: 0}
-  health: {fileID: 0}
-  forceAnimation: 
-  frozen: -1
-  animator: {fileID: 0}
   input: {fileID: 11421850}
   initialFacing: -1
   rayLengthFactor: 2
