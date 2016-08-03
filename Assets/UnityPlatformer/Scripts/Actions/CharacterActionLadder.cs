@@ -81,10 +81,8 @@ namespace UnityPlatformer {
       // enter ladder condition
       if (onLadderArea && !onLadderState && (ladder != null || character.ladder != null)) {
         float dir = input.GetAxisRawY();
-        Debug.Log("dir" + dir);
         // moving up, while inside a real LadderArea.
         if (dir > 0 && !(ladder ?? character.ladder).IsAtTop(character, character.feet)) {
-          Debug.Log("Enter up . no top");
           enter = true;
         } else if (dir < 0 && !(ladder ?? character.ladder).IsAtBottom(character, character.feet)) {
           // moving down: entering from the top

@@ -61,6 +61,11 @@ namespace UnityPlatformer {
         return 0;
       }
 
+      // disable when ladder is close or water...
+      if (character.IsOnArea(Areas.Liquid) || character.IsOnArea(Areas.Ladder)) {
+        return 0;
+      }
+
       if ((
         (pc2d.collisions.left && pc2d.collisions.leftIsWall) ||
         (pc2d.collisions.right && pc2d.collisions.rightIsWall)
