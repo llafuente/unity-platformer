@@ -1,6 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace UnityPlatformer {
   [RequireComponent (typeof (BoxCollider2D))]
   public class Liquid : MonoBehaviour {
@@ -43,11 +47,15 @@ namespace UnityPlatformer {
       return GetTop().y - char_surface_level;
     }
 
+#if UNITY_EDITOR
+    [DrawGizmo(GizmoType.InSelectionHierarchy | GizmoType.NotInSelectionHierarchy)]
     void OnDrawGizmos() {
+      if (Application.isPlaying) return;
       if (body) {
         body.bounds.Draw(transform);
       }
     }
+#endif
 
     public virtual void OnTriggerEnter2D(Collider2D o) {
       HitBox h = o.GetComponent<HitBox>();

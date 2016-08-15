@@ -1,5 +1,10 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Rendering;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace UnityPlatformer {
   [RequireComponent (typeof (BoxCollider2D))]
@@ -67,5 +72,29 @@ namespace UnityPlatformer {
         DisableLadder(h.owner.GetComponent<Character>());
       }
     }
+
+#if UNITY_EDITOR
+    [DrawGizmo(GizmoType.InSelectionHierarchy | GizmoType.NotInSelectionHierarchy)]
+    void OnDrawGizmos() {
+      if (Application.isPlaying) return;
+
+      body = GetComponent<BoxCollider2D>();
+
+      Vector3 size = body.size;
+      Vector3 pos = transform.position;
+
+      Handles.Label(pos + new Vector3(-size.x * 0.5f, size.y * 0.5f, 0), "Ladder");
+
+      Vector3[] verts = new Vector3[] {
+        new Vector3(pos.x - size.x * 0.5f, pos.y - size.y * 0.5f, pos.z),
+        new Vector3(pos.x - size.x * 0.5f, pos.y + size.y * 0.5f, pos.z),
+        new Vector3(pos.x + size.x * 0.5f, pos.y + size.y * 0.5f, pos.z),
+        new Vector3(pos.x + size.x * 0.5f, pos.y - size.y * 0.5f, pos.z)
+      };
+      Handles.DrawSolidRectangleWithOutline( verts, new Color(1, 1, 0, 0.05f), new Color(0, 0, 0, 0.5f));
+    }
+#endif
+
+
   }
 }

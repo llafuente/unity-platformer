@@ -295,6 +295,8 @@ namespace UnityPlatformer {
     #if UNITY_EDITOR
     [DrawGizmo(GizmoType.InSelectionHierarchy | GizmoType.NotInSelectionHierarchy)]
     void OnDrawGizmos() {
+      if (Application.isPlaying) return;
+
       Gizmos.color = Color.green;
       float height = segments * segmentLength;
 
