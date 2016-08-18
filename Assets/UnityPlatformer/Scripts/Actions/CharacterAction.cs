@@ -88,7 +88,7 @@ namespace UnityPlatformer {
     /// * Negative numbers are used to ignore fight and force Character to call
     /// PerformAction, but! because it doesn't win the fight onLoseControl,
     /// onGrainControl and GetPostUpdateActions are ignored.
-    /// NOTE can be used as a replace for UpdateManager.ManagedUpdate
+    /// NOTE can be used as a replace for UpdateManager.PlatformerUpdate
     /// </summary>
     public abstract int WantsToUpdate(float delta);
 

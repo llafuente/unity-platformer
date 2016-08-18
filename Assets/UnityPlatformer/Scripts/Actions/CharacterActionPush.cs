@@ -73,17 +73,28 @@ namespace UnityPlatformer {
     }
 
     bool IsBox(ref RaycastHit2D[] hits, int count) {
+      bool valid_box = false;
       for (int i = 0; i < count; ++i) {
         Box b = hits[i].collider.gameObject.GetComponent<Box>();
         if (b != null) {
           // guard against dark arts
           if (Configuration.IsBox(b.boxCharacter.gameObject)) {
-            return true;
+            if (
+              // the box cannot be falling!
+              (b.boxCharacter.IsOnState(States.Falling)) ||
+              // box cannot be colliding against anything in the movement direction
+              (faceDir == 1 && b.boxCharacter.pc2d.collisions.right) ||
+              (faceDir == -1 && b.boxCharacter.pc2d.collisions.left)
+              ) {
+              continue;
+            }
+
+            valid_box = true;
           }
         }
       }
 
-      return false;
+      return valid_box;
     }
 
     bool IsBoxRight() {
@@ -101,6 +112,8 @@ namespace UnityPlatformer {
       base.GainControl(delta);
 
       character.EnterState(States.Pushing);
+      Log.level = LogLevel.Silly;
+      Log.Silly("(Push) {0} Start pushing", gameObject.name);
     }
 
     /// <summary>
@@ -110,6 +123,9 @@ namespace UnityPlatformer {
       base.LoseControl(delta);
 
       character.ExitState(States.Pushing);
+
+      Log.Silly("(Push) {0} Stop pushing", gameObject.name);
+      Log.level = LogLevel.Info;
     }
 
     public override void PerformAction(float delta) {
@@ -133,6 +149,7 @@ namespace UnityPlatformer {
       // sarch the lowest box and push it
       float minY = Mathf.Infinity;
       int index = -1;
+      Log.Silly("(Push) PushBox.count {0}", count);
       for (int i = 0; i < count; ++i) {
         Box b = hits[i].collider.gameObject.GetComponent<Box>();
         if (b != null) {
@@ -141,7 +158,8 @@ namespace UnityPlatformer {
             return;
           }
 
-          float y = b.body.bounds.min.y;
+          float y = b.transform.position.y;
+          Log.Silly("(Push) Found a box at index {0} {1} {2} {3}", i, b, minY, y);
           if (y < minY) {
             minY = y;
             index = i;
@@ -149,9 +167,12 @@ namespace UnityPlatformer {
         }
       }
 
+      Log.Silly("(Push) will push {0} {1}", index, velocity.ToString("F4"));
+
       if (index != -1) {
         Box b = hits[index].collider.gameObject.GetComponent<Box>();
         b.boxCharacter.pc2d.Move(velocity, delta);
+        b.boxMovingPlatform.PlatformerUpdate(delta);
       }
     }
 

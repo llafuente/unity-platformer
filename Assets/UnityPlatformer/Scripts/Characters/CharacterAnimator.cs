@@ -29,7 +29,7 @@ namespace UnityPlatformer {
       UpdateManager.instance.Remove(this);
     }
 
-    public virtual void ManagedUpdate(float delta) {
+    public virtual void PlatformerUpdate(float delta) {
       if (character.faceDir == Facing.Right) {
         transform.localScale  = new Vector3(1, 1, 1);
       } else {
@@ -86,6 +86,9 @@ namespace UnityPlatformer {
           Play("idle");
         }
       }
+    }
+
+    public virtual void LatePlatformerUpdate(float delta) {
     }
 
     public abstract void Play(string animation);

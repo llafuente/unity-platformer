@@ -167,7 +167,7 @@ namespace UnityPlatformer {
     /// Managed update called by UpdateManager
     /// Transform Input into platformer magic :)
     /// </summary>
-    public virtual void ManagedUpdate(float delta) {
+    public virtual void PlatformerUpdate(float delta) {
       frozen -= delta;
       int prio = 0;
       int tmp;
@@ -259,6 +259,9 @@ namespace UnityPlatformer {
       }
 
       lastAction = action;
+    }
+
+    public virtual void LatePlatformerUpdate(float delta) {
     }
 
     public bool IsOnState(States _state) {

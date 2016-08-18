@@ -5,6 +5,8 @@ using System.Collections;
 namespace UnityPlatformer {
   // TODO alignament for image/text
   public class InstancePrefab : MonoBehaviour {
+    static int count = 1;
+
     public Sprite placeholder;
     public GameObject prefab;
     public bool attachToRoot = true; // false child
@@ -16,9 +18,19 @@ namespace UnityPlatformer {
       OnAwake();
     }
 
+    public virtual void Rename(Transform transform) {
+      foreach (Transform child in transform) {
+        child.gameObject.name = child.gameObject.name + count;
+      }
+    }
+
     public virtual void OnAwake(bool notify = true) {
       if (instance == null) {
         instance = Instantiate(prefab, transform.position, transform.rotation) as GameObject;
+
+        instance.name = gameObject.name;
+        Rename(instance.transform);
+        ++count;
 
         if (!attachToRoot) {
            instance.transform.parent = gameObject.transform;

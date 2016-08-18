@@ -15,12 +15,12 @@ namespace UnityPlatformer {
 
     #endregion
 
-    public override void ManagedUpdate(float delta) {
+    public override void PlatformerUpdate(float delta) {
       if (!input.IsActionHeld("Attack")) {
         input.EnableAction("Attack");
       }
 
-      base.ManagedUpdate(delta);
+      base.PlatformerUpdate(delta);
     }
   }
 }

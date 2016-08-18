@@ -114,8 +114,9 @@ namespace UnityPlatformer {
     public bool IsStopped() {
       return currentSpeed == 0;
     }
+    public virtual void LatePlatformerUpdate(float delta) {}
 
-    public void ManagedUpdate (float delta) {
+    public void PlatformerUpdate (float delta) {
 
       UpdateRaycastOrigins ();
       bounds.Draw(transform);
@@ -195,6 +196,7 @@ namespace UnityPlatformer {
     void MovePassengers(bool beforeMovePlatform) {
       foreach (PassengerMovement passenger in passengerMovement) {
         if (passenger.moveBeforePlatform == beforeMovePlatform) {
+          Log.Debug("(MovingPlatform) move passenger {0} {1}", passenger.transform.gameObject.name, passenger.velocity.ToString("F4"));
           passenger.transform.GetComponent<PlatformerCollider2D>().transform.Translate (passenger.velocity, Space.World);
         }
       }
@@ -248,9 +250,6 @@ namespace UnityPlatformer {
         if (directionY == 1) {
           ForeachHeadRay(rayLength, ref velocity, itr);
         } else {
-          Debug.Log(disableDownRayCast);
-          Debug.Log(Configuration.IsOneWayPlatformUp(gameObject));
-          Debug.Break();
           ForeachFeetRay(rayLength, ref velocity, itr);
         }
       }

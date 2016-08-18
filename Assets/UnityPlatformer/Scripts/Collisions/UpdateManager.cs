@@ -118,12 +118,17 @@ namespace UnityPlatformer {
     /// Update object in order
     /// </summary>
     void FixedUpdate() {
+      Log.Verbose("FixedUpdate start: {0}", frame);
+
       float delta = timeScale * Time.fixedDeltaTime;
       runningTime += delta;
 
       // update entities
       for (int i = 0; i < used; ++i) {
-        frameListeners[i].entity.ManagedUpdate(delta);
+        frameListeners[i].entity.PlatformerUpdate(delta);
+      }
+      for (int i = 0; i < used; ++i) {
+        frameListeners[i].entity.LatePlatformerUpdate(delta);
       }
 
       // call callbacks
@@ -140,6 +145,8 @@ namespace UnityPlatformer {
           --i;
         }
       }
+
+      Log.Verbose("FixedUpdate end: {0}", frame);
     }
 
     public void SetTimeout(Action method, float timeout) {

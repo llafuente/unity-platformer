@@ -52,12 +52,12 @@ namespace UnityPlatformer {
       input.SetX((float) facing);
     }
 
-    public override void ManagedUpdate(float delta) {
+    public override void PlatformerUpdate(float delta) {
       if (!input.IsActionHeld("Jump")) {
         input.EnableAction("Jump");
       }
 
-      base.ManagedUpdate(delta);
+      base.PlatformerUpdate(delta);
     }
   }
 }

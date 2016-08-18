@@ -43,7 +43,7 @@ namespace UnityPlatformer {
       input.SetX((float) facing);
     }
 
-    public override void ManagedUpdate(float delta) {
+    public override void PlatformerUpdate(float delta) {
       if (doNotFall && pc2d.collisions.below) {
         if (!IsGroundOnLeft (rayLengthFactor, delta)) {
           OnLeftWall ();
@@ -52,7 +52,7 @@ namespace UnityPlatformer {
         }
       }
 
-      base.ManagedUpdate(delta);
+      base.PlatformerUpdate(delta);
     }
   }
 }

@@ -84,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 160622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -110,7 +110,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123690}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.15, z: 0}
+  m_LocalPosition: {x: 0, y: 0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -123,7 +123,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140502}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 19.390308, y: 6.134967, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -224,9 +224,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -0.4}
+  m_Offset: {x: 0, y: -0.3}
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.2}
+  m_Size: {x: 1.1, y: 0.4}
 --- !u!61 &6149948
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -240,7 +240,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.7}
+  m_Size: {x: 1, y: 0.5}
 --- !u!114 &11404358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -255,7 +255,7 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 67840
-  minDistanceToEnv: 0.08
+  minDistanceToEnv: 0.1
   skinWidth: 0.2
   horizontalRayCount: 4
   verticalRayCount: 4
@@ -284,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555ac947cf7104549a98e34d122f32ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallingTime: 0.1
+  fallingTime: 0
   groundGraceTime: 0.05
   minVelocity: 0.05
 --- !u!114 &11414688
@@ -299,6 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxCharacter: {fileID: 11406898}
+  boxMovingPlatform: {fileID: 11404358}
 --- !u!114 &11442630
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -390,8 +391,8 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 67072
-  minDistanceToEnv: 0.1
-  skinWidth: 0.1
+  minDistanceToEnv: 0.08
+  skinWidth: 0.2
   horizontalRayCount: 4
   verticalRayCount: 4
   horizontalRaySpacing: 0
@@ -400,6 +401,7 @@ MonoBehaviour:
   gravityOverride: {x: 0, y: 0}
   maxClimbAngle: 45
   maxDescendAngle: 45
+  wallAngle: 89.9
   enableSlopes: 1
   minTranslation: 0.01
 --- !u!212 &21228400

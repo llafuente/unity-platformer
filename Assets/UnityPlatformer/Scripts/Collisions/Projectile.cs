@@ -69,9 +69,12 @@ namespace UnityPlatformer {
     ///<summary>
     /// Move projectile accordingly
     ///</summary>
-    public virtual void ManagedUpdate(float delta) {
+    public virtual void PlatformerUpdate(float delta) {
       velocity.y += gravity * delta;
       transform.position += (Vector3)velocity * delta;
+    }
+
+    public virtual void LatePlatformerUpdate(float delta) {
     }
 
     ///<summary>

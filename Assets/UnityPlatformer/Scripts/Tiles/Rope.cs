@@ -272,11 +272,14 @@ namespace UnityPlatformer {
     /// <summary>
     /// Rope motion!
     /// </summary>
-    public virtual void ManagedUpdate(float delta) {
+    public virtual void PlatformerUpdate(float delta) {
       if (stop) return;
 
       time += delta * timeSign / rotationTime;
       UpdateRotation();
+    }
+
+    public virtual void LatePlatformerUpdate(float delta) {
     }
 
     public void BreakRope() {

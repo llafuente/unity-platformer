@@ -3,6 +3,7 @@ using System.Collections;
 
 namespace UnityPlatformer {
 	public interface IUpdateEntity {
-    void ManagedUpdate(float delta);
+    void PlatformerUpdate(float delta);
+    void LatePlatformerUpdate(float delta);
   }
 }

@@ -48,6 +48,7 @@ namespace UnityPlatformer {
 
     public float maxClimbAngle = 45.0f;
     public float maxDescendAngle = 45.0f;
+    public float wallAngle = 89.9f; // 90 to disable
     public bool enableSlopes = true;
     ///<summary>
     /// This prevent unwanted micro changes in orientation/falling for example...
@@ -102,6 +103,7 @@ namespace UnityPlatformer {
     /// NOTE collisions.velocity has the real velocity applied
     /// </summary>
     public Vector3 Move(Vector3 velocity, float delta) {
+      Log.Silly("(PlatformerCollider2D) Move({0} {1}, {2})", gameObject.name, velocity.ToString("F4"), delta);
       // swap layers, this makes possible to collide with something inside my own layer
       // like boxes
       previousLayer = gameObject.layer;
@@ -123,7 +125,7 @@ namespace UnityPlatformer {
 
       // Climb or descend a slope if in range
       if (enableSlopes) {
-        GetCurrentSlope(ref velocity);
+        GetCurrentSlope(velocity);
 
         // TODO PERF add: pCcollisions.below, so wont be testing while falling
         // if (collisions.slopeAngle != 0 && pCollisions.below) {
@@ -173,13 +175,15 @@ namespace UnityPlatformer {
       b.center += velocity;
       b.Draw(transform, new Color(0,1,1,0.25f));
 
+      Log.Silly("(PlatformerCollider2D) Moved({0}m {1}, {2})", gameObject.name, velocity.ToString("F4"), delta);
+
       return velocity;
     }
 
     /// <summary>
     /// Launch rays and get the maximum slope found
     /// </summary>
-    void GetCurrentSlope(ref Vector3 velocity) {
+    void GetCurrentSlope(Vector3 velocity) {
       // TODO perf
       float slopeAngle = 0.0f;
       int index = -1;
@@ -208,7 +212,12 @@ namespace UnityPlatformer {
         }
       }
 
-      if (index != -1 && !Mathf.Approximately(slopeAngle, 90) && !Mathf.Approximately(slopeAngle, 0)) {
+      if (
+        index != -1 && // slope is found
+        !Mathf.Approximately(slopeAngle, 90) && // slope not close to 90
+        !Mathf.Approximately(slopeAngle, 0) && // slope not close to 0
+        slopeAngle < wallAngle // slope cannot be considered a wall
+      ) {
         collisions.slopeAngle = slopeAngle;
 
         collisions.slopeNormal = slopeRays[index].normal;
@@ -272,7 +281,12 @@ namespace UnityPlatformer {
           // TODO REVIEW check variable-slope. while on ground i the slope push
           // the character strange things happens because of this
           if (velocity.x == 0 || dir == Mathf.Sign(velocity.x)) {
-            velocity.x = (ray.distance - minDistanceToEnv) * dir;
+
+            velocity.x = dir == 1 ?
+              Mathf.Min(velocity.x, (ray.distance - minDistanceToEnv) * dir) :
+              Mathf.Max(velocity.x, (ray.distance - minDistanceToEnv) * dir);
+
+            Log.Silly("(PlatformerCollider2D) HorizontalCollisions new velocity {0}", velocity.ToString("F4"));
           }
         }
       }
@@ -329,6 +343,8 @@ namespace UnityPlatformer {
           if (velocity.y < wanted) {
             velocity.y = wanted;
             collisions.below = dir == -1;
+
+            Log.Silly("(PlatformerCollider2D) VerticalCollisions new velocity {0}", velocity.ToString("F4"));
           }
         }
 
@@ -374,6 +390,8 @@ namespace UnityPlatformer {
         velocity.x *= Mathf.Abs(slopeDir.x);
         velocity.y = Mathf.Abs(velocity.x * slopeDir.y);
         collisions.below = true;
+
+        Log.Silly("(PlatformerCollider2D) ClimbSlope new velocity {0}", velocity.ToString("F4"));
       }
     }
 
@@ -388,6 +406,8 @@ namespace UnityPlatformer {
         //velocity.y = (Mathf.Abs(velocity.x) + collisions.slopeDistance) * slopeDir.y;
         velocity.y = Mathf.Abs(velocity.x) * slopeDir.y;
         collisions.below = true;
+
+        Log.Silly("(PlatformerCollider2D) DescendSlope new velocity {0}", velocity.ToString("F4"));
       }
     }
 
