@@ -29,7 +29,9 @@ namespace UnityPlatformer {
 
     #endregion
 
-    public void Start() {
+    override public void Start() {
+      base.Start();
+
       pc2d.onLeftWall += OnLeftWall;
       pc2d.onRightWall += OnRightWall;
 

@@ -6,22 +6,25 @@ namespace UnityPlatformer {
   /// Tracks character health and lives.
   /// Triggers character death
   /// TODO handle lives / Game over
+  /// TODO handle alignment
   /// </summary>
-  public class Health : MonoBehaviour {
+  public class CharacterHealth : MonoBehaviour {
 
     #region public
 
-    [Comment("Health the character will have when Start")]
+    public Alignment alignment = Alignment.None;
+    [Comment("Health the character will have when game starts")]
     public int startingHealth = 1;
-    [Comment("Max health. if startingHealth == maxHealth will trigger onMaxHealth on Start")]
+    [Comment("Maximum health (-1 no maximum). NOTE if startingHealth == maxHealth will trigger onMaxHealth on Start.")]
     public int maxHealth = 1;
-    [Comment("Lives the character starts with. -1 disable lives")]
+    [Comment("Lives the character starts with (-1 no lives)")]
     public int startingLives = 1;
     [Comment("Maximum lives of the character. 2,147,483,647 is the maximum :)")]
     public int maxLives = 1;
-    [Comment("After any Damage how much time the character will be invulnerable to any Damage. -1 to disable")]
+    [Comment("After any Damage how much time the character will be invulnerable to any Damage (0 to disable)")]
     public float invulnerabilityTimeAfterDamage = 2.0f;
-    public DamageTypes immunity = 0;
+    [Comment("List of damages that are ignored")]
+    public DamageType immunity = 0;
     ///
     /// Actions
     ///
@@ -34,7 +37,7 @@ namespace UnityPlatformer {
     /// Flash it!
     /// </summary>
     public Action onDamage;
-    public delegate void HurtCallback(DamageType dt, Health to);
+    public delegate void HurtCallback(Damage dt, CharacterHealth to);
     public HurtCallback onHurt;
     /// <summary>
     /// Display some greenish starts floating around!
@@ -87,7 +90,7 @@ namespace UnityPlatformer {
         Debug.LogWarning(this.name + " startingLives < maxLives ?");
       }
 
-      health = startingHealth;
+      Heal(startingHealth);
       lives = startingLives;
     }
 
@@ -108,7 +111,7 @@ namespace UnityPlatformer {
     /// Turns a character invulnerable, but still can be killed using Kill
     /// NOTE use float.MaxValue for unlimited time
     /// </summary>
-    public Health SetInvulnerable(float time) {
+    public CharacterHealth SetInvulnerable(float time) {
       _invulnerable = time;
 
       if (_invulnerable > 0.0f) {
@@ -122,7 +125,7 @@ namespace UnityPlatformer {
     /// <summary>
     /// disable invulnerability
     /// </summary>
-    public Health SetVulnerable() {
+    public CharacterHealth SetVulnerable() {
       _invulnerable = -1; // any negative value works :D
 
       return this;
@@ -136,7 +139,7 @@ namespace UnityPlatformer {
     /// <summary>
     /// Kill the character even if it's invulnerable
     /// </summary>
-    public Health Kill() {
+    public CharacterHealth Kill() {
       health = 0;
       Die();
 
@@ -146,20 +149,20 @@ namespace UnityPlatformer {
     /// Kill the character even if it's invulnerable
     /// TODO handle direction here or in the HitBox but must be done :)
     /// </summary>
-    public void Damage(DamageType dt) {
+    public void Damage(Damage dmg) {
       Debug.LogFormat("Object: {0} recieve damage {1} health {2} from: {3}",
-        gameObject.name, dt.amount, health, dt.causer.gameObject.name);
+        gameObject.name, dmg.amount, health, dmg.causer.gameObject.name);
 
-      if (Damage(dt.amount, dt.type)) {
-        if (dt.causer != null && dt.causer.onHurt != null) {
-          dt.causer.onHurt(dt, this);
+      if (Damage(dmg.amount, dmg.type)) {
+        if (dmg.causer != null && dmg.causer.onHurt != null) {
+          dmg.causer.onHurt(dmg, this);
         }
       }
     }
-    public bool Damage(int amount, DamageTypes type) {
-      Debug.LogFormat("immunity {0} type {1}", immunity, type);
-      if ((immunity & type) == type) {
-        Debug.LogFormat("Inminute to {0} attacks", type);
+    public bool Damage(int amount, DamageType dt) {
+      Debug.LogFormat("immunity {0} DamageType {1}", immunity, dt);
+      if ((immunity & dt) == dt) {
+        Debug.LogFormat("Inmune to {0} attacks", dt);
         return false;
       }
 
@@ -227,14 +230,14 @@ namespace UnityPlatformer {
     /// Trigger onDeath
     /// </summary>
     public void Die() {
-      Debug.Log(this.name + " disable all HitBox");
+      Debug.Log(this.name + " disable all HitBox(es)");
   	  var lch = GetComponentsInChildren<HitBox> ();
       foreach (var x in lch) {
   	     x.gameObject.SetActive(false);
       }
 
-      Debug.Log(this.name + " disable all DamageType");
-      var ldt = GetComponentsInChildren<DamageType> ();
+      Debug.Log(this.name + " disable all Damage(s)");
+      var ldt = GetComponentsInChildren<Damage> ();
       foreach (var x in ldt) {
   	     x.gameObject.SetActive(false);
       }

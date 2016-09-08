@@ -98,7 +98,7 @@ namespace UnityPlatformer {
     public virtual void OnAreaChange(Areas before, Areas after) {
       //Debug.LogFormat("area change {1} vs {2}", before, after);
     }
-    public virtual void OnHurtCharacter(DamageType dt, Health h, Character to) {
+    public virtual void OnHurtCharacter(Damage dt, CharacterHealth h, Character to) {
       //Debug.LogFormat("hurt {1} with {2} damage", to.gameObject, dt.amount);
     }
     public virtual void OnStateChange(States before, States after) {

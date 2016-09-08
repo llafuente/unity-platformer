@@ -1,6 +1,7 @@
-#if UNITY_EDITOR
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using System.Collections;
 
 // TODO fix List problems
@@ -11,6 +12,8 @@ namespace UnityPlatformer {
 
     public CommentAttribute(string comment) { this.comment = comment; }
   }
+
+  #if UNITY_EDITOR
 
   [CustomPropertyDrawer(typeof(CommentAttribute))]
   public class CommentDrawer : PropertyDrawer {
@@ -46,5 +49,6 @@ namespace UnityPlatformer {
       //base.OnGUI(position, property, label);
     }
   }
+
+  #endif
 }
-#endif

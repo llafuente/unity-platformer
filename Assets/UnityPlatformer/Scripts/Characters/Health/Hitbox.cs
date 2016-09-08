@@ -33,18 +33,18 @@ namespace UnityPlatformer {
     [Comment("Who can deal damage to me?")]
     public LayerMask collideWith;
     [Comment("Who am I?")]
-    public Health owner;
+    public CharacterHealth owner;
     public HitBoxType type = HitBoxType.DealDamage;
     public bool dealDamageToSelf = false;
 
     #endregion
 
-    DamageType dt;
+    Damage dt;
 
     void Start() {
-      dt = GetComponent<DamageType> ();
+      dt = GetComponent<Damage> ();
       if (type == HitBoxType.DealDamage && dt == null) {
-        Debug.LogWarning("Missing DamageType", this);
+        Debug.LogWarning("DealDamage require Damage Behaviour", this);
       }
     }
 

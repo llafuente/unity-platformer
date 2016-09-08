@@ -93,7 +93,7 @@ namespace UnityPlatformer {
             onImpact();
           }
           //Debug.Log("Projectile impact something, deal damage!");
-          dst.owner.Damage (GetComponent<DamageType>());
+          dst.owner.Damage(GetComponent<Damage>());
         }
         //Debug.Log("Destroy !!!!!!!!");
         Destroy();

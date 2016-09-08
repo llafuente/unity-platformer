@@ -81,14 +81,14 @@ namespace UnityPlatformer {
     int timeSign = 1;
     float time = 0;
     float lastAngle = 0;
-    Health health;
+    CharacterHealth health;
 
     void Start() {
       // create the rope from bottom to top
       // and chain them
       gameObject.transform.DestroyImmediateChildren();
 
-      health = GetComponent<Health>();
+      health = GetComponent<CharacterHealth>();
       if (health != null) {
         health.onDeath += BreakRope;
       }

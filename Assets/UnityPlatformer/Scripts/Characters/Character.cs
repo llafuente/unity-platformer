@@ -11,7 +11,7 @@ namespace UnityPlatformer {
   /// into 'readable' information for animations.
   /// </summary>
   [RequireComponent (typeof (PlatformerCollider2D))]
-  [RequireComponent (typeof (Health))]
+  [RequireComponent (typeof (CharacterHealth))]
   public class Character: MonoBehaviour, IUpdateEntity {
     #region public
 
@@ -28,7 +28,7 @@ namespace UnityPlatformer {
 
     public delegate void AreaChange(Areas before, Areas after);
     public AreaChange onAreaChange;
-    public delegate void HurtCharacter(DamageType dt, Health to, Character character);
+    public delegate void HurtCharacter(Damage dt, CharacterHealth to, Character character);
     public HurtCharacter onHurtCharacter;
     public delegate void StateChange(States before, States after);
     public StateChange onStateChange;
@@ -79,7 +79,7 @@ namespace UnityPlatformer {
     // World velocity, wind, tracks etc.
     internal Vector3 worldVelocity = Vector3.zero;
     internal PlatformerCollider2D pc2d;
-    internal Health health;
+    internal CharacterHealth health;
 
     /// <summary>
     /// Force to play this animation
@@ -132,7 +132,7 @@ namespace UnityPlatformer {
       forceAnimation = null;
       //Debug.Log("Start new Character: " + gameObject.name);
       pc2d = GetComponent<PlatformerCollider2D> ();
-      health = GetComponent<Health>();
+      health = GetComponent<CharacterHealth>();
       health.onHurt += OnHurt;
       body = GetComponent<BoxCollider2D>();
 
@@ -147,7 +147,7 @@ namespace UnityPlatformer {
       health.onDeath += OnDeath;
     }
 
-    void OnHurt(DamageType dt, Health to) {
+    void OnHurt(Damage dt, CharacterHealth to) {
       if (dt != null && onHurtCharacter != null) {
         onHurtCharacter(dt, to, this);
       }
