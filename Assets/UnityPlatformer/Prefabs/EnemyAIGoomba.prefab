@@ -490,6 +490,7 @@ MonoBehaviour:
   gravityOverride: {x: 0, y: 0}
   maxClimbAngle: 30
   maxDescendAngle: 30
+  wallAngle: 89.9
   enableSlopes: 1
   minTranslation: 0.01
 --- !u!114 &11421618
@@ -505,7 +506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 1
   type: 4
-  causer: {fileID: 0}
+  causer: {fileID: 11477932}
   direction: {x: 0, y: 0, z: 0}
 --- !u!114 &11421850
 MonoBehaviour:

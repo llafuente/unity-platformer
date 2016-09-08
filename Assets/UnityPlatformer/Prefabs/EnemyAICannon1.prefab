@@ -561,6 +561,7 @@ MonoBehaviour:
   gravityOverride: {x: 0, y: 0}
   maxClimbAngle: 30
   maxDescendAngle: 30
+  wallAngle: 89.9
   enableSlopes: 1
   minTranslation: 0.01
 --- !u!114 &11435234
