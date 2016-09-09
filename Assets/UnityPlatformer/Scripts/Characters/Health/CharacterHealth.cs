@@ -72,6 +72,7 @@ namespace UnityPlatformer {
     // logical Action dispacthing
     internal int health = 0;
     internal int lives = 0;
+    internal Character character;
 
     #endregion
 
@@ -90,6 +91,7 @@ namespace UnityPlatformer {
         Debug.LogWarning(this.name + " startingLives < maxLives ?");
       }
 
+      character = GetComponent<Character>();
       Heal(startingHealth);
       lives = startingLives;
     }
@@ -111,7 +113,7 @@ namespace UnityPlatformer {
     /// Turns a character invulnerable, but still can be killed using Kill
     /// NOTE use float.MaxValue for unlimited time
     /// </summary>
-    public CharacterHealth SetInvulnerable(float time) {
+    public void SetInvulnerable(float time) {
       _invulnerable = time;
 
       if (_invulnerable > 0.0f) {
@@ -119,32 +121,33 @@ namespace UnityPlatformer {
           onInvulnerabilityStart();
         }
       }
-
-      return this;
     }
+
     /// <summary>
     /// disable invulnerability
     /// </summary>
-    public CharacterHealth SetVulnerable() {
+    public void SetVulnerable() {
+      bool was_invulnerable = _invulnerable >= 0;
       _invulnerable = -1; // any negative value works :D
 
-      return this;
+      if (was_invulnerable && onInvulnerabilityEnd != null) {
+        onInvulnerabilityEnd();
+      }
     }
 
     public bool IsInvulnerable() {
       // is death? leave him alone...
       return health <= 0 || _invulnerable > 0.0f;
-
     }
+
     /// <summary>
     /// Kill the character even if it's invulnerable
     /// </summary>
-    public CharacterHealth Kill() {
+    public void Kill() {
       health = 0;
       Die();
-
-      return this;
     }
+
     /// <summary>
     /// Kill the character even if it's invulnerable
     /// TODO handle direction here or in the HitBox but must be done :)
@@ -159,6 +162,7 @@ namespace UnityPlatformer {
         }
       }
     }
+
     public bool Damage(int amount, DamageType dt) {
       Debug.LogFormat("immunity {0} DamageType {1}", immunity, dt);
       if ((immunity & dt) == dt) {
@@ -168,6 +172,7 @@ namespace UnityPlatformer {
 
       return Damage(amount);
     }
+
     /// <summary>
     /// triggers onDamage
     /// triggers onDeath

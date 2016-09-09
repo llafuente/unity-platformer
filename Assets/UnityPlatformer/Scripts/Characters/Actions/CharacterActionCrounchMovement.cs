@@ -5,7 +5,7 @@ namespace UnityPlatformer {
   /// <summary>
   /// Movement while on ground and not slipping
   /// </summary>
-  public class CharacterActionGroundMovement: CharacterActionHorizontalMovement {
+  public class CharacterActionCrounchMovement: CharacterActionHorizontalMovement {
     /// <summary>
     /// Execute when collision below.
     /// </summary>
@@ -13,7 +13,7 @@ namespace UnityPlatformer {
       // NOTE if Air/Ground are very different maybe:
       // if (pc2d.IsOnGround(<frames>)) it's better
       if (pc2d.collisions.below &&
-        !character.IsOnState(States.Crounch) &&
+        character.IsOnState(States.Crounch) &&
         !character.IsOnState(States.Slipping) &&
         !character.IsOnState(States.Pushing)) {
         return -1;

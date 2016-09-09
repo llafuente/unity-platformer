@@ -268,6 +268,10 @@ namespace UnityPlatformer {
       return (state & _state) == _state;
     }
 
+    public bool IsOnAnyState(States _state) {
+      return (state & _state) > 0;
+    }
+
     public bool IsOnArea(Areas _area) {
       return (area & _area) == _area;
     }

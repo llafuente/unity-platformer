@@ -37,6 +37,11 @@ namespace UnityPlatformer {
     public HitBoxType type = HitBoxType.DealDamage;
     public bool dealDamageToSelf = false;
 
+    // this allow to implement diferent HitBoxes depending on the
+    // Character State
+    [Comment("Disable HitBox when character is any given state")]
+    public States disableWhileOnState = States.None;
+
     #endregion
 
     Damage dt;
@@ -46,6 +51,10 @@ namespace UnityPlatformer {
       if (type == HitBoxType.DealDamage && dt == null) {
         Debug.LogWarning("DealDamage require Damage Behaviour", this);
       }
+    }
+
+    public bool IsDisabled() {
+      return owner.character.IsOnAnyState(disableWhileOnState);
     }
 
 #if UNITY_EDITOR
@@ -71,11 +80,16 @@ namespace UnityPlatformer {
 #endif
 
     void OnTriggerEnter2D(Collider2D o) {
+      // source disabled?
+      if (IsDisabled()) return;
+
       if (type == HitBoxType.DealDamage) {
         //Debug.LogFormat("me {0} of {1} collide with {2}@{3}", name, owner, o.gameObject, o.gameObject.layer);
 
         var hitbox = o.gameObject.GetComponent<HitBox> ();
         if (hitbox != null && hitbox.type == HitBoxType.RecieveDamage && dt != null) {
+          // target disabled?
+          if (hitbox.IsDisabled()) return;
 
           // can I deal damage to this HitBox?
           // check layer
