@@ -46,8 +46,7 @@ namespace UnityPlatformer {
 
     #region private
 
-    [HideInInspector]
-    public Vector3[] globalWaypoints;
+    internal Vector3[] globalWaypoints;
 
     int fromWaypointIndex;
     float percentBetweenWaypoints;

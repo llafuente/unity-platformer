@@ -16,10 +16,8 @@ namespace UnityPlatformer {
       public GameObject area;
       public float startAt = 0.0f;
 
-      [HideInInspector]
-      public int offsetFrame = 0;
-      [HideInInspector]
-      public bool active = false;
+      internal int offsetFrame = 0;
+      internal bool active = false;
     }
 
     public MeleeDamage[] damageAreas = new MeleeDamage[1];

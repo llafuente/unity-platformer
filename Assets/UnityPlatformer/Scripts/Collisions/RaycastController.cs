@@ -54,14 +54,10 @@ namespace UnityPlatformer {
     /// </summary>
     public int verticalRayCount = 4;
 
-    [HideInInspector]
-    public float horizontalRaySpacing;
+    internal float horizontalRaySpacing;
+    internal float verticalRaySpacing;
 
-    [HideInInspector]
-    public float verticalRaySpacing;
-
-    [HideInInspector]
-    public BoxCollider2D box;
+    internal BoxCollider2D box;
 
     internal RaycastOrigins raycastOrigins;
     internal RaycastHit2D[] horizontalRays;

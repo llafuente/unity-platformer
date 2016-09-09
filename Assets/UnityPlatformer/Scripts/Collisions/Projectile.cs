@@ -31,8 +31,7 @@ namespace UnityPlatformer {
     #endregion
 
     // impact against something "damageable"
-    [HideInInspector]
-    public bool impact = false;
+    internal bool impact = false;
 
     ///<summary>
     /// When Object is Awake, it will be automatically disabled
