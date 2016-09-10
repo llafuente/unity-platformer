@@ -253,12 +253,12 @@ namespace UnityPlatformer {
       if (pc2d.collisions.below) {
         fallingCD.Reset();
         groundCD.Reset();
-        SolfEnterState(States.OnGround);
+        EnterStateGraceful(States.OnGround);
       } else {
         groundCD.Increment();
         // give some margin
         if (groundCD.Ready()) {
-          SolfExitState(States.OnGround);
+          ExitStateGraceful(States.OnGround);
         }
 
         // falling but not wallsliding
@@ -268,7 +268,7 @@ namespace UnityPlatformer {
           !IsOnState(States.Rope)) {
           fallingCD.Increment();
           if (fallingCD.Ready()) {
-            SolfEnterState(States.Falling);
+            EnterStateGraceful(States.Falling);
           }
         }
       }
@@ -299,7 +299,7 @@ namespace UnityPlatformer {
     /// EnterState if it's not already in it
     /// It a safe mechanism to not trigger the change
     /// </summary>
-    public void SolfEnterState(States a) {
+    public void EnterStateGraceful(States a) {
       if (!IsOnState(a)) {
         EnterState(a);
       }
@@ -308,7 +308,7 @@ namespace UnityPlatformer {
     /// EnterState if it's not already in it
     /// It a safe mechanism to not trigger the change
     /// </summary>
-    public void SolfExitState(States a) {
+    public void ExitStateGraceful(States a) {
       if (IsOnState(a)) {
         ExitState(a);
       }

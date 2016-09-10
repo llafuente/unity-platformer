@@ -51,11 +51,11 @@ namespace UnityPlatformer {
       float dir = input.GetAxisRawY();
 
       if (crounchHeld || (dir < 0 && character.ladderBottom == null)) {
-        character.SolfEnterState(States.Crounch);
+        character.EnterStateGraceful(States.Crounch);
         return -1;
       }
 
-      character.SolfExitState(States.Crounch);
+      character.ExitStateGraceful(States.Crounch);
 
       return 0;
     }

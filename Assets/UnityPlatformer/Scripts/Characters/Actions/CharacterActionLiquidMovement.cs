@@ -64,7 +64,7 @@ namespace UnityPlatformer {
       if (character.liquid) {
         // liquid is very little
         if (character.liquid.body.size.y < liquidMinHeight) {
-          character.SolfExitState(States.Liquid);
+          character.ExitStateGraceful(States.Liquid);
           return 0;
         }
 
@@ -72,16 +72,16 @@ namespace UnityPlatformer {
         if (character.liquid.IsBelowSurface(character, surfaceLevel)) {
           // enter when 'below surface'
           // this allow to walk-small-water
-          character.SolfEnterState(States.Liquid);
+          character.EnterStateGraceful(States.Liquid);
           return -1;
         } else if (character.pc2d.collisions.below) {
           // is in the water, touching floor, exit
-          character.SolfExitState(States.Liquid);
+          character.ExitStateGraceful(States.Liquid);
           return 0;
         }
       }
 
-      character.SolfExitState(States.Liquid);
+      character.ExitStateGraceful(States.Liquid);
       return 0;
     }
 
