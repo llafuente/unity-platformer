@@ -30,6 +30,7 @@ namespace UnityPlatformer {
     OnGroundLiquid = OnGround | Liquid,
     OnGroundPushing = OnGround | Pushing,
     NotCrounching = ~Crounch,
+    OnGroundCrounching = OnGround | Crounch,
 
     //Dashing,
     //Frozen,

@@ -40,8 +40,9 @@ namespace UnityPlatformer {
 
       actionJump = character.GetAction<CharacterActionJump>();
       if (actionJump == null && dismountJumping) {
-        Debug.LogWarning("CharacterActionJump is required in CharacterActionRope because dismountJumping is true");
+        Debug.LogError("CharacterActionJump is required in CharacterActionRope because dismountJumping is true");
       }
+
       canGrab = new Cooldown(grabAgainCooldown);
     }
 

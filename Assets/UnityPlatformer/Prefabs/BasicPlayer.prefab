@@ -887,7 +887,6 @@ MonoBehaviour:
   amount: 1
   type: 4
   causer: {fileID: 11429098}
-  direction: {x: 0, y: 0, z: 0}
 --- !u!114 &11422012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -906,6 +905,7 @@ MonoBehaviour:
   owner: {fileID: 11429098}
   type: 2
   dealDamageToSelf: 0
+  disableWhileOnState: 0
 --- !u!114 &11422300
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -953,7 +953,6 @@ MonoBehaviour:
   amount: 1
   type: 1
   causer: {fileID: 0}
-  direction: {x: 0, y: 0, z: 0}
 --- !u!114 &11429098
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -965,6 +964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5fa7573398ecf468c5a90c9cecef15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alignment: 0
   startingHealth: 1
   maxHealth: 1
   startingLives: 1
@@ -1139,9 +1139,6 @@ MonoBehaviour:
   skinWidth: 0.2
   horizontalRayCount: 4
   verticalRayCount: 4
-  horizontalRaySpacing: 0
-  verticalRaySpacing: 0
-  box: {fileID: 0}
   gravityOverride: {x: 0, y: 0}
   maxClimbAngle: 30
   maxDescendAngle: 45
@@ -1260,7 +1257,6 @@ MonoBehaviour:
   amount: 1
   type: 1
   causer: {fileID: 0}
-  direction: {x: 0, y: 0, z: 0}
 --- !u!114 &11474686
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1305,7 +1301,6 @@ MonoBehaviour:
   amount: 1
   type: 1
   causer: {fileID: 0}
-  direction: {x: 0, y: 0, z: 0}
 --- !u!114 &11482940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1324,6 +1319,7 @@ MonoBehaviour:
   owner: {fileID: 11429098}
   type: 0
   dealDamageToSelf: 0
+  disableWhileOnState: 0
 --- !u!114 &11483384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1365,6 +1361,7 @@ MonoBehaviour:
   owner: {fileID: 11429098}
   type: 1
   dealDamageToSelf: 0
+  disableWhileOnState: 0
 --- !u!114 &11484966
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1411,16 +1408,10 @@ MonoBehaviour:
   damageAreas:
   - area: {fileID: 151872}
     startAt: 0
-    offsetFrame: 0
-    active: 0
   - area: {fileID: 108168}
     startAt: 0.25
-    offsetFrame: 0
-    active: 0
   - area: {fileID: 164936}
     startAt: 0.5
-    offsetFrame: 0
-    active: 0
   action: Attack
   priority: 20
 --- !u!114 &11489022

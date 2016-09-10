@@ -49,6 +49,7 @@ namespace UnityPlatformer {
     internal Areas area = Areas.None;
     internal BoxCollider2D body;
     internal Ladder ladder;
+    internal Ladder ladderBottom;
     internal Liquid liquid;
     internal Item item;
     internal Grab grab;
@@ -168,6 +169,24 @@ namespace UnityPlatformer {
     /// Transform Input into platformer magic :)
     /// </summary>
     public virtual void PlatformerUpdate(float delta) {
+
+      // before anything try to find if there is a ladder below
+      // it's neccesary for ActionLadder&ActionCrounch
+      RaycastHit2D hit = pc2d.DoFeetRay(
+        pc2d.skinWidth * 2,
+        Configuration.instance.laddersMask
+      );
+
+      if (hit) {
+        ladderBottom = hit.collider.gameObject.GetComponent<Ladder>();
+        if (ladderBottom == null) {
+          Debug.LogWarning("Object with ladder mask but no Ladder Behaviour found", hit.collider.gameObject);
+        }
+      } else {
+        ladderBottom = null;
+      }
+
+      //
       frozen -= delta;
       int prio = 0;
       int tmp;

@@ -555,9 +555,6 @@ MonoBehaviour:
   skinWidth: 0.2
   horizontalRayCount: 4
   verticalRayCount: 4
-  horizontalRaySpacing: 0
-  verticalRaySpacing: 0
-  box: {fileID: 0}
   gravityOverride: {x: 0, y: 0}
   maxClimbAngle: 30
   maxDescendAngle: 30
@@ -581,7 +578,6 @@ MonoBehaviour:
   velocity: {x: -2, y: 0}
   gravity: 0
   destroyDelay: 0
-  impact: 0
 --- !u!114 &11448890
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -617,7 +613,6 @@ MonoBehaviour:
   amount: 1
   type: 0
   causer: {fileID: 0}
-  direction: {x: 0, y: 0, z: 0}
 --- !u!114 &11454956
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -650,6 +645,7 @@ MonoBehaviour:
   owner: {fileID: 11465536}
   type: 0
   dealDamageToSelf: 0
+  disableWhileOnState: 0
 --- !u!114 &11465536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -661,6 +657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5fa7573398ecf468c5a90c9cecef15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alignment: 0
   startingHealth: 1
   maxHealth: 1
   startingLives: 1
@@ -709,7 +706,6 @@ MonoBehaviour:
   amount: 1
   type: 0
   causer: {fileID: 0}
-  direction: {x: 0, y: 0, z: 0}
 --- !u!114 &11493562
 MonoBehaviour:
   m_ObjectHideFlags: 1

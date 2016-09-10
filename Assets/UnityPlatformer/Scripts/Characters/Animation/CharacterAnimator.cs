@@ -80,10 +80,14 @@ namespace UnityPlatformer {
       } else if (character.IsOnState(States.Falling)) {
         Play("falling");
       } else {
+        string modifier = "";
+        if (character.IsOnState(States.Crounch)) {
+          modifier = "crounch_";
+        }
         if (character.velocity.x != 0) {
-          Play("walk");
+          Play(modifier + "walk");
         } else {
-          Play("idle");
+          Play(modifier + "idle");
         }
       }
     }

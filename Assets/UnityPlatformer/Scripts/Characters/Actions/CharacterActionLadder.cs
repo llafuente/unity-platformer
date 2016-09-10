@@ -41,6 +41,9 @@ namespace UnityPlatformer {
 
       dismount = new Cooldown(dismountTime);
       actionJump = character.GetAction<CharacterActionJump>();
+      if (actionJump == null) {
+        Debug.LogError("CharacterActionLadder requires CharacterActionJump");
+      }
     }
 
     /// <summary>
@@ -52,24 +55,12 @@ namespace UnityPlatformer {
       // this means below my feet there is a ladder
       Ladder ladder = null;
 
-      if (!onLadderArea) {
-        // check out feet, maybe there is a ladder below...
-        RaycastHit2D hit = pc2d.DoFeetRay(
-          pc2d.skinWidth * 2,
-          Configuration.instance.laddersMask
-        );
-        if (hit) {
-          ladder = hit.collider.gameObject.GetComponent<Ladder>();
-          if (ladder == null) {
-            Debug.LogWarning(hit.collider.gameObject + " in ladder mask don't have a Ladder component!");
-          } else {
-            Debug.Log("below there is a ladder!!");
-            // deferred logic
-            // if you EnableLadder now, you enter an area but there is no 'outisde-check'
-            // so defer logic until also press down.
-            onLadderArea = true;
-          }
-        }
+      if (!onLadderArea && character.ladderBottom) {
+        // deferred logic
+        // if you EnableLadder now, you enter an area but there is no 'outisde-check'
+        // so defer logic until also press down.
+        onLadderArea = true;
+        ladder = character.ladderBottom;
       }
 
       // in ladder state

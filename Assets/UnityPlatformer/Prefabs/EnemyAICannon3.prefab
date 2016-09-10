@@ -757,7 +757,6 @@ MonoBehaviour:
   amount: 1
   type: 0
   causer: {fileID: 0}
-  direction: {x: 0, y: 0, z: 0}
 --- !u!114 &11417272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -856,6 +855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5fa7573398ecf468c5a90c9cecef15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alignment: 0
   startingHealth: 1
   maxHealth: 1
   startingLives: 1
@@ -972,7 +972,6 @@ MonoBehaviour:
   amount: 1
   type: 0
   causer: {fileID: 0}
-  direction: {x: 0, y: 0, z: 0}
 --- !u!114 &11486926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -987,7 +986,6 @@ MonoBehaviour:
   amount: 1
   type: 0
   causer: {fileID: 0}
-  direction: {x: 0, y: 0, z: 0}
 --- !u!114 &11494170
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1029,7 +1027,6 @@ MonoBehaviour:
   amount: 1
   type: 0
   causer: {fileID: 0}
-  direction: {x: 0, y: 0, z: 0}
 --- !u!114 &11499646
 MonoBehaviour:
   m_ObjectHideFlags: 1

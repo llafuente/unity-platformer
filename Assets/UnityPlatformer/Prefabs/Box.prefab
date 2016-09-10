@@ -259,9 +259,6 @@ MonoBehaviour:
   skinWidth: 0.2
   horizontalRayCount: 4
   verticalRayCount: 4
-  horizontalRaySpacing: 0
-  verticalRaySpacing: 0
-  box: {fileID: 0}
   passengerMask:
     serializedVersion: 2
     m_Bits: 67840
@@ -272,7 +269,6 @@ MonoBehaviour:
   easeAmount: 0
   disableDownRayCast: 1
   startStopped: 0
-  globalWaypoints: []
 --- !u!114 &11406898
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -326,7 +322,6 @@ MonoBehaviour:
   amount: 1
   type: 1
   causer: {fileID: 11496560}
-  direction: {x: 0, y: 0, z: 0}
 --- !u!114 &11479092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -354,12 +349,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 4
-  collideWith:
-    serializedVersion: 2
-    m_Bits: 4096
+  collideWith: {}
   owner: {fileID: 11496560}
   type: 0
   dealDamageToSelf: 0
+  dt: {fileID: 0}
 --- !u!114 &11496560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -371,6 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5fa7573398ecf468c5a90c9cecef15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alignment: 0
   startingHealth: 1
   maxHealth: 1
   startingLives: 1
@@ -395,9 +390,6 @@ MonoBehaviour:
   skinWidth: 0.2
   horizontalRayCount: 4
   verticalRayCount: 4
-  horizontalRaySpacing: 0
-  verticalRaySpacing: 0
-  box: {fileID: 0}
   gravityOverride: {x: 0, y: 0}
   maxClimbAngle: 45
   maxDescendAngle: 45
