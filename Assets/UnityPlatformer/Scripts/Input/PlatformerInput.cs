@@ -42,7 +42,7 @@ namespace UnityPlatformer {
 
     public virtual void Start() {
       foreach (var button in listenActions) {
-        Debug.Log("initialize button " + button);
+        Log.Info("(PlatformerInput) Initialize button " + button);
         actions[button] = InputStates.Off;
       }
     }

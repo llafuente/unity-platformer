@@ -49,7 +49,7 @@ namespace UnityPlatformer {
     void Start() {
       dt = GetComponent<Damage> ();
       if (type == HitBoxType.DealDamage && dt == null) {
-        Debug.LogWarning("DealDamage require Damage Behaviour", this);
+        Debug.LogError("DealDamage require Damage Behaviour", this);
       }
     }
 
@@ -80,22 +80,31 @@ namespace UnityPlatformer {
 #endif
 
     void OnTriggerEnter2D(Collider2D o) {
-      // source disabled?
-      if (IsDisabled()) return;
 
       if (type == HitBoxType.DealDamage) {
+        // source disabled?
+        if (IsDisabled()) {
+          Log.Debug("(HitBox) {0} cannot deal damage it's disabled", this.gameObject.name);
+          return;
+        }
+
         //Debug.LogFormat("me {0} of {1} collide with {2}@{3}", name, owner, o.gameObject, o.gameObject.layer);
 
         var hitbox = o.gameObject.GetComponent<HitBox> ();
-        if (hitbox != null && hitbox.type == HitBoxType.RecieveDamage && dt != null) {
+        if (hitbox != null && hitbox.type == HitBoxType.RecieveDamage) {
+          Log.Debug("(HitBox) Collide {0} with {1}", gameObject.name, hitbox.gameObject.name);
           // target disabled?
-          if (hitbox.IsDisabled()) return;
+          if (hitbox.IsDisabled()) {
+            Log.Debug("(HitBox) {0} cannot recieve damage it's disabled", o.gameObject.name);
+            return;
+          }
 
           // can I deal damage to this HitBox?
           // check layer
           if (hitbox.collideWith.Contains(gameObject.layer)) {
             // check we not the same, or i can damage to myself at lest
             if (dealDamageToSelf || (!dealDamageToSelf && hitbox.owner != dt.causer)) {
+              Log.Debug("(HitBox) Damage to {0}", hitbox.owner.gameObject.name);
               hitbox.owner.Damage(dt);
             }
           }

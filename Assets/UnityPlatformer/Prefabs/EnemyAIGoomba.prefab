@@ -484,9 +484,6 @@ MonoBehaviour:
   skinWidth: 0.2
   horizontalRayCount: 4
   verticalRayCount: 4
-  horizontalRaySpacing: 0
-  verticalRaySpacing: 0
-  box: {fileID: 0}
   gravityOverride: {x: 0, y: 0}
   maxClimbAngle: 30
   maxDescendAngle: 30
@@ -554,6 +551,7 @@ MonoBehaviour:
   owner: {fileID: 11477932}
   type: 0
   dealDamageToSelf: 0
+  disableWhileOnState: 0
 --- !u!114 &11439932
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -612,6 +610,7 @@ MonoBehaviour:
   owner: {fileID: 11477932}
   type: 1
   dealDamageToSelf: 0
+  disableWhileOnState: 0
 --- !u!114 &11472910
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -630,6 +629,7 @@ MonoBehaviour:
   owner: {fileID: 11477932}
   type: 2
   dealDamageToSelf: 0
+  disableWhileOnState: 0
 --- !u!114 &11477932
 MonoBehaviour:
   m_ObjectHideFlags: 1

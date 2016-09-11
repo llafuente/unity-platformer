@@ -804,7 +804,6 @@ MonoBehaviour:
   velocity: {x: -2, y: 3}
   gravity: -4
   destroyDelay: 0
-  impact: 0
 --- !u!114 &11435534
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -903,7 +902,6 @@ MonoBehaviour:
   velocity: {x: -2, y: 4}
   gravity: -3
   destroyDelay: 0
-  impact: 0
 --- !u!114 &11462954
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -958,6 +956,7 @@ MonoBehaviour:
   owner: {fileID: 11446040}
   type: 0
   dealDamageToSelf: 0
+  disableWhileOnState: 0
 --- !u!114 &11482328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1004,9 +1003,6 @@ MonoBehaviour:
   skinWidth: 0.2
   horizontalRayCount: 4
   verticalRayCount: 4
-  horizontalRaySpacing: 0
-  verticalRaySpacing: 0
-  box: {fileID: 0}
   gravityOverride: {x: 0, y: 0}
   maxClimbAngle: 30
   maxDescendAngle: 30
@@ -1044,7 +1040,6 @@ MonoBehaviour:
   velocity: {x: -2, y: 2}
   gravity: -3
   destroyDelay: 0
-  impact: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
