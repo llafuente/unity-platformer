@@ -255,12 +255,7 @@ namespace UnityPlatformer {
           return;
         }
 
-
-        if (dir == -1) {
-          collisions.PushLeftCollider(ray);
-        } else {
-          collisions.PushRightCollider(ray);
-        }
+        collisions.PushContact(ray, dir == -1 ? Directions.Left : Directions.Right);
 
         float slopeAngle = Vector2.Angle(ray.normal, Vector2.up);
         if (slopeAngle > maxClimbAngle) {
@@ -330,6 +325,8 @@ namespace UnityPlatformer {
         )) {
           return;
         }
+
+        collisions.PushContact(ray, dir == 1 ? Directions.Top : Directions.Bottom);
 
         if (!leavingGround) {
           // Separate but only if we are not jumping
@@ -526,6 +523,12 @@ namespace UnityPlatformer {
     }
 
     [Serializable]
+    public class Contacts {
+      public RaycastHit2D hit;
+      public Directions dir;
+    }
+
+    [Serializable]
     public class CollisionInfo {
       // current
       public bool above, below;
@@ -549,20 +552,12 @@ namespace UnityPlatformer {
 
       // colliders
       public GameObject slope;
-      const int MAX_COLLIDERS = 3;
-      public RaycastHit2D[] leftHits;
-      public int leftHitsIdx;
-      public RaycastHit2D[] rightHits;
-      public int rightHitsIdx;
+      const int MAX_CONTACTS = 3;
+      public Contacts[] contacts;
+      public int contactsIdx;
 
       public CollisionInfo() {
-        leftHits = new RaycastHit2D[MAX_COLLIDERS];
-        rightHits = new RaycastHit2D[MAX_COLLIDERS];
-
-        for (int i = 0; i < leftHitsIdx; ++i) {
-          leftHits[i] = new RaycastHit2D();
-          rightHits[i] = new RaycastHit2D();
-        }
+        contacts = new Contacts[MAX_CONTACTS];
       }
 
       public CollisionInfo Clone() {
@@ -585,46 +580,25 @@ namespace UnityPlatformer {
         slopeNormal = Vector3.zero;
         slopeDistance = 0;
 
-        leftHitsIdx = 0;
-        rightHitsIdx = 0;
+        contactsIdx = 0;
       }
 
-      public RaycastHit2D GetRightCollider(int i) {
-        return i < rightHitsIdx ? rightHits[i] : new RaycastHit2D();
-      }
-
-      public RaycastHit2D GetLeftCollider(int i) {
-        return i < leftHitsIdx ? leftHits[i] : new RaycastHit2D();
-      }
-
-      public void PushLeftCollider(RaycastHit2D c) {
-        if (leftHitsIdx == MAX_COLLIDERS) {
+      public void PushContact(RaycastHit2D hit, Directions dir) {
+        if (contactsIdx == MAX_CONTACTS) {
           return; // max reached
         }
 
         // no duplicates
-        for (int i = 0; i < leftHitsIdx; ++i) {
-          if (leftHits[i].collider == c.collider) {
+        for (int i = 0; i < contactsIdx; ++i) {
+          if (contacts[i].hit.collider == hit.collider && contacts[i].dir == dir) {
             return;
           }
         }
 
-        leftHits[leftHitsIdx++] = c;
-      }
+        contacts[contactsIdx].dir = dir;
+        contacts[contactsIdx].hit = hit;
 
-      public void PushRightCollider(RaycastHit2D c) {
-        if (rightHitsIdx == MAX_COLLIDERS) {
-          return; // max reached
-        }
-
-        // no duplicates
-        for (int i = 0; i < rightHitsIdx; ++i) {
-          if (rightHits[i].collider == c.collider) {
-            return;
-          }
-        }
-
-        rightHits[rightHitsIdx++] = c;
+        ++contactsIdx;
       }
     }
   }

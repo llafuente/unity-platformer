@@ -72,10 +72,12 @@ namespace UnityPlatformer {
       return 0;
     }
 
-    bool IsBox(ref RaycastHit2D[] hits, int count) {
+    bool IsBox(ref PlatformerCollider2D.Contacts[] contacts, Directions dir, int count) {
       bool valid_box = false;
       for (int i = 0; i < count; ++i) {
-        Box b = hits[i].collider.gameObject.GetComponent<Box>();
+        if (contacts[i].dir != dir) continue;
+
+        Box b = contacts[i].hit.collider.gameObject.GetComponent<Box>();
         if (b != null) {
           // guard against dark arts
           if (Configuration.IsBox(b.boxCharacter.gameObject)) {
@@ -98,11 +100,11 @@ namespace UnityPlatformer {
     }
 
     bool IsBoxRight() {
-      return IsBox(ref character.pc2d.collisions.rightHits, character.pc2d.collisions.rightHitsIdx);
+      return IsBox(ref character.pc2d.collisions.contacts, Directions.Right, character.pc2d.collisions.contactsIdx);
     }
 
     bool IsBoxLeft() {
-      return IsBox(ref character.pc2d.collisions.leftHits, character.pc2d.collisions.leftHitsIdx);
+      return IsBox(ref character.pc2d.collisions.contacts, Directions.Left, character.pc2d.collisions.contactsIdx);
     }
 
     /// <summary>
@@ -134,15 +136,17 @@ namespace UnityPlatformer {
 
     public void OnBeforeMove(Character ch, float delta) {
       if (ch.IsOnState(States.Pushing)) {
-        if (ch.faceDir == Facing.Right) {
-          PushBox(ch.velocity * delta, ref ch.pc2d.collisions.rightHits, ch.pc2d.collisions.rightHitsIdx, delta);
-        } else {
-          PushBox(ch.velocity * delta, ref ch.pc2d.collisions.leftHits, ch.pc2d.collisions.leftHitsIdx, delta);
-        }
+        PushBox(
+          ch.velocity * delta,
+          ref ch.pc2d.collisions.contacts,
+          ch.faceDir == Facing.Right ? Directions.Right : Directions.Left,
+          ch.pc2d.collisions.contactsIdx,
+          delta
+        );
       }
     }
 
-    public void PushBox(Vector3 velocity, ref RaycastHit2D[] hits, int count, float delta) {
+    public void PushBox(Vector3 velocity, ref PlatformerCollider2D.Contacts[] contacts, Directions dir, int count, float delta) {
       if (forbidVerticalPush) {
         velocity.y = 0.0f;
       }
@@ -151,7 +155,9 @@ namespace UnityPlatformer {
       int index = -1;
       Log.Silly("(Push) PushBox.count {0}", count);
       for (int i = 0; i < count; ++i) {
-        Box b = hits[i].collider.gameObject.GetComponent<Box>();
+        if (contacts[i].dir != dir) continue;
+
+        Box b = contacts[i].hit.collider.gameObject.GetComponent<Box>();
         if (b != null) {
           if (!Configuration.IsBox(b.boxCharacter.gameObject)) {
             Debug.LogWarning("Found a Character that should be a box", b.boxCharacter.gameObject);
@@ -170,7 +176,7 @@ namespace UnityPlatformer {
       Log.Silly("(Push) will push {0} {1}", index, velocity.ToString("F4"));
 
       if (index != -1) {
-        Box b = hits[index].collider.gameObject.GetComponent<Box>();
+        Box b = contacts[index].hit.collider.gameObject.GetComponent<Box>();
         b.boxCharacter.pc2d.Move(velocity, delta);
         b.boxMovingPlatform.PlatformerUpdate(delta);
       }

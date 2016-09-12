@@ -15,6 +15,16 @@ namespace UnityPlatformer {
 
       // Update is called once per frame
     virtual public void Update() {
+      int leftHitsIdx = 0;
+      int rightHitsIdx = 0;
+
+      for (int i = 0; i < pc2d.collisions.contactsIdx; ++i) {
+        switch(pc2d.collisions.contacts[i].dir) {
+        case Directions.Left: ++leftHitsIdx; break;
+        case Directions.Right: ++rightHitsIdx; break;
+        }
+      }
+
       text = string.Format(
         "above? {0} @ {4}\n"+
         "below? {1} @ {5}\n"+
@@ -46,8 +56,8 @@ namespace UnityPlatformer {
 
         pc2d.collisions.slopeDistance,
         pc2d.collisions.slopeNormal,
-        pc2d.collisions.leftHitsIdx,
-        pc2d.collisions.rightHitsIdx,
+        leftHitsIdx,
+        rightHitsIdx,
         pc2d.enableSlopes,
         pc2d.leavingGround
       );
