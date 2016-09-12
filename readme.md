@@ -6,23 +6,45 @@ in it's own beast.
 
 ## Features
 
+
+Tiles (Asserts/UnityPlatformer/Scripts/Tiles/)
+
 * Moving platforms
-* One way platforms
+* One way platforms (all four directions)
 * Ladders
-* AI (Patrol, Projectiles, Jumpers, etc...)
-* Component based Actions. Instead of a big class mapping all actions,
-each Action (Jump, Climb ladder, ground/air movement) it's a separate component.
+* Boxes (movable)
+* Jumpers
+* Ropes
+* Item (Pickable / Usable)
+* Tracks
+* ...
+
+
+Artificial inteligence (Asserts/UnityPlatformer/Scripts/AI/)
+
+* Patrol
 * Projectiles
+* Jumpers
+
+
+Character actions (Asserts/UnityPlatformer/Scripts/Character/Actions/)
+
 * Melee attacks
 * Wallstick/WallJump
 * Push boxes
 * Water (liquid) bouyancy
 * Climb/Descent Slopes
+* Crounch
+* Slip down big slopes
+* Use items
+* ...
 
-* Input abstraction (this will help if you add a pad or touch controls)
-* Update everything in order (UpdateManager).
 
-  This allow total control over who is updated first and act accordingly
+Input (Asserts/UnityPlatformer/Scripts/Input/)
+* Keyboard / mouse (unity input)
+* Wii pad
+* CnControls
+
 
 ## Known issues
 
