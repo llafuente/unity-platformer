@@ -485,5 +485,34 @@ namespace UnityPlatformer {
         faceDir = x == 1 ? Facing.Right : Facing.Left;
       }
     }
+
+    public bool IsBox(Directions dir) {
+      PlatformerCollider2D.Contacts[] contacts = pc2d.collisions.contacts;
+
+      bool valid_box = false;
+      for (int i = 0; i < pc2d.collisions.contactsIdx; ++i) {
+        if (contacts[i].dir != dir) continue;
+
+        Box b = contacts[i].hit.collider.gameObject.GetComponent<Box>();
+        if (b != null) {
+          // guard against dark arts
+          if (Configuration.IsBox(b.boxCharacter.gameObject)) {
+            if (
+              // the box cannot be falling!
+              (b.boxCharacter.IsOnState(States.Falling)) ||
+              // box cannot be colliding against anything in the movement direction
+              (dir == Directions.Right && b.boxCharacter.pc2d.collisions.right) ||
+              (dir == Directions.Left && b.boxCharacter.pc2d.collisions.left)
+              ) {
+              continue;
+            }
+
+            valid_box = true;
+          }
+        }
+      }
+
+      return valid_box;
+    }
   }
 }

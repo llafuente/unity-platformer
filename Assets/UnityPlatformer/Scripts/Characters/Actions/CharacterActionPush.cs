@@ -51,7 +51,7 @@ namespace UnityPlatformer {
         }
 
         faceDir = 1;
-        if (IsBoxRight() && pushingCD.IncReady()) {
+        if (character.IsBox(Directions.Right) && pushingCD.IncReady()) {
           return priority;
         }
         return 0;
@@ -62,7 +62,7 @@ namespace UnityPlatformer {
         }
 
         faceDir = -1;
-        if (IsBoxLeft() && pushingCD.IncReady()) {
+        if (character.IsBox(Directions.Left) && pushingCD.IncReady()) {
           return priority;
         }
         return 0;
@@ -70,41 +70,6 @@ namespace UnityPlatformer {
 
       pushingCD.Reset();
       return 0;
-    }
-
-    bool IsBox(ref PlatformerCollider2D.Contacts[] contacts, Directions dir, int count) {
-      bool valid_box = false;
-      for (int i = 0; i < count; ++i) {
-        if (contacts[i].dir != dir) continue;
-
-        Box b = contacts[i].hit.collider.gameObject.GetComponent<Box>();
-        if (b != null) {
-          // guard against dark arts
-          if (Configuration.IsBox(b.boxCharacter.gameObject)) {
-            if (
-              // the box cannot be falling!
-              (b.boxCharacter.IsOnState(States.Falling)) ||
-              // box cannot be colliding against anything in the movement direction
-              (faceDir == 1 && b.boxCharacter.pc2d.collisions.right) ||
-              (faceDir == -1 && b.boxCharacter.pc2d.collisions.left)
-              ) {
-              continue;
-            }
-
-            valid_box = true;
-          }
-        }
-      }
-
-      return valid_box;
-    }
-
-    bool IsBoxRight() {
-      return IsBox(ref character.pc2d.collisions.contacts, Directions.Right, character.pc2d.collisions.contactsIdx);
-    }
-
-    bool IsBoxLeft() {
-      return IsBox(ref character.pc2d.collisions.contacts, Directions.Left, character.pc2d.collisions.contactsIdx);
     }
 
     /// <summary>
