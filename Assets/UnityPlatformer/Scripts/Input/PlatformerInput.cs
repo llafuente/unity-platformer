@@ -28,7 +28,7 @@ namespace UnityPlatformer {
   public abstract class PlatformerInput : MonoBehaviour {
 
     [Comment("List of actions that will fire events")]
-    public List<string> listenActions = new List<string> {"Jump", "Attack", "Use", "Run"};
+    public List<string> listenActions = new List<string> {"Jump", "Attack", "Use", "Run", "Pull"};
 
     public delegate void InputActionDelegate(string button);
     public InputActionDelegate onActionUp;

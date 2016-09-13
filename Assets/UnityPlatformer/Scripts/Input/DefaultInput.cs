@@ -66,6 +66,11 @@ namespace UnityPlatformer {
         "Use",
         "Run",
         WiiButtons.WII_BUTTON_B
+      ), new InputMap (
+        "Pull",
+        "Pull",
+        "Pull",
+        WiiButtons.WII_BUTTON_B // REVIEW
       )
     };
 

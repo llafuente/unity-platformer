@@ -41,6 +41,9 @@ namespace UnityPlatformer {
     }
 
     public override int WantsToUpdate(float delta) {
+      if (!pc2d.collisions.below) {
+        return 0;
+      }
 
       float x = input.GetAxisRawX();
 

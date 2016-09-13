@@ -249,6 +249,7 @@ GameObject:
   - 114: {fileID: 11459062}
   - 114: {fileID: 11415312}
   - 114: {fileID: 11410450}
+  - 114: {fileID: 11496510}
   m_Layer: 8
   m_Name: BasicPlayer_Actions
   m_TagString: Untagged
@@ -298,7 +299,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192718}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.79, y: 1.16, z: 0}
+  m_LocalPosition: {x: 4.5, y: 0.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1022,6 +1023,7 @@ MonoBehaviour:
   - Attack
   - Use
   - Run
+  - Pull
   inputsMap:
   - action: Jump
     handheld: Jump
@@ -1038,6 +1040,10 @@ MonoBehaviour:
   - action: Run
     handheld: Use
     keyboard: Run
+    wii: 3
+  - action: Pull
+    handheld: Pull
+    keyboard: Pull
     wii: 3
 --- !u!114 &11428056
 MonoBehaviour:
@@ -1596,6 +1602,24 @@ MonoBehaviour:
   runAccelerationTime: 0.1
   alwaysRun: 0
   runAction: Run
+--- !u!114 &11496510
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 178970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61dc491b49cc64657869fc716700f35b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 11435812}
+  input: {fileID: 11422300}
+  speed: 2
+  accelerationTime: 0.1
+  forbidVerticalPush: 1
+  action: Pull
+  priority: 20
 --- !u!212 &21266804
 SpriteRenderer:
   m_ObjectHideFlags: 1

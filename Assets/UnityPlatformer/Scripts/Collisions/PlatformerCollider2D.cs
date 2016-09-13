@@ -526,6 +526,11 @@ namespace UnityPlatformer {
     public class Contacts {
       public RaycastHit2D hit;
       public Directions dir;
+
+      public Contacts(RaycastHit2D _hit, Directions _dir) {
+        hit = _hit;
+        dir = _dir;
+      }
     }
 
     [Serializable]
@@ -554,7 +559,7 @@ namespace UnityPlatformer {
       public GameObject slope;
       const int MAX_CONTACTS = 3;
       public Contacts[] contacts;
-      public int contactsIdx;
+      public int contactsIdx = 0;
 
       public CollisionInfo() {
         contacts = new Contacts[MAX_CONTACTS];
@@ -595,8 +600,7 @@ namespace UnityPlatformer {
           }
         }
 
-        contacts[contactsIdx].dir = dir;
-        contacts[contactsIdx].hit = hit;
+        contacts[contactsIdx] = new Contacts(hit, dir);
 
         ++contactsIdx;
       }
