@@ -62,6 +62,8 @@ namespace UnityPlatformer {
         transform.rotation = Quaternion.AngleAxis(z, Vector3.forward);
       } else if (character.IsOnState(States.Pushing)) {
         Play("pushing");
+      } else if (character.IsOnState(States.Pulling)) {
+        Play("pulling");
       } else if (character.IsOnState(States.Liquid)) {
         Play("swimming");
       } else if (character.IsOnState(States.WallSliding)) {

@@ -77,6 +77,7 @@ namespace UnityPlatformer {
     internal MovingPlatform platform;
     // character velocity by itself. Movement
     internal Vector3 velocity = Vector3.zero;
+    internal Vector3 movedLastFrame = Vector3.zero;
     // World velocity, wind, tracks etc.
     internal Vector3 worldVelocity = Vector3.zero;
     internal PlatformerCollider2D pc2d;
@@ -238,7 +239,7 @@ namespace UnityPlatformer {
         onBeforeMove(this, delta);
       }
 
-      pc2d.Move((velocity + worldVelocity) * delta, delta);
+      movedLastFrame = pc2d.Move((velocity + worldVelocity) * delta, delta);
 
       if (onAfterMove != null) {
         onAfterMove(this, delta);
@@ -513,6 +514,40 @@ namespace UnityPlatformer {
       }
 
       return valid_box;
+    }
+
+    public Box GetLowestBox(Directions dir) {
+      PlatformerCollider2D.Contacts[] contacts = pc2d.collisions.contacts;
+      // sarch the lowest box and push it
+      float minY = Mathf.Infinity;
+      int index = -1;
+      Log.Silly("(Push) PushBox.count {0}", pc2d.collisions.contactsIdx);
+      for (int i = 0; i < pc2d.collisions.contactsIdx; ++i) {
+        if (contacts[i].dir != dir) continue;
+
+        Box b = contacts[i].hit.collider.gameObject.GetComponent<Box>();
+        if (b != null) {
+          if (!Configuration.IsBox(b.boxCharacter.gameObject)) {
+            Debug.LogWarning("Found a Character that should be a box", b.boxCharacter.gameObject);
+            continue;
+          }
+
+          float y = b.transform.position.y;
+          Log.Silly("(Push) Found a box at index {0} {1} {2} {3}", i, b, minY, y);
+          if (y < minY) {
+            minY = y;
+            index = i;
+          }
+        }
+      }
+
+      Log.Silly("(Push) will push {0} {1}", index, velocity.ToString("F4"));
+
+      if (index != -1) {
+        return contacts[index].hit.collider.gameObject.GetComponent<Box>();
+      }
+
+      return null;
     }
   }
 }

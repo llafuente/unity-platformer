@@ -6,18 +6,20 @@ namespace UnityPlatformer {
   /// Push objects (Box)
   /// NOTE require CharacterActionGroundMovement
   /// </summary>
-  public class CharacterActionPush: CharacterAction {
+  public class CharacterActionPull: CharacterAction {
     #region public
 
     [Comment("Movement speed")]
     public float speed = 3;
     [Comment("Time to reach max speed")]
     public float accelerationTime = .1f;
-    [Comment("Time to pushing before start moving the object")]
-    public float pushingStartTime = 0.5f;
     //public float maxWeight =4f;
     [Comment("Limit Push to X")]
     public bool forbidVerticalPush = true;
+
+    [Space(10)]
+    [Comment("Must match something @PlatformerInput")]
+    public String action = "Pull";
 
     [Space(10)]
     [Comment("Remember: Higher priority wins. Modify with caution")]
@@ -26,7 +28,6 @@ namespace UnityPlatformer {
     #endregion
 
     int faceDir = 0;
-    Cooldown pushingCD;
 
     float velocityXSmoothing;
     CharacterActionGroundMovement groundMovement;
@@ -34,40 +35,29 @@ namespace UnityPlatformer {
     public override void OnEnable() {
       base.OnEnable();
 
-      pushingCD = new Cooldown(pushingStartTime);
       groundMovement = character.GetAction<CharacterActionGroundMovement>();
 
-      character.onBeforeMove += OnBeforeMove;
+      character.onAfterMove += OnAfterMove;
     }
 
     public override int WantsToUpdate(float delta) {
 
       float x = input.GetAxisRawX();
 
-      if (x > 0) {
-        if (faceDir != 1) {
-          pushingCD.Reset();
+      if (input.IsActionHeld(action)) {
+        if (x > 0) {
+          faceDir = 1;
+          if (character.IsBox(Directions.Left)) {
+            return priority;
+          }
+        } else if (x < 0) {
+          faceDir = -1;
+          if (character.IsBox(Directions.Right)) {
+            return priority;
+          }
         }
-
-        faceDir = 1;
-        if (character.IsBox(Directions.Right) && pushingCD.IncReady()) {
-          return priority;
-        }
-        return 0;
-      }
-      if (x < 0) {
-        if (faceDir != -1) {
-          pushingCD.Reset();
-        }
-
-        faceDir = -1;
-        if (character.IsBox(Directions.Left) && pushingCD.IncReady()) {
-          return priority;
-        }
-        return 0;
       }
 
-      pushingCD.Reset();
       return 0;
     }
 
@@ -77,9 +67,9 @@ namespace UnityPlatformer {
     public override void GainControl(float delta) {
       base.GainControl(delta);
 
-      character.EnterState(States.Pushing);
+      character.EnterState(States.Pulling);
       Log.level = LogLevel.Silly;
-      Log.Silly("(Push) {0} Start pushing", gameObject.name);
+      Log.Silly("(Push) {0} Start pulling", gameObject.name);
     }
 
     /// <summary>
@@ -88,9 +78,9 @@ namespace UnityPlatformer {
     public override void LoseControl(float delta) {
       base.LoseControl(delta);
 
-      character.ExitState(States.Pushing);
+      character.ExitState(States.Pulling);
 
-      Log.Silly("(Push) {0} Stop pushing", gameObject.name);
+      Log.Silly("(Push) {0} Stop pulling", gameObject.name);
       Log.level = LogLevel.Info;
     }
 
@@ -98,24 +88,17 @@ namespace UnityPlatformer {
       groundMovement.Move(speed, ref velocityXSmoothing, accelerationTime);
     }
 
-    public void OnBeforeMove(Character ch, float delta) {
-      // TODO test if give better results
-      // disable all boxes
-      // move character
-      // enable all boxes
-      // after move it use movedLastFrame as velocity
-      // NOTE should not kill the character!
-
-      if (ch.IsOnState(States.Pushing)) {
-        PushBox(
-          ch.velocity * delta,
-          ch.faceDir == Facing.Right ? Directions.Right : Directions.Left,
+    public void OnAfterMove(Character ch, float delta) {
+      if (ch.IsOnState(States.Pulling)) {
+        PullBox(
+          ch.movedLastFrame, // do not use velocity
+          ch.faceDir == Facing.Right ? Directions.Left : Directions.Right,
           delta
         );
       }
     }
 
-    public void PushBox(Vector3 velocity, Directions dir, float delta) {
+    public void PullBox(Vector3 velocity, Directions dir, float delta) {
       if (forbidVerticalPush) {
         velocity.y = 0.0f;
       }
