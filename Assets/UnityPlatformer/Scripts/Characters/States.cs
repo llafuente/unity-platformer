@@ -23,6 +23,7 @@ namespace UnityPlatformer {
     Pulling =             1 << 15,
     Rope =                1 << 16,
     Crounch =             1 << 17,
+    Fence =               1 << 18,
 
     // debug states, so it can be displayed as text
     SlippingGrounded =    Slipping | OnGround,

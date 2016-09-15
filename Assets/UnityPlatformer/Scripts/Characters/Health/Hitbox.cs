@@ -44,6 +44,8 @@ namespace UnityPlatformer {
 
     #endregion
 
+    internal BoxCollider2D body;
+
     Damage dt;
 
     void Start() {
@@ -51,6 +53,8 @@ namespace UnityPlatformer {
       if (type == HitBoxType.DealDamage && dt == null) {
         Debug.LogError("DealDamage require Damage Behaviour", this);
       }
+
+      body = GetComponent<BoxCollider2D>();
     }
 
     public bool IsDisabled() {
@@ -73,8 +77,7 @@ namespace UnityPlatformer {
           break;
         }
 
-        BoxCollider2D box = GetComponent<BoxCollider2D>();
-        Gizmos.DrawWireCube(transform.position + (Vector3)box.offset, box.size);
+        Gizmos.DrawWireCube(transform.position + (Vector3)body.offset, body.size);
         //Handles.Label(transform.position + new Vector3(-box.size.x * 0.5f, box.size.y * 0.5f, 0), "HitBox: " + type);
     }
 #endif

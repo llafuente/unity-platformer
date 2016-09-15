@@ -10,5 +10,6 @@ namespace UnityPlatformer {
     Item =                1 << 4,
     Rope =                1 << 5,
     Track =               1 << 6,
+    Fence =               1 << 7,
   }
 }

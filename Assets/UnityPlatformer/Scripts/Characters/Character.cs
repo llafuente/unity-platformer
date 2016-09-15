@@ -48,6 +48,7 @@ namespace UnityPlatformer {
     internal States state = States.None;
     internal Areas area = Areas.None;
     internal BoxCollider2D body;
+    internal Fence fence;
     internal Ladder ladder;
     internal Ladder ladderBottom;
     internal Liquid liquid;
