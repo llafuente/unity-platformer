@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace UnityPlatformer {
-  public class ControllerMonitor : Monitor {
+  public class PlatformerCollider2DMonitor : Monitor {
     PlatformerCollider2D pc2d;
     // Use this for initialization
     virtual public void Start() {

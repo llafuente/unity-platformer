@@ -83,6 +83,7 @@ namespace UnityPlatformer {
     internal Vector3 worldVelocity = Vector3.zero;
     internal PlatformerCollider2D pc2d;
     internal CharacterHealth health;
+    internal HitBox enterAreas;
 
     /// <summary>
     /// Force to play this animation

@@ -17,6 +17,8 @@ TagManager:
   - OneWayPlatformDown
   - OneWayWallLeft
   - OneWayWallRight
+  - Boxes
+  - Fences
   layers:
   - Default
   - TransparentFX
@@ -36,8 +38,7 @@ TagManager:
   - Liquids
   - Box
   - Rope
-  - 
-  - 
+  - Fences
   - 
   - 
   - 

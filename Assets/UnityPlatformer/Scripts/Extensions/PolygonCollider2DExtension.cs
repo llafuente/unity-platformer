@@ -12,14 +12,39 @@ namespace UnityPlatformer {
       return polyPoints;
     }
 
-    static public Vector3[] GetWorldPoints3(this PolygonCollider2D poly) {
-      Vector3[] polyPoints = new Vector3[poly.points.Length];
+    static public Vector3[] GetWorldPoints3(this PolygonCollider2D poly, bool close = false) {
+      Vector3[] polyPoints = new Vector3[poly.points.Length + (close ? 2 : 0)];
 
-      for (int i = 0; i < polyPoints.Length; ++i) {
+      int i = 0;
+      for (; i < poly.points.Length; ++i) {
         polyPoints[i] = (Vector3)poly.transform.TransformPoint(poly.points[i]);
       }
 
+      if (close) {
+        polyPoints[i++] = (Vector3)poly.transform.TransformPoint(poly.points[0]);
+        polyPoints[i++] = (Vector3)poly.transform.TransformPoint(poly.points[1]);
+      }
+
       return polyPoints;
+    }
+
+    // check if the bounds is completely inside, check all four points
+    static public bool Contains(this PolygonCollider2D poly, Vector2 pmin, Vector2 pmax) {
+      return poly.Contains(pmin) &&
+             poly.Contains(pmax) &&
+             poly.Contains(new Vector2(pmin.x, pmax.y)) &&
+             poly.Contains(new Vector2(pmax.x, pmin.y));
+    }
+
+    static public bool Contains(this PolygonCollider2D poly, Bounds b) {
+      Vector2 pmin = b.min;
+      Vector2 pmax = b.max;
+
+      // check if the bounds is completely inside, check all four points
+      return poly.Contains(pmin) &&
+             poly.Contains(pmax) &&
+             poly.Contains(new Vector2(pmin.x, pmax.y)) &&
+             poly.Contains(new Vector2(pmax.x, pmin.y));
     }
 
     static public bool Contains(this PolygonCollider2D poly, Vector2 p) {

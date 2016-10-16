@@ -55,6 +55,13 @@ namespace UnityPlatformer {
       }
 
       body = GetComponent<BoxCollider2D>();
+
+      if (type == HitBoxType.EnterAreas) {
+        if (owner.character.enterAreas != null && owner.character.enterAreas != this ) {
+          Debug.LogWarning("(HitBox) Only one EnterAreas HitBox is allowed!");
+        }
+        owner.character.enterAreas = this;
+      }
     }
 
     public bool IsDisabled() {
@@ -64,6 +71,7 @@ namespace UnityPlatformer {
 #if UNITY_EDITOR
     [DrawGizmo(GizmoType.InSelectionHierarchy | GizmoType.NotInSelectionHierarchy)]
     void OnDrawGizmos() {
+        body = GetComponent<BoxCollider2D>();
 
         switch(type) {
         case HitBoxType.DealDamage:

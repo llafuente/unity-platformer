@@ -10,12 +10,13 @@ namespace UnityPlatformer {
   [RequireComponent (typeof (PolygonCollider2D))]
   public class Fence : MonoBehaviour {
     // cache
-    PolygonCollider2D body;
+    internal PolygonCollider2D body;
     public bool topDismount = true;
     public bool bottomDismount = true;
 
     virtual public void Start() {
       body = GetComponent<PolygonCollider2D>();
+      body.isTrigger = true;
     }
 
     virtual public void EnableFence(Character p) {
@@ -35,6 +36,7 @@ namespace UnityPlatformer {
 
     public virtual void OnTriggerEnter2D(Collider2D o) {
       HitBox h = o.GetComponent<HitBox>();
+      Debug.LogFormat("fence hit {0}", h);
       if (h && h.type == HitBoxType.EnterAreas) {
         EnableFence(h.owner.GetComponent<Character>());
       }
@@ -42,9 +44,12 @@ namespace UnityPlatformer {
 
     public virtual void OnTriggerStay2D(Collider2D o) {
       HitBox h = o.GetComponent<HitBox>();
+
+      Debug.LogFormat("fence hit {0}", h);
+
       if (h && h.type == HitBoxType.EnterAreas) {
-        Vector2 pmin = body.bounds.min;
-        Vector2 pmax = body.bounds.max;
+        Vector2 pmin = h.body.bounds.min;
+        Vector2 pmax = h.body.bounds.max;
 
         // check if the body is completely inside
         if (
@@ -65,12 +70,14 @@ namespace UnityPlatformer {
     void OnDrawGizmos() {
       if (Application.isPlaying) return;
 
+      body = GetComponent<PolygonCollider2D>();
       Vector3 size = body.bounds.size;
       Vector3 pos = transform.position;
 
       Handles.Label(pos + new Vector3(-size.x * 0.5f, size.y * 0.5f, 0), "Fence");
 
-      Handles.DrawSolidRectangleWithOutline(body.GetWorldPoints3(), new Color(1, 1, 0, 0.05f), new Color(0, 0, 0, 0.5f));
+      Handles.color = new Color(1, 1, 0, 0.05f);
+      Handles.DrawAAConvexPolygon(body.GetWorldPoints3());
     }
 #endif
 

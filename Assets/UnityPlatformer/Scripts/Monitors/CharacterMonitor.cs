@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityPlatformer {
   //[RequireComponent (typeof (Character))]
-  public class CharacterMonitor : ControllerMonitor {
+  public class CharacterMonitor : PlatformerCollider2DMonitor {
 
     Character character;
 
@@ -28,6 +28,7 @@ namespace UnityPlatformer {
         "State: {1}\n"+
         "Facing: {15} ForceAni: {12}\n"+
         "Ladder: {2} IsAboveTop {3} IsBelowBottom {4}\n" +
+        "Fence: {16}\n" +
         "Liquid: {9}  IsBelowSurface {10} / {11}\n" +
         "Rope: {13} @ {14}\n" +
         "Platform: {5}\n" +
@@ -46,7 +47,8 @@ namespace UnityPlatformer {
         character.liquid ? character.liquid.DistanceToSurface(character, 1.5f) : -1,
         character.forceAnimation,
         character.rope, character.ropeIndex,
-        character.faceDir
+        character.faceDir,
+        character.fence
       );
     }
   }

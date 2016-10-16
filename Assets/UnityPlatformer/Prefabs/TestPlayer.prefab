@@ -907,13 +907,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 4
-  collideWith:
-    serializedVersion: 2
-    m_Bits: 4096
+  collideWith: {}
   owner: {fileID: 11424084}
   type: 1
   dealDamageToSelf: 0
   disableWhileOnState: 65536
+  dt: {fileID: 0}
 --- !u!114 &11402832
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -945,13 +944,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 4
-  collideWith:
-    serializedVersion: 2
-    m_Bits: 0
+  collideWith: {}
   owner: {fileID: 11424084}
   type: 0
   dealDamageToSelf: 0
   disableWhileOnState: 0
+  dt: {fileID: 0}
 --- !u!114 &11409862
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1140,13 +1138,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 1
-  collideWith:
-    serializedVersion: 2
-    m_Bits: 0
+  collideWith: {}
   owner: {fileID: 11424084}
   type: 2
   dealDamageToSelf: 0
   disableWhileOnState: 0
+  dt: {fileID: 0}
 --- !u!114 &11440066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1291,13 +1288,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 4
-  collideWith:
-    serializedVersion: 2
-    m_Bits: 4096
+  collideWith: {}
   owner: {fileID: 11424084}
   type: 1
   dealDamageToSelf: 0
   disableWhileOnState: -65537
+  dt: {fileID: 0}
 --- !u!114 &11459680
 MonoBehaviour:
   m_ObjectHideFlags: 1
