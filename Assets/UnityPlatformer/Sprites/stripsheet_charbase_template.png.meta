@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 8791302439e7552498614f632b823a02
-timeCreated: 1463683916
+timeCreated: 1476813455
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -355,11 +355,14 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 28
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: stripsheet_charbase_template_0
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_0
       rect:
         serializedVersion: 2
         x: 0
@@ -367,14 +370,12 @@ TextureImporter:
         width: 800
         height: 148
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -400, y: 74}
-        - {x: -400, y: -74}
-        - {x: 400, y: -74}
-        - {x: 400, y: 74}
-    - name: stripsheet_charbase_template_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_1
       rect:
         serializedVersion: 2
         x: 16
@@ -382,10 +383,12 @@ TextureImporter:
         width: 48
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_2
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_2
       rect:
         serializedVersion: 2
         x: 69
@@ -393,10 +396,12 @@ TextureImporter:
         width: 45
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_3
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_3
       rect:
         serializedVersion: 2
         x: 121
@@ -404,10 +409,12 @@ TextureImporter:
         width: 43
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_4
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_4
       rect:
         serializedVersion: 2
         x: 172
@@ -415,10 +422,12 @@ TextureImporter:
         width: 42
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_5
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_5
       rect:
         serializedVersion: 2
         x: 221
@@ -426,10 +435,12 @@ TextureImporter:
         width: 43
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_6
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_6
       rect:
         serializedVersion: 2
         x: 269
@@ -437,10 +448,12 @@ TextureImporter:
         width: 45
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_7
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_7
       rect:
         serializedVersion: 2
         x: 16
@@ -448,10 +461,12 @@ TextureImporter:
         width: 27
         height: 47
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_8
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_8
       rect:
         serializedVersion: 2
         x: 48
@@ -459,10 +474,12 @@ TextureImporter:
         width: 25
         height: 61
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_9
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_9
       rect:
         serializedVersion: 2
         x: 79
@@ -470,10 +487,12 @@ TextureImporter:
         width: 25
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_10
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_10
       rect:
         serializedVersion: 2
         x: 110
@@ -481,10 +500,12 @@ TextureImporter:
         width: 28
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_11
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_11
       rect:
         serializedVersion: 2
         x: 348
@@ -492,10 +513,12 @@ TextureImporter:
         width: 25
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_12
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_12
       rect:
         serializedVersion: 2
         x: 376
@@ -503,10 +526,12 @@ TextureImporter:
         width: 26
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_13
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_13
       rect:
         serializedVersion: 2
         x: 404
@@ -514,10 +539,12 @@ TextureImporter:
         width: 27
         height: 47
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_14
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_14
       rect:
         serializedVersion: 2
         x: 435
@@ -525,10 +552,12 @@ TextureImporter:
         width: 25
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_15
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_15
       rect:
         serializedVersion: 2
         x: 464
@@ -536,10 +565,12 @@ TextureImporter:
         width: 25
         height: 47
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_16
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_16
       rect:
         serializedVersion: 2
         x: 492
@@ -547,10 +578,12 @@ TextureImporter:
         width: 26
         height: 47
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_17
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_17
       rect:
         serializedVersion: 2
         x: 18
@@ -558,10 +591,12 @@ TextureImporter:
         width: 27
         height: 41
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_18
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_18
       rect:
         serializedVersion: 2
         x: 58
@@ -569,10 +604,12 @@ TextureImporter:
         width: 31
         height: 44
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_19
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_19
       rect:
         serializedVersion: 2
         x: 100
@@ -580,18 +617,12 @@ TextureImporter:
         width: 33
         height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 4.5, y: 21.5}
-        - {x: -16.5, y: 21.5}
-        - {x: -16.5, y: -20.5}
-        - {x: -15.5, y: -21.5}
-        - {x: 12.5, y: -21.5}
-        - {x: 14.5, y: -16.5}
-        - {x: 16.5, y: -8.5}
-        - {x: 16.5, y: 9.5}
-    - name: stripsheet_charbase_template_20
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_20
       rect:
         serializedVersion: 2
         x: 145
@@ -599,10 +630,12 @@ TextureImporter:
         width: 22
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_21
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_21
       rect:
         serializedVersion: 2
         x: 188
@@ -610,10 +643,12 @@ TextureImporter:
         width: 22
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_22
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_22
       rect:
         serializedVersion: 2
         x: 230
@@ -621,10 +656,12 @@ TextureImporter:
         width: 27
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_23
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_23
       rect:
         serializedVersion: 2
         x: 272
@@ -632,16 +669,12 @@ TextureImporter:
         width: 36
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -18, y: 28.5}
-        - {x: -18, y: -28.5}
-        - {x: 10, y: -28.5}
-        - {x: 18, y: -19.5}
-        - {x: 18, y: 26.5}
-        - {x: 17, y: 28.5}
-    - name: stripsheet_charbase_template_24
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_24
       rect:
         serializedVersion: 2
         x: 313
@@ -649,10 +682,12 @@ TextureImporter:
         width: 28
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_25
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_25
       rect:
         serializedVersion: 2
         x: 356
@@ -660,16 +695,12 @@ TextureImporter:
         width: 33
         height: 56
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16.5, y: 28}
-        - {x: -16.5, y: -28}
-        - {x: 13.5, y: -28}
-        - {x: 16.5, y: -15}
-        - {x: 16.5, y: 24}
-        - {x: 7.5, y: 28}
-    - name: stripsheet_charbase_template_26
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_26
       rect:
         serializedVersion: 2
         x: 15
@@ -677,10 +708,12 @@ TextureImporter:
         width: 31
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_27
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_27
       rect:
         serializedVersion: 2
         x: 49
@@ -688,10 +721,12 @@ TextureImporter:
         width: 28
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_28
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_28
       rect:
         serializedVersion: 2
         x: 86
@@ -699,10 +734,12 @@ TextureImporter:
         width: 22
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_29
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_29
       rect:
         serializedVersion: 2
         x: 115
@@ -710,10 +747,12 @@ TextureImporter:
         width: 27
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_30
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_30
       rect:
         serializedVersion: 2
         x: 147
@@ -721,10 +760,12 @@ TextureImporter:
         width: 29
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_31
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_31
       rect:
         serializedVersion: 2
         x: 186
@@ -732,10 +773,12 @@ TextureImporter:
         width: 21
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_32
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_32
       rect:
         serializedVersion: 2
         x: 222
@@ -743,10 +786,12 @@ TextureImporter:
         width: 22
         height: 56
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_33
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_33
       rect:
         serializedVersion: 2
         x: 245
@@ -754,10 +799,12 @@ TextureImporter:
         width: 18
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_34
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_34
       rect:
         serializedVersion: 2
         x: 267
@@ -765,10 +812,12 @@ TextureImporter:
         width: 18
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_35
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_35
       rect:
         serializedVersion: 2
         x: 288
@@ -776,10 +825,12 @@ TextureImporter:
         width: 21
         height: 56
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_36
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_36
       rect:
         serializedVersion: 2
         x: 311
@@ -787,10 +838,12 @@ TextureImporter:
         width: 18
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_37
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_37
       rect:
         serializedVersion: 2
         x: 333
@@ -798,10 +851,12 @@ TextureImporter:
         width: 18
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_38
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_38
       rect:
         serializedVersion: 2
         x: 14
@@ -809,10 +864,12 @@ TextureImporter:
         width: 31
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_39
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_39
       rect:
         serializedVersion: 2
         x: 46
@@ -820,10 +877,12 @@ TextureImporter:
         width: 29
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_40
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_40
       rect:
         serializedVersion: 2
         x: 81
@@ -831,10 +890,12 @@ TextureImporter:
         width: 24
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_41
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_41
       rect:
         serializedVersion: 2
         x: 108
@@ -842,10 +903,12 @@ TextureImporter:
         width: 27
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_42
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_42
       rect:
         serializedVersion: 2
         x: 138
@@ -853,10 +916,12 @@ TextureImporter:
         width: 29
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_43
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_43
       rect:
         serializedVersion: 2
         x: 175
@@ -864,10 +929,12 @@ TextureImporter:
         width: 23
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_44
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_44
       rect:
         serializedVersion: 2
         x: 209
@@ -875,19 +942,12 @@ TextureImporter:
         width: 40
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 14, y: 27.5}
-        - {x: -10, y: 27.5}
-        - {x: -17, y: 23.5}
-        - {x: -20, y: 4.5}
-        - {x: -20, y: -27.5}
-        - {x: -1, y: -27.5}
-        - {x: 12, y: -23.5}
-        - {x: 20, y: -12.5}
-        - {x: 20, y: 16.5}
-    - name: stripsheet_charbase_template_45
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_45
       rect:
         serializedVersion: 2
         x: 252
@@ -895,18 +955,12 @@ TextureImporter:
         width: 39
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -9.5, y: 27}
-        - {x: -12.5, y: 24}
-        - {x: -19.5, y: 12}
-        - {x: -19.5, y: -27}
-        - {x: 12.5, y: -27}
-        - {x: 19.5, y: -17}
-        - {x: 19.5, y: 17}
-        - {x: 13.5, y: 27}
-    - name: stripsheet_charbase_template_46
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_46
       rect:
         serializedVersion: 2
         x: 298
@@ -914,20 +968,12 @@ TextureImporter:
         width: 35
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 17.5, y: 14.5}
-        - {x: 6.5, y: 27.5}
-        - {x: -12.5, y: 27.5}
-        - {x: -17.5, y: 26.5}
-        - {x: -17.5, y: -26.5}
-        - {x: -15.5, y: -27.5}
-        - {x: -0.5, y: -27.5}
-        - {x: 0.5, y: -26.5}
-        - {x: 1.5, y: -22.5}
-        - {x: 17.5, y: 1.5}
-    - name: stripsheet_charbase_template_47
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_47
       rect:
         serializedVersion: 2
         x: 336
@@ -935,18 +981,12 @@ TextureImporter:
         width: 39
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -10.5, y: 27.5}
-        - {x: -16.5, y: 22.5}
-        - {x: -19.5, y: 10.5}
-        - {x: -19.5, y: -27.5}
-        - {x: 12.5, y: -27.5}
-        - {x: 19.5, y: -17.5}
-        - {x: 19.5, y: 20.5}
-        - {x: 15.5, y: 27.5}
-    - name: stripsheet_charbase_template_48
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_48
       rect:
         serializedVersion: 2
         x: 377
@@ -954,18 +994,12 @@ TextureImporter:
         width: 40
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 14, y: 27}
-        - {x: -17, y: 27}
-        - {x: -20, y: 18}
-        - {x: -20, y: -26}
-        - {x: -18, y: -27}
-        - {x: 13, y: -27}
-        - {x: 20, y: -16}
-        - {x: 20, y: 18}
-    - name: stripsheet_charbase_template_49
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_49
       rect:
         serializedVersion: 2
         x: 425
@@ -973,18 +1007,12 @@ TextureImporter:
         width: 34
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 12, y: 27.5}
-        - {x: -16, y: 27.5}
-        - {x: -17, y: 26.5}
-        - {x: -17, y: -27.5}
-        - {x: -1, y: -27.5}
-        - {x: 0, y: -26.5}
-        - {x: 17, y: -11.5}
-        - {x: 17, y: 19.5}
-    - name: stripsheet_charbase_template_50
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_50
       rect:
         serializedVersion: 2
         x: 14
@@ -992,10 +1020,12 @@ TextureImporter:
         width: 27
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_51
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_51
       rect:
         serializedVersion: 2
         x: 46
@@ -1003,10 +1033,12 @@ TextureImporter:
         width: 28
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_52
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_52
       rect:
         serializedVersion: 2
         x: 81
@@ -1014,10 +1046,12 @@ TextureImporter:
         width: 22
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_53
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_53
       rect:
         serializedVersion: 2
         x: 108
@@ -1025,10 +1059,12 @@ TextureImporter:
         width: 26
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_54
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_54
       rect:
         serializedVersion: 2
         x: 138
@@ -1036,10 +1072,12 @@ TextureImporter:
         width: 29
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_55
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_55
       rect:
         serializedVersion: 2
         x: 175
@@ -1047,10 +1085,12 @@ TextureImporter:
         width: 21
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_56
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_56
       rect:
         serializedVersion: 2
         x: 209
@@ -1058,19 +1098,12 @@ TextureImporter:
         width: 33
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 11.5, y: 25.5}
-        - {x: 10.5, y: 27.5}
-        - {x: -13.5, y: 27.5}
-        - {x: -16.5, y: 9.5}
-        - {x: -16.5, y: -27.5}
-        - {x: 2.5, y: -27.5}
-        - {x: 15.5, y: -23.5}
-        - {x: 16.5, y: -17.5}
-        - {x: 16.5, y: 8.5}
-    - name: stripsheet_charbase_template_57
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_57
       rect:
         serializedVersion: 2
         x: 243
@@ -1078,18 +1111,12 @@ TextureImporter:
         width: 32
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -8, y: 27}
-        - {x: -14, y: 15}
-        - {x: -16, y: 1}
-        - {x: -16, y: -26}
-        - {x: -14, y: -27}
-        - {x: 16, y: -27}
-        - {x: 16, y: 24}
-        - {x: 9, y: 27}
-    - name: stripsheet_charbase_template_58
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_58
       rect:
         serializedVersion: 2
         x: 280
@@ -1097,10 +1124,12 @@ TextureImporter:
         width: 28
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_59
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_59
       rect:
         serializedVersion: 2
         x: 309
@@ -1108,15 +1137,12 @@ TextureImporter:
         width: 32
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -15, y: 27.5}
-        - {x: -16, y: 16.5}
-        - {x: -16, y: -27.5}
-        - {x: 16, y: -27.5}
-        - {x: 16, y: 27.5}
-    - name: stripsheet_charbase_template_60
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_60
       rect:
         serializedVersion: 2
         x: 341
@@ -1124,16 +1150,12 @@ TextureImporter:
         width: 33
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -8.5, y: 27}
-        - {x: -14.5, y: 16}
-        - {x: -16.5, y: 4}
-        - {x: -16.5, y: -27}
-        - {x: 16.5, y: -27}
-        - {x: 16.5, y: 27}
-    - name: stripsheet_charbase_template_61
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_61
       rect:
         serializedVersion: 2
         x: 380
@@ -1141,10 +1163,12 @@ TextureImporter:
         width: 27
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_62
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_62
       rect:
         serializedVersion: 2
         x: 16
@@ -1152,10 +1176,12 @@ TextureImporter:
         width: 21
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_63
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_63
       rect:
         serializedVersion: 2
         x: 42
@@ -1163,10 +1189,12 @@ TextureImporter:
         width: 23
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_64
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_64
       rect:
         serializedVersion: 2
         x: 70
@@ -1174,10 +1202,12 @@ TextureImporter:
         width: 23
         height: 51
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_65
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_65
       rect:
         serializedVersion: 2
         x: 99
@@ -1185,10 +1215,12 @@ TextureImporter:
         width: 21
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_66
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_66
       rect:
         serializedVersion: 2
         x: 129
@@ -1196,33 +1228,25 @@ TextureImporter:
         width: 23
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_67
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_67
       rect:
         serializedVersion: 2
         x: 157
         y: 1200
-        width: 35
+        width: 22
         height: 51
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 1.5, y: 25.5}
-        - {x: -17.5, y: 25.5}
-        - {x: -17.5, y: -25.5}
-        - {x: 5.5, y: -25.5}
-        - {x: 6.5, y: -9.5}
-        - {x: 6.5, y: 13.5}
-        - {x: 3.5, y: 23.5}
-      - - {x: 14.5, y: -8.5}
-        - {x: 16.5, y: -10.5}
-        - {x: 17.5, y: -10.5}
-        - {x: 17.5, y: -3.5}
-        - {x: 14.5, y: -4.5}
-    - name: stripsheet_charbase_template_68
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_68
       rect:
         serializedVersion: 2
         x: 16
@@ -1230,17 +1254,12 @@ TextureImporter:
         width: 45
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 22.5, y: 21}
-        - {x: 21.5, y: 24}
-        - {x: -4.5, y: 24}
-        - {x: -5.5, y: 23}
-        - {x: -22.5, y: -2}
-        - {x: -22.5, y: -24}
-        - {x: 22.5, y: -24}
-    - name: stripsheet_charbase_template_69
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_69
       rect:
         serializedVersion: 2
         x: 66
@@ -1248,15 +1267,12 @@ TextureImporter:
         width: 47
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -11.5, y: 24}
-        - {x: -23.5, y: -1}
-        - {x: -23.5, y: -24}
-        - {x: 23.5, y: -24}
-        - {x: 23.5, y: 24}
-    - name: stripsheet_charbase_template_70
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_70
       rect:
         serializedVersion: 2
         x: 121
@@ -1264,17 +1280,12 @@ TextureImporter:
         width: 33
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -2.5, y: 27}
-        - {x: -5.5, y: 26}
-        - {x: -16.5, y: 7}
-        - {x: -16.5, y: -25}
-        - {x: -11.5, y: -27}
-        - {x: 16.5, y: -27}
-        - {x: 16.5, y: 27}
-    - name: stripsheet_charbase_template_71
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_71
       rect:
         serializedVersion: 2
         x: 177
@@ -1282,10 +1293,12 @@ TextureImporter:
         width: 30
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_72
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_72
       rect:
         serializedVersion: 2
         x: 216
@@ -1293,20 +1306,12 @@ TextureImporter:
         width: 44
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -1, y: 24}
-        - {x: -21, y: 4}
-        - {x: -20, y: -1}
-        - {x: -17, y: -4}
-        - {x: -13, y: -4}
-        - {x: -15, y: -4}
-        - {x: -22, y: -10}
-        - {x: -22, y: -24}
-        - {x: 22, y: -24}
-        - {x: 22, y: 24}
-    - name: stripsheet_charbase_template_73
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_73
       rect:
         serializedVersion: 2
         x: 267
@@ -1314,22 +1319,12 @@ TextureImporter:
         width: 46
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 13, y: 5}
-        - {x: 10, y: 3}
-        - {x: 17, y: 10}
-        - {x: 17, y: 23}
-        - {x: 15, y: 24}
-        - {x: -3, y: 24}
-        - {x: -23, y: 0}
-        - {x: -23, y: -24}
-        - {x: 21, y: -24}
-        - {x: 23, y: -21}
-        - {x: 23, y: -8}
-        - {x: 20, y: 10}
-    - name: stripsheet_charbase_template_74
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_74
       rect:
         serializedVersion: 2
         x: 321
@@ -1337,17 +1332,12 @@ TextureImporter:
         width: 34
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -2, y: 27}
-        - {x: -6, y: 26}
-        - {x: -17, y: 7}
-        - {x: -17, y: -27}
-        - {x: 17, y: -27}
-        - {x: 17, y: 25}
-        - {x: 16, y: 27}
-    - name: stripsheet_charbase_template_75
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_75
       rect:
         serializedVersion: 2
         x: 374
@@ -1355,10 +1345,12 @@ TextureImporter:
         width: 29
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_76
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_76
       rect:
         serializedVersion: 2
         x: 19
@@ -1366,10 +1358,12 @@ TextureImporter:
         width: 24
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_77
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_77
       rect:
         serializedVersion: 2
         x: 63
@@ -1377,10 +1371,12 @@ TextureImporter:
         width: 27
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_78
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_78
       rect:
         serializedVersion: 2
         x: 106
@@ -1388,10 +1384,12 @@ TextureImporter:
         width: 27
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_79
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_79
       rect:
         serializedVersion: 2
         x: 154
@@ -1399,17 +1397,12 @@ TextureImporter:
         width: 37
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16.5, y: 27.5}
-        - {x: -18.5, y: 23.5}
-        - {x: -18.5, y: -27.5}
-        - {x: -3.5, y: -27.5}
-        - {x: 18.5, y: -11.5}
-        - {x: 18.5, y: 22.5}
-        - {x: 15.5, y: 27.5}
-    - name: stripsheet_charbase_template_80
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_80
       rect:
         serializedVersion: 2
         x: 199
@@ -1417,10 +1410,12 @@ TextureImporter:
         width: 31
         height: 56
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_81
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_81
       rect:
         serializedVersion: 2
         x: 244
@@ -1428,10 +1423,12 @@ TextureImporter:
         width: 26
         height: 56
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_82
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_82
       rect:
         serializedVersion: 2
         x: 23
@@ -1439,10 +1436,12 @@ TextureImporter:
         width: 24
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_83
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_83
       rect:
         serializedVersion: 2
         x: 70
@@ -1450,18 +1449,12 @@ TextureImporter:
         width: 33
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 7.5, y: 28.5}
-        - {x: -9.5, y: 28.5}
-        - {x: -16.5, y: 18.5}
-        - {x: -16.5, y: -8.5}
-        - {x: -13.5, y: -28.5}
-        - {x: 6.5, y: -28.5}
-        - {x: 16.5, y: -19.5}
-        - {x: 16.5, y: 7.5}
-    - name: stripsheet_charbase_template_84
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_84
       rect:
         serializedVersion: 2
         x: 119
@@ -1469,18 +1462,12 @@ TextureImporter:
         width: 40
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -12, y: 28.5}
-        - {x: -20, y: 25.5}
-        - {x: -20, y: -8.5}
-        - {x: -13, y: -28.5}
-        - {x: 8, y: -28.5}
-        - {x: 20, y: -22.5}
-        - {x: 20, y: 15.5}
-        - {x: 10, y: 28.5}
-    - name: stripsheet_charbase_template_85
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_85
       rect:
         serializedVersion: 2
         x: 183
@@ -1488,18 +1475,12 @@ TextureImporter:
         width: 34
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -7, y: 27.5}
-        - {x: -13, y: 15.5}
-        - {x: -17, y: -10.5}
-        - {x: -17, y: -27.5}
-        - {x: 16, y: -27.5}
-        - {x: 17, y: -26.5}
-        - {x: 17, y: 24.5}
-        - {x: 11, y: 27.5}
-    - name: stripsheet_charbase_template_86
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_86
       rect:
         serializedVersion: 2
         x: 237
@@ -1507,17 +1488,12 @@ TextureImporter:
         width: 41
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -17.5, y: 27}
-        - {x: -20.5, y: 6}
-        - {x: -20.5, y: -27}
-        - {x: 19.5, y: -27}
-        - {x: 20.5, y: -17}
-        - {x: 20.5, y: 6}
-        - {x: 7.5, y: 27}
-    - name: stripsheet_charbase_template_87
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_87
       rect:
         serializedVersion: 2
         x: 288
@@ -1525,10 +1501,12 @@ TextureImporter:
         width: 26
         height: 56
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_88
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_88
       rect:
         serializedVersion: 2
         x: 21
@@ -1536,10 +1514,12 @@ TextureImporter:
         width: 30
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_89
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_89
       rect:
         serializedVersion: 2
         x: 81
@@ -1547,19 +1527,12 @@ TextureImporter:
         width: 33
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -8.5, y: 28.5}
-        - {x: -16.5, y: 23.5}
-        - {x: -16.5, y: -1.5}
-        - {x: -9.5, y: -3.5}
-        - {x: -13.5, y: -24.5}
-        - {x: -10.5, y: -28.5}
-        - {x: 12.5, y: -28.5}
-        - {x: 16.5, y: -23.5}
-        - {x: 16.5, y: 28.5}
-    - name: stripsheet_charbase_template_90
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_90
       rect:
         serializedVersion: 2
         x: 143
@@ -1567,18 +1540,12 @@ TextureImporter:
         width: 39
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -19.5, y: 22.5}
-        - {x: -19.5, y: -26.5}
-        - {x: -17.5, y: -28.5}
-        - {x: 19.5, y: -28.5}
-        - {x: 19.5, y: 9.5}
-        - {x: 16.5, y: 26.5}
-        - {x: 12.5, y: 28.5}
-        - {x: -12.5, y: 28.5}
-    - name: stripsheet_charbase_template_91
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_91
       rect:
         serializedVersion: 2
         x: 207
@@ -1586,16 +1553,12 @@ TextureImporter:
         width: 39
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 12.5, y: 27.5}
-        - {x: -19.5, y: 27.5}
-        - {x: -19.5, y: -27.5}
-        - {x: 19.5, y: -27.5}
-        - {x: 19.5, y: -5.5}
-        - {x: 16.5, y: 13.5}
-    - name: stripsheet_charbase_template_92
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_92
       rect:
         serializedVersion: 2
         x: 267
@@ -1603,17 +1566,12 @@ TextureImporter:
         width: 39
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 12.5, y: 27}
-        - {x: -17.5, y: 27}
-        - {x: -19.5, y: 8}
-        - {x: -19.5, y: -27}
-        - {x: 19.5, y: -27}
-        - {x: 19.5, y: 11}
-        - {x: 15.5, y: 26}
-    - name: stripsheet_charbase_template_93
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_93
       rect:
         serializedVersion: 2
         x: 327
@@ -1621,17 +1579,12 @@ TextureImporter:
         width: 39
         height: 53
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -19.5, y: -26.5}
-        - {x: 19.5, y: -26.5}
-        - {x: 19.5, y: 8.5}
-        - {x: 15.5, y: 25.5}
-        - {x: 13.5, y: 26.5}
-        - {x: -7.5, y: 26.5}
-        - {x: -19.5, y: -2.5}
-    - name: stripsheet_charbase_template_94
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_94
       rect:
         serializedVersion: 2
         x: 27
@@ -1639,10 +1592,12 @@ TextureImporter:
         width: 24
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_95
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_95
       rect:
         serializedVersion: 2
         x: 84
@@ -1650,10 +1605,12 @@ TextureImporter:
         width: 30
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_96
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_96
       rect:
         serializedVersion: 2
         x: 144
@@ -1661,16 +1618,12 @@ TextureImporter:
         width: 36
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -13, y: 28.5}
-        - {x: -18, y: 15.5}
-        - {x: -18, y: -28.5}
-        - {x: 18, y: -28.5}
-        - {x: 18, y: 24.5}
-        - {x: 11, y: 28.5}
-    - name: stripsheet_charbase_template_97
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_97
       rect:
         serializedVersion: 2
         x: 207
@@ -1678,22 +1631,12 @@ TextureImporter:
         width: 38
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 19, y: -6}
-        - {x: 15, y: 23}
-        - {x: 13, y: 27}
-        - {x: -5, y: 27}
-        - {x: -9, y: 26}
-        - {x: -8, y: 15}
-        - {x: -19, y: -9}
-        - {x: -19, y: -27}
-        - {x: -6, y: -27}
-        - {x: -6, y: -24}
-        - {x: 18, y: -25}
-        - {x: 19, y: -24}
-    - name: stripsheet_charbase_template_98
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_98
       rect:
         serializedVersion: 2
         x: 269
@@ -1701,19 +1644,12 @@ TextureImporter:
         width: 44
         height: 52
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 22, y: 8}
-        - {x: 10, y: 26}
-        - {x: -11, y: 26}
-        - {x: -22, y: 18}
-        - {x: -22, y: -26}
-        - {x: 20, y: -26}
-        - {x: 21, y: -19}
-        - {x: 15, y: -10}
-        - {x: 22, y: -9}
-    - name: stripsheet_charbase_template_99
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_99
       rect:
         serializedVersion: 2
         x: 329
@@ -1721,22 +1657,12 @@ TextureImporter:
         width: 42
         height: 52
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 9, y: -5}
-        - {x: 15, y: -8}
-        - {x: 21, y: -8}
-        - {x: 21, y: 21}
-        - {x: 14, y: 26}
-        - {x: -12, y: 26}
-        - {x: -21, y: -1}
-        - {x: -21, y: -26}
-        - {x: 21, y: -26}
-        - {x: 21, y: -19}
-        - {x: 14, y: -11}
-        - {x: 8, y: -4}
-    - name: stripsheet_charbase_template_100
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_100
       rect:
         serializedVersion: 2
         x: 27
@@ -1744,10 +1670,12 @@ TextureImporter:
         width: 24
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_101
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_101
       rect:
         serializedVersion: 2
         x: 84
@@ -1755,10 +1683,12 @@ TextureImporter:
         width: 28
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_102
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_102
       rect:
         serializedVersion: 2
         x: 145
@@ -1766,10 +1696,12 @@ TextureImporter:
         width: 31
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_103
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_103
       rect:
         serializedVersion: 2
         x: 204
@@ -1777,16 +1709,12 @@ TextureImporter:
         width: 34
         height: 59
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -17, y: 29.5}
-        - {x: -17, y: -29.5}
-        - {x: 6, y: -29.5}
-        - {x: 17, y: -26.5}
-        - {x: 17, y: 10.5}
-        - {x: 6, y: 29.5}
-    - name: stripsheet_charbase_template_104
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_104
       rect:
         serializedVersion: 2
         x: 267
@@ -1794,16 +1722,12 @@ TextureImporter:
         width: 36
         height: 53
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -1, y: 26.5}
-        - {x: -4, y: 23.5}
-        - {x: -18, y: -0.5}
-        - {x: -18, y: -26.5}
-        - {x: 18, y: -26.5}
-        - {x: 18, y: 26.5}
-    - name: stripsheet_charbase_template_105
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_105
       rect:
         serializedVersion: 2
         x: 327
@@ -1811,18 +1735,12 @@ TextureImporter:
         width: 32
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -1, y: 27}
-        - {x: -3, y: 24}
-        - {x: -4, y: 21}
-        - {x: -14, y: 3}
-        - {x: -16, y: -14}
-        - {x: -16, y: -27}
-        - {x: 16, y: -27}
-        - {x: 16, y: 27}
-    - name: stripsheet_charbase_template_106
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_106
       rect:
         serializedVersion: 2
         x: 27
@@ -1830,10 +1748,12 @@ TextureImporter:
         width: 25
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_107
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_107
       rect:
         serializedVersion: 2
         x: 87
@@ -1841,10 +1761,12 @@ TextureImporter:
         width: 26
         height: 58
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_108
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_108
       rect:
         serializedVersion: 2
         x: 148
@@ -1852,10 +1774,12 @@ TextureImporter:
         width: 27
         height: 58
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_109
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_109
       rect:
         serializedVersion: 2
         x: 209
@@ -1863,10 +1787,12 @@ TextureImporter:
         width: 29
         height: 58
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_110
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_110
       rect:
         serializedVersion: 2
         x: 267
@@ -1874,18 +1800,12 @@ TextureImporter:
         width: 40
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 12, y: 27}
-        - {x: -7, y: 27}
-        - {x: -12, y: 15}
-        - {x: -20, y: -9}
-        - {x: -20, y: -27}
-        - {x: 20, y: -27}
-        - {x: 20, y: 6}
-        - {x: 14, y: 26}
-    - name: stripsheet_charbase_template_111
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_111
       rect:
         serializedVersion: 2
         x: 324
@@ -1893,18 +1813,12 @@ TextureImporter:
         width: 39
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -19.5, y: 16.5}
-        - {x: -19.5, y: -27.5}
-        - {x: 19.5, y: -27.5}
-        - {x: 19.5, y: 5.5}
-        - {x: 16.5, y: 24.5}
-        - {x: 13.5, y: 27.5}
-        - {x: -7.5, y: 27.5}
-        - {x: -11.5, y: 26.5}
-    - name: stripsheet_charbase_template_112
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_112
       rect:
         serializedVersion: 2
         x: 381
@@ -1912,25 +1826,12 @@ TextureImporter:
         width: 34
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 17, y: -28.5}
-        - {x: 17, y: -5.5}
-        - {x: 14, y: 24.5}
-        - {x: 11, y: 28.5}
-        - {x: -8, y: 28.5}
-        - {x: -12, y: 27.5}
-        - {x: -11, y: 16.5}
-        - {x: -17, y: 4.5}
-        - {x: -17, y: -12.5}
-        - {x: -13, y: -25.5}
-        - {x: -11, y: -28.5}
-        - {x: 2, y: -28.5}
-        - {x: 2, y: -25.5}
-        - {x: 5, y: -27.5}
-        - {x: 12, y: -28.5}
-    - name: stripsheet_charbase_template_113
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_113
       rect:
         serializedVersion: 2
         x: 25
@@ -1938,16 +1839,12 @@ TextureImporter:
         width: 34
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -17, y: -27.5}
-        - {x: 17, y: -27.5}
-        - {x: 17, y: -5.5}
-        - {x: 12, y: 27.5}
-        - {x: -11, y: 27.5}
-        - {x: -17, y: 12.5}
-    - name: stripsheet_charbase_template_114
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_114
       rect:
         serializedVersion: 2
         x: 81
@@ -1955,18 +1852,12 @@ TextureImporter:
         width: 38
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -10, y: 27}
-        - {x: -13, y: 26}
-        - {x: -19, y: 5}
-        - {x: -19, y: -16}
-        - {x: -15, y: -27}
-        - {x: 19, y: -27}
-        - {x: 19, y: -9}
-        - {x: 10, y: 27}
-    - name: stripsheet_charbase_template_115
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_115
       rect:
         serializedVersion: 2
         x: 147
@@ -1974,16 +1865,12 @@ TextureImporter:
         width: 32
         height: 53
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -11, y: 26.5}
-        - {x: -16, y: 17.5}
-        - {x: -16, y: -26.5}
-        - {x: 16, y: -26.5}
-        - {x: 16, y: 1.5}
-        - {x: 8, y: 26.5}
-    - name: stripsheet_charbase_template_116
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_116
       rect:
         serializedVersion: 2
         x: 208
@@ -1991,16 +1878,12 @@ TextureImporter:
         width: 33
         height: 53
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -6.5, y: 26.5}
-        - {x: -11.5, y: 20.5}
-        - {x: -16.5, y: -11.5}
-        - {x: -16.5, y: -26.5}
-        - {x: 16.5, y: -26.5}
-        - {x: 16.5, y: 26.5}
-    - name: stripsheet_charbase_template_117
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_117
       rect:
         serializedVersion: 2
         x: 268
@@ -2008,19 +1891,12 @@ TextureImporter:
         width: 37
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 18.5, y: 28.5}
-        - {x: -7.5, y: 28.5}
-        - {x: -14.5, y: 23.5}
-        - {x: -18.5, y: 1.5}
-        - {x: -18.5, y: -28.5}
-        - {x: -6.5, y: -28.5}
-        - {x: -4.5, y: -26.5}
-        - {x: -2.5, y: -28.5}
-        - {x: 18.5, y: -28.5}
-    - name: stripsheet_charbase_template_118
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_118
       rect:
         serializedVersion: 2
         x: 327
@@ -2028,16 +1904,12 @@ TextureImporter:
         width: 33
         height: 56
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -13.5, y: 28}
-        - {x: -16.5, y: 20}
-        - {x: -16.5, y: -28}
-        - {x: 16.5, y: -28}
-        - {x: 16.5, y: 17}
-        - {x: 14.5, y: 28}
-    - name: stripsheet_charbase_template_119
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_119
       rect:
         serializedVersion: 2
         x: 387
@@ -2045,15 +1917,12 @@ TextureImporter:
         width: 33
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -15.5, y: 27.5}
-        - {x: -16.5, y: 26.5}
-        - {x: -16.5, y: -27.5}
-        - {x: 16.5, y: -27.5}
-        - {x: 16.5, y: 27.5}
-    - name: stripsheet_charbase_template_120
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_120
       rect:
         serializedVersion: 2
         x: 17
@@ -2061,17 +1930,12 @@ TextureImporter:
         width: 49
         height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -7.5, y: 25}
-        - {x: -24.5, y: -4}
-        - {x: -24.5, y: -23}
-        - {x: -23.5, y: -25}
-        - {x: 20.5, y: -25}
-        - {x: 24.5, y: -8}
-        - {x: 24.5, y: 25}
-    - name: stripsheet_charbase_template_121
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_121
       rect:
         serializedVersion: 2
         x: 74
@@ -2079,21 +1943,12 @@ TextureImporter:
         width: 46
         height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 13, y: 25}
-        - {x: -5, y: 25}
-        - {x: -8, y: 19}
-        - {x: -22, y: -6}
-        - {x: -23, y: -8}
-        - {x: -23, y: -24}
-        - {x: -22, y: -25}
-        - {x: 11, y: -25}
-        - {x: 12, y: -16}
-        - {x: 23, y: -9}
-        - {x: 23, y: 23}
-    - name: stripsheet_charbase_template_122
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_122
       rect:
         serializedVersion: 2
         x: 137
@@ -2101,18 +1956,12 @@ TextureImporter:
         width: 37
         height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -11.5, y: 25}
-        - {x: -17.5, y: 23}
-        - {x: -18.5, y: 18}
-        - {x: -18.5, y: -25}
-        - {x: 5.5, y: -25}
-        - {x: 18.5, y: -7}
-        - {x: 18.5, y: 20}
-        - {x: 12.5, y: 25}
-    - name: stripsheet_charbase_template_123
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_123
       rect:
         serializedVersion: 2
         x: 184
@@ -2120,15 +1969,12 @@ TextureImporter:
         width: 44
         height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -22, y: 25}
-        - {x: -22, y: -25}
-        - {x: 22, y: -25}
-        - {x: 22, y: 21}
-        - {x: 19, y: 25}
-    - name: stripsheet_charbase_template_124
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_124
       rect:
         serializedVersion: 2
         x: 235
@@ -2136,19 +1982,12 @@ TextureImporter:
         width: 47
         height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 14.5, y: 25}
-        - {x: -2.5, y: 25}
-        - {x: -7.5, y: 19}
-        - {x: -6.5, y: 14}
-        - {x: -23.5, y: -7}
-        - {x: -23.5, y: -25}
-        - {x: 18.5, y: -25}
-        - {x: 23.5, y: -18}
-        - {x: 23.5, y: 23}
-    - name: stripsheet_charbase_template_125
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_125
       rect:
         serializedVersion: 2
         x: 289
@@ -2156,17 +1995,12 @@ TextureImporter:
         width: 47
         height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -2.5, y: 25}
-        - {x: -8.5, y: 20}
-        - {x: -23.5, y: -5}
-        - {x: -23.5, y: -25}
-        - {x: 23.5, y: -25}
-        - {x: 23.5, y: 22}
-        - {x: 21.5, y: 25}
-    - name: stripsheet_charbase_template_126
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_126
       rect:
         serializedVersion: 2
         x: 356
@@ -2174,20 +2008,12 @@ TextureImporter:
         width: 34
         height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 17, y: 20}
-        - {x: 6, y: 25}
-        - {x: -9, y: 25}
-        - {x: -14, y: 19}
-        - {x: -17, y: 8}
-        - {x: -17, y: -25}
-        - {x: 0, y: -25}
-        - {x: 5, y: -16}
-        - {x: 4, y: -12}
-        - {x: 17, y: -6}
-    - name: stripsheet_charbase_template_127
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_127
       rect:
         serializedVersion: 2
         x: 399
@@ -2195,18 +2021,12 @@ TextureImporter:
         width: 45
         height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 15.5, y: 25}
-        - {x: -5.5, y: 25}
-        - {x: -9.5, y: 24}
-        - {x: -22.5, y: -5}
-        - {x: -22.5, y: -25}
-        - {x: 16.5, y: -25}
-        - {x: 22.5, y: -17}
-        - {x: 22.5, y: 20}
-    - name: stripsheet_charbase_template_128
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_128
       rect:
         serializedVersion: 2
         x: 450
@@ -2214,16 +2034,12 @@ TextureImporter:
         width: 48
         height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -9, y: 25}
-        - {x: -24, y: 2}
-        - {x: -24, y: -25}
-        - {x: 24, y: -25}
-        - {x: 24, y: 23}
-        - {x: 18, y: 25}
-    - name: stripsheet_charbase_template_129
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_129
       rect:
         serializedVersion: 2
         x: 12
@@ -2231,10 +2047,12 @@ TextureImporter:
         width: 27
         height: 47
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_130
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_130
       rect:
         serializedVersion: 2
         x: 63
@@ -2242,10 +2060,12 @@ TextureImporter:
         width: 25
         height: 61
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_131
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_131
       rect:
         serializedVersion: 2
         x: 118
@@ -2253,10 +2073,12 @@ TextureImporter:
         width: 28
         height: 57
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_132
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_132
       rect:
         serializedVersion: 2
         x: 166
@@ -2264,16 +2086,12 @@ TextureImporter:
         width: 33
         height: 51
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16.5, y: -21.5}
-        - {x: -13.5, y: -25.5}
-        - {x: 16.5, y: -25.5}
-        - {x: 16.5, y: 25.5}
-        - {x: -12.5, y: 25.5}
-        - {x: -16.5, y: 22.5}
-    - name: stripsheet_charbase_template_133
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_133
       rect:
         serializedVersion: 2
         x: 213
@@ -2281,20 +2099,12 @@ TextureImporter:
         width: 40
         height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -17, y: 19}
-        - {x: -20, y: 8}
-        - {x: -20, y: -18}
-        - {x: -15, y: -18}
-        - {x: -12, y: -15}
-        - {x: -8, y: -19}
-        - {x: 3, y: -19}
-        - {x: 13, y: -10}
-        - {x: 20, y: -2}
-        - {x: 20, y: 19}
-    - name: stripsheet_charbase_template_134
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_134
       rect:
         serializedVersion: 2
         x: 262
@@ -2302,17 +2112,12 @@ TextureImporter:
         width: 41
         height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 2.5, y: 21}
-        - {x: -20.5, y: 21}
-        - {x: -20.5, y: -17}
-        - {x: -18.5, y: -21}
-        - {x: 20.5, y: -21}
-        - {x: 20.5, y: 7}
-        - {x: 19.5, y: 11}
-    - name: stripsheet_charbase_template_135
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_135
       rect:
         serializedVersion: 2
         x: 315
@@ -2320,17 +2125,12 @@ TextureImporter:
         width: 43
         height: 41
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -10.5, y: 20.5}
-        - {x: -21.5, y: 4.5}
-        - {x: -21.5, y: -20.5}
-        - {x: 4.5, y: -20.5}
-        - {x: 16.5, y: -14.5}
-        - {x: 21.5, y: 0.5}
-        - {x: 21.5, y: 20.5}
-    - name: stripsheet_charbase_template_136
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_136
       rect:
         serializedVersion: 2
         x: 366
@@ -2338,23 +2138,12 @@ TextureImporter:
         width: 44
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 17, y: -15}
-        - {x: 22, y: -8}
-        - {x: 22, y: 2}
-        - {x: 21, y: 3}
-        - {x: 10, y: 25}
-        - {x: 6, y: 27}
-        - {x: -22, y: 27}
-        - {x: -22, y: 1}
-        - {x: -3, y: -27}
-        - {x: 9, y: -27}
-        - {x: 13, y: -22}
-        - {x: 13, y: -17}
-        - {x: 11, y: -15}
-    - name: stripsheet_charbase_template_137
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_137
       rect:
         serializedVersion: 2
         x: 414
@@ -2362,10 +2151,12 @@ TextureImporter:
         width: 27
         height: 62
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_138
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_138
       rect:
         serializedVersion: 2
         x: 464
@@ -2373,10 +2164,12 @@ TextureImporter:
         width: 27
         height: 41
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_139
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_139
       rect:
         serializedVersion: 2
         x: 52
@@ -2384,15 +2177,12 @@ TextureImporter:
         width: 32
         height: 53
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: 26.5}
-        - {x: -16, y: -26.5}
-        - {x: 16, y: -26.5}
-        - {x: 16, y: 19.5}
-        - {x: 9, y: 26.5}
-    - name: stripsheet_charbase_template_140
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_140
       rect:
         serializedVersion: 2
         x: 130
@@ -2400,17 +2190,12 @@ TextureImporter:
         width: 33
         height: 53
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 1.5, y: 26.5}
-        - {x: -16.5, y: 26.5}
-        - {x: -16.5, y: -26.5}
-        - {x: 12.5, y: -26.5}
-        - {x: 16.5, y: -25.5}
-        - {x: 16.5, y: -12.5}
-        - {x: 4.5, y: 25.5}
-    - name: stripsheet_charbase_template_141
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_141
       rect:
         serializedVersion: 2
         x: 196
@@ -2418,20 +2203,12 @@ TextureImporter:
         width: 43
         height: 52
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 16.5, y: -6}
-        - {x: 15.5, y: 2}
-        - {x: 8.5, y: 13}
-        - {x: -1.5, y: 26}
-        - {x: -21.5, y: 26}
-        - {x: -21.5, y: -4}
-        - {x: -17.5, y: -26}
-        - {x: 21.5, y: -26}
-        - {x: 21.5, y: -7}
-        - {x: 20.5, y: -6}
-    - name: stripsheet_charbase_template_142
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_142
       rect:
         serializedVersion: 2
         x: 266
@@ -2439,19 +2216,12 @@ TextureImporter:
         width: 44
         height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 3, y: 21.5}
-        - {x: -22, y: 21.5}
-        - {x: -22, y: -1.5}
-        - {x: -16, y: -20.5}
-        - {x: -8, y: -21.5}
-        - {x: 18, y: -21.5}
-        - {x: 22, y: -18.5}
-        - {x: 22, y: 7.5}
-        - {x: 16, y: 18.5}
-    - name: stripsheet_charbase_template_143
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_143
       rect:
         serializedVersion: 2
         x: 338
@@ -2459,10 +2229,12 @@ TextureImporter:
         width: 58
         height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_144
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_144
       rect:
         serializedVersion: 2
         x: 418
@@ -2470,10 +2242,12 @@ TextureImporter:
         width: 57
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_145
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_145
       rect:
         serializedVersion: 2
         x: 498
@@ -2481,10 +2255,12 @@ TextureImporter:
         width: 57
         height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_146
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_146
       rect:
         serializedVersion: 2
         x: 578
@@ -2492,10 +2268,12 @@ TextureImporter:
         width: 57
         height: 19
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_147
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_147
       rect:
         serializedVersion: 2
         x: 24
@@ -2503,10 +2281,12 @@ TextureImporter:
         width: 29
         height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_148
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_148
       rect:
         serializedVersion: 2
         x: 112
@@ -2514,10 +2294,12 @@ TextureImporter:
         width: 31
         height: 51
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_149
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_149
       rect:
         serializedVersion: 2
         x: 200
@@ -2525,16 +2307,12 @@ TextureImporter:
         width: 33
         height: 51
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -11.5, y: 25.5}
-        - {x: -16.5, y: 14.5}
-        - {x: -16.5, y: -25.5}
-        - {x: 16.5, y: -25.5}
-        - {x: 16.5, y: 23.5}
-        - {x: 11.5, y: 25.5}
-    - name: stripsheet_charbase_template_150
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_150
       rect:
         serializedVersion: 2
         x: 289
@@ -2542,16 +2320,12 @@ TextureImporter:
         width: 34
         height: 51
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 17, y: 5.5}
-        - {x: 8, y: 25.5}
-        - {x: -10, y: 25.5}
-        - {x: -17, y: 10.5}
-        - {x: -17, y: -25.5}
-        - {x: 17, y: -25.5}
-    - name: stripsheet_charbase_template_151
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_151
       rect:
         serializedVersion: 2
         x: 379
@@ -2559,21 +2333,12 @@ TextureImporter:
         width: 34
         height: 51
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -9, y: 25.5}
-        - {x: -12, y: 19.5}
-        - {x: -11, y: 14.5}
-        - {x: -17, y: 1.5}
-        - {x: -17, y: -7.5}
-        - {x: -14, y: -10.5}
-        - {x: -17, y: -17.5}
-        - {x: -17, y: -25.5}
-        - {x: 17, y: -25.5}
-        - {x: 17, y: 13.5}
-        - {x: 11, y: 25.5}
-    - name: stripsheet_charbase_template_152
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_152
       rect:
         serializedVersion: 2
         x: 19
@@ -2581,15 +2346,12 @@ TextureImporter:
         width: 35
         height: 51
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -17.5, y: 25.5}
-        - {x: -17.5, y: -25.5}
-        - {x: 17.5, y: -25.5}
-        - {x: 17.5, y: 5.5}
-        - {x: 10.5, y: 25.5}
-    - name: stripsheet_charbase_template_153
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_153
       rect:
         serializedVersion: 2
         x: 114
@@ -2597,17 +2359,12 @@ TextureImporter:
         width: 37
         height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -5.5, y: 25}
-        - {x: -18.5, y: -7}
-        - {x: -18.5, y: -25}
-        - {x: -3.5, y: -25}
-        - {x: 12.5, y: -23}
-        - {x: 18.5, y: -15}
-        - {x: 18.5, y: 25}
-    - name: stripsheet_charbase_template_154
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_154
       rect:
         serializedVersion: 2
         x: 207
@@ -2615,18 +2372,12 @@ TextureImporter:
         width: 48
         height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 19, y: 25}
-        - {x: -10, y: 25}
-        - {x: -24, y: -3}
-        - {x: -24, y: -25}
-        - {x: 2, y: -25}
-        - {x: 21, y: -23}
-        - {x: 24, y: -15}
-        - {x: 24, y: 21}
-    - name: stripsheet_charbase_template_155
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_155
       rect:
         serializedVersion: 2
         x: 305
@@ -2634,16 +2385,12 @@ TextureImporter:
         width: 54
         height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -20, y: 25}
-        - {x: -27, y: 7}
-        - {x: -27, y: -25}
-        - {x: 27, y: -25}
-        - {x: 27, y: 23}
-        - {x: 19, y: 25}
-    - name: stripsheet_charbase_template_156
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_156
       rect:
         serializedVersion: 2
         x: 399
@@ -2651,22 +2398,12 @@ TextureImporter:
         width: 42
         height: 52
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 9, y: -5}
-        - {x: 15, y: -8}
-        - {x: 21, y: -8}
-        - {x: 21, y: 21}
-        - {x: 14, y: 26}
-        - {x: -12, y: 26}
-        - {x: -21, y: -1}
-        - {x: -21, y: -26}
-        - {x: 21, y: -26}
-        - {x: 21, y: -19}
-        - {x: 14, y: -11}
-        - {x: 8, y: -4}
-    - name: stripsheet_charbase_template_157
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_157
       rect:
         serializedVersion: 2
         x: 28
@@ -2674,10 +2411,12 @@ TextureImporter:
         width: 27
         height: 74
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_158
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_158
       rect:
         serializedVersion: 2
         x: 86
@@ -2685,10 +2424,12 @@ TextureImporter:
         width: 30
         height: 74
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_159
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_159
       rect:
         serializedVersion: 2
         x: 147
@@ -2696,18 +2437,12 @@ TextureImporter:
         width: 32
         height: 73
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 16, y: 36.5}
-        - {x: -14, y: 36.5}
-        - {x: -16, y: 35.5}
-        - {x: -16, y: -36.5}
-        - {x: -7, y: -36.5}
-        - {x: -4, y: -33.5}
-        - {x: 2, y: -36.5}
-        - {x: 16, y: -36.5}
-    - name: stripsheet_charbase_template_160
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_160
       rect:
         serializedVersion: 2
         x: 206
@@ -2715,14 +2450,12 @@ TextureImporter:
         width: 32
         height: 74
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: 37}
-        - {x: -16, y: -37}
-        - {x: 16, y: -37}
-        - {x: 16, y: 37}
-    - name: stripsheet_charbase_template_161
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_161
       rect:
         serializedVersion: 2
         x: 265
@@ -2730,14 +2463,12 @@ TextureImporter:
         width: 33
         height: 73
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16.5, y: 36.5}
-        - {x: -16.5, y: -36.5}
-        - {x: 16.5, y: -36.5}
-        - {x: 16.5, y: 36.5}
-    - name: stripsheet_charbase_template_162
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_162
       rect:
         serializedVersion: 2
         x: 327
@@ -2745,10 +2476,12 @@ TextureImporter:
         width: 30
         height: 73
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_163
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_163
       rect:
         serializedVersion: 2
         x: 386
@@ -2756,10 +2489,12 @@ TextureImporter:
         width: 29
         height: 74
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_164
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_164
       rect:
         serializedVersion: 2
         x: 28
@@ -2767,10 +2502,12 @@ TextureImporter:
         width: 28
         height: 74
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_165
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_165
       rect:
         serializedVersion: 2
         x: 90
@@ -2778,10 +2515,12 @@ TextureImporter:
         width: 27
         height: 70
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_166
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_166
       rect:
         serializedVersion: 2
         x: 143
@@ -2789,15 +2528,12 @@ TextureImporter:
         width: 40
         height: 58
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -20, y: 29}
-        - {x: -20, y: -29}
-        - {x: 10, y: -29}
-        - {x: 20, y: -23}
-        - {x: 20, y: 29}
-    - name: stripsheet_charbase_template_167
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_167
       rect:
         serializedVersion: 2
         x: 209
@@ -2805,10 +2541,12 @@ TextureImporter:
         width: 26
         height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_168
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_168
       rect:
         serializedVersion: 2
         x: 269
@@ -2816,10 +2554,12 @@ TextureImporter:
         width: 26
         height: 53
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: stripsheet_charbase_template_169
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_169
       rect:
         serializedVersion: 2
         x: 323
@@ -2827,19 +2567,12 @@ TextureImporter:
         width: 40
         height: 51
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -12, y: 25.5}
-        - {x: -20, y: 13.5}
-        - {x: -20, y: -2.5}
-        - {x: -15, y: -16.5}
-        - {x: -7, y: -25.5}
-        - {x: 19, y: -25.5}
-        - {x: 20, y: -17.5}
-        - {x: 20, y: 9.5}
-        - {x: 6, y: 25.5}
-    - name: stripsheet_charbase_template_170
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_170
       rect:
         serializedVersion: 2
         x: 383
@@ -2847,17 +2580,12 @@ TextureImporter:
         width: 41
         height: 49
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -11.5, y: 24.5}
-        - {x: -20.5, y: 7.5}
-        - {x: -20.5, y: -12.5}
-        - {x: -15.5, y: -24.5}
-        - {x: 20.5, y: -24.5}
-        - {x: 20.5, y: 3.5}
-        - {x: 9.5, y: 24.5}
-    - name: stripsheet_charbase_template_171
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_171
       rect:
         serializedVersion: 2
         x: 443
@@ -2865,20 +2593,12 @@ TextureImporter:
         width: 41
         height: 46
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 7.5, y: 23}
-        - {x: -10.5, y: 23}
-        - {x: -14.5, y: 22}
-        - {x: -20.5, y: -6}
-        - {x: -20.5, y: -15}
-        - {x: -4.5, y: -23}
-        - {x: 11.5, y: -23}
-        - {x: 20.5, y: -19}
-        - {x: 20.5, y: -5}
-        - {x: 8.5, y: 21}
-    - name: stripsheet_charbase_template_172
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_172
       rect:
         serializedVersion: 2
         x: 503
@@ -2886,17 +2606,12 @@ TextureImporter:
         width: 41
         height: 39
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -5.5, y: 19.5}
-        - {x: -18.5, y: -3.5}
-        - {x: -20.5, y: -13.5}
-        - {x: -20.5, y: -19.5}
-        - {x: 20.5, y: -19.5}
-        - {x: 20.5, y: -12.5}
-        - {x: 15.5, y: 19.5}
-    - name: stripsheet_charbase_template_173
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: stripsheet_charbase_template_173
       rect:
         serializedVersion: 2
         x: 563
@@ -2904,17 +2619,10 @@ TextureImporter:
         width: 41
         height: 41
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -20.5, y: -10.5}
-        - {x: -20.5, y: -20.5}
-        - {x: 20.5, y: -20.5}
-        - {x: 20.5, y: -3.5}
-        - {x: 18.5, y: 19.5}
-        - {x: 17.5, y: 20.5}
-        - {x: -2.5, y: 20.5}
-        - {x: -6.5, y: 19.5}
+      outline: []
+      tessellationDetail: -1
     outline: []
   spritePackingTag: 
   userData: 

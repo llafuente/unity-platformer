@@ -76,6 +76,15 @@ namespace UnityPlatformer {
         Play("attack_melee");
       } else if (character.IsOnState(States.Ladder)) {
         Play("ladder");
+      } else if (character.IsOnState(States.Fence)) {
+        // left/right has priority
+        if (character.velocity.x != 0) {
+          Play("fence_" + (Mathf.Sign(character.velocity.x) == 1 ? "right" : "left"));
+        } else if (character.velocity.y != 0) {
+          Play("fence_" + (Mathf.Sign(character.velocity.y) == 1 ? "up" : "down"));
+        } else {
+          Play("fence_idle");
+        }
       } else if (character.IsOnState(States.Jumping)) {
         //Transition("jump_start", 0.1f);
         Play("jump");
