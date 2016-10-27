@@ -48,9 +48,9 @@ namespace UnityPlatformer {
     public virtual void EndAction() {
     }
 
-    ///<summary>
+    /// <summary>
     /// interrupt current action, to reset cooldown send true
-    ///</summary>
+    /// </summary>
     public void Interrupt(bool resetCd) {
       if (onInterrupt != null) {
         onInterrupt();

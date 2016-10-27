@@ -5,8 +5,13 @@ namespace UnityPlatformer {
   /// Generic Singleton template for MonoBehaviours
   /// </summary>
   public class MBSingleton<T> : MonoBehaviour where T : MBSingleton<T> {
+    /// <summary>
+    /// Singleton instance
+    /// </summary>
     private static T _instance;
-
+    /// <summary>
+    /// Singleton instance retrieval
+    /// </summary>
     public static T instance {
       get {
         if (_instance == null) {

@@ -2,23 +2,34 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace UnityPlatformer {
+  /// <summary>
+  /// Monitor for PlatformerCollider2D
+  /// </summary>
   public class PlatformerCollider2DMonitor : Monitor {
+    /// <summary>
+    /// PlatformerCollider2D
+    /// </summary>
     PlatformerCollider2D pc2d;
-    // Use this for initialization
+    /// <summary>
+    /// Get PlatformerCollider2D
+    /// </summary>
     virtual public void Start() {
-        pc2d = GetComponent<PlatformerCollider2D> ();
+      pc2d = GetComponent<PlatformerCollider2D> ();
     }
-
+    /// <summary>
+    /// Get PlatformerCollider2D
+    /// </summary>
     virtual public void OnEnable() {
-        Start();
+      Start();
     }
-
-      // Update is called once per frame
+    /// <summary>
+    /// Create text to display
+    /// </summary>
     virtual public void Update() {
       int leftHitsIdx = 0;
       int rightHitsIdx = 0;
 
-      for (int i = 0; i < pc2d.collisions.contactsIdx; ++i) {
+      for (int i = 0; i < pc2d.collisions.contactsCount; ++i) {
         switch(pc2d.collisions.contacts[i].dir) {
         case Directions.Left: ++leftHitsIdx; break;
         case Directions.Right: ++rightHitsIdx; break;

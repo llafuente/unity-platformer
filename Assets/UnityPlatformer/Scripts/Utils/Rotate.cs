@@ -7,6 +7,9 @@ namespace UnityPlatformer {
   /// Rotate current object
   /// </summary>
   public class Rotate : MonoBehaviour {
+    /// <summary>
+    /// Degrees per second
+    /// </summary>
     [Comment("In Degrees")]
     public Vector3 rotationPerSecond;
 

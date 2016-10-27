@@ -6,8 +6,17 @@ using System.Collections;
 using UnityEditor;
 #endif
 
+// TODO faceDir & timeSign are the same ?!
+
 namespace UnityPlatformer {
+  /// <summary>
+  /// Rope tile
+  /// </summary>
   public class Rope : MonoBehaviour, IUpdateEntity {
+    /// <summary>
+    /// Object that can be 'atachhed' to the rope
+    /// This allow to create rope in background, for example.
+    /// </summary>
     public LayerMask passengers;
     /// <summary>
     /// The number of segments..
@@ -42,9 +51,14 @@ namespace UnityPlatformer {
     /// rope rotation easing
     /// </summary>
     public EasingType easing = EasingType.Sine;
-
+    /// <summary>
+    /// rope is stopped
+    /// </summary>
     public bool stop = false;
     [Range(0, 1)]
+    /// <summary>
+    /// Initial time
+    /// </summary>
     public float initialTime = 0;
 
     /*
@@ -53,6 +67,9 @@ namespace UnityPlatformer {
     /// </summary>
     public float angularDrag = 1.0f;
     */
+    /// <summary>
+    /// Where the rope movement is facing
+    /// </summary>
     public float faceDir {
       get {
         return Mathf.Sign(lastAngle);
@@ -72,15 +89,37 @@ namespace UnityPlatformer {
     [Range(0,1)]
     public float slowDownModifier;
 
+    /// <summary>
+    /// Rope callback type
+    /// </summary>
     public delegate void RopeCallback(Rope rope);
+    /// <summary>
+    /// When a side is reached (before change waving)
+    /// </summary>
     public RopeCallback onSideReached;
+    /// <summary>
+    /// When rope is broken
+    /// </summary>
     public RopeCallback onBreakRope;
-
+    /// <summary>
+    /// GameObjects with RopeSection
+    /// </summary>
     internal GameObject[] sections;
-
+    /// <summary>
+    ///
+    /// </summary>
     int timeSign = 1;
+    /// <summary>
+    /// Current time, goes from 0-1
+    /// </summary>
     float time = 0;
+    /// <summary>
+    /// Root RopeSection last angle
+    /// </summary>
     float lastAngle = 0;
+    /// <summary>
+    /// Health of the Rope, so it can be breakable
+    /// </summary>
     CharacterHealth health;
 
     void Start() {
@@ -114,9 +153,10 @@ namespace UnityPlatformer {
       UpdateRotation();
     }
 
-
 #if UNITY_EDITOR
-    /// update the rope on each change...
+    /// <summary>
+    /// Update the rope on each editor change...
+    /// </summary>
     void OnValidate() {
       if (transform.parent != null) {
         Debug.LogWarning ("Rope creation may not work correctly if the Rope is a child of another object.");
@@ -128,11 +168,15 @@ namespace UnityPlatformer {
       }
     }
 #endif
-
+    /// <summary>
+    /// Conversion factor
+    /// </summary>
     public float SpeedToSectionOffset(float speed) {
       return speed / segmentLength;
     }
-
+    /// <summary>
+    /// Create Rope anchor
+    /// </summary>
     GameObject CreateAnchor() {
       GameObject anchor = new GameObject ();
       anchor.transform.parent = transform;
@@ -143,7 +187,9 @@ namespace UnityPlatformer {
 
       return anchor;
     }
-
+    /// <summary>
+    /// Create and configure RopeSection
+    /// </summary>
     GameObject CreateSection(int i, Rigidbody2D connectedBody) {
       GameObject section;
       float currentLocalYPos = -segmentLength / 2.0f - segmentLength * i;
@@ -228,15 +274,22 @@ namespace UnityPlatformer {
       if (index < segments - 1) return sections[index + 1];
       return null;
     }
-
+    /// <summary>
+    /// notify UpdateManager
+    /// </summary>
     public virtual void OnEnable() {
       UpdateManager.instance.Push(this, Configuration.instance.movingPlatformsPriority);
     }
-
+    /// <summary>
+    /// notify UpdateManager
+    /// </summary>
     public virtual void OnDisable() {
       UpdateManager.instance.Remove(this);
     }
-
+    /// <summary>
+    /// Update rope rotation, this is called PlatformerUpdate
+    /// if you need to called it outside, remember that time must be updated before
+    /// </summary>
     public void UpdateRotation() {
       // rotate only top section
       // rope isKinematic atm, not realistic but works perfectly
@@ -278,10 +331,14 @@ namespace UnityPlatformer {
       time += delta * timeSign / rotationTime;
       UpdateRotation();
     }
-
-    public virtual void LatePlatformerUpdate(float delta) {
-    }
-
+    /// <summary>
+    /// Do nothing, use PlatformerUpdate instead
+    /// </summary>
+    public virtual void LatePlatformerUpdate(float delta) {}
+    /// <summary>
+    /// Break the rope and stop movement
+    /// TODO break do not destroy sections
+    /// </summary>
     public void BreakRope() {
       if (onBreakRope != null) {
         onBreakRope(this);
@@ -294,8 +351,10 @@ namespace UnityPlatformer {
       gameObject.transform.DestroyChildren();
     }
 
-
     #if UNITY_EDITOR
+    /// <summary>
+    /// Draw in Editor
+    /// </summary>
     [DrawGizmo(GizmoType.InSelectionHierarchy | GizmoType.NotInSelectionHierarchy)]
     void OnDrawGizmos() {
       if (Application.isPlaying) return;

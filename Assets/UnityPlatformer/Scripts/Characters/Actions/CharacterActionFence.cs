@@ -78,11 +78,11 @@ namespace UnityPlatformer {
 
     public override void PerformAction(float delta) {
       // guard: something goes wrong!
-      if (character.fence == null) {
+      Fence fence = character.fence;
+      if (fence == null) {
         character.ExitState(States.Fence);
         return;
       }
-      Fence fence = character.fence;
       Vector2 in2d = input.GetAxisRaw();
       Vector3 velocity = new Vector3(speed.x * in2d.x, 0, 0);
 
@@ -92,13 +92,13 @@ namespace UnityPlatformer {
       Vector3 pmax = b.max;
 
       // test move X, if NOK do not move X
-      if (!character.fence.body.Contains(pmin + velocity * delta, pmax + velocity * delta)) {
+      if (!fence.body.Contains(pmin + velocity * delta, pmax + velocity * delta)) {
         velocity.x = 0;
       }
 
       // test move Y, if NOK do not move Y
       velocity.y = speed.y * in2d.y;
-      if (!character.fence.body.Contains(pmin + velocity * delta, pmax + velocity * delta)) {
+      if (!fence.body.Contains(pmin + velocity * delta, pmax + velocity * delta)) {
         velocity.y = 0;
       }
 
@@ -110,8 +110,8 @@ namespace UnityPlatformer {
       // move up if you want it
       if (dismountJumping && input.IsActionHeld(actionJump.action)) {
         //dismount.Reset();
-        character.fence.Dismount(character);
-        character.fence = null;
+        fence.Dismount(character);
+        fence = null;
 
         actionJump.Jump(new JumpConstant(character,
           jumpOff.Clone((int) character.faceDir)

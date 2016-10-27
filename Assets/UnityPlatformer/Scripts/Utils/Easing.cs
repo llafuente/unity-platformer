@@ -84,7 +84,9 @@ namespace UnityPlatformer {
       }
     }
   }
-
+  /// <summary>
+  /// Easing types
+  /// </summary>
   public enum EasingType {
     Step,
     Linear,

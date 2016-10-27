@@ -3,15 +3,31 @@ using UnityEngine;
 using UnityPlatformer;
 
 namespace UnityPlatformer {
+  /// <summary>
+  /// Input for automated tests
+  /// * Move right until wall, then move left
+  /// * If found a ladder climb
+  /// </summary>
   public class TestInputPatrolLadder : MonoBehaviour {
-
+    /// <summary>
+    /// Character AIInput
+    /// </summary>
     internal AIInput inputMgr;
+    /// <summary>
+    /// PlatformerCollider2D to listen collision callbacks
+    /// </summary>
     internal PlatformerCollider2D pc2d;
+    /// <summary>
+    /// Character
+    /// </summary>
     internal Character character;
-
+    /// <summary>
+    /// where is facing
+    /// </summary>
     Facing facing = Facing.Right;
-
-
+    /// <summary>
+    /// Listen InstancePrefab SendMessage and start logic
+    /// </summary>
     public void OnInstancePrefab(InstancePrefab prefab) {
       inputMgr = prefab.instance.GetComponentInChildren<AIInput>();
       if (inputMgr == null) {
@@ -27,7 +43,11 @@ namespace UnityPlatformer {
       pc2d.onLeftWall += OnLeftWall;
       pc2d.onRightWall += OnRightWall;
     }
-
+    /// <summary>
+    /// Listen area changes
+    /// if enter ladder climb
+    /// if leave ladder resume horizontal movement
+    /// </summary>
     void OnAreaChange(Areas before, Areas after) {
       if ((after & Areas.Ladder) == Areas.Ladder) {
         if (character.ladder.IsAboveTop(character, character.feet)) {
@@ -43,16 +63,23 @@ namespace UnityPlatformer {
       }
     }
 
-    // this prevent to get stuck in a vine
+    /// <summary>
+    /// resume horizontal movement
+    /// this prevent to get stuck in a vine (where top is not reachable)
+    /// </summary>
     void ContinueMoving() {
       inputMgr.SetX((float)facing);
     }
-
+    /// <summary>
+    /// Character hit a wall, move in the other direction
+    /// </summary>
     void OnLeftWall() {
       facing = Facing.Right;
       inputMgr.SetX((float)facing);
     }
-
+    /// <summary>
+    /// Character hit a wall, move in the other direction
+    /// </summary>
     void OnRightWall() {
       facing = Facing.Left;
       inputMgr.SetX((float)facing);

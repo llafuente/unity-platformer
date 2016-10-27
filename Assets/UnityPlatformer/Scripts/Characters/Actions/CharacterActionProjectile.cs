@@ -58,10 +58,10 @@ namespace UnityPlatformer {
       Fire();
     }
 
-    ///<summary>
+    /// <summary>
     /// Fire projectiles, regardless the cooldown,
     /// Call it after all checks
-    ///</summary>
+    /// </summary>
     public virtual void Fire() {
       if (fireMode) {
         for (int i = 0; i < projectiles.Count; ++i) {

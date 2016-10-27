@@ -2,19 +2,24 @@ using System;
 using UnityEngine;
 
 namespace UnityPlatformer {
-  ///<summary>
+  /// <summary>
   /// Static cannon Artificial inteligence.
-  /// Projectile definition at CharacterActionProjectile
-  /// NOTE do not move.
-  ///</summary>
+  ///
+  /// This just fire projectiles enabling 'Attack' in the input every fireDelay
+  /// To configure Projectile(s) you must add CharacterActionProjectile to your
+  /// Enemy Character
+  /// </summary>
   public class AICannon: Enemy {
-    #region public
-
+    /// <summary>
+    /// Reload time, delay between fires
+    /// </summary>
     [Comment("Reload time")]
     public float fireDelay = 5;
-
-    #endregion
-
+    /// <summary>
+    /// Enable Attack Action
+    ///
+    /// TODO fireDelay?!
+    /// </summary>
     public override void PlatformerUpdate(float delta) {
       if (!input.IsActionHeld("Attack")) {
         input.EnableAction("Attack");

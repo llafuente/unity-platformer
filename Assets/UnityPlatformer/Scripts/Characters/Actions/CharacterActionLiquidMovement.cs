@@ -26,7 +26,6 @@ namespace UnityPlatformer {
     internal CharacterActionJump actionJump;
 
     float velocityXSmoothing;
-    bool insideWater = false;
 
     public override void OnEnable() {
       base.OnEnable();

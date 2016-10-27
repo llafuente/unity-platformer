@@ -11,12 +11,25 @@ namespace UnityPlatformer {
   /// *NOTE* BoxCollider2D and Rigidbody2D will be hidden.
   /// </summary>
   public class BoxTrigger2D : Trigger2D {
+    /// <summary>
+    /// callback type
+    /// </summary>
     public delegate void OnTrigger(Collider2D o);
+    /// <summary>
+    /// callback when OnTriggerEnter2D is called with a object that match collisionMask
+    /// </summary>
     public OnTrigger onTriggerEnter2D;
+    /// <summary>
+    /// callback when OnTriggerExit2D is called with a object that match collisionMask
+    /// </summary>
     public OnTrigger onTriggerExit2D;
+    /// <summary>
+    /// callback when OnTriggerStay2D is called with a object that match collisionMask
+    /// </summary>
     public OnTrigger onTriggerStay2D;
-
-
+    /// <summary>
+    /// BoxCollider2D size
+    /// </summary>
     public Vector2 size {
       get { return _size; }
       set {
@@ -26,17 +39,28 @@ namespace UnityPlatformer {
         }
       }
     }
-
+    /// <summary>
+    /// Allowed mask, if something in the mask collide, trigger will fire!
+    /// </summary>
     public LayerMask collisionMask;
-
+    /// <summary>
+    /// BoxCollider2D size
+    /// </summary>
     [SerializeField]
-    protected Vector2 _size;
-
-
-    BoxCollider2D box2d;
-    Rigidbody2D rb2d;
+    private Vector2 _size;
+    /// <summary>
+    /// BoxCollider2D
+    /// </summary>
+    internal BoxCollider2D box2d;
+    /// <summary>
+    /// Rigidbody2D
+    /// </summary>
+    internal Rigidbody2D rb2d;
 
     #if UNITY_EDITOR
+    /// <summary>
+    /// Draw on editor
+    /// </summary>
     [DrawGizmo(GizmoType.InSelectionHierarchy | GizmoType.NotInSelectionHierarchy)]
     void OnDrawGizmos() {
       if (Application.isPlaying) return;
@@ -52,7 +76,9 @@ namespace UnityPlatformer {
       Handles.DrawSolidRectangleWithOutline( verts, new Color( 0, 1, 0, 0.05f ), new Color( 0, 0, 0, 0.5f ) );
     }
     #endif
-
+    /// <summary>
+    /// Get/Create BoxCollider2D & Rigidbody2D, then configure
+    /// </summary>
     void Start() {
       box2d = gameObject.GetOrAddComponent<BoxCollider2D>();
       box2d.isTrigger = true;

@@ -7,8 +7,10 @@ using UnityPlatformer;
 namespace UnityPlatformer {
   /// <summary>
   /// Base class for: Players, NPCs, enemies.
+  ///
   /// Handle all movement logic and transform collider information
-  /// into 'readable' information for animations.
+  /// into 'readable' information for animations.\n
+  /// NOTE executionOrder should be -25
   /// </summary>
   [RequireComponent (typeof (PlatformerCollider2D))]
   [RequireComponent (typeof (CharacterHealth))]
@@ -169,13 +171,18 @@ namespace UnityPlatformer {
 
     /// <summary>
     /// Managed update called by UpdateManager
-    /// Transform Input into platformer magic :)
+    ///
+    /// Call all actions ask them who 'WantsToUpdate'\n
+    /// The highest priority action what want GainControl and PerformAction\n
+    /// Given action give a list of things to do after using GetPostUpdateActions\n
+    /// When all is done, fire events
     /// </summary>
     public virtual void PlatformerUpdate(float delta) {
 
       // before anything try to find if there is a ladder below
       // it's neccesary for ActionLadder&ActionCrounch
-      RaycastHit2D hit = pc2d.DoFeetRay(
+      // this is not the right place... but where?! to be unique
+      RaycastHit2D hit = pc2d.FeetRay(
         pc2d.skinWidth * 2,
         Configuration.instance.laddersMask
       );
@@ -220,12 +227,12 @@ namespace UnityPlatformer {
         a = action.GetPostUpdateActions();
       }
 
-      if (Utils.biton((int)a, (int)PostUpdateActions.APPLY_GRAVITY)) {
+      if (BitOn((int)a, (int)PostUpdateActions.APPLY_GRAVITY)) {
         // TODO REVIEW x/y gravity...
         velocity.y += pc2d.gravity.y * delta;
       }
 
-      if (!Utils.biton((int)a, (int)PostUpdateActions.WORLD_COLLISIONS)) {
+      if (!BitOn((int)a, (int)PostUpdateActions.WORLD_COLLISIONS)) {
         pc2d.disableWorldCollisions = true;
       }
 
@@ -493,7 +500,7 @@ namespace UnityPlatformer {
       PlatformerCollider2D.Contacts[] contacts = pc2d.collisions.contacts;
 
       bool valid_box = false;
-      for (int i = 0; i < pc2d.collisions.contactsIdx; ++i) {
+      for (int i = 0; i < pc2d.collisions.contactsCount; ++i) {
         if (contacts[i].dir != dir) continue;
 
         Box b = contacts[i].hit.collider.gameObject.GetComponent<Box>();
@@ -523,8 +530,8 @@ namespace UnityPlatformer {
       // sarch the lowest box and push it
       float minY = Mathf.Infinity;
       int index = -1;
-      Log.Silly("(Push) PushBox.count {0}", pc2d.collisions.contactsIdx);
-      for (int i = 0; i < pc2d.collisions.contactsIdx; ++i) {
+      Log.Silly("(Push) PushBox.count {0}", pc2d.collisions.contactsCount);
+      for (int i = 0; i < pc2d.collisions.contactsCount; ++i) {
         if (contacts[i].dir != dir) continue;
 
         Box b = contacts[i].hit.collider.gameObject.GetComponent<Box>();
@@ -550,6 +557,10 @@ namespace UnityPlatformer {
       }
 
       return null;
+    }
+
+    static public bool BitOn(int a, int b) {
+      return (a & b) == b;
     }
   }
 }

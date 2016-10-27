@@ -7,8 +7,6 @@ namespace UnityPlatformer {
   /// NOTE require CharacterActionGroundMovement
   /// </summary>
   public class CharacterActionPull: CharacterAction {
-    #region public
-
     [Comment("Movement speed")]
     public float speed = 3;
     [Comment("Time to reach max speed")]
@@ -25,9 +23,7 @@ namespace UnityPlatformer {
     [Comment("Remember: Higher priority wins. Modify with caution")]
     public int priority = 20;
 
-    #endregion
-
-    int faceDir = 0;
+    internal int faceDir = 0;
 
     float velocityXSmoothing;
     CharacterActionGroundMovement groundMovement;

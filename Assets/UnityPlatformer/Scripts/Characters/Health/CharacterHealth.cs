@@ -1,43 +1,75 @@
 using System;
 using UnityEngine;
 
+/// TODO handle lives / Game over
+/// TODO handle character alignment
+/// TODO onGameOver
+/// TODO handle Damage direction here or in the HitBox but must be done :)
+
 namespace UnityPlatformer {
   /// <summary>
   /// Tracks character health and lives.
-  /// Triggers character death
-  /// TODO handle lives / Game over
-  /// TODO handle alignment
+  ///
+  /// Triggers character damage/death
   /// </summary>
   public class CharacterHealth : MonoBehaviour {
-
-    #region public
-
+    /// <summary>
+    /// Character alignment
+    /// </summary>
     public Alignment alignment = Alignment.None;
+    /// <summary>
+    /// Health the character will have when game starts
+    /// </summary>
     [Comment("Health the character will have when game starts")]
     public int startingHealth = 1;
+    /// <summary>
+    /// Maximum health (-1 no maximum). NOTE if startingHealth == maxHealth will trigger onMaxHealth on Start.
+    /// </summary>
     [Comment("Maximum health (-1 no maximum). NOTE if startingHealth == maxHealth will trigger onMaxHealth on Start.")]
     public int maxHealth = 1;
+    /// <summary>
+    /// Lives the character starts with (-1 no lives)
+    /// </summary>
     [Comment("Lives the character starts with (-1 no lives)")]
     public int startingLives = 1;
+    /// <summary>
+    /// Maximum lives of the character. 2,147,483,647 is the maximum :)
+    /// </summary>
     [Comment("Maximum lives of the character. 2,147,483,647 is the maximum :)")]
     public int maxLives = 1;
+    /// <summary>
+    /// After any Damage how much time the character will be invulnerable to any Damage (0 to disable)
+    /// </summary>
     [Comment("After any Damage how much time the character will be invulnerable to any Damage (0 to disable)")]
     public float invulnerabilityTimeAfterDamage = 2.0f;
+    /// <summary>
+    /// List of damages that are ignored
+    ///
+    /// NOTE: this can give your character super powers! use it with caution!
+    /// </summary>
     [Comment("List of damages that are ignored")]
     public DamageType immunity = 0;
-    ///
-    /// Actions
-    ///
-
     /// <summary>
-    /// Give your character super powers!
+    /// Fired when Character heal and now it's at maxHealth
     /// </summary>
     public Action onMaxHealth;
     /// <summary>
-    /// Flash it!
+    /// Fired when character is damaged.
+    ///
+    /// Will be fired even it the character is inmmune
     /// </summary>
     public Action onDamage;
+    /// <summary>
+    /// Fired after onDamage and Character is inmmune to given Damage
+    /// </summary>
+    public Action onImmunity;
+    /// <summary>
+    /// Callback type for onHurt
+    /// </summary>
     public delegate void HurtCallback(Damage dt, CharacterHealth to);
+    /// <summary>
+    /// Health is reduced, will fire after onDamage
+    /// </summary>
     public HurtCallback onHurt;
     /// <summary>
     /// Display some greenish starts floating around!
@@ -52,7 +84,8 @@ namespace UnityPlatformer {
     /// </summary>
     public Action onGameOver;
     /// <summary>
-    /// Play that funky music!
+    /// Play that funky music! Quake-damage!
+    ///
     /// NOTE this can be fired many times before onInvulnerabilityEnd
     /// </summary>
     public Action onInvulnerabilityStart;
@@ -60,28 +93,27 @@ namespace UnityPlatformer {
     /// Stop that funky music!
     /// </summary>
     public Action onInvulnerabilityEnd;
-    /// <summary>
-    /// Stop that funky music!
-    /// </summary>
-    public Action onImmunity;
-    #endregion
-
-    #region ~private
-
     // NOTE do not use setter/getter to trigger death, we need to preserve
     // logical Action dispacthing
+    /// <summary>
+    /// Character health
+    /// </summary>
     internal int health = 0;
+    /// <summary>
+    /// Character lives
+    /// </summary>
     internal int lives = 0;
+    /// <summary>
+    /// Character owner of this CharacterHealth
+    /// </summary>
     internal Character character;
-
-    #endregion
-
-    #region private
-
-    float _invulnerable = 0;
-
-    #endregion
-
+    /// <summary>
+    /// Time counter for invulnerability
+    /// </summary>
+    private float _invulnerable = 0;
+    /// <summary>
+    /// missconfiguration and initialization
+    /// </summary>
     void Start() {
       // check missconfiguration
       if (startingHealth < maxHealth) {
@@ -95,7 +127,9 @@ namespace UnityPlatformer {
       Heal(startingHealth);
       lives = startingLives;
     }
-
+    /// <summary>
+    /// invulnerability logic
+    /// </summary>
     void LateUpdate() {
       // NOTE do not use IsInvulnerable here...
       bool was_invulnerable = _invulnerable >= 0;
@@ -108,9 +142,9 @@ namespace UnityPlatformer {
         }
       }
     }
-
     /// <summary>
     /// Turns a character invulnerable, but still can be killed using Kill
+    ///
     /// NOTE use float.MaxValue for unlimited time
     /// </summary>
     public void SetInvulnerable(float time) {
@@ -122,7 +156,6 @@ namespace UnityPlatformer {
         }
       }
     }
-
     /// <summary>
     /// disable invulnerability
     /// </summary>
@@ -134,12 +167,13 @@ namespace UnityPlatformer {
         onInvulnerabilityEnd();
       }
     }
-
+    /// <summary>
+    /// Character is invulnerable?
+    /// </summary>
     public bool IsInvulnerable() {
       // is death? leave him alone...
       return health <= 0 || _invulnerable > 0.0f;
     }
-
     /// <summary>
     /// Kill the character even if it's invulnerable
     /// </summary>
@@ -147,10 +181,8 @@ namespace UnityPlatformer {
       health = 0;
       Die();
     }
-
     /// <summary>
-    /// Kill the character even if it's invulnerable
-    /// TODO handle direction here or in the HitBox but must be done :)
+    /// Try to Damage the Character
     /// </summary>
     public void Damage(Damage dmg) {
       Debug.LogFormat("Object: {0} recieve damage {1} health {2} from: {3}",
@@ -185,6 +217,15 @@ namespace UnityPlatformer {
 
       if (IsInvulnerable()) {
         Debug.Log(this.name + " is invulnerable, ignore damage");
+
+        if (onDamage != null) {
+          onDamage();
+        }
+
+        if (onImmunity != null) {
+          onImmunity();
+        }
+
         return false;
       }
 

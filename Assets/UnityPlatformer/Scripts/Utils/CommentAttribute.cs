@@ -6,23 +6,39 @@ using System.Collections;
 
 // TODO fix List problems
 namespace UnityPlatformer {
-
+  /// <summary>
+  /// Comment Attribute
+  /// </summary>
   public class CommentAttribute : PropertyAttribute {
+    /// <summary>
+    /// Comment
+    /// </summary>
     public readonly string comment;
-
+    /// <summary>
+    /// Constructor
+    /// </summary>
     public CommentAttribute(string comment) { this.comment = comment; }
   }
 
   #if UNITY_EDITOR
-
+  /// <summary>
+  /// Editor Drawer
+  /// </summary>
   [CustomPropertyDrawer(typeof(CommentAttribute))]
   public class CommentDrawer : PropertyDrawer {
+    /// <summary>
+    /// Default height
+    /// </summary>
     protected float textHeight = 20.0f;
-    // clang-format on
+    /// <summary>
+    /// Getter CommentAttribute
+    /// </summary>
     CommentAttribute commentAttribute {
       get { return (CommentAttribute)attribute; }
     }
-
+    /// <summary>
+    /// Calc height needed, right now is always 20
+    /// </summary>
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
       // TODO find a way to fix it and support multiple lines
       // Rect labelRect = GUILayoutUtility.GetRect(new
@@ -36,7 +52,9 @@ namespace UnityPlatformer {
 
       return textHeight + EditorGUI.GetPropertyHeight(property, label, true);
     }
-
+    /// <summary>
+    /// Draw
+    /// </summary>
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
       EditorGUI.LabelField(position, new GUIContent(commentAttribute.comment));
       EditorGUI.indentLevel = 0;

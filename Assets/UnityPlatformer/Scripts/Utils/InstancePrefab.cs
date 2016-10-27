@@ -4,28 +4,52 @@ using UnityEditor;
 #endif
 using System.Collections;
 
+// TODO alignament for image/text
+
 namespace UnityPlatformer {
-  // TODO alignament for image/text
+  /// <summary>
+  /// Instance a prefab on start
+  /// </summary>
   public class InstancePrefab : MonoBehaviour {
+    /// <summary>
+    /// Counter to make names unique
+    /// </summary>
     static int count = 1;
-
+    /// <summary>
+    /// Placeholder sprite for editor, to see something
+    /// </summary>
     public Sprite placeholder;
+    /// <summary>
+    /// Prefab to instance
+    /// </summary>
     public GameObject prefab;
+    /// <summary>
+    /// Attach the prefab as a child or at root node.
+    /// </summary>
     public bool attachToRoot = true; // false child
-
+    /// <summary>
+    /// reference to instanced prefab
+    /// </summary>
     internal GameObject instance = null;
 
-    // no virtual on purpose. override OnAwake
+    /// <summary>
+    /// NOTE no virtual on purpose. override OnAwake
+    /// </summary>
     public void Awake() {
       OnAwake();
     }
-
+    /// <summary>
+    /// Rename logic: append counter to the name
+    /// </summary>
     public virtual void Rename(Transform transform) {
       foreach (Transform child in transform) {
         child.gameObject.name = child.gameObject.name + count;
       }
     }
-
+    /// <summary>
+    /// Instance the prefab, rename and attach it
+    /// </summary>
+    /// <param name="notify">true -> SendMessage: OnInstancePrefab</param>
     public virtual void OnAwake(bool notify = true) {
       if (instance == null) {
         instance = Instantiate(prefab, transform.position, transform.rotation) as GameObject;
@@ -46,6 +70,9 @@ namespace UnityPlatformer {
 
 
     #if UNITY_EDITOR
+      /// <summary>
+      /// Draw placeholder + name in editor mode.
+      /// </summary>
       public virtual void OnDrawGizmos() {
         if (Application.isPlaying) return;
 

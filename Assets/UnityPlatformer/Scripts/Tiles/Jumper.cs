@@ -2,10 +2,19 @@ using UnityEngine;
 using System.Collections;
 
 namespace UnityPlatformer {
+  /// <summary>
+  /// Tile that force Character to Jump!
+  /// </summary>
   [RequireComponent (typeof (BoxCollider2D))]
   public class Jumper : MonoBehaviour {
+    /// <summary>
+    /// Jump properties
+    /// </summary>
     public JumpConstantSpringProperties jumpProperties;
 
+    /// <summary>
+    /// Force a player to jump!
+    /// </summary>
     public virtual void StartJump(Character c) {
       // search CharacterActionJump
       CharacterActionJump actionJump = null;
@@ -24,18 +33,15 @@ namespace UnityPlatformer {
         Debug.LogWarning("character found without CharacterActionJump so ignore.");
       }
     }
-
+    // REVIEW could the Character double-enter?
+    /// <summary>
+    /// If Character enter, force him to jump!
+    /// </summary>
     public virtual void OnTriggerEnter2D(Collider2D o) {
       Character p = o.GetComponent<Character>();
       if (p) {
         StartJump(p);
       }
-    }
-
-    public virtual void OnTriggerStay2D(Collider2D o) {
-    }
-
-    public virtual void OnTriggerExit2D(Collider2D o) {
     }
   }
 }

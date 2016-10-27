@@ -2,18 +2,34 @@ using System;
 using UnityEngine;
 
 namespace UnityPlatformer {
+  /// <summary>
+  /// Serializable class to configure JumpConstantSpring in the Editor
+  /// </summary>
   [Serializable]
   public class JumpConstantSpringProperties {
+    /// <summary>
+    /// Initial velocity
+    /// </summary>
     public float initialVelocity = 20;
+    /// <summary>
+    /// Penetration in units
+    /// </summary>
     public float penetration = 0.5f;
+    /// <summary>
+    /// Penetrate if speed is greater than
+    /// </summary>
     public float minPenetrationSpeed = 3;
-
+    /// <summary>
+    /// Constructor
+    /// </summary>
     public JumpConstantSpringProperties(float ivel, float pen, float mpenvel) {
       initialVelocity = ivel;
       penetration = pen;
       minPenetrationSpeed = mpenvel;
     }
-
+    /// <summary>
+    /// Clone
+    /// </summary>
     public JumpConstantSpringProperties Clone(int faceDir) {
       return new JumpConstantSpringProperties(initialVelocity, penetration, minPenetrationSpeed);
     }
@@ -23,23 +39,38 @@ namespace UnityPlatformer {
   /// Math behind the Jump
   /// </summary>
   public class JumpConstantSpring : Jump {
+    /// <summary>
+    /// Initial velocity
+    /// </summary>
     public float initialVelocity;
+    /// <summary>
+    /// Penetration in units
+    /// </summary>
     public float penetration = 0.5f;
+    /// <summary>
+    /// Penetrate if speed is greater than
+    /// </summary>
     public float minPenetrationSpeed = 3;
 
     float currentDeceleration = 0;
     float initialYPos = 0;
-
-    public JumpConstantSpring(Character _character, float _initialVelocity, float _penetration) {
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    public JumpConstantSpring(Character _character, float _initialVelocity, float _penetration, float _minPenetrationSpeed) {
       character = _character;
       initialVelocity = _initialVelocity;
       penetration = _penetration;
+      minPenetrationSpeed = _minPenetrationSpeed;
     }
-
+    /// <summary>
+    /// Constructor
+    /// </summary>
     public JumpConstantSpring(Character _character, JumpConstantSpringProperties jp) {
       character = _character;
       initialVelocity = jp.initialVelocity;
       penetration = jp.penetration;
+      minPenetrationSpeed = jp.minPenetrationSpeed;
     }
 
     public override void StartJump(ref Vector3 velocity) {

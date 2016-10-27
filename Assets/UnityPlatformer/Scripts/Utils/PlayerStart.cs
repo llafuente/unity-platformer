@@ -5,15 +5,26 @@ using UnityEditor;
 using System.Collections;
 
 namespace UnityPlatformer {
+  /// <summary>
+  /// Create a player at given position
+  /// </summary>
   public class PlayerStart : InstancePrefab {
     /// <summary>
     /// If you have your own camera, this should be false.
     /// </summary>
     public bool setupCameraFollow = true;
+    /// <summary>
+    /// true: Enable CharacterMonitor if it's found in the Prefab or Create it
+    /// false: do nothing
+    /// </summary>
     public bool monitor = false;
 
     internal CharacterMonitor mon;
 
+    /// <summary>
+    /// Instance the prefab, rename and attach it
+    /// </summary>
+    /// <param name="notify">true -> SendMessage: OnInstancePrefab</param>
     public override void OnAwake(bool notify = true) {
       base.OnAwake(false); // notify below, maybe someone need mon
 

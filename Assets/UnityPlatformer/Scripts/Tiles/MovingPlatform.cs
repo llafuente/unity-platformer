@@ -4,6 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace UnityPlatformer {
+  /// <summary>
+  /// Action that MovingPlatform can perform
+  /// </summary>
   public enum MovingPlatformActions {
     Nothing,
     Resume,
@@ -16,49 +19,104 @@ namespace UnityPlatformer {
   };
 
   /// <summary>
-  /// TODO Stop, Resume, Reverse, StopOnNextWaypoint
+  /// Moving Platform Tile
   /// </summary>
   public class MovingPlatform : RaycastController, IUpdateEntity {
-    #region public
-
+    /// <summary>
+    /// Mask of things that can be a passanger
+    /// </summary>
     [Comment("Who will move while in the platform.")]
     public LayerMask passengerMask;
+    /// <summary>
+    /// Path that MovingPlatform will follow
+    /// </summary>
     public Line path;
+    /// <summary>
+    /// Speed along the path
+    /// </summary>
     public float speed = 2;
+    /// <summary>
+    /// true: MovingPlatform will be looping
+    /// false: MovingPlatform will go back and forth
+    /// </summary>
     [Comment("Is a loop? (check) back and forth? (uncheck)")]
     public bool cyclic = false;
+    /// <summary>
+    /// Delay after each waypoint
+    /// </summary>
     [Comment("Delay after each waypoint")]
     public float waitTime = 0;
+    /// <summary>
+    /// Ease movement
+    /// </summary>
     [Range(0,2)]
     public float easeAmount = 0;
+    /// <summary>
+    /// downcast can move Character in unexpected manners
+    /// but it's also necessary for one-way-moving-platforms...
+    /// TODO kill player?
+    /// </summary>
     public bool disableDownRayCast = false;
+    /// <summary>
+    /// Initial state stop?
+    /// </summary>
     public bool startStopped = false;
-
+    /// <summary>
+    /// callback call when reach any waypoint
+    /// </summary>
     public delegate void ReachWaypoint(int index);
     /// <summary>
     /// It's called just after select next waypoint and before apply waitTime
     /// </summary>
     public ReachWaypoint onReachWaypoint;
+    /// <summary>
+    /// callback call when MovingPlatform is stopped
+    /// </summary>
     public Action onStop;
+    /// <summary>
+    /// callback call when MovingPlatform is resume
+    /// </summary>
     public Action onResume;
 
-    #endregion
-
     #region private
-
+    /// <summary>
+    /// waypoints list taken from path
+    /// </summary>
     internal Vector3[] globalWaypoints;
-
+    /// <summary>
+    /// current waypoint index
+    /// </summary>
     int fromWaypointIndex;
+    /// <summary>
+    /// current percentage (0-1) between previous/next waypoints
+    /// </summary>
     float percentBetweenWaypoints;
+    /// <summary>
+    /// time since last waypoint start, used to calculate (waitTime) delay
+    /// </summary>
     float nextMoveTime;
+    /// <summary>
+    /// List of passengers to move
+    /// </summary>
     List<PassengerMovement> passengerMovement;
+    /// <summary>
+    /// List of passengers to moved
+    /// </summary>
     HashSet<Transform> prevPassengers = null;
+    /// <summary>
+    /// Current speed
+    /// </summary>
     float currentSpeed;
-
+    /// <summary>
+    /// Last position
+    /// </summary>
     Vector3 lastPosition;
 
     #endregion
 
+    /// <summary>
+    /// Setup initial state
+    /// </summary>
     public virtual void Start () {
       // check that gameObject has a valid tag!
       if (!Configuration.IsMovingPlatform(gameObject)) {
@@ -92,29 +150,44 @@ namespace UnityPlatformer {
         onStop();
       }
     }
-
+    /// <summary>
+    /// TODO
+    /// </summary>
     public void StopOn(int waypoints) {
       //stopOnWaypoint = waypoints;
     }
-
+    /// <summary>
+    /// Resume movement with default speed
+    /// </summary>
     public void Resume() {
       currentSpeed = speed;
       if (onResume != null) {
         onResume();
       }
     }
-
+    /// <summary>
+    /// Reverse waypoints, current waypoint and percentBetweenWaypoints
+    /// This is used when reach the end, so we don't need handle both logics
+    /// </summary>
     public void Reverse() {
       System.Array.Reverse(globalWaypoints);
       fromWaypointIndex = globalWaypoints.Length - 2 - fromWaypointIndex;
       percentBetweenWaypoints = 1 - percentBetweenWaypoints;
     }
-
+    /// <summary>
+    /// Reverse waypoints, current waypoint and percentBetweenWaypoints
+    /// This is used when reach the end, so we don't need handle both logics
+    /// </summary>
     public bool IsStopped() {
       return currentSpeed == 0;
     }
+    /// <summary>
+    /// Do nothing
+    /// </summary>
     public virtual void LatePlatformerUpdate(float delta) {}
-
+    /// <summary>
+    /// Get passenger list, pre update, move and post update
+    /// </summary>
     public void PlatformerUpdate (float delta) {
 
       UpdateRaycastOrigins ();
@@ -140,12 +213,18 @@ namespace UnityPlatformer {
 
       lastPosition = transform.position;
     }
-
+    /// <summary>
+    /// Ease movement formula
+    /// TODO use UnityPlatformer.Easing even when some configuration don't make sense...
+    /// </summary>
     float Ease(float x) {
       float a = easeAmount + 1;
       return Mathf.Pow(x,a) / (Mathf.Pow(x,a) + Mathf.Pow(1-x,a));
     }
-
+    /// <summary>
+    /// Calculate how much the platform will move
+    /// NOTE This can't be called without moving the platform
+    /// </summary>
     Vector3 CalculatePlatformMovement(float delta) {
 
       if (Time.time < nextMoveTime) {
@@ -191,7 +270,9 @@ namespace UnityPlatformer {
 
       return newPos - transform.position;
     }
-
+    /// <summary>
+    /// Move passenger
+    /// </summary>
     void MovePassengers(bool beforeMovePlatform) {
       foreach (PassengerMovement passenger in passengerMovement) {
         if (passenger.moveBeforePlatform == beforeMovePlatform) {
@@ -200,12 +281,13 @@ namespace UnityPlatformer {
         }
       }
     }
-
+    /// <summary>
+    /// Calculate how much each passenger should move
+    /// </summary>
     void CalculatePassengerMovement(Vector3 velocity) {
       HashSet<Transform> movedPassengers = new HashSet<Transform> ();
       passengerMovement = new List<PassengerMovement> ();
 
-      float directionX = Mathf.Sign (velocity.x);
       float directionY = Mathf.Sign (velocity.y);
       float rayLength = skinWidth * 2 + Configuration.instance.minDistanceToEnv;
 
@@ -301,7 +383,9 @@ namespace UnityPlatformer {
       }
       prevPassengers = movedPassengers;
     }
-
+    /// <summary>
+    /// Perform an action over MovingPlatform like: Resume, stop, reverse....
+    /// </summary>
     public void DoAction(MovingPlatformActions action) {
       switch (action) {
       case MovingPlatformActions.Resume:
@@ -334,16 +418,22 @@ namespace UnityPlatformer {
         break;
       }
     }
-
+    /// <summary>
+    /// notify UpdateManager
+    /// </summary>
     public override void OnEnable() {
       base.OnEnable();
       UpdateManager.instance.Push(this, Configuration.instance.defaultPriority);
     }
-
+    /// <summary>
+    /// notify UpdateManager
+    /// </summary>
     void OnDisable() {
       UpdateManager.instance.Remove(this);
     }
-
+    /// <summary>
+    /// Struct to store information about passenger movement
+    /// </summary>
     struct PassengerMovement {
       public Transform transform;
       public Vector3 velocity;

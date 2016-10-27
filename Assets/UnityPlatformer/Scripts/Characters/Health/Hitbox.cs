@@ -5,6 +5,10 @@ using UnityEditor;
 using UnityEngine.UI;
 
 namespace UnityPlatformer {
+  /// <summary>
+  /// List of part a character can have, maybe needed to handle
+  /// how to reach to certain Damages
+  /// </summary>
   public enum CharacterPart {
     None =          0,
     FakeBody =      1,
@@ -15,39 +19,64 @@ namespace UnityPlatformer {
     LeftFoot =      1 << 6,
     Head =          1 << 7,
   }
-
+  /// <summary>
+  /// Type of HitBoxe, what it do
+  /// </summary>
   public enum HitBoxType {
     DealDamage,
     RecieveDamage,
     EnterAreas
   }
 
-  /// <sumary>
-  /// HitBoxes
-  /// </sumary>
+  /// <summary>
+  /// HitBoxes are triggers that Deal/Revieve Damage or enter areas(tile)
+  /// </summary>
   [RequireComponent (typeof (BoxCollider2D))]
   public class HitBox : MonoBehaviour {
-    #region public
-
+    /// <summary>
+    /// Character part this HitBox belong
+    /// </summary>
     public CharacterPart part;
+    /// <summary>
+    /// Who can deal damage to me?
+    ///
+    /// Only used when type=HitBoxType.RecieveDamage.
+    /// </summary>
     [Comment("Who can deal damage to me?")]
     public LayerMask collideWith;
+    /// <summary>
+    /// HitBox owner
+    /// </summary>
     [Comment("Who am I?")]
     public CharacterHealth owner;
+    /// <summary>
+    /// HitBoxType
+    /// </summary>
     public HitBoxType type = HitBoxType.DealDamage;
+    /// <summary>
+    /// Can i deal damage to myself?
+    /// </summary>
     public bool dealDamageToSelf = false;
 
-    // this allow to implement diferent HitBoxes depending on the
-    // Character State
+    /// <summary>
+    /// this allow to implement diferent HitBoxes depending on the
+    /// Character State
+    ///
+    /// For example have a RecieveDamage while standing and other while crouching
+    /// </summary>
     [Comment("Disable HitBox when character is any given state")]
     public States disableWhileOnState = States.None;
-
-    #endregion
-
+    /// <summary>
+    /// BoxCollider2D
+    /// </summary>
     internal BoxCollider2D body;
-
-    Damage dt;
-
+    /// <summary>
+    /// Damage info, only used type=HitBoxType.DealDamage.
+    /// </summary>
+    internal Damage dt;
+    /// <summary>
+    /// Report missconfigurations and initialize
+    /// </summary>
     void Start() {
       dt = GetComponent<Damage> ();
       if (type == HitBoxType.DealDamage && dt == null) {
@@ -63,12 +92,17 @@ namespace UnityPlatformer {
         owner.character.enterAreas = this;
       }
     }
-
+    /// <summary>
+    /// Return if the HitBox is disabled base on disableWhileOnState
+    /// </summary>
     public bool IsDisabled() {
       return owner.character.IsOnAnyState(disableWhileOnState);
     }
 
 #if UNITY_EDITOR
+    /// <summary>
+    /// Draw in the Editor mode
+    /// </summary>
     [DrawGizmo(GizmoType.InSelectionHierarchy | GizmoType.NotInSelectionHierarchy)]
     void OnDrawGizmos() {
         body = GetComponent<BoxCollider2D>();
@@ -89,7 +123,9 @@ namespace UnityPlatformer {
         //Handles.Label(transform.position + new Vector3(-box.size.x * 0.5f, box.size.y * 0.5f, 0), "HitBox: " + type);
     }
 #endif
-
+    /// <summary>
+    /// I'm a DealDamage, o is RecieveDamage, then Deal Damage to it's owner!
+    /// </summary>
     void OnTriggerEnter2D(Collider2D o) {
 
       if (type == HitBoxType.DealDamage) {
@@ -121,14 +157,6 @@ namespace UnityPlatformer {
           }
         }
       }
-    }
-
-    void OnTriggerStay2D(Collider2D o) {
-      // TODO handle something
-    }
-
-    public void OnTriggerExit2D(Collider2D o) {
-      // TODO handle something
     }
   }
 }

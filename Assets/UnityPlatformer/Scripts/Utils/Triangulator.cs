@@ -1,14 +1,35 @@
-// from: http://wiki.unity3d.com/index.php?title=Triangulator
 using UnityEngine;
 using System.Collections.Generic;
 
+// TODO move to static to avoid copying the original ?
+
 namespace UnityPlatformer {
-  // clang-format off
+  /// <summary>
+  /// http://wiki.unity3d.com/index.php?title=Triangulator
+  ///
+  /// This script can be used to split a 2D polygon into triangles.
+  /// The algorithm supports concave polygons, but not polygons with holes,
+  /// or multiple polygons at once.
+  /// Note: This is a naive triangulation implementation.
+  /// For more well-distributed triangles, consider using Delaunay
+  /// triangulation, such as with the script here [1]
+  /// </summary>
   public class Triangulator {
+    /// <summary>
+    /// Points to triangulate
+    /// </summary>
     private List<Vector2> m_points = new List<Vector2>();
-
-    public Triangulator(Vector2[] points) { m_points = new List<Vector2>(points); }
-
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="points">Points to triangulate</param>
+    public Triangulator(Vector2[] points) {
+      m_points = new List<Vector2>(points);
+    }
+    /// <summary>
+    /// Triangulate logic
+    /// </summary>
+    /// <returns>Faces triangulated</returns>
     public int[] Triangulate() {
       List<int> indices = new List<int>();
 

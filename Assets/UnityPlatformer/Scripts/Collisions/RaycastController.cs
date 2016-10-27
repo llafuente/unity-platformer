@@ -30,18 +30,24 @@ SOFTWARE.
 using System.Collections;
 
 namespace UnityPlatformer {
+  /// <summary>
+  /// Raycast helper
+  /// </summary>
   [RequireComponent (typeof (BoxCollider2D))]
   public class RaycastController : MonoBehaviour {
-
+    /// <summary>
+    /// Static geometry mask
+    /// </summary>
     public LayerMask collisionMask;
-
     /// <summary>
     /// How far from then env the Character must be.
+    ///
     /// NOTE: must be less than skinWidth, to allow continuous ground contact
     /// </summary>
     public float minDistanceToEnv = 0.1f;
     /// <summary>
     /// Defines how far in from the edges of the collider rays are we going to cast from.
+    ///
     /// NOTE: This value must be greater than minDistanceToEnv
     /// </summary>
     public float skinWidth = 0.2f;
@@ -53,19 +59,41 @@ namespace UnityPlatformer {
     /// How many rays to check vertical collisions
     /// </summary>
     public int verticalRayCount = 4;
-
+    /// <summary>
+    /// Horizontal space between vertical rays
+    /// </summary>
     internal float horizontalRaySpacing;
+    /// <summary>
+    /// Vertical space between horizontal rays
+    /// </summary>
     internal float verticalRaySpacing;
-
+    /// <summary>
+    /// BoxCollider2D
+    /// </summary>
     internal BoxCollider2D box;
-
+    /// <summary>
+    /// Raycast origins
+    /// </summary>
     internal RaycastOrigins raycastOrigins;
+    /// <summary>
+    /// horizontal rays result, to not allocate them each frame
+    /// </summary>
     internal RaycastHit2D[] horizontalRays;
+    /// <summary>
+    /// vertical rays result, to not allocate them each frame
+    /// </summary>
     internal RaycastHit2D[] verticalRays;
-
+    /// <summary>
+    /// cache: shrinked box.bounds
+    /// </summary>
     internal Bounds bounds;
+    /// <summary>
+    /// cache: Mathf.Sqrt(skinWidth + skinWidth)
+    /// </summary>
     internal float skinWidthMagnitude;
-
+    /// <summary>
+    /// Recalculate everything
+    /// </summary>
     public virtual void OnEnable() {
       box = GetComponent<BoxCollider2D> ();
       CalculateRaySpacing ();
@@ -81,13 +109,17 @@ namespace UnityPlatformer {
         verticalRays = new RaycastHit2D[verticalRayCount];
       }
     }
-
+    /// <summary>
+    /// Recalculate shrinked the bounds
+    /// </summary>
     public void UpdateInnerBounds() {
       bounds = box.bounds;
       // * 2 so it's shrink skinWidth by each side
       bounds.Expand (skinWidth * -2);
     }
-
+    /// <summary>
+    /// Recalculate raycastOrigins
+    /// </summary>
     public void UpdateRaycastOrigins() {
       UpdateInnerBounds();
       CalculateRaySpacing();
@@ -115,40 +147,71 @@ namespace UnityPlatformer {
       horizontalRaySpacing = bounds.size.y / (horizontalRayCount - 1);
       verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);
     }
-
+    /// <summary>
+    /// Call Physics2D.Raycast and Draw the ray to debug
+    /// </summary>
     public RaycastHit2D Raycast(Vector2 origin, Vector2 direction, float rayLength, int mask, Color? color = null) {
       Debug.DrawRay(origin, direction * rayLength, color ?? Color.red);
 
       return Physics2D.Raycast(origin, direction, rayLength, mask);
     }
-
+    /// <summary>
+    /// Raycast Origins
+    /// </summary>
     [Serializable]
     public struct RaycastOrigins {
+      /// <summary>
+      /// Top left
+      /// </summary>
       public Vector2 topLeft;
+      /// <summary>
+      /// Top center
+      /// </summary>
       public Vector2 topCenter;
+      /// <summary>
+      /// Top right
+      /// </summary>
       public Vector2 topRight;
+      /// <summary>
+      /// Bottom left
+      /// </summary>
       public Vector2 bottomLeft;
+      /// <summary>
+      /// Bottom center
+      /// </summary>
       public Vector2 bottomCenter;
+      /// <summary>
+      /// Bottom right
+      /// </summary>
       public Vector2 bottomRight;
-    }
+    };
 
-    public RaycastHit2D DoVerticalRay(float directionY, int i, float rayLength, ref Vector3 velocity, Color? c = null) {
+    /// <summary>
+    /// Return RaycastHit2D of Raycasting at given index
+    /// </summary>
+    public RaycastHit2D VerticalRay(float directionY, int index, float rayLength, ref Vector3 velocity, Color? c = null) {
         Vector2 rayOrigin = (directionY == -1) ?
           raycastOrigins.bottomLeft :
           raycastOrigins.topLeft;
 
-        rayOrigin += Vector2.right * (verticalRaySpacing * i + velocity.x);
+        rayOrigin += Vector2.right * (verticalRaySpacing * index + velocity.x);
         RaycastHit2D hit = Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask, c ?? Color.red);
 
         return hit;
     }
-
-    public RaycastHit2D DoFeetRay(float rayLength, LayerMask mask) {
+    /// <summary>
+    /// Return RaycastHit2D of Raycasting at bottom center.
+    /// </summary>
+    public RaycastHit2D FeetRay(float rayLength, LayerMask mask) {
       return Raycast(raycastOrigins.bottomCenter, Vector2.down, rayLength, mask, Color.blue);
     }
-
+    /// <summary>
+    /// Callback for iterate rays
+    /// </summary>
     public delegate void RayItr(ref RaycastHit2D hit, ref Vector3 velocity, int dir, int idx);
-
+    /// <summary>
+    /// Iterate over all right/horizontal rays
+    /// </summary>
     public void ForeachRightRay(float rayLength, ref Vector3 velocity, RayItr itr) {
       if (velocity.x > 0) {
         rayLength += velocity.x;
@@ -165,7 +228,9 @@ namespace UnityPlatformer {
         itr(ref horizontalRays[i], ref velocity, 1, i);
       }
     }
-
+    /// <summary>
+    /// Iterate over all left/horizontal rays
+    /// </summary>
     public void ForeachLeftRay(float rayLength, ref Vector3 velocity, RayItr itr) {
       if (velocity.x < 0) {
         rayLength -= velocity.x;
@@ -182,7 +247,9 @@ namespace UnityPlatformer {
         itr(ref horizontalRays[i], ref velocity, -1, i);
       }
     }
-
+    /// <summary>
+    /// Iterate over all head/vertical rays
+    /// </summary>
     public void ForeachHeadRay(float rayLength, ref Vector3 velocity, RayItr itr) {
       if (velocity.y > 0) {
         rayLength += velocity.y;
@@ -199,7 +266,9 @@ namespace UnityPlatformer {
         itr(ref verticalRays[i], ref velocity, 1, i);
       }
     }
-
+    /// <summary>
+    /// Iterate over all feet/vertical rays
+    /// </summary>
     public void ForeachFeetRay(float rayLength, ref Vector3 velocity, RayItr itr) {
       Vector3 origin = raycastOrigins.bottomLeft;
       origin.x += velocity.x;
@@ -214,7 +283,9 @@ namespace UnityPlatformer {
         itr(ref verticalRays[i], ref velocity, -1, i);
       }
     }
-
+    /// <summary>
+    /// Return RaycastHit2D of Raycasting at bottom left.
+    /// </summary>
     public RaycastHit2D LeftFeetRay(float rayLength, Vector3 velocity) {
       if (velocity.y < 0) {
         rayLength -= velocity.y;
@@ -225,7 +296,9 @@ namespace UnityPlatformer {
 
       return Raycast(origin, Vector2.down, rayLength, collisionMask, Color.yellow);
     }
-
+    /// <summary>
+    /// Return RaycastHit2D of Raycasting at bottom right.
+    /// </summary>
     public RaycastHit2D RightFeetRay(float rayLength, Vector3 velocity) {
       if (velocity.y < 0) {
         rayLength -= velocity.y;

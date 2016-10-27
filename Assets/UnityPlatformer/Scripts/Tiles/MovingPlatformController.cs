@@ -2,26 +2,35 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityPlatformer;
 
-// clang-format off
 namespace UnityPlatformer {
   /// <summary>
-  /// Perform actions over a MovingPlatform.
+  /// Perform actions over a MovingPlatform when something enter/stay/leave
+  ///
+  /// NOTE Stay will be executed many times, it's not recommended to use it...
   /// </summary>
   [RequireComponent(typeof(Trigger2D))]
   public class MovingPlatformController : MonoBehaviour, ITriggerAble {
-    #region public
-
-
+    /// <summary>
+    /// mask to trigger actions
+    /// </summary>
     [Comment("Who can trigger me?")]
     public LayerMask mask;
-
+    /// <summary>
+    /// target Moving Platforms
+    /// </summary>
     public List<MovingPlatform> targets;
-    // enum On/Off/Nothing
+    /// <summary>
+    /// Action to perform when enter
+    /// </summary>
     public MovingPlatformActions onEnter = MovingPlatformActions.Nothing;
+    /// <summary>
+    /// Action to perform when leave
+    /// </summary>
     public MovingPlatformActions onExit = MovingPlatformActions.Nothing;
+    /// <summary>
+    /// Action to perform while stay
+    /// </summary>
     public MovingPlatformActions onStay = MovingPlatformActions.Nothing;
-
-    #endregion
 
     void DoAction(MovingPlatformActions action) {
       if (action == MovingPlatformActions.Nothing) {

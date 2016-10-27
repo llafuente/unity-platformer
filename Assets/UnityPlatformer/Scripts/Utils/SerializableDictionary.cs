@@ -2,17 +2,25 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-// from: http://answers.unity3d.com/questions/460727/how-to-serialize-dictionary-with-unity-serializati.html
+/// <summary>
+/// Serializable Dictionary
+/// http://answers.unity3d.com/questions/460727/how-to-serialize-dictionary-with-unity-serializati.html
+/// </summary>
 [Serializable]
-public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
-{
+public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver {
+  /// <summary>
+  /// keys
+  /// </summary>
   [SerializeField]
   private List<TKey> keys = new List<TKey>();
-
+  /// <summary>
+  /// values
+  /// </summary>
   [SerializeField]
   private List<TValue> values = new List<TValue>();
-
-  // save the dictionary to lists
+  /// <summary>
+  /// save the dictionary to lists
+  /// </summary>
   public void OnBeforeSerialize() {
     keys.Clear();
     values.Clear();
@@ -21,8 +29,9 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IS
       values.Add(pair.Value);
     }
   }
-
-  // load dictionary from lists
+  /// <summary>
+  /// load dictionary from lists
+  /// </summary>
   public void OnAfterDeserialize() {
     this.Clear();
 

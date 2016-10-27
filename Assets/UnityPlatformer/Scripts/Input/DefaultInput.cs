@@ -13,8 +13,13 @@ using System;
   using WiimoteApi;
 #endif
 
+// TODO player selection?!
 
 namespace UnityPlatformer {
+  /// <summary>
+  /// internal map of Wiimote library buttons
+  /// TODO nunchuck, and other pads?
+  /// </summary>
   public enum WiiButtons {
     WII_BUTTON_1,
     WII_BUTTON_2,
@@ -25,25 +30,46 @@ namespace UnityPlatformer {
     WII_BUTTON_HOME
   }
   /// <summary>
-  /// Keyboard and Touch (https://www.assetstore.unity3d.com/en/#!/content/15233)
-  /// All CnControls is enconsed in #ifdef.
-  /// If your project use CnControls define UP_USE_CN_INPUT_MANAGER to support it.
+  /// Keyboard, Touch and Wii
+  ///
+  /// Touch use CnControls [https://www.assetstore.unity3d.com/en/#!/content/15233]
+  /// to enable touch you need to uncomment '\#define UP_USE_CN_INPUT_MANAGER'
+  /// at the top of this file\n
+  /// Wii controls use WiimoteApi [https://github.com/Flafla2/Unity-Wiimote] to enable wiimote support you need to
+  /// uncomment '\#define UP_USE_WII_INPUT_MANAGER' at the top of this file
   /// </summary>
   public class DefaultInput : PlatformerInput {
     [Serializable]
     public class InputMap {
+      /// <summary>
+      /// constructor
+      /// </summary>
       public InputMap(String _action, String _handheld, String _keyboard, WiiButtons _wii) {
         action = _action;
         handheld = _handheld;
         keyboard = _keyboard;
         wii = _wii;
       }
+      /// <summary>
+      /// action identifier
+      /// </summary>
       public String action;
+      /// <summary>
+      /// CNInput name
+      /// </summary>
       public String handheld;
+      /// <summary>
+      /// Keyboard name
+      /// </summary>
       public String keyboard;
+      /// <summary>
+      /// Button in a wiimote
+      /// </summary>
       public WiiButtons wii;
     };
-
+    /// <summary>
+    /// List of action - button/key mapping
+    /// </summary>
     public List<InputMap> inputsMap = new List<InputMap> {
       // default map
       new InputMap (
