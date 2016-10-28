@@ -4,31 +4,56 @@ using UnityEngine;
 namespace UnityPlatformer {
   /// <summary>
   /// Push objects (Box)
+  ///
   /// NOTE require CharacterActionGroundMovement
   /// </summary>
   public class CharacterActionPush: CharacterAction {
-    #region public
-
+    /// <summary>
+    /// Movement speed
+    /// </summary>
     [Comment("Movement speed")]
     public float speed = 3;
+    /// <summary>
+    /// Time to reach max speed
+    /// </summary>
     [Comment("Time to reach max speed")]
     public float accelerationTime = .1f;
+    /// <summary>
+    /// Time to pushing before start moving the object
+    /// </summary>
     [Comment("Time to pushing before start moving the object")]
     public float pushingStartTime = 0.5f;
-    //public float maxWeight =4f;
+    /// <summary>
+    /// Limit Push to X
+    ///
+    /// if false, you will see problems while on slopes, but maybe
+    /// it's desired...
+    /// </summary>
     [Comment("Limit Push to X")]
-    public bool forbidVerticalPush = true;
+    public bool forbidVerticalMovement = true;
 
     [Space(10)]
+
+    /// <summary>
+    /// Action priority
+    /// </summary>
     [Comment("Remember: Higher priority wins. Modify with caution")]
     public int priority = 20;
-
-    #endregion
-
+    /// <summary>
+    /// Where the Character was facing, for reseting pushingCD
+    /// </summary>
     int faceDir = 0;
+    /// <summary>
+    /// Time Pushing to give some time before actually push
+    /// </summary>
     Cooldown pushingCD;
-
+    /// <summary>
+    /// for Mathf.SmoothDamp
+    /// </summary>
     float velocityXSmoothing;
+    /// <summary>
+    /// for Mathf.SmoothDamp
+    /// </summary>
     CharacterActionGroundMovement groundMovement;
 
     public override void OnEnable() {
@@ -36,10 +61,15 @@ namespace UnityPlatformer {
 
       pushingCD = new Cooldown(pushingStartTime);
       groundMovement = character.GetAction<CharacterActionGroundMovement>();
+      if (groundMovement == null) {
+        Debug.LogWarning("CharacterActionGroundMovement is required by CharacterActionPush");
+      }
 
       character.onBeforeMove += OnBeforeMove;
     }
-
+    /// <summary>
+    /// Pushing and object enough time?
+    /// </summary>
     public override int WantsToUpdate(float delta) {
       if (!pc2d.collisions.below) {
         return 0;
@@ -73,7 +103,6 @@ namespace UnityPlatformer {
       pushingCD.Reset();
       return 0;
     }
-
     /// <summary>
     /// EnterState and start centering
     /// </summary>
@@ -84,7 +113,6 @@ namespace UnityPlatformer {
       Log.level = LogLevel.Silly;
       Log.Silly("(Push) {0} Start pushing", gameObject.name);
     }
-
     /// <summary>
     /// EnterState and start centering
     /// </summary>
@@ -96,11 +124,15 @@ namespace UnityPlatformer {
       Log.Silly("(Push) {0} Stop pushing", gameObject.name);
       Log.level = LogLevel.Info;
     }
-
+    /// <summary>
+    /// Move Character, because the magic is in OnBeforeMove
+    /// </summary>
     public override void PerformAction(float delta) {
       groundMovement.Move(speed, ref velocityXSmoothing, accelerationTime);
     }
-
+    /// <summary>
+    /// Move the Box before moving the character so there is a gap between them
+    /// </summary>
     public void OnBeforeMove(Character ch, float delta) {
       // TODO test if give better results
       // disable all boxes
@@ -117,9 +149,11 @@ namespace UnityPlatformer {
         );
       }
     }
-
+    /// <summary>
+    /// Move a Box
+    /// </summary>
     public void PushBox(Vector3 velocity, Directions dir, float delta) {
-      if (forbidVerticalPush) {
+      if (forbidVerticalMovement) {
         velocity.y = 0.0f;
       }
 
@@ -129,7 +163,9 @@ namespace UnityPlatformer {
         b.boxMovingPlatform.PlatformerUpdate(delta);
       }
     }
-
+    /// <summary>
+    /// default
+    /// </summary>
     public override PostUpdateActions GetPostUpdateActions() {
       return PostUpdateActions.WORLD_COLLISIONS | PostUpdateActions.APPLY_GRAVITY;
     }

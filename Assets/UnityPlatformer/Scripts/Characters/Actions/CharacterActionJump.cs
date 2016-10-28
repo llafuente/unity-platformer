@@ -13,33 +13,59 @@ namespace UnityPlatformer {
   /// TODO force one jump per press, force to release before another jump\n
   /// </summary>
   public class CharacterActionJump: CharacterAction {
-    #region public
-
+    /// <summary>
+    /// Jump Properties
+    /// </summary>
     public JumpVariableHeightProperties jumpProperties;
 
     // TODO OnValidate check this!
     [Space(10)]
+
+    /// <summary>
+    /// Input action name
+    /// </summary>
     [Comment("Must match something @PlatformerInput")]
     public String action = "Jump";
 
     [Space(10)]
+
+    /// <summary>
+    /// Action priority
+    /// </summary>
     [Comment("Remember: Higher priority wins. Modify with caution")]
     public int priority = 5;
-    #endregion
-
-    #region private
-
+    /// <summary>
+    /// Jump is held
+    /// </summary>
     bool jumpHeld = false;
+    /// <summary>
+    /// Currently jumping
+    /// </summary>
     bool jumping = false;
+    /// <summary>
+    /// Jump stopped, for ex: key up
+    /// </summary>
     bool jumpStopped = false;
+    /// <summary>
+    /// Is doing a custom jump, using Force
+    /// </summary>
     bool customJump = false;
+    /// <summary>
+    /// Is a forced jump
+    /// </summary>
     bool forceJump = false;
-
+    /// <summary>
+    /// default jump using jumpProperties
+    /// </summary>
     Jump defaultJump;
+    /// <summary>
+    /// Current jump, could be defaultJump or a forced one
+    /// </summary>
     Jump currentJump;
+    /// <summary>
+    /// jumpProperties.graceJumpTime to frames
+    /// </summary>
     int _graceJumpFrames;
-
-    #endregion
 
     public override void OnEnable() {
       base.OnEnable();
@@ -50,13 +76,17 @@ namespace UnityPlatformer {
       input.onActionUp += OnActionUp;
       input.onActionDown += OnActionDown;
     }
-
+    /// <summary>
+    /// input.onActionDown callback
+    /// </summary>
     public void OnActionDown(string _action) {
       if (_action == action) {
         jumpHeld = true;
       }
     }
-
+    /// <summary>
+    /// input.onActionUp callback
+    /// </summary>
     public void OnActionUp(string _action) {
       // when button is up, reset, and allow a new jump
       if (_action == action) {
@@ -66,20 +96,26 @@ namespace UnityPlatformer {
         }
       }
     }
-
+    /// <summary>
+    /// Force Character to Jump!
+    ///
+    /// User must be sure of what they are doing... this doesn't check anything
+    /// </summary>
     public void ForceJump(Jump j) {
       Jump(j);
       forceJump = true;
     }
-
+    /// <summary>
+    /// Try to jump
+    /// </summary>
     public void Jump(Jump j) {
       jumping = true;
       customJump = true; // enable StartJump
       currentJump = j;
     }
-
     /// <summary>
     /// Listen input and Select the current Jump
+    ///
     /// Other actions (with higher priority) can trigger Jumps
     /// using Jump(), and the next Frame CharacterActionJump
     /// willl take control!

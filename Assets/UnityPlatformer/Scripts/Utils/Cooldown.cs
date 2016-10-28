@@ -35,7 +35,7 @@ namespace UnityPlatformer {
       return Ready();
     }
     /// <summary>
-    /// Is ready, coldown expired
+    /// Is ready, cooldown expired
     /// </summary>
     public bool Ready() {
       return counter >= limit;

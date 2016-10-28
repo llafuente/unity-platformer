@@ -75,7 +75,7 @@ namespace UnityPlatformer {
     /// </summary>
     internal Damage dt;
     /// <summary>
-    /// Report missconfigurations and initialize
+    /// check missconfigurations and initialize
     /// </summary>
     void Start() {
       dt = GetComponent<Damage> ();

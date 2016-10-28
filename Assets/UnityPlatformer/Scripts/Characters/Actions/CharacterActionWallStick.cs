@@ -6,37 +6,70 @@ namespace UnityPlatformer {
   /// Stick at walls. Also perform wall-jumps
   /// </summary>
   public class CharacterActionWallStick: CharacterAction {
-    #region public
-
+    /// <summary>
+    /// Vertical terminal velocity while stick
+    /// </summary>
     [Comment("Vertical terminal velocity while stick")]
-	  public float wallSlideSpeedMax = 3;
+    public float wallSlideSpeedMax = 3;
+    /// <summary>
+    /// Time player need to oppose walkstick to leave / press in the other direction.
+    /// </summary>
     [Comment("Time player need to oppose walkstick to leave / press in the other direction.")]
-	  public float wallStickLeaveTime = 0.25f;
-	  public float wallStickLeaveAgain = 0.25f;
+    public float wallStickLeaveTime = 0.25f;
+    /// <summary>
+    /// After wall-jump, time that CharacterActionWallStick will be disabled
+    /// </summary>
+    public float wallStickLeaveAgain = 0.25f;
+    /// <summary>
+    /// Character can use wall-jumps ?
+    /// </summary>
     public bool enableWallJumps = true;
+    /// <summary>
+    /// CharacterActionJump
+    /// </summary>
     public CharacterActionJump actionJump;
-    [Comment("Jump in the same direction as the wall. Climb")]
+    /// <summary>
+    /// Climb jump: Jump in the same direction as the wall.
+    /// </summary>
+    [Comment("Climb jump: Jump in the same direction as the wall.")]
     public JumpConstantProperties wallJumpClimb = new JumpConstantProperties(new Vector2(10, 35));
+    /// <summary>
+    /// Jump with no direction pressed.
+    /// </summary>
     [Comment("Jump with no direction pressed.")]
     public JumpConstantProperties wallJumpOff = new JumpConstantProperties(new Vector2(20, 20));
+    /// <summary>
+    /// Jump in the opposite direction
+    /// </summary>
     [Comment("Jump in the opposite direction")]
     public JumpConstantProperties wallLeap = new JumpConstantProperties(new Vector2(20, 20));
 
     [Space(10)]
+
+    /// <summary>
+    /// action priority
+    /// </summary>
     [Comment("Remember: Higher priority wins. Modify with caution. Tip: Higher than Jump")]
     public int priority = 7;
-
-    #endregion
-
-    #region private
-
-	  float timeToWallStickLeave;
-	  int wallStickLeaveAgainFrames;
-	  int wallStickLeaveAgainCounter;
-	  int slidingFrames = 0;
-
-    #endregion
-
+    /// <summary>
+    /// Frame sliding
+    /// </summary>
+    internal int slidingFrames = 0;
+    /// <summary>
+    /// counter to compare against wallStickLeaveTime
+    /// </summary>
+    float timeToWallStickLeave;
+    /// <summary>
+    /// wallStickLeaveAgain converted to frames
+    /// </summary>
+    int wallStickLeaveAgainFrames;
+    /// <summary>
+    /// counter to compare against wallStickLeaveAgainFrames
+    /// </summary>
+    int wallStickLeaveAgainCounter;
+    /// <summary>
+    /// Initialization
+    /// </summary>
     public override void OnEnable() {
       base.OnEnable();
 
@@ -48,9 +81,7 @@ namespace UnityPlatformer {
       if (enableWallJumps && actionJump == null) {
         Debug.LogWarning("enableWallJumps is true but there is no actionJump selected!");
       }
-
     }
-
     /// <summary>
     /// When Character is colliding left or right but now below
     /// and falling! Stick!
@@ -78,9 +109,8 @@ namespace UnityPlatformer {
 
       return 0;
     }
-
     /// <summary>
-    /// Reset SmoothDamp
+    /// Reset SmoothDamp and enter state States.WallSliding
     /// </summary>
     public override void GainControl(float delta) {
       base.GainControl(delta);
@@ -88,7 +118,9 @@ namespace UnityPlatformer {
       character.EnterState(States.WallSliding);
       slidingFrames = 0;
     }
-
+    /// <summary>
+    /// Stick, then slide down. Can dismount jumping if enableWallJumps
+    /// </summary>
     public override void PerformAction(float delta) {
       ++slidingFrames;
 
@@ -140,7 +172,9 @@ namespace UnityPlatformer {
       }
 
     }
-
+    /// <summary>
+    /// default behaviour
+    /// </summary>
     public override PostUpdateActions GetPostUpdateActions() {
       return PostUpdateActions.WORLD_COLLISIONS | PostUpdateActions.APPLY_GRAVITY;
     }

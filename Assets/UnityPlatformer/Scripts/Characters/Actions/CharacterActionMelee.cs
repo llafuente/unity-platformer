@@ -1,39 +1,57 @@
 using System;
 using UnityEngine;
 
+/// TODO animationName (so we could supports multiple melee attacks)
+
 namespace UnityPlatformer {
   /// <summary>
   /// Melee attack
+  ///
   /// NOTE Can't be interrupted atm
-  /// TODO animationName (so we could supports multiple melee attacks)
   /// </summary>
   public class CharacterActionMelee: CharacterActionTimed {
-    #region public
-
+    /// <summary>
+    /// Melee Damage data
+    /// </summary>
     [Serializable]
     public class MeleeDamage {
-      // this must contains a DamageType
+      /// <summary>
+      /// An object with a DamageType
+      /// </summary>
       public GameObject area;
+      /// <summary>
+      /// When enable the Damage area
+      /// </summary>
       public float startAt = 0.0f;
-
+      /// <summary>
+      /// time in frames
+      /// </summary>
       internal int offsetFrame = 0;
+      /// <summary>
+      /// is currently active
+      /// </summary>
       internal bool active = false;
     }
-
+    /// <summary>
+    /// List of Damage areas, something like moving hitboxes
+    /// </summary>
     public MeleeDamage[] damageAreas = new MeleeDamage[1];
+    /// <summary>
+    /// Input action name
+    /// </summary>
     public string action = "Attack";
 
     [Space(10)]
+
+    /// <summary>
+    /// Action priority
+    /// </summary>
     [Comment("Remember: Higher priority wins. Modify with caution")]
     public int priority = 20;
-
-    #endregion
-
-    #region private
-
+    /// <summary>
+    /// listen action input events
+    /// </summary>
     bool attackHeld = false;
-
-    #endregion
 
     public override void OnEnable() {
       base.OnEnable();
@@ -49,14 +67,18 @@ namespace UnityPlatformer {
 
       Reset();
     }
-
+    /// <summary>
+    /// input.onActionDown callabck
+    /// </summary>
     public void OnActionDown(string _action) {
       if (_action == action) {
         attackHeld = true;
         Reset();
       }
     }
-
+    /// <summary>
+    /// input.onActionUp callabck
+    /// </summary>
     public void OnActionUp(string _action) {
       // when button is up, reset, and allow a new jump
       if (_action == action) {
@@ -64,27 +86,33 @@ namespace UnityPlatformer {
         Reset();
       }
     }
-
+    /// <summary>
+    /// Disable all areas
+    /// </summary>
     public void Reset() {
       for (var i = 0; i < damageAreas.Length; ++i) {
         damageAreas[i].area.SetActive(false);
       }
     }
-
+    /// <summary>
+    /// EnterState
+    /// </summary>
     public override void StartAction() {
       base.StartAction();
 
       character.EnterState(States.MeleeAttack);
     }
-
+    /// <summary>
+    /// ExitState
+    /// </summary>
     public override void EndAction() {
       base.EndAction();
 
       character.ExitState(States.MeleeAttack);
     }
-
-
     /// <summary>
+    /// attackHeld &amp; and previous attack ended
+    ///
     /// TODO REVIEW continous attack ?
     /// </summary>
     public override int WantsToUpdate(float delta) {
@@ -92,7 +120,7 @@ namespace UnityPlatformer {
 
       if (attackHeld || !IsActionComplete()) {
         // attack starts!
-        if (!IsColdown()) {
+        if (!IsCooldown()) {
           StartAction();
           return priority;
         }

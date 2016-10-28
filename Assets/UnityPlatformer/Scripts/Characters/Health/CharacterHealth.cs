@@ -69,6 +69,16 @@ namespace UnityPlatformer {
     public delegate void HurtCallback(Damage dt, CharacterHealth to);
     /// <summary>
     /// Health is reduced, will fire after onDamage
+    ///
+    /// dt is the Damage dealed
+    /// to is the CharacterHealth that hurt me, if possible, could be null
+    /// </summary>
+    public HurtCallback onInjured;
+    /// <summary>
+    /// This Character Deal damage to someone
+    ///
+    /// dt is the Damage dealed
+    /// to is the CharacterHealth hurted
     /// </summary>
     public HurtCallback onHurt;
     /// <summary>
@@ -112,10 +122,9 @@ namespace UnityPlatformer {
     /// </summary>
     private float _invulnerable = 0;
     /// <summary>
-    /// missconfiguration and initialization
+    /// check missconfiguration and initialization
     /// </summary>
     void Start() {
-      // check missconfiguration
       if (startingHealth < maxHealth) {
         Debug.LogWarning(this.name + " startingHealth < maxHealth ?");
       }
@@ -188,29 +197,41 @@ namespace UnityPlatformer {
       Debug.LogFormat("Object: {0} recieve damage {1} health {2} from: {3}",
         gameObject.name, dmg.amount, health, dmg.causer.gameObject.name);
 
-      if (Damage(dmg.amount, dmg.type)) {
+      if (Damage(dmg.amount, dmg.type, dmg.causer)) {
         if (dmg.causer != null && dmg.causer.onHurt != null) {
           dmg.causer.onHurt(dmg, this);
         }
       }
     }
-
-    public bool Damage(int amount, DamageType dt) {
+    /// <summary>
+    /// Try to Damage the Character
+    /// </summary>
+    public bool Damage(int amount, DamageType dt, CharacterHealth causer = null) {
       Debug.LogFormat("immunity {0} DamageType {1}", immunity, dt);
       if ((immunity & dt) == dt) {
         Debug.LogFormat("Inmune to {0} attacks", dt);
+
+        if (onDamage != null) {
+          onDamage();
+        }
+
+        if (onImmunity != null) {
+          onImmunity();
+        }
+
         return false;
       }
 
-      return Damage(amount);
+      return Damage(amount, causer);
     }
-
     /// <summary>
+    /// Try to Damage the Character
+    ///
     /// triggers onDamage
     /// triggers onDeath
     /// NOTE this won't trigger onHurtCharacter
     /// </summary>
-    public bool Damage(int amount = 1) {
+    public bool Damage(int amount = 1, CharacterHealth causer = null) {
       if (amount <= 0) {
         Debug.LogWarning("amount <= 0 ??");
       }
@@ -237,8 +258,8 @@ namespace UnityPlatformer {
         onDamage();
       }
 
-      if (onHurt != null) {
-        onHurt(null, this);
+      if (onInjured != null) {
+        onInjured(null, causer);
       }
 
       if (health <= 0) {
@@ -248,11 +269,12 @@ namespace UnityPlatformer {
       return true;
 
     }
-
+    /// <summary>
+    /// No healt
+    /// </summary>
     public bool isDead() {
       return health <= 0;
     }
-
     /// <summary>
     /// increse health character if possible maxHealth not reached.
     /// Trigger onMaxHealth

@@ -3,45 +3,79 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO use: CharacterActionTimed ?
+// TODO OnValidate check this! CharacterActionProjectile.action value
+// TODO wire actions
+
 namespace UnityPlatformer {
   /// <summary>
   /// Fire projectiles (All or one by one), handles orientation based on
   /// the character collisions.faceDir
-  /// TODO use: CharacterActionTimed
   /// </summary>
   public class CharacterActionProjectile: CharacterAction {
-    #region public
-
+    /// <summary>
+    /// Projectiles data
+    /// </summary>
     [Serializable]
     public struct ProjectileCfg {
+      /// <summary>
+      /// Projectile object
+      /// </summary>
       public Projectile projectile;
+      /// <summary>
+      /// Offset position when firing
+      /// </summary>
       public Vector2 offset;
-      // this is ignored when fireMode = false
+      /// <summary>
+      /// delay between fires
+      ///
+      /// NOTE this is ignored when fireMode = false
+      /// </summary>
       public float delay;
     };
-
-
-    // TODO OnValidate check this!
+    /// <summary>
+    /// Input action name
+    /// </summary>
     [Comment("Must match something in @PlatformerInput")]
     public String action = "Attack";
+    /// <summary>
+    /// List of projectiles
+    /// </summary>
     public List<ProjectileCfg> projectiles = new List<ProjectileCfg>();
+
     [Space(10)]
+
+    /// <summary>
+    /// Reload time
+    /// </summary>
     [Comment("Reload time")]
     public float fireDelay = 5;
+    /// <summary>
+    /// * true: Fire all at once (with given delays).
+    /// * false: Fire one by one
+    /// </summary>
     [Comment("checked: Fire all at once (with given delays). unchecked: Fire one by one")]
     public bool fireMode = false;
 
     [Space(10)]
+
+    /// <summary>
+    /// Action priority
+    /// </summary>
     [Comment("Remember: Higher priority wins. Modify with caution")]
     public int priority = 5;
-
+    /// <summary>
+    /// Fired when fire a projectile
+    /// </summary>
     public Action onFire;
-
-    #endregion
-
+    /// <summary>
+    /// Current projectile index
+    /// </summary>
     int currentIndex = 0;
+    /// <summary>
+    /// Counter
+    /// </summary>
     float time = 0;
-
     /// <summary>
     /// TODO REVIEW continous fire?
     /// </summary>
@@ -57,7 +91,6 @@ namespace UnityPlatformer {
       time = 0; // reset timer
       Fire();
     }
-
     /// <summary>
     /// Fire projectiles, regardless the cooldown,
     /// Call it after all checks
@@ -77,7 +110,9 @@ namespace UnityPlatformer {
         onFire();
       }
     }
-
+    /// <summary>
+    /// Real Fire function, for use with: UpdateManager.SetTimeout
+    /// </summary>
     protected virtual void _Fire() {
       // select projectile
       ProjectileCfg p = projectiles[currentIndex++];
@@ -94,8 +129,6 @@ namespace UnityPlatformer {
       Projectile new_p;
       new_p = p.projectile.Fire(character.transform.position + offset);
       new_p.velocity.x *= dir;
-
-      // TODO wire actions
     }
 
     public override PostUpdateActions GetPostUpdateActions() {

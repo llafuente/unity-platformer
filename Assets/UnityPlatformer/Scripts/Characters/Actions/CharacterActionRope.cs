@@ -6,33 +6,67 @@ namespace UnityPlatformer {
   /// Rope climb
   /// </summary>
   public class CharacterActionRope: CharacterAction {
-    #region public
-
+    /// <summary>
+    /// Climb speed
+    /// </summary>
     public float climbSpeed = 6;
+    /// <summary>
+    /// Max speed to snap to the center.
+    /// </summary>
     [Comment("Max speed to snap to the center.")]
     public float towardsSpeed = 32;
+    /// <summary>
+    /// Time to reach the center (if towardsSpeed is fast enough).
+    /// </summary>
     [Comment("Time to reach the center (if towardsSpeed is fast enough).")]
     public float towardsTime = 0.1f;
-    [Comment("Move character to the center of the grabArea")]
+    /// <summary>
+    /// Move character to the center of the Rope
+    /// </summary>
+    [Comment("Move character to the center of the Rope")]
     public bool moveToCenter = false;
-    [Comment("Character offset position for centering")]
+    /// <summary>
+    /// Character offset position while grabbing
+    /// </summary>
+    [Comment("Character offset position while grabbing")]
     public Vector3 grabbingOffset = new Vector3(0, 0, 0);
-    //public bool dismountPressingDown = true;
+    /// <summary>
+    /// Character can dismount pressing jump
+    /// </summary>
     public bool dismountJumping = true;
-    [Comment("Jump with no direction pressed.")]
+    /// <summary>
+    /// Dismount jump properties
+    /// </summary>
+    [Comment("Dismount jump properties")]
     public JumpConstantProperties jumpOff = new JumpConstantProperties(new Vector2(20, 20));
 
     [Space(10)]
+
+    /// <summary>
+    /// Action priority
+    /// </summary>
     [Comment("Remember: Higher priority wins. Modify with caution")]
     public int priority = 20;
-
+    /// <summary>
+    /// Time to wait before grab again a Rope, should be enough to let the
+    /// player leave the Rope Area
+    /// </summary>
     public float grabAgainCooldown = 0.25f;
-
-    #endregion
-
+    /// <summary>
+    /// CharacterActionJump
+    /// </summary>
     CharacterActionJump actionJump;
+    /// <summary>
+    /// is action centering the character in the rope
+    /// </summary>
     bool centering = false;
+    /// <summary>
+    /// Grab again cooldown
+    /// </summary>
     Cooldown canGrab;
+    /// <summary>
+    /// Current position in the SectionRope
+    /// </summary>
     float positionOfSection = 0.5f;
 
     public override void OnEnable() {
@@ -55,9 +89,10 @@ namespace UnityPlatformer {
       }
       return 0;
     }
-
     /// <summary>
-    /// EnterState and start centering
+    /// EnterState and start centering and listen rope breakage
+    ///
+    /// TODO set positionOfSection = 0.5f, we should calc the closest...
     /// </summary>
     public override void GainControl(float delta) {
       base.GainControl(delta);
@@ -68,20 +103,26 @@ namespace UnityPlatformer {
 
       character.rope.onBreakRope += OnBreakRope;
     }
-
+    /// <summary>
+    /// stop listenting rope break
+    /// </summary>
     public override void LoseControl(float delta) {
       if (character.rope != null) {
         character.rope.onBreakRope -= OnBreakRope;
       }
     }
-
+    /// <summary>
+    /// Let the Character fall
+    /// </summary>
     void OnBreakRope(Rope rope) {
       LoseControl(0.0f);
       character.ExitState(States.Rope);
       character.ExitArea(Areas.Rope);
       character.rope = null;
     }
-
+    /// <summary>
+    /// Move up/down and sync with Rope movement
+    /// </summary>
     public override void PerformAction(float delta) {
       Vector3 ori = character.transform.position;
       Vector3 ropePosition = character.rope.sections[character.ropeIndex].GetComponent<RopeSection>().GetPositionInSection(positionOfSection);
@@ -143,7 +184,9 @@ namespace UnityPlatformer {
       }
 
     }
-
+    /// <summary>
+    /// Do nothing, while on a Rope there shoud be no world to collide
+    /// </summary>
     public override PostUpdateActions GetPostUpdateActions() {
       return PostUpdateActions.NONE;
     }

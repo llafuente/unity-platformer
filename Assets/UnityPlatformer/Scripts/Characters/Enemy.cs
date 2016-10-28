@@ -17,7 +17,7 @@ namespace UnityPlatformer {
       UpdateManager.instance.Remove (this);
     }
     /// <summary>
-    /// LogWarning if there is some missconfiguration
+    /// check missconfiguration
     /// </summary>
     public virtual void Start() {
       if (input == null) {

@@ -7,24 +7,45 @@ namespace UnityPlatformer {
   /// TODO slopeAccelerationFactor/slopeDeccelerationFactor
   /// </summary>
   public class CharacterActionLiquidMovement: CharacterAction {
-    #region public
-
+    /// <summary>
+    /// Movement speed
+    /// </summary>
     [Comment("Movement speed")]
     public float speed = 6;
+    /// <summary>
+    /// Time to reach max speed
+    /// </summary>
     [Comment("Time to reach max speed")]
     public float accelerationTime = .1f;
+    /// <summary>
+    /// Distance from feet (up)
+    /// </summary>
     [Comment("Distance from feet (up)")]
     public float surfaceLevel = 1.5f;
+    /// <summary>
+    /// Terminal velocity going up
+    /// </summary>
     public float terminalYUP = 2f;
+    /// <summary>
+    /// Terminal velocity going down
+    /// </summary>
     public float terminalYDown = 3f;
+    /// <summary>
+    /// Ignore liquids under liquidMinHeight
+    /// </summary>
     public float liquidMinHeight = 0.75f;
+    /// <summary>
+    /// Exit jump properties
+    /// </summary>
     [Comment("Exit jump.")]
     public JumpConstantProperties jumpOff = new JumpConstantProperties(new Vector2(20, 20));
-
-    #endregion
-
+    /// <summary>
+    /// CharacterActionJump
+    /// </summary>
     internal CharacterActionJump actionJump;
-
+    /// <summary>
+    /// Mathf.SmoothDamp
+    /// </summary>
     float velocityXSmoothing;
 
     public override void OnEnable() {
@@ -34,13 +55,12 @@ namespace UnityPlatformer {
     }
 
     void OnEnterState(States before, States after) {
-
       int change = 0; // no
       if (
         ((before & States.Liquid) == States.Liquid) &&
         ((after & States.Liquid) != States.Liquid)
       ) {
-        change = 1; // lave
+        change = 1; // leave
       } else if (
         ((before & States.Liquid) != States.Liquid) &&
         ((after & States.Liquid) == States.Liquid)
@@ -53,7 +73,6 @@ namespace UnityPlatformer {
         pc2d.leavingGround = change == 2;
       }
     }
-
     /// <summary>
     /// Execute when collision below.
     /// </summary>
@@ -84,8 +103,6 @@ namespace UnityPlatformer {
       return 0;
     }
 
-    /// <summary>
-    /// </summary>
     public override void PerformAction(float delta) {
       Vector2 in2d = input.GetAxisRaw();
 

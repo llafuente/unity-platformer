@@ -6,34 +6,66 @@ namespace UnityPlatformer {
   /// Climb a ladder
   /// </summary>
   public class CharacterActionLadder: CharacterAction {
-    #region public
-
+    /// <summary>
+    /// Ladder movement speed.
+    /// </summary>
     [Comment("Ladder movement speed.")]
     public float speed = 6;
+    /// <summary>
+    /// Move character to the center of the ladder, instantly
+    /// </summary>
     [Comment("Move character to the center of the ladder, instantly")]
     public bool moveToCenter = false;
-    [Comment("max speed to snap to the center.")]
+    /// <summary>
+    /// Maximum speed to snap to the center.
+    /// </summary>
+    [Comment("Maximum speed to snap to the center.")]
     public float towardsSpeed = 32;
-    [Comment("time to reach the center (if towardsSpeed is fast enough).")]
+    /// <summary>
+    /// Time to reach the center (if towardsSpeed is fast enough).
+    /// </summary>
+    [Comment("Time to reach the center (if towardsSpeed is fast enough).")]
     public float towardsTime = 0.1f;
 
     [Space(10)]
+
+    /// <summary>
+    /// Dismount pressing left/right
+    /// </summary>
     [Comment("Dismount pressing left/right")]
     public bool leftRightDismount = true;
+    /// <summary>
+    /// Time left/right need to be pressed to dismount
+    /// </summary>
     [Comment("Time left/right need to be pressed to dismount")]
     public float dismountTime = 0.2f;
+    /// <summary>
+    /// Character can dismount ladders jumping?
+    /// </summary>
     public bool dismountJumping = true;
+    /// <summary>
+    /// Jump with no direction pressed.
+    /// </summary>
     [Comment("Jump with no direction pressed.")]
     public JumpConstantProperties jumpOff = new JumpConstantProperties(new Vector2(20, 20));
 
     [Space(10)]
+    /// <summary>
+    /// Action priority
+    /// </summary>
     [Comment("Remember: Higher priority wins. Modify with caution")]
     public int priority = 10;
-
-    #endregion
-
+    /// <summary>
+    /// CharacterActionJump
+    /// </summary>
     CharacterActionJump actionJump;
+    /// <summary>
+    /// currently centering the Character?
+    /// </summary>
     bool centering = false;
+    /// <summary>
+    /// Cooldown to enter in a ladder again
+    /// </summary>
     Cooldown dismount;
 
     public override void OnEnable() {
@@ -45,7 +77,6 @@ namespace UnityPlatformer {
         Debug.LogError("CharacterActionLadder requires CharacterActionJump");
       }
     }
-
     /// <summary>
     /// Enter in ladder mode when user is in a ladder area and pressing up/down
     /// </summary>
@@ -106,7 +137,6 @@ namespace UnityPlatformer {
 
       return 0;
     }
-
     /// <summary>
     /// EnterState and start centering
     /// </summary>

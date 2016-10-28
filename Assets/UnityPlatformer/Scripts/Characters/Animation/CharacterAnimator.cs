@@ -5,30 +5,47 @@ using UnityPlatformer;
 
 namespace UnityPlatformer {
   /// <summary>
-  /// Animator class, read all information available at character to play
-  /// animations
+  /// Animator class
+  ///
+  /// Use all data available at Character &amp; cia to know what to play
   /// </summary>
   public abstract class CharacterAnimator: MonoBehaviour, IUpdateEntity {
-
+    /// <summary>
+    /// Character
+    /// </summary>
     public Character character;
+    /// <summary>
+    /// When a player is on a slope rotate the player the same angle?
+    /// </summary>
     public bool rotateOnSlopes = true;
+    /// <summary>
+    /// Max rotation slope, above this value it will be 0º
+    /// </summary>
     public float maxSlope = 70f;
-
+    /// <summary>
+    /// Start listening
+    /// </summary>
     public virtual void Start() {
       character.animator = this;
       character.onAreaChange += OnAreaChange;
       character.onHurtCharacter += OnHurtCharacter;
       character.onStateChange += OnStateChange;
     }
-
+    /// <summary>
+    /// sync UpdateManager
+    /// </summary>
     public virtual void OnEnable() {
       UpdateManager.instance.Push(this, Configuration.instance.defaultPriority);
     }
-
+    /// <summary>
+    /// sync UpdateManager
+    /// </summary>
     public virtual void OnDisable() {
       UpdateManager.instance.Remove(this);
     }
-
+    /// <summary>
+    /// Calculate what animation to play and do it!
+    /// </summary>
     public virtual void PlatformerUpdate(float delta) {
       if (character.faceDir == Facing.Right) {
         transform.localScale  = new Vector3(1, 1, 1);
@@ -102,20 +119,37 @@ namespace UnityPlatformer {
         }
       }
     }
-
-    public virtual void LatePlatformerUpdate(float delta) {
-    }
-
+    /// <summary>
+    /// do nothing
+    /// </summary>
+    public virtual void LatePlatformerUpdate(float delta) {}
+    /// <summary>
+    /// Play animation
+    ///
+    /// NOTE this method should check that it's not currently playing
+    /// the given animation, because each PlatformerUpdate you will recieve
+    /// the same animation
+    /// </summary>
     public abstract void Play(string animation);
-
+    /// <summary>
+    /// Get animation length in seconds
+    /// </summary>
     public abstract float GetAnimationLength(string animation);
-
+    /// <summary>
+    /// Not used atm
+    /// </summary>
     public virtual void OnAreaChange(Areas before, Areas after) {
       //Debug.LogFormat("area change {1} vs {2}", before, after);
     }
+    /// <summary>
+    /// Not used atm
+    /// </summary>
     public virtual void OnHurtCharacter(Damage dt, CharacterHealth h, Character to) {
       //Debug.LogFormat("hurt {1} with {2} damage", to.gameObject, dt.amount);
     }
+    /// <summary>
+    /// Not used atm
+    /// </summary>
     public virtual void OnStateChange(States before, States after) {
       //Debug.LogFormat("OnStateChange {1} vs {2}", before, after);
     }
