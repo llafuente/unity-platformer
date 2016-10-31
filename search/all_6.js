@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['facedir',['faceDir',['../class_unity_platformer_1_1_rope.html#a1f0f1aaea9ccfe7f21de0cb36db60da3',1,'UnityPlatformer::Rope']]],
+  ['facing',['facing',['../class_unity_platformer_1_1_item.html#a0da6b69ae31b7979ce92df55c6a46b18',1,'UnityPlatformer.Item.facing()'],['../namespace_unity_platformer.html#a762e329b1ffae14b22b8853b9410a719',1,'UnityPlatformer.Facing()']]],
+  ['fallingthroughplatform',['fallingThroughPlatform',['../class_unity_platformer_1_1_platformer_collider2_d_1_1_collision_info.html#a8c19c3e2ffa5d19c3d9f671781db552b',1,'UnityPlatformer::PlatformerCollider2D::CollisionInfo']]],
+  ['fallingtime',['fallingTime',['../class_unity_platformer_1_1_character.html#a83757962bd6be1cd4707afdcd78b2a2a',1,'UnityPlatformer::Character']]],
+  ['fallthroughplatform',['FallThroughPlatform',['../class_unity_platformer_1_1_platformer_collider2_d.html#aebed72ecd45a1e09b73520d384bebdea',1,'UnityPlatformer::PlatformerCollider2D']]],
+  ['feet',['feet',['../class_unity_platformer_1_1_character.html#a29d9955dddb2b7e6fcf675982fcec459',1,'UnityPlatformer::Character']]],
+  ['feetray',['FeetRay',['../class_unity_platformer_1_1_raycast_controller.html#a1778f838f3a6d2ede67baeecf6c1278a',1,'UnityPlatformer::RaycastController']]],
+  ['fence',['Fence',['../class_unity_platformer_1_1_fence.html',1,'UnityPlatformer']]],
+  ['fire',['Fire',['../class_unity_platformer_1_1_character_action_projectile.html#aa3870f51373a0a72aa7ebed4a68321e7',1,'UnityPlatformer.CharacterActionProjectile.Fire()'],['../class_unity_platformer_1_1_projectile.html#af0697c6ffe5c76653b0b7d832a15bb60',1,'UnityPlatformer.Projectile.Fire()']]],
+  ['firedelay',['fireDelay',['../class_unity_platformer_1_1_a_i_cannon.html#af15eedf20fa1aa70ba160a3d36c5f821',1,'UnityPlatformer.AICannon.fireDelay()'],['../class_unity_platformer_1_1_character_action_projectile.html#a601c194edcefac8864954221e04433a5',1,'UnityPlatformer.CharacterActionProjectile.fireDelay()']]],
+  ['firemode',['fireMode',['../class_unity_platformer_1_1_character_action_projectile.html#aabc3bd62a58f6c5967c02adc7b0c41ca',1,'UnityPlatformer::CharacterActionProjectile']]],
+  ['focusareasize',['focusAreaSize',['../class_unity_platformer_1_1_camera_follow.html#afb031b8c545dcd3dfd103c1d36cadfaa',1,'UnityPlatformer::CameraFollow']]],
+  ['forbidverticalmovement',['forbidVerticalMovement',['../class_unity_platformer_1_1_character_action_pull.html#ade8e7738271589eacb79a395aedb5712',1,'UnityPlatformer.CharacterActionPull.forbidVerticalMovement()'],['../class_unity_platformer_1_1_character_action_push.html#a98396ce16aae0063f43131426202d620',1,'UnityPlatformer.CharacterActionPush.forbidVerticalMovement()']]],
+  ['forcejump',['ForceJump',['../class_unity_platformer_1_1_character_action_jump.html#a1fafed296d1039ebb8e6720a0b1f164b',1,'UnityPlatformer::CharacterActionJump']]],
+  ['foreachfeetray',['ForeachFeetRay',['../class_unity_platformer_1_1_raycast_controller.html#a955b477b0ff8d532ea04a55daa2f2671',1,'UnityPlatformer::RaycastController']]],
+  ['foreachheadray',['ForeachHeadRay',['../class_unity_platformer_1_1_raycast_controller.html#a5158bbaaf4834748e3e73fddadb35bf3',1,'UnityPlatformer::RaycastController']]],
+  ['foreachleftray',['ForeachLeftRay',['../class_unity_platformer_1_1_raycast_controller.html#ac0ad48c157bca29ce6584dbb20a2edc6',1,'UnityPlatformer::RaycastController']]],
+  ['foreachrightray',['ForeachRightRay',['../class_unity_platformer_1_1_raycast_controller.html#a4491b3a0be1f253ba7472133ebad0bcb',1,'UnityPlatformer::RaycastController']]]
+];
