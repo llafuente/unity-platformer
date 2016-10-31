@@ -4,8 +4,11 @@
 Based on https://github.com/SebLague/2DPlatformer-Tutorial evolve
 in it's own beast.
 
-## Features
+## API documentation
 
+[unity-platformer API](http://llafuente.github.io/unity-platformer/)
+
+## Features
 
 Tiles (Asserts/UnityPlatformer/Scripts/Tiles/)
 
