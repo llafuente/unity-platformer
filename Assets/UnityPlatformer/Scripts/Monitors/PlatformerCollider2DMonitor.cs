@@ -5,6 +5,7 @@ namespace UnityPlatformer {
   /// <summary>
   /// Monitor for PlatformerCollider2D
   /// </summary>
+  [RequireComponent (typeof (PlatformerCollider2DMonitor))]
   public class PlatformerCollider2DMonitor : Monitor {
     /// <summary>
     /// PlatformerCollider2D

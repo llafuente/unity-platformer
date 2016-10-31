@@ -15,78 +15,186 @@ namespace UnityPlatformer {
   [RequireComponent (typeof (PlatformerCollider2D))]
   [RequireComponent (typeof (CharacterHealth))]
   public class Character: MonoBehaviour, IUpdateEntity {
-    #region public
-
+    /// <summary>
+    /// Delay before enter States.Falling.
+    /// </summary>
     [Comment("Time to wait before change state to falling.")]
     public float fallingTime = 0.1f;
+    /// <summary>
+    /// Delay before exit States.OnGround.
+    /// </summary>
     [Comment("Time before disable OnGround State.")]
     public float groundGraceTime = 0.05f;
-
+    /// <summary>
+    /// Minimum velocity. This is not a magnitude.
+    /// </summary>
     public float minVelocity = 0.05f;
-
-    ///
-    /// Callbacks
-    ///
-
+    /// <summary>
+    /// Area change callback type
+    /// </summary>
     public delegate void AreaChange(Areas before, Areas after);
+    /// <summary>
+    /// Area change event (enter or leave)
+    /// </summary>
     public AreaChange onAreaChange;
-    public delegate void HurtCharacter(Damage dt, CharacterHealth to, Character character);
-    public HurtCharacter onHurtCharacter;
+    /// <summary>
+    /// Character is Injured callback type
+    /// </summary>
+    public delegate void InjuredCharacter(Damage dt, CharacterHealth to, Character character);
+    /// <summary>
+    /// Character is Injured
+    /// </summary>
+    public InjuredCharacter onInjuredCharacter;
+    /// <summary>
+    /// State change event callback type
+    /// </summary>
     public delegate void StateChange(States before, States after);
+    /// <summary>
+    /// State change event (enter or leave)
+    /// </summary>
     public StateChange onStateChange;
-    public delegate void CharacterDelegate(Character character, float delta);
-    public CharacterDelegate onBeforeMove;
-    public CharacterDelegate onAfterMove;
-
-    #endregion
-
-    #region ~private
-
+    /// <summary>
+    /// Character move callback type
+    /// </summary>
+    public delegate void CharacterMove(Character character, float delta);
+    /// <summary>
+    /// Before character move event
+    /// </summary>
+    public CharacterMove onBeforeMove;
+    /// <summary>
+    /// After character move event
+    /// </summary>
+    public CharacterMove onAfterMove;
     /// <summary>
     /// List of enabled actions
+    ///
+    /// NOTE Each CharacterAction must sync with it's character
     /// </summary>
     internal List<CharacterAction> actions = new List<CharacterAction>();
+    /// <summary>
+    /// Where is facing
+    /// </summary>
     internal Facing faceDir;
+    /// <summary>
+    /// Current states
+    /// </summary>
     internal States state = States.None;
+    /// <summary>
+    /// Current areas
+    /// </summary>
     internal Areas area = Areas.None;
-    internal BoxCollider2D body;
+    /// <summary>
+    /// Current fence
+    /// </summary>
     internal Fence fence;
+    /// <summary>
+    /// Current ladder
+    /// </summary>
     internal Ladder ladder;
+    /// <summary>
+    /// Ladder at Character feet
+    /// </summary>
     internal Ladder ladderBottom;
+    /// <summary>
+    /// Current liquid
+    /// </summary>
     internal Liquid liquid;
+    /// <summary>
+    /// Current reachable item
+    /// </summary>
     internal Item item;
+    /// <summary>
+    /// Current Grab area
+    /// </summary>
     internal Grab grab;
+    /// <summary>
+    /// Current Rope
+    /// </summary>
     internal Rope rope;
-    internal Track track;
+    /// <summary>
+    /// Current RopeSection index
+    /// </summary>
     internal int ropeIndex = -1;
+    /// <summary>
+    /// Current Track
+    /// </summary>
+    internal Track track;
+    /// <summary>
+    /// Current MovingPlatform
+    /// </summary>
+    internal MovingPlatform platform;
+    /// <summary>
+    /// Last jump distance
+    /// </summary>
     internal Vector2 lastJumpDistance {
       get {
         return jumpEnd - jumpStart;
       }
     }
+    /// <summary>
+    /// Last fall distance
+    /// </summary>
     internal Vector2 lastFallDistance {
       get {
         return fallEnd - fallStart;
       }
     }
-
+    /// <summary>
+    /// Character height
+    /// </summary>
     public float height {
       get {
         return pc2d.GetComponent<BoxCollider2D>().bounds.size.y;
       }
     }
-
-    internal Vector2 fallDistance;
-    internal MovingPlatform platform;
-    // character velocity by itself. Movement
+    /// <summary>
+    /// Character head position
+    /// </summary>
+    public Vector2 head {
+      get {
+        return pc2d.raycastOrigins.topCenter;
+      }
+    }
+    /// <summary>
+    /// Character feet position
+    /// </summary>
+    public Vector2 feet {
+      get {
+        return pc2d.raycastOrigins.bottomCenter;
+      }
+    }
+    /// <summary>
+    /// character velocity
+    ///
+    /// NOTE Character real velocity is velocity + worldVelocity
+    /// </summary>
     internal Vector3 velocity = Vector3.zero;
-    internal Vector3 movedLastFrame = Vector3.zero;
-    // World velocity, wind, tracks etc.
+    /// <summary>
+    /// World velocity: wind, Track...
+    ///
+    /// NOTE Character real velocity is velocity + worldVelocity
+    /// </summary>
     internal Vector3 worldVelocity = Vector3.zero;
+    /// <summary>
+    /// Amount moved in the last PlatformerUpdate
+    /// </summary>
+    internal Vector3 movedLastFrame = Vector3.zero;
+    /// <summary>
+    /// Cache PlatformerCollider2D
+    /// </summary>
     internal PlatformerCollider2D pc2d;
+    /// <summary>
+    /// Cache CharacterHealth
+    /// </summary>
     internal CharacterHealth health;
+    /// <summary>
+    /// Cache HitBox
+    /// </summary>
     internal HitBox enterAreas;
-
+    /// <summary>
+    /// Cache CharacterAnimator
+    /// </summary>
+    internal CharacterAnimator animator;
     /// <summary>
     /// Force to play this animation
     /// </summary>
@@ -94,42 +202,40 @@ namespace UnityPlatformer {
     /// <summary>
     /// Do not execute any Action, Character still moves, so set velocity to
     /// Vector3.zero if necesarry
+    ///
+    /// NOTE Even frozen, forceAnimation works...
     /// </summary>
     internal float frozen = -1f;
-    /// <summary>
-    /// back reference to CharacterAnimator
-    /// </summary>
-    internal CharacterAnimator animator;
 
-    public Vector2 head {
-      get {
-        return pc2d.raycastOrigins.topCenter;
-      }
-    }
-    public Vector2 feet {
-      get {
-        return pc2d.raycastOrigins.bottomCenter;
-      }
-    }
 
-    #endregion
 
-    #region private
+
 
     CharacterAction lastAction;
-
+    /// <summary>
+    /// Cooldown for fallingTime
+    /// </summary>
     Cooldown fallingCD;
+    /// <summary>
+    /// Cooldown for groundGraceTime
+    /// </summary>
     Cooldown groundCD;
-
+    /// <summary>
+    /// Position when last jump started
+    /// </summary>
     Vector2 jumpStart;
+    /// <summary>
+    /// Position when last jump ended
+    /// </summary>
     Vector2 jumpEnd;
-
+    /// <summary>
+    /// Position when last fall started
+    /// </summary>
     Vector2 fallStart;
+    /// <summary>
+    /// Position when last fall ended
+    /// </summary>
     Vector2 fallEnd;
-
-
-    #endregion
-
     /// <summary>
     /// This method precalculate some vars, but those value could change. This need to be refactored.
     /// Maybe setters are the appropiate method to refactor this.
@@ -139,8 +245,7 @@ namespace UnityPlatformer {
       //Debug.Log("Start new Character: " + gameObject.name);
       pc2d = GetComponent<PlatformerCollider2D> ();
       health = GetComponent<CharacterHealth>();
-      health.onHurt += OnHurt;
-      body = GetComponent<BoxCollider2D>();
+      health.onHurt += onInjured;
 
       if (fallingCD == null) {
         fallingCD = new Cooldown(fallingTime);
@@ -149,16 +254,19 @@ namespace UnityPlatformer {
       if (groundCD == null) {
         groundCD = new Cooldown(groundGraceTime);
       }
-      //TODO review how hotswapping behave in this case ?!
+
+      // TODO review how hotswapping behave in this case ?!
       health.onDeath += OnDeath;
     }
 
-    void OnHurt(Damage dt, CharacterHealth to) {
-      if (dt != null && onHurtCharacter != null) {
-        onHurtCharacter(dt, to, this);
+    void onInjured(Damage dt, CharacterHealth to) {
+      if (dt != null && onInjuredCharacter != null) {
+        onInjuredCharacter(dt, to, this);
       }
     }
-
+    /// <summary>
+    /// Get CharacterAction by type
+    /// </summary>
     public T GetAction<T>() {
       foreach (var i in actions) {
         if (i.GetType() == typeof(T)) {
@@ -168,7 +276,6 @@ namespace UnityPlatformer {
 
       return default(T);
     }
-
     /// <summary>
     /// Managed update called by UpdateManager
     ///
@@ -289,14 +396,19 @@ namespace UnityPlatformer {
 
       lastAction = action;
     }
-
-    public virtual void LatePlatformerUpdate(float delta) {
-    }
-
+    /// <summary>
+    /// Do nothing
+    /// </summary>
+    public virtual void LatePlatformerUpdate(float delta) {}
+    /// <summary>
+    /// Return if the Character is on given state
+    /// </summary>
     public bool IsOnState(States _state) {
-      return (state & _state) == _state;
+      return BitOn(state, _state);
     }
-
+    /// <summary>
+    /// Return if the Character is on any of the given states
+    /// </summary>
     public bool IsOnAnyState(States _state) {
       if (_state == 0) return false; // 0 means do not test
 
@@ -308,11 +420,12 @@ namespace UnityPlatformer {
 
       return (state & _state) != 0;
     }
-
+    /// <summary>
+    /// Return if the Character is on given area
+    /// </summary>
     public bool IsOnArea(Areas _area) {
-      return (area & _area) == _area;
+      return BitOn(area, _area);
     }
-
     /// <summary>
     /// EnterState if it's not already in it
     /// It a safe mechanism to not trigger the change
@@ -379,7 +492,6 @@ namespace UnityPlatformer {
         onStateChange(before, state);
       }
     }
-
     /// <summary>
     /// Notify that Character enter a new state.
     /// There are incompatible states, like jumping and falling,
@@ -404,7 +516,9 @@ namespace UnityPlatformer {
         onStateChange(before, state);
       }
     }
-
+    /// <summary>
+    /// Character enter given area
+    /// </summary>
     public void EnterArea(Areas a) {
       Areas before = area;
       area |= a;
@@ -413,7 +527,9 @@ namespace UnityPlatformer {
         onAreaChange(before, area);
       }
     }
-
+    /// <summary>
+    /// Character exit given area
+    /// </summary>
     public void ExitArea(Areas a) {
       Areas before = area;
       area &= ~a;
@@ -422,26 +538,37 @@ namespace UnityPlatformer {
         onAreaChange(before, area);
       }
     }
-
+    /// <summary>
+    /// Event when player is dead
+    /// </summary>
     virtual public void OnDeath() {
       Debug.Log("Player die! play some fancy animation!");
     }
-
+    /// <summary>
+    /// Get Character center position
+    /// </summary>
     public virtual Vector3 GetCenter() {
       return pc2d.GetComponent<BoxCollider2D>().bounds.center;
     }
-
+    /// <summary>
+    /// sync UpdateManager
+    /// </summary>
     public virtual void OnEnable() {
       Awake();
       UpdateManager.instance.Push(this, Configuration.instance.charactersPriority);
     }
-
+    /// <summary>
+    /// sync UpdateManager
+    /// </summary>
     public virtual void OnDisable() {
       fallingCD = null;
       groundCD = null;
       UpdateManager.instance.Remove(this);
     }
-
+    /// <summary>
+    /// Override current animation with the one given. The animation will
+    /// be entirely played, then it will ClearOverrideAnimation
+    /// </summary>
     public void SetOverrideAnimation(string animation, bool freeze) {
       if (animator == null) {
         Debug.LogWarning("Cannot OverrideAnimation. There is no PlatformerAnimator linked to this Character", this);
@@ -457,11 +584,12 @@ namespace UnityPlatformer {
 
       UpdateManager.instance.SetTimeout(ClearOverrideAnimation, delay);
     }
-
+    /// <summary>
+    /// nullify forceAnimation. to be used with UpdateManager.SetTimeout
+    /// </summary>
     public void ClearOverrideAnimation() {
       forceAnimation = null;
     }
-
     /// <summary>
     /// Tell you if there is something on the left side
     /// NOTE ray origin is raycastOrigins.bottomLeft
@@ -471,7 +599,6 @@ namespace UnityPlatformer {
 
       return hit.collider != null;
     }
-
     /// <summary>
     /// Tell you if there is something on the right side
     /// NOTE ray origin is raycastOrigins.bottomRight
@@ -481,12 +608,15 @@ namespace UnityPlatformer {
 
       return hit.collider != null;
     }
-
-    // TODO REVIEW necessary?
+    /// <summary>
+    /// Set faceDir manualy
+    /// </summary>
     public void SetFacing(Facing f) {
       faceDir = f;
     }
-
+    /// <summary>
+    /// Based on 'horizontal movement'
+    /// </summary>
     public void SetFacing(float x) {
       if (x == 0) {
         faceDir = Facing.None;
@@ -495,7 +625,9 @@ namespace UnityPlatformer {
         faceDir = x == 1 ? Facing.Right : Facing.Left;
       }
     }
-
+    /// <summary>
+    /// Is there a box on given direction?
+    /// </summary>
     public bool IsBox(Directions dir) {
       PlatformerCollider2D.Contacts[] contacts = pc2d.collisions.contacts;
 
@@ -524,7 +656,9 @@ namespace UnityPlatformer {
 
       return valid_box;
     }
-
+    /// <summary>
+    /// Get the lowest box (the one Character Pull/Push)
+    /// </summary>
     public Box GetLowestBox(Directions dir) {
       PlatformerCollider2D.Contacts[] contacts = pc2d.collisions.contacts;
       // sarch the lowest box and push it
@@ -558,7 +692,9 @@ namespace UnityPlatformer {
 
       return null;
     }
-
+    /// <summary>
+    /// shortcut: Is a bit on
+    /// </summary>
     static public bool BitOn(int a, int b) {
       return (a & b) == b;
     }

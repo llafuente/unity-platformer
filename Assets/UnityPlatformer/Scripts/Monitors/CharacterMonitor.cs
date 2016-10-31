@@ -2,23 +2,33 @@ using System;
 using UnityEngine;
 
 namespace UnityPlatformer {
-  //[RequireComponent (typeof (Character))]
+  /// <summary>
+  /// Monitor for Character
+  /// </summary>
+  [RequireComponent (typeof (Character))]
   public class CharacterMonitor : PlatformerCollider2DMonitor {
-
+    /// <summary>
+    /// Character
+    /// </summary>
     Character character;
+    /// <summary>
+    /// Log state changes
+    /// </summary>
+    bool logStateChanges = false;
 
     override public void Start() {
       base.Start ();
       character = GetComponent<Character> ();
-      character.onStateChange += LogStateChanges;
+      if (logStateChanges) {
+        character.onStateChange += LogStateChanges;
+      }
     }
-    override public  void OnGUI() {
-      base.OnGUI ();
-    }
-
+    /// <summary>
+    /// Log state changes
+    /// </summary>
     void LogStateChanges(States before, States after) {
       // this is a lot noisy, useful for debuging for nothing more...
-      //Debug.LogFormat("state before: {0} / after: {1}", before, after);
+      Debug.LogFormat("state before: {0} / after: {1}", before, after);
     }
 
     override public void Update() {

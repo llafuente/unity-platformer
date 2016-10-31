@@ -6,6 +6,9 @@ namespace UnityPlatformer {
   /// Base class for Enemies
   /// </summary>
   public class Enemy : Character {
+    /// <summary>
+    /// Input
+    /// </summary>
     public AIInput input;
     /// <summary>
     /// Listen death event

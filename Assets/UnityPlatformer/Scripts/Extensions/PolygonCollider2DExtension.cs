@@ -1,7 +1,13 @@
 using UnityEngine;
 
 namespace UnityPlatformer {
+  /// <summary>
+  /// UnityEngine.PolygonCollider2D
+  /// </summary>
   public static class PolygonCollider2DExtension {
+    /// <summary>
+    /// Get all points in the collider as Vector2
+    /// </summary>
     static public Vector2[] GetWorldPoints(this PolygonCollider2D poly) {
       Vector2[] polyPoints = new Vector2[poly.points.Length];
 
@@ -11,7 +17,9 @@ namespace UnityPlatformer {
 
       return polyPoints;
     }
-
+    /// <summary>
+    /// Get all points in the collider as Vector3
+    /// </summary>
     static public Vector3[] GetWorldPoints3(this PolygonCollider2D poly, bool close = false) {
       Vector3[] polyPoints = new Vector3[poly.points.Length + (close ? 2 : 0)];
 
@@ -28,14 +36,18 @@ namespace UnityPlatformer {
       return polyPoints;
     }
 
-    // check if the bounds is completely inside, check all four points
+    /// <summary>
+    /// check if the bounds is completely inside, check all four points
+    /// </summary>
     static public bool Contains(this PolygonCollider2D poly, Vector2 pmin, Vector2 pmax) {
       return poly.Contains(pmin) &&
              poly.Contains(pmax) &&
              poly.Contains(new Vector2(pmin.x, pmax.y)) &&
              poly.Contains(new Vector2(pmax.x, pmin.y));
     }
-
+    /// <summary>
+    /// check if the bounds is completely inside, check all four points
+    /// </summary>
     static public bool Contains(this PolygonCollider2D poly, Bounds b) {
       Vector2 pmin = b.min;
       Vector2 pmax = b.max;
@@ -46,7 +58,9 @@ namespace UnityPlatformer {
              poly.Contains(new Vector2(pmin.x, pmax.y)) &&
              poly.Contains(new Vector2(pmax.x, pmin.y));
     }
-
+    /// <summary>
+    /// check if the point is inside
+    /// </summary>
     static public bool Contains(this PolygonCollider2D poly, Vector2 p) {
       Vector2[] polyPoints = poly.GetWorldPoints();
 
@@ -65,7 +79,9 @@ namespace UnityPlatformer {
 
       return inside;
     }
-
+    /// <summary>
+    /// helper
+    /// </summary>
     static bool Intersection(Vector2 p1, Vector2 q1, Vector2  p2, Vector2  q2, out Vector2 res) {
         float eps = 1e-9f;
         float dx1 = p1.x - q1.x;
@@ -87,7 +103,9 @@ namespace UnityPlatformer {
         res = new Vector2(px, py);
         return true;
     }
-
+    /// <summary>
+    /// helper
+    /// </summary>
     static public bool Intersects(this PolygonCollider2D poly, Vector2 a, Vector2 b, out Vector2 intersection) {
       Vector2[] polyPoints = poly.GetWorldPoints();
 
@@ -102,7 +120,9 @@ namespace UnityPlatformer {
       intersection = Vector2.zero;
       return false;
     }
-
+    /// <summary>
+    /// helper
+    /// </summary>
     static public bool IntersectsTop(this PolygonCollider2D poly, Bounds bounds, out Vector2 intersection) {
       Vector2 topleft = new Vector2(bounds.center.x - bounds.size.x * 0.5f, bounds.min.y + bounds.size.y * 0.5f);
       Vector2 topright = new Vector2(bounds.center.x + bounds.size.x * 0.5f, bounds.min.y + bounds.size.y * 0.5f);

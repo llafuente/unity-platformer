@@ -6,31 +6,62 @@ namespace UnityPlatformer {
   /// Grab 'something' and freeze.
   /// </summary>
   public class CharacterActionGrab: CharacterAction {
-    #region public
-
+    /// <summary>
+    /// Maximum speed to snap to the center.
+    /// </summary>
     [Comment("Max speed to snap to the center.")]
     public float towardsSpeed = 32;
+    /// <summary>
+    /// Time to reach the center (if towardsSpeed is fast enough).
+    /// </summary>
     [Comment("Time to reach the center (if towardsSpeed is fast enough).")]
     public float towardsTime = 0.1f;
+    /// <summary>
+    /// Move character to the center of the grabArea
+    /// </summary>
     [Comment("Move character to the center of the grabArea")]
     public bool moveToCenter = false;
-    [Comment("Character offset position for centering")]
+    /// <summary>
+    /// Character offset position while grabbing
+    /// </summary>
+    [Comment("Character offset position while grabbing")]
     public Vector3 grabbingOffset = new Vector3(0, 0, 0);
+    /// <summary>
+    /// Dismount 'Grab' pressing down axis
+    /// </summary>
     public bool dismountPressingDown = true;
+    /// <summary>
+    /// Dismount 'Grab' jumping
+    /// </summary>
     public bool dismountJumping = true;
+    /// <summary>
+    /// Dismount jump properties
+    /// </summary>
     [Comment("Jump with no direction pressed.")]
     public JumpConstantProperties jumpOff = new JumpConstantProperties(new Vector2(20, 20));
 
     [Space(10)]
+
+    /// <summary>
+    /// Action priority
+    /// </summary>
     [Comment("Remember: Higher priority wins. Modify with caution")]
     public int priority = 20;
-
+    /// <summary>
+    /// Time after dismount before being able to grab again.
+    /// </summary>
     public float grabAgainCooldown = 0.25f;
-
-    #endregion
-
+    /// <summary>
+    /// CharacterActionJump
+    /// </summary>
     CharacterActionJump actionJump;
+    /// <summary>
+    /// centering Character?
+    /// </summary>
     bool centering = false;
+    /// <summary>
+    /// Cooldown for grabAgainCooldown
+    /// </summary>
     Cooldown canGrab;
 
     public override void OnEnable() {
@@ -49,7 +80,6 @@ namespace UnityPlatformer {
       }
       return 0;
     }
-
     /// <summary>
     /// EnterState and start centering
     /// </summary>
@@ -58,6 +88,15 @@ namespace UnityPlatformer {
 
       character.EnterState(States.Grabbing);
       centering = true;
+    }
+    /// <summary>
+    /// ExitState and no centering
+    /// </summary>
+    public override void LoseControl(float delta) {
+      base.LoseControl(delta);
+
+      character.ExitState(States.Grabbing);
+      centering = false;
     }
 
     public override void PerformAction(float delta) {

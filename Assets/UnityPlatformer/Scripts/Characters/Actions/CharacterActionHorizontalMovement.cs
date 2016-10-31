@@ -6,27 +6,48 @@ namespace UnityPlatformer {
   /// Movement while on ground and not slipping
   /// </summary>
   public abstract class CharacterActionHorizontalMovement: CharacterAction {
-    #region public
-
     [Header("Walk")]
+    /// <summary>
+    /// (Walking) Movement speed
+    /// </summary>
     [Comment("Movement speed")]
     public float speed = 3;
+    /// <summary>
+    /// (Walking) Time to reach max speed
+    /// </summary>
     [Comment("Time to reach max speed")]
     public float accelerationTime = .1f;
 
     [Header("Run")]
+    /// <summary>
+    /// (Running) Movement speed
+    /// </summary>
     [Comment("Movement speed")]
     public float runSpeed = 6;
+    /// <summary>
+    /// (Running) Time to reach max speed
+    /// </summary>
     [Comment("Time to reach max speed")]
     public float runAccelerationTime = .1f;
-
+    /// <summary>
+    /// Do not walk?
+    /// </summary>
     public bool alwaysRun = true;
+    /// <summary>
+    /// Input action name for start running (not used if alwaysRun=true)
+    /// </summary>
     public string runAction = "Run";
-
-    #endregion
-
+    /// <summary>
+    /// (Walking) Mathf.SmoothDamp
+    /// </summary>
     float velocityXSmoothing;
+    /// <summary>
+    /// (Running) Mathf.SmoothDamp
+    /// </summary>
     float runVelocityXSmoothing;
+    /// <summary>
+    /// Currently running?
+    /// </summary>
     bool running = false;
 
     public override void OnEnable() {
@@ -35,19 +56,22 @@ namespace UnityPlatformer {
       input.onActionUp += OnActionUp;
       input.onActionDown += OnActionDown;
     }
-
+    /// <summary>
+    /// input.onActionDown
+    /// </summary>
     public void OnActionDown(string _action) {
       if (_action == runAction) {
         running = true;
       }
     }
-
+    /// <summary>
+    /// input.onActionUp
+    /// </summary>
     public void OnActionUp(string _action) {
       if (_action == runAction) {
         running = false;
       }
     }
-
     /// <summary>
     /// Reset SmoothDamp
     /// </summary>
@@ -55,8 +79,6 @@ namespace UnityPlatformer {
       velocityXSmoothing = 0;
       runVelocityXSmoothing = 0;
     }
-
-
     /// <summary>
     /// Do horizontal movement
     /// </summary>
@@ -67,7 +89,6 @@ namespace UnityPlatformer {
         Move(speed, ref velocityXSmoothing, accelerationTime);
       }
     }
-
     /// <summary>
     /// Horizontal movement based on current input
     /// </summary>

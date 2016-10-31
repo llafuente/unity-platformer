@@ -28,7 +28,7 @@ namespace UnityPlatformer {
     public virtual void Start() {
       character.animator = this;
       character.onAreaChange += OnAreaChange;
-      character.onHurtCharacter += OnHurtCharacter;
+      character.onInjuredCharacter += OnInjuredCharacter;
       character.onStateChange += OnStateChange;
     }
     /// <summary>
@@ -144,7 +144,7 @@ namespace UnityPlatformer {
     /// <summary>
     /// Not used atm
     /// </summary>
-    public virtual void OnHurtCharacter(Damage dt, CharacterHealth h, Character to) {
+    public virtual void OnInjuredCharacter(Damage dt, CharacterHealth h, Character to) {
       //Debug.LogFormat("hurt {1} with {2} damage", to.gameObject, dt.amount);
     }
     /// <summary>

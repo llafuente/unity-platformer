@@ -39,12 +39,15 @@ namespace UnityPlatformer {
   /// uncomment '\#define UP_USE_WII_INPUT_MANAGER' at the top of this file
   /// </summary>
   public class DefaultInput : PlatformerInput {
+    /// <summary>
+    /// Input mapping
+    /// </summary>
     [Serializable]
-    public class InputMap {
+    public class InputMapping {
       /// <summary>
       /// constructor
       /// </summary>
-      public InputMap(String _action, String _handheld, String _keyboard, WiiButtons _wii) {
+      public InputMapping(String _action, String _handheld, String _keyboard, WiiButtons _wii) {
         action = _action;
         handheld = _handheld;
         keyboard = _keyboard;
@@ -70,29 +73,29 @@ namespace UnityPlatformer {
     /// <summary>
     /// List of action - button/key mapping
     /// </summary>
-    public List<InputMap> inputsMap = new List<InputMap> {
+    public List<InputMapping> inputsMap = new List<InputMapping> {
       // default map
-      new InputMap (
+      new InputMapping (
         "Jump",
         "Jump",
         "Jump",
         WiiButtons.WII_BUTTON_1
-      ), new InputMap (
+      ), new InputMapping (
         "Attack",
         "Attack",
         "Fire2",
         WiiButtons.WII_BUTTON_2
-      ), new InputMap (
+      ), new InputMapping (
         "Use",
         "Use",
         "Fire1",
         WiiButtons.WII_BUTTON_A
-      ), new InputMap (
+      ), new InputMapping (
         "Run",
         "Use",
         "Run",
         WiiButtons.WII_BUTTON_B
-      ), new InputMap (
+      ), new InputMapping (
         "Pull",
         "Pull",
         "Pull",

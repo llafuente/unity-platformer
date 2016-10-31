@@ -766,6 +766,7 @@ INPUT                 += "./Assets/UnityPlatformer/Scripts/Input"
 INPUT                 += "./Assets/UnityPlatformer/Scripts/Monitors"
 INPUT                 += "./Assets/UnityPlatformer/Scripts/Tiles"
 INPUT                 += "./Assets/UnityPlatformer/Scripts/Utils"
+INPUT                 += "./Assets/UnityPlatformer/Editor"
 
 
 # This tag can be used to specify the character encoding of the source files

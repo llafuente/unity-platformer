@@ -68,14 +68,14 @@ namespace UnityPlatformer {
     /// </summary>
     public delegate void HurtCallback(Damage dt, CharacterHealth to);
     /// <summary>
-    /// Health is reduced, will fire after onDamage
+    /// This Character health is reduced, will fire after onDamage
     ///
     /// dt is the Damage dealed
     /// to is the CharacterHealth that hurt me, if possible, could be null
     /// </summary>
     public HurtCallback onInjured;
     /// <summary>
-    /// This Character Deal damage to someone
+    /// This Character deal damage to other
     ///
     /// dt is the Damage dealed
     /// to is the CharacterHealth hurted
@@ -292,7 +292,6 @@ namespace UnityPlatformer {
         }
       }
     }
-
     /// <summary>
     /// Disable HitBox(es) and DamageType(s)
     /// Trigger onDeath

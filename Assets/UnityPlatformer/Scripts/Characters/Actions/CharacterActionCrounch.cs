@@ -6,21 +6,15 @@ namespace UnityPlatformer {
   /// Crounch
   /// </summary>
   public class CharacterActionCrounch: CharacterAction {
-    #region public
-
-    // TODO OnValidate check this!
-    [Space(10)]
+    /// <summary>
+    /// Input action name
+    /// </summary>
     [Comment("Must match something @PlatformerInput")]
     public String action = "Crounch";
-    public bool enablePressingDown = true;
-
-    #endregion
-
-    #region private
-
+    /// <summary>
+    /// Input action name
+    /// </summary>
     bool crounchHeld = false;
-
-    #endregion
 
     public override void OnEnable() {
       base.OnEnable();
@@ -30,13 +24,17 @@ namespace UnityPlatformer {
         input.onActionDown += OnActionDown;
       }
     }
-
+    /// <summary>
+    /// input.onActionDown
+    /// </summary>
     public void OnActionDown(string _action) {
       if (_action == action) {
         crounchHeld = true;
       }
     }
-
+    /// <summary>
+    /// input.onActionUp
+    /// </summary>
     public void OnActionUp(string _action) {
       // when button is up, reset, and allow a new jump
       if (_action == action) {

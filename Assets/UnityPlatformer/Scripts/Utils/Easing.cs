@@ -1,8 +1,11 @@
 using System;
 
-// credits: http://theinstructionlimit.com/wp-content/uploads/2009/07/Easing.cs
+// credits:
 
 namespace UnityPlatformer {
+  /// <summary>
+  /// http://theinstructionlimit.com/wp-content/uploads/2009/07/Easing.cs
+  /// </summary>
   public static class Easing {
     // Adapted from source : http://www.robertpenner.com/easing/
 
@@ -96,7 +99,9 @@ namespace UnityPlatformer {
     Quartic,
     Quintic
   }
-
+  /// <summary>
+  /// Math helper
+  /// </summary>
   public static class MathHelper {
     public const float Pi = (float)Math.PI;
     public const float HalfPi = (float)(Math.PI / 2);

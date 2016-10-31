@@ -1,7 +1,13 @@
 using UnityEngine;
 
 namespace UnityPlatformer {
+  /// <summary>
+  /// UnityEngine.Bounds
+  /// </summary>
   public static class BoundsExtension {
+    /// <summary>
+    /// Draw the bounds using Debug.DrawRay
+    /// </summary>
     static public void Draw(this Bounds bounds, Transform transform, Color? color = null) {
       Color c = color ?? Color.white;
       Vector3 bc = bounds.center;//transform.position + transform.rotation * (bounds.center - transform.position);

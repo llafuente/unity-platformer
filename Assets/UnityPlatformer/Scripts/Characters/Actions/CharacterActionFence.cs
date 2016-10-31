@@ -7,25 +7,42 @@ namespace UnityPlatformer {
   /// enter
   /// </summary>
   public class CharacterActionFence: CharacterAction {
-    #region public
-
+    /// <summary>
+    /// Fence movement speed.
+    /// </summary>
     [Comment("Fence movement speed.")]
     public Vector2 speed = new Vector2(6, 6);
 
     [Space(10)]
-    [Comment("Dismount pressing left/right")]
+
+    /// <summary>
+    /// Input name action to start grabbing on the fence
+    /// </summary>
     public string action = "Pull";
+    /// <summary>
+    /// Allow dismount pressing jump
+    /// </summary>
     public bool dismountJumping = true;
+    /// <summary>
+    /// dismount jump properties
+    /// </summary>
     [Comment("Jump with no direction pressed.")]
     public JumpConstantProperties jumpOff = new JumpConstantProperties(new Vector2(20, 20));
 
     [Space(10)]
+
+    /// <summary>
+    /// Action priority
+    /// </summary>
     [Comment("Remember: Higher priority wins. Modify with caution")]
     public int priority = 10;
-
-    #endregion
-
+    /// <summary>
+    /// Is action held?
+    /// </summary>
     protected bool grabHeld;
+    /// <summary>
+    /// CharacterActionJump
+    /// </summary>
     protected CharacterActionJump actionJump;
 
     public override void OnEnable() {
@@ -39,20 +56,23 @@ namespace UnityPlatformer {
       input.onActionUp += OnActionUp;
       input.onActionDown += OnActionDown;
     }
-
+    /// <summary>
+    /// input.onActionDown
+    /// </summary>
     public void OnActionDown(string _action) {
       if (_action == action) {
         grabHeld = true;
       }
     }
-
+    /// <summary>
+    /// input.onActionUp
+    /// </summary>
     public void OnActionUp(string _action) {
       // when button is up, reset, and allow a new jump
       if (_action == action) {
         grabHeld = false;
       }
     }
-
     /// <summary>
     /// Enter in fence mode when user is in a fence area and pressing up/down
     /// </summary>
@@ -66,7 +86,6 @@ namespace UnityPlatformer {
 
       return 0;
     }
-
     /// <summary>
     /// EnterState
     /// </summary>

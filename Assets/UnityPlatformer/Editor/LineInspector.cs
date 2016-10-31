@@ -5,11 +5,15 @@ using System;
 namespace UnityPlatformer {
   /// <summary>
   /// Line editor
+  ///
   /// Many thanks for the tutorial to
   /// http://catlikecoding.com/unity/tutorials/curves-and-splines/
   /// </summary>
   [CustomEditor(typeof(Line))]
   public class LineInspector : Editor {
+    /// <summary>
+    /// On inspector draw helpers
+    /// </summary>
     public override void OnInspectorGUI () {
       Line line = target as Line;
 

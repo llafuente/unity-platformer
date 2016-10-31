@@ -1,4 +1,9 @@
 namespace UnityPlatformer {
+  /// <summary>
+  /// List of Damage types
+  ///
+  /// NOTE this should be edited in your game
+  /// </summary>
   public enum DamageType {
     None =       0,
     Default =    1,
