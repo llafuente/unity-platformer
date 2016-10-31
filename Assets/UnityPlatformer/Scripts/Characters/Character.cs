@@ -404,7 +404,7 @@ namespace UnityPlatformer {
     /// Return if the Character is on given state
     /// </summary>
     public bool IsOnState(States _state) {
-      return BitOn(state, _state);
+      return BitOn((int)state, (int)_state);
     }
     /// <summary>
     /// Return if the Character is on any of the given states
@@ -424,7 +424,7 @@ namespace UnityPlatformer {
     /// Return if the Character is on given area
     /// </summary>
     public bool IsOnArea(Areas _area) {
-      return BitOn(area, _area);
+      return BitOn((int)area, (int)_area);
     }
     /// <summary>
     /// EnterState if it's not already in it
