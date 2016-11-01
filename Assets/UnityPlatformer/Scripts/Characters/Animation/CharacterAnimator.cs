@@ -22,6 +22,32 @@ namespace UnityPlatformer {
     /// Max rotation slope, above this value it will be 0º
     /// </summary>
     public float maxSlope = 70f;
+
+    [Space(10)]
+    [Header("Animation names")]
+
+    public string fallLoop = "falling";
+    public string fenceIdle = "fence_idle";
+    public string fenceRight = "fence_right";
+    public string fenceLeft = "fence_left";
+    public string fenceUp = "fence_up";
+    public string fenceDown = "fence_down";
+    public string ladder = "ladder";
+    public string rope = "rope";
+    public string pushing = "pushing";
+    public string pulling = "pulling";
+    public string swimming = "swimming";
+    public string wallsliding = "wallsliding";
+    public string slipping = "slipping";
+    public string grabbing = "grabbing";
+    public string attackMelee = "attack_melee";
+    public string jump = "jump";
+    public string walk = "walk";
+    public string idle = "idle";
+    public string crounchWalk = "crounch_walk";
+    public string crounchIdle = "crounch_idle";
+
+
     /// <summary>
     /// Start listening
     /// </summary>
@@ -73,49 +99,53 @@ namespace UnityPlatformer {
       if (character.forceAnimation != null) {
         Play(character.forceAnimation);
       } else if (character.IsOnState(States.Rope)) {
-        Play("rope");
+        Play(rope);
         // override rotation
         float z = character.rope.sections[character.ropeIndex].transform.eulerAngles.z;
         transform.rotation = Quaternion.AngleAxis(z, Vector3.forward);
       } else if (character.IsOnState(States.Pushing)) {
-        Play("pushing");
+        Play(pushing);
       } else if (character.IsOnState(States.Pulling)) {
-        Play("pulling");
+        Play(pulling);
       } else if (character.IsOnState(States.Liquid)) {
-        Play("swimming");
+        Play(swimming);
       } else if (character.IsOnState(States.WallSliding)) {
-        Play("wallsliding");
+        Play(wallsliding);
       } else if (character.IsOnState(States.Slipping)) {
-        Play("slipping");
+        Play(slipping);
       } else if (character.IsOnState(States.Grabbing)) {
-        Play("grabbing");
+        Play(grabbing);
       } else if (character.IsOnState(States.MeleeAttack)) {
-        Play("attack_melee");
+        Play(attackMelee);
       } else if (character.IsOnState(States.Ladder)) {
-        Play("ladder");
+        Play(ladder);
       } else if (character.IsOnState(States.Fence)) {
         // left/right has priority
         if (character.velocity.x != 0) {
-          Play("fence_" + (Mathf.Sign(character.velocity.x) == 1 ? "right" : "left"));
+          Play(Mathf.Sign(character.velocity.x) == 1 ? fenceRight : fenceLeft);
         } else if (character.velocity.y != 0) {
-          Play("fence_" + (Mathf.Sign(character.velocity.y) == 1 ? "up" : "down"));
+          Play(Mathf.Sign(character.velocity.y) == 1 ? fenceUp : fenceDown);
         } else {
-          Play("fence_idle");
+          Play(fenceIdle);
         }
       } else if (character.IsOnState(States.Jumping)) {
         //Transition("jump_start", 0.1f);
-        Play("jump");
+        Play(jump);
       } else if (character.IsOnState(States.Falling)) {
-        Play("falling");
+        Play(fallLoop);
       } else {
-        string modifier = "";
         if (character.IsOnState(States.Crounch)) {
-          modifier = "crounch_";
-        }
-        if (character.velocity.x != 0) {
-          Play(modifier + "walk");
+          if (character.velocity.x != 0) {
+            Play(crounchWalk);
+          } else {
+            Play(crounchIdle);
+          }
         } else {
-          Play(modifier + "idle");
+          if (character.velocity.x != 0) {
+            Play(walk);
+          } else {
+            Play(idle);
+          }
         }
       }
     }

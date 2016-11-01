@@ -78,6 +78,11 @@ namespace UnityPlatformer {
     /// check missconfigurations and initialize
     /// </summary>
     void Start() {
+      if (!owner) {
+        Debug.LogWarning("(HitBox) owner is required", this);
+        return;
+      }
+
       dt = GetComponent<Damage> ();
       if (type == HitBoxType.DealDamage && dt == null) {
         Debug.LogError("DealDamage require Damage Behaviour", this);

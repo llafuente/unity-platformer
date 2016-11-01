@@ -19,22 +19,20 @@ namespace UnityPlatformer {
   public class CharacterAnimatorSpriter: CharacterAnimator {
     public SpriterDotNetBehaviour behaviour;
 
-    UnitySpriterAnimator animator;
-
     public override void Start() {
       base.Start();
 
-      animator = behaviour.Animator;
       /* display all animations
-      foreach (var i in animator.GetAnimations()) {
-        Debug.Log(i);
+      foreach (var i in behaviour.Animator.GetAnimations()) {
+        Debug.Log("animation " + i);
       }
       */
+
     }
 
     public override void Play(string animation) {
-        if (animator.Name != animation) {
-        animator.Play(animation);
+      if (behaviour.Animator.Name != animation) {
+        behaviour.Animator.Play(animation);
       }
     }
 
