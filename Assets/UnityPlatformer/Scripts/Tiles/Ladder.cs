@@ -130,7 +130,7 @@ namespace UnityPlatformer {
       body = GetComponent<BoxCollider2D>();
 
       Vector3 size = body.size;
-      Vector3 pos = transform.position;
+      Vector3 pos = transform.position + (Vector3)body.offset;
 
       Handles.Label(pos + new Vector3(-size.x * 0.5f, size.y * 0.5f, 0), "Ladder");
 
@@ -140,7 +140,7 @@ namespace UnityPlatformer {
         new Vector3(pos.x + size.x * 0.5f, pos.y + size.y * 0.5f, pos.z),
         new Vector3(pos.x + size.x * 0.5f, pos.y - size.y * 0.5f, pos.z)
       };
-      Handles.DrawSolidRectangleWithOutline( verts, new Color(1, 1, 0, 0.05f), new Color(0, 0, 0, 0.5f));
+      Handles.DrawSolidRectangleWithOutline(verts, new Color(1, 1, 0, 0.05f), new Color(0, 0, 0, 0.5f));
     }
 #endif
   }
