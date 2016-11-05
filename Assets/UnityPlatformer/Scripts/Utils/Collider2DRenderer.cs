@@ -1,5 +1,3 @@
-#if UNITY_EDITOR
-
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.Rendering;
@@ -196,5 +194,3 @@ namespace UnityPlatformer {
     }
   }
 }
-
-#endif

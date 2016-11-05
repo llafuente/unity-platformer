@@ -58,7 +58,7 @@ namespace UnityPlatformer {
 
       damageAreas[0].startAt = damageAreas[0].offsetFrame = 0;
       for (var i = 1; i < damageAreas.Length; ++i) {
-        damageAreas[i].offsetFrame = damageAreas[0].offsetFrame + UpdateManager.instance.GetFrameCount (damageAreas[i].startAt);
+        damageAreas[i].offsetFrame = damageAreas[0].offsetFrame + UpdateManager.GetFrameCount (damageAreas[i].startAt);
         // Debug.LogFormat("Offsetframes {0} - {1}", i, damageAreas[i].offsetFrame);
       }
 

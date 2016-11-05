@@ -24,7 +24,7 @@ namespace UnityPlatformer {
     /// Initialize max time
     /// </summary>
     public void Init(float time) {
-      limit = UpdateManager.instance.GetFrameCount (time);
+      limit = UpdateManager.GetFrameCount (time);
       Reset();
     }
     /// <summary>

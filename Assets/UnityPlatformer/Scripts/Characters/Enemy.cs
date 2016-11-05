@@ -17,7 +17,7 @@ namespace UnityPlatformer {
     /// </summary>
     public override void OnDeath() {
       Debug.Log("stop enemy updating!");
-      UpdateManager.instance.Remove (this);
+      UpdateManager.Remove (this);
     }
     /// <summary>
     /// check missconfiguration
@@ -32,14 +32,14 @@ namespace UnityPlatformer {
     /// </summary>
     public override void OnEnable() {
       base.OnEnable();
-      UpdateManager.instance.Push(this, Configuration.instance.enemiesPriority);
+      UpdateManager.Push(this, Configuration.instance.enemiesPriority);
     }
     /// <summary>
     /// sync UpdateManager
     /// </summary>
     public override void OnDisable() {
       base.OnDisable();
-      UpdateManager.instance.Remove(this);
+      UpdateManager.Remove(this);
     }
   }
 }

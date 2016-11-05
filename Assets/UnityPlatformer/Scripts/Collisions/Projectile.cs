@@ -73,7 +73,7 @@ namespace UnityPlatformer {
         return null;
       }
 
-      UpdateManager.instance.Push(prj, Configuration.instance.projectilesPriority);
+      UpdateManager.Push(prj, Configuration.instance.projectilesPriority);
       return prj;
     }
     /// <summary>
@@ -114,7 +114,7 @@ namespace UnityPlatformer {
     /// </summary>
     public virtual void Destroy() {
       if (destroyDelay != 0f) {
-        UpdateManager.instance.SetTimeout(_Destroy, destroyDelay);
+        UpdateManager.SetTimeout(_Destroy, destroyDelay);
         return;
       }
       _Destroy();
@@ -123,7 +123,7 @@ namespace UnityPlatformer {
     /// Real destroy method
     /// </summary>
     protected void _Destroy() {
-      UpdateManager.instance.Remove(this);
+      UpdateManager.Remove(this);
       Destroy (gameObject);
     }
   }

@@ -98,7 +98,7 @@ namespace UnityPlatformer {
     public virtual void Fire() {
       if (fireMode) {
         for (int i = 0; i < projectiles.Count; ++i) {
-          UpdateManager.instance.SetTimeout(_Fire, projectiles[i].delay);
+          UpdateManager.SetTimeout(_Fire, projectiles[i].delay);
         }
       } else {
         ProjectileCfg p = projectiles[currentIndex];

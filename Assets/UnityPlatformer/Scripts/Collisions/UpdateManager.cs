@@ -61,16 +61,16 @@ namespace UnityPlatformer {
     /// <summary>
     /// Initialize
     /// </summary>
-    void LazyInit() {
+    static void LazyInit() {
       // NOTE this need to be initialized with new before resize, docs are wrong!
-      if (frameListeners == null) {
-        frameListeners = new ItemPrio[10];
-        frameListenersCount = 0;
+      if (instance.frameListeners == null) {
+        instance.frameListeners = new ItemPrio[10];
+        instance.frameListenersCount = 0;
       }
 
-      if (callbacks == null) {
-        callbacks = new Callback[10];
-        callbacksCount = 0;
+      if (instance.callbacks == null) {
+        instance.callbacks = new Callback[10];
+        instance.callbacksCount = 0;
       }
     }
     /// <summary>
@@ -80,9 +80,17 @@ namespace UnityPlatformer {
       LazyInit();
     }
     /// <summary>
-    /// FPS
+    /// Get current frame
     /// </summary>
-    public int GetFrameCount(float time) {
+    static public long GetCurrentFrame() {
+      return instance.frame;
+    }
+    /// <summary>
+    /// Time to frame conversion
+    ///
+    /// NOTE you should listen to timeScale changes...
+    /// </summary>
+    static public int GetFrameCount(float time) {
       float frames = time / Time.fixedDeltaTime;
       int roundedFrames = Mathf.RoundToInt(frames);
 
@@ -90,27 +98,27 @@ namespace UnityPlatformer {
         return roundedFrames;
       }
 
-      return Mathf.RoundToInt(Mathf.CeilToInt(frames) / timeScale);
+      return Mathf.RoundToInt(Mathf.CeilToInt(frames) / instance.timeScale);
     }
     /// <summary>
     /// Push a new entity to update loop
     /// </summary>
-    public bool Push(IUpdateEntity entity, int priority) {
+    static public bool Push(IUpdateEntity entity, int priority) {
       LazyInit();
 
       int idx = IndexOf(entity);
       if (idx == -1) {
         // resize before overflow!
-        if (frameListenersCount == frameListeners.Length) {
-          Array.Resize(ref frameListeners, frameListenersCount + 10);
+        if (instance.frameListenersCount == instance.frameListeners.Length) {
+          Array.Resize(ref instance.frameListeners, instance.frameListenersCount + 10);
         }
 
-        frameListeners[frameListenersCount].entity = entity;
-        frameListeners[frameListenersCount].priority = priority;
+        instance.frameListeners[instance.frameListenersCount].entity = entity;
+        instance.frameListeners[instance.frameListenersCount].priority = priority;
 
-        ++frameListenersCount;
+        ++instance.frameListenersCount;
 
-        Array.Sort(frameListeners, delegate(ItemPrio a, ItemPrio b) {
+        Array.Sort(instance.frameListeners, delegate(ItemPrio a, ItemPrio b) {
           return b.priority - a.priority;
         });
 
@@ -123,11 +131,11 @@ namespace UnityPlatformer {
     /// Index of given entity in the frameListeners
     /// </summary>
     /// </returns>>= 0 if found (index). -1 if not found</returns>
-    public int IndexOf(IUpdateEntity entity) {
+    static public int IndexOf(IUpdateEntity entity) {
       LazyInit();
 
-      for (int i = 0; i < frameListenersCount; ++i) {
-        if (frameListeners[i].entity == entity) {
+      for (int i = 0; i < instance.frameListenersCount; ++i) {
+        if (instance.frameListeners[i].entity == entity) {
           return i;
         }
       }
@@ -137,16 +145,16 @@ namespace UnityPlatformer {
     /// Remove given entity from frameListeners
     /// </summary>
     /// </returns>If it was removed</returns>
-    public bool Remove(IUpdateEntity entity) {
+    static public bool Remove(IUpdateEntity entity) {
       LazyInit();
 
       int idx = IndexOf(entity);
       if (idx != -1) {
         // frameListeners.Splice(idx, 1);
-        for (int i = idx; i < frameListenersCount; ++i) {
-          frameListeners[i] = frameListeners[i + 1];
+        for (int i = idx; i < instance.frameListenersCount; ++i) {
+          instance.frameListeners[i] = instance.frameListeners[i + 1];
         }
-        --frameListenersCount;
+        --instance.frameListenersCount;
         return true;
       }
 
@@ -203,15 +211,32 @@ namespace UnityPlatformer {
     /// NOTE Do not use corountines because the can't hotswap
     /// Also corountines don't know if you modify timeScale this do.
     /// </summary>
-    public void SetTimeout(Action callback, float timeout) {
-      if (callbacksCount == callbacks.Length) {
-        Array.Resize(ref callbacks, callbacksCount + 10);
+    static public void SetTimeout(Action callback, float timeout) {
+      if (instance.callbacksCount == instance.callbacks.Length) {
+        Array.Resize(ref instance.callbacks, instance.callbacksCount + 10);
       }
 
-      callbacks[callbacksCount].callback = callback;
-      callbacks[callbacksCount].time = timeout;
+      instance.callbacks[instance.callbacksCount].callback = callback;
+      instance.callbacks[instance.callbacksCount].time = timeout;
 
-      ++callbacksCount;
+      ++instance.callbacksCount;
+    }
+    /// <summary>
+    /// Remove once given callback
+    /// </summary>
+    /// <returns>true if found, false if not found</returns>
+    static public bool ClearTimeout(Action callback, float timeout) {
+      for (int i = 0; i < instance.callbacksCount; ++i) {
+        if (instance.callbacks[i].callback == callback) {
+          for (int j = i; j < instance.callbacksCount - 1; ++j) {
+            instance.callbacks[j] = instance.callbacks[j + 1];
+          }
+          --instance.callbacksCount;
+          return true;
+        }
+      }
+
+      return false;
     }
   }
 }

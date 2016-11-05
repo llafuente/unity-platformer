@@ -75,7 +75,7 @@ namespace UnityPlatformer {
 
       timeToWallStickLeave = wallStickLeaveTime;
 
-      wallStickLeaveAgainFrames = UpdateManager.instance.GetFrameCount (wallStickLeaveAgain);
+      wallStickLeaveAgainFrames = UpdateManager.GetFrameCount (wallStickLeaveAgain);
       wallStickLeaveAgainCounter = wallStickLeaveAgainFrames + 1; // can wallstick
 
       if (enableWallJumps && actionJump == null) {

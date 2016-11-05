@@ -555,7 +555,7 @@ namespace UnityPlatformer {
     /// </summary>
     public virtual void OnEnable() {
       Awake();
-      UpdateManager.instance.Push(this, Configuration.instance.charactersPriority);
+      UpdateManager.Push(this, Configuration.instance.charactersPriority);
     }
     /// <summary>
     /// sync UpdateManager
@@ -563,7 +563,7 @@ namespace UnityPlatformer {
     public virtual void OnDisable() {
       fallingCD = null;
       groundCD = null;
-      UpdateManager.instance.Remove(this);
+      UpdateManager.Remove(this);
     }
     /// <summary>
     /// Override current animation with the one given. The animation will
@@ -582,7 +582,7 @@ namespace UnityPlatformer {
         frozen = delay;
       }
 
-      UpdateManager.instance.SetTimeout(ClearOverrideAnimation, delay);
+      UpdateManager.SetTimeout(ClearOverrideAnimation, delay);
     }
     /// <summary>
     /// nullify forceAnimation. to be used with UpdateManager.SetTimeout

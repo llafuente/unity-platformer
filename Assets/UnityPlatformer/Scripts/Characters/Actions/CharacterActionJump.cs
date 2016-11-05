@@ -72,7 +72,7 @@ namespace UnityPlatformer {
 
       defaultJump = new JumpVariableHeight(character, jumpProperties);
 
-      _graceJumpFrames = UpdateManager.instance.GetFrameCount (jumpProperties.graceJumpTime);
+      _graceJumpFrames = UpdateManager.GetFrameCount (jumpProperties.graceJumpTime);
       input.onActionUp += OnActionUp;
       input.onActionDown += OnActionDown;
     }

@@ -423,13 +423,13 @@ namespace UnityPlatformer {
     /// </summary>
     public override void OnEnable() {
       base.OnEnable();
-      UpdateManager.instance.Push(this, Configuration.instance.defaultPriority);
+      UpdateManager.Push(this, Configuration.instance.defaultPriority);
     }
     /// <summary>
     /// notify UpdateManager
     /// </summary>
     void OnDisable() {
-      UpdateManager.instance.Remove(this);
+      UpdateManager.Remove(this);
     }
     /// <summary>
     /// Struct to store information about passenger movement

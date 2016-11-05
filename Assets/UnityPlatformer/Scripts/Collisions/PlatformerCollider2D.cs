@@ -515,7 +515,7 @@ namespace UnityPlatformer {
     public void DisableSlopes(float resetDelay = 0.5f) {
       enableSlopes = false;
       if (resetDelay > 0) {
-        UpdateManager.instance.SetTimeout(EnableSlopes, resetDelay);
+        UpdateManager.SetTimeout(EnableSlopes, resetDelay);
       }
     }
     /// <summary>
@@ -536,7 +536,7 @@ namespace UnityPlatformer {
 
       collisions.fallingThroughPlatform = true;
       if (resetDelay > 0) {
-        UpdateManager.instance.SetTimeout(ResetFallingThroughPlatform, resetDelay);
+        UpdateManager.SetTimeout(ResetFallingThroughPlatform, resetDelay);
       }
     }
     /// <summary>
@@ -553,7 +553,7 @@ namespace UnityPlatformer {
       leavingGround = true;
 
       if (resetDelay > 0) {
-        UpdateManager.instance.SetTimeout(DisableLeaveGround, resetDelay);
+        UpdateManager.SetTimeout(DisableLeaveGround, resetDelay);
       }
     }
     /// <summary>

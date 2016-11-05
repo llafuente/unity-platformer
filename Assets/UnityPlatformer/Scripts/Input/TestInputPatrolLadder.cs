@@ -57,7 +57,7 @@ namespace UnityPlatformer {
         }
 
         inputMgr.SetX(0);
-        UpdateManager.instance.SetTimeout(ContinueMoving, 2.5f);
+        UpdateManager.SetTimeout(ContinueMoving, 2.5f);
       } else {
         inputMgr.SetX((float)facing);
       }

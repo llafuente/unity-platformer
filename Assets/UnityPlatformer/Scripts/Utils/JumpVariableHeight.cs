@@ -76,8 +76,8 @@ namespace UnityPlatformer {
     public void Init(float timeToJumpApex, float minJumpHeight, float maxJumpHeight, float hangTime) {
       maxJumpVelocity = Mathf.Abs(character.pc2d.gravity.y) * timeToJumpApex;
       minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (character.pc2d.gravity.y) * minJumpHeight);
-      apexFrames = UpdateManager.instance.GetFrameCount(timeToJumpApex);
-      hangFrames = UpdateManager.instance.GetFrameCount(hangTime);
+      apexFrames = UpdateManager.GetFrameCount(timeToJumpApex);
+      hangFrames = UpdateManager.GetFrameCount(hangTime);
     }
 
 

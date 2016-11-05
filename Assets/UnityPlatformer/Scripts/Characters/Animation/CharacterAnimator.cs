@@ -61,13 +61,13 @@ namespace UnityPlatformer {
     /// sync UpdateManager
     /// </summary>
     public virtual void OnEnable() {
-      UpdateManager.instance.Push(this, Configuration.instance.defaultPriority);
+      UpdateManager.Push(this, Configuration.instance.defaultPriority);
     }
     /// <summary>
     /// sync UpdateManager
     /// </summary>
     public virtual void OnDisable() {
-      UpdateManager.instance.Remove(this);
+      UpdateManager.Remove(this);
     }
     /// <summary>
     /// Calculate what animation to play and do it!

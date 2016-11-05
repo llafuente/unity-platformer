@@ -278,13 +278,13 @@ namespace UnityPlatformer {
     /// notify UpdateManager
     /// </summary>
     public virtual void OnEnable() {
-      UpdateManager.instance.Push(this, Configuration.instance.movingPlatformsPriority);
+      UpdateManager.Push(this, Configuration.instance.movingPlatformsPriority);
     }
     /// <summary>
     /// notify UpdateManager
     /// </summary>
     public virtual void OnDisable() {
-      UpdateManager.instance.Remove(this);
+      UpdateManager.Remove(this);
     }
     /// <summary>
     /// Update rope rotation, this is called PlatformerUpdate
