@@ -47,7 +47,10 @@ namespace UnityPlatformer {
     public string crounchWalk = "crounch_walk";
     public string crounchIdle = "crounch_idle";
 
-
+    /// <summary>
+    /// Previous speed changed when calling PlaybackSpeed, StopPlayback or StartPlayback
+    /// </summary>
+    internal float previousSpeed;
     /// <summary>
     /// Start listening
     /// </summary>
@@ -161,6 +164,22 @@ namespace UnityPlatformer {
     /// the same animation
     /// </summary>
     public abstract void Play(string animation);
+    /// <summary>
+    /// Set playback speed.
+    ///
+    /// 1: normal\n
+    /// 0-1: slow-motion\n
+    /// >1: fast-motion
+    /// </summary>
+    public abstract void PlaybackSpeed(float speed);
+    /// <summary>
+    /// Stop current animation
+    /// </summary>
+    public abstract void StopPlayback();
+    /// <summary>
+    /// Continue playing current animation
+    /// </summary>
+    public abstract void StartPlayback();
     /// <summary>
     /// Get animation length in seconds
     /// </summary>

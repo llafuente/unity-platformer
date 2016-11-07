@@ -1,6 +1,8 @@
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.Rendering;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace UnityPlatformer {
   /// <summary>
@@ -49,6 +51,7 @@ namespace UnityPlatformer {
 
     // clang-format on
     void Start() {
+      #if UNITY_EDITOR
       if (_default_material == null) {
         // TODO fixit!
         //_default_material = Resources.Load("Transparent", typeof(Material)) as
@@ -57,6 +60,7 @@ namespace UnityPlatformer {
             "Noboxout/Utils/Materials/Collider2D.mat");
         //_default_material = new Material(Shader.Find("Transparent"));
       }
+      #endif
 
       if (_default_material == null) {
         //Debug.LogWarning("cannot load Transparent material!");

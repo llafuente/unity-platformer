@@ -36,6 +36,21 @@ namespace UnityPlatformer {
       }
     }
 
+    public override PlaybackSpeed(float speed) {
+      previousSpeed = animator.Speed;
+      animator.Speed = speed;
+    }
+
+    public override StopPlayback() {
+      previousSpeed = animator.Speed;
+      animator.Speed = 0;
+    }
+
+    public override StartPlayback() {
+      animator.Speed = previousSpeed ? previousSpeed : 1;
+      previousSpeed = 0;
+    }
+
     public override float GetAnimationLength(string animation) {
       // TODO
 

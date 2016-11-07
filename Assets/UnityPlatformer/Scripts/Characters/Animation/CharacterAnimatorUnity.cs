@@ -28,6 +28,20 @@ namespace UnityPlatformer {
       playing = animation;
       animator.Play(animation);
     }
+
+    public override void PlaybackSpeed(float speed) {
+      // save it for completness but it's not used
+      previousSpeed = animator.speed;
+      animator.speed = speed;
+    }
+
+    public override void StopPlayback() {
+      animator.StopPlayback();
+    }
+
+    public override void StartPlayback() {
+      animator.StartPlayback();
+    }
     /// <summary>
     /// Get animation length in seconds using RuntimeAnimatorController
     /// </summary>

@@ -40,7 +40,7 @@ namespace UnityPlatformer {
   /// </summary>
   public class DefaultInput : PlatformerInput {
     /// <summary>
-    /// Input mapping
+    /// Maps between various inputs methods and action (string)
     /// </summary>
     [Serializable]
     public class InputMapping {

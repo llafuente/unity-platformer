@@ -70,9 +70,9 @@ namespace UnityPlatformer {
     public override void OnEnable() {
       base.OnEnable();
 
-      castFrames = UpdateManager.instance.GetFrameCount (castTime);
-      durationFrames = UpdateManager.instance.GetFrameCount (durationTime);
-      cooldownFrames = UpdateManager.instance.GetFrameCount (cooldownTime);
+      castFrames = UpdateManager.GetFrameCount (castTime);
+      durationFrames = UpdateManager.GetFrameCount (durationTime);
+      cooldownFrames = UpdateManager.GetFrameCount (cooldownTime);
 
       cooldownCounter = cooldownFrames + 1;
       actionCounter = cooldownFrames + 1;
