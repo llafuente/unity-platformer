@@ -1,9 +1,4 @@
-# TODO temporal: remove until it's done
-Docs/
-
 # this are internal staff for develop
-/Assets/Editor
-/Assets/Editor.meta
 /Assets/UnityPlatformer/Scenes/all-prefabs.unity
 /Assets/UnityPlatformer/Scenes/all-prefabs.unity.meta
 /Assets/UnityPlatformer/Scenes/physics.unity
@@ -40,15 +35,11 @@ Docs/
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
 
+# Unity3D unit test result file
+/results.xml
 
 #
 Library
 
 # External libraries, mostly git clones and soft-linked
 External
-
-# AssetsStore goes here
-Assets/ThirdParty/*
-!Assets/ThirdParty/PC2D
-# ferr cache
-Assets/Ferr*
