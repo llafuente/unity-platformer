@@ -29,7 +29,7 @@ namespace UnityPlatformer {
     /// Index of the next level\n
     /// -1 means next index
     /// </summary>
-    public int nextLevel;
+    public int nextLevel = -1;
     /// <summary>
     /// List of LevelData Indexes (@LevelManager) that will be unlocked
     /// </summary>
@@ -47,6 +47,14 @@ namespace UnityPlatformer {
     /// Is currently locked?\n
     /// TODO persist
     /// </summary>
-    internal bool unlocked = false;
+    [HideInInspector]
+    public int sceneId = 0;
+    /// <summary>
+    /// Is currently locked?\n
+    /// TODO persist
+    /// </summary>
+    [HideInInspector]
+    public bool locked = false;
+    public LevelData() {}
   }
 }

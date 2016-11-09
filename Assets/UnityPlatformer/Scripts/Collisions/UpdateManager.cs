@@ -22,11 +22,13 @@ namespace UnityPlatformer {
     /// <summary>
     /// Time the app is running
     /// </summary>
-    internal float runningTime = 0;
+    [HideInInspector]
+    public float runningTime = 0;
     /// <summary>
     /// Current frame
     /// </summary>
-    internal long frame = 0;
+    [HideInInspector]
+    public long frame = 0;
     /// <summary>
     /// Priority queue type
     /// </summary>
@@ -174,8 +176,11 @@ namespace UnityPlatformer {
     /// Then call LatePlatformerUpdate\n
     /// NOTE FixedUpdate can be called multiple times each frame
     /// </summary>
-    void FixedUpdate() {
-      Log.Verbose("FixedUpdate start: {0}", frame);
+    public void FixedUpdate() {
+      Log.Verbose("FixedUpdate start: {0} listeners: {1} callbacks: {2}",
+        frame, frameListenersCount, callbacksCount);
+        Debug.LogFormat("FixedUpdate start: {0} listeners: {1} callbacks: {2}",
+          frame, frameListenersCount, callbacksCount);
 
       float delta = timeScale * Time.fixedDeltaTime;
       runningTime += delta;

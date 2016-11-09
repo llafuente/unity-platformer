@@ -20,5 +20,12 @@ namespace UnityPlatformer {
         return _instance;
       }
     }
+    /// <summary>
+    /// This method is for testing purposes only, you should not called it
+    /// in your application
+    /// </summary>
+    public static void ClearInstance() {
+      _instance = null;
+    }
   }
 }

@@ -3,7 +3,6 @@ using UnityEngine;
 
 /// TODO handle lives / Game over
 /// TODO handle character alignment
-/// TODO onGameOver
 /// TODO handle Damage direction here or in the HitBox but must be done :)
 
 namespace UnityPlatformer {
@@ -12,7 +11,7 @@ namespace UnityPlatformer {
   ///
   /// Triggers character damage/death
   /// </summary>
-  public class CharacterHealth : MonoBehaviour {
+  public class CharacterHealth : MonoBehaviour, IUpdateEntity {
     /// <summary>
     /// Character alignment
     /// </summary>
@@ -103,20 +102,27 @@ namespace UnityPlatformer {
     /// Stop that funky music!
     /// </summary>
     public Action onInvulnerabilityEnd;
+    /// <summary>
+    /// After death when there are lives player can respawn
+    /// </summary>
+    public Action onRespawn;
     // NOTE do not use setter/getter to trigger death, we need to preserve
     // logical Action dispacthing
     /// <summary>
     /// Character health
     /// </summary>
-    internal int health = 0;
+    [HideInInspector]
+    public int health = 0;
     /// <summary>
     /// Character lives
     /// </summary>
-    internal int lives = 0;
+    [HideInInspector]
+    public int lives = 0;
     /// <summary>
     /// Character owner of this CharacterHealth
     /// </summary>
-    internal Character character;
+    [HideInInspector]
+    public Character character;
     /// <summary>
     /// Time counter for invulnerability
     /// </summary>
@@ -124,7 +130,7 @@ namespace UnityPlatformer {
     /// <summary>
     /// check missconfiguration and initialization
     /// </summary>
-    void Start() {
+    public void Start() {
       if (startingHealth < maxHealth) {
         Debug.LogWarning(this.name + " startingHealth < maxHealth ?");
       }
@@ -136,14 +142,18 @@ namespace UnityPlatformer {
       Heal(startingHealth);
       lives = startingLives;
     }
+    public void OnEnable() {
+      UpdateManager.Push(this, Configuration.instance.charactersPriority);
+    }
     /// <summary>
     /// invulnerability logic
     /// </summary>
-    void LateUpdate() {
+    public virtual void PlatformerUpdate(float delta) {
+      Debug.Log(delta);
       // NOTE do not use IsInvulnerable here...
       bool was_invulnerable = _invulnerable >= 0;
 
-      _invulnerable -= Time.deltaTime;
+      _invulnerable -= delta;
 
       if (was_invulnerable && _invulnerable < 0) {
         if (onInvulnerabilityEnd != null) {
@@ -151,6 +161,7 @@ namespace UnityPlatformer {
         }
       }
     }
+    public virtual void LatePlatformerUpdate(float delta) {}
     /// <summary>
     /// Turns a character invulnerable, but still can be killed using Kill
     ///
@@ -252,7 +263,10 @@ namespace UnityPlatformer {
 
       health -= amount;
 
-      SetInvulnerable(invulnerabilityTimeAfterDamage);
+      // do not set invulnerable a dead Character
+      if (health > 0) {
+        SetInvulnerable(invulnerabilityTimeAfterDamage);
+      }
 
       if (onDamage != null) {
         onDamage();
@@ -297,23 +311,40 @@ namespace UnityPlatformer {
     /// Trigger onDeath
     /// </summary>
     public void Die() {
-      Debug.Log(this.name + " disable all HitBox(es)");
-  	  var lch = GetComponentsInChildren<HitBox> ();
-      foreach (var x in lch) {
-  	     x.gameObject.SetActive(false);
-      }
-
-      Debug.Log(this.name + " disable all Damage(s)");
-      var ldt = GetComponentsInChildren<Damage> ();
-      foreach (var x in ldt) {
-  	     x.gameObject.SetActive(false);
-      }
-
-      //Destroy(gameObject);
+      --lives;
 
       if (onDeath != null) {
         Debug.Log(this.name + " died!");
         onDeath();
+      }
+
+      if (lives == 0) {
+        // game over
+        Debug.Log(this.name + " disable all HitBox(es)");
+        var lch = GetComponentsInChildren<HitBox> ();
+        foreach (var x in lch) {
+           x.gameObject.SetActive(false);
+        }
+
+        Debug.Log(this.name + " disable all Damage(s)");
+        var ldt = GetComponentsInChildren<Damage> ();
+        foreach (var x in ldt) {
+           x.gameObject.SetActive(false);
+        }
+
+        if (onGameOver != null) {
+          Debug.Log(this.name + " game-over!");
+          onGameOver();
+        }
+      } else {
+        // disable invulnerability
+
+        // respawn
+        Heal(startingHealth);
+
+        if (onRespawn != null) {
+          onRespawn();
+        }
       }
     }
   }
