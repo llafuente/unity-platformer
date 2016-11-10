@@ -372,7 +372,6 @@ namespace UnityPlatformer {
         groundCD.Reset();
         EnterStateGraceful(States.OnGround);
       } else {
-        groundCD.Increment();
         // give some margin
         if (groundCD.Ready()) {
           ExitStateGraceful(States.OnGround);
@@ -383,7 +382,6 @@ namespace UnityPlatformer {
           !IsOnState(States.WallSliding) &&
           !IsOnState(States.Liquid) &&
           !IsOnState(States.Rope)) {
-          fallingCD.Increment();
           if (fallingCD.Ready()) {
             EnterStateGraceful(States.Falling);
           }

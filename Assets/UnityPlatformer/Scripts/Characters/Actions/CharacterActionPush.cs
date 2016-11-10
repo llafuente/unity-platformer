@@ -83,7 +83,7 @@ namespace UnityPlatformer {
         }
 
         faceDir = 1;
-        if (character.IsBox(Directions.Right) && pushingCD.IncReady()) {
+        if (character.IsBox(Directions.Right) && pushingCD.Ready()) {
           return priority;
         }
         return 0;
@@ -94,7 +94,7 @@ namespace UnityPlatformer {
         }
 
         faceDir = -1;
-        if (character.IsBox(Directions.Left) && pushingCD.IncReady()) {
+        if (character.IsBox(Directions.Left) && pushingCD.Ready()) {
           return priority;
         }
         return 0;

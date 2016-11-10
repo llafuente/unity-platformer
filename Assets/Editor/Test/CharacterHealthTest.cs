@@ -44,7 +44,6 @@ namespace UnityPlatformer {
       character = objx.AddComponent<Character>();
       Assert.NotNull(character);
       health = objx.GetComponent<CharacterHealth>();
-      health.OnEnable();
       Assert.NotNull(health);
       col2d = objx.GetComponent<PlatformerCollider2D>();
       Assert.NotNull(col2d);
@@ -122,9 +121,12 @@ namespace UnityPlatformer {
       ResetCallbacks();
 
       // TEST add time, wait until invulnerability ends
-      health.PlatformerUpdate(0.25f);
+      Time.fixedDeltaTime = 0.25f;
+      umgr.FixedUpdate();
       Assert.That(health.IsInvulnerable(), Is.EqualTo(true));
-      health.PlatformerUpdate(2);
+
+      Time.fixedDeltaTime = 2f;
+      umgr.FixedUpdate();
       Assert.That(health.IsInvulnerable(), Is.EqualTo(false));
       Assert.That(onInvulnerabilityEndCalled, Is.EqualTo(true));
 

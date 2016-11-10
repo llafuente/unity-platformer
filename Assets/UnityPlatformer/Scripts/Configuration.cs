@@ -68,6 +68,11 @@ namespace UnityPlatformer {
     [Space(20)]
     [Header("UpdateManager priorities")]
     /// <summary>
+    /// Cooldown priority, should be the highest so when updating anything else
+    /// cooldowns are updated first
+    /// </summary>
+    public int cooldownsPriority = 100;
+    /// <summary>
     /// Moving platform priority
     /// </summary>
     public int movingPlatformsPriority = 50;

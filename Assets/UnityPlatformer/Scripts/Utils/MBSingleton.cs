@@ -8,7 +8,7 @@ namespace UnityPlatformer {
     /// <summary>
     /// Singleton instance
     /// </summary>
-    private static T _instance;
+    protected static T _instance;
     /// <summary>
     /// Singleton instance retrieval
     /// </summary>

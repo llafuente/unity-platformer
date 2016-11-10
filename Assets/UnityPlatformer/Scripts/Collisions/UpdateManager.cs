@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 namespace UnityPlatformer {
   /// <summary>
@@ -13,12 +14,41 @@ namespace UnityPlatformer {
   /// </summary>
   public class UpdateManager : MBSingleton<UpdateManager> {
     /// <summary>
+    /// Create a debug UI
+    /// </summary>
+    public bool debug = false;
+    /// <summary>
+    /// Time scale
+    /// </summary>
+    [HideInInspector]
+    private float _timeScale = 1;
+    /// <summary>
+    /// Time Scale in the next frame\n
+    /// This variable is for consistency, when anybody change timeScale
+    /// the change is queued until next FixedUpdate
+    /// </summary>
+    private float nextFrameTimeScale = 1;
+    /// <summary>
     /// Time Scale
     ///
     /// > 1 fast motion\n
     /// < 1 slow motion
     /// </summary>
-    public float timeScale = 1;
+    public float timeScale {
+      get
+      {
+        return _timeScale;
+      }
+      set
+      {
+        nextFrameTimeScale = value;
+
+        if (onTimeScaleChanged != null) {
+          onTimeScaleChanged(value);
+        }
+      }
+    }
+
     /// <summary>
     /// Time the app is running
     /// </summary>
@@ -61,6 +91,14 @@ namespace UnityPlatformer {
     /// </summary>
     int callbacksCount;
     /// <summary>
+    /// Time change callback
+    /// </summary>
+    public delegate void TimeChanged(float timeScale);
+    /// <summary>
+    /// notify when time is changed
+    /// </summary>
+    public TimeChanged onTimeScaleChanged;
+    /// <summary>
     /// Initialize
     /// </summary>
     static void LazyInit() {
@@ -80,12 +118,30 @@ namespace UnityPlatformer {
     /// </summary>
     public void OnEnable() {
       LazyInit();
+
+      if (instance.debug) {
+        transform.GetChild(0).gameObject.SetActive(true);
+        var slider = GetComponentInChildren<Slider>();
+        slider.onValueChanged.AddListener((value) => {
+          UpdateManager.instance.timeScale = value;
+        });
+      }
     }
     /// <summary>
     /// Get current frame
     /// </summary>
     static public long GetCurrentFrame() {
       return instance.frame;
+    }
+    /// <summary>
+    /// Get current frame
+    /// </summary>
+    public void SetTimeScale2(float ts) {
+      Debug.Log(ts);
+      timeScale = ts;
+      if (onTimeScaleChanged != null) {
+        onTimeScaleChanged(ts);
+      }
     }
     /// <summary>
     /// Time to frame conversion
@@ -148,7 +204,9 @@ namespace UnityPlatformer {
     /// </summary>
     /// </returns>If it was removed</returns>
     static public bool Remove(IUpdateEntity entity) {
-      LazyInit();
+      if (_instance == null) {
+        return false;
+      }
 
       int idx = IndexOf(entity);
       if (idx != -1) {
@@ -179,8 +237,8 @@ namespace UnityPlatformer {
     public void FixedUpdate() {
       Log.Verbose("FixedUpdate start: {0} listeners: {1} callbacks: {2}",
         frame, frameListenersCount, callbacksCount);
-        Debug.LogFormat("FixedUpdate start: {0} listeners: {1} callbacks: {2}",
-          frame, frameListenersCount, callbacksCount);
+
+      _timeScale = nextFrameTimeScale;
 
       float delta = timeScale * Time.fixedDeltaTime;
       runningTime += delta;

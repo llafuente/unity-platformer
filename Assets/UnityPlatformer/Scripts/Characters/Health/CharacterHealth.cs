@@ -11,7 +11,7 @@ namespace UnityPlatformer {
   ///
   /// Triggers character damage/death
   /// </summary>
-  public class CharacterHealth : MonoBehaviour, IUpdateEntity {
+  public class CharacterHealth : MonoBehaviour {
     /// <summary>
     /// Character alignment
     /// </summary>
@@ -126,7 +126,7 @@ namespace UnityPlatformer {
     /// <summary>
     /// Time counter for invulnerability
     /// </summary>
-    private float _invulnerable = 0;
+    private Cooldown invulnerability;
     /// <summary>
     /// check missconfiguration and initialization
     /// </summary>
@@ -141,58 +141,40 @@ namespace UnityPlatformer {
       character = GetComponent<Character>();
       Heal(startingHealth);
       lives = startingLives;
-    }
-    public void OnEnable() {
-      UpdateManager.Push(this, Configuration.instance.charactersPriority);
-    }
-    /// <summary>
-    /// invulnerability logic
-    /// </summary>
-    public virtual void PlatformerUpdate(float delta) {
-      Debug.Log(delta);
-      // NOTE do not use IsInvulnerable here...
-      bool was_invulnerable = _invulnerable >= 0;
 
-      _invulnerable -= delta;
-
-      if (was_invulnerable && _invulnerable < 0) {
+      invulnerability = new Cooldown(invulnerabilityTimeAfterDamage);
+      invulnerability.onReady += () => {
         if (onInvulnerabilityEnd != null) {
           onInvulnerabilityEnd();
         }
-      }
+      };
+      invulnerability.onReset += () => {
+        if (onInvulnerabilityStart != null) {
+          onInvulnerabilityStart();
+        }
+      };
     }
-    public virtual void LatePlatformerUpdate(float delta) {}
     /// <summary>
     /// Turns a character invulnerable, but still can be killed using Kill
     ///
     /// NOTE use float.MaxValue for unlimited time
     /// </summary>
     public void SetInvulnerable(float time) {
-      _invulnerable = time;
-
-      if (_invulnerable > 0.0f) {
-        if (onInvulnerabilityStart != null) {
-          onInvulnerabilityStart();
-        }
-      }
+      invulnerability.Update(time);
+      invulnerability.Reset();
     }
     /// <summary>
     /// disable invulnerability
     /// </summary>
     public void SetVulnerable() {
-      bool was_invulnerable = _invulnerable >= 0;
-      _invulnerable = -1; // any negative value works :D
-
-      if (was_invulnerable && onInvulnerabilityEnd != null) {
-        onInvulnerabilityEnd();
-      }
+      invulnerability.Clear();
     }
     /// <summary>
     /// Character is invulnerable?
     /// </summary>
     public bool IsInvulnerable() {
       // is death? leave him alone...
-      return health <= 0 || _invulnerable > 0.0f;
+      return health <= 0 || !invulnerability.Ready();
     }
     /// <summary>
     /// Kill the character even if it's invulnerable

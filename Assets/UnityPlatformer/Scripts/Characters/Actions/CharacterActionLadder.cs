@@ -208,7 +208,7 @@ namespace UnityPlatformer {
           actionJump.Jump(new JumpConstant(character,
             jumpOff.Clone((int) character.faceDir)
           ));
-        } else if (dismount.IncReady()) {
+        } else if (dismount.Ready()) {
           character.velocity = Vector2.zero;
           character.ladder.Dismount(character);
           character.ladder = null;

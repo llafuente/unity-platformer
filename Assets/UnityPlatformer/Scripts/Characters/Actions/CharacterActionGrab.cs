@@ -73,7 +73,6 @@ namespace UnityPlatformer {
 
     public override int WantsToUpdate(float delta) {
       bool onGrabbableArea = character.IsOnArea(Areas.Grabbable);
-      canGrab.Increment();
 
       if (onGrabbableArea && canGrab.Ready()) {
         return priority;

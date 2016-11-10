@@ -5,52 +5,72 @@ namespace UnityPlatformer {
   /// <summary>
   /// Cooldown helper
   /// </summary>
-  public class Cooldown {
+  public class Cooldown : IUpdateEntity {
     /// <summary>
-    /// frames to cooldown
+    /// time since last reset
     /// </summary>
-    int limit;
+    protected float counter;
     /// <summary>
-    /// frames since las reset
+    /// cooldown time in seconds
     /// </summary>
-    int counter;
+    protected float seconds;
     /// <summary>
-    /// Constructor
+    /// boolean to keep track of when fire the callbacks
     /// </summary>
-    public Cooldown(float time) {
-      Init(time);
+    protected bool wasReady = false;
+    /// <summary>
+    /// callbacks
+    /// </summary>
+    public Action onReset;
+    /// <summary>
+    /// callbacks
+    /// </summary>
+    public Action onReady;
+    public Cooldown(float timeInSeconds) {
+      counter = seconds = timeInSeconds;
+      wasReady = true;
+
+      UpdateManager.Push(this, Configuration.instance.cooldownsPriority);
     }
     /// <summary>
-    /// Initialize max time
-    /// </summary>
-    public void Init(float time) {
-      limit = UpdateManager.GetFrameCount (time);
-      Reset();
-    }
-    /// <summary>
-    /// Increment and check
-    /// </summary>
-    public bool IncReady() {
-      Increment();
-      return Ready();
-    }
-    /// <summary>
-    /// Is ready, cooldown expired
+    /// Is ready? cooldown expired?
     /// </summary>
     public bool Ready() {
-      return counter >= limit;
+      return counter >= seconds;
     }
     /// <summary>
-    /// Increment counter
+    /// Update cooldown
     /// </summary>
-    public void Increment() {
-      ++counter;
+    public void Update(float timeInSeconds) {
+      seconds = timeInSeconds;
     }
     /// <summary>
     /// Reset
     /// </summary>
     public void Reset() {
-      counter = 0;
+      counter = 0.0f;
+      wasReady = false;
+      if (seconds > 0.0f && onReset != null) {
+        onReset();
+      }
     }
+    /// <summary>
+    /// Clear cooldown -> ready
+    /// </summary>
+    public void Clear() {
+      counter = seconds + 1;
+    }
+
+    public void PlatformerUpdate(float delta) {
+      counter += delta;
+      if (counter >= seconds && !wasReady) {
+        wasReady = true;
+        if (onReady != null) {
+          onReady();
+        }
+      }
+    }
+
+    public void LatePlatformerUpdate(float delta) {}
   }
 }

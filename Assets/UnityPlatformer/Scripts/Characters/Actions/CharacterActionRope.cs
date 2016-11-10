@@ -82,7 +82,6 @@ namespace UnityPlatformer {
 
     public override int WantsToUpdate(float delta) {
       bool onGrabbableArea = character.IsOnArea(Areas.Rope);
-      canGrab.Increment();
 
       if (onGrabbableArea && canGrab.Ready() && character.rope.passengers.Contains(character.gameObject.layer)) {
         return priority;
