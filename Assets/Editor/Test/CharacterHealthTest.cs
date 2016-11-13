@@ -6,7 +6,7 @@ using UnityEngine;
 
 using UnityPlatformer;
 
-namespace UnityPlatformer {
+namespace UnityPlatformer.Test {
   [TestFixture]
   [Category("Character")]
   class CharacterHealthTest {
@@ -121,11 +121,11 @@ namespace UnityPlatformer {
       ResetCallbacks();
 
       // TEST add time, wait until invulnerability ends
-      Time.fixedDeltaTime = 0.25f;
+      umgr.forceFixedDeltaTime = 0.25f;
       umgr.FixedUpdate();
       Assert.That(health.IsInvulnerable(), Is.EqualTo(true));
 
-      Time.fixedDeltaTime = 2f;
+      umgr.forceFixedDeltaTime = 2.0f;
       umgr.FixedUpdate();
       Assert.That(health.IsInvulnerable(), Is.EqualTo(false));
       Assert.That(onInvulnerabilityEndCalled, Is.EqualTo(true));
@@ -215,11 +215,11 @@ namespace UnityPlatformer {
 
       ResetCallbacks();
 
-      Time.fixedDeltaTime = 0.25f;
+      umgr.forceFixedDeltaTime = 0.25f;
       // TEST add time, wait until invulnerability ends
       umgr.FixedUpdate();
       Assert.That(health.IsInvulnerable(), Is.EqualTo(true));
-      Time.fixedDeltaTime = 2f;
+      umgr.forceFixedDeltaTime = 2.0f;
       umgr.FixedUpdate();
       Assert.That(health.IsInvulnerable(), Is.EqualTo(false));
       Assert.That(onInvulnerabilityEndCalled, Is.EqualTo(true));

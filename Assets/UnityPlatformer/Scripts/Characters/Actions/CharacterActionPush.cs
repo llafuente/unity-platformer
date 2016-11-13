@@ -110,7 +110,7 @@ namespace UnityPlatformer {
       base.GainControl(delta);
 
       character.EnterState(States.Pushing);
-      Log.level = LogLevel.Silly;
+      Log.SetLevel(LogLevel.Silly);
       Log.Silly("(Push) {0} Start pushing", gameObject.name);
     }
     /// <summary>
@@ -122,7 +122,7 @@ namespace UnityPlatformer {
       character.ExitState(States.Pushing);
 
       Log.Silly("(Push) {0} Stop pushing", gameObject.name);
-      Log.level = LogLevel.Info;
+      Log.SetLevel(LogLevel.Info);
     }
     /// <summary>
     /// Move Character, because the magic is in OnBeforeMove

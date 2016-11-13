@@ -6,7 +6,7 @@ using UnityEngine;
 
 using UnityPlatformer;
 
-namespace UnityPlatformer {
+namespace UnityPlatformer.Test {
   [TestFixture]
   [Category("LevelManager")]
   class LevelManagerTest {

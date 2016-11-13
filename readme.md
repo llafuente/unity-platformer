@@ -8,6 +8,15 @@ in it's own beast.
 
 [unity-platformer API](http://llafuente.github.io/unity-platformer/)
 
+## Installation
+
+A package will be available soon, when everything is rather stable.
+
+I don't even have develop/master setup... there is no stable version
+I'm still developing and reshaping the API.
+
+Require Unity-Test-Tools to be installed in the project (or delete Assets/Tests)
+
 ## Features
 
 Tiles (Asserts/UnityPlatformer/Scripts/Tiles/)

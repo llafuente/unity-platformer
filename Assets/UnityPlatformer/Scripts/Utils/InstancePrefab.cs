@@ -30,7 +30,8 @@ namespace UnityPlatformer {
     /// <summary>
     /// reference to instanced prefab
     /// </summary>
-    internal GameObject instance = null;
+    [HideInInspector]
+    public GameObject instance = null;
 
     /// <summary>
     /// NOTE no virtual on purpose. override OnAwake

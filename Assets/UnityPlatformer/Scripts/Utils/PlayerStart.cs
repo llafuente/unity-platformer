@@ -19,7 +19,12 @@ namespace UnityPlatformer {
     /// </summary>
     public bool monitor = false;
 
-    internal CharacterMonitor mon;
+    [HideInInspector]
+    public Character character;
+    [HideInInspector]
+    public PlatformerInput input;
+    [HideInInspector]
+    public CharacterMonitor mon;
 
     /// <summary>
     /// Instance the prefab, rename and attach it
@@ -34,6 +39,7 @@ namespace UnityPlatformer {
         return;
       }
 
+
       PlatformerInput[] inputs = instance.gameObject.GetComponentsInChildren<PlatformerInput>();
 
       if (inputs.Length != 1) {
@@ -41,7 +47,10 @@ namespace UnityPlatformer {
         return;
       }
 
-      mon = chars[0].gameObject.GetOrAddComponent<CharacterMonitor>();
+      character = chars[0];
+      input = inputs[0];
+
+      mon = character.gameObject.GetOrAddComponent<CharacterMonitor>();
       mon.enabled = monitor;
 
       if (setupCameraFollow) {
@@ -51,8 +60,8 @@ namespace UnityPlatformer {
           CameraFollow cf = c.GetComponent<CameraFollow>();
 
           if (cf) {
-            cf.target = chars[0];
-            cf.targetInput = inputs[0];
+            cf.target = character;
+            cf.targetInput = input;
           }
         }
       }

@@ -9,7 +9,7 @@ namespace UnityPlatformer {
   /// Base class for: Players, NPCs, enemies.
   ///
   /// Handle all movement logic and transform collider information
-  /// into 'readable' information for animations.\n
+  /// into 'readable' information for animations.<para />
   /// NOTE executionOrder should be -25
   /// </summary>
   [RequireComponent (typeof (PlatformerCollider2D))]
@@ -70,63 +70,78 @@ namespace UnityPlatformer {
     ///
     /// NOTE Each CharacterAction must sync with it's character
     /// </summary>
-    internal List<CharacterAction> actions = new List<CharacterAction>();
+    [HideInInspector]
+    public List<CharacterAction> actions = new List<CharacterAction>();
     /// <summary>
     /// Where is facing
     /// </summary>
-    internal Facing faceDir;
+    [HideInInspector]
+    public Facing faceDir;
     /// <summary>
     /// Current states
     /// </summary>
-    internal States state = States.None;
+    [HideInInspector]
+    public States state = States.None;
     /// <summary>
     /// Current areas
     /// </summary>
-    internal Areas area = Areas.None;
+    [HideInInspector]
+    public Areas area = Areas.None;
     /// <summary>
     /// Current fence
     /// </summary>
-    internal Fence fence;
+    [HideInInspector]
+    public Fence fence;
     /// <summary>
     /// Current ladder
     /// </summary>
-    internal Ladder ladder;
+    [HideInInspector]
+    public Ladder ladder;
     /// <summary>
     /// Ladder at Character feet
     /// </summary>
-    internal Ladder ladderBottom;
+    [HideInInspector]
+    public Ladder ladderBottom;
     /// <summary>
     /// Current liquid
     /// </summary>
-    internal Liquid liquid;
+    [HideInInspector]
+    public Liquid liquid;
     /// <summary>
     /// Current reachable item
     /// </summary>
-    internal Item item;
+    [HideInInspector]
+    public Item item;
     /// <summary>
     /// Current Grab area
     /// </summary>
-    internal Grab grab;
+    [HideInInspector]
+    public Grab grab;
     /// <summary>
     /// Current Rope
     /// </summary>
-    internal Rope rope;
+    [HideInInspector]
+    public Rope rope;
     /// <summary>
     /// Current RopeSection index
     /// </summary>
-    internal int ropeIndex = -1;
+    [HideInInspector]
+    public int ropeIndex = -1;
     /// <summary>
     /// Current Track
     /// </summary>
-    internal Track track;
+    [HideInInspector]
+    public Track track;
     /// <summary>
     /// Current MovingPlatform
     /// </summary>
-    internal MovingPlatform platform;
+    [HideInInspector]
+    public MovingPlatform platform;
     /// <summary>
     /// Last jump distance
     /// </summary>
-    internal Vector2 lastJumpDistance {
+    [HideInInspector]
+    public Vector2 lastJumpDistance {
       get {
         return jumpEnd - jumpStart;
       }
@@ -134,7 +149,8 @@ namespace UnityPlatformer {
     /// <summary>
     /// Last fall distance
     /// </summary>
-    internal Vector2 lastFallDistance {
+    [HideInInspector]
+    public Vector2 lastFallDistance {
       get {
         return fallEnd - fallStart;
       }
@@ -168,44 +184,53 @@ namespace UnityPlatformer {
     ///
     /// NOTE Character real velocity is velocity + worldVelocity
     /// </summary>
-    internal Vector3 velocity = Vector3.zero;
+    [HideInInspector]
+    public Vector3 velocity = Vector3.zero;
     /// <summary>
     /// World velocity: wind, Track...
     ///
     /// NOTE Character real velocity is velocity + worldVelocity
     /// </summary>
-    internal Vector3 worldVelocity = Vector3.zero;
+    [HideInInspector]
+    public Vector3 worldVelocity = Vector3.zero;
     /// <summary>
     /// Amount moved in the last PlatformerUpdate
     /// </summary>
-    internal Vector3 movedLastFrame = Vector3.zero;
+    [HideInInspector]
+    public Vector3 movedLastFrame = Vector3.zero;
     /// <summary>
     /// Cache PlatformerCollider2D
     /// </summary>
-    internal PlatformerCollider2D pc2d;
+    [HideInInspector]
+    public PlatformerCollider2D pc2d;
     /// <summary>
     /// Cache CharacterHealth
     /// </summary>
-    internal CharacterHealth health;
+    [HideInInspector]
+    public CharacterHealth health;
     /// <summary>
     /// Cache HitBox
     /// </summary>
-    internal HitBox enterAreas;
+    [HideInInspector]
+    public HitBox enterAreas;
     /// <summary>
     /// Cache CharacterAnimator
     /// </summary>
-    internal CharacterAnimator animator;
+    [HideInInspector]
+    public CharacterAnimator animator;
     /// <summary>
     /// Force to play this animation
     /// </summary>
-    internal string forceAnimation;
+    [HideInInspector]
+    public string forceAnimation;
     /// <summary>
     /// Do not execute any Action, Character still moves, so set velocity to
     /// Vector3.zero if necesarry
     ///
     /// NOTE Even frozen, forceAnimation works...
     /// </summary>
-    internal float frozen = -1f;
+    [HideInInspector]
+    public float frozen = -1f;
 
 
 

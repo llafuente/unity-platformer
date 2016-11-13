@@ -7,10 +7,11 @@ namespace UnityPlatformer {
   /// Custom update loop.
   ///
   /// The purpose behind this class/style is to be precise about the update
-  /// order of all entities.\n
-  /// Also handle Timeout Actions, do not use corountines.\n
-  /// NOTE Use a sorted array based on the priorities defined at Configuration\n
-  /// NOTE executionOrder should be -50
+  /// order of all entities.<para />
+  /// Also handle Timeout Actions, do not use corountines.<para />
+  /// NOTE Use a sorted array based on the priorities defined at Configuration<para />
+  /// NOTE executionOrder should be -50<para />
+  /// NOTE Do not call UpdateManager at Awake
   /// </summary>
   public class UpdateManager : MBSingleton<UpdateManager> {
     /// <summary>
@@ -18,16 +19,23 @@ namespace UnityPlatformer {
     /// </summary>
     public bool debug = false;
     /// <summary>
+    /// Ignore Unity Time.fixedDeltaTime use this value\n
+    /// this is meant for testing, because setting Time.fixedDeltaTime
+    /// may mess your configuration
+    /// </summary>
+    [HideInInspector]
+    public float forceFixedDeltaTime = 0.0f;
+    /// <summary>
     /// Time scale
     /// </summary>
     [HideInInspector]
-    private float _timeScale = 1;
+    protected float _timeScale = 1;
     /// <summary>
     /// Time Scale in the next frame\n
     /// This variable is for consistency, when anybody change timeScale
     /// the change is queued until next FixedUpdate
     /// </summary>
-    private float nextFrameTimeScale = 1;
+    protected float nextFrameTimeScale = 1;
     /// <summary>
     /// Time Scale
     ///
@@ -79,8 +87,18 @@ namespace UnityPlatformer {
     /// Callback type
     /// </summary>
     struct Callback {
+      /// <summary>
+      /// the callback itself
+      /// </summary>
       public Action callback;
+      /// <summary>
+      /// Time to call callback. Start at initial time and when reach <= 0 fire!
+      /// </summary>
       public float time;
+      /// <summary>
+      /// Initial time to repeat, if zero callback will be executed once
+      /// </summary>
+      public float repeat;
     }
     /// <summary>
     /// List of callbacks
@@ -134,14 +152,10 @@ namespace UnityPlatformer {
       return instance.frame;
     }
     /// <summary>
-    /// Get current frame
+    /// Get current delta
     /// </summary>
-    public void SetTimeScale2(float ts) {
-      Debug.Log(ts);
-      timeScale = ts;
-      if (onTimeScaleChanged != null) {
-        onTimeScaleChanged(ts);
-      }
+    static public float GetFixedDeltaTime() {
+      return instance.forceFixedDeltaTime != 0.0f ? instance.forceFixedDeltaTime : Time.fixedDeltaTime;
     }
     /// <summary>
     /// Time to frame conversion
@@ -149,7 +163,7 @@ namespace UnityPlatformer {
     /// NOTE you should listen to timeScale changes...
     /// </summary>
     static public int GetFrameCount(float time) {
-      float frames = time / Time.fixedDeltaTime;
+      float frames = time / GetFixedDeltaTime();
       int roundedFrames = Mathf.RoundToInt(frames);
 
       if (Mathf.Approximately(frames, roundedFrames)) {
@@ -226,7 +240,9 @@ namespace UnityPlatformer {
     void Update() {
       ++frame;
     }
-
+    static public float GetCurrentDelta() {
+      return instance.timeScale * GetFixedDeltaTime();
+    }
     /// <summary>
     /// Run update loop
     ///
@@ -235,16 +251,31 @@ namespace UnityPlatformer {
     /// NOTE FixedUpdate can be called multiple times each frame
     /// </summary>
     public void FixedUpdate() {
-      Log.Verbose("FixedUpdate start: {0} listeners: {1} callbacks: {2}",
-        frame, frameListenersCount, callbacksCount);
-
+      float delta = GetCurrentDelta();
       _timeScale = nextFrameTimeScale;
 
-      float delta = timeScale * Time.fixedDeltaTime;
       runningTime += delta;
+
+      Log.Verbose("FixedUpdate start: {0} listeners: {1} callbacks: {2} delta {3} runningTime {4}",
+      frame, frameListenersCount, callbacksCount, delta, runningTime);
+
+      //Debug.LogFormat("FixedUpdate start: {0} listeners: {1} callbacks: {2} delta {3} runningTime {4} -- {5}",
+      //frame, frameListenersCount, callbacksCount, delta, runningTime, frameListeners);
 
       // update entities
       for (int i = 0; i < frameListenersCount; ++i) {
+        /*
+        Debug.LogFormat("{0} {1}", i, frameListeners[i].entity);
+        if (frameListeners[i].entity == null) {
+          for (int j = i; j < frameListenersCount; ++j) {
+            frameListeners[j] = frameListeners[j + 1];
+          }
+          --frameListenersCount;
+          --i;
+          continue;
+        }
+        */
+
         frameListeners[i].entity.PlatformerUpdate(delta);
       }
       for (int i = 0; i < frameListenersCount; ++i) {
@@ -258,11 +289,15 @@ namespace UnityPlatformer {
         if (callbacks[i].time <= 0) {
           // trigger & 'splice'
           callbacks[i].callback();
-          for (int j = i; j < callbacksCount - 1; ++j) {
-            callbacks[j] = callbacks[j + 1];
+          if (callbacks[i].repeat == 0.0f) {
+            for (int j = i; j < callbacksCount - 1; ++j) {
+              callbacks[j] = callbacks[j + 1];
+            }
+            --callbacksCount;
+            --i;
+          } else {
+            callbacks[i].time += callbacks[i].repeat;
           }
-          --callbacksCount;
-          --i;
         }
       }
 
@@ -275,12 +310,34 @@ namespace UnityPlatformer {
     /// Also corountines don't know if you modify timeScale this do.
     /// </summary>
     static public void SetTimeout(Action callback, float timeout) {
+      LazyInit();
+
       if (instance.callbacksCount == instance.callbacks.Length) {
         Array.Resize(ref instance.callbacks, instance.callbacksCount + 10);
       }
 
       instance.callbacks[instance.callbacksCount].callback = callback;
       instance.callbacks[instance.callbacksCount].time = timeout;
+      instance.callbacks[instance.callbacksCount].repeat = 0.0f;
+
+      ++instance.callbacksCount;
+    }
+    /// <summary>
+    /// Call given callback in given timeout
+    ///
+    /// NOTE Do not use corountines because the can't hotswap
+    /// Also corountines don't know if you modify timeScale this do.
+    /// </summary>
+    static public void SetInterval(Action callback, float timeout) {
+      LazyInit();
+
+      if (instance.callbacksCount == instance.callbacks.Length) {
+        Array.Resize(ref instance.callbacks, instance.callbacksCount + 10);
+      }
+
+      instance.callbacks[instance.callbacksCount].callback = callback;
+      instance.callbacks[instance.callbacksCount].time = timeout;
+      instance.callbacks[instance.callbacksCount].repeat = timeout;
 
       ++instance.callbacksCount;
     }
@@ -289,6 +346,8 @@ namespace UnityPlatformer {
     /// </summary>
     /// <returns>true if found, false if not found</returns>
     static public bool ClearTimeout(Action callback, float timeout) {
+      LazyInit();
+
       for (int i = 0; i < instance.callbacksCount; ++i) {
         if (instance.callbacks[i].callback == callback) {
           for (int j = i; j < instance.callbacksCount - 1; ++j) {

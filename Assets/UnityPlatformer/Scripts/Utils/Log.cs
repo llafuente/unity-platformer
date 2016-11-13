@@ -3,10 +3,6 @@ using UnityEngine.Rendering;
 using System.IO;
 using System;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
 namespace UnityPlatformer {
   /// <summary>
   /// Log levels
@@ -42,17 +38,28 @@ namespace UnityPlatformer {
     /// <summary>
     /// file instance
     /// </summary>
-    static StreamWriter streamWriter = new StreamWriter("./log");
+    public StreamWriter streamWriter = null;
     /// <summary>
     /// Current log level
     /// </summary>
-    static public LogLevel level = LogLevel.Info;
+    public LogLevel level = LogLevel.Silly;
+    /// <summary>
+    /// protected constructor for Singleton usage
+    /// </summary>
+    protected Log() {
+      if (Application.isPlaying) {
+        streamWriter = new StreamWriter("./log");
+      }
+    }
+    static public void SetLevel(LogLevel lvl) {
+      instance.level = lvl;
+    }
     /// <summary>
     /// Write to file
     /// </summary>
     static public void Write(LogLevel lvl, string s) {
-      if (lvl <= level) {
-        streamWriter.WriteLine(s);
+      if (instance.streamWriter != null && lvl <= instance.level) {
+        instance.streamWriter.WriteLine(s);
       }
     }
     /// <summary>
