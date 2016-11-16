@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Assertions;
 
 namespace UnityPlatformer {
   /// <summary>
@@ -22,14 +23,13 @@ namespace UnityPlatformer {
     /// <summary>
     /// TODO direction will be calc, someday :)
     /// </summary>
-    internal Vector3 direction;
+    [HideInInspector]
+    public Vector3 direction;
     /// <summary>
     /// check missconfiguration
     /// </summary>
-    void Start() {
-      if (causer == null) {
-        Debug.LogWarning("causer cannot be null", this);
-      }
+    public void Start() {
+      Assert.IsNotNull(causer, "(Damage) causer cannot be null: " + gameObject.name);
     }
   }
 }

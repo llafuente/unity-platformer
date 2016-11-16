@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 using UnityEngine.UI;
+using UnityEngine.Assertions;
 
 namespace UnityPlatformer {
   /// <summary>
@@ -73,26 +74,24 @@ namespace UnityPlatformer {
     /// <summary>
     /// Damage info, only used type=HitBoxType.DealDamage.
     /// </summary>
-    internal Damage dt;
+    internal Damage damage;
     /// <summary>
     /// check missconfigurations and initialize
     /// </summary>
-    void Start() {
-      if (!owner) {
-        Debug.LogWarning("(HitBox) owner is required", this);
-        return;
-      }
+    public void Start() {
+      Assert.IsNotNull(owner, "CharacterHealth owner is required: " + gameObject.name);
 
-      dt = GetComponent<Damage> ();
-      if (type == HitBoxType.DealDamage && dt == null) {
-        Debug.LogError("DealDamage require Damage Behaviour", this);
+      damage = GetComponent<Damage> ();
+      if (type == HitBoxType.DealDamage) {
+        Assert.IsNotNull(damage, "Damage is require if type is DealDamage: " + gameObject.name);
       }
 
       body = GetComponent<BoxCollider2D>();
+      Assert.IsNotNull(body, "BoxCollider2D is required: " + gameObject.name);
 
       if (type == HitBoxType.EnterAreas) {
         if (owner.character.enterAreas != null && owner.character.enterAreas != this ) {
-          Debug.LogWarning("(HitBox) Only one EnterAreas HitBox is allowed!");
+          Debug.LogWarning("Only one EnterAreas HitBox is allowed!");
         }
         owner.character.enterAreas = this;
       }
@@ -131,34 +130,38 @@ namespace UnityPlatformer {
     /// <summary>
     /// I'm a DealDamage, o is RecieveDamage, then Deal Damage to it's owner!
     /// </summary>
-    void OnTriggerEnter2D(Collider2D o) {
+    public void OnTriggerEnter2D(Collider2D o) {
 
       if (type == HitBoxType.DealDamage) {
         // source disabled?
         if (IsDisabled()) {
-          Log.Debug("(HitBox) {0} cannot deal damage it's disabled", this.gameObject.name);
+          Log.Debug("{0} cannot deal damage it's disabled", this.gameObject.name);
           return;
         }
 
         //Debug.LogFormat("me {0} of {1} collide with {2}@{3}", name, owner, o.gameObject, o.gameObject.layer);
 
         var hitbox = o.gameObject.GetComponent<HitBox> ();
+        Log.Silly("o is a HitBox? {0}", hitbox);
         if (hitbox != null && hitbox.type == HitBoxType.RecieveDamage) {
-          Log.Debug("(HitBox) Collide {0} with {1}", gameObject.name, hitbox.gameObject.name);
+          Log.Debug("Collide {0} with {1}", gameObject.name, hitbox.gameObject.name);
           // target disabled?
           if (hitbox.IsDisabled()) {
-            Log.Debug("(HitBox) {0} cannot recieve damage it's disabled", o.gameObject.name);
+            Log.Debug("{0} cannot recieve damage it's disabled", o.gameObject.name);
             return;
           }
 
           // can I deal damage to this HitBox?
           // check layer
           if (hitbox.collideWith.Contains(gameObject.layer)) {
+            Log.Silly("compatible layers");
             // check we not the same, or i can damage to myself at lest
-            if (dealDamageToSelf || (!dealDamageToSelf && hitbox.owner != dt.causer)) {
-              Log.Debug("(HitBox) Damage to {0}", hitbox.owner.gameObject.name);
-              hitbox.owner.Damage(dt);
+            if (dealDamageToSelf || (!dealDamageToSelf && hitbox.owner != damage.causer)) {
+              Log.Debug("Damage to {0} with {1}", hitbox.owner.gameObject.name, damage);
+              hitbox.owner.Damage(damage);
             }
+          } else {
+            Log.Silly("incompatible layers");
           }
         }
       }

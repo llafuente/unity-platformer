@@ -30,5 +30,13 @@ namespace UnityPlatformer {
 
       return bounds;
     }
+
+    static public GameObject CreateChild(this GameObject obj, string name) {
+      GameObject robj = new GameObject ();
+      robj.name = name;
+      robj.transform.parent = obj.transform;
+
+      return robj;
+    }
   }
 }

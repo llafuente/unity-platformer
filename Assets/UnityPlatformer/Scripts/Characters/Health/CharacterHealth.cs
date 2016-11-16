@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 /// TODO handle lives / Game over
 /// TODO handle character alignment
@@ -131,14 +132,12 @@ namespace UnityPlatformer {
     /// check missconfiguration and initialization
     /// </summary>
     public void Start() {
-      if (startingHealth < maxHealth) {
-        Debug.LogWarning(this.name + " startingHealth < maxHealth ?");
-      }
-      if (startingLives < maxLives) {
-        Debug.LogWarning(this.name + " startingLives < maxLives ?");
-      }
+      Assert.IsFalse(startingHealth < maxHealth, "(CharacterHealth) startingHealth < maxHealth: " + gameObject.name);
+      Assert.IsFalse(startingLives < maxLives, "(CharacterHealth) startingLives < maxLives: " + gameObject.name);
 
       character = GetComponent<Character>();
+      Assert.IsNotNull(character, "(CharacterHealth) Character is required: " + gameObject.name);
+
       Heal(startingHealth);
       lives = startingLives;
 

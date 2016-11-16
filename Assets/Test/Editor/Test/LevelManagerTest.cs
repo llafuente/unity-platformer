@@ -50,8 +50,6 @@ namespace UnityPlatformer.Test {
       lmgr.LevelCleared();
       Assert.That(lmgr.currentLevel.sceneId, Is.EqualTo(2));
       Assert.That(lmgr.currentLevel.locked, Is.EqualTo(false));
-
-      Assert.Pass();
     }
   }
 }

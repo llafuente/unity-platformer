@@ -1,13 +1,15 @@
 #!/bin/sh
 
-mkdir Build
+mkdir -p Build
 
 /usr/bin/time -v /opt/Unity/Editor/Unity \
   -batchmode \
   -nographics \
   -projectPath $(pwd) \
-  -editorTestsFilter UnityPlatformer -runEditorTests -editorTestsResultFile \
-  -editorTestsResultFile=$(pwd)/Build/unit-test-results.xml \
+  -runEditorTests \
+  -editorTestsResultFile $(pwd)/Build/unit-test-results.xml \
+  -editorTestsFilter UnityPlatformer \
+  -logFile $(pwd)/Build/log-unit-test.txt
 
 #-executeMethod UnityTest.Batch.RunIntegrationTests
 #-testscenes=scene1,scene2

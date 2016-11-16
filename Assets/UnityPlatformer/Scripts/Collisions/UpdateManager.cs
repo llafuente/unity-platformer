@@ -256,7 +256,7 @@ namespace UnityPlatformer {
 
       runningTime += delta;
 
-      Log.Verbose("FixedUpdate start: {0} listeners: {1} callbacks: {2} delta {3} runningTime {4}",
+      Log.Verbose("start: {0} listeners: {1} callbacks: {2} delta {3} runningTime {4}",
       frame, frameListenersCount, callbacksCount, delta, runningTime);
 
       //Debug.LogFormat("FixedUpdate start: {0} listeners: {1} callbacks: {2} delta {3} runningTime {4} -- {5}",
@@ -301,7 +301,7 @@ namespace UnityPlatformer {
         }
       }
 
-      Log.Verbose("FixedUpdate end: {0}", frame);
+      Log.Verbose("end: {0}", frame);
     }
     /// <summary>
     /// Call given callback in given timeout

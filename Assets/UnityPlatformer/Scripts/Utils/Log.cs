@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using System.IO;
 using System;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace UnityPlatformer {
   /// <summary>
@@ -23,11 +25,11 @@ namespace UnityPlatformer {
     /// <summary>
     /// real instance
     /// </summary>
-    private static Log _instance;
+    protected static Log _instance;
     /// <summary>
     /// Singleton
     /// </summary>
-    public static Log instance {
+    protected static Log instance {
       get {
         if (_instance == null) {
             _instance = new Log();
@@ -47,9 +49,9 @@ namespace UnityPlatformer {
     /// protected constructor for Singleton usage
     /// </summary>
     protected Log() {
-      if (Application.isPlaying) {
+      //if (Application.isPlaying) {
         streamWriter = new StreamWriter("./log");
-      }
+      //}
     }
     static public void SetLevel(LogLevel lvl) {
       instance.level = lvl;
@@ -58,9 +60,16 @@ namespace UnityPlatformer {
     /// Write to file
     /// </summary>
     static public void Write(LogLevel lvl, string s) {
-      if (instance.streamWriter != null && lvl <= instance.level) {
-        instance.streamWriter.WriteLine(s);
-      }
+      StackTrace stackTrace = new StackTrace();
+      MethodBase method = stackTrace.GetFrame(2).GetMethod();
+      //if (instance.streamWriter != null && lvl <= instance.level) {
+        instance.streamWriter.WriteLine(
+          "[" +
+          method.Name + "@" +
+          method.ReflectedType.Name + ":" + stackTrace.GetFrame(2).GetFileLineNumber()
+          + "] " + s);
+        instance.streamWriter.Flush();
+      //}
     }
     /// <summary>
     /// Log an error message
