@@ -1,0 +1,40 @@
+version: '{build}'
+os: Visual Studio 2015
+platform: x64
+
+install:
+  - ps: >
+      Invoke-WebRequest "http://beta.unity3d.com/download/d44b7ab76b45/Windows64EditorInstaller/UnitySetup64-5.5.0f1.exe" -OutFile .\UnitySetup64.exe
+
+      (Get-Item .\UnitySetup64.exe).length
+
+      .\UnitySetup64.exe /S /Q
+
+      Invoke-WebRequest "https://bitbucket.org/Unity-Technologies/unitytesttools/get/5.5.zip"  -OutFile .\UnityTestTools.zip
+
+      (Get-Item .\UnityTestTools.zip).length
+
+      Expand-Archive .\UnityTestTools.zip .
+
+      Move-Item Unity-Technologies-unitytesttools-*\Assets\UnityTestTools C:\projects\unity-platformer\Assets\UnityTestTools
+
+build: off
+
+test_script:
+  - ps: >
+      Start-Sleep -s 240
+
+      $env:Path += ";C:\Program Files\Unity\Editor"
+
+      Unity.exe -batchmode -nographics -projectPath C:\projects\unity-platformer -runEditorTests -editorTestsResultFile C:\projects\unity-platformer\unit-test-results.xml -editorTestsFilter UnityPlatformer -logFile C:\projects\unity-platformer\log-unit-test.txt -quit
+
+      Start-Sleep -s 5
+
+      Get-Content C:\projects\unity-platformer\log-unit-test.txt
+
+      Get-Content C:\projects\unity-platformer\unit-test-results.xml
+
+deploy: off
+
+#cache:
+#  - C:\Program Files\Unity\ -> appveyor.yml
