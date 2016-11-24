@@ -30,7 +30,7 @@ test_script:
 
       date
 
-      Start-Process -FilePath "Unity.exe" -Wait -ArgumentList ('-batchmode', '-nographics', '-projectPath', 'C:\projects\unity-platformer', '-runEditorTests', '-editorTestsResultFile', 'C:\projects\unity-platformer\unit-test-results.xml', '-editorTestsFilter', 'UnityPlatformer', '-logFile', 'C:\projects\unity-platformer\log-unit-test.txt', '-quit')
+      Start-Process -FilePath "Unity.exe" -Wait -ArgumentList ('-batchmode', '-nographics', '-projectPath', 'C:\projects\unity-platformer', '-runEditorTests', '-editorTestsResultFile', 'C:\projects\unity-platformer\unit-test-results.xml', '-editorTestsFilter', 'UnityPlatformer', '-logFile', 'C:\projects\unity-platformer\log-unit-test.txt', '-quit', '-serial', 'F3-MAT2-K5S2-RU4H-AEBV-XC4C')
 
       date
 
@@ -43,6 +43,10 @@ test_script:
       $wc = New-Object 'System.Net.WebClient'
 
       $wc.UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", "C:\projects\unity-platformer\unit-test-results.xml")
+
+      Start-Process -FilePath "Unity.exe" -Wait -ArgumentList ('-returnlicense', '-quit', '-batchmode', '-logFile')
+
+      Start-Sleep -s 10
 
 deploy: off
 
