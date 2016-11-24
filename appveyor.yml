@@ -8,7 +8,11 @@ install:
 
       (Get-Item .\UnitySetup64.exe).length
 
-      .\UnitySetup64.exe /S /Q
+      date
+
+      Start-Process -FilePath ".\UnitySetup64.exe" -Wait -ArgumentList ('/S', '/Q')
+
+      date
 
       Invoke-WebRequest "https://bitbucket.org/Unity-Technologies/unitytesttools/get/5.5.zip"  -OutFile .\UnityTestTools.zip
 
@@ -22,17 +26,23 @@ build: off
 
 test_script:
   - ps: >
-      Start-Sleep -s 240
-
       $env:Path += ";C:\Program Files\Unity\Editor"
 
-      Unity.exe -batchmode -nographics -projectPath C:\projects\unity-platformer -runEditorTests -editorTestsResultFile C:\projects\unity-platformer\unit-test-results.xml -editorTestsFilter UnityPlatformer -logFile C:\projects\unity-platformer\log-unit-test.txt -quit
+      date
 
-      Start-Sleep -s 5
+      Start-Process -FilePath "Unity.exe" -Wait -ArgumentList ('-batchmode', '-nographics', '-projectPath', 'C:\projects\unity-platformer', '-runEditorTests', '-editorTestsResultFile', 'C:\projects\unity-platformer\unit-test-results.xml', '-editorTestsFilter', 'UnityPlatformer', '-logFile', 'C:\projects\unity-platformer\log-unit-test.txt', '-quit')
+
+      date
+
+      Start-Sleep -s 1
 
       Get-Content C:\projects\unity-platformer\log-unit-test.txt
 
       Get-Content C:\projects\unity-platformer\unit-test-results.xml
+
+      $wc = New-Object 'System.Net.WebClient'
+
+      $wc.UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", "C:\projects\unity-platformer\unit-test-results.xml")
 
 deploy: off
 
