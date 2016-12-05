@@ -21,13 +21,19 @@ install:
 
       Move-Item Unity-Technologies-unitytesttools-*\Assets\UnityTestTools C:\projects\unity-platformer\Assets\UnityTestTools
 
-      $pass = $env:UNITY_PASSWORD -split ''
+      $password = Get-ChildItem env:UNITY_PASSWORD
 
-      $pass_commands = "Send, {" + ($pass[1..($pass.Length-2)] -join "}`nSleep, 100`nSend, {") + "}`n"
+      $password = $password -split ''
 
-      $user = $env:UNITY_USERNAME -split ''
+      $pass_commands = "Send, {" + ($password[1..($password.Length-2)] -join "}`nSleep, 100`nSend, {") + "}`n"
 
-      $user_commands = "Send, {" + ($user[1..($user.Length-2)] -join "}`nSleep, 100`nSend, {") + "}`n"
+      $username = Get-ChildItem env:UNITY_USERNAME
+
+      $username = $username -split ''
+
+      $user_commands = "Send, {" + ($username[1..($username.Length-2)] -join "}`nSleep, 100`nSend, {") + "}`n"
+
+      echo $user_commands
 
       (Get-Content C:\projects\unity-platformer\Scripts\unity.ahk).replace('; username', $user_commands).replace('; password', $pass_commands) | Set-Content C:\projects\unity-platformer\unity.ahk
 
@@ -41,9 +47,7 @@ test_script:
   - ps: >
       $env:Path += ";C:\Program Files\Unity\Editor"
 
-      Start-Process -FilePath "Unity.exe" -Wait -ArgumentList ('-batchmode', '-nographics', '-projectPath', 'C:\projects\unity-platformer', '-runEditorTests', '-editorTestsResultFile', 'C:\projects\unity-platformer\unit-test-results.xml', '-editorTestsFilter', 'UnityPlatformer', '-logFile', 'C:\projects\unity-platformer\log-unit-test.txt', '-quit', '-force-free')
-
-      Start-Process -FilePath "Unity.exe" -Wait -ArgumentList ('-batchmode', '-nographics', '-projectPath', 'C:\projects\unity-platformer', '-runEditorTests', '-editorTestsResultFile', 'C:\projects\unity-platformer\unit-test-results.xml', '-editorTestsFilter', 'UnityPlatformer', '-logFile', 'C:\projects\unity-platformer\log-unit-test.txt', '-quit', '-force-free')
+      Start-Process -FilePath "Unity.exe" -Wait -ArgumentList ('-batchmode', '-nographics', '-projectPath', 'C:\projects\unity-platformer', '-runEditorTests', '-editorTestsResultFile', 'C:\projects\unity-platformer\unit-test-results.xml', '-editorTestsFilter', 'UnityPlatformer', '-logFile', 'C:\projects\unity-platformer\log-unit-test.txt', '-quit')
 
       Get-Content C:\projects\unity-platformer\log-unit-test.txt
 
