@@ -21,13 +21,13 @@ install:
 
       Move-Item Unity-Technologies-unitytesttools-*\Assets\UnityTestTools C:\projects\unity-platformer\Assets\UnityTestTools
 
-      $password = Get-ChildItem env:UNITY_PASSWORD
+      $password = $env:UNITY_PASSWORD
 
       $password = $password -split ''
 
       $pass_commands = "Send, {" + ($password[1..($password.Length-2)] -join "}`nSleep, 100`nSend, {") + "}`n"
 
-      $username = Get-ChildItem env:UNITY_USERNAME
+      $username = $env:UNITY_USERNAME
 
       $username = $username -split ''
 
@@ -39,7 +39,7 @@ install:
 
       $env:Path += ";C:\Program Files\AutoHotkey"
 
-      Start-Process -FilePath "AutoHotkey.exe" -Wait -ArgumentList ('C:\projects\unity-platformer\unity.ahk') 
+      Start-Process -FilePath "AutoHotkey.exe" -Wait -ArgumentList ('C:\projects\unity-platformer\unity.ahk')
 
 build: off
 
