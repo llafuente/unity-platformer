@@ -3,6 +3,9 @@ os: Visual Studio 2015
 platform: x64
 # Invoke-WebRequest "http://beta.unity3d.com/download/d44b7ab76b45/Windows64EditorInstaller/UnitySetup64-5.5.0f1.exe" -OutFile .\UnitySetup64.exe
 # Invoke-WebRequest "https://bitbucket.org/Unity-Technologies/unitytesttools/get/5.5.zip"  -OutFile .\UnityTestTools.zip
+init:
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-desktop.ps1'))
+
 install:
   - ps: >
       Invoke-WebRequest "http://netstorage.unity3d.com/unity/01f4c123905a/Windows64EditorInstaller/UnitySetup64-5.4.3f1.exe" -OutFile .\UnitySetup64.exe
@@ -33,8 +36,6 @@ install:
 
       $user_commands = "Send, {" + ($username[1..($username.Length-2)] -join "}`nSleep, 100`nSend, {") + "}`n"
 
-      echo $user_commands
-
       (Get-Content C:\projects\unity-platformer\Scripts\unity.ahk).replace('; username', $user_commands).replace('; password', $pass_commands) | Set-Content C:\projects\unity-platformer\unity.ahk
 
       $env:Path += ";C:\Program Files\AutoHotkey"
@@ -56,6 +57,10 @@ test_script:
       $wc = New-Object 'System.Net.WebClient'
 
       $wc.UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", "C:\projects\unity-platformer\unit-test-results.xml")
+
+# screenshots
+#on_finish:
+#  - ps: Push-AppveyorArtifact
 
 deploy: off
 
