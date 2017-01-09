@@ -19,6 +19,8 @@ TagManager:
   - OneWayWallRight
   - Boxes
   - Fences
+  - Tracks
+  - Items
   layers:
   - Default
   - TransparentFX
@@ -39,8 +41,8 @@ TagManager:
   - Box
   - Rope
   - Fences
-  - 
-  - 
+  - Tracks
+  - Items
   - 
   - 
   - 

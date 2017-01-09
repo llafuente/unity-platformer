@@ -30,6 +30,7 @@ namespace UnityPlatformer {
     /// </summary>
     public virtual void Start() {
       body = GetComponent<BoxCollider2D>();
+      body.isTrigger = true; // force trigger
     }
     /// <summary>
     /// Get real-world-coordinates center

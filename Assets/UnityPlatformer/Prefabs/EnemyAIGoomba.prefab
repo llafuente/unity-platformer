@@ -5,9 +5,9 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 423388}
+  - component: {fileID: 423388}
   m_Layer: 0
   m_Name: EnemyAIGoomba
   m_TagString: Untagged
@@ -20,10 +20,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 495910}
-  - 114: {fileID: 11421850}
+  - component: {fileID: 495910}
+  - component: {fileID: 11421850}
   m_Layer: 8
   m_Name: Input
   m_TagString: Untagged
@@ -36,9 +36,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 402184}
+  - component: {fileID: 402184}
   m_Layer: 8
   m_Name: HitBoxes
   m_TagString: Untagged
@@ -51,12 +51,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 412776}
-  - 114: {fileID: 11405964}
-  - 114: {fileID: 11407222}
-  - 114: {fileID: 11451492}
+  - component: {fileID: 412776}
+  - component: {fileID: 11405964}
+  - component: {fileID: 11407222}
+  - component: {fileID: 11451492}
   m_Layer: 8
   m_Name: Actions
   m_TagString: Untagged
@@ -69,13 +69,13 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 439832}
-  - 114: {fileID: 11402162}
-  - 114: {fileID: 11472910}
-  - 61: {fileID: 6130008}
-  - 50: {fileID: 5071450}
+  - component: {fileID: 439832}
+  - component: {fileID: 11402162}
+  - component: {fileID: 11472910}
+  - component: {fileID: 6130008}
+  - component: {fileID: 5071450}
   m_Layer: 0
   m_Name: EnterArea
   m_TagString: Untagged
@@ -88,13 +88,13 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 467360}
-  - 114: {fileID: 11427732}
-  - 114: {fileID: 11470210}
-  - 61: {fileID: 6124674}
-  - 50: {fileID: 5087900}
+  - component: {fileID: 467360}
+  - component: {fileID: 11427732}
+  - component: {fileID: 11470210}
+  - component: {fileID: 6124674}
+  - component: {fileID: 5087900}
   m_Layer: 12
   m_Name: RecieveDamage
   m_TagString: Untagged
@@ -107,16 +107,16 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 429156}
-  - 61: {fileID: 6124200}
-  - 114: {fileID: 11452506}
-  - 33: {fileID: 3398948}
-  - 23: {fileID: 2389464}
-  - 114: {fileID: 11419068}
-  - 114: {fileID: 11477932}
-  - 114: {fileID: 11409386}
+  - component: {fileID: 429156}
+  - component: {fileID: 6124200}
+  - component: {fileID: 11452506}
+  - component: {fileID: 3398948}
+  - component: {fileID: 2389464}
+  - component: {fileID: 11419068}
+  - component: {fileID: 11477932}
+  - component: {fileID: 11409386}
   m_Layer: 8
   m_Name: Character
   m_TagString: Enemy
@@ -129,14 +129,14 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 471004}
-  - 114: {fileID: 11439932}
-  - 114: {fileID: 11431076}
-  - 61: {fileID: 6176622}
-  - 50: {fileID: 5028030}
-  - 114: {fileID: 11421618}
+  - component: {fileID: 471004}
+  - component: {fileID: 11439932}
+  - component: {fileID: 11431076}
+  - component: {fileID: 6176622}
+  - component: {fileID: 5028030}
+  - component: {fileID: 11421618}
   m_Layer: 12
   m_Name: DealDamage
   m_TagString: Untagged
@@ -153,13 +153,13 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 439832}
   - {fileID: 467360}
   - {fileID: 471004}
   m_Father: {fileID: 429156}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &412776
 Transform:
   m_ObjectHideFlags: 1
@@ -169,10 +169,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 423388}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &423388
 Transform:
   m_ObjectHideFlags: 1
@@ -182,13 +182,13 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 429156}
   - {fileID: 495910}
   - {fileID: 412776}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &429156
 Transform:
   m_ObjectHideFlags: 1
@@ -198,11 +198,11 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 402184}
   m_Father: {fileID: 423388}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &439832
 Transform:
   m_ObjectHideFlags: 1
@@ -212,10 +212,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 402184}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &467360
 Transform:
   m_ObjectHideFlags: 1
@@ -225,10 +225,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 402184}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &471004
 Transform:
   m_ObjectHideFlags: 1
@@ -238,10 +238,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 402184}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &495910
 Transform:
   m_ObjectHideFlags: 1
@@ -251,10 +251,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 423388}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2389464
 MeshRenderer:
   m_ObjectHideFlags: 2
@@ -269,7 +269,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 2100000, guid: b8c5e6f7b98848843a56c1c10d293a59, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -277,7 +279,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -293,51 +295,60 @@ MeshFilter:
   m_Mesh: {fileID: 0}
 --- !u!50 &5028030
 Rigidbody2D:
-  serializedVersion: 2
+  serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 171452}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_IsKinematic: 1
+  m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!50 &5071450
 Rigidbody2D:
-  serializedVersion: 2
+  serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 131648}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_IsKinematic: 1
+  m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!50 &5087900
 Rigidbody2D:
-  serializedVersion: 2
+  serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 162666}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_IsKinematic: 1
+  m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -465,6 +476,29 @@ MonoBehaviour:
   fallingTime: 0.1
   groundGraceTime: 0.05
   minVelocity: 0.05
+  actions: []
+  faceDir: 0
+  state: 0
+  area: 0
+  fence: {fileID: 0}
+  ladder: {fileID: 0}
+  ladderBottom: {fileID: 0}
+  liquid: {fileID: 0}
+  item: {fileID: 0}
+  grab: {fileID: 0}
+  rope: {fileID: 0}
+  ropeIndex: -1
+  track: {fileID: 0}
+  platform: {fileID: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  worldVelocity: {x: 0, y: 0, z: 0}
+  movedLastFrame: {x: 0, y: 0, z: 0}
+  pc2d: {fileID: 0}
+  health: {fileID: 0}
+  enterAreas: {fileID: 0}
+  animator: {fileID: 0}
+  forceAnimation: 
+  frozen: -1
   input: {fileID: 11421850}
   initialFacing: -1
   rayLengthFactor: 2
@@ -507,6 +541,7 @@ MonoBehaviour:
   amount: 1
   type: 4
   causer: {fileID: 11477932}
+  direction: {x: 0, y: 0, z: 0}
 --- !u!114 &11421850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -651,6 +686,9 @@ MonoBehaviour:
   maxLives: 1
   invulnerabilityTimeAfterDamage: 2
   immunity: 0
+  health: 0
+  lives: 0
+  character: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

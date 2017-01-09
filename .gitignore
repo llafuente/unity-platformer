@@ -45,3 +45,6 @@ Library
 
 # External libraries, mostly git clones and soft-linked
 External
+
+# UnityPlatformer log file
+log

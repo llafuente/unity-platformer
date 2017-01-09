@@ -4,6 +4,9 @@
 Based on https://github.com/SebLague/2DPlatformer-Tutorial evolve
 in it's own beast.
 
+This project is 5.5, I cannot garantee 5.4 compatibility of Assets but code
+should be OK.
+
 ## API documentation
 
 [unity-platformer API](http://llafuente.github.io/unity-platformer/)

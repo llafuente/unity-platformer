@@ -135,7 +135,7 @@ namespace UnityPlatformer {
       ++actionCounter;
 
       if (actionCounter == durationFrames + castFrames) {
-        Debug.Log("Attack ended!");
+        Log.Silly("(CharacterActionTimed) Attack ended!");
         EndAction();
       }
 
