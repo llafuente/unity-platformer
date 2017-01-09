@@ -267,10 +267,18 @@ namespace UnityPlatformer {
     /// </summary>
     virtual public void Awake() {
       forceAnimation = null;
-      //Debug.Log("Start new Character: " + gameObject.name);
-      pc2d = GetComponent<PlatformerCollider2D> ();
-      health = GetComponent<CharacterHealth>();
-      health.onHurt += onInjured;
+
+      if (pc2d == null) {
+        Debug.Log("Start new Character: " + gameObject.GetFullName());
+        pc2d = GetComponent<PlatformerCollider2D> ();
+      }
+
+      if (health == null) {
+        health = GetComponent<CharacterHealth>();
+        // TODO review how hotswapping behave in this case ?!
+        health.onHurt += onInjured;
+        health.onDeath += OnDeath;
+      }
 
       if (fallingCD == null) {
         fallingCD = new Cooldown(fallingTime);
@@ -280,8 +288,6 @@ namespace UnityPlatformer {
         groundCD = new Cooldown(groundGraceTime);
       }
 
-      // TODO review how hotswapping behave in this case ?!
-      health.onDeath += OnDeath;
     }
 
     void onInjured(Damage dt, CharacterHealth to) {

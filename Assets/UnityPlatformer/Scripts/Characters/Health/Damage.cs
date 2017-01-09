@@ -29,7 +29,7 @@ namespace UnityPlatformer {
     /// check missconfiguration
     /// </summary>
     public void Start() {
-      Assert.IsNotNull(causer, "(Damage) causer cannot be null: " + gameObject.name);
+      Assert.IsNotNull(causer, "(Damage) causer cannot be null: " + gameObject.GetFullName());
     }
   }
 }

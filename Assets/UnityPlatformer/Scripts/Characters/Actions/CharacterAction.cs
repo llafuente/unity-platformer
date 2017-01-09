@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace UnityPlatformer {
   /// <summary>
@@ -45,13 +46,10 @@ namespace UnityPlatformer {
     /// keep Character.actions in sync
     /// </summary>
     public virtual void OnEnable() {
-      if (character == null) {
-        Debug.LogError("Action character property is null", this);
-      }
+      Assert.IsNotNull(character, "(CharacterAction) character is required: " + gameObject.name);
+      Assert.IsNotNull(input, "(CharacterAction) input is required: " + gameObject.name);
 
-      if (input == null) {
-        Debug.LogError("Action input property is null", this);
-      }
+      character.Awake();
 
       pc2d = character.gameObject.GetComponent<PlatformerCollider2D>();
 

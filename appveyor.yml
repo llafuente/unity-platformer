@@ -1,28 +1,34 @@
 version: '{build}'
-os: Visual Studio 2015
+os: unstable
 platform: x64
 # Invoke-WebRequest "http://beta.unity3d.com/download/d44b7ab76b45/Windows64EditorInstaller/UnitySetup64-5.5.0f1.exe" -OutFile .\UnitySetup64.exe
 # Invoke-WebRequest "https://bitbucket.org/Unity-Technologies/unitytesttools/get/5.5.zip"  -OutFile .\UnityTestTools.zip
+init:
+  - ps: >
+      iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-desktop.ps1'))
 
 install:
   - ps: >
-      iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-desktop.ps1'))
 
       Invoke-WebRequest "http://netstorage.unity3d.com/unity/01f4c123905a/Windows64EditorInstaller/UnitySetup64-5.4.3f1.exe" -OutFile .\UnitySetup64.exe
 
       Start-Process -FilePath ".\UnitySetup64.exe" -Wait -ArgumentList ('/S', '/Q')
 
+      Write-Host "Unity Installed"-ForegroundColor green
+
       Invoke-WebRequest "http://ahkscript.org/download/ahk-install.exe" -OutFile .\ahk-installer.exe
 
       Start-Process -FilePath ".\ahk-installer.exe" -Wait -ArgumentList ('/S')
 
-      Invoke-WebRequest "https://bitbucket.org/Unity-Technologies/unitytesttools/get/5.3.zip"  -OutFile .\UnityTestTools.zip
+      Write-Host "AHK Installed"-ForegroundColor green
 
-      (Get-Item .\UnityTestTools.zip).length
+      Invoke-WebRequest "https://bitbucket.org/Unity-Technologies/unitytesttools/get/5.3.zip"  -OutFile .\UnityTestTools.zip
 
       Expand-Archive .\UnityTestTools.zip .
 
       Move-Item Unity-Technologies-unitytesttools-*\Assets\UnityTestTools C:\projects\unity-platformer\Assets\UnityTestTools
+
+      Write-Host "UnityTestTools Installed"-ForegroundColor green
 
       $password = $env:UNITY_PASSWORD
 
@@ -41,6 +47,8 @@ install:
       $env:Path += ";C:\Program Files\AutoHotkey"
 
       Start-Process -FilePath "AutoHotkey.exe" -Wait -ArgumentList ('C:\projects\unity-platformer\unity.ahk')
+
+      Write-Host "Unity login bypassed"-ForegroundColor green
 
 build: off
 

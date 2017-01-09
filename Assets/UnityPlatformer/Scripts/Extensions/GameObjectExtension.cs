@@ -38,5 +38,16 @@ namespace UnityPlatformer {
 
       return robj;
     }
+
+    static public string GetFullName(this GameObject theObj) {
+        string path = "/" + theObj.name;
+        GameObject obj = theObj;
+        while (obj.transform.parent != null) {
+            obj = obj.transform.parent.gameObject;
+            path = "/" + obj.name + path;
+        }
+
+        return path;
+    }
   }
 }
