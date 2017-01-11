@@ -1,11 +1,26 @@
 language: objective-c
-osx_image: xcode7.3
-#rvm:
-#- 2.1.2
+
+os:
+  - linux
+  - osx
+matrix:
+  include:
+    - os: linux
+      dist: trusty #xenial somaday
+      sudo: required
+    - os: osx
+      osx_image: xcode7.3
+
 before_install:
 - chmod a+x ./Scripts/ci-osx-install.sh
 - chmod a+x ./Scripts/ci-osx-test.sh
+- chmod a+x ./Scripts/ci-linux-install.sh
+- chmod a+x ./Scripts/ci-linux-test.sh
+
 install:
-- ./Scripts/ci-osx-install.sh
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then ./Scripts/ci-osx-install.sh; fi;
+- if [ "$TRAVIS_OS_NAME" == "linux" ]; then ./Scripts/ci-linux-install.sh; fi;
+
 script:
-- ./Scripts/ci-osx-test.sh
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then ./Scripts/ci-osx-test.sh; fi;
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then ./Scripts/ci-linux-test.sh; fi;
