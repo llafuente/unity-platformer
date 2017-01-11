@@ -9,7 +9,7 @@ namespace UnityPlatformer {
   /// If no CharacterActionAirMovement it will froze while on air\n
   /// If no CharacterActionGroundMovement it will froze while on ground\n
   /// </summary>
-  public class AIGoomba: Enemy {
+  public class AIPatrol: Enemy {
     /// <summary>
     /// Initial Facing
     /// </summary>
@@ -46,14 +46,18 @@ namespace UnityPlatformer {
     /// Move right
     /// </summary>
     virtual public void OnLeftWall() {
+      Debug.Log("OnLeftWall");
       facing = Facing.Right;
+      velocity = Vector3.zero;
       input.SetX((float) facing);
     }
     /// <summary>
     /// Move left
     /// </summary>
     virtual public void OnRightWall() {
+      Debug.Log("OnRightWall");
       facing = Facing.Left;
+      velocity = Vector3.zero;
       input.SetX((float) facing);
     }
     /// <summary>
@@ -66,7 +70,7 @@ namespace UnityPlatformer {
     /// <summary>
     /// Check that the Character do not fall
     /// </summary>
-    public override void PlatformerUpdate(float delta) {
+    public override void LatePlatformerUpdate(float delta) {
       if (doNotFall && pc2d.collisions.below) {
         if (!IsGroundOnLeft (rayLengthFactor, delta)) {
           OnLeftWall ();
@@ -75,7 +79,7 @@ namespace UnityPlatformer {
         }
       }
 
-      base.PlatformerUpdate(delta);
+      base.LatePlatformerUpdate(delta);
     }
   }
 }

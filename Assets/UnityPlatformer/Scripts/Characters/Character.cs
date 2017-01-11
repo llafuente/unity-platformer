@@ -623,8 +623,8 @@ namespace UnityPlatformer {
     /// Tell you if there is something on the left side
     /// NOTE ray origin is raycastOrigins.bottomLeft
     /// </summary>
-    public bool IsGroundOnLeft(float rayLengthFactor, float delta) {
-      RaycastHit2D hit = pc2d.LeftFeetRay(pc2d.skinWidth * rayLengthFactor, velocity * delta);
+    public bool IsGroundOnLeft(float rayLengthFactor, float delta, Vector3? vel = null) {
+      RaycastHit2D hit = pc2d.LeftFeetRay(pc2d.skinWidth * rayLengthFactor, (vel ?? velocity) * delta);
 
       return hit.collider != null;
     }
@@ -632,8 +632,8 @@ namespace UnityPlatformer {
     /// Tell you if there is something on the right side
     /// NOTE ray origin is raycastOrigins.bottomRight
     /// </summary>
-    public bool IsGroundOnRight(float rayLengthFactor, float delta) {
-      RaycastHit2D hit = pc2d.RightFeetRay(pc2d.skinWidth * rayLengthFactor, velocity * delta);
+    public bool IsGroundOnRight(float rayLengthFactor, float delta, Vector3? vel = null) {
+      RaycastHit2D hit = pc2d.RightFeetRay(pc2d.skinWidth * rayLengthFactor, (vel ?? velocity) * delta);
 
       return hit.collider != null;
     }

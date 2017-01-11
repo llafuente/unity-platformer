@@ -518,7 +518,7 @@ MonoBehaviour:
   input: {fileID: 11448450}
   initialFacing: -1
   rayLengthFactor: 1
-  doNotFall: 1
+  doNotFall: 0
 --- !u!114 &11434092
 MonoBehaviour:
   m_ObjectHideFlags: 1

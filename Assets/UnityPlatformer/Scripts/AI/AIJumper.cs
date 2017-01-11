@@ -10,7 +10,7 @@ namespace UnityPlatformer {
   /// TODO jump delay\n
   /// TODO can turn during jump\n
   /// </summary>
-  public class AIJumper: AIGoomba {
+  public class AIJumper: AIPatrol {
     /// <summary>
     /// Enable Jump and do Patrol staff
     /// </summary>
