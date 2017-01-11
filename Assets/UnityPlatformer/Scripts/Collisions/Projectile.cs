@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using UnityEngine.Assertions;
 
 namespace UnityPlatformer {
   /// <summary>
@@ -9,9 +10,8 @@ namespace UnityPlatformer {
   /// If a projectile collide with a HitBox then deal damage\n
   /// If a projectile collide witht the world is destroyed
   /// </summary>
-  [RequireComponent (typeof (Collider2D))]
-  [RequireComponent (typeof (Rigidbody2D))]
-  [RequireComponent (typeof (DamageType))]
+  [RequireComponent (typeof (HitBox))]
+  [RequireComponent (typeof (Damage))]
   public class Projectile : MonoBehaviour, IUpdateEntity {
     /// <summary>
     /// Layers wich destroy the projectile: Static geometry + Characters
@@ -27,8 +27,8 @@ namespace UnityPlatformer {
     /// Gravity, Projectiles ignore global gravity, usually everyone want
     /// straight projectiles
     /// </summary>
-    [Comment("Y gravity")]
-    public float gravity;
+    [Comment("Projectile are not affected by global gravity use it's own")]
+    public Vector2 gravity = Vector2.zero;
     /// <summary>
     /// Delay after impact before destroying the projectile
     /// </summary>
@@ -53,6 +53,11 @@ namespace UnityPlatformer {
     void Awake() {
       // disable at start (so people dont need to remember)
       gameObject.SetActive(false);
+
+      // force trigger
+      Collider2D col2d = GetComponent<Collider2D>();
+      Assert.IsNotNull(col2d, "(Projectile) Missing Monobehaviour Collider2D at " + gameObject.GetFullName());
+      col2d.isTrigger = true;
     }
     /// <summary>
     /// Clone the projectile, activate, add it to UpdateManager
@@ -66,21 +71,20 @@ namespace UnityPlatformer {
       gameObject.SetActive(false);
       obj.SetActive(true);
 
-      // defensive programming
       Projectile prj = obj.GetComponent<Projectile>();
-      if (prj == null) {
-        Debug.LogWarning("Cloned object does not have Projectile?!");
-        return null;
-      }
+      Assert.IsNotNull(prj, "(Projectile) Cloned object does not have Projectile monobehaviour: " + gameObject.GetFullName());
 
       UpdateManager.Push(prj, Configuration.instance.projectilesPriority);
+
       return prj;
     }
     /// <summary>
     /// Move projectile accordingly
     /// </summary>
     public virtual void PlatformerUpdate(float delta) {
-      velocity.y += gravity * delta;
+      //Debug.Log("update projectile" + gameObject.GetFullName() + ": " + velocity);
+
+      velocity += gravity * delta;
       transform.position += (Vector3)velocity * delta;
     }
     /// <summary>
@@ -92,12 +96,9 @@ namespace UnityPlatformer {
     /// it's damageable, and Destroy
     /// </summary>
     public virtual void OnTriggerEnter2D(Collider2D o) {
-      //Debug.Log(this.name + " collide with: " + o.gameObject + "@" + o.gameObject.layer);
       if (collisionMask.Contains(o.gameObject.layer)) {
         var dst = o.gameObject.GetComponent<HitBox> ();
-        if (dst == null) {
-          //Debug.LogWarning("Destroy projectile");
-        } else {
+        if (dst != null) {
           impact = true;
           if (onImpact != null) {
             onImpact();
@@ -105,7 +106,6 @@ namespace UnityPlatformer {
           //Debug.Log("Projectile impact something, deal damage!");
           dst.owner.Damage(GetComponent<Damage>());
         }
-        //Debug.Log("Destroy !!!!!!!!");
         Destroy();
       }
     }
@@ -114,15 +114,15 @@ namespace UnityPlatformer {
     /// </summary>
     public virtual void Destroy() {
       if (destroyDelay != 0f) {
-        UpdateManager.SetTimeout(_Destroy, destroyDelay);
+        UpdateManager.SetTimeout(DestroyNow, destroyDelay);
         return;
       }
-      _Destroy();
+      DestroyNow();
     }
     /// <summary>
     /// Real destroy method
     /// </summary>
-    protected void _Destroy() {
+    public void DestroyNow() {
       UpdateManager.Remove(this);
       Destroy (gameObject);
     }

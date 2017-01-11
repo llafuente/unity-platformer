@@ -60,8 +60,9 @@ namespace UnityPlatformer {
       Debug.LogFormat("fence hit {0}", h);
 
       if (h && h.type == HitBoxType.EnterAreas) {
-        Vector2 pmin = h.body.bounds.min;
-        Vector2 pmax = h.body.bounds.max;
+        Bounds b = h.GetComponent<BoxCollider2D>().bounds;
+        Vector2 pmin = b.min;
+        Vector2 pmax = b.max;
 
         // check if the body is completely inside
         if (

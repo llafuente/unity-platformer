@@ -30,9 +30,11 @@ namespace UnityPlatformer {
   }
 
   /// <summary>
-  /// HitBoxes are triggers that Deal/Revieve Damage or enter areas(tile)
+  /// HitBoxes are triggers that Deal/Revieve Damage or enter areas(tile)\n
+  /// DealDamage require Damage MonoBehaviour\n
+  /// EnterAreas require Collider2D to be BoxCollider2D
   /// </summary>
-  [RequireComponent (typeof (BoxCollider2D))]
+  [RequireComponent (typeof (Collider2D))]
   public class HitBox : MonoBehaviour {
     /// <summary>
     /// Character part this HitBox belong
@@ -68,10 +70,6 @@ namespace UnityPlatformer {
     [Comment("Disable HitBox when character is any given state")]
     public States disableWhileOnState = States.None;
     /// <summary>
-    /// BoxCollider2D
-    /// </summary>
-    internal BoxCollider2D body;
-    /// <summary>
     /// Damage info, only used type=HitBoxType.DealDamage.
     /// </summary>
     internal Damage damage;
@@ -79,15 +77,20 @@ namespace UnityPlatformer {
     /// check missconfigurations and initialize
     /// </summary>
     public void Start() {
-      Assert.IsNotNull(owner, "CharacterHealth owner is required: " + gameObject.name);
+      Assert.IsNotNull(owner, "CharacterHealth owner is required at " + gameObject.GetFullName());
 
       damage = GetComponent<Damage> ();
       if (type == HitBoxType.DealDamage) {
-        Assert.IsNotNull(damage, "Damage is require if type is DealDamage: " + gameObject.name);
+        Assert.IsNotNull(damage, "Missing MonoBehaviour Damage at " + gameObject.GetFullName() + " because typem is DealDamage");
       }
 
-      body = GetComponent<BoxCollider2D>();
-      Assert.IsNotNull(body, "BoxCollider2D is required: " + gameObject.name);
+      if (type == HitBoxType.EnterAreas) {
+        BoxCollider2D box2d = GetComponent<BoxCollider2D>();
+        Assert.IsNotNull(box2d, "Missing MonoBehaviour BoxCollider2D at " + gameObject.GetFullName() + " because typem is EnterAreas");
+      }
+
+      Collider2D body = GetComponent<Collider2D>();
+      Assert.IsNotNull(body, "Missing MonoBehaviour Collider2D at " + gameObject.GetFullName());
 
       if (type == HitBoxType.EnterAreas) {
         if (owner.character.enterAreas != null && owner.character.enterAreas != this ) {
@@ -109,8 +112,6 @@ namespace UnityPlatformer {
     /// </summary>
     [DrawGizmo(GizmoType.InSelectionHierarchy | GizmoType.NotInSelectionHierarchy)]
     void OnDrawGizmos() {
-        body = GetComponent<BoxCollider2D>();
-
         switch(type) {
         case HitBoxType.DealDamage:
           Gizmos.color = Color.red;
@@ -123,7 +124,14 @@ namespace UnityPlatformer {
           break;
         }
 
-        Gizmos.DrawWireCube(transform.position + (Vector3)body.offset, body.size);
+        BoxCollider2D box2d = GetComponent<BoxCollider2D>();
+        if (box2d != null) {
+          Gizmos.DrawWireCube(transform.position + (Vector3)box2d.offset, box2d.size);
+        } else {
+          CircleCollider2D circle2d = GetComponent<CircleCollider2D>();
+          Gizmos.DrawWireSphere(transform.position + (Vector3)circle2d.offset, circle2d.radius);
+
+        }
         //Handles.Label(transform.position + new Vector3(-box.size.x * 0.5f, box.size.y * 0.5f, 0), "HitBox: " + type);
     }
 #endif

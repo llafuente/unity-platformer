@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -ex
+
 UNITY_TEST_TOOL_BRANCH=5.5
 
 wget -O unity-editor.deb 'http://beta.unity3d.com/download/59c25c92588f/unity-editor_amd64-5.5.0xp1Linux.deb'

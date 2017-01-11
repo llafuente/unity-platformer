@@ -121,13 +121,18 @@ namespace UnityPlatformer {
         currentIndex = 0;
       }
 
-      int dir = (int) character.faceDir; // TODO REVIEW what happens when Facing.None ??!
+      // TODO REVIEW if Facing.None -> Facing.Left
+      int dir = (int) character.faceDir;
+      if (dir == 0) {
+        dir = -1;
+      }
+
       Vector3 offset = (Vector3) p.offset;
       offset.x *= dir;
 
       // unlesh hell
-      Projectile new_p;
-      new_p = p.projectile.Fire(character.transform.position + offset);
+      Projectile new_p =
+        p.projectile.Fire(character.transform.position + offset);
       new_p.velocity.x *= dir;
     }
 

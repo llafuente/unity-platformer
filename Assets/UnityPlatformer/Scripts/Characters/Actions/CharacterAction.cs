@@ -46,8 +46,8 @@ namespace UnityPlatformer {
     /// keep Character.actions in sync
     /// </summary>
     public virtual void OnEnable() {
-      Assert.IsNotNull(character, "(CharacterAction) character is required: " + gameObject.name);
-      Assert.IsNotNull(input, "(CharacterAction) input is required: " + gameObject.name);
+      Assert.IsNotNull(character, "(CharacterAction) character is required: " + gameObject.GetFullName());
+      Assert.IsNotNull(input, "(CharacterAction) input is required: " + gameObject.GetFullName());
 
       character.Awake();
 

@@ -1,8 +1,5 @@
 language: objective-c
 
-os:
-  - linux
-  - osx
 matrix:
   include:
     - os: linux

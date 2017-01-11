@@ -106,7 +106,7 @@ namespace UnityPlatformer {
       Vector3 velocity = new Vector3(speed.x * in2d.x, 0, 0);
 
       // is difficult to move a Bound, so just move min/max point instead
-      Bounds b = character.enterAreas.body.bounds;
+      Bounds b = character.enterAreas.GetComponent<BoxCollider2D>().bounds;
       Vector3 pmin = b.min;
       Vector3 pmax = b.max;
 

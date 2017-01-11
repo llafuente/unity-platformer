@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.Assertions;
 
 namespace UnityPlatformer {
   /// <summary>
@@ -176,6 +177,8 @@ namespace UnityPlatformer {
     /// Push a new entity to update loop
     /// </summary>
     static public bool Push(IUpdateEntity entity, int priority) {
+      Assert.IsNotNull(entity, "(UpdateManager) Push(entity = null)");
+
       LazyInit();
 
       int idx = IndexOf(entity);
