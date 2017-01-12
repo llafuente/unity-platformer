@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Assertions;
 
 namespace UnityPlatformer {
   /// <summary>
@@ -22,23 +23,14 @@ namespace UnityPlatformer {
     /// <summary>
     /// Force a player to jump!
     /// </summary>
-    public virtual void StartJump(Character c) {
-      // search CharacterActionJump
-      CharacterActionJump actionJump = null;
+    public virtual void StartJump(Character character) {
+      CharacterActionJump actionJump = character.GetAction<CharacterActionJump>();
 
-      foreach (var x in c.actions) {
-        if (x is CharacterActionJump) {
-          actionJump = x as CharacterActionJump;
-        }
-      }
+      Assert.IsNotNull(actionJump, "(Jumper) Missing Monobehaviour CharacterActionJump at " + character.gameObject.GetFullName());
 
-      if (actionJump != null) {
-        actionJump.ForceJump(
-          new JumpConstantSpring(c, jumpProperties.Clone(1))
-        );
-      } else {
-        Debug.LogWarning("character found without CharacterActionJump so ignore.");
-      }
+      actionJump.ForceJump(
+        new JumpConstantSpring(character, jumpProperties.Clone(1))
+      );
     }
     // REVIEW could the Character double-enter?
     /// <summary>

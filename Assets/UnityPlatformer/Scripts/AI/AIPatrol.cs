@@ -72,9 +72,9 @@ namespace UnityPlatformer {
     /// </summary>
     public override void LatePlatformerUpdate(float delta) {
       if (doNotFall && pc2d.collisions.below) {
-        if (!IsGroundOnLeft (rayLengthFactor, delta)) {
+        if (!IsGroundOnLeft (rayLengthFactor, delta) && velocity.x < 0) {
           OnLeftWall ();
-        } else if (!IsGroundOnRight (rayLengthFactor, delta)) {
+        } else if (!IsGroundOnRight (rayLengthFactor, delta) && velocity.x > 0) {
           OnRightWall ();
         }
       }
