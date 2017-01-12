@@ -79,3 +79,7 @@ environment:
     secure: C+GziLnSW/7+WeChq9DTDw==
 #cache:
 #  - C:\Program Files\Unity\ -> appveyor.yml
+
+# try to debug!
+on_finish:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
