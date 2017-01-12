@@ -5,11 +5,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 409222}
-  - 114: {fileID: 11463972}
-  - 114: {fileID: 11452612}
+  - component: {fileID: 409222}
+  - component: {fileID: 11463972}
+  - component: {fileID: 11452612}
   m_Layer: 0
   m_Name: Setup
   m_TagString: Untagged
@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  timeScale: 1
+  forceFixedDeltaTime: 0
   runningTime: 0
   frame: 0
 --- !u!114 &11463972
@@ -72,11 +72,21 @@ MonoBehaviour:
   enemyTag: Enemy
   projectileTag: Projectile
   boxTag: Box
+  cooldownsPriority: 100
   movingPlatformsPriority: 50
   charactersPriority: 40
   enemiesPriority: 30
   projectilesPriority: 20
   defaultPriority: 10
+  recieveDamageMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  dealDamageMask:
+    serializedVersion: 2
+    m_Bits: 2101248
+  enterAreasMask:
+    serializedVersion: 2
+    m_Bits: 2023424
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -93,11 +103,11 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 224000010063284036}
-  - 222: {fileID: 222000013897958466}
-  - 114: {fileID: 114000013323006154}
+  - component: {fileID: 224000010063284036}
+  - component: {fileID: 222000013897958466}
+  - component: {fileID: 114000013323006154}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Untagged
@@ -110,10 +120,10 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 224000011922922158}
-  - 114: {fileID: 114000011264630590}
+  - component: {fileID: 224000011922922158}
+  - component: {fileID: 114000011264630590}
   m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
@@ -126,11 +136,11 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 224000011855627096}
-  - 222: {fileID: 222000010063722690}
-  - 114: {fileID: 114000012962794688}
+  - component: {fileID: 224000011855627096}
+  - component: {fileID: 222000010063722690}
+  - component: {fileID: 114000012962794688}
   m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
@@ -143,12 +153,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 224000013943411092}
-  - 223: {fileID: 223000011320004128}
-  - 114: {fileID: 114000013360296774}
-  - 114: {fileID: 114000013039834088}
+  - component: {fileID: 224000013943411092}
+  - component: {fileID: 223000011320004128}
+  - component: {fileID: 114000013360296774}
+  - component: {fileID: 114000013039834088}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -161,9 +171,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 224000010724384318}
+  - component: {fileID: 224000010724384318}
   m_Layer: 0
   m_Name: Fill Area
   m_TagString: Untagged
@@ -176,9 +186,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 224000012983499616}
+  - component: {fileID: 224000012983499616}
   m_Layer: 0
   m_Name: Handle Slide Area
   m_TagString: Untagged
@@ -191,11 +201,11 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 224000011364685054}
-  - 222: {fileID: 222000011642135142}
-  - 114: {fileID: 114000011493815324}
+  - component: {fileID: 224000011364685054}
+  - component: {fileID: 222000011642135142}
+  - component: {fileID: 114000011493815324}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged

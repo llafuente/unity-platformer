@@ -37,6 +37,31 @@ Sleep, 100
 Send, {Enter}
 ; wait and close
 Sleep, 7500
+;CoordMode, Mouse, Window
+Click 700, 290 ; Unity personal
+Click 700, 430 ; Next
+Sleep, 2500
+Click 275, 380 ; I don't use Unity in a professional capacity
+Click 700, 430 ; Next
+WheelDown
+Sleep, 500
+WheelDown
+Sleep, 500
+WheelDown
+Sleep, 500
+WheelDown
+Sleep, 500
+WheelDown
+Sleep, 500
+WheelDown
+Sleep, 500
+WheelDown
+Sleep, 500
+WheelDown
+Sleep, 500
+WheelDown
+Click 500, 390 ; Start Using Unity
+Sleep, 2500
 WinClose, ahk_pid %PID%
 Sleep, 333
 Return

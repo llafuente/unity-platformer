@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 61466494392290670}
   - component: {fileID: 114395109281998840}
   - component: {fileID: 50494032444721446}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: RecieveDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -759,7 +759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2101760
   velocity: {x: 5, y: 2}
   gravity: {x: 0, y: -10}
   destroyDelay: 0
@@ -796,7 +796,7 @@ MonoBehaviour:
   part: 0
   collideWith:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2101248
   owner: {fileID: 11446040}
   type: 1
   dealDamageToSelf: 0
@@ -826,7 +826,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 512
   velocity: {x: 5, y: 8}
   gravity: {x: 0, y: -10}
   destroyDelay: 0
@@ -870,7 +870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 512
   velocity: {x: 5, y: 5}
   gravity: {x: 0, y: -10}
   destroyDelay: 0

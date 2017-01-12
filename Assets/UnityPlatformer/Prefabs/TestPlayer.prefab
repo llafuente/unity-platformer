@@ -341,7 +341,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 178880}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.038224, y: 1.2670155, z: 0}
+  m_LocalPosition: {x: 3.1816828, y: 8.184324, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 471952}
@@ -948,13 +948,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 4
-  collideWith:
+  useGlobalMask: 1
+  collisionMask:
     serializedVersion: 2
     m_Bits: 0
   owner: {fileID: 11424084}
   type: 1
   dealDamageToSelf: 0
-  disableWhileOnState: 65536
+  disableWhileOnState: 131072
 --- !u!114 &11402832
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -986,7 +987,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 4
-  collideWith:
+  useGlobalMask: 1
+  collisionMask:
     serializedVersion: 2
     m_Bits: 0
   owner: {fileID: 11424084}
@@ -1208,7 +1210,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 1
-  collideWith:
+  useGlobalMask: 1
+  collisionMask:
     serializedVersion: 2
     m_Bits: 0
   owner: {fileID: 11424084}
@@ -1381,13 +1384,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 4
-  collideWith:
+  useGlobalMask: 1
+  collisionMask:
     serializedVersion: 2
     m_Bits: 0
   owner: {fileID: 11424084}
   type: 1
   dealDamageToSelf: 0
-  disableWhileOnState: -65537
+  disableWhileOnState: -131073
 --- !u!114 &11459680
 MonoBehaviour:
   m_ObjectHideFlags: 1

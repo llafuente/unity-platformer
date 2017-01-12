@@ -41,12 +41,16 @@ namespace UnityPlatformer {
     /// </summary>
     public CharacterPart part;
     /// <summary>
+    /// Flag
+    /// </summary>
+    public bool useGlobalMask = true;
+    /// <summary>
     /// Who can deal damage to me?
     ///
     /// Only used when type=HitBoxType.RecieveDamage.
     /// </summary>
-    [Comment("Who can deal damage to me?")]
-    public LayerMask collideWith;
+    [DisableIf("useGlobalMask")]
+    public LayerMask collisionMask;
     /// <summary>
     /// HitBox owner
     /// </summary>
@@ -135,6 +139,21 @@ namespace UnityPlatformer {
         //Handles.Label(transform.position + new Vector3(-box.size.x * 0.5f, box.size.y * 0.5f, 0), "HitBox: " + type);
     }
 #endif
+    public LayerMask GetCollisionMask() {
+      if (useGlobalMask) {
+        switch(type) {
+        case HitBoxType.DealDamage:
+          return Configuration.instance.dealDamageMask;
+        case HitBoxType.RecieveDamage:
+          return Configuration.instance.recieveDamageMask;
+          break;
+        case HitBoxType.EnterAreas:
+          return Configuration.instance.enterAreasMask;
+        }
+      }
+
+      return collisionMask;
+    }
     /// <summary>
     /// I'm a DealDamage, o is RecieveDamage, then Deal Damage to it's owner!
     /// </summary>
@@ -143,7 +162,7 @@ namespace UnityPlatformer {
       if (type == HitBoxType.DealDamage) {
         // source disabled?
         if (IsDisabled()) {
-          Log.Debug("{0} cannot deal damage it's disabled", this.gameObject.name);
+          Log.Debug("{0} cannot deal damage it's disabled", this.gameObject.GetFullName());
           return;
         }
 
@@ -152,24 +171,27 @@ namespace UnityPlatformer {
         var hitbox = o.gameObject.GetComponent<HitBox> ();
         Log.Silly("o is a HitBox? {0}", hitbox);
         if (hitbox != null && hitbox.type == HitBoxType.RecieveDamage) {
-          Log.Debug("Collide {0} with {1}", gameObject.name, hitbox.gameObject.name);
+          Log.Debug("Collide {0} with {1}", gameObject.GetFullName(), hitbox.gameObject.GetFullName());
           // target disabled?
           if (hitbox.IsDisabled()) {
-            Log.Debug("{0} cannot recieve damage it's disabled", o.gameObject.name);
+            Log.Debug("{0} cannot recieve damage it's disabled", o.gameObject.GetFullName());
             return;
           }
 
           // can I deal damage to this HitBox?
           // check layer
-          if (hitbox.collideWith.Contains(gameObject.layer)) {
+          if (hitbox.GetCollisionMask().Contains(gameObject.layer)) {
             Log.Silly("compatible layers");
             // check we not the same, or i can damage to myself at lest
             if (dealDamageToSelf || (!dealDamageToSelf && hitbox.owner != damage.causer)) {
-              Log.Debug("Damage to {0} with {1}", hitbox.owner.gameObject.name, damage);
+              Log.Debug("Damage to {0} with {1}", hitbox.owner.gameObject.GetFullName(), damage);
               hitbox.owner.Damage(damage);
             }
           } else {
-            Log.Silly("incompatible layers");
+            Log.Silly("incompatible layers {0} vs {1}",
+              string.Join(",", hitbox.GetCollisionMask().MaskToNames()),
+              LayerMask.LayerToName(gameObject.layer)
+            );
           }
         }
       }

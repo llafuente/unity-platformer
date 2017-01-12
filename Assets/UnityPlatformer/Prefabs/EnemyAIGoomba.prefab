@@ -644,7 +644,7 @@ MonoBehaviour:
   part: 4
   collideWith:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2101248
   owner: {fileID: 11477932}
   type: 1
   dealDamageToSelf: 0
@@ -663,7 +663,7 @@ MonoBehaviour:
   part: 1
   collideWith:
     serializedVersion: 2
-    m_Bits: 57344
+    m_Bits: 843776
   owner: {fileID: 11477932}
   type: 2
   dealDamageToSelf: 0

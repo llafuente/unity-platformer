@@ -57,7 +57,8 @@ namespace UnityPlatformer.Test {
       Assert.NotNull(dealHitBox);
 
       dealHitBox.type = HitBoxType.DealDamage;
-      dealHitBox.collideWith = (1 << 2); // | (1 << ?)
+      dealHitBox.useGlobalMask = false;
+      dealHitBox.collisionMask = (1 << 2); // | (1 << ?)
       dealHitBox.gameObject.layer = 2;
       damage = dealHitBox.gameObject.AddComponent<Damage>();
       damage.causer = health;
@@ -72,7 +73,8 @@ namespace UnityPlatformer.Test {
       Assert.NotNull(recieveHitBox);
 
       recieveHitBox.type = HitBoxType.RecieveDamage;
-      recieveHitBox.collideWith = (1 << 2);
+      recieveHitBox.useGlobalMask = false;
+      recieveHitBox.collisionMask = (1 << 2);
       recieveHitBox.gameObject.layer = 2;
       recieveHitBox.owner = health;
 

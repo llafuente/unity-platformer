@@ -93,6 +93,21 @@ namespace UnityPlatformer {
     /// </summary>
     public int defaultPriority = 10;
 
+    [Space(20)]
+    [Header("Masks")]
+    /// <summary>
+    /// Mask for HitBoxes with type RecieveDamage
+    /// </summary>
+    public LayerMask recieveDamageMask;
+    /// <summary>
+    /// Mask for HitBoxes with type DealDamage
+    /// </summary>
+    public LayerMask dealDamageMask;
+    /// <summary>
+    /// Mask for HitBoxes with type EnterAreas
+    /// </summary>
+    public LayerMask enterAreasMask;
+
     /// <summary>
     /// check if given GameObject has a the tag oneWayPlatformUpTag
     /// </summary>

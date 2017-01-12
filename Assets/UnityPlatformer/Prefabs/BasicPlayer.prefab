@@ -1589,7 +1589,7 @@ MonoBehaviour:
   part: 4
   collideWith:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2101248
   owner: {fileID: 11429098}
   type: 1
   dealDamageToSelf: 0

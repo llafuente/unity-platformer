@@ -14,7 +14,7 @@ namespace UnityPlatformer {
   [RequireComponent (typeof (Damage))]
   public class Projectile : MonoBehaviour, IUpdateEntity {
     /// <summary>
-    /// Layers wich destroy the projectile: Static geometry + Characters
+    /// Layers wich destroy the projectile: StaticGeometry + HitBox + Projectiles
     /// </summary>
     [Comment("Destroy when collide with")]
     public LayerMask collisionMask;

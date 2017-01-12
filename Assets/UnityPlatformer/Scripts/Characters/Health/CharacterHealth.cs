@@ -229,7 +229,7 @@ namespace UnityPlatformer {
       }
 
       if (IsInvulnerable()) {
-        Debug.Log(this.name + " is invulnerable, ignore damage");
+        Debug.Log(gameObject.GetFullName() + " is invulnerable, ignore damage");
 
         if (onDamage != null) {
           onDamage();
@@ -295,26 +295,26 @@ namespace UnityPlatformer {
       --lives;
 
       if (onDeath != null) {
-        Debug.Log(this.name + " died!");
+        Debug.Log(gameObject.GetFullName() + " died!");
         onDeath();
       }
 
       if (lives == 0) {
         // game over
-        Debug.Log(this.name + " disable all HitBox(es)");
+        Debug.Log(gameObject.GetFullName() + " disable all HitBox(es)");
         var lch = GetComponentsInChildren<HitBox> ();
         foreach (var x in lch) {
            x.gameObject.SetActive(false);
         }
 
-        Debug.Log(this.name + " disable all Damage(s)");
+        Debug.Log(gameObject.GetFullName() + " disable all Damage(s)");
         var ldt = GetComponentsInChildren<Damage> ();
         foreach (var x in ldt) {
            x.gameObject.SetActive(false);
         }
 
         if (onGameOver != null) {
-          Debug.Log(this.name + " game-over!");
+          Debug.Log(gameObject.GetFullName() + " game-over!");
           onGameOver();
         }
       } else {
