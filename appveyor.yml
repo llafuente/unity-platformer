@@ -52,8 +52,6 @@ build_script:
 
       Write-Host "$(date) Unity login bypassed"-ForegroundColor green
 
-build: off
-
 test_script:
   - ps: >
       Write-Host "$(date) Start test script"-ForegroundColor green
