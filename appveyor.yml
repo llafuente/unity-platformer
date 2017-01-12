@@ -46,9 +46,8 @@ install:
 
       $env:Path += ";C:\Program Files\AutoHotkey"
 
-      Start-Process -FilePath "AutoHotkey.exe" -Wait -ArgumentList ('C:\projects\unity-platformer\unity.ahk')
-
-      Write-Host "Unity login bypassed"-ForegroundColor green
+#Start-Process -FilePath "AutoHotkey.exe" -Wait -ArgumentList ('C:\projects\unity-platformer\unity.ahk')
+#Write-Host "Unity login bypassed"-ForegroundColor green
 
 build: off
 

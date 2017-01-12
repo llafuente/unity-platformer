@@ -5,12 +5,19 @@ namespace UnityPlatformer {
   /// <summary>
   /// Tile that force Character to Jump!
   /// </summary>
-  [RequireComponent (typeof (BoxCollider2D))]
+  [RequireComponent (typeof (Collider2D))]
   public class Jumper : MonoBehaviour {
     /// <summary>
     /// Jump properties
     /// </summary>
     public JumpConstantSpringProperties jumpProperties;
+
+    public virtual void Start() {
+      // force trigger
+      Collider2D col2d = GetComponent<Collider2D>();
+      Assert.IsNotNull(col2d, "(Projectile) Missing Monobehaviour Collider2D at " + gameObject.GetFullName());
+      col2d.isTrigger = true;
+    }
 
     /// <summary>
     /// Force a player to jump!
