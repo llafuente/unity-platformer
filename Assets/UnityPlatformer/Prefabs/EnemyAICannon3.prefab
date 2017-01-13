@@ -761,7 +761,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2101760
   velocity: {x: 5, y: 2}
-  gravity: {x: 0, y: -10}
+  gravity: {x: 0, y: 0}
   destroyDelay: 0
 --- !u!114 &114379516894106924
 MonoBehaviour:
@@ -775,9 +775,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 1
-  collideWith:
+  useGlobalMask: 1
+  collisionMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 0
   owner: {fileID: 11446040}
   type: 0
   dealDamageToSelf: 0
@@ -794,9 +795,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 0
-  collideWith:
+  useGlobalMask: 1
+  collisionMask:
     serializedVersion: 2
-    m_Bits: 2101248
+    m_Bits: 0
   owner: {fileID: 11446040}
   type: 1
   dealDamageToSelf: 0
@@ -828,7 +830,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   velocity: {x: 5, y: 8}
-  gravity: {x: 0, y: -10}
+  gravity: {x: 0, y: 0}
   destroyDelay: 0
 --- !u!114 &114562797961048934
 MonoBehaviour:
@@ -872,7 +874,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   velocity: {x: 5, y: 5}
-  gravity: {x: 0, y: -10}
+  gravity: {x: 0, y: 0}
   destroyDelay: 0
 --- !u!114 &114636427575406580
 MonoBehaviour:
@@ -913,9 +915,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 1
-  collideWith:
+  useGlobalMask: 1
+  collisionMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 0
   owner: {fileID: 11446040}
   type: 0
   dealDamageToSelf: 0
@@ -947,9 +950,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 1
-  collideWith:
+  useGlobalMask: 1
+  collisionMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 0
   owner: {fileID: 11446040}
   type: 0
   dealDamageToSelf: 0

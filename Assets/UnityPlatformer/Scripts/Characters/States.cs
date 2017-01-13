@@ -33,6 +33,7 @@ namespace UnityPlatformer {
     OnGroundPushing = OnGround | Pushing,
     NotCrounching = ~Crounch,
     OnGroundCrounching = OnGround | Crounch,
+    NotRope = ~Rope,
 
     //Dashing,
     //Frozen,

@@ -604,6 +604,8 @@ namespace UnityPlatformer {
       }
       if (collisions.below) {
         collisions.lastBelowFrame = 0;
+      } else {
+        collisions.belowFrames = -1;
       }
 
       if (collisions.right && !pCollisions.right) {
@@ -715,6 +717,11 @@ namespace UnityPlatformer {
       /// </summary>
       public int lastRightFrame;
       /// <summary>
+      /// consecutive frame that collision below
+      /// if !below then -1
+      /// </summary>
+      public int belowFrames;
+      /// <summary>
       /// Collider is climbing a slope
       /// </summary>
       public bool climbingSlope;
@@ -772,6 +779,8 @@ namespace UnityPlatformer {
         ++lastBelowFrame;
         ++lastLeftFrame;
         ++lastRightFrame;
+
+        ++belowFrames;
 
         slopeAngle = 0;
         slopeNormal = Vector3.zero;

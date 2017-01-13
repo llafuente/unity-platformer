@@ -371,7 +371,6 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 0
-  _size: {x: 0.75, y: 0.2}
 --- !u!114 &11484926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -384,7 +383,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 4
-  collideWith:
+  useGlobalMask: 1
+  collisionMask:
     serializedVersion: 2
     m_Bits: 0
   owner: {fileID: 11496560}

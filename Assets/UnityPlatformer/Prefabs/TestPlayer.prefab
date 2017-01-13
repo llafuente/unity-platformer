@@ -699,7 +699,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 177342}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -739,7 +739,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106624}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -759,7 +759,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 116068}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -779,7 +779,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 111218}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -1022,7 +1022,6 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 0
-  _size: {x: 0.8, y: 1.8}
 --- !u!114 &11418990
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1052,7 +1051,6 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 0
-  _size: {x: 0.9, y: 0.25}
 --- !u!114 &11423180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1087,6 +1085,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73431d03012b7a4ba33787a81c2afd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &11424084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1173,6 +1174,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73431d03012b7a4ba33787a81c2afd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &11433178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1282,7 +1286,6 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 0
-  _size: {x: 0.9, y: 1}
 --- !u!114 &11443286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1439,7 +1442,6 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 0
-  _size: {x: 0.9, y: 1.6}
 --- !u!114 &11462374
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1541,6 +1543,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73431d03012b7a4ba33787a81c2afd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &11479622
 MonoBehaviour:
   m_ObjectHideFlags: 1

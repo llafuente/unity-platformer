@@ -423,7 +423,6 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 0
-  _size: {x: 0.8, y: 1.8}
 --- !u!114 &11405964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -570,7 +569,6 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 0
-  _size: {x: 0.9, y: 0.9}
 --- !u!114 &11431076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -583,9 +581,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 4
-  collideWith:
+  useGlobalMask: 1
+  collisionMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 0
   owner: {fileID: 11477932}
   type: 0
   dealDamageToSelf: 0
@@ -604,7 +603,6 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 0
-  _size: {x: 1, y: 1}
 --- !u!114 &11451492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -642,9 +640,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 4
-  collideWith:
+  useGlobalMask: 1
+  collisionMask:
     serializedVersion: 2
-    m_Bits: 2101248
+    m_Bits: 0
   owner: {fileID: 11477932}
   type: 1
   dealDamageToSelf: 0
@@ -661,9 +660,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 1
-  collideWith:
+  useGlobalMask: 1
+  collisionMask:
     serializedVersion: 2
-    m_Bits: 843776
+    m_Bits: 0
   owner: {fileID: 11477932}
   type: 2
   dealDamageToSelf: 0

@@ -68,6 +68,18 @@ namespace UnityPlatformer {
       input.SetX((float) facing);
     }
     /// <summary>
+    /// Move in the other direction
+    /// </summary>
+    virtual public void Stop() {
+      input.SetX(0);
+    }
+    /// <summary>
+    /// Move in the other direction
+    /// </summary>
+    virtual public void Resume() {
+      input.SetX((float) facing);
+    }
+    /// <summary>
     /// Check that the Character do not fall
     /// </summary>
     public override void LatePlatformerUpdate(float delta) {

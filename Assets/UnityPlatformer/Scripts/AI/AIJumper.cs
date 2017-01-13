@@ -11,12 +11,33 @@ namespace UnityPlatformer {
   /// TODO can turn during jump\n
   /// </summary>
   public class AIJumper: AIPatrol {
+    float jumpDelay = 1.0f;
+    bool movingWhileNotJumping = false;
+    bool abruptStop = true;
     /// <summary>
     /// Enable Jump and do Patrol staff
     /// </summary>
     public override void PlatformerUpdate(float delta) {
-      if (!input.IsActionHeld("Jump")) {
+      // jump after the delay
+      if (
+        pc2d.collisions.belowFrames > UpdateManager.GetFrameCount(jumpDelay)
+        &&
+        !IsOnState(States.Jumping)
+      ) {
         input.EnableAction("Jump");
+      }
+      // jump until start falling
+      if (input.IsActionHeld("Jump") && IsOnState(States.Falling)) {
+        input.DisableAction("Jump");
+      }
+
+      if (!movingWhileNotJumping && IsOnState(States.OnGround)) {
+        Stop();
+        if (abruptStop) {
+          velocity.x = 0;
+        }
+      } else {
+        Resume();
       }
 
       base.PlatformerUpdate(delta);

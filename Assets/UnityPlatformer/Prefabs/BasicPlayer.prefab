@@ -721,7 +721,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 175088}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -741,7 +741,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 121632}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -761,7 +761,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190570}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -781,7 +781,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 115894}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -949,6 +949,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73431d03012b7a4ba33787a81c2afd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &11409188
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -963,7 +966,6 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 0
-  _size: {x: 0.8, y: 1.8}
 --- !u!114 &11410450
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1042,9 +1044,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 1
-  collideWith:
+  useGlobalMask: 1
+  collisionMask:
     serializedVersion: 2
-    m_Bits: 843776
+    m_Bits: 0
   owner: {fileID: 11429098}
   type: 2
   dealDamageToSelf: 0
@@ -1149,7 +1152,6 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 0
-  _size: {x: 0.9, y: 1.6}
 --- !u!114 &11435812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1198,6 +1200,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73431d03012b7a4ba33787a81c2afd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &11436890
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1236,7 +1241,6 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 0
-  _size: {x: 0.9, y: 1}
 --- !u!114 &11442048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1248,6 +1252,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73431d03012b7a4ba33787a81c2afd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &11442472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1460,9 +1467,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 4
-  collideWith:
+  useGlobalMask: 1
+  collisionMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 0
   owner: {fileID: 11429098}
   type: 1
   dealDamageToSelf: 0
@@ -1517,7 +1525,6 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 0
-  _size: {x: 0.9, y: 0.25}
 --- !u!114 &11479932
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1545,9 +1552,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 4
-  collideWith:
+  useGlobalMask: 1
+  collisionMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 0
   owner: {fileID: 11429098}
   type: 0
   dealDamageToSelf: 0
@@ -1587,9 +1595,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: 4
-  collideWith:
+  useGlobalMask: 1
+  collisionMask:
     serializedVersion: 2
-    m_Bits: 2101248
+    m_Bits: 0
   owner: {fileID: 11429098}
   type: 1
   dealDamageToSelf: 0
