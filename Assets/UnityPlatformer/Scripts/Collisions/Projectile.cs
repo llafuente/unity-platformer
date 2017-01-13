@@ -108,12 +108,18 @@ namespace UnityPlatformer {
         var dst = o.gameObject.GetComponent<HitBox> ();
         if (dst != null) {
           impact = true;
+          // ignore DealDamage & EnterAreas
+          if (dst.type != HitBoxType.RecieveDamage) {
+            return;
+          }
+          // if HitBoxType.RecieveDamage
           if (onImpact != null) {
             onImpact();
           }
           //Debug.Log("Projectile impact something, deal damage!");
           dst.owner.Damage(GetComponent<Damage>());
         }
+
         Destroy();
       }
     }

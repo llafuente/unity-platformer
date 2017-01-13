@@ -228,7 +228,7 @@ namespace UnityPlatformer {
       int idx = IndexOf(entity);
       if (idx != -1) {
         // frameListeners.Splice(idx, 1);
-        for (int i = idx; i < instance.frameListenersCount; ++i) {
+        for (int i = idx; i < instance.frameListenersCount - 1; ++i) {
           instance.frameListeners[i] = instance.frameListeners[i + 1];
         }
         --instance.frameListenersCount;

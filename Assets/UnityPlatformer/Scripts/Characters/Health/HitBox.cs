@@ -34,6 +34,7 @@ namespace UnityPlatformer {
   /// DealDamage require Damage MonoBehaviour\n
   /// EnterAreas require Collider2D to be BoxCollider2D
   /// </summary>
+  //[RequireComponent (typeof (Rigidbody2D))] // only for DealDamage...
   [RequireComponent (typeof (Collider2D))]
   public class HitBox : MonoBehaviour {
     /// <summary>
@@ -95,12 +96,19 @@ namespace UnityPlatformer {
 
       Collider2D body = GetComponent<Collider2D>();
       Assert.IsNotNull(body, "Missing MonoBehaviour Collider2D at " + gameObject.GetFullName());
+      body.isTrigger = true;
 
       if (type == HitBoxType.EnterAreas) {
         if (owner.character.enterAreas != null && owner.character.enterAreas != this ) {
           Debug.LogWarning("Only one EnterAreas HitBox is allowed!");
         }
         owner.character.enterAreas = this;
+      }
+
+      // all damage dealers need Rigidbody2D, so be sure
+      if (type == HitBoxType.DealDamage) {
+        Rigidbody2D rb2d = gameObject.GetOrAddComponent<Rigidbody2D>();
+        rb2d.gravityScale = 0.0f; // TODO REVIEW this is what everybody wants?
       }
     }
 #if UNITY_EDITOR
@@ -109,6 +117,11 @@ namespace UnityPlatformer {
     /// </summary>
     void Reset() {
       gameObject.layer = Configuration.instance.hitBoxesMask;
+      owner = GetComponentInParent<CharacterHealth>();
+
+      Collider2D col2d = GetComponent<Collider2D>();
+      Assert.IsNotNull(col2d, "(HitBox) Missing Monobehaviour Collider2D at " + gameObject.GetFullName());
+      col2d.isTrigger = true;
     }
 #endif
     /// <summary>

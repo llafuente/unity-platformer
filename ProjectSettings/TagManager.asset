@@ -30,16 +30,16 @@ TagManager:
   - UI
   - 
   - 
-  - Player
+  - Players
   - StaticGeometry
   - MovingPlatforms
-  - Enemy
+  - Enemies
   - HitBoxes
   - Ladders
-  - Grabable
+  - Grabables
   - Liquids
-  - Box
-  - Rope
+  - Boxes
+  - Ropes
   - Fences
   - Tracks
   - Items
