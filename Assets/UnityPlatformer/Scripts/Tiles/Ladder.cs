@@ -36,6 +36,14 @@ namespace UnityPlatformer {
     virtual public void Start() {
       body = GetComponent<BoxCollider2D>();
     }
+#if UNITY_EDITOR
+    /// <summary>
+    /// Set layer to Configuration.laddersMask
+    /// </summary>
+    void Reset() {
+      gameObject.layer = Configuration.instance.laddersMask;
+    }
+#endif
     /// <summary>
     /// get real-world-coordinates top of the ladder
     /// </summary>

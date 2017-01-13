@@ -152,20 +152,12 @@ namespace UnityPlatformer {
       }
       UpdateRotation();
     }
-
 #if UNITY_EDITOR
     /// <summary>
-    /// Update the rope on each editor change...
+    /// Set layer to Configuration.ropesMask
     /// </summary>
-    void OnValidate() {
-      if (transform.parent != null) {
-        Debug.LogWarning ("Rope creation may not work correctly if the Rope is a child of another object.");
-      }
-
-      if (transform.localScale != Vector3.one) {
-        Debug.LogWarning ("Scale cannot be changed");
-        transform.localScale = Vector3.one;
-      }
+    void Reset() {
+      gameObject.layer = Configuration.instance.ropesMask;
     }
 #endif
     /// <summary>

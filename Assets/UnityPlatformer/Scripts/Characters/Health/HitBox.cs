@@ -103,6 +103,14 @@ namespace UnityPlatformer {
         owner.character.enterAreas = this;
       }
     }
+#if UNITY_EDITOR
+    /// <summary>
+    /// Set layer to Configuration.ropesMask
+    /// </summary>
+    void Reset() {
+      gameObject.layer = Configuration.instance.hitBoxesMask;
+    }
+#endif
     /// <summary>
     /// Return if the HitBox is disabled base on disableWhileOnState
     /// </summary>

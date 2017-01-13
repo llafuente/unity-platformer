@@ -10,6 +10,14 @@ namespace UnityPlatformer {
     /// Velocity that will be add to characters inside track
     /// </summary>
     public Vector3 velocity;
+#if UNITY_EDITOR
+    /// <summary>
+    /// Set layer to Configuration.ropesMask
+    /// </summary>
+    public void Reset() {
+      gameObject.layer = Configuration.instance.tracksMask;
+    }
+#endif
     /// <summary>
     /// Enable track
     /// </summary>

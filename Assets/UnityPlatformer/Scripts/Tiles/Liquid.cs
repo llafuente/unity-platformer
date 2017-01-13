@@ -36,6 +36,14 @@ namespace UnityPlatformer {
     virtual public void Start() {
       body = GetComponent<BoxCollider2D>();
     }
+#if UNITY_EDITOR
+    /// <summary>
+    /// Set layer to Configuration.ropesMask
+    /// </summary>
+    void Reset() {
+      gameObject.layer = Configuration.instance.liquidsMask;
+    }
+#endif
     /// <summary>
     /// Get real-world-coordinates water top
     /// </summary>

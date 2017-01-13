@@ -59,6 +59,14 @@ namespace UnityPlatformer {
       Assert.IsNotNull(col2d, "(Projectile) Missing Monobehaviour Collider2D at " + gameObject.GetFullName());
       col2d.isTrigger = true;
     }
+#if UNITY_EDITOR
+    /// <summary>
+    /// Set layer to Configuration.ropesMask
+    /// </summary>
+    void Reset() {
+      gameObject.layer = Configuration.instance.projectilesMask;
+    }
+#endif
     /// <summary>
     /// Clone the projectile, activate, add it to UpdateManager
     /// and return :)

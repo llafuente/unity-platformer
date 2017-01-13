@@ -14,6 +14,14 @@ namespace UnityPlatformer {
       p.EnterArea(Areas.Grabbable);
       p.grab = this;
     }
+#if UNITY_EDITOR
+    /// <summary>
+    /// Set layer to Configuration.ropesMask
+    /// </summary>
+    void Reset() {
+      gameObject.layer = Configuration.instance.grabablesMask;
+    }
+#endif
     /// <summary>
     /// ExitState Grabbing
     /// </summary>

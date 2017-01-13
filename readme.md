@@ -1,4 +1,7 @@
-# unity-platformer [![Build Status](https://secure.travis-ci.org/llafuente/unity-platformer.png?branch=master)](http://travis-ci.org/llafuente/unity-platformer)
+# unity-platformer [![Travis Status](https://secure.travis-ci.org/llafuente/unity-platformer.png?branch=master)](http://travis-ci.org/llafuente/unity-platformer) [![Appveyor Status](https://ci.appveyor.com/api/projects/status/github/llafuente/unity-platformer?branch=master&svg=true)](https://ci.appveyor.com/project/llafuente/unity-platformer)
+
+
+
 ===
 
 Based on https://github.com/SebLague/2DPlatformer-Tutorial evolve

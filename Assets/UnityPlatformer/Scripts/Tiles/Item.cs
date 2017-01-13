@@ -32,6 +32,14 @@ namespace UnityPlatformer {
       body = GetComponent<BoxCollider2D>();
       body.isTrigger = true; // force trigger
     }
+#if UNITY_EDITOR
+    /// <summary>
+    /// Set layer to Configuration.ropesMask
+    /// </summary>
+    void Reset() {
+      gameObject.layer = Configuration.instance.itemsMask;
+    }
+#endif
     /// <summary>
     /// Get real-world-coordinates center
     /// </summary>

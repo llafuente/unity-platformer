@@ -43,6 +43,13 @@ namespace UnityPlatformer {
     /// </summary>
     private bool hasControl = false;
     /// <summary>
+    /// Try to set character &amp; input from parent nodes
+    /// </summary>
+    public void Reset() {
+      character = GetComponentInParent<Character>();
+      input = GetComponentInParent<PlatformerInput>();
+    }
+    /// <summary>
     /// keep Character.actions in sync
     /// </summary>
     public virtual void OnEnable() {

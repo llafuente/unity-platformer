@@ -17,10 +17,6 @@ namespace UnityPlatformer {
     /// Global min distance to Environment
     /// </summary>
     public float minDistanceToEnv = 0.1f;
-    /// <summary>
-    /// Mask for ladders
-    /// </summary>
-    public LayerMask laddersMask;
 
     [Space(20)]
     [Header("Tags")]
@@ -94,6 +90,128 @@ namespace UnityPlatformer {
     public int defaultPriority = 10;
 
     [Space(20)]
+    [Header("Layers")]
+    /// <summary>
+    /// Mask name for Ladders
+    /// </summary>
+    public string laddersLayerName = "Ladders";
+    /// <summary>
+    /// Mask for Ladders
+    /// </summary>
+    [HideInInspector]
+    public LayerMask laddersMask;
+
+    /// <summary>
+    /// Mask name for Fences
+    /// </summary>
+    public string fencesLayerName = "Fences";
+    /// <summary>
+    /// Mask for Fences
+    /// </summary>
+    [HideInInspector]
+    public LayerMask fencesMask;
+
+    /// <summary>
+    /// Mask name for Ropes
+    /// </summary>
+    public string ropesLayerName = "Ropes";
+    /// <summary>
+    /// Mask for Ropes
+    /// </summary>
+    [HideInInspector]
+    public LayerMask ropesMask;
+
+    /// <summary>
+    /// Mask name for HitBoxes
+    /// </summary>
+    public string hitBoxesLayerName = "HitBoxes";
+    /// <summary>
+    /// Mask for HitBoxes
+    /// </summary>
+    [HideInInspector]
+    public LayerMask hitBoxesMask;
+
+    /// <summary>
+    /// Mask name for Players
+    /// </summary>
+    public string playersLayerName = "Players";
+    /// <summary>
+    /// Mask for Players
+    /// </summary>
+    [HideInInspector]
+    public LayerMask playersMask;
+
+    /// <summary>
+    /// Mask name for Enemies
+    /// </summary>
+    public string enemiesLayerName = "Enemies";
+    /// <summary>
+    /// Mask for Enemies
+    /// </summary>
+    [HideInInspector]
+    public LayerMask enemiesMask;
+
+    /// <summary>
+    /// Mask name for Grabables
+    /// </summary>
+    public string grabablesLayerName = "Grabables";
+    /// <summary>
+    /// Mask for Grabables
+    /// </summary>
+    [HideInInspector]
+    public LayerMask grabablesMask;
+
+    /// <summary>
+    /// Mask name for Liquids
+    /// </summary>
+    public string liquidsLayerName = "Liquids";
+    /// <summary>
+    /// Mask for Liquids
+    /// </summary>
+    [HideInInspector]
+    public LayerMask liquidsMask;
+
+    /// <summary>
+    /// Mask name for Boxes
+    /// </summary>
+    public string boxesLayerName = "Boxes";
+    /// <summary>
+    /// Mask for Boxes
+    /// </summary>
+    [HideInInspector]
+    public LayerMask boxesMask;
+
+    /// <summary>
+    /// Mask name for Tracks
+    /// </summary>
+    public string tracksLayerName = "Tracks";
+    /// <summary>
+    /// Mask for Tracks
+    /// </summary>
+    [HideInInspector]
+    public LayerMask tracksMask;
+
+    /// <summary>
+    /// Mask name for Items
+    /// </summary>
+    public string itemsLayerName = "Items";
+    /// <summary>
+    /// Mask for Items
+    /// </summary>
+    [HideInInspector]
+    public LayerMask itemsMask;
+
+    /// <summary>
+    /// Mask name for Items
+    /// </summary>
+    public string projectilesLayerName = "Projectiles";
+    /// <summary>
+    /// Mask for Items
+    /// </summary>
+    [HideInInspector]
+    public LayerMask projectilesMask;
+
+    [Space(20)]
     [Header("Masks")]
     /// <summary>
     /// Mask for HitBoxes with type RecieveDamage
@@ -107,6 +225,25 @@ namespace UnityPlatformer {
     /// Mask for HitBoxes with type EnterAreas
     /// </summary>
     public LayerMask enterAreasMask;
+
+#if UNITY_EDITOR
+    /// <summary>
+    /// transform layer names to LayerMask
+    /// </summary>
+    void OnValidate() {
+      laddersMask = LayerMask.NameToLayer(laddersLayerName);
+      fencesMask = LayerMask.NameToLayer(fencesLayerName);
+      ropesMask = LayerMask.NameToLayer(ropesLayerName);
+      hitBoxesMask = LayerMask.NameToLayer(hitBoxesLayerName);
+      enemiesMask = LayerMask.NameToLayer(enemiesLayerName);
+      grabablesMask = LayerMask.NameToLayer(grabablesLayerName);
+      liquidsMask = LayerMask.NameToLayer(liquidsLayerName);
+      boxesMask = LayerMask.NameToLayer(boxesLayerName);
+      tracksMask = LayerMask.NameToLayer(tracksLayerName);
+      itemsMask = LayerMask.NameToLayer(itemsLayerName);
+      projectilesMask = LayerMask.NameToLayer(projectilesLayerName);
+    }
+#endif
 
     /// <summary>
     /// check if given GameObject has a the tag oneWayPlatformUpTag

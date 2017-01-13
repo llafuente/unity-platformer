@@ -25,6 +25,15 @@ namespace UnityPlatformer {
       body.isTrigger = true;
     }
 
+#if UNITY_EDITOR
+    /// <summary>
+    /// Set layer to Configuration.ropesMask
+    /// </summary>
+    void Reset() {
+      gameObject.layer = Configuration.instance.fencesMask;
+    }
+#endif
+
     /// <summary>
     /// notify character that is in a Fence
     /// </summary>
