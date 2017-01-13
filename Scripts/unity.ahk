@@ -17,11 +17,12 @@ SetBatchLines -1
 
 Macro1:
 Run, C:\Program Files\Unity\Editor\Unity.exe, , , PID
-WinWaitActive, ahk_pid %PID%
-Sleep, 333
+; swap places, App window in CI never get active...
+Sleep, 5000
 WinActivate, ahk_pid %PID%
-Sleep, 333
-Sleep, 7500
+Sleep, 1000
+WinWaitActive, ahk_pid %PID%
+Sleep, 2500
 ; username
 Sleep, 100
 ; move to next input, password
