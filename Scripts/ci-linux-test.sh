@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -ex
+
 /opt/Unity/Editor/Unity \
   -batchmode \
   -nographics \

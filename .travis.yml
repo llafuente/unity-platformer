@@ -20,4 +20,4 @@ install:
 
 script:
 - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ./Scripts/ci-osx-test.sh; fi;
-- if [ "$TRAVIS_OS_NAME" == "osx" ]; then ./Scripts/ci-linux-test.sh; fi;
+- if [ "$TRAVIS_OS_NAME" == "linux" ]; then ./Scripts/ci-linux-test.sh; fi;

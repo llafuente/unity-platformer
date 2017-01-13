@@ -17,9 +17,33 @@ SetBatchLines -1
 
 Macro1:
 Run, C:\Program Files\Unity\Editor\Unity.exe, , , PID
-; swap places, App window in CI never get active...
 Sleep, 5000
-WinActivate, ahk_pid %PID%
+; App window in CI never get active...
+
+; method 1, activate by name
+SetTitleMatchMode 2
+WinActivate Unity, , 2
+if ErrorLevel <> 0
+{
+  ; method 2, activate by PID
+  WinActivate, ahk_pid %PID%, , 2
+  if ErrorLevel <> 0
+  {
+    ; method 3, activate last
+    Send !{ESC}
+    WinActivate, ahk_pid %PID%, , 2
+    if ErrorLevel <> 0
+    {
+      ; method 4, position in the center of the screen and click
+      CoordMode, Mouse, Screen
+      ;MouseMove, (A_ScreenWidth / 2), (A_ScreenHeight / 2)
+      Click, (A_ScreenWidth / 2), (A_ScreenHeight / 2)
+    }
+  }
+}
+
+
+SetTitleMatchMode 1
 Sleep, 1000
 WinWaitActive, ahk_pid %PID%
 Sleep, 2500
