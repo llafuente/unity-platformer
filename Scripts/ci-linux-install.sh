@@ -5,10 +5,10 @@ set -ex
 UNITY_TEST_TOOL_BRANCH=5.5
 
 wget -O unity-editor.deb 'http://beta.unity3d.com/download/59c25c92588f/unity-editor_amd64-5.5.0xp1Linux.deb'
-dpkg -i unity-editor.deb
+sudo dpkg -i unity-editor.deb
 
 # fix dependencies broken by installing Unity
-apt-get -y -f install
+sudo apt-get -y -f install
 
 
 curl -o "UnityTestTools.tar.bz2" "https://bitbucket.org/Unity-Technologies/unitytesttools/get/${UNITY_TEST_TOOL_BRANCH}.tar.bz2"
