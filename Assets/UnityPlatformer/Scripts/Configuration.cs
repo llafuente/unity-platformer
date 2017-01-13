@@ -329,5 +329,22 @@ namespace UnityPlatformer {
     static public bool IsBox(Collider2D obj) {
       return obj.tag.IndexOf(Configuration.instance.boxTag) != -1;
     }
+
+    static public Character GetNearestPlayer(Vector3 position) {
+      GameObject[] gos = GameObject.FindGameObjectsWithTag(instance.playerTag);
+      GameObject closest = null;
+
+      float distance = Mathf.Infinity;
+      foreach (GameObject go in gos) {
+        Vector3 diff = go.transform.position - position;
+        float curDistance = diff.sqrMagnitude;
+        if (curDistance < distance) {
+          closest = go;
+          distance = curDistance;
+        }
+      }
+
+      return closest ? closest.GetComponent<Character>() : null;
+    }
   }
 }

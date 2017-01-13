@@ -100,14 +100,14 @@ namespace UnityPlatformer {
       centering = true;
       positionOfSection = 0.5f;
 
-      character.rope.onBreakRope += OnBreakRope;
+      character.rope.onBreak += OnBreakRope;
     }
     /// <summary>
     /// stop listenting rope break
     /// </summary>
     public override void LoseControl(float delta) {
       if (character.rope != null) {
-        character.rope.onBreakRope -= OnBreakRope;
+        character.rope.onBreak -= OnBreakRope;
       }
     }
     /// <summary>

@@ -27,7 +27,7 @@ namespace UnityPlatformer {
       if (rb2d) {
         rb2d.isKinematic = true;
         rb2d.gravityScale = 0;
-        rb2d.hideFlags = HideFlags.HideInInspector;
+        //rb2d.hideFlags = HideFlags.HideInInspector;
         //rb2d.hideFlags = HideFlags.None;
       }
     }
@@ -48,7 +48,7 @@ namespace UnityPlatformer {
         rb2d = gameObject.AddComponent<Rigidbody2D>();
         rb2d.isKinematic = true;
         rb2d.gravityScale = 0;
-        rb2d.hideFlags = HideFlags.HideInInspector;
+        //rb2d.hideFlags = HideFlags.HideInInspector;
       }
     }
   }

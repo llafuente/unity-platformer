@@ -100,7 +100,7 @@ namespace UnityPlatformer {
     /// <summary>
     /// When rope is broken
     /// </summary>
-    public RopeCallback onBreakRope;
+    public RopeCallback onBreak;
     /// <summary>
     /// GameObjects with RopeSection
     /// </summary>
@@ -332,8 +332,8 @@ namespace UnityPlatformer {
     /// TODO break do not destroy sections
     /// </summary>
     public void BreakRope() {
-      if (onBreakRope != null) {
-        onBreakRope(this);
+      if (onBreak != null) {
+        onBreak(this);
       }
 
       Debug.Log("BreakRope");

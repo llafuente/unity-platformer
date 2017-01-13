@@ -29,7 +29,25 @@ namespace UnityPlatformer {
     /// check missconfiguration
     /// </summary>
     public void Start() {
-      Assert.IsNotNull(causer, "(Damage) causer cannot be null: " + gameObject.GetFullName());
+      Assert.IsNotNull(causer, "(Damage) causer cannot be null at " + gameObject.GetFullName());
+
+      // REVIEW this may not be necessary...
+      HitBox hitbox = GetComponent<HitBox> ();
+      Assert.IsNotNull(hitbox, "(Damage) Missing MonoBehaviour HitBox at " + gameObject.GetFullName());
+      if (hitbox.type != HitBoxType.DealDamage) {
+        Assert.IsNotNull(null, "(Damage) Damage found but hitbox type is not DealDamage at " + gameObject.GetFullName());
+      }
     }
+
+#if UNITY_EDITOR
+    /// <summary>
+    /// Set layer to Configuration.ropesMask
+    /// </summary>
+    void Reset() {
+      if (causer == null) {
+        causer = GetComponentInParent<CharacterHealth>();
+      }
+    }
+#endif
   }
 }

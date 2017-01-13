@@ -25,7 +25,7 @@ Require Unity-Test-Tools to be installed in the project (or delete Assets/Tests)
 
 ## Features
 
-Tiles (Asserts/UnityPlatformer/Scripts/Tiles/)
+Tiles (Assets/UnityPlatformer/Scripts/Tiles/)
 
 * Moving platforms
 * One way platforms (all four directions)
@@ -35,17 +35,17 @@ Tiles (Asserts/UnityPlatformer/Scripts/Tiles/)
 * Ropes
 * Item (Pickable / Usable)
 * Tracks
-* ...
+* Liquid (bouyancy, not inside water yet)
 
 
-Artificial inteligence (Asserts/UnityPlatformer/Scripts/AI/)
+Artificial inteligence (Assets/UnityPlatformer/Scripts/AI/)
 
 * Patrol
 * Projectiles
-* Jumpers
+* Jumper
 
 
-Character actions (Asserts/UnityPlatformer/Scripts/Character/Actions/)
+Character actions (Assets/UnityPlatformer/Scripts/Character/Actions/)
 
 * Melee attacks
 * Wallstick/WallJump
@@ -58,7 +58,7 @@ Character actions (Asserts/UnityPlatformer/Scripts/Character/Actions/)
 * ...
 
 
-Input (Asserts/UnityPlatformer/Scripts/Input/)
+Input (Assets/UnityPlatformer/Scripts/Input/)
 * Keyboard / mouse (unity input)
 * Wii pad
 * CnControls

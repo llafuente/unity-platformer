@@ -13,6 +13,6 @@ indent_size = 2
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{unity,prefab,meta,controller,anim,mat}]
+[*.{unity,prefab,meta,controller,anim,mat,asset}]
 trim_trailing_whitespace = false
 insert_final_newline = false

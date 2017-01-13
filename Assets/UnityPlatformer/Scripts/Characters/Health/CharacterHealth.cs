@@ -18,6 +18,10 @@ namespace UnityPlatformer {
     /// </summary>
     public Alignment alignment = Alignment.None;
     /// <summary>
+    /// Can recieve Damage from friends (same alignment)
+    /// </summary>
+    public bool friendlyFire = false;
+    /// <summary>
     /// Health the character will have when game starts
     /// </summary>
     [Comment("Health the character will have when game starts")]
@@ -199,7 +203,12 @@ namespace UnityPlatformer {
     /// Try to Damage the Character
     /// </summary>
     public bool Damage(int amount, DamageType dt, CharacterHealth causer = null) {
-      Debug.LogFormat("immunity {0} DamageType {1}", immunity, dt);
+      Debug.LogFormat("immunity {0} DamageType {1} alignment {2}", immunity, dt, alignment);
+      if (!friendlyFire && causer.alignment == alignment) {
+        Debug.LogFormat("Cannot recieve damage from the same alignament");
+        return false;
+      }
+
       if ((immunity & dt) == dt) {
         Debug.LogFormat("Inmune to {0} attacks", dt);
 
