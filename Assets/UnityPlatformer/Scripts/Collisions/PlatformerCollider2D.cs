@@ -157,7 +157,24 @@ namespace UnityPlatformer {
       base.OnEnable();
       slopeRays = new RaycastHit2D[verticalRayCount + 2];
     }
-
+    /// <summary>
+    /// Is character move against gravity
+    /// <summary>
+    public bool IsMovingAgainstGravity(ref Vector3 velocity) {
+      return velocity.y != 0.0f && Mathf.Sign(velocity.y) != Mathf.Sign(gravity.y);
+    }
+    /// <summary>
+    /// Returns if gravity has the same direction as dir
+    /// <summary>
+    public bool IsDirectionBelow(int dir) {
+      return dir == Mathf.Sign(gravity.y);
+    }
+    /// <summary>
+    /// Returns if gravity has the opposite direction as dir
+    /// <summary>
+    public bool IsDirectionAbove(int dir) {
+      return dir != Mathf.Sign(gravity.y);
+    }
     /// <summary>
     /// Attempt to move the character to current position + velocity.
     ///
@@ -169,6 +186,8 @@ namespace UnityPlatformer {
     /// <param name="delta">Time since last update</param>
     /// <returns>Real velocity after collisions</returns>
     public Vector3 Move(Vector3 velocity, float delta) {
+      gravitySwapped = gravity.y > 0;
+
       Log.Silly("(PlatformerCollider2D) Move({0}, {1}, {2})", gameObject.name, velocity.ToString("F4"), delta);
       // swap layers, this makes possible to collide with something inside
       // my own layer like boxes
@@ -191,6 +210,8 @@ namespace UnityPlatformer {
       collisions.Reset();
 
       // Climb or descend a slope if in range
+      // NOTE slopes are not supported when gravity is positive atm.
+      // https://github.com/llafuente/unity-platformer/issues/49
       if (enableSlopes) {
         UpdateCurrentSlope(velocity);
 
@@ -213,7 +234,7 @@ namespace UnityPlatformer {
         ForeachLeftRay(skinWidth, ref velocity, HorizontalCollisions);
         ForeachRightRay(skinWidth, ref velocity, HorizontalCollisions);
 
-        if (velocity.y > 0) {
+        if (IsMovingAgainstGravity(ref velocity)) {
           ForeachFeetRay(skinWidth, ref velocity, VerticalCollisions);
           ForeachHeadRay(skinWidth, ref velocity, VerticalCollisions);
         } else {
@@ -418,7 +439,7 @@ namespace UnityPlatformer {
       if (!leavingGround) {
         // Separate but only if we are not jumping
         velocity.y = (ray.distance - minDistanceToEnv) * dir;
-        collisions.below = dir == -1;
+        collisions.below = IsDirectionBelow(dir);
       } else if (ray.distance < minDistanceToEnv * 0.5f) {
         // we just want to override if we are not separating enough from
         // ground also, do not set collision below until that moment or
@@ -426,13 +447,13 @@ namespace UnityPlatformer {
         float wanted = (ray.distance - minDistanceToEnv) * dir;
         if (velocity.y < wanted) {
           velocity.y = wanted;
-          collisions.below = dir == -1;
+          collisions.below = IsDirectionBelow(dir);
 
           Log.Silly("(PlatformerCollider2D) VerticalCollisions new velocity {0}", velocity.ToString("F4"));
         }
       }
 
-      collisions.above = dir == 1;
+      collisions.above = IsDirectionAbove(dir);
     }
 
     /// <summary>

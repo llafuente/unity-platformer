@@ -27,7 +27,7 @@ namespace UnityPlatformer {
     /// </summary>
     [DrawGizmo(GizmoType.InSelectionHierarchy | GizmoType.NotInSelectionHierarchy)]
     void OnDrawGizmos() {
-      if (Application.isPlaying) return;
+      if (Application.isPlaying || box2d == null) return;
       Vector3 size = box2d.size;
       //Handles.Label(transform.position + new Vector3(-size.x * 0.5f, size.y * 0.5f, 0), "Trigger: " + this.name);
 
@@ -49,8 +49,11 @@ namespace UnityPlatformer {
       box2d.isTrigger = true;
 
       rb2d = gameObject.GetOrAddComponent<Rigidbody2D>();
-      rb2d.isKinematic = true;
+      rb2d.isKinematic = false;
       rb2d.gravityScale = 0;
+    }
+    void Reset() {
+      Start();
     }
 
     void OnValidate() {

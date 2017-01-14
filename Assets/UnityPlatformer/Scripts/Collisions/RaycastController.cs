@@ -92,6 +92,11 @@ namespace UnityPlatformer {
     /// </summary>
     internal float skinWidthMagnitude;
     /// <summary>
+    /// Is gravity positive?\n
+    /// Set at <see cref="PlatformerCollider2D.Move" />
+    /// </summary>
+    internal bool gravitySwapped;
+    /// <summary>
     /// Recalculate everything
     /// </summary>
     public virtual void OnEnable() {
@@ -208,6 +213,10 @@ namespace UnityPlatformer {
     /// Return RaycastHit2D of Raycasting at bottom center.
     /// </summary>
     public RaycastHit2D FeetRay(float rayLength, LayerMask mask) {
+      if (gravitySwapped) {
+        return Raycast(raycastOrigins.topCenter, Vector2.up, rayLength, mask, Color.blue);
+      }
+
       return Raycast(raycastOrigins.bottomCenter, Vector2.down, rayLength, mask, Color.blue);
     }
     /// <summary>
@@ -255,7 +264,13 @@ namespace UnityPlatformer {
     /// <summary>
     /// Iterate over all head/vertical rays
     /// </summary>
-    public void ForeachHeadRay(float rayLength, ref Vector3 velocity, RayItr itr) {
+    public void ForeachHeadRay(float rayLength, ref Vector3 velocity, RayItr itr, bool checkGravitySwap = true) {
+      // swap gravity?
+      if (checkGravitySwap && gravitySwapped) {
+        ForeachFeetRay(rayLength, ref velocity, itr, false);
+        return;
+      }
+
       if (velocity.y > 0) {
         rayLength += velocity.y;
       }
@@ -265,7 +280,7 @@ namespace UnityPlatformer {
 
       for (int i = 0; i < verticalRayCount; i ++) {
 
-        verticalRays[i] = Raycast(origin, Vector2.up, rayLength, collisionMask, new Color(1, 0, 0, 0.5f));
+        verticalRays[i] = Raycast(origin, Vector2.up, rayLength, collisionMask, new Color(1, 1, 1, 0.5f));
         origin.x += verticalRaySpacing;
 
         itr(ref verticalRays[i], ref velocity, 1, i);
@@ -274,7 +289,13 @@ namespace UnityPlatformer {
     /// <summary>
     /// Iterate over all feet/vertical rays
     /// </summary>
-    public void ForeachFeetRay(float rayLength, ref Vector3 velocity, RayItr itr) {
+    public void ForeachFeetRay(float rayLength, ref Vector3 velocity, RayItr itr, bool checkGravitySwap = true) {
+      // swap gravity?
+      if (checkGravitySwap && gravitySwapped) {
+        ForeachHeadRay(rayLength, ref velocity, itr, false);
+        return;
+      }
+
       Vector3 origin = raycastOrigins.bottomLeft;
       origin.x += velocity.x;
       float length;
@@ -289,6 +310,24 @@ namespace UnityPlatformer {
       }
     }
     /// <summary>
+    /// Return gravity aware down Vector2
+    /// </summary>
+    public Vector2 GetDownVector() {
+      return gravitySwapped ? Vector2.up : Vector2.down;
+    }
+    /// <summary>
+    /// Return gravity aware bottom left
+    /// </summary>
+    public Vector3 GetBottomLeft() {
+      return gravitySwapped ? raycastOrigins.topLeft : raycastOrigins.bottomLeft;
+    }
+    /// <summary>
+    /// Return gravity aware bottom right
+    /// </summary>
+    public Vector3 GetBottomRight() {
+      return gravitySwapped ? raycastOrigins.topRight : raycastOrigins.bottomRight;
+    }
+    /// <summary>
     /// Return RaycastHit2D of Raycasting at bottom left.
     /// </summary>
     public RaycastHit2D LeftFeetRay(float rayLength, Vector3 velocity) {
@@ -296,10 +335,10 @@ namespace UnityPlatformer {
         rayLength -= velocity.y;
       }
 
-      Vector3 origin = raycastOrigins.bottomLeft;
+      Vector3 origin = GetBottomLeft();
       origin.x += velocity.x;
 
-      return Raycast(origin, Vector2.down, rayLength, collisionMask, Color.cyan);
+      return Raycast(origin, GetDownVector(), rayLength, collisionMask, Color.cyan);
     }
     /// <summary>
     /// Return RaycastHit2D of Raycasting at bottom right.
@@ -309,10 +348,10 @@ namespace UnityPlatformer {
         rayLength -= velocity.y;
       }
 
-      Vector3 origin = raycastOrigins.bottomLeft;
-      origin.x += velocity.x + verticalRaySpacing * verticalRayCount;
+      Vector3 origin = GetBottomRight();
+      origin.x += velocity.x /*+ verticalRaySpacing * verticalRayCount*/;
 
-      return Raycast(origin, Vector2.down, rayLength, collisionMask, Color.magenta);
+      return Raycast(origin, GetDownVector(), rayLength, collisionMask, Color.magenta);
     }
   }
 }

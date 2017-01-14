@@ -42,9 +42,11 @@ namespace UnityPlatformer {
     /// <summary>
     /// Rename logic: append counter to the name
     /// </summary>
-    public virtual void Rename(Transform transform) {
-      foreach (Transform child in transform) {
-        child.gameObject.name = child.gameObject.name + count;
+    public virtual void RenameInstance(string rootName, int index) {
+      instance.name = rootName;
+
+      foreach (Transform child in instance.transform) {
+        child.gameObject.name = child.gameObject.name + index;
       }
     }
     /// <summary>
@@ -55,8 +57,7 @@ namespace UnityPlatformer {
       if (instance == null) {
         instance = Instantiate(prefab, transform.position, transform.rotation) as GameObject;
 
-        instance.name = gameObject.name;
-        Rename(instance.transform);
+        RenameInstance(gameObject.name, count);
         ++count;
 
         if (!attachToRoot) {

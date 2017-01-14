@@ -16,6 +16,7 @@ SetBatchLines -1
 
 
 Macro1:
+LOGFile = C:\projects\unity-platformer\autohotkey.txt
 Run, C:\Program Files\Unity\Editor\Unity.exe, , , PID
 Sleep, 5000
 ; App window in CI never get active...
@@ -24,22 +25,28 @@ Sleep, 5000
 SetTitleMatchMode 2
 WinActivate Unity
 WinWaitActive, ahk_pid %PID%, , 2
+FileAppend, Method 1 fail with %ErrorLevel%, %LOGFile%
+
 if ErrorLevel <> 0
 {
   ; method 2, activate by PID
   WinActivate, ahk_pid %PID%
   WinWaitActive, ahk_pid %PID%, , 2
+  FileAppend, Method 2 fail with %ErrorLevel%, %LOGFile%
   if ErrorLevel <> 0
   {
     ; method 3, activate last
     Send !{ESC}
     WinWaitActive, ahk_pid %PID%, , 2
+    FileAppend, Method 3 fail with %ErrorLevel%, %LOGFile%
     if ErrorLevel <> 0
     {
       ; method 4, position in the center of the screen and click
       CoordMode, Mouse, Screen
       ;MouseMove, (A_ScreenWidth / 2), (A_ScreenHeight / 2)
       Click, (A_ScreenWidth / 2), (A_ScreenHeight / 2)
+      WinWaitActive, ahk_pid %PID%, , 2
+      FileAppend, Method 4 fail with %ErrorLevel%, %LOGFile%
     }
   }
 }

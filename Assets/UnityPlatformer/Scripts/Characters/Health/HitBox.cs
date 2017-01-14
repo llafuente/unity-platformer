@@ -19,6 +19,8 @@ namespace UnityPlatformer {
     RightFoot =     1 << 5,
     LeftFoot =      1 << 6,
     Head =          1 << 7,
+    Weapon =        1 << 8,
+    Projectile =    1 << 9,
   }
   /// <summary>
   /// Type of HitBoxe, what it do
@@ -154,8 +156,9 @@ namespace UnityPlatformer {
           Gizmos.DrawWireCube(transform.position + (Vector3)box2d.offset, box2d.size);
         } else {
           CircleCollider2D circle2d = GetComponent<CircleCollider2D>();
-          Gizmos.DrawWireSphere(transform.position + (Vector3)circle2d.offset, circle2d.radius);
-
+          if (circle2d != null) {
+            Gizmos.DrawWireSphere(transform.position + (Vector3)circle2d.offset, circle2d.radius);
+          } // TODO handle the rest
         }
         //Handles.Label(transform.position + new Vector3(-box.size.x * 0.5f, box.size.y * 0.5f, 0), "HitBox: " + type);
     }
