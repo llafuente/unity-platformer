@@ -22,16 +22,18 @@ Sleep, 5000
 
 ; method 1, activate by name
 SetTitleMatchMode 2
-WinActivate Unity, , 2
+WinActivate Unity
+WinWaitActive, ahk_pid %PID%, , 2
 if ErrorLevel <> 0
 {
   ; method 2, activate by PID
-  WinActivate, ahk_pid %PID%, , 2
+  WinActivate, ahk_pid %PID%
+  WinWaitActive, ahk_pid %PID%, , 2
   if ErrorLevel <> 0
   {
     ; method 3, activate last
     Send !{ESC}
-    WinActivate, ahk_pid %PID%, , 2
+    WinWaitActive, ahk_pid %PID%, , 2
     if ErrorLevel <> 0
     {
       ; method 4, position in the center of the screen and click
@@ -44,9 +46,7 @@ if ErrorLevel <> 0
 
 
 SetTitleMatchMode 1
-Sleep, 1000
-WinWaitActive, ahk_pid %PID%
-Sleep, 2500
+Sleep, 3500
 ; username
 Sleep, 100
 ; move to next input, password

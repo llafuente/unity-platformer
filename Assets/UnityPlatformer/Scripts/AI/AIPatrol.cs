@@ -46,7 +46,7 @@ namespace UnityPlatformer {
     /// Move right
     /// </summary>
     virtual public void OnLeftWall() {
-      Debug.Log("OnLeftWall");
+      //Debug.Log("OnLeftWall");
       facing = Facing.Right;
       velocity = Vector3.zero;
       input.SetX((float) facing);
@@ -55,7 +55,7 @@ namespace UnityPlatformer {
     /// Move left
     /// </summary>
     virtual public void OnRightWall() {
-      Debug.Log("OnRightWall");
+      //Debug.Log("OnRightWall");
       facing = Facing.Left;
       velocity = Vector3.zero;
       input.SetX((float) facing);

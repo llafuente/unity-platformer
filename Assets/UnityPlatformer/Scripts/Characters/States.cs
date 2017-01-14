@@ -26,14 +26,16 @@ namespace UnityPlatformer {
     Fence =               1 << 18,
 
     // debug states, so it can be displayed as text
-    SlippingGrounded =    Slipping | OnGround,
-    SlippingSlopeGrounded =    Slipping | OnSlope | OnGround,
+    SlippingGrounded = Slipping | OnGround,
+    MeleeAttackGrounded = MeleeAttack | OnGround,
+    SlippingSlopeGrounded = Slipping | OnSlope | OnGround,
     FallingLiquid = Falling | Liquid,
     OnGroundLiquid = OnGround | Liquid,
     OnGroundPushing = OnGround | Pushing,
     NotCrounching = ~Crounch,
     OnGroundCrounching = OnGround | Crounch,
     NotRope = ~Rope,
+    NotMeleeAttack = ~MeleeAttack,
 
     //Dashing,
     //Frozen,

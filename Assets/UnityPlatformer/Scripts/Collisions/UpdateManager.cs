@@ -348,7 +348,7 @@ namespace UnityPlatformer {
     /// Remove once given callback
     /// </summary>
     /// <returns>true if found, false if not found</returns>
-    static public bool ClearTimeout(Action callback, float timeout) {
+    static public bool ClearTimeout(Action callback) {
       LazyInit();
 
       for (int i = 0; i < instance.callbacksCount; ++i) {
