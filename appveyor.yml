@@ -6,7 +6,6 @@ platform: x64
 
 install:
   - appveyor DownloadFile https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-desktop.ps1
-  - ps: .\enable-desktop
 
 build_script:
   - ps: .\Scripts\ci-windows-install.ps1

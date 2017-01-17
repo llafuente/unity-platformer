@@ -25,7 +25,7 @@ Sleep, 5000
 SetTitleMatchMode 2
 WinActivate Unity
 WinWaitActive, ahk_pid %PID%, , 2
-Err = ErrorLevel
+Err = %ErrorLevel%
 FileAppend, Method 1 fail with %Err%, %LOGFile%
 
 if (Err <> 0)
@@ -33,14 +33,14 @@ if (Err <> 0)
   ; method 2, activate by PID
   WinActivate, ahk_pid %PID%
   WinWaitActive, ahk_pid %PID%, , 2
-  Err = ErrorLevel
+  Err = %ErrorLevel%
   FileAppend, Method 2 fail with %Err%, %LOGFile%
   if (Err <> 0)
   {
     ; method 3, activate last
     Send !{ESC}
     WinWaitActive, ahk_pid %PID%, , 2
-    Err = ErrorLevel
+    Err = %ErrorLevel%
     FileAppend, Method 3 fail with %Err%, %LOGFile%
     if (Err <> 0)
     {
@@ -49,7 +49,7 @@ if (Err <> 0)
       ;MouseMove, (A_ScreenWidth / 2), (A_ScreenHeight / 2)
       Click, (A_ScreenWidth / 2), (A_ScreenHeight / 2)
       WinWaitActive, ahk_pid %PID%, , 2
-      Err = ErrorLevel
+      Err = %ErrorLevel%
       FileAppend, Method 4 fail with %Err%, %LOGFile%
     }
   }

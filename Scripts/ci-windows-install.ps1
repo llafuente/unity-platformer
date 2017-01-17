@@ -1,5 +1,7 @@
 Write-Host "$(date) Start build script"-ForegroundColor green
 
+.\enable-desktop
+
 Invoke-WebRequest "http://netstorage.unity3d.com/unity/01f4c123905a/Windows64EditorInstaller/UnitySetup64-5.4.3f1.exe" -OutFile .\UnitySetup64.exe
 
 Start-Process -FilePath ".\UnitySetup64.exe" -Wait -ArgumentList ('/S', '/Q')
