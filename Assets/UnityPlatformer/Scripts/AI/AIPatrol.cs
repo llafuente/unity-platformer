@@ -26,6 +26,7 @@ namespace UnityPlatformer {
     /// </summary>
     [Comment("Do not fall on platform edge. Go back.")]
     public bool doNotFall = true;
+    public bool resetVelocityOnTurn = false;
     /// <summary>
     /// Where is facing now
     /// </summary>
@@ -48,7 +49,9 @@ namespace UnityPlatformer {
     virtual public void OnLeftWall() {
       //Debug.Log("OnLeftWall");
       facing = Facing.Right;
-      velocity = Vector3.zero;
+      if (resetVelocityOnTurn) {
+        velocity = Vector3.zero;
+      }
       input.SetX((float) facing);
     }
     /// <summary>
@@ -57,7 +60,9 @@ namespace UnityPlatformer {
     virtual public void OnRightWall() {
       //Debug.Log("OnRightWall");
       facing = Facing.Left;
-      velocity = Vector3.zero;
+      if (resetVelocityOnTurn) {
+        velocity = Vector3.zero;
+      }
       input.SetX((float) facing);
     }
     /// <summary>

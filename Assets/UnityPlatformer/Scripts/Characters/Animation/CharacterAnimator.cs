@@ -50,6 +50,7 @@ namespace UnityPlatformer {
     /// <summary>
     /// Previous speed changed when calling PlaybackSpeed, StopPlayback or StartPlayback
     /// </summary>
+    [HideInInspector]
     public float previousSpeed;
     /// <summary>
     /// Start listening
