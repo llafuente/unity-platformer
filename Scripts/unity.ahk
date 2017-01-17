@@ -27,19 +27,19 @@ WinActivate Unity
 WinWaitActive, ahk_pid %PID%, , 2
 FileAppend, Method 1 fail with %ErrorLevel%, %LOGFile%
 
-if ErrorLevel <> 0
+if (ErrorLevel <> 0)
 {
   ; method 2, activate by PID
   WinActivate, ahk_pid %PID%
   WinWaitActive, ahk_pid %PID%, , 2
   FileAppend, Method 2 fail with %ErrorLevel%, %LOGFile%
-  if ErrorLevel <> 0
+  if (ErrorLevel <> 0)
   {
     ; method 3, activate last
     Send !{ESC}
     WinWaitActive, ahk_pid %PID%, , 2
     FileAppend, Method 3 fail with %ErrorLevel%, %LOGFile%
-    if ErrorLevel <> 0
+    if (ErrorLevel <> 0)
     {
       ; method 4, position in the center of the screen and click
       CoordMode, Mouse, Screen
