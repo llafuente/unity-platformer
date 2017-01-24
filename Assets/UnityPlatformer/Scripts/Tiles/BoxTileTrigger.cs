@@ -11,15 +11,18 @@ namespace UnityPlatformer {
   [RequireComponent (typeof (Rigidbody2D))]
   public class BoxTileTrigger : MonoBehaviour {
     // cache
-    internal BoxCollider2D body;
-    internal Rigidbody2D rb2d;
-    internal Character[] characters;
-    internal int charCount;
+    [HideInInspector]
+    public BoxCollider2D body;
+    [HideInInspector]
+    public Character[] characters;
+    [HideInInspector]
+    public int charCount;
 
     /// <summary>
     /// force BoxCollider2D to be trigger
     /// </summary>
     virtual public void Start() {
+      body = GetComponent<BoxCollider2D>();
       Reset();
 
       if (characters == null) {

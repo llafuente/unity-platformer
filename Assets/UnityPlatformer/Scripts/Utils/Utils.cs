@@ -12,7 +12,7 @@ namespace UnityPlatformer {
   /// </summary>
   public static class Utils {
     static public void DynamicTrigger(GameObject gameObject) {
-      // force trigger, dinamic and never sleep
+      // force trigger, dinamic and never sleep, so stay will be called every frame
       Collider2D col2d = gameObject.GetComponent<Collider2D>();
       Assert.IsNotNull(col2d, "(Utils) Missing Monobehaviour Collider2D at " + gameObject.GetFullName());
       col2d.isTrigger = true;
@@ -42,6 +42,7 @@ namespace UnityPlatformer {
             Gizmos.DrawWireSphere((Vector3)circle2d.offset, circle2d.radius);
           } // TODO handle the rest
         }
+        Gizmos.matrix = Matrix4x4.identity;
     }
     #endif
   }

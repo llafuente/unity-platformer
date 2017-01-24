@@ -62,13 +62,21 @@ namespace UnityPlatformer {
     /// </summary>
     public bool startStopped = false;
     /// <summary>
+    /// callback call when passenter enter/leave
+    /// </summary>
+    public delegate void PassengerEvent(Transform transform);
+    /// <summary>
     /// callback call when reach any waypoint
     /// </summary>
-    public delegate void ReachWaypoint(int index);
+    public delegate void WaypointEvent(int index);
     /// <summary>
     /// It's called just after select next waypoint and before apply waitTime
     /// </summary>
-    public ReachWaypoint onReachWaypoint;
+    public WaypointEvent onWaypointEvent;
+
+    public PassengerEvent onEnterPassenger;
+    public PassengerEvent onLeavePassenger;
+
     /// <summary>
     /// callback call when MovingPlatform is stopped
     /// </summary>
@@ -82,35 +90,40 @@ namespace UnityPlatformer {
     /// <summary>
     /// waypoints list taken from path
     /// </summary>
-    internal Vector3[] globalWaypoints;
+    [HideInInspector]
+    public Vector3[] globalWaypoints;
     /// <summary>
     /// current waypoint index
     /// </summary>
-    int fromWaypointIndex;
+    protected int fromWaypointIndex;
     /// <summary>
     /// current percentage (0-1) between previous/next waypoints
     /// </summary>
-    float percentBetweenWaypoints;
+    protected float percentBetweenWaypoints;
     /// <summary>
     /// time since last waypoint start, used to calculate (waitTime) delay
     /// </summary>
-    float nextMoveTime;
+    protected float nextMoveTime;
     /// <summary>
     /// List of passengers to move
     /// </summary>
-    List<PassengerMovement> passengerMovement;
+    protected List<PassengerMovement> passengerMovement;
+    /// <summary>
+    /// List of previous passengers
+    /// </summary>
+    protected List<PassengerMovement> pPassengerMovement;
     /// <summary>
     /// List of passengers to moved
     /// </summary>
-    HashSet<Transform> prevPassengers = null;
+    protected HashSet<Transform> prevPassengers = null;
     /// <summary>
     /// Current speed
     /// </summary>
-    float currentSpeed;
+    protected float currentSpeed;
     /// <summary>
     /// Last position
     /// </summary>
-    Vector3 lastPosition;
+    protected Vector3 lastPosition;
 
     #endregion
 
@@ -134,6 +147,7 @@ namespace UnityPlatformer {
       }
 
       lastPosition = transform.position;
+      passengerMovement = new List<PassengerMovement> ();
 
       if (startStopped) {
         Stop();
@@ -212,6 +226,36 @@ namespace UnityPlatformer {
       MovePassengers (false);
 
       lastPosition = transform.position;
+
+      if (onEnterPassenger != null) {
+        for (int i = 0; i < passengerMovement.Count; ++i) {
+          bool f = false;
+          for (int j = 0; j < pPassengerMovement.Count; ++j) {
+            if (pPassengerMovement[j].transform == passengerMovement[i].transform) {
+              f = true;
+              break;
+            }
+          }
+          if (!f) {
+            onEnterPassenger(passengerMovement[i].transform);
+          }
+        }
+      }
+
+      if (onLeavePassenger != null) {
+        for (int i = 0; i < pPassengerMovement.Count; ++i) {
+          bool f = false;
+          for (int j = 0; j < passengerMovement.Count; ++j) {
+            if (pPassengerMovement[i].transform == passengerMovement[j].transform) {
+              f = true;
+              break;
+            }
+          }
+          if (!f) {
+            onLeavePassenger(pPassengerMovement[i].transform);
+          }
+        }
+      }
     }
     /// <summary>
     /// Ease movement formula
@@ -261,8 +305,8 @@ namespace UnityPlatformer {
           }
         }
 
-        if (onReachWaypoint != null) {
-          onReachWaypoint(fromWaypointIndex);
+        if (onWaypointEvent != null) {
+          onWaypointEvent(fromWaypointIndex);
         }
 
         nextMoveTime = Time.time + waitTime;
@@ -286,6 +330,7 @@ namespace UnityPlatformer {
     /// </summary>
     void CalculatePassengerMovement(Vector3 velocity) {
       HashSet<Transform> movedPassengers = new HashSet<Transform> ();
+      pPassengerMovement = passengerMovement;
       passengerMovement = new List<PassengerMovement> ();
 
       float directionY = Mathf.Sign (velocity.y);
@@ -313,7 +358,7 @@ namespace UnityPlatformer {
       if (
         // up
         (directionY == 1)
-        && // down
+        || // down
         (directionY == -1 && (!disableDownRayCast && !Configuration.IsOneWayPlatformUp(gameObject)))
       ) {
         RayItr itr = (ref RaycastHit2D ray, ref Vector3 vel, int dir, int idx) => {
@@ -434,7 +479,7 @@ namespace UnityPlatformer {
     /// <summary>
     /// Struct to store information about passenger movement
     /// </summary>
-    struct PassengerMovement {
+    public struct PassengerMovement {
       public Transform transform;
       public Vector3 velocity;
       public bool standingOnPlatform;
