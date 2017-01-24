@@ -151,15 +151,7 @@ namespace UnityPlatformer {
           break;
         }
 
-        BoxCollider2D box2d = GetComponent<BoxCollider2D>();
-        if (box2d != null) {
-          Gizmos.DrawWireCube(transform.position + (Vector3)box2d.offset, box2d.size);
-        } else {
-          CircleCollider2D circle2d = GetComponent<CircleCollider2D>();
-          if (circle2d != null) {
-            Gizmos.DrawWireSphere(transform.position + (Vector3)circle2d.offset, circle2d.radius);
-          } // TODO handle the rest
-        }
+        Utils.DrawCollider2D(gameObject);
         //Handles.Label(transform.position + new Vector3(-box.size.x * 0.5f, box.size.y * 0.5f, 0), "HitBox: " + type);
     }
 #endif

@@ -29,6 +29,10 @@ SOFTWARE.
 ﻿using UnityEngine;
 using System.Collections;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace UnityPlatformer {
   /// <summary>
   /// Raycast helper
@@ -353,5 +357,15 @@ namespace UnityPlatformer {
 
       return Raycast(origin, GetDownVector(), rayLength, collisionMask, Color.magenta);
     }
+
+#if UNITY_EDITOR
+    /// <summary>
+    /// Draw in the Editor mode
+    /// </summary>
+    [DrawGizmo(GizmoType.InSelectionHierarchy | GizmoType.NotInSelectionHierarchy)]
+    void OnDrawGizmos() {
+      Utils.DrawCollider2D(gameObject);
+    }
+#endif
   }
 }

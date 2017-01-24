@@ -98,8 +98,8 @@ namespace UnityPlatformer {
       }
 
       if ((
-        (pc2d.collisions.left && pc2d.collisions.leftIsWall) ||
-        (pc2d.collisions.right && pc2d.collisions.rightIsWall)
+        (pc2d.collisions.left && pc2d.collisions.leftIsWall && character.faceDir == Facing.Left) ||
+        (pc2d.collisions.right && pc2d.collisions.rightIsWall && character.faceDir == Facing.Right)
       ) &&
         !pc2d.collisions.below &&
         character.velocity.y < 0

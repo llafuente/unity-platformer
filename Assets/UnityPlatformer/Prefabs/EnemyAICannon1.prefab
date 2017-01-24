@@ -279,6 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alignment: 0
+  friendlyFire: 0
   startingHealth: 1
   maxHealth: 1
   startingLives: 1

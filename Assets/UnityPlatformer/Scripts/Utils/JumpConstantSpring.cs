@@ -10,7 +10,7 @@ namespace UnityPlatformer {
     /// <summary>
     /// Initial velocity
     /// </summary>
-    public float initialVelocity = 20;
+    public Vector2 initialVelocity = new Vector2(0, 20);
     /// <summary>
     /// Penetration in units
     /// </summary>
@@ -22,7 +22,7 @@ namespace UnityPlatformer {
     /// <summary>
     /// Constructor
     /// </summary>
-    public JumpConstantSpringProperties(float ivel, float pen, float mpenvel) {
+    public JumpConstantSpringProperties(Vector2 ivel, float pen, float mpenvel) {
       initialVelocity = ivel;
       penetration = pen;
       minPenetrationSpeed = mpenvel;
@@ -42,7 +42,7 @@ namespace UnityPlatformer {
     /// <summary>
     /// Initial velocity
     /// </summary>
-    public float initialVelocity;
+    public Vector2 initialVelocity;
     /// <summary>
     /// Penetration in units
     /// </summary>
@@ -57,7 +57,7 @@ namespace UnityPlatformer {
     /// <summary>
     /// Constructor
     /// </summary>
-    public JumpConstantSpring(Character _character, float _initialVelocity, float _penetration, float _minPenetrationSpeed) {
+    public JumpConstantSpring(Character _character, Vector2 _initialVelocity, float _penetration, float _minPenetrationSpeed) {
       character = _character;
       initialVelocity = _initialVelocity;
       penetration = _penetration;
@@ -104,7 +104,7 @@ namespace UnityPlatformer {
         // jump
         if (currentDeceleration != 0) {
           currentDeceleration = 0;
-          velocity.y = initialVelocity;
+          velocity = initialVelocity;
           // need to enter again, because before we were falling!
           character.EnterState(States.Jumping);
         } else if (velocity.y <= 0) {

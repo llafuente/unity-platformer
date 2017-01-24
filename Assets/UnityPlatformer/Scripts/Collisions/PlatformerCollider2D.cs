@@ -188,7 +188,7 @@ namespace UnityPlatformer {
     public Vector3 Move(Vector3 velocity, float delta) {
       gravitySwapped = gravity.y > 0;
 
-      Log.Silly("(PlatformerCollider2D) Move({0}, {1}, {2})", gameObject.name, velocity.ToString("F4"), delta);
+      Log.Silly("(PlatformerCollider2D) Move({0}, {1}, {2})", gameObject.GetFullName(), velocity.ToString("F4"), delta);
       // swap layers, this makes possible to collide with something inside
       // my own layer like boxes
       previousLayer = gameObject.layer;
@@ -263,7 +263,7 @@ namespace UnityPlatformer {
       b.center += velocity;
       b.Draw(transform, new Color(0,1,1,0.25f));
 
-      Log.Silly("(PlatformerCollider2D) Moved({0}, {1}, {2})", gameObject.name, velocity.ToString("F4"), delta);
+      Log.Silly("(PlatformerCollider2D) Moved({0}, {1}, {2})", gameObject.GetFullName(), velocity.ToString("F4"), delta);
 
       return velocity;
     }

@@ -4,7 +4,11 @@ namespace UnityPlatformer {
   /// </summary>
   public enum Alignment {
     None =                0,
+    // Player and player allied
     Allied =              1,
-    Enemy =               1 << 2
+    // Enemy side
+    Enemy =               1 << 2,
+    // meant to be all static damage the world made, like spikes!
+    World =               1 << 3,
   }
 }

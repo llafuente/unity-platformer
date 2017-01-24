@@ -36,6 +36,7 @@ namespace UnityPlatformer {
     OnGroundCrounching = OnGround | Crounch,
     NotRope = ~Rope,
     NotMeleeAttack = ~MeleeAttack,
+    OnMidAir = Jumping | Falling,
 
     //Dashing,
     //Frozen,

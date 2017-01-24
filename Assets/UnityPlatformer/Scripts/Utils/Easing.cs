@@ -7,8 +7,22 @@ namespace UnityPlatformer {
   /// http://theinstructionlimit.com/wp-content/uploads/2009/07/Easing.cs
   /// </summary>
   public static class Easing {
-    // Adapted from source : http://www.robertpenner.com/easing/
+    public static float Ease(double linearStep, EasingType type, EasingMethod method) {
+      switch (method) {
+      case EasingMethod.Ease:
+        return Ease(linearStep, 0, type);
+      case EasingMethod.EaseIn:
+        return EaseIn(linearStep, type);
+      case EasingMethod.EaseOut:
+        return EaseOut(linearStep, type);
+      case EasingMethod.EaseInOut:
+        return EaseInOut(linearStep, type);
+      }
 
+      throw new Exception("EasingMethod not found");
+    }
+
+    // Adapted from source : http://www.robertpenner.com/easing/
     public static float Ease(double linearStep, float acceleration, EasingType type) {
       float easedStep = acceleration > 0 ? EaseIn(linearStep, type) :
                 acceleration < 0 ? EaseOut(linearStep, type) :
@@ -26,6 +40,7 @@ namespace UnityPlatformer {
         case EasingType.Cubic:    return Power.EaseIn(linearStep, 3);
         case EasingType.Quartic:  return Power.EaseIn(linearStep, 4);
         case EasingType.Quintic:  return Power.EaseIn(linearStep, 5);
+        case EasingType.Bounce:  return Easing.BounceIn(linearStep);
       }
       throw new NotImplementedException();
     }
@@ -39,6 +54,7 @@ namespace UnityPlatformer {
         case EasingType.Cubic:    return Power.EaseOut(linearStep, 3);
         case EasingType.Quartic:  return Power.EaseOut(linearStep, 4);
         case EasingType.Quintic:  return Power.EaseOut(linearStep, 5);
+        case EasingType.Bounce:  return Easing.BounceOut(linearStep);
       }
       throw new NotImplementedException();
     }
@@ -55,8 +71,32 @@ namespace UnityPlatformer {
         case EasingType.Cubic:    return Power.EaseInOut(linearStep, 3);
         case EasingType.Quartic:  return Power.EaseInOut(linearStep, 4);
         case EasingType.Quintic:  return Power.EaseInOut(linearStep, 5);
+        case EasingType.Bounce:  return Easing.BounceInOut(linearStep);
       }
       throw new NotImplementedException();
+    }
+
+    static public float BounceIn(double x) {
+      return 1 - BounceOut(1 - x);
+    }
+
+    static public float BounceInOut(double x) {
+      return x < 0.5
+        ? (1 - BounceOut(1 - 2 * x)) / 2
+        : (1 + BounceOut(2 * x - 1)) / 2;
+    }
+
+    static public float BounceOut(double x) {
+      double n1 = 7.5625f;
+      double d1 = 2.75f;
+
+      return (float) (x < 1 / d1
+        ? n1 * x * x
+        : x < 2 / d1
+          ? n1 * (x -= (1.5d / d1)) * x + .75d
+          : x < 2.5d / d1
+            ? n1 * (x -= (2.25d / d1)) * x + 0.9375d
+            : n1 * (x -= (2.625d / d1)) * x + 0.984375d);
     }
 
     static class Sine {
@@ -88,6 +128,15 @@ namespace UnityPlatformer {
     }
   }
   /// <summary>
+  /// Easing method
+  /// </summary>
+  public enum EasingMethod {
+    Ease,
+    EaseIn,
+    EaseOut,
+    EaseInOut,
+  };
+  /// <summary>
   /// Easing types
   /// </summary>
   public enum EasingType {
@@ -97,7 +146,8 @@ namespace UnityPlatformer {
     Quadratic,
     Cubic,
     Quartic,
-    Quintic
+    Quintic,
+    Bounce
   }
   /// <summary>
   /// Math helper

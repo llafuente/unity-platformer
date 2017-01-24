@@ -8,9 +8,11 @@ namespace UnityPlatformer {
   /// Base class for Square trigger (BoxCollider2D)
   /// </summary>
   [RequireComponent (typeof (BoxCollider2D))]
+  [RequireComponent (typeof (Rigidbody2D))]
   public class BoxTileTrigger : MonoBehaviour {
     // cache
     internal BoxCollider2D body;
+    internal Rigidbody2D rb2d;
     internal Character[] characters;
     internal int charCount;
 
@@ -18,13 +20,18 @@ namespace UnityPlatformer {
     /// force BoxCollider2D to be trigger
     /// </summary>
     virtual public void Start() {
-      body = GetComponent<BoxCollider2D>();
-      body.isTrigger = true;
+      Reset();
+
       if (characters == null) {
         characters = new Character[5];
         charCount = 0;
       }
     }
+
+    virtual public void Reset() {
+      Utils.DynamicTrigger(gameObject);
+    }
+
     /// <summary>
     /// Get real-world-coordinates center
     /// </summary>
@@ -42,7 +49,7 @@ namespace UnityPlatformer {
     }
 
     /// <summary>
-    /// add character to the list
+    /// Add character to the list
     /// </summary>
     virtual public void CharacterEnter(Character p) {
       if (p == null) return;
@@ -50,7 +57,7 @@ namespace UnityPlatformer {
     }
 
     /// <summary>
-    /// remove character from the list
+    /// Remove character from the list
     /// </summary>
     virtual public void CharacterExit(Character p) {
       if (p == null) return;
@@ -68,6 +75,11 @@ namespace UnityPlatformer {
       }
     }
     /// <summary>
+    /// Do nothing
+    /// </summary>
+    virtual public void CharacterStay(Character p) {
+    }
+    /// <summary>
     /// if Hitbox with EnterAreas enter -> CharacterEnter
     /// </summary>
     public virtual void OnTriggerEnter2D(Collider2D o) {
@@ -83,6 +95,15 @@ namespace UnityPlatformer {
       HitBox h = o.GetComponent<HitBox>();
       if (h && h.type == HitBoxType.EnterAreas) {
         CharacterExit(h.owner.GetComponent<Character>());
+      }
+    }
+    /// <summary>
+    /// if Hitbox with EnterAreas leave -> CharacterExit
+    /// </summary>
+    public virtual void OnTriggerStay2D(Collider2D o) {
+      HitBox h = o.GetComponent<HitBox>();
+      if (h && h.type == HitBoxType.EnterAreas) {
+        CharacterStay(h.owner.GetComponent<Character>());
       }
     }
   }

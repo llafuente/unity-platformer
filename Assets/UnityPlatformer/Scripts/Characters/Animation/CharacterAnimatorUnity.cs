@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityPlatformer;
+using UnityEngine.Assertions;
 
 namespace UnityPlatformer {
   /// <summary>
@@ -19,6 +20,10 @@ namespace UnityPlatformer {
     /// <summary>
     /// call animator.Play
     /// </summary>
+    public override void Start() {
+      base.Start();
+      Assert.IsNotNull(animator, "(CharacterAnimatorUnity) Unnasigned property Animator at " + gameObject.GetFullName());
+    }
     public override void Play(string animation) {
       if (playing == animation) {
         return;
