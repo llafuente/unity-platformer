@@ -52,6 +52,7 @@ namespace UnityPlatformer {
     /// NOTE: this can give your character super powers! use it with caution!
     /// </summary>
     [Comment("List of damages that are ignored")]
+    [EnumFlagsAttribute]
     public DamageType immunity = 0;
     /// <summary>
     /// Fired when Character heal and now it's at maxHealth

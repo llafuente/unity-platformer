@@ -3,7 +3,7 @@ namespace UnityPlatformer {
   /// States in wich the Character can be.
   /// NOTE Some can overlap
   /// </summary>
-  public enum States {
+  public enum States : uint {
     None =                0,
     OnGround =            1,
     OnMovingPlatform =    3,
@@ -24,7 +24,9 @@ namespace UnityPlatformer {
     Rope =                1 << 16,
     Crounch =             1 << 17,
     Fence =               1 << 18,
+    Running =             1 << 19,
 
+    /*
     // debug states, so it can be displayed as text
     SlippingGrounded = Slipping | OnGround,
     MeleeAttackGrounded = MeleeAttack | OnGround,
@@ -34,9 +36,12 @@ namespace UnityPlatformer {
     OnGroundPushing = OnGround | Pushing,
     NotCrounching = ~Crounch,
     OnGroundCrounching = OnGround | Crounch,
+
+    NotRunning = ~Running,
     NotRope = ~Rope,
     NotMeleeAttack = ~MeleeAttack,
     OnMidAir = Jumping | Falling,
+    */
 
     //Dashing,
     //Frozen,

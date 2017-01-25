@@ -308,11 +308,17 @@ namespace UnityPlatformer {
     }
     /// <summary>
     /// Call given callback in given timeout
+    /// if timeout is &lt;= 0, will be called now.
     ///
     /// NOTE Do not use corountines because the can't hotswap
     /// Also corountines don't know if you modify timeScale this do.
     /// </summary>
     static public void SetTimeout(Action callback, float timeout) {
+      if (timeout <= 0.0f) {
+        callback();
+        return;
+      }
+
       LazyInit();
 
       if (instance.callbacksCount == instance.callbacks.Length) {

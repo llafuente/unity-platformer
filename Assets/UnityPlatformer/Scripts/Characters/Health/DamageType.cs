@@ -4,11 +4,7 @@ namespace UnityPlatformer {
   ///
   /// NOTE this should be edited in your game
   /// </summary>
-  public enum DamageType {
-    // this only makes sense when we speack about inmmunity
-    // just for editor purposes.
-    Everything = ~0,
-
+  public enum DamageType : uint {
     None =       0,
     Default =    1,
     Physical =   1 << 2,
@@ -18,6 +14,7 @@ namespace UnityPlatformer {
     Electrical = 1 << 6,
     Poison =     1 << 7,
     Shadow =     1 << 8,
+    Lethal =     1 << 9,
     // Choose your pain!
   };
 }

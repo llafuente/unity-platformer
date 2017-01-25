@@ -127,11 +127,7 @@ namespace UnityPlatformer {
     /// Destroy Projectile waiting destroyDelay if needed
     /// </summary>
     public virtual void Destroy() {
-      if (destroyDelay != 0f) {
-        UpdateManager.SetTimeout(DestroyNow, destroyDelay);
-        return;
-      }
-      DestroyNow();
+      UpdateManager.SetTimeout(DestroyNow, destroyDelay);
     }
     /// <summary>
     /// Real destroy method

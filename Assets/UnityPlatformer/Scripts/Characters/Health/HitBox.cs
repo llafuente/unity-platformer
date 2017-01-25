@@ -75,6 +75,7 @@ namespace UnityPlatformer {
     /// For example have a RecieveDamage while standing and other while crouching
     /// </summary>
     [Comment("Disable HitBox when character is any given state")]
+    [EnumFlagsAttribute]
     public States disableWhileOnState = States.None;
     /// <summary>
     /// Damage info, only used type=HitBoxType.DealDamage.
@@ -130,7 +131,11 @@ namespace UnityPlatformer {
     /// Return if the HitBox is disabled base on disableWhileOnState
     /// </summary>
     public bool IsDisabled() {
-      return owner.character.IsOnAnyState(disableWhileOnState);
+      if (disableWhileOnState != States.None) {
+        return false;
+      }
+
+      return !owner.character.IsOnState(disableWhileOnState);
     }
 
 #if UNITY_EDITOR
@@ -178,14 +183,14 @@ namespace UnityPlatformer {
       if (type == HitBoxType.DealDamage) {
         // source disabled?
         if (IsDisabled()) {
-          Log.Debug("{0} cannot deal damage it's disabled", this.gameObject.GetFullName());
+          Log.Debug("{0} cannot deal damage it's disabled {1} {2}", this.gameObject.GetFullName(), disableWhileOnState, owner.character.state);
           return;
         }
 
         //Debug.LogFormat("me {0} of {1} collide with {2}@{3}", name, owner, o.gameObject, o.gameObject.layer);
 
         var hitbox = o.gameObject.GetComponent<HitBox> ();
-        Log.Silly("o is a HitBox? {0}", hitbox);
+        Log.Silly("o is a HitBox? {0} at {0}", hitbox, o.gameObject.GetFullName());
         if (hitbox != null && hitbox.type == HitBoxType.RecieveDamage) {
           Log.Debug("Collide {0} with {1}", gameObject.GetFullName(), hitbox.gameObject.GetFullName());
           // target disabled?

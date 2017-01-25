@@ -84,8 +84,10 @@ namespace UnityPlatformer {
     /// </summary>
     public override void PerformAction(float delta) {
       if (running || alwaysRun) {
+        character.EnterStateGraceful(States.Running);
         Move(runSpeed, ref runVelocityXSmoothing, runAccelerationTime);
       } else {
+        character.ExitStateGraceful(States.Running);
         Move(speed, ref velocityXSmoothing, accelerationTime);
       }
     }
