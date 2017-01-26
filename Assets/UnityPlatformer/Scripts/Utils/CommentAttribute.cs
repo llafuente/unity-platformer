@@ -14,6 +14,7 @@ namespace UnityPlatformer {
     /// Comment
     /// </summary>
     public readonly string comment;
+    public readonly MessageType messageType = MessageType.Info;
     /// <summary>
     /// Constructor
     /// </summary>
@@ -25,11 +26,7 @@ namespace UnityPlatformer {
   /// Editor Drawer
   /// </summary>
   [CustomPropertyDrawer(typeof(CommentAttribute))]
-  public class CommentDrawer : PropertyDrawer {
-    /// <summary>
-    /// Default height
-    /// </summary>
-    protected float textHeight = 20.0f;
+  public class CommentDrawer : DecoratorDrawer {
     /// <summary>
     /// Getter CommentAttribute
     /// </summary>
@@ -39,32 +36,24 @@ namespace UnityPlatformer {
     /// <summary>
     /// Calc height needed, right now is always 20
     /// </summary>
-    public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
-      // TODO find a way to fix it and support multiple lines
-      // Rect labelRect = GUILayoutUtility.GetRect(new
-      // GUIContent(commentAttribute.comment), "label");
-      // textHeight = labelRect.height;
-      // textHeight = GUIStyle.CalcHeight(new
-      // GUIContent(commentAttribute.comment));
+    public override float GetHeight() {
+      GUIStyle style = "HelpBox";
 
-      //textHeight = 20;
-      //return textHeight + base.GetPropertyHeight(property, label);
-
-      return textHeight + EditorGUI.GetPropertyHeight(property, label, true);
+      return Mathf.Max(
+        style.CalcHeight(
+          new GUIContent(commentAttribute.comment),
+          Screen.width
+        ),
+        20
+      );
     }
     /// <summary>
     /// Draw
     /// </summary>
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
-      EditorGUI.LabelField(position, new GUIContent(commentAttribute.comment));
-      EditorGUI.indentLevel = 0;
-      position.y += textHeight;
-      position.height -= textHeight;
-
-
-      EditorGUI.PropertyField(position, property, label, true);
-      // NOTE this is buggy! do not use it!
-      //base.OnGUI(position, property, label);
+    public override void OnGUI(Rect position) {
+      // this include an icon, not needed...
+      //EditorGUI.HelpBox(position, commentAttribute.comment, commentAttribute.messageType);
+      EditorGUI.LabelField(position, commentAttribute.comment, EditorStyles.helpBox);
     }
   }
 

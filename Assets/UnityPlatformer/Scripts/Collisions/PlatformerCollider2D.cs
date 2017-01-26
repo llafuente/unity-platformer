@@ -48,6 +48,8 @@ namespace UnityPlatformer {
         return gravityOverride == Vector2.zero ? Configuration.instance.gravity : gravityOverride;
       }
     }
+    [Comment("Terminal velocity must be positive (only Y used atm).")]
+    public Vector2 terminalVelocity = new Vector2(50, 25);
     /// <summary>
     /// Maximum angle the collider can walk-up
     /// </summary>

@@ -131,7 +131,7 @@ namespace UnityPlatformer {
     /// Current Track
     /// </summary>
     [HideInInspector]
-    public Track track;
+    public TrackData track;
     /// <summary>
     /// Current MovingPlatform
     /// </summary>
@@ -385,6 +385,13 @@ namespace UnityPlatformer {
       if (onBeforeMove != null) {
         onBeforeMove(this, delta);
       }
+
+      // check velocity don't exceed terminalVelocity
+      // Limit X
+      //velocity.x = Mathf.Min(velocity.x, pc2d.terminalVelocity.x);
+      //velocity.x = Mathf.Max(velocity.x, -pc2d.terminalVelocity.x);
+      // Limit Y but only freefall
+      velocity.y = Mathf.Max(velocity.y, -pc2d.terminalVelocity.y);
 
       movedLastFrame = pc2d.Move((velocity + worldVelocity) * delta, delta);
 

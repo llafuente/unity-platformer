@@ -107,7 +107,7 @@ namespace UnityPlatformer {
       character.velocity.x = Mathf.SmoothDamp (
         character.velocity.x,
         targetVelocityX,
-        ref velocityXSmoothing,
+        ref smoothing,
         accTime
       );
     }
