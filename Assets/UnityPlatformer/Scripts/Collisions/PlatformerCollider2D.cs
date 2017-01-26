@@ -196,14 +196,15 @@ namespace UnityPlatformer {
 
       UpdateRaycastOrigins();
 
-      // debug
-      var b = bounds;
-      b.Draw(transform, new Color(1,1,1, 0.25f));
-      b.center += velocity;
-      b.Draw(transform, new Color(0,0,1, 0.5f));
-      b.Expand(minDistanceToEnv * 2);
-      //b.center -= new Vector3(minDistanceToEnv, minDistanceToEnv, 0);
-      b.Draw(transform, new Color(0,0,1, 0.75f));
+      if (debug) {
+        var b = bounds;
+        b.Draw(transform, new Color(1,1,1, 0.25f));
+        b.center += velocity;
+        b.Draw(transform, new Color(0,0,1, 0.5f));
+        b.Expand(minDistanceToEnv * 2);
+        //b.center -= new Vector3(minDistanceToEnv, minDistanceToEnv, 0);
+        b.Draw(transform, new Color(0,0,1, 0.75f));
+      }
 
       // set previous collisions and reset current one
       pCollisions = collisions.Clone();
@@ -259,9 +260,9 @@ namespace UnityPlatformer {
 
       gameObject.layer = previousLayer;
 
-      b = bounds;
-      b.center += velocity;
-      b.Draw(transform, new Color(0,1,1,0.25f));
+      var bb = bounds;
+      bb.center += velocity;
+      bb.Draw(transform, new Color(0,1,1,0.25f));
 
       Log.Silly("(PlatformerCollider2D) Moved({0}, {1}, {2})", gameObject.GetFullName(), velocity.ToString("F4"), delta);
 

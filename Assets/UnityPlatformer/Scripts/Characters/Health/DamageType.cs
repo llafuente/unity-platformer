@@ -4,8 +4,7 @@ namespace UnityPlatformer {
   ///
   /// NOTE this should be edited in your game
   /// </summary>
-  public enum DamageType : uint {
-    None =       0,
+  public enum DamageType {
     Default =    1,
     Physical =   1 << 2,
     Magical =    1 << 3,

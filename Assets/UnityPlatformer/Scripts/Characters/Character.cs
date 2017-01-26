@@ -439,15 +439,7 @@ namespace UnityPlatformer {
     /// Return if the Character is on any of the given states
     /// </summary>
     public bool IsOnAnyState(States _state) {
-      if (_state == 0) return false; // 0 means do not test
-
-      // Log.Debug("state {0} _state {1} state & _state {2}",
-      //   Convert.ToString((int)state, 2),
-      //   Convert.ToString((int)_state, 2),
-      //   Convert.ToString((int)(state & _state), 2)
-      // );
-
-      return (state & _state) != 0;
+      return ((int)state & (int)_state) != 0;
     }
     /// <summary>
     /// Return if the Character is on given area

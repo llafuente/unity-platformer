@@ -39,6 +39,7 @@ namespace UnityPlatformer {
   /// </summary>
   [RequireComponent (typeof (BoxCollider2D))]
   public class RaycastController : MonoBehaviour {
+    public bool debug = false;
     /// <summary>
     /// Static geometry mask
     /// </summary>
@@ -160,12 +161,14 @@ namespace UnityPlatformer {
     /// Call Physics2D.Raycast and Draw the ray to debug
     /// </summary>
     public RaycastHit2D Raycast(Vector2 origin, Vector2 direction, float rayLength, int mask, Color? color = null) {
-      Debug.DrawRay(origin, direction * rayLength, color ?? Color.red);
+      if (debug) {
+        Debug.DrawRay(origin, direction * rayLength, color ?? Color.red);
 
-      Vector3 right = Quaternion.LookRotation(direction) * Quaternion.Euler(0,220,0) * new Vector3(0,0,1);
-      Vector3 left = Quaternion.LookRotation(direction) * Quaternion.Euler(0,140,0) * new Vector3(0,0,1);
-      Debug.DrawRay(origin + direction * rayLength, right * rayLength * 0.2f, color ?? Color.red);
-      Debug.DrawRay(origin + direction * rayLength, left * rayLength * 0.2f, color ?? Color.red);
+        Vector3 right = Quaternion.LookRotation(direction) * Quaternion.Euler(0,220,0) * new Vector3(0,0,1);
+        Vector3 left = Quaternion.LookRotation(direction) * Quaternion.Euler(0,140,0) * new Vector3(0,0,1);
+        Debug.DrawRay(origin + direction * rayLength, right * rayLength * 0.2f, color ?? Color.red);
+        Debug.DrawRay(origin + direction * rayLength, left * rayLength * 0.2f, color ?? Color.red);
+      }
 
       return Physics2D.Raycast(origin, direction, rayLength, mask);
     }

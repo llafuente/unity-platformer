@@ -13,22 +13,7 @@ namespace UnityPlatformer {
     /// TODO do something...
     /// </summary>
     public override void OnDeath() {
-      Debug.Log("stop enemy updating!");
       UpdateManager.Remove (this);
-    }
-    /// <summary>
-    /// sync UpdateManager
-    /// </summary>
-    public override void OnEnable() {
-      base.OnEnable();
-      UpdateManager.Push(this, Configuration.instance.charactersPriority);
-    }
-    /// <summary>
-    /// sync UpdateManager
-    /// </summary>
-    public override void OnDisable() {
-      base.OnDisable();
-      UpdateManager.Remove(this);
     }
     /// <summary>
     /// just do nothing!

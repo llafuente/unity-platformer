@@ -62,6 +62,12 @@ namespace UnityPlatformer {
       character.onStateChange += OnStateChange;
     }
     /// <summary>
+    /// Set character to a parent component if found
+    /// </summary>
+    void Reset() {
+      character = GetComponentInParent<Character>();
+    }
+    /// <summary>
     /// sync UpdateManager
     /// </summary>
     public virtual void OnEnable() {

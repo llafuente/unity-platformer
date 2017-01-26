@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -67,16 +68,16 @@ namespace UnityPlatformer {
     /// Can i deal damage to myself?
     /// </summary>
     public bool dealDamageToSelf = false;
-
+    public bool alwaysEnabled = true;
     /// <summary>
     /// this allow to implement diferent HitBoxes depending on the
     /// Character State
     ///
     /// For example have a RecieveDamage while standing and other while crouching
     /// </summary>
-    [Comment("Disable HitBox when character is any given state")]
-    [EnumFlagsAttribute]
-    public States disableWhileOnState = States.None;
+    [DisableIf("alwaysEnabled", order = 0)]
+    [EnumFlagsAttribute(order = 1)]
+    public StatesMask enabledOnStates = 0;
     /// <summary>
     /// Damage info, only used type=HitBoxType.DealDamage.
     /// </summary>
@@ -128,14 +129,10 @@ namespace UnityPlatformer {
     }
 #endif
     /// <summary>
-    /// Return if the HitBox is disabled base on disableWhileOnState
+    /// Return if the HitBox is disabled base on enabledOnStates
     /// </summary>
     public bool IsDisabled() {
-      if (disableWhileOnState != States.None) {
-        return false;
-      }
-
-      return !owner.character.IsOnState(disableWhileOnState);
+      return alwaysEnabled ? false : owner.character.IsOnAnyState((States) enabledOnStates);
     }
 
 #if UNITY_EDITOR
@@ -183,7 +180,7 @@ namespace UnityPlatformer {
       if (type == HitBoxType.DealDamage) {
         // source disabled?
         if (IsDisabled()) {
-          Log.Debug("{0} cannot deal damage it's disabled {1} {2}", this.gameObject.GetFullName(), disableWhileOnState, owner.character.state);
+          Log.Debug("{0} cannot deal damage it's disabled &Mask: {1}", this.gameObject.GetFullName(), Convert.ToString((int)owner.character.state & (int)enabledOnStates, 2));
           return;
         }
 
