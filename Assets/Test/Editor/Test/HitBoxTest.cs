@@ -28,7 +28,9 @@ namespace UnityPlatformer.Test {
       Assert.NotNull(umgr);
 
       char1 = new TestCharacter("char1");
+      char1.health.alignment = Alignment.Allied;
       char2 = new TestCharacter("char2");
+      char2.health.alignment = Alignment.Enemy;
     }
 
     [Test]

@@ -44,7 +44,9 @@ namespace UnityPlatformer.Test {
       Assert.NotNull(health);
       health.Start();
 
-      enterHitBox = charObj.CreateChild("entreAreas").AddComponent<HitBox>();
+      GameObject enterGO = charObj.CreateChild("enterAreas");
+      enterGO.AddComponent<BoxCollider2D>();
+      enterHitBox = enterGO.AddComponent<HitBox>();
       enterHitBox.type = HitBoxType.EnterAreas;
       enterHitBox.gameObject.layer = 1;
 
@@ -53,7 +55,9 @@ namespace UnityPlatformer.Test {
       enterHitBox.owner = health;
       enterHitBox.Start();
 
-      dealHitBox = charObj.CreateChild("dealHitBox").AddComponent<HitBox>();
+      GameObject dealGO = charObj.CreateChild("dealHitBox");
+      dealGO.AddComponent<BoxCollider2D>();
+      dealHitBox = dealGO.AddComponent<HitBox>();
       Assert.NotNull(dealHitBox);
 
       dealHitBox.type = HitBoxType.DealDamage;
@@ -69,7 +73,9 @@ namespace UnityPlatformer.Test {
       dealBox2D.size = new Vector2(1, 1);
       dealHitBox.Start();
 
-      recieveHitBox = charObj.CreateChild("recieveHitBox").AddComponent<HitBox>();
+      GameObject recieveGO = charObj.CreateChild("recieveHitBox");
+      recieveGO.AddComponent<BoxCollider2D>();
+      recieveHitBox = recieveGO.AddComponent<HitBox>();
       Assert.NotNull(recieveHitBox);
 
       recieveHitBox.type = HitBoxType.RecieveDamage;

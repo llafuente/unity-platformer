@@ -141,6 +141,7 @@ namespace UnityPlatformer.Test {
       Assert.NotNull(damage);
       damage.type = DamageType.Water;
       damage.causer = character2.GetComponent<CharacterHealth>();
+      damage.causer.alignment = Alignment.Enemy;
 
       health.Damage(damage);
       Assert.That(onHealCalled, Is.EqualTo(false));
@@ -230,12 +231,13 @@ namespace UnityPlatformer.Test {
 
       // TEST invulnerable to recieved damage
       var obj3 = new GameObject();
+      obj3.name = "Character3";
       var damage = obj3.AddComponent<Damage>();
       var character2 = obj3.AddComponent<Character>();
       Assert.NotNull(damage);
       damage.type = DamageType.Water;
       damage.causer = character2.GetComponent<CharacterHealth>();
-
+      damage.causer.alignment = Alignment.Enemy;
       health.Damage(damage);
       Assert.That(onHealCalled, Is.EqualTo(false));
       Assert.That(onDamageCalled, Is.EqualTo(true));

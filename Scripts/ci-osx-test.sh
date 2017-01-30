@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -ex
+
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
   -batchmode \
   -nographics \

@@ -8,7 +8,14 @@ using System;
 
 
 namespace UnityPlatformer {
+  [Serializable]
   public class LevelData {
+    /// <summary>
+    /// Scene name
+    /// </summary>
+    [Comment("Index of the scene in the 'Scenes In Build'")]
+    [Scene]
+    public int sceneIndex = 0;
     /// <summary>
     /// World number, to keep your data tide.
     /// </summary>
@@ -22,33 +29,21 @@ namespace UnityPlatformer {
     /// </summary>
     public bool isBonusLevel;
     /// <summary>
-    /// Is a menu?
+    /// Index of the next level
     /// </summary>
-    public bool isMenu;
+    [Scene]
+    public int nextLevel = 0;
     /// <summary>
-    /// Index of the next level\n
-    /// -1 means next index
+    /// levels that will be unlocked\n
+    /// Leave it empty to unlock the next level
     /// </summary>
-    public int nextLevel = -1;
-    /// <summary>
-    /// List of LevelData Indexes (@LevelManager) that will be unlocked
-    /// </summary>
+    [Comment("Levels that will be unlocked. Leave it empty to unlock the next level")]
+    [Scene]
     public int[] unlock;
     /// <summary>
-    /// Start locked?\n
-    /// NOTE main menu should be false
+    /// Start locked?
     /// </summary>
     public bool startLocked = true;
-    /// <summary>
-    /// Scene name
-    /// </summary>
-    public string sceneName;
-    /// <summary>
-    /// Is currently locked?\n
-    /// TODO persist
-    /// </summary>
-    [HideInInspector]
-    public int sceneId = 0;
     /// <summary>
     /// Is currently locked?\n
     /// TODO persist
