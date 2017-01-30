@@ -98,10 +98,6 @@ namespace UnityPlatformer {
         Assert.IsNotNull(box2d, "Missing MonoBehaviour BoxCollider2D at " + gameObject.GetFullName() + " because typem is EnterAreas");
       }
 
-      Collider2D body = GetComponent<Collider2D>();
-      Assert.IsNotNull(body, "Missing MonoBehaviour Collider2D at " + gameObject.GetFullName());
-      body.isTrigger = true;
-
       if (type == HitBoxType.EnterAreas) {
         if (owner.character.enterAreas != null && owner.character.enterAreas != this ) {
           Debug.LogWarning("Only one EnterAreas HitBox is allowed!");
@@ -109,11 +105,7 @@ namespace UnityPlatformer {
         owner.character.enterAreas = this;
       }
 
-      // all damage dealers need Rigidbody2D, so be sure
-      if (type == HitBoxType.DealDamage) {
-        Rigidbody2D rb2d = gameObject.GetOrAddComponent<Rigidbody2D>();
-        rb2d.gravityScale = 0.0f; // TODO REVIEW this is what everybody wants?
-      }
+      Utils.KinematicTrigger(gameObject);
     }
 #if UNITY_EDITOR
     /// <summary>
@@ -123,9 +115,7 @@ namespace UnityPlatformer {
       gameObject.layer = Configuration.instance.hitBoxesMask;
       owner = GetComponentInParent<CharacterHealth>();
 
-      Collider2D col2d = GetComponent<Collider2D>();
-      Assert.IsNotNull(col2d, "(HitBox) Missing Monobehaviour Collider2D at " + gameObject.GetFullName());
-      col2d.isTrigger = true;
+      Utils.KinematicTrigger(gameObject);
     }
 #endif
     /// <summary>

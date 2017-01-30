@@ -38,8 +38,9 @@ namespace UnityPlatformer {
   /// Raycast helper
   /// </summary>
   [RequireComponent (typeof (BoxCollider2D))]
-  public class RaycastController : MonoBehaviour {
+  public abstract class RaycastController : MonoBehaviour {
     public bool debug = false;
+    [Header("Raycast")]
     /// <summary>
     /// Static geometry mask
     /// </summary>
@@ -64,6 +65,16 @@ namespace UnityPlatformer {
     /// How many rays to check vertical collisions
     /// </summary>
     public int verticalRayCount = 4;
+    /// <summary>
+    /// Collider real height
+    /// </summary>
+    [HideInInspector]
+    public float height;
+    /// <summary>
+    /// Collider height
+    /// </summary>
+    [HideInInspector]
+    public Vector3 center;
     /// <summary>
     /// Horizontal space between vertical rays
     /// </summary>
@@ -101,6 +112,13 @@ namespace UnityPlatformer {
     /// Set at <see cref="PlatformerCollider2D.Move" />
     /// </summary>
     internal bool gravitySwapped;
+    public virtual void Start() {
+      height = box.bounds.size.y;
+      center = box.bounds.center;
+
+      box.size = new Vector2(box.size.x - minDistanceToEnv, box.size.y - minDistanceToEnv);
+      //box.offset = new Vector2(box.offset.x, box.offset.y + skinWidth);
+    }
     /// <summary>
     /// Recalculate everything
     /// </summary>

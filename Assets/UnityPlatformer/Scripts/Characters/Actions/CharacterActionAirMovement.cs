@@ -11,9 +11,9 @@ namespace UnityPlatformer {
     /// </summary>
     public override int WantsToUpdate(float delta) {
       // NOTE if Air/Ground are very different maybe:
-      // if (pc2d.IsOnGround(<frames>)) it's better
-      if (pc2d.collisions.below || character.IsOnState(States.Grabbing)) {
-        Reset();
+      // if (character.IsOnGround(<frames>)) it's better
+      if (character.collisions.below || character.IsOnState(States.Grabbing)) {
+        Clear();
         return 0;
       }
       return -1;

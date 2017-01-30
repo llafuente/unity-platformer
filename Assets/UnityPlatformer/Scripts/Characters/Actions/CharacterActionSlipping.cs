@@ -44,8 +44,8 @@ namespace UnityPlatformer {
       }
 
       // NOTE if Air/Ground are very different maybe:
-      // if (pc2d.IsOnGround(<frames>)) it's better
-      if (character.IsOnState(States.OnGround) && pc2d.collisions.slopeAngle > pc2d.maxClimbAngle) {
+      // if (character.IsOnGround(<frames>)) it's better
+      if (character.IsOnState(States.OnGround) && character.collisions.slopeAngle > character.maxClimbAngle) {
         return priority;
       }
       return 0;
@@ -58,9 +58,9 @@ namespace UnityPlatformer {
       velocityXSmoothing = 0;
       // TODO REVIEW this is to be sure the character stay colliding below, any side effects?
       character.velocity.y = 0;
-      character.velocity.x = minSpeed * Mathf.Sign(pc2d.collisions.slopeNormal.x);
+      character.velocity.x = minSpeed * Mathf.Sign(character.collisions.slopeNormal.x);
       character.EnterState(States.Slipping);
-      pc2d.ignoreDescendAngle = true;
+      character.ignoreDescendAngle = true;
     }
     /// <summary>
     /// Exit state
@@ -68,17 +68,17 @@ namespace UnityPlatformer {
     public override void LoseControl(float delta) {
       base.LoseControl(delta);
       character.ExitState(States.Slipping);
-      pc2d.ignoreDescendAngle = false;
+      character.ignoreDescendAngle = false;
     }
     /// <summary>
     /// Slipping down slope!
     /// </summary>
     public override void PerformAction(float delta) {
-      Vector3 slopeDir = pc2d.GetDownSlopeDir();
+      Vector3 slopeDir = character.GetDownSlopeDir();
 
       character.velocity.x = Mathf.SmoothDamp (
         character.velocity.x,
-        maxSpeed * Mathf.Sign(pc2d.collisions.slopeNormal.x) * Mathf.Abs(slopeDir.y),
+        maxSpeed * Mathf.Sign(character.collisions.slopeNormal.x) * Mathf.Abs(slopeDir.y),
         ref velocityXSmoothing,
         accelerationTime
       );

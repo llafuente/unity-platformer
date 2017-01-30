@@ -28,7 +28,7 @@ namespace UnityPlatformer {
     public override int WantsToUpdate(float delta) {
       if (
         character.IsOnArea(Areas.Item) &&
-        pc2d.collisions.below &&
+        character.collisions.below &&
         character.item.IsUsableBy(character) &&
         input.IsActionHeld(actionUse)
       ) {

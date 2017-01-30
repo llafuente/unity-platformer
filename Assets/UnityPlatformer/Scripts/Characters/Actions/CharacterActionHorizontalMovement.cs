@@ -75,7 +75,7 @@ namespace UnityPlatformer {
     /// <summary>
     /// Reset SmoothDamp
     /// </summary>
-    public void Reset() {
+    public void Clear() {
       velocityXSmoothing = 0;
       runVelocityXSmoothing = 0;
     }

@@ -96,14 +96,14 @@ namespace UnityPlatformer {
     public bool debug = false;
 
     void Start() {
-      focusArea = new FocusArea (target.pc2d.box.bounds, focusAreaSize);
+      focusArea = new FocusArea (target.box.bounds, focusAreaSize);
     }
 
     void LateUpdate() {
       if (target == null) {
         return; // just ignore
       }
-      focusArea.Update (target.pc2d.box.bounds);
+      focusArea.Update (target.box.bounds);
 
       Vector3 focusPosition = focusArea.centre + Vector2.up * verticalOffset;
 

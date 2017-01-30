@@ -12,9 +12,9 @@ namespace UnityPlatformer {
   /// into 'readable' information for animations.<para />
   /// NOTE executionOrder should be -25
   /// </summary>
-  [RequireComponent (typeof (PlatformerCollider2D))]
   [RequireComponent (typeof (CharacterHealth))]
-  public class Character: MonoBehaviour, IUpdateEntity {
+  public class Character: PlatformerCollider2D, IUpdateEntity {
+    [Header("Character")]
     /// <summary>
     /// Delay before enter States.Falling.
     /// </summary>
@@ -156,19 +156,11 @@ namespace UnityPlatformer {
       }
     }
     /// <summary>
-    /// Character height
-    /// </summary>
-    public float height {
-      get {
-        return pc2d.GetComponent<BoxCollider2D>().bounds.size.y;
-      }
-    }
-    /// <summary>
     /// Character head position
     /// </summary>
     public Vector2 head {
       get {
-        return pc2d.raycastOrigins.topCenter;
+        return raycastOrigins.topCenter;
       }
     }
     /// <summary>
@@ -176,7 +168,7 @@ namespace UnityPlatformer {
     /// </summary>
     public Vector2 feet {
       get {
-        return pc2d.raycastOrigins.bottomCenter;
+        return raycastOrigins.bottomCenter;
       }
     }
     /// <summary>
@@ -198,11 +190,6 @@ namespace UnityPlatformer {
     /// </summary>
     [HideInInspector]
     public Vector3 movedLastFrame = Vector3.zero;
-    /// <summary>
-    /// Cache PlatformerCollider2D
-    /// </summary>
-    [HideInInspector]
-    public PlatformerCollider2D pc2d;
     /// <summary>
     /// Cache CharacterHealth
     /// </summary>
@@ -268,11 +255,6 @@ namespace UnityPlatformer {
     virtual public void Awake() {
       forceAnimation = null;
 
-      if (pc2d == null) {
-        Debug.Log("Start new Character: " + gameObject.GetFullName());
-        pc2d = GetComponent<PlatformerCollider2D> ();
-      }
-
       if (health == null) {
         health = GetComponent<CharacterHealth>();
         // TODO review how hotswapping behave in this case ?!
@@ -320,8 +302,8 @@ namespace UnityPlatformer {
       // before anything try to find if there is a ladder below
       // it's neccesary for ActionLadder&ActionCrounch
       // this is not the right place... but where?! to be unique
-      RaycastHit2D hit = pc2d.FeetRay(
-        pc2d.skinWidth * 2,
+      RaycastHit2D hit = FeetRay(
+        skinWidth * 2,
         Configuration.instance.laddersMask
       );
 
@@ -353,7 +335,7 @@ namespace UnityPlatformer {
       }
 
       // reset / defaults
-      pc2d.disableWorldCollisions = false;
+      disableWorldCollisions = false;
       PostUpdateActions a = PostUpdateActions.WORLD_COLLISIONS | PostUpdateActions.APPLY_GRAVITY;
 
       if (action != null) {
@@ -367,11 +349,11 @@ namespace UnityPlatformer {
 
       if (BitOn((int)a, (int)PostUpdateActions.APPLY_GRAVITY)) {
         // TODO REVIEW x/y gravity...
-        velocity.y += pc2d.gravity.y * delta;
+        velocity.y += gravity.y * delta;
       }
 
       if (!BitOn((int)a, (int)PostUpdateActions.WORLD_COLLISIONS)) {
-        pc2d.disableWorldCollisions = true;
+        disableWorldCollisions = true;
       }
 
       if (Mathf.Abs(velocity.x) < minVelocity) {
@@ -388,12 +370,12 @@ namespace UnityPlatformer {
 
       // check velocity don't exceed terminalVelocity
       // Limit X
-      //velocity.x = Mathf.Min(velocity.x, pc2d.terminalVelocity.x);
-      //velocity.x = Mathf.Max(velocity.x, -pc2d.terminalVelocity.x);
+      //velocity.x = Mathf.Min(velocity.x, terminalVelocity.x);
+      //velocity.x = Mathf.Max(velocity.x, -terminalVelocity.x);
       // Limit Y but only freefall
-      velocity.y = Mathf.Max(velocity.y, -pc2d.terminalVelocity.y);
+      velocity.y = Mathf.Max(velocity.y, -terminalVelocity.y);
 
-      movedLastFrame = pc2d.Move((velocity + worldVelocity) * delta, delta);
+      movedLastFrame = Move((velocity + worldVelocity) * delta, delta);
 
       if (onAfterMove != null) {
         onAfterMove(this, delta);
@@ -401,11 +383,11 @@ namespace UnityPlatformer {
 
 
       // this is meant to fix jump and falling hit something unexpected
-      if (pc2d.collisions.above || pc2d.collisions.below) {
+      if (collisions.above || collisions.below) {
         velocity.y = 0;
       }
 
-      if (pc2d.collisions.below) {
+      if (collisions.below) {
         fallingCD.Reset();
         groundCD.Reset();
         EnterStateGraceful(States.OnGround);
@@ -488,7 +470,7 @@ namespace UnityPlatformer {
         jumpStart = transform.position;
         // temporary disable slopes because jump initial velocity.y
         // was modified by ClimbSlope & DescendSlope
-        pc2d.DisableSlopes(0.1f);
+        DisableSlopes(0.1f);
       }
 
       if (a == States.Falling) {
@@ -573,15 +555,10 @@ namespace UnityPlatformer {
       Debug.Log("Player die! play some fancy animation!");
     }
     /// <summary>
-    /// Get Character center position
-    /// </summary>
-    public virtual Vector3 GetCenter() {
-      return pc2d.GetComponent<BoxCollider2D>().bounds.center;
-    }
-    /// <summary>
     /// sync UpdateManager
     /// </summary>
-    public virtual void OnEnable() {
+    public override void OnEnable() {
+      base.OnEnable();
       Awake();
       UpdateManager.Push(this, Configuration.instance.charactersPriority);
     }
@@ -623,7 +600,7 @@ namespace UnityPlatformer {
     /// NOTE ray origin is raycastOrigins.bottomLeft
     /// </summary>
     public bool IsGroundOnLeft(float rayLengthFactor, float delta, Vector3? vel = null) {
-      RaycastHit2D hit = pc2d.LeftFeetRay(pc2d.skinWidth * rayLengthFactor, (vel ?? velocity) * delta);
+      RaycastHit2D hit = LeftFeetRay(skinWidth * rayLengthFactor, (vel ?? velocity) * delta);
 
       return hit.collider != null;
     }
@@ -632,7 +609,7 @@ namespace UnityPlatformer {
     /// NOTE ray origin is raycastOrigins.bottomRight
     /// </summary>
     public bool IsGroundOnRight(float rayLengthFactor, float delta, Vector3? vel = null) {
-      RaycastHit2D hit = pc2d.RightFeetRay(pc2d.skinWidth * rayLengthFactor, (vel ?? velocity) * delta);
+      RaycastHit2D hit = RightFeetRay(skinWidth * rayLengthFactor, (vel ?? velocity) * delta);
 
       return hit.collider != null;
     }
@@ -657,10 +634,10 @@ namespace UnityPlatformer {
     /// Is there a box on given direction?
     /// </summary>
     public bool IsBox(Directions dir) {
-      PlatformerCollider2D.Contacts[] contacts = pc2d.collisions.contacts;
+      PlatformerCollider2D.Contacts[] contacts = collisions.contacts;
 
       bool valid_box = false;
-      for (int i = 0; i < pc2d.collisions.contactsCount; ++i) {
+      for (int i = 0; i < collisions.contactsCount; ++i) {
         if (contacts[i].dir != dir) continue;
 
         Box b = contacts[i].hit.collider.gameObject.GetComponent<Box>();
@@ -671,8 +648,8 @@ namespace UnityPlatformer {
               // the box cannot be falling!
               (b.boxCharacter.IsOnState(States.Falling)) ||
               // box cannot be colliding against anything in the movement direction
-              (dir == Directions.Right && b.boxCharacter.pc2d.collisions.right) ||
-              (dir == Directions.Left && b.boxCharacter.pc2d.collisions.left)
+              (dir == Directions.Right && b.boxCharacter.collisions.right) ||
+              (dir == Directions.Left && b.boxCharacter.collisions.left)
               ) {
               continue;
             }
@@ -688,12 +665,12 @@ namespace UnityPlatformer {
     /// Get the lowest box (the one Character Pull/Push)
     /// </summary>
     public Box GetLowestBox(Directions dir) {
-      PlatformerCollider2D.Contacts[] contacts = pc2d.collisions.contacts;
+      PlatformerCollider2D.Contacts[] contacts = collisions.contacts;
       // sarch the lowest box and push it
       float minY = Mathf.Infinity;
       int index = -1;
-      Log.Silly("(Push) PushBox.count {0}", pc2d.collisions.contactsCount);
-      for (int i = 0; i < pc2d.collisions.contactsCount; ++i) {
+      Log.Silly("(Push) PushBox.count {0}", collisions.contactsCount);
+      for (int i = 0; i < collisions.contactsCount; ++i) {
         if (contacts[i].dir != dir) continue;
 
         Box b = contacts[i].hit.collider.gameObject.GetComponent<Box>();

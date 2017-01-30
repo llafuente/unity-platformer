@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using System.Reflection;
+
 
 namespace UnityPlatformer {
   /// <summary>
@@ -33,6 +35,24 @@ namespace UnityPlatformer {
 
     override public void Update() {
       base.Update ();
+
+      string states = "";
+      Type typ = typeof(StatesMask);
+      FieldInfo[] fields = typ.GetFields();
+      int[] values = (int[]) Enum.GetValues(typ);
+      int i = 0;
+      foreach (var item in fields) { /*Enum.GetValues(typeof(StatesMask))) {*/
+        if (item.Name == "value__") {
+          continue;
+        }
+
+        if (((int)values[i] & (int)character.state) != 0) {
+          states += item.Name + ",";
+        }
+
+        ++i;
+      }
+
       text += string.Format(
         "Area: {0}\n"+
         "State: {1}\n"+
@@ -45,13 +65,13 @@ namespace UnityPlatformer {
         "Jump: {6}\n" +
         "Velocity: {7} - {8}\n",
         character.area.ToString(),
-        character.state.ToString(),
+        states,
         character.ladder ? character.ladder.gameObject : null,
         character.ladder ? character.ladder.IsAboveTop(character, character.feet) : false,
         character.ladder ? character.ladder.IsBelowBottom(character, character.feet) : false,
         character.platform,
         character.lastJumpDistance,
-        character.velocity.ToString("F4"), character.pc2d.collisions.velocity.ToString("F4"),
+        character.velocity.ToString("F4"), character.collisions.velocity.ToString("F4"),
         character.liquid,
         character.liquid ? character.liquid.IsBelowSurface(character, 1.5f) : false,
         character.liquid ? character.liquid.DistanceToSurface(character, 1.5f) : -1,

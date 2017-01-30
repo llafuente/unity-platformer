@@ -63,7 +63,7 @@ namespace UnityPlatformer {
     }
 
     public override int WantsToUpdate(float delta) {
-      if (!pc2d.collisions.below) {
+      if (!character.collisions.below) {
         return 0;
       }
 
@@ -134,7 +134,7 @@ namespace UnityPlatformer {
 
       Box b = character.GetLowestBox(dir);
       if (b) {
-        b.boxCharacter.pc2d.Move(velocity, delta);
+        b.boxCharacter.Move(velocity, delta);
         b.boxMovingPlatform.PlatformerUpdate(delta);
       }
     }

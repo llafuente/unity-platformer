@@ -15,7 +15,7 @@ namespace UnityPlatformer {
     /// Oppose gravity, do not fall
     /// </summary>
     public override void PerformAction(float delta) {
-      character.velocity.y -= pc2d.gravity.y * delta;
+      character.velocity.y -= character.gravity.y * delta;
     }
     /// <summary>
     /// Always.

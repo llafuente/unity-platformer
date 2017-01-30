@@ -34,7 +34,8 @@ namespace UnityPlatformer {
   /// <summary>
   /// Handle collisions with the world
   /// </summary>
-  public class PlatformerCollider2D : RaycastController {
+  public abstract class PlatformerCollider2D : RaycastController {
+    [Header("Collider")]
     /// <summary>
     /// Override Configuration.gravity
     /// </summary>
@@ -81,7 +82,7 @@ namespace UnityPlatformer {
     /// enter another object by accident and we handle less collisions
     /// but has many drawbacks, that can't be solved atm, like OneWayPlatforms
     /// </summary>
-    bool useRigidbody2D = false;
+    public bool useRigidbody2D = false;
     /// <summary>
     /// Collider hit a wall on right side
     /// </summary>
@@ -145,11 +146,13 @@ namespace UnityPlatformer {
     /// <summary>
     /// Initialization
     /// <summary>
-    public virtual void Start() {
+    public override void Start() {
+      base.Start();
       collisions = new CollisionInfo();
 
       if (useRigidbody2D) {
         rigidBody2D = GetComponent<Rigidbody2D>();
+        rigidBody2D.gravityScale = 0.0f; // we handle gravity thx!
       }
     }
     /// <summary>
@@ -253,6 +256,7 @@ namespace UnityPlatformer {
       }
 
       if (useRigidbody2D) {
+        //rigidBody2D.AddForce((Vector2)velocity, ForceMode2D.Impulse);
         rigidBody2D.velocity = velocity / delta;
       } else {
         transform.Translate(velocity);

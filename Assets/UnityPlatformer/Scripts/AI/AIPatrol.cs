@@ -10,6 +10,7 @@ namespace UnityPlatformer {
   /// If no CharacterActionGroundMovement it will froze while on ground\n
   /// </summary>
   public class AIPatrol: Enemy {
+    [Header("Patrol")]
     /// <summary>
     /// Initial Facing
     /// </summary>
@@ -34,11 +35,11 @@ namespace UnityPlatformer {
     /// <summary>
     /// Listen onLeftWall, onRightWall and start moving
     /// </summary>
-    override public void Start() {
+    public override void Start() {
       base.Start();
 
-      pc2d.onLeftWall += OnLeftWall;
-      pc2d.onRightWall += OnRightWall;
+      onLeftWall += OnLeftWall;
+      onRightWall += OnRightWall;
 
       facing = initialFacing;
       input.SetX((float) facing);
@@ -88,7 +89,7 @@ namespace UnityPlatformer {
     /// Check that the Character do not fall
     /// </summary>
     public override void LatePlatformerUpdate(float delta) {
-      if (doNotFall && pc2d.collisions.belowFrames > 3) {
+      if (doNotFall && collisions.belowFrames > 3) {
         if (!IsGroundOnLeft (rayLengthFactor, delta) && velocity.x < 0) {
           OnLeftWall ();
         } else if (!IsGroundOnRight (rayLengthFactor, delta) && velocity.x > 0) {

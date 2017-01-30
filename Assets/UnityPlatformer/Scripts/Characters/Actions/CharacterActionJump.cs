@@ -125,12 +125,12 @@ namespace UnityPlatformer {
       text = string.Format("jumpHeld: {0}\nonGround: {1}\njumping: {2}\njumpStopped: {3}\nCondition: {4}\n" +
       "maxJumpVelocity: {5}\nminJumpVelocity: {6}\nhangFrames: {7}\napexFrames: {8}\nticks: {9}",
         jumpHeld,
-        pc2d.IsOnGround(_graceJumpFrames),
+        character.IsOnGround(_graceJumpFrames),
         jumping,
         jumpStopped,
         jumpStopped || (
           jumpHeld && (
-            pc2d.IsOnGround(_graceJumpFrames) || jumping
+            character.IsOnGround(_graceJumpFrames) || jumping
           )
         ),
 
@@ -153,7 +153,7 @@ namespace UnityPlatformer {
       }
 
       if (jumpHeld) {
-        if (pc2d.IsOnGround(_graceJumpFrames) && !jumping) {
+        if (character.IsOnGround(_graceJumpFrames) && !jumping) {
           currentJump = defaultJump;
           return priority;
         }
@@ -173,8 +173,8 @@ namespace UnityPlatformer {
     public override void PerformAction(float delta) {
       //Debug.LogFormat("jumpStopped {0} jumping {1} customJump {2}", jumpStopped, jumping, customJump);
       // last update to set 'exit' velocity
-      if (pc2d.leavingGround && !pc2d.collisions.below) {
-        pc2d.leavingGround = false;
+      if (character.leavingGround && !character.collisions.below) {
+        character.leavingGround = false;
       }
 
       if (jumpStopped) {
@@ -190,7 +190,7 @@ namespace UnityPlatformer {
         character.EnterState(States.Jumping);
         // leaving ground could lead to some inestability in the collider
         // use a max delay to leave ground in case jump is disabled too fast
-        pc2d.EnableLeaveGround(0.25f);
+        character.EnableLeaveGround(0.25f);
       } else {
         if (currentJump.IsHanging()) {
           character.EnterState(States.Hanging);

@@ -69,8 +69,8 @@ namespace UnityPlatformer {
       }
 
       if (change > 0) {
-        pc2d.enableSlopes = change == 1;
-        pc2d.leavingGround = change == 2;
+        character.enableSlopes = change == 1;
+        character.leavingGround = change == 2;
       }
     }
     /// <summary>
@@ -78,7 +78,7 @@ namespace UnityPlatformer {
     /// </summary>
     public override int WantsToUpdate(float delta) {
       // NOTE if Air/Ground are very different maybe:
-      // if (pc2d.IsOnGround(<frames>)) it's better
+      // if (character.IsOnGround(<frames>)) it's better
       if (character.liquid) {
         // liquid is very little
         if (character.liquid.body.size.y < liquidMinHeight) {
@@ -92,7 +92,7 @@ namespace UnityPlatformer {
           // this allow to walk-small-water
           character.EnterStateGraceful(States.Liquid);
           return -1;
-        } else if (character.pc2d.collisions.below) {
+        } else if (character.collisions.below) {
           // is in the water, touching floor, exit
           character.ExitStateGraceful(States.Liquid);
           return 0;

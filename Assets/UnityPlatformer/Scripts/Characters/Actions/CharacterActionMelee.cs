@@ -65,7 +65,7 @@ namespace UnityPlatformer {
       input.onActionUp += OnActionUp;
       input.onActionDown += OnActionDown;
 
-      Reset();
+      Clear();
     }
     /// <summary>
     /// input.onActionDown callabck
@@ -73,7 +73,7 @@ namespace UnityPlatformer {
     public void OnActionDown(string _action) {
       if (_action == action) {
         attackHeld = true;
-        Reset();
+        Clear();
       }
     }
     /// <summary>
@@ -83,13 +83,13 @@ namespace UnityPlatformer {
       // when button is up, reset, and allow a new jump
       if (_action == action) {
         attackHeld = false;
-        Reset();
+        Clear();
       }
     }
     /// <summary>
     /// Disable all areas
     /// </summary>
-    public void Reset() {
+    public void Clear() {
       for (var i = 0; i < damageAreas.Length; ++i) {
         damageAreas[i].area.SetActive(false);
       }

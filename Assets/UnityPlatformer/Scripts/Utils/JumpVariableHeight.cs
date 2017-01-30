@@ -74,8 +74,8 @@ namespace UnityPlatformer {
     /// Constructor
     /// </summary>
     public void Init(float timeToJumpApex, float minJumpHeight, float maxJumpHeight, float hangTime) {
-      maxJumpVelocity = Mathf.Abs(character.pc2d.gravity.y) * timeToJumpApex;
-      minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (character.pc2d.gravity.y) * minJumpHeight);
+      maxJumpVelocity = Mathf.Abs(character.gravity.y) * timeToJumpApex;
+      minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (character.gravity.y) * minJumpHeight);
       apexFrames = UpdateManager.GetFrameCount(timeToJumpApex);
       hangFrames = UpdateManager.GetFrameCount(hangTime);
     }
@@ -111,7 +111,7 @@ namespace UnityPlatformer {
       if (IsHanging()) {
         // hang time, opose Y gravity
         // TODO REVIEW disable gravity ?
-        velocity.y = -character.pc2d.gravity.y * Time.fixedDeltaTime;
+        velocity.y = -character.gravity.y * Time.fixedDeltaTime;
         return true;
       }
 

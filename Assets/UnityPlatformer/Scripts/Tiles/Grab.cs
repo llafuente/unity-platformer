@@ -18,7 +18,8 @@ namespace UnityPlatformer {
     /// <summary>
     /// Set layer to Configuration.ropesMask
     /// </summary>
-    void Reset() {
+    public override void Reset() {
+      base.Reset();
       gameObject.layer = Configuration.instance.grabablesMask;
     }
 #endif

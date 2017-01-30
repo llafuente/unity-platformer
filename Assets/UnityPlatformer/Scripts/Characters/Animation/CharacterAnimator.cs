@@ -91,14 +91,14 @@ namespace UnityPlatformer {
 
       if (rotateOnSlopes) {
         if (
-          character.pc2d.collisions.slopeAngle != 0 &&
-          character.pc2d.collisions.below &&
-          !character.pc2d.collisions.left &&
-          !character.pc2d.collisions.right &&
-          maxSlope > character.pc2d.collisions.slopeAngle
+          character.collisions.slopeAngle != 0 &&
+          character.collisions.below &&
+          !character.collisions.left &&
+          !character.collisions.right &&
+          maxSlope > character.collisions.slopeAngle
         ) {
-          float angle = 90 - Mathf.Atan2(character.pc2d.collisions.slopeNormal.y,
-          -character.pc2d.collisions.slopeNormal.x) * Mathf.Rad2Deg;
+          float angle = 90 - Mathf.Atan2(character.collisions.slopeNormal.y,
+          -character.collisions.slopeNormal.x) * Mathf.Rad2Deg;
 
           transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         } else {

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 
@@ -26,13 +27,13 @@ namespace UnityPlatformer {
       Reset();
 
       if (characters == null) {
-        characters = new Character[5];
+        characters = new Character[4];
         charCount = 0;
       }
     }
 
-    virtual public void Reset() {
-      Utils.DynamicTrigger(gameObject);
+    public virtual void Reset() {
+      Utils.KinematicTrigger(gameObject);
     }
 
     /// <summary>
@@ -56,6 +57,11 @@ namespace UnityPlatformer {
     /// </summary>
     virtual public void CharacterEnter(Character p) {
       if (p == null) return;
+
+      if (charCount == characters.Length) {
+        Array.Resize(ref characters, charCount + 4);
+      }
+
       characters[charCount++] = p;
     }
 

@@ -98,10 +98,10 @@ namespace UnityPlatformer {
       }
 
       if ((
-        (pc2d.collisions.left && pc2d.collisions.leftIsWall && character.faceDir == Facing.Left) ||
-        (pc2d.collisions.right && pc2d.collisions.rightIsWall && character.faceDir == Facing.Right)
+        (character.collisions.left && character.collisions.leftIsWall && character.faceDir == Facing.Left) ||
+        (character.collisions.right && character.collisions.rightIsWall && character.faceDir == Facing.Right)
       ) &&
-        !pc2d.collisions.below &&
+        !character.collisions.below &&
         character.velocity.y < 0
       ) {
         return priority;
@@ -124,13 +124,13 @@ namespace UnityPlatformer {
     public override void PerformAction(float delta) {
       ++slidingFrames;
 
-      int wallDirX = (pc2d.collisions.left) ? -1 : 1;
+      int wallDirX = (character.collisions.left) ? -1 : 1;
       float x = input.GetAxisRawX();
 
       // terminal velocity
       // NOTE apply -gravity to compensate
       if (character.velocity.y < -wallSlideSpeedMax) {
-        character.velocity.y = -wallSlideSpeedMax - character.pc2d.gravity.y * delta;
+        character.velocity.y = -wallSlideSpeedMax - character.gravity.y * delta;
       }
 
       // TODO manage in frames

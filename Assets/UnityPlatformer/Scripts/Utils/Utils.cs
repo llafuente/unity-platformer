@@ -16,9 +16,21 @@ namespace UnityPlatformer {
       Collider2D col2d = gameObject.GetComponent<Collider2D>();
       Assert.IsNotNull(col2d, "(Utils) Missing Monobehaviour Collider2D at " + gameObject.GetFullName());
       col2d.isTrigger = true;
-      Rigidbody2D rb2d = gameObject.GetComponent<Rigidbody2D>();
+      Rigidbody2D rb2d = gameObject.GetOrAddComponent<Rigidbody2D>();
       Assert.IsNotNull(col2d, "(Utils) Missing Monobehaviour Rigidbody2D at " + gameObject.GetFullName());
       rb2d.bodyType = RigidbodyType2D.Dynamic;
+      rb2d.sleepMode = RigidbodySleepMode2D.NeverSleep;
+      rb2d.gravityScale = 0.0f;
+    }
+
+    static public void KinematicTrigger(GameObject gameObject) {
+      // force trigger, dinamic and never sleep, so stay will be called every frame
+      Collider2D col2d = gameObject.GetComponent<Collider2D>();
+      Assert.IsNotNull(col2d, "(Utils) Missing Monobehaviour Collider2D at " + gameObject.GetFullName());
+      col2d.isTrigger = true;
+      Rigidbody2D rb2d = gameObject.GetOrAddComponent<Rigidbody2D>();
+      Assert.IsNotNull(col2d, "(Utils) Missing Monobehaviour Rigidbody2D at " + gameObject.GetFullName());
+      rb2d.bodyType = RigidbodyType2D.Kinematic;
       rb2d.sleepMode = RigidbodySleepMode2D.NeverSleep;
       rb2d.gravityScale = 0.0f;
     }

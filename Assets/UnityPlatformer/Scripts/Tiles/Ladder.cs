@@ -62,13 +62,13 @@ namespace UnityPlatformer {
     /// the next frame
     /// </summary>
     virtual public bool IsAboveTop(Character c, Vector2 pos) {
-      return pos.y > (GetTop().y - c.pc2d.minDistanceToEnv) + 0.001f;
+      return pos.y > (GetTop().y - c.minDistanceToEnv) + 0.001f;
     }
     /// <summary>
     /// Return if the Character is very close to the top
     /// </summary>
     virtual public bool IsAtTop(Character c, Vector2 pos) {
-      return Mathf.Abs(pos.y - GetTop().y) - c.pc2d.minDistanceToEnv < 0.001f;
+      return Mathf.Abs(pos.y - GetTop().y) - c.minDistanceToEnv < 0.001f;
     }
     /// <summary>
     /// Return if the character at given position will be above the botom
@@ -76,7 +76,7 @@ namespace UnityPlatformer {
     /// botom in the next frame
     /// </summary>
     virtual public bool IsBelowBottom(Character c, Vector2 pos) {
-      return pos.y < (GetBottom().y + c.pc2d.minDistanceToEnv) - 0.001f;
+      return pos.y < (GetBottom().y + c.minDistanceToEnv) - 0.001f;
     }
     /// <summary>
     /// Return if the Character is very close to the bottom
@@ -84,7 +84,7 @@ namespace UnityPlatformer {
     virtual public bool IsAtBottom(Character c, Vector2 pos) {
       float bottomY = GetBottom().y;
 
-      return Mathf.Abs(pos.y - bottomY) < c.pc2d.skinWidth;
+      return Mathf.Abs(pos.y - bottomY) < c.skinWidth;
     }
     /// <summary>
     /// Notify Character is on ladder area

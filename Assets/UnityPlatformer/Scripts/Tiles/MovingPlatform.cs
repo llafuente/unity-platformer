@@ -22,6 +22,7 @@ namespace UnityPlatformer {
   /// Moving Platform Tile
   /// </summary>
   public class MovingPlatform : RaycastController, IUpdateEntity {
+    [Header("Moving platform")]
     /// <summary>
     /// Mask of things that can be a passanger
     /// </summary>
@@ -130,7 +131,9 @@ namespace UnityPlatformer {
     /// <summary>
     /// Setup initial state
     /// </summary>
-    public virtual void Start () {
+    public override void Start() {
+      base.Start();
+
       // check that gameObject has a valid tag!
       if (!Configuration.IsMovingPlatform(gameObject)) {
         Debug.LogWarning("Found a MovingPlatform misstagged");

@@ -20,7 +20,7 @@ namespace UnityPlatformer {
     public override void PlatformerUpdate(float delta) {
       // jump after the delay
       if (
-        pc2d.collisions.belowFrames > UpdateManager.GetFrameCount(jumpDelay)
+        collisions.belowFrames > UpdateManager.GetFrameCount(jumpDelay)
         &&
         !IsOnState(States.Jumping)
       ) {
