@@ -222,8 +222,16 @@ namespace UnityPlatformer {
 
 
 
+    /// <summary>
+    /// Collision bound
+    /// </summary>
+    [HideInInspector]
+    public Bounds colBounds;
 
-    CharacterAction lastAction;
+    [HideInInspector]
+    public CharacterAction lastAction;
+    [HideInInspector]
+    public CharacterAction meleeInProgress;
     /// <summary>
     /// Cooldown for fallingTime
     /// </summary>
@@ -298,6 +306,7 @@ namespace UnityPlatformer {
     /// When all is done, fire events
     /// </summary>
     public virtual void PlatformerUpdate(float delta) {
+      colBounds = bounds;
 
       // before anything try to find if there is a ladder below
       // it's neccesary for ActionLadder&ActionCrounch
@@ -498,6 +507,29 @@ namespace UnityPlatformer {
       States before = state;
       state |= a;
 
+      // if is OnGround and doing nothing, is idling
+      Debug.LogFormat("{0} {1} {2}",
+        (state & States.OnGround) == States.OnGround,
+        velocity.x == 0,
+        (state & (
+            States.MeleeAttack | States.Slipping |
+            States.Pushing | States.Pulling
+          )) == 0
+        );
+
+      if (
+          (state & States.OnGround) != 0 &&
+          velocity.x == 0 &&
+          (state & (
+            States.MeleeAttack | States.Slipping |
+            States.Pushing | States.Pulling
+          )) == 0
+        ) {
+        state |= States.Idle;
+      } else {
+        state &= ~States.Idle;
+      }
+
       if (!privcall && onStateChange != null && before != state) {
         onStateChange(before, state);
       }
@@ -553,6 +585,8 @@ namespace UnityPlatformer {
     /// </summary>
     virtual public void OnDeath() {
       Debug.Log("Player die! play some fancy animation!");
+      UpdateManager.Remove (this);
+      // disable hitboxes
     }
     /// <summary>
     /// sync UpdateManager
@@ -702,6 +736,45 @@ namespace UnityPlatformer {
     /// </summary>
     static public bool BitOn(int a, int b) {
       return (a & b) == b;
+    }
+    /// <summary>
+    /// This is a smash/splash/squash test to kill character if needed
+    /// </summary>
+    void OnCollisionStay2D(Collision2D collisionInfo) {
+      //if (collisionInfo.collider.gameObject.layer == Configuration.instance.staticGeometryMask) {
+      if (collisionMask.Contains(collisionInfo.collider.gameObject.layer)) {
+        Vector3 max = colBounds.max;
+        Vector3 min = colBounds.min;
+
+
+
+        Debug.Log("OnCollisionStay!!" + collisionInfo.collider.gameObject.GetFullName());
+        foreach (ContactPoint2D contact in collisionInfo.contacts) {
+          //Debug.DrawRay(contact.point, contact.normal, Color.blue);
+          ((Vector3)contact.point).Draw();
+
+          if (contact.point.x - min.x < max.x - contact.point.x) {
+            min.x = contact.point.x;
+          } else {
+            max.x = contact.point.x;
+          }
+
+          if (contact.point.y - min.y < max.y - contact.point.y) {
+            min.y = contact.point.y;
+          } else {
+            max.y = contact.point.y;
+          }
+        }
+
+        colBounds.SetMinMax(min, max);
+
+        colBounds.Draw(transform, Color.blue);
+        if (bounds.size.x * bounds.size.y * 0.8 > colBounds.size.x * colBounds.size.y) {
+          Debug.Log("Character crushed!!!");
+          health.Kill();
+        }
+
+      }
     }
   }
 }

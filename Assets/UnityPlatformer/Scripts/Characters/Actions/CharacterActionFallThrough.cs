@@ -5,7 +5,7 @@ namespace UnityPlatformer {
   /// <summary>
   /// Fall through platforms while pressing down
   /// </summary>
-  public class CharacterActionMovingPlatforms: CharacterAction {
+  public class CharacterActionFallThrough: CharacterAction {
 
     public override int WantsToUpdate(float delta) {
       if (

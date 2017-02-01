@@ -92,6 +92,16 @@ namespace UnityPlatformer {
     [Space(20)]
     [Header("Layers")]
     /// <summary>
+    /// Mask name for static geometry
+    /// </summary>
+    public string staticGeometryLayerName = "StaticGeometry";
+    /// <summary>
+    /// Mask for static geometry
+    /// </summary>
+    [HideInInspector]
+    public LayerMask staticGeometryMask;
+
+    /// <summary>
     /// Mask name for Ladders
     /// </summary>
     public string laddersLayerName = "Ladders";
@@ -231,6 +241,7 @@ namespace UnityPlatformer {
     /// transform layer names to LayerMask
     /// </summary>
     void OnValidate() {
+      staticGeometryMask = LayerMask.NameToLayer(staticGeometryLayerName);
       laddersMask = LayerMask.NameToLayer(laddersLayerName);
       fencesMask = LayerMask.NameToLayer(fencesLayerName);
       ropesMask = LayerMask.NameToLayer(ropesLayerName);

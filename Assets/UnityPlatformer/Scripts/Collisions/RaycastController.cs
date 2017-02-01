@@ -143,7 +143,7 @@ namespace UnityPlatformer {
     public void UpdateInnerBounds() {
       bounds = box.bounds;
       // * 2 so it's shrink skinWidth by each side
-      bounds.Expand (skinWidth * -2);
+      //bounds.Expand (skinWidth * -2);
     }
     /// <summary>
     /// Recalculate raycastOrigins

@@ -21,3 +21,10 @@ install:
 script:
 - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ./Scripts/ci-osx-test.sh; fi;
 - if [ "$TRAVIS_OS_NAME" == "linux" ]; then ./Scripts/ci-linux-test.sh; fi;
+
+after_success: # print something readable
+- cat $(pwd)/unit-test-results.xml
+
+after_failure:
+- cat $(pwd)/log-unit-test.txt
+- cat $(pwd)/unit-test-results.xml

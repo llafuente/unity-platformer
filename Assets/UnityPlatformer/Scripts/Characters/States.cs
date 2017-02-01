@@ -25,6 +25,7 @@ namespace UnityPlatformer {
     Fence =               1 << 18,
     Walking =             1 << 19,
     Running =             1 << 20,
+    Idle =                1 << 21,
 
 
     // debug states, so it can be displayed as text
@@ -69,5 +70,6 @@ namespace UnityPlatformer {
     Fence =               1 << 18,
     Walking =             1 << 19,
     Running =             1 << 20,
+    Idle =                1 << 21,
   };
 }

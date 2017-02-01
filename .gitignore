@@ -48,3 +48,6 @@ External
 
 # UnityPlatformer log file
 log
+# unit-testing
+log-unit-test.txt
+unit-test-results.xml

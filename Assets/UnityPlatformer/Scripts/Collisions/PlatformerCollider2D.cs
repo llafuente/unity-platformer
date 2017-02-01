@@ -266,9 +266,11 @@ namespace UnityPlatformer {
 
       gameObject.layer = previousLayer;
 
-      var bb = bounds;
-      bb.center += velocity;
-      bb.Draw(transform, new Color(0,1,1,0.25f));
+      if (debug) {
+        var b = bounds;
+        b.center += velocity;
+        b.Draw(transform, new Color(0,1,1,0.25f));
+      }
 
       Log.Silly("(PlatformerCollider2D) Moved({0}, {1}, {2})", gameObject.GetFullName(), velocity.ToString("F4"), delta);
 
