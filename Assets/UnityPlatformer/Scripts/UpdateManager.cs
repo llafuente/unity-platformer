@@ -131,6 +131,16 @@ namespace UnityPlatformer {
         instance.callbacks = new Callback[10];
         instance.callbacksCount = 0;
       }
+
+      if (instance.delays == null) {
+        instance.delays = new Delay[10];
+        instance.delaysCount = 0;
+      }
+
+      if (instance.freeDelays == null) {
+        instance.freeDelays = new Delay[10];
+        instance.freeDelaysCount = 0;
+      }
     }
     /// <summary>
     /// LazyInit
@@ -265,6 +275,10 @@ namespace UnityPlatformer {
       //Debug.LogFormat("FixedUpdate start: {0} listeners: {1} callbacks: {2} delta {3} runningTime {4} -- {5}",
       //frame, frameListenersCount, callbacksCount, delta, runningTime, frameListeners);
 
+      for (int i = 0; i < instance.delaysCount - 1; ++i) {
+        instance.delays[i].Update(delta);
+      }
+
       // update entities
       for (int i = 0; i < frameListenersCount; ++i) {
         /*
@@ -368,6 +382,58 @@ namespace UnityPlatformer {
       }
 
       return false;
+    }
+
+    // Delays pool
+
+    [HideInInspector]
+    public Delay[] freeDelays;
+    [HideInInspector]
+    public int freeDelaysCount = 0;
+
+    [HideInInspector]
+    public Delay[] delays;
+    [HideInInspector]
+    public int delaysCount = 0;
+
+    static public Delay GetDelay(float time) {
+      LazyInit();
+
+      Delay d;
+      if (instance.freeDelaysCount > 0) {
+        --instance.freeDelaysCount;
+        d = instance.freeDelays[instance.freeDelaysCount];
+        d.Set(time);
+      } else {
+        d = new Delay(time);
+      }
+
+      if (instance.delaysCount == instance.delays.Length) {
+        Array.Resize(ref instance.delays, instance.delaysCount + 10);
+      }
+      instance.delays[instance.delaysCount] = d;
+      ++instance.delaysCount;
+
+      return d;
+    }
+
+    static public void DisposeDelay(Delay d) {
+      LazyInit();
+
+      int idx = Array.IndexOf(instance.delays, d);
+      Assert.IsTrue(idx != -1, "(UpdateManager) Can't find Delay sent, already disposed or create outside UpdateManager.GetDelay");
+
+      for (int i = idx; i < instance.delaysCount - 1; ++i) {
+        instance.delays[i] = instance.delays[i + 1];
+      }
+      --instance.delaysCount;
+
+
+      if (instance.freeDelaysCount == instance.freeDelays.Length) {
+        Array.Resize(ref instance.freeDelays, instance.freeDelaysCount + 10);
+      }
+      instance.freeDelays[instance.freeDelaysCount] = d;
+      ++instance.freeDelaysCount;
     }
   }
 }
