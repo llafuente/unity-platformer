@@ -6,15 +6,15 @@ namespace UnityPlatformer {
   /// <summary>
   /// Tile that force Character to Jump!
   /// </summary>
-  [RequireComponent (typeof (Collider2D))]
   [RequireComponent (typeof (Rigidbody2D))]
-  public class Jumper : MonoBehaviour {
+  public class Jumper : Physhic2DMonoBehaviour {
     /// <summary>
     /// Jump properties
     /// </summary>
     public JumpConstantSpringProperties jumpProperties;
 
-    public virtual void Start() {
+    public override void Start() {
+      base.Start();
       Reset();
     }
 
@@ -40,7 +40,7 @@ namespace UnityPlatformer {
     /// </summary>
     public virtual void OnTriggerEnter2D(Collider2D o) {
       Character p = o.GetComponent<Character>();
-      if (p) {
+      if (p != null) {
         StartJump(p);
       }
     }

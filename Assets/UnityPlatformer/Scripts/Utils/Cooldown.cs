@@ -41,7 +41,7 @@ namespace UnityPlatformer {
     /// <summary>
     /// Update cooldown
     /// </summary>
-    public void Update(float timeInSeconds) {
+    public void Set(float timeInSeconds) {
       seconds = timeInSeconds;
     }
     /// <summary>

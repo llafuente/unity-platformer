@@ -10,7 +10,7 @@ namespace UnityPlatformer {
   /// </summary>
   [RequireComponent (typeof (BoxCollider2D))]
   [RequireComponent (typeof (Rigidbody2D))]
-  public class BoxTileTrigger : MonoBehaviour {
+  public class BoxTileTrigger : Physhic2DMonoBehaviour {
     // cache
     [HideInInspector]
     public BoxCollider2D body;
@@ -22,7 +22,8 @@ namespace UnityPlatformer {
     /// <summary>
     /// force BoxCollider2D to be trigger
     /// </summary>
-    virtual public void Start() {
+    override public void Start() {
+      base.Start();
       body = GetComponent<BoxCollider2D>();
       Reset();
 

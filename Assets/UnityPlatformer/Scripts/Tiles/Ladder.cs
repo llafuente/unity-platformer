@@ -13,7 +13,7 @@ namespace UnityPlatformer {
   /// Ladder tile. Climb ladder
   /// </summary>
   [RequireComponent (typeof (BoxCollider2D))]
-  public class Ladder : MonoBehaviour {
+  public class Ladder : Physhic2DMonoBehaviour {
     /// <summary>
     /// true: Top is reachable (Ladder)
     /// false: Top is not reachable (Vine)
@@ -126,7 +126,7 @@ namespace UnityPlatformer {
         DisableLadder(h.owner.GetComponent<Character>());
       }
     }
-
+/*
 #if UNITY_EDITOR
     /// <summary>
     /// Draw in the editor
@@ -151,5 +151,6 @@ namespace UnityPlatformer {
       Handles.DrawSolidRectangleWithOutline(verts, new Color(1, 1, 0, 0.05f), new Color(0, 0, 0, 0.5f));
     }
 #endif
+*/
   }
 }
