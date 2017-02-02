@@ -4,6 +4,13 @@ using UnityEngine;
 // TODO honor UpdateManager.timeScale
 
 namespace UnityPlatformer {
+  public enum CharacterActionTimedState {
+    Ready,
+    Casting,
+    InProgress,
+    Cooldown
+  };
+
   /// <summary>
   /// Manage actions that has the loop: cast -> duration -> cooldown .
   ///
@@ -47,47 +54,59 @@ namespace UnityPlatformer {
     /// <summary>
     /// castTime in frames
     /// </summary>
-    protected int castFrames = 0;
+    protected Delay casting;
     /// <summary>
     /// durationTime in frames
     /// </summary>
-    protected int durationFrames = 0;
+    protected Delay inprogress;
     /// <summary>
     /// cooldownTime in frames
     /// </summary>
-    protected int cooldownFrames = 0;
-    /// <summary>
-    /// count frames the action is running
-    /// </summary>
-    protected int actionCounter = 0;
-    /// <summary>
-    /// counter for cooldown
-    /// </summary>
-    protected int cooldownCounter = 0;
-    /// <summary>
-    /// conver time to frames
-    /// </summary>
+    protected Delay cooldown;
+
+    protected CharacterActionTimedState state = CharacterActionTimedState.Ready;
+
     public override void OnEnable() {
       base.OnEnable();
 
-      castFrames = UpdateManager.GetFrameCount (castTime);
-      durationFrames = UpdateManager.GetFrameCount (durationTime);
-      cooldownFrames = UpdateManager.GetFrameCount (cooldownTime);
+      if (casting == null) {
+        casting = UpdateManager.GetDelay(castTime);
+      }
 
-      cooldownCounter = cooldownFrames + 1;
-      actionCounter = cooldownFrames + 1;
+      if (inprogress == null) {
+        inprogress = UpdateManager.GetDelay(castTime + durationTime);
+      }
+
+      if (cooldown == null) {
+        cooldown = UpdateManager.GetDelay(castTime + durationTime + cooldownTime);
+      }
+
+      casting.Clear();
+      inprogress.Clear();
+      cooldown.Clear();
+    }
+    public override void OnDisable() {
+      base.OnDisable();
+
+      UpdateManager.DisposeDelay(casting);
+      UpdateManager.DisposeDelay(inprogress);
+      UpdateManager.DisposeDelay(cooldown);
+
+      casting = null;
+      inprogress = null;
+      cooldown = null;
     }
     /// <summary>
     /// Start action!
     /// </summary>
-    public virtual void StartAction() {
-      cooldownCounter = 0;
-      actionCounter = 0;
+    public override void GainControl(float delta) {
+      base.GainControl(delta);
+
+      casting.Reset();
+      inprogress.Reset();
+      cooldown.Reset();
+      state = CharacterActionTimedState.Casting;
     }
-    /// <summary>
-    /// End action!
-    /// </summary>
-    public virtual void EndAction() {}
     /// <summary>
     /// interrupt current action
     /// </summary>
@@ -97,49 +116,55 @@ namespace UnityPlatformer {
         onInterrupt();
       }
 
-      actionCounter = cooldownFrames + 1;
       if (resetCooldown) {
-        cooldownCounter = cooldownFrames + 1;
+        casting.Clear();
+        inprogress.Clear();
+        cooldown.Clear();
       }
 
-      EndAction();
+      // TODO REVIEW call LoseControl manually...
     }
 
     /// <summary>
-    /// Casting time
+    /// in castTime?
     /// </summary>
     public bool IsCasting() {
-      return actionCounter < castFrames;
+      return !casting.Fulfilled();
     }
     /// <summary>
-    /// Attacking time
+    /// after castTime, in durationTime?
     /// </summary>
     public bool IsActionInProgress() {
-      return actionCounter - castFrames < durationFrames;
+      return !IsCasting() && !inprogress.Fulfilled();
     }
     /// <summary>
     /// attack ended
     /// </summary>
-    public bool IsActionComplete() {
-      return actionCounter - castFrames > durationFrames;
+    public bool IsDone() {
+      return inprogress.Fulfilled();
     }
     /// <summary>
     /// Can perform action?
     /// </summary>
     public bool IsCooldown() {
-      return cooldownCounter < cooldownFrames;
+      return cooldown.Fulfilled();
     }
 
     public override int WantsToUpdate(float delta) {
-      ++cooldownCounter; // update here, to handle cooldown properly
-      ++actionCounter;
-
-      if (actionCounter == durationFrames + castFrames) {
-        Log.Silly("(CharacterActionTimed) Attack ended!");
-        EndAction();
+      if (state == CharacterActionTimedState.Casting && casting.Fulfilled()) {
+        state = CharacterActionTimedState.InProgress;
       }
 
-      // this is not used... that's why we don't have priority in this action
+      if (state == CharacterActionTimedState.InProgress && inprogress.Fulfilled()) {
+        state = CharacterActionTimedState.Cooldown;
+      }
+
+      if (state == CharacterActionTimedState.Cooldown && cooldown.Fulfilled()) {
+        state = CharacterActionTimedState.Ready;
+      }
+
+      // NOTE this MUST not used...
+      // return desired priority at the sub-class
       return 0;
     }
   }

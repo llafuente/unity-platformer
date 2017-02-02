@@ -11,15 +11,6 @@ namespace UnityPlatformer {
     /// </summary>
     public AIInput input;
     /// <summary>
-    /// Listen death event
-    ///
-    /// TODO do something...
-    /// </summary>
-    public override void OnDeath() {
-      Debug.Log("stop enemy updating!");
-      UpdateManager.Remove (this);
-    }
-    /// <summary>
     /// check missconfiguration
     /// </summary>
     public override void Start() {

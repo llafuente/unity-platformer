@@ -35,7 +35,6 @@ namespace UnityPlatformer {
     /// Is ready? cooldown expired?
     /// </summary>
     public bool Fulfilled() {
-      Debug.LogFormat("Fulfilled() elapsedTime {0} >= refTime {1}", elapsedTime, refTime);
       return elapsedTime >= refTime;
     }
     /// <summary>
@@ -60,7 +59,7 @@ namespace UnityPlatformer {
       }
     }
     /// <summary>
-    /// Update with refTime, so it will be instantly fullfiled
+    /// Update with refTime, so it will be instantly fulfilled
     /// </summary>
     public void Clear() {
       Update(refTime);

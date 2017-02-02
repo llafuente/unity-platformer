@@ -118,9 +118,16 @@ namespace UnityPlatformer {
     /// </summary>
     public TimeChanged onTimeScaleChanged;
     /// <summary>
-    /// Initialize
+    /// Lazy Initialize if possible\n
+    /// Initialize if possible
     /// </summary>
-    static void LazyInit() {
+    /// <returns>If the UpdateManager is Initialized</returns>
+    static bool LazyInit() {
+      // Guard, when destroying scene OnDisable is called but it seems that
+      // sometimes the GameObject with UpdateManager is destroyed before
+      // the rest... this prevent null access
+      if (instance == null) return false;
+
       // NOTE this need to be initialized with new before resize, docs are wrong!
       if (instance.frameListeners == null) {
         instance.frameListeners = new ItemPrio[10];
@@ -141,6 +148,8 @@ namespace UnityPlatformer {
         instance.freeDelays = new Delay[10];
         instance.freeDelaysCount = 0;
       }
+
+      return true;
     }
     /// <summary>
     /// LazyInit
@@ -231,18 +240,16 @@ namespace UnityPlatformer {
     /// </summary>
     /// </returns>If it was removed</returns>
     static public bool Remove(IUpdateEntity entity) {
-      if (_instance == null) {
-        return false;
-      }
-
-      int idx = IndexOf(entity);
-      if (idx != -1) {
-        // frameListeners.Splice(idx, 1);
-        for (int i = idx; i < instance.frameListenersCount - 1; ++i) {
-          instance.frameListeners[i] = instance.frameListeners[i + 1];
+      if (LazyInit()) {
+        int idx = IndexOf(entity);
+        if (idx != -1) {
+          // frameListeners.Splice(idx, 1);
+          for (int i = idx; i < instance.frameListenersCount - 1; ++i) {
+            instance.frameListeners[i] = instance.frameListeners[i + 1];
+          }
+          --instance.frameListenersCount;
+          return true;
         }
-        --instance.frameListenersCount;
-        return true;
       }
 
       return false;
@@ -369,15 +376,15 @@ namespace UnityPlatformer {
     /// </summary>
     /// <returns>true if found, false if not found</returns>
     static public bool ClearTimeout(Action callback) {
-      LazyInit();
-
-      for (int i = 0; i < instance.callbacksCount; ++i) {
-        if (instance.callbacks[i].callback == callback) {
-          for (int j = i; j < instance.callbacksCount - 1; ++j) {
-            instance.callbacks[j] = instance.callbacks[j + 1];
+      if (LazyInit()) {
+        for (int i = 0; i < instance.callbacksCount; ++i) {
+          if (instance.callbacks[i].callback == callback) {
+            for (int j = i; j < instance.callbacksCount - 1; ++j) {
+              instance.callbacks[j] = instance.callbacks[j + 1];
+            }
+            --instance.callbacksCount;
+            return true;
           }
-          --instance.callbacksCount;
-          return true;
         }
       }
 
@@ -418,22 +425,22 @@ namespace UnityPlatformer {
     }
 
     static public void DisposeDelay(Delay d) {
-      LazyInit();
+      if (LazyInit()) {
+        int idx = Array.IndexOf(instance.delays, d);
+        Assert.IsTrue(idx != -1, "(UpdateManager) Can't find Delay sent, already disposed or create outside UpdateManager.GetDelay");
 
-      int idx = Array.IndexOf(instance.delays, d);
-      Assert.IsTrue(idx != -1, "(UpdateManager) Can't find Delay sent, already disposed or create outside UpdateManager.GetDelay");
+        for (int i = idx; i < instance.delaysCount - 1; ++i) {
+          instance.delays[i] = instance.delays[i + 1];
+        }
+        --instance.delaysCount;
 
-      for (int i = idx; i < instance.delaysCount - 1; ++i) {
-        instance.delays[i] = instance.delays[i + 1];
+
+        if (instance.freeDelaysCount == instance.freeDelays.Length) {
+          Array.Resize(ref instance.freeDelays, instance.freeDelaysCount + 10);
+        }
+        instance.freeDelays[instance.freeDelaysCount] = d;
+        ++instance.freeDelaysCount;
       }
-      --instance.delaysCount;
-
-
-      if (instance.freeDelaysCount == instance.freeDelays.Length) {
-        Array.Resize(ref instance.freeDelays, instance.freeDelaysCount + 10);
-      }
-      instance.freeDelays[instance.freeDelaysCount] = d;
-      ++instance.freeDelaysCount;
     }
   }
 }

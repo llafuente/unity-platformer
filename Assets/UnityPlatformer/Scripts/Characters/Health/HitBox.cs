@@ -68,16 +68,10 @@ namespace UnityPlatformer {
     /// Can i deal damage to myself?
     /// </summary>
     public bool dealDamageToSelf = false;
-    public bool alwaysEnabled = true;
     /// <summary>
-    /// this allow to implement diferent HitBoxes depending on the
-    /// Character State
-    ///
-    /// For example have a RecieveDamage while standing and other while crouching
+    /// Combo to check character state
     /// </summary>
-    [DisableIf("alwaysEnabled", order = 0)]
-    [EnumFlagsAttribute(order = 1)]
-    public StatesMask enabledOnStates = 0;
+    public CharacterStatesCheck characterState;
     /// <summary>
     /// Damage info, only used type=HitBoxType.DealDamage.
     /// </summary>
@@ -122,7 +116,7 @@ namespace UnityPlatformer {
     /// Return if the HitBox is disabled base on enabledOnStates
     /// </summary>
     public bool IsDisabled() {
-      return alwaysEnabled ? false : owner.character.IsOnAnyState((States) enabledOnStates);
+      return characterState.ValidStates(owner.character);
     }
 
 #if UNITY_EDITOR
@@ -154,7 +148,6 @@ namespace UnityPlatformer {
           return Configuration.instance.dealDamageMask;
         case HitBoxType.RecieveDamage:
           return Configuration.instance.recieveDamageMask;
-          break;
         case HitBoxType.EnterAreas:
           return Configuration.instance.enterAreasMask;
         }
@@ -166,11 +159,11 @@ namespace UnityPlatformer {
     /// I'm a DealDamage, o is RecieveDamage, then Deal Damage to it's owner!
     /// </summary>
     public void OnTriggerEnter2D(Collider2D o) {
-
+Log.Debug("" + o);
       if (type == HitBoxType.DealDamage) {
         // source disabled?
         if (IsDisabled()) {
-          Log.Debug("{0} cannot deal damage it's disabled &Mask: {1}", this.gameObject.GetFullName(), Convert.ToString((int)owner.character.state & (int)enabledOnStates, 2));
+          Log.Debug("{0} cannot deal damage it's disabled", this.gameObject.GetFullName());
           return;
         }
 

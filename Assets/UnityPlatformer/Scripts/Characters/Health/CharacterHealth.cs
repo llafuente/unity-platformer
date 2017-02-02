@@ -164,7 +164,7 @@ namespace UnityPlatformer {
     /// NOTE use float.MaxValue for unlimited time
     /// </summary>
     public void SetInvulnerable(float time) {
-      invulnerability.Update(time);
+      invulnerability.Set(time);
       invulnerability.Reset();
     }
     /// <summary>
@@ -192,7 +192,7 @@ namespace UnityPlatformer {
     /// </summary>
     public void Damage(Damage dmg) {
       Debug.LogFormat("Object: {0} recieve damage {1} health {2} from: {3}",
-        gameObject.name, dmg.amount, health, dmg.causer.gameObject.name);
+        gameObject.GetFullName(), dmg.amount, health, dmg.causer.gameObject.GetFullName());
 
       if (Damage(dmg.amount, dmg.type, dmg.causer)) {
         if (dmg.causer != null && dmg.causer.onHurt != null) {
@@ -297,6 +297,19 @@ namespace UnityPlatformer {
         }
       }
     }
+    public void DisableAllHitBoxes() {
+      Debug.Log(gameObject.GetFullName() + " disable all HitBox(es)");
+      var lch = GetComponentsInChildren<HitBox> ();
+      foreach (var x in lch) {
+         x.gameObject.SetActive(false);
+      }
+
+      Debug.Log(gameObject.GetFullName() + " disable all Damage(s)");
+      var ldt = GetComponentsInChildren<Damage> ();
+      foreach (var x in ldt) {
+         x.gameObject.SetActive(false);
+      }
+    }
     /// <summary>
     /// Disable HitBox(es) and DamageType(s)
     /// Trigger onDeath
@@ -310,19 +323,6 @@ namespace UnityPlatformer {
       }
 
       if (lives == 0) {
-        // game over
-        Debug.Log(gameObject.GetFullName() + " disable all HitBox(es)");
-        var lch = GetComponentsInChildren<HitBox> ();
-        foreach (var x in lch) {
-           x.gameObject.SetActive(false);
-        }
-
-        Debug.Log(gameObject.GetFullName() + " disable all Damage(s)");
-        var ldt = GetComponentsInChildren<Damage> ();
-        foreach (var x in ldt) {
-           x.gameObject.SetActive(false);
-        }
-
         if (onGameOver != null) {
           Debug.Log(gameObject.GetFullName() + " game-over!");
           onGameOver();

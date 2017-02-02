@@ -10,6 +10,8 @@ namespace UnityPlatformer {
   /// Use all data available at Character &amp; cia to know what to play
   /// </summary>
   public abstract class CharacterAnimator: MonoBehaviour, IUpdateEntity {
+    [Help("Do not scale this GameObject, scale children")]
+    [Space(10)]
     /// <summary>
     /// Character
     /// </summary>

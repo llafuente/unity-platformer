@@ -50,6 +50,7 @@ namespace UnityPlatformer {
   };
 
   public enum StatesMask {
+    None =                0,
     OnGround =            1,
     OnSlope =             1 << 2,
     Jumping =             1 << 3,

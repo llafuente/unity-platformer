@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 /// TODO animationName (so we could supports multiple melee attacks)
 
@@ -26,12 +27,18 @@ namespace UnityPlatformer {
       /// <summary>
       /// time in frames
       /// </summary>
-      internal int offsetFrame = 0;
+      [HideInInspector]
+      public float endAt = 0;
       /// <summary>
       /// is currently active
       /// </summary>
-      internal bool active = false;
-    }
+      [HideInInspector]
+      public bool active = false;
+    };
+    /// <summary>
+    /// Set forceAnimation at character if not empty
+    /// </summary>
+    public string forceAnimation = "";
     /// <summary>
     /// List of Damage areas, something like moving hitboxes
     /// </summary>
@@ -40,6 +47,10 @@ namespace UnityPlatformer {
     /// Input action name
     /// </summary>
     public string action = "Attack";
+    /// <summary>
+    /// Combo to check character state
+    /// </summary>
+    public CharacterStatesCheck characterState;
 
     [Space(10)]
 
@@ -51,16 +62,23 @@ namespace UnityPlatformer {
     /// <summary>
     /// listen action input events
     /// </summary>
-    bool attackHeld = false;
+    protected bool attackHeld = false;
+    protected float startTime = 0.0f;
 
     public override void OnEnable() {
       base.OnEnable();
 
-      damageAreas[0].startAt = damageAreas[0].offsetFrame = 0;
-      for (var i = 1; i < damageAreas.Length; ++i) {
-        damageAreas[i].offsetFrame = damageAreas[0].offsetFrame + UpdateManager.GetFrameCount (damageAreas[i].startAt);
-        // Debug.LogFormat("Offsetframes {0} - {1}", i, damageAreas[i].offsetFrame);
+      damageAreas[0].startAt = 0;
+      for (var i = 0; i < damageAreas.Length - 1; ++i) {
+        damageAreas[i].endAt = damageAreas[i + 1].startAt;
+
+        Assert.IsNotNull(damageAreas[i].area,
+          "CharacterActionMelee area[" + i +"] is required at " + gameObject.GetFullName());
+
+        Assert.IsTrue(damageAreas[i].startAt < durationTime,
+          "CharacterActionMelee area[" + i +"] startAt greater than durationTime at " + gameObject.GetFullName());
       }
+      damageAreas[damageAreas.Length - 1].endAt = durationTime;
 
       input.onActionUp += OnActionUp;
       input.onActionDown += OnActionDown;
@@ -97,18 +115,33 @@ namespace UnityPlatformer {
     /// <summary>
     /// EnterState
     /// </summary>
-    public override void StartAction() {
-      base.StartAction();
+    public override void GainControl(float delta) {
+      base.GainControl(delta);
 
       character.EnterState(States.MeleeAttack);
+      if (forceAnimation.Length != 0) {
+        character.forceAnimation = forceAnimation;
+      }
+
+      character.meleeInProgress = this;
+      startTime = UpdateManager.instance.runningTime;
+      character.turnAllowed = false;
     }
     /// <summary>
     /// ExitState
     /// </summary>
-    public override void EndAction() {
-      base.EndAction();
+    public override void LoseControl(float delta) {
+      base.LoseControl(delta);
 
       character.ExitState(States.MeleeAttack);
+      Clear();
+
+      if (character.forceAnimation == forceAnimation) {
+        character.forceAnimation = null;
+      }
+
+      character.meleeInProgress = null;
+      character.turnAllowed = true;
     }
     /// <summary>
     /// attackHeld &amp; and previous attack ended
@@ -118,13 +151,16 @@ namespace UnityPlatformer {
     public override int WantsToUpdate(float delta) {
       base.WantsToUpdate(delta);
 
-      if (attackHeld || !IsActionComplete()) {
-        // attack starts!
-        if (!IsCooldown()) {
-          StartAction();
-          return priority;
-        }
+      // only one attack is allowed at a time
+      // TODO NOTE REVIEW maybe we may use lastAction but this is more explicit
+      if (character.meleeInProgress != null && character.meleeInProgress != this) {
+        return 0;
+      }
 
+      characterState.ValidStates(character);
+
+      if (attackHeld || !IsDone()) {
+        // attack in progress
         return priority;
       }
 
@@ -132,12 +168,13 @@ namespace UnityPlatformer {
     }
 
     public override void PerformAction(float delta) {
-      if (IsActionInProgress()) {
-        var offset = actionCounter - castFrames;
-        for (var i = 0; i < damageAreas.Length; ++i) {
+      if (state == CharacterActionTimedState.InProgress) {
+        float offset = UpdateManager.instance.runningTime - startTime;
+
+        for (int i = 0; i < damageAreas.Length; ++i) {
           if (
-            (i == damageAreas.Length -1 && offset >= damageAreas[i].offsetFrame) ||
-            (offset >= damageAreas[i].offsetFrame && offset < damageAreas[i + 1].offsetFrame)
+            offset >= damageAreas[i].startAt &&
+            offset < damageAreas[i].endAt
           ) {
             damageAreas[i].area.SetActive(true);
           } else {

@@ -12,8 +12,6 @@ namespace UnityPlatformer {
     }
   };
 
-  public class TrackCharacterAccel : SerializableDictionary<Character, float> {};
-
   /// <summary>
   /// Track tile
   /// </summary>

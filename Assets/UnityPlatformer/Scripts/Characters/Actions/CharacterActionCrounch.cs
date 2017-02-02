@@ -42,6 +42,10 @@ namespace UnityPlatformer {
       }
     }
 
+    // TODO REVIEW this is not a problem, if player attack and crounch
+    // 1 - animation could be wrong if forceAnimation is not set
+    // 2 - hitboxes will be wrong, because it's not really crouching yet
+
     /// <summary>
     /// crounch if onground and no ladder below
     /// </summary>

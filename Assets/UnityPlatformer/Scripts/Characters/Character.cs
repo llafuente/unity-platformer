@@ -78,6 +78,13 @@ namespace UnityPlatformer {
     [HideInInspector]
     public Facing faceDir;
     /// <summary>
+    /// faceDir change is allowed?\n
+    /// This is used at melee attack so when you start an attack character don't
+    /// turn and attack both sides at the same time.
+    /// </summary>
+    [HideInInspector]
+    public bool turnAllowed = true;
+    /// <summary>
     /// Current states
     /// </summary>
     [HideInInspector]
@@ -508,15 +515,6 @@ namespace UnityPlatformer {
       state |= a;
 
       // if is OnGround and doing nothing, is idling
-      Debug.LogFormat("{0} {1} {2}",
-        (state & States.OnGround) == States.OnGround,
-        velocity.x == 0,
-        (state & (
-            States.MeleeAttack | States.Slipping |
-            States.Pushing | States.Pulling
-          )) == 0
-        );
-
       if (
           (state & States.OnGround) != 0 &&
           velocity.x == 0 &&
@@ -586,6 +584,7 @@ namespace UnityPlatformer {
     virtual public void OnDeath() {
       Debug.Log("Player die! play some fancy animation!");
       UpdateManager.Remove (this);
+      gameObject.SetActive(false);
       // disable hitboxes
     }
     /// <summary>
@@ -651,17 +650,21 @@ namespace UnityPlatformer {
     /// Set faceDir manualy
     /// </summary>
     public void SetFacing(Facing f) {
-      faceDir = f;
+      if (turnAllowed) {
+        faceDir = f;
+      }
     }
     /// <summary>
     /// Based on 'horizontal movement'
     /// </summary>
     public void SetFacing(float x) {
-      if (x == 0) {
-        faceDir = Facing.None;
-      } else {
-        x = Mathf.Sign(x);
-        faceDir = x == 1 ? Facing.Right : Facing.Left;
+      if (turnAllowed) {
+        if (x == 0) {
+          faceDir = Facing.None;
+        } else {
+          x = Mathf.Sign(x);
+          faceDir = x == 1 ? Facing.Right : Facing.Left;
+        }
       }
     }
     /// <summary>

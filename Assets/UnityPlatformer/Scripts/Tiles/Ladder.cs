@@ -33,7 +33,8 @@ namespace UnityPlatformer {
     /// <summary>
     /// get BoxCollider2D
     /// </summary>
-    virtual public void Start() {
+    override public void Start() {
+      base.Start();
       body = GetComponent<BoxCollider2D>();
     }
 #if UNITY_EDITOR
