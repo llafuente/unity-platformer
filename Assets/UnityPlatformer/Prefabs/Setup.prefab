@@ -59,9 +59,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravity: {x: 0, y: -50}
   minDistanceToEnv: 0.1
-  laddersMask:
-    serializedVersion: 2
-    m_Bits: 8192
   playerTag: Player
   oneWayPlatformUpTag: OneWayPlatformUp
   oneWayPlatformDownTag: OneWayPlatformDown
@@ -78,6 +75,14 @@ MonoBehaviour:
   enemiesPriority: 30
   projectilesPriority: 20
   defaultPriority: 10
+  laddersMaskName: Ladders
+  laddersMask:
+    serializedVersion: 2
+    m_Bits: 13
+  ropesMaskName: Ropes
+  ropesMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   recieveDamageMask:
     serializedVersion: 2
     m_Bits: 4096

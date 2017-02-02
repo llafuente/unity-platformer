@@ -28,7 +28,6 @@ GameObject:
   - component: {fileID: 11472298}
   - component: {fileID: 3338226}
   - component: {fileID: 2394696}
-  - component: {fileID: 11494170}
   - component: {fileID: 11446040}
   - component: {fileID: 11417272}
   m_Layer: 8
@@ -220,11 +219,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdabf3247656ff94eb15aeba59dc2f95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 1536
+  minDistanceToEnv: 0.1
+  skinWidth: 0.2
+  horizontalRayCount: 4
+  verticalRayCount: 4
+  height: 0
+  center: {x: 0, y: 0, z: 0}
+  gravityOverride: {x: 0, y: 0}
+  terminalVelocity: {x: 50, y: 25}
+  maxClimbAngle: 45
+  maxDescendAngle: 45
+  wallAngle: 89.9
+  enableSlopes: 1
+  minTranslation: 0.01
+  useRigidbody2D: 0
   fallingTime: 0.1
   groundGraceTime: 0.05
   minVelocity: 0.05
   actions: []
   faceDir: 0
+  turnAllowed: 1
   state: 0
   area: 0
   fence: {fileID: 0}
@@ -235,17 +253,20 @@ MonoBehaviour:
   grab: {fileID: 0}
   rope: {fileID: 0}
   ropeIndex: -1
-  track: {fileID: 0}
   platform: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   worldVelocity: {x: 0, y: 0, z: 0}
   movedLastFrame: {x: 0, y: 0, z: 0}
-  pc2d: {fileID: 0}
   health: {fileID: 0}
   enterAreas: {fileID: 0}
   animator: {fileID: 0}
   forceAnimation: 
   frozen: -1
+  colBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  lastAction: {fileID: 0}
+  meleeInProgress: {fileID: 0}
   input: {fileID: 11426646}
   fireDelay: 5
 --- !u!114 &11426646
@@ -300,7 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5fa7573398ecf468c5a90c9cecef15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alignment: 0
+  alignment: 4
   friendlyFire: 0
   startingHealth: 1
   maxHealth: 1
@@ -323,30 +344,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _material: {fileID: 2100000, guid: b8c5e6f7b98848843a56c1c10d293a59, type: 2}
---- !u!114 &11494170
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 118932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ffa4b2fceab2ed41ae9003e306298a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collisionMask:
-    serializedVersion: 2
-    m_Bits: 1536
-  minDistanceToEnv: 0.1
-  skinWidth: 0.2
-  horizontalRayCount: 4
-  verticalRayCount: 4
-  gravityOverride: {x: 0, y: 0}
-  maxClimbAngle: 30
-  maxDescendAngle: 30
-  wallAngle: 89.9
-  enableSlopes: 1
-  minTranslation: 0.01
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -783,7 +780,9 @@ MonoBehaviour:
   owner: {fileID: 11446040}
   type: 0
   dealDamageToSelf: 0
-  disableWhileOnState: 0
+  characterState:
+    requiredStates: 0
+    forbiddenStates: 0
 --- !u!114 &114395109281998840
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -803,7 +802,9 @@ MonoBehaviour:
   owner: {fileID: 11446040}
   type: 1
   dealDamageToSelf: 0
-  disableWhileOnState: 0
+  characterState:
+    requiredStates: 0
+    forbiddenStates: 0
 --- !u!114 &114401966190506264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -923,7 +924,9 @@ MonoBehaviour:
   owner: {fileID: 11446040}
   type: 0
   dealDamageToSelf: 0
-  disableWhileOnState: 0
+  characterState:
+    requiredStates: 0
+    forbiddenStates: 0
 --- !u!114 &114888033628678448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -958,4 +961,6 @@ MonoBehaviour:
   owner: {fileID: 11446040}
   type: 0
   dealDamageToSelf: 0
-  disableWhileOnState: 0
+  characterState:
+    requiredStates: 0
+    forbiddenStates: 0

@@ -31,7 +31,6 @@ GameObject:
   - component: {fileID: 11442630}
   - component: {fileID: 3323292}
   - component: {fileID: 2338854}
-  - component: {fileID: 11498430}
   - component: {fileID: 11496560}
   - component: {fileID: 11406898}
   m_Layer: 16
@@ -123,7 +122,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140502}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.390308, y: 6.134967, z: 0}
+  m_LocalPosition: {x: -1.611043, y: 7.006163, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 430850}
@@ -177,7 +176,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 162516}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -235,7 +234,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: -0.3}
+  m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
   m_Size: {x: 1.1, y: 0.4}
 --- !u!61 &6149948
@@ -263,6 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a912db9ed74391f43b1fa906f464613d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   collisionMask:
     serializedVersion: 2
     m_Bits: 67840
@@ -270,6 +270,8 @@ MonoBehaviour:
   skinWidth: 0.2
   horizontalRayCount: 4
   verticalRayCount: 4
+  height: 0
+  localCenter: {x: 0, y: 0, z: 0}
   passengerMask:
     serializedVersion: 2
     m_Bits: 67840
@@ -280,6 +282,7 @@ MonoBehaviour:
   easeAmount: 0
   disableDownRayCast: 1
   startStopped: 0
+  globalWaypoints: []
 --- !u!114 &11406898
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -291,11 +294,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555ac947cf7104549a98e34d122f32ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 2147550720
+  minDistanceToEnv: 0.1
+  skinWidth: 0.2
+  horizontalRayCount: 4
+  verticalRayCount: 4
+  height: 0
+  localCenter: {x: 0, y: 0, z: 0}
+  gravityOverride: {x: 0, y: 0}
+  terminalVelocity: {x: 50, y: 25}
+  maxClimbAngle: 45
+  maxDescendAngle: 45
+  wallAngle: 89.9
+  enableSlopes: 1
+  minTranslation: 0.01
+  useRigidbody2D: 0
   fallingTime: 0
   groundGraceTime: 0.05
   minVelocity: 0.05
   actions: []
   faceDir: 0
+  turnAllowed: 1
   state: 0
   area: 0
   fence: {fileID: 0}
@@ -306,17 +328,20 @@ MonoBehaviour:
   grab: {fileID: 0}
   rope: {fileID: 0}
   ropeIndex: -1
-  track: {fileID: 0}
   platform: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   worldVelocity: {x: 0, y: 0, z: 0}
   movedLastFrame: {x: 0, y: 0, z: 0}
-  pc2d: {fileID: 0}
   health: {fileID: 0}
   enterAreas: {fileID: 0}
   animator: {fileID: 0}
   forceAnimation: 
   frozen: -1
+  colBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  lastAction: {fileID: 0}
+  meleeInProgress: {fileID: 0}
 --- !u!114 &11414688
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -390,7 +415,9 @@ MonoBehaviour:
   owner: {fileID: 11496560}
   type: 0
   dealDamageToSelf: 0
-  disableWhileOnState: 0
+  characterState:
+    requiredStates: 0
+    forbiddenStates: 0
 --- !u!114 &11496560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -402,7 +429,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5fa7573398ecf468c5a90c9cecef15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alignment: 0
+  alignment: 8
+  friendlyFire: 0
   startingHealth: 1
   maxHealth: 1
   startingLives: 1
@@ -412,30 +440,6 @@ MonoBehaviour:
   health: 0
   lives: 0
   character: {fileID: 0}
---- !u!114 &11498430
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 140502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ffa4b2fceab2ed41ae9003e306298a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collisionMask:
-    serializedVersion: 2
-    m_Bits: 67072
-  minDistanceToEnv: 0.08
-  skinWidth: 0.2
-  horizontalRayCount: 4
-  verticalRayCount: 4
-  gravityOverride: {x: 0, y: 0}
-  maxClimbAngle: 45
-  maxDescendAngle: 45
-  wallAngle: 89.9
-  enableSlopes: 1
-  minTranslation: 0.01
 --- !u!212 &21228400
 SpriteRenderer:
   m_ObjectHideFlags: 1
