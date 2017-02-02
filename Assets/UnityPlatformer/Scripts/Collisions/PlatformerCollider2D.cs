@@ -346,6 +346,7 @@ namespace UnityPlatformer {
         return;
       }
 
+      // TODO REVIEW use: Physics2D.IgnoreCollision
       // ignore oneWayPlatformsUp/Down, both aren't walls
       if (Configuration.IsOneWayPlatformUp(ray.collider) || Configuration.IsOneWayPlatformDown(ray.collider)) {
         return;

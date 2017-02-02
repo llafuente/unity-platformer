@@ -71,10 +71,19 @@ namespace UnityPlatformer {
     [HideInInspector]
     public float height;
     /// <summary>
-    /// Collider height
+    /// Collider center in world space
     /// </summary>
     [HideInInspector]
-    public Vector3 center;
+    public Vector3 center {
+      get {
+        return transform.TransformPoint(localCenter);
+      }
+    }
+    /// <summary>
+    /// Collider center in local space
+    /// </summary>
+    [HideInInspector]
+    public Vector3 localCenter;
     /// <summary>
     /// Horizontal space between vertical rays
     /// </summary>
@@ -114,7 +123,7 @@ namespace UnityPlatformer {
     internal bool gravitySwapped;
     public virtual void Start() {
       height = box.bounds.size.y;
-      center = box.bounds.center;
+      localCenter = transform.InverseTransformPoint(box.bounds.center);
 
       box.size = new Vector2(box.size.x - minDistanceToEnv, box.size.y - minDistanceToEnv);
       //box.offset = new Vector2(box.offset.x, box.offset.y + skinWidth);

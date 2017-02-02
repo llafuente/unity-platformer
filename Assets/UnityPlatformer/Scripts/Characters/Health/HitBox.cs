@@ -116,7 +116,7 @@ namespace UnityPlatformer {
     /// Return if the HitBox is disabled base on enabledOnStates
     /// </summary>
     public bool IsDisabled() {
-      return characterState.ValidStates(owner.character);
+      return !characterState.ValidStates(owner.character);
     }
 
 #if UNITY_EDITOR
@@ -159,7 +159,7 @@ namespace UnityPlatformer {
     /// I'm a DealDamage, o is RecieveDamage, then Deal Damage to it's owner!
     /// </summary>
     public void OnTriggerEnter2D(Collider2D o) {
-Log.Debug("" + o);
+
       if (type == HitBoxType.DealDamage) {
         // source disabled?
         if (IsDisabled()) {

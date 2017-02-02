@@ -10,7 +10,7 @@ namespace UnityPlatformer {
   /// Liquid tile.
   /// </summary>
   [RequireComponent (typeof (BoxCollider2D))]
-  public class Liquid : MonoBehaviour {
+  public class Liquid : Physhic2DMonoBehaviour {
     /// <summary>
     /// Viscosity affect Character Liquid movement
     /// </summary>
@@ -33,7 +33,8 @@ namespace UnityPlatformer {
     /// <summary>
     /// Get BoxCollider2D
     /// </summary>
-    virtual public void Start() {
+    override public void Start() {
+      base.Start();
       body = GetComponent<BoxCollider2D>();
     }
 #if UNITY_EDITOR
@@ -70,19 +71,6 @@ namespace UnityPlatformer {
       float char_surface_level = character.feet.y + offset + surfaceOffset;
       return GetTop().y - char_surface_level;
     }
-
-#if UNITY_EDITOR
-    /// <summary>
-    /// Draw in Editor mode
-    /// </summary>
-    [DrawGizmo(GizmoType.InSelectionHierarchy | GizmoType.NotInSelectionHierarchy)]
-    void OnDrawGizmos() {
-      if (Application.isPlaying) return;
-      if (body) {
-        body.bounds.Draw(transform);
-      }
-    }
-#endif
     /// <summary>
     /// if a Hitbox(EnterAreas) enter -> enterArea
     /// </summary>

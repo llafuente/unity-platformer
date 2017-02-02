@@ -80,5 +80,19 @@ namespace UnityPlatformer {
         Gizmos.matrix = Matrix4x4.identity;
     }
     #endif
+
+    static public Character SmartGetCharacter(GameObject obj) {
+      Character p = obj.GetComponent<Character>();
+      if (p != null) {
+        return p;
+      }
+
+      HitBox hb = obj.GetComponent<HitBox>();
+      if (hb != null) {
+        return hb.owner.character;
+      }
+
+      return null;
+    }
   }
 }

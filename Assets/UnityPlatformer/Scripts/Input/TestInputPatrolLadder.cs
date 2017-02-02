@@ -14,10 +14,6 @@ namespace UnityPlatformer {
     /// </summary>
     internal AIInput inputMgr;
     /// <summary>
-    /// PlatformerCollider2D to listen collision callbacks
-    /// </summary>
-    internal PlatformerCollider2D pc2d;
-    /// <summary>
     /// Character
     /// </summary>
     internal Character character;
@@ -34,14 +30,13 @@ namespace UnityPlatformer {
         Debug.LogWarning("AIInput is expected in the prefab");
         return;
       }
-      pc2d = prefab.instance.GetComponentInChildren<PlatformerCollider2D>();
-      character = prefab.instance.GetComponentInChildren<Character>();
 
+      character = prefab.instance.GetComponentInChildren<Character>();
 
       inputMgr.SetX(1);
       character.onAreaChange += OnAreaChange;
-      pc2d.onLeftWall += OnLeftWall;
-      pc2d.onRightWall += OnRightWall;
+      character.onLeftWall += OnLeftWall;
+      character.onRightWall += OnRightWall;
     }
     /// <summary>
     /// Listen area changes

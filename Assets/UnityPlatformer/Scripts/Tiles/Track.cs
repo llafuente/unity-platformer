@@ -32,7 +32,10 @@ namespace UnityPlatformer {
 #endif
     [Comment("Enable track if character is on given state.")]
     [EnumFlagsAttribute(order = 1)]
-    public StatesMask state;
+        /// <summary>
+    /// Combo to check character state
+    /// </summary>
+    public CharacterStatesCheck characterState;
 
     public delegate void CharacterEvent(Character c);
     public CharacterEvent onEnter;
@@ -64,57 +67,57 @@ namespace UnityPlatformer {
     /// <summary>
     /// Enable track
     /// </summary>
-    override public void CharacterEnter(Character p) {
-      //Debug.LogFormat("CharacterEnter: {0} {1}", p, p.IsOnAnyState((States)state));
+    override public void CharacterEnter(Character character) {
+      Debug.LogFormat("CharacterEnter: {0}", character);
       // only the first one enable the track
-      if (p.track == null) {
-        if (!p.IsOnAnyState((States)state)) {
+      if (character.track == null) {
+        if (!characterState.ValidStates(character)) {
           return;
         }
 
-        Log.Silly("(Track) Enter " + p.gameObject.GetFullName());
-        p.onBeforeMove += Accelerate;
-        p.EnterArea(Areas.Track);
-        p.track = new TrackData(this);
-        //p.worldVelocity += velocity;
+        Log.Silly("(Track) Enter " + character.gameObject.GetFullName());
+        character.onBeforeMove += Accelerate;
+        character.EnterArea(Areas.Track);
+        character.track = new TrackData(this);
+        //character.worldVelocity += velocity;
         if (onEnter != null) {
-          onEnter(p);
+          onEnter(character);
         }
       }
     }
     /// <summary>
     /// Disable track
     /// </summary>
-    override public void CharacterExit(Character p) {
+    override public void CharacterExit(Character character) {
       // same as above, only diable if we leave the section we are grabbing
-      if (p.track != null && p.track.track == this) {
-        Log.Silly("(Track) Leave " + p.gameObject.GetFullName());
-        p.onBeforeMove -= Accelerate;
-        p.ExitArea(Areas.Track);
+      if (character.track != null && character.track.track == this) {
+        Log.Silly("(Track) Leave " + character.gameObject.GetFullName());
+        character.onBeforeMove -= Accelerate;
+        character.ExitArea(Areas.Track);
         // when character exit, we must continue to apply the velocity
         // but this time not as world, as 'Character' velocity to keep
         // a smooth exit
         // this will be ok unless you exceeed terminalVelocity
-        p.worldVelocity -= p.track.appliedAcceleration;
-        p.velocity += p.track.appliedAcceleration;
-        p.track = null;
+        character.worldVelocity -= character.track.appliedAcceleration;
+        character.velocity += character.track.appliedAcceleration;
+        character.track = null;
         if (onExit != null) {
-          onExit(p);
+          onExit(character);
         }
       }
     }
-    override public void CharacterStay(Character p) {
+    override public void CharacterStay(Character character) {
       //Debug.LogFormat("CharacterStay: {0} {1} {2} {3} {4}", p, p.IsOnAnyState((States)state), p.track, p.worldVelocity, p.velocity);
       // already in? maybe exit
-      if (p.track != null && p.track.track == this) {
+      if (character.track != null && character.track.track == this) {
         // check
-        if (!p.IsOnAnyState((States)state)) {
-          CharacterExit(p);
+        if (!characterState.ValidStates(character)) {
+          CharacterExit(character);
         }
       } else {
         // not in? maybe enter
-        if (p.IsOnAnyState((States)state)) {
-          CharacterEnter(p);
+        if (characterState.ValidStates(character)) {
+          CharacterEnter(character);
         }
       }
     }

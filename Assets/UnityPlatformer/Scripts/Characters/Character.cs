@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityPlatformer;
+using UnityEngine.Assertions;
 
 namespace UnityPlatformer {
   /// <summary>
@@ -320,14 +321,14 @@ namespace UnityPlatformer {
       // this is not the right place... but where?! to be unique
       RaycastHit2D hit = FeetRay(
         skinWidth * 2,
-        Configuration.instance.laddersMask
+        1 << Configuration.instance.laddersMask
       );
+
+      Debug.Log((int)Configuration.instance.laddersMask);
 
       if (hit) {
         ladderBottom = hit.collider.gameObject.GetComponent<Ladder>();
-        if (ladderBottom == null) {
-          Debug.LogWarning("Object with ladder mask but no Ladder Behaviour found", hit.collider.gameObject);
-        }
+        Assert.IsNotNull(ladderBottom, "GameObject at Ladders layer without Ladder MonoBehaviour at " + hit.collider.gameObject.GetFullName());
       } else {
         ladderBottom = null;
       }

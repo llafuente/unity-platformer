@@ -95,7 +95,7 @@ namespace UnityPlatformer {
     public virtual void OnTriggerEnter2D(Collider2D o) {
       HitBox h = o.GetComponent<HitBox>();
       if (h && h.type == HitBoxType.EnterAreas) {
-        CharacterEnter(h.owner.GetComponent<Character>());
+        CharacterEnter(h.owner.character);
       }
     }
     /// <summary>
@@ -104,7 +104,7 @@ namespace UnityPlatformer {
     public virtual void OnTriggerExit2D(Collider2D o) {
       HitBox h = o.GetComponent<HitBox>();
       if (h && h.type == HitBoxType.EnterAreas) {
-        CharacterExit(h.owner.GetComponent<Character>());
+        CharacterExit(h.owner.character);
       }
     }
     /// <summary>

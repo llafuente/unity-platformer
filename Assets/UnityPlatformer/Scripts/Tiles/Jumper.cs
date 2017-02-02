@@ -39,7 +39,7 @@ namespace UnityPlatformer {
     /// If Character enter, force him to jump!
     /// </summary>
     public virtual void OnTriggerEnter2D(Collider2D o) {
-      Character p = o.GetComponent<Character>();
+      Character p = Utils.SmartGetCharacter(o.gameObject);
       if (p != null) {
         StartJump(p);
       }
