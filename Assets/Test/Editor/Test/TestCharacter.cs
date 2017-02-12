@@ -47,6 +47,7 @@ namespace UnityPlatformer.Test {
       GameObject enterGO = charObj.CreateChild("enterAreas");
       enterGO.AddComponent<BoxCollider2D>();
       enterHitBox = enterGO.AddComponent<HitBox>();
+      enterHitBox.Reset();
       enterHitBox.type = HitBoxType.EnterAreas;
       enterHitBox.gameObject.layer = 1;
 

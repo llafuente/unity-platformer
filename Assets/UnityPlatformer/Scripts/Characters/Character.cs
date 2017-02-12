@@ -324,8 +324,6 @@ namespace UnityPlatformer {
         1 << Configuration.instance.laddersMask
       );
 
-      Debug.Log((int)Configuration.instance.laddersMask);
-
       if (hit) {
         ladderBottom = hit.collider.gameObject.GetComponent<Ladder>();
         Assert.IsNotNull(ladderBottom, "GameObject at Ladders layer without Ladder MonoBehaviour at " + hit.collider.gameObject.GetFullName());

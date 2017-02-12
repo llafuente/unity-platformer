@@ -106,6 +106,9 @@ namespace UnityPlatformer {
     /// Set layer to Configuration.ropesMask
     /// </summary>
     void Reset() {
+      if (characterState == null) {
+        characterState = new CharacterStatesCheck();
+      }
       gameObject.layer = Configuration.instance.hitBoxesMask;
       owner = GetComponentInParent<CharacterHealth>();
 

@@ -76,7 +76,7 @@ namespace UnityPlatformer {
     public WaypointEvent onWaypointEvent;
 
     public PassengerEvent onEnterPassenger;
-    public PassengerEvent onLeavePassenger;
+    public PassengerEvent onExitPassenger;
 
     /// <summary>
     /// callback call when MovingPlatform is stopped
@@ -245,7 +245,7 @@ namespace UnityPlatformer {
         }
       }
 
-      if (onLeavePassenger != null) {
+      if (onExitPassenger != null) {
         for (int i = 0; i < pPassengerMovement.Count; ++i) {
           bool f = false;
           for (int j = 0; j < passengerMovement.Count; ++j) {
@@ -255,7 +255,7 @@ namespace UnityPlatformer {
             }
           }
           if (!f) {
-            onLeavePassenger(pPassengerMovement[i].transform);
+            onExitPassenger(pPassengerMovement[i].transform);
           }
         }
       }
