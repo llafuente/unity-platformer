@@ -105,7 +105,7 @@ namespace UnityPlatformer {
     /// <summary>
     /// Set layer to Configuration.ropesMask
     /// </summary>
-    void Reset() {
+    public void Reset() {
       if (characterState == null) {
         characterState = new CharacterStatesCheck();
       }
