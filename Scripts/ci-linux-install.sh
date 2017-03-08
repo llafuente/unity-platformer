@@ -4,6 +4,10 @@ set -ex
 
 UNITY_TEST_TOOL_BRANCH=5.5
 
+# try to solve some dpkg errors
+sudo apt-get clean
+sudo apt-get update && sudo apt-get upgrade
+
 wget -O unity-editor.deb 'http://beta.unity3d.com/download/59c25c92588f/unity-editor_amd64-5.5.0xp1Linux.deb'
 # install and fix dependencies broken by installing Unity
 # in the same command, because dpkg will fail...
