@@ -80,10 +80,11 @@ Input (Assets/UnityPlatformer/Scripts/Input/)
 
 The wiki contains the documentation along with the issues above
 
-* [Home](/llafuente/unity-platformer/wiki)
-* [Character setup](/llafuente/unity-platformer/wiki/Character-setup)
-* [FAQ](/llafuente/unity-platformer/wiki/FAQ)
-* [Usage](/llafuente/unity-platformer/wiki/Usage)
+* [Introduction](https://github.com/llafuente/unity-platformer/wiki)
+* [Character setup](https://github.com/llafuente/unity-platformer/wiki/Character-setup)
+* [FAQ](https://github.com/llafuente/unity-platformer/wiki/FAQ)
+* [Scene setup](https://github.com/llafuente/unity-platformer/wiki/Scene-setup)
+* [Usage](https://github.com/llafuente/unity-platformer/wiki/Usage)
 
 ## Hotswapping
 
