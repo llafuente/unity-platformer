@@ -5,6 +5,9 @@ using UnityEditor;
 using System.Collections;
 
 namespace UnityPlatformer {
+  // TODO this class is not useful enough to be extended
+  // move all logic to methods so each bit of code can be extended
+
   /// <summary>
   /// Create a player at given position
   /// </summary>
@@ -19,15 +22,26 @@ namespace UnityPlatformer {
     /// </summary>
     public bool monitor = false;
 
+    /// <summary>
+    /// Character reference
+    /// </summary>
     [HideInInspector]
     public Character character;
+    /// <summary>
+    /// Input reference
+    /// </summary>
     [HideInInspector]
     public PlatformerInput input;
+    /// <summary>
+    /// Monitor
+    /// </summary>
     [HideInInspector]
     public CharacterMonitor mon;
 
     /// <summary>
     /// Instance the prefab, rename and attach it
+    ///
+    /// To be Character must have only one Character and PlatformerInput
     /// </summary>
     /// <param name="notify">true -> SendMessage: OnInstancePrefab</param>
     public override void OnAwake(bool notify = true) {

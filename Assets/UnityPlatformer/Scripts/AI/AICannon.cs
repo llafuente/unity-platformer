@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace UnityPlatformer {
   /// <summary>
-  /// Static cannon Artificial inteligence.
+  /// Static Character that fire projectiles
   ///
-  /// This just fire projectiles enabling 'Attack' in the input every fireDelay
-  /// To configure Projectile(s) you must add CharacterActionProjectile to your
-  /// Enemy Character
+  /// Like the rest of IA just use input modification.
+  /// Enabling 'Attack' to continuosly fire projectiles.
+  /// CharacterActionProjectile is required.
   /// </summary>
   public class AICannon: Enemy {
     /// <summary>

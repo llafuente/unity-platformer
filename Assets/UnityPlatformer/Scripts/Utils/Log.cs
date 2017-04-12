@@ -53,6 +53,9 @@ namespace UnityPlatformer {
         streamWriter = new StreamWriter("./log");
       //}
     }
+    /// <summary>
+    /// define current level
+    /// </summary>
     static public void SetLevel(LogLevel lvl) {
       instance.level = lvl;
     }

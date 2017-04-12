@@ -12,15 +12,22 @@ namespace UnityPlatformer {
     /// Jump properties
     /// </summary>
     public JumpConstantSpringProperties jumpProperties;
-
+    /// <summary>
+    /// force Collider2D to be trigger using: Utils.KinematicTrigger
+    /// </summary>
     public override void Start() {
       base.Start();
-      Reset();
+      Utils.DynamicTrigger(gameObject);
     }
 
+#if UNITY_EDITOR
+    /// <summary>
+    /// Set Collider2D to be trigger using: Utils.KinematicTrigger
+    /// </summary>
     public virtual void Reset() {
       Utils.DynamicTrigger(gameObject);
     }
+#endif
 
     /// <summary>
     /// Force a player to jump!

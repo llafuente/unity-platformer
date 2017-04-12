@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityPlatformer {
   /// <summary>
-  /// Grab 'something' and freeze.
+  /// Character Grab 'something', is centered and stop. ex: grab a ring
   /// </summary>
   public class CharacterActionGrab: CharacterAction {
     /// <summary>

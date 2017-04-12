@@ -63,9 +63,13 @@ namespace UnityPlatformer {
     /// cooldownTime in frames
     /// </summary>
     protected Delay cooldown;
-
+    /// <summary>
+    /// Current action state
+    /// </summary>
     protected CharacterActionTimedState state = CharacterActionTimedState.Ready;
-
+    /// <summary>
+    /// Create Delays
+    /// </summary>
     public override void OnEnable() {
       base.OnEnable();
 
@@ -85,6 +89,9 @@ namespace UnityPlatformer {
       inprogress.Clear();
       cooldown.Clear();
     }
+    /// <summary>
+    /// Dispose Delays
+    /// </summary>
     public override void OnDisable() {
       base.OnDisable();
 

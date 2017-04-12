@@ -2,9 +2,10 @@ using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-/// TODO animationName (so we could supports multiple melee attacks)
 
 namespace UnityPlatformer {
+  // TODO animationName (so we could supports multiple melee attacks)
+
   /// <summary>
   /// Melee attack
   ///
@@ -63,8 +64,13 @@ namespace UnityPlatformer {
     /// listen action input events
     /// </summary>
     protected bool attackHeld = false;
+    /// <summary>
+    /// When attack started
+    /// </summary>
     protected float startTime = 0.0f;
-
+    /// <summary>
+    /// Setup damageAreas and listen input
+    /// </summary>
     public override void OnEnable() {
       base.OnEnable();
 
@@ -84,6 +90,13 @@ namespace UnityPlatformer {
       input.onActionDown += OnActionDown;
 
       Clear();
+    }
+    /// <summary>
+    /// remove input listeners
+    /// </summary>
+    public override void OnDisable() {
+      input.onActionUp -= OnActionUp;
+      input.onActionDown -= OnActionDown;
     }
     /// <summary>
     /// input.onActionDown callabck

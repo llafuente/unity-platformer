@@ -8,13 +8,18 @@ using UnityEditor;
 
 namespace UnityPlatformer {
 
+  /// <summary>
+  /// Base class to easy debug 2D Colliders visually in Editor and in game.
+  /// </summary>
   [RequireComponent (typeof (Collider2D))]
   public class Physhic2DMonoBehaviour : MonoBehaviour {
     /// <summary>
     /// Display collider as flat color
     /// </summary>
     public bool debug = false;
-
+    /// <summary>
+    /// Initialize Collider2DRenderer component if debug is enabled
+    /// </summary>
     public virtual void Start() {
       if (debug) {
         Utils.SetDebugCollider2D(gameObject, "Green");

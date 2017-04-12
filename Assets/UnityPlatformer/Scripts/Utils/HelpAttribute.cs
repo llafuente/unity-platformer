@@ -14,6 +14,9 @@ namespace UnityPlatformer {
     /// Help
     /// </summary>
     public readonly string Help;
+    /// <summary>
+    /// MessageType.Info
+    /// </summary>
     public readonly MessageType messageType = MessageType.Info;
     /// <summary>
     /// Constructor

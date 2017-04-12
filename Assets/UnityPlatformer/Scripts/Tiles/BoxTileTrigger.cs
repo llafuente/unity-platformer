@@ -2,30 +2,39 @@ using System;
 using UnityEngine;
 using System.Collections;
 
-// TODO review memory allocation
-
 namespace UnityPlatformer {
+  // TODO REVIEW memory allocation
+
   /// <summary>
-  /// Base class for Square trigger (BoxCollider2D)
+  /// Base class for a Square trigger (BoxCollider2D)
   /// </summary>
   [RequireComponent (typeof (BoxCollider2D))]
   [RequireComponent (typeof (Rigidbody2D))]
   public class BoxTileTrigger : Physhic2DMonoBehaviour {
-    // cache
+    /// <summary>
+    /// cached BoxCollider2D component
+    /// </summary>
     [HideInInspector]
     public BoxCollider2D body;
+    /// <summary>
+    /// List of character in the Tile
+    /// </summary>
     [HideInInspector]
     public Character[] characters;
+    /// <summary>
+    /// How many character are in the Tile
+    /// </summary>
     [HideInInspector]
     public int charCount;
 
     /// <summary>
-    /// force BoxCollider2D to be trigger
+    /// Force BoxCollider2D to be trigger using: Utils.KinematicTrigger and
+    /// initialize character list
     /// </summary>
     override public void Start() {
       base.Start();
       body = GetComponent<BoxCollider2D>();
-      Reset();
+      Utils.KinematicTrigger(gameObject);
 
       if (characters == null) {
         characters = new Character[4];
@@ -33,9 +42,14 @@ namespace UnityPlatformer {
       }
     }
 
+#if UNITY_EDITOR
+    /// <summary>
+    /// Set BoxCollider2D to be trigger using: Utils.KinematicTrigger
+    /// </summary>
     public virtual void Reset() {
       Utils.KinematicTrigger(gameObject);
     }
+#endif
 
     /// <summary>
     /// Get real-world-coordinates center

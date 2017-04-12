@@ -3,8 +3,7 @@ using System.Collections;
 
 namespace UnityPlatformer {
   /// <summary>
-  /// Box Tile
-  /// A box is a combination of a Character and MovingPlatform.
+  /// Box Tile: Implemented as a composition of Character and MovingPlatform.
   /// </summary>
   public class Box : MonoBehaviour {
     /// <summary>

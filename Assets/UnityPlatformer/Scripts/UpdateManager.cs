@@ -260,6 +260,11 @@ namespace UnityPlatformer {
     void Update() {
       ++frame;
     }
+    /// <summary>
+    /// Helper to get current delta, it's sent to
+    /// PlatformerUpdate & LatePlatformerUpdate
+    /// but could be useful if you don't want to foward it's value everywhere
+    /// </summary>
     static public float GetCurrentDelta() {
       return instance.timeScale * GetFixedDeltaTime();
     }
@@ -392,17 +397,30 @@ namespace UnityPlatformer {
     }
 
     // Delays pool
-
+    /// <summary>
+    /// List of free delays
+    /// </summary>
     [HideInInspector]
     public Delay[] freeDelays;
+    /// <summary>
+    /// How many free delays are available
+    /// </summary>
     [HideInInspector]
     public int freeDelaysCount = 0;
-
+    /// <summary>
+    /// List of Delays in use
+    /// </summary>
     [HideInInspector]
     public Delay[] delays;
+    /// <summary>
+    /// How many Delays are in use
+    /// </summary>
     [HideInInspector]
     public int delaysCount = 0;
 
+    /// <summary>
+    /// Create a new Delay (or reuse it)
+    /// </summary>
     static public Delay GetDelay(float time) {
       LazyInit();
 
@@ -423,7 +441,9 @@ namespace UnityPlatformer {
 
       return d;
     }
-
+    /// <summary>
+    /// Mark Delay to be reused
+    /// </summary>
     static public void DisposeDelay(Delay d) {
       if (LazyInit()) {
         int idx = Array.IndexOf(instance.delays, d);

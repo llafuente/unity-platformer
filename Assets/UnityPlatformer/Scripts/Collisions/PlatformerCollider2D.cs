@@ -48,7 +48,13 @@ namespace UnityPlatformer {
       get {
         return gravityOverride == Vector2.zero ? Configuration.instance.gravity : gravityOverride;
       }
+
     }
+    /// <summary>
+    /// Terminal velocity: maximum velocity that the PlatformerCollider2D could have.
+    ///
+    /// NOTE: Character.worldVelocity is applied after this terminalVelocity
+    /// </summary>
     [Comment("Terminal velocity must be positive (only Y used atm).")]
     public Vector2 terminalVelocity = new Vector2(50, 25);
     /// <summary>

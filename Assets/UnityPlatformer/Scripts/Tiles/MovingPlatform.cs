@@ -71,13 +71,17 @@ namespace UnityPlatformer {
     /// </summary>
     public delegate void WaypointEvent(int index);
     /// <summary>
-    /// It's called just after select next waypoint and before apply waitTime
+    /// Called just after select next waypoint and before apply waitTime
     /// </summary>
     public WaypointEvent onWaypointEvent;
-
+    /// <summary>
+    /// Called when a Character start being a passenger
+    /// </summary>
     public PassengerEvent onEnterPassenger;
+    /// <summary>
+    /// Called when a Character is not longer a passenger
+    /// </summary>
     public PassengerEvent onExitPassenger;
-
     /// <summary>
     /// callback call when MovingPlatform is stopped
     /// </summary>
@@ -224,9 +228,9 @@ namespace UnityPlatformer {
 
       CalculatePassengerMovement(path_velocity + offset_velocity);
 
-      MovePassengers (true);
+      MovePassengers(true);
       transform.Translate (path_velocity, Space.World);
-      MovePassengers (false);
+      MovePassengers(false);
 
       lastPosition = transform.position;
 
@@ -483,11 +487,27 @@ namespace UnityPlatformer {
     /// Struct to store information about passenger movement
     /// </summary>
     public struct PassengerMovement {
+      /// <summary>
+      /// Transform renference
+      /// </summary>
       public Transform transform;
+      /// <summary>
+      /// MovingPlatform velocity
+      /// </summary>
       public Vector3 velocity;
+      /// <summary>
+      /// Character is on the platform, and the platform push the character up
+      /// </summary>
       public bool standingOnPlatform;
+      /// <summary>
+      /// Flag to tell when to move the Character
+      /// Vertical Platforms: true
+      /// Horizontal Platforms: false
+      /// </summary>
       public bool moveBeforePlatform;
-
+      /// <summary>
+      /// constructor
+      /// </summary>
       public PassengerMovement(Transform _transform, Vector3 _velocity, bool _standingOnPlatform, bool _moveBeforePlatform) {
         transform = _transform;
         velocity = _velocity;

@@ -39,6 +39,9 @@ namespace UnityPlatformer {
   /// </summary>
   [RequireComponent (typeof (BoxCollider2D))]
   public abstract class RaycastController : MonoBehaviour {
+    /// <summary>
+    /// Enable drawing debug information, this has performance impact
+    /// </summary>
     public bool debug = false;
     [Header("Raycast")]
     /// <summary>
@@ -121,6 +124,9 @@ namespace UnityPlatformer {
     /// Set at <see cref="PlatformerCollider2D.Move" />
     /// </summary>
     internal bool gravitySwapped;
+    /// <summary>
+    /// initialize cached properties
+    /// </summary>
     public virtual void Start() {
       height = box.bounds.size.y;
       localCenter = transform.InverseTransformPoint(box.bounds.center);

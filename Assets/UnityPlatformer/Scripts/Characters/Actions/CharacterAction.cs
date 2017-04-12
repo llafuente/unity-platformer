@@ -12,9 +12,9 @@ namespace UnityPlatformer {
     WORLD_COLLISIONS = 0x02,
   };
   /// <summary>
-  /// Base class to perform an action over a character
+  /// Abstract class to perform an action over a character
   ///
-  /// Basically an action modify character state and velocity
+  /// Basically an action modify character state, velocity and/or animation
   /// </summary>
   [Serializable]
   public abstract class CharacterAction : MonoBehaviour {

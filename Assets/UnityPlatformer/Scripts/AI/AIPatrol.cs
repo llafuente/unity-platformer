@@ -5,7 +5,7 @@ namespace UnityPlatformer {
   /// <summary>
   /// Patrol Artificial inteligence.
   ///
-  /// Does not require Actions but it's recommended\n
+  /// Does not require Actions but it's recommended because:\n
   /// If no CharacterActionAirMovement it will froze while on air\n
   /// If no CharacterActionGroundMovement it will froze while on ground\n
   /// </summary>
@@ -23,17 +23,23 @@ namespace UnityPlatformer {
     public float rayLengthFactor = 1.0f;
     /// <summary>
     /// true: when reach an edge, change direction\n
-    /// false: when reach an edge, continue and fall\n
+    /// false: when reach an edge, just fall
     /// </summary>
     [Comment("Do not fall on platform edge. Go back.")]
     public bool doNotFall = true;
+    /// <summary>
+    /// true: when turn set velocity to zero so next frame will start moving
+    /// the other direction\n
+    /// false: when turn, do not touch velocity, will decelerate
+    /// before change direction
+    /// </summary>
     public bool resetVelocityOnTurn = false;
     /// <summary>
     /// Where is facing now
     /// </summary>
     internal Facing facing;
     /// <summary>
-    /// Listen onLeftWall, onRightWall and start moving
+    /// Listen onLeftWall, onRightWall and start moving in facing direction
     /// </summary>
     public override void Start() {
       base.Start();

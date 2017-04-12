@@ -144,6 +144,9 @@ namespace UnityPlatformer {
         //Handles.Label(transform.position + new Vector3(-box.size.x * 0.5f, box.size.y * 0.5f, 0), "HitBox: " + type);
     }
 #endif
+    /// <summary>
+    /// Get final collision mask, taking into consideration useGlobalMask flags
+    /// </summary>
     public LayerMask GetCollisionMask() {
       if (useGlobalMask) {
         switch(type) {

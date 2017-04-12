@@ -340,7 +340,9 @@ namespace UnityPlatformer {
     static public bool IsBox(Collider2D obj) {
       return obj.tag.IndexOf(Configuration.instance.boxTag) != -1;
     }
-
+    /// <summary>
+    /// Get nearest player to given position
+    /// </summary>
     static public Character GetNearestPlayer(Vector3 position) {
       GameObject[] gos = GameObject.FindGameObjectsWithTag(instance.playerTag);
       GameObject closest = null;

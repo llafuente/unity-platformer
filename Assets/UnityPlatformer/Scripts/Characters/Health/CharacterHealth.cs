@@ -206,7 +206,7 @@ namespace UnityPlatformer {
     public bool Damage(int amount, DamageType dt, CharacterHealth causer = null) {
       Debug.LogFormat("immunity {0} DamageType {1} alignment {2}", immunity, dt, alignment);
       if (!friendlyFire && causer.alignment == alignment) {
-        Debug.LogFormat("Cannot recieve damage from the same alignament");
+        Debug.LogFormat("Cannot recieve damage from the same alignment");
         return false;
       }
 

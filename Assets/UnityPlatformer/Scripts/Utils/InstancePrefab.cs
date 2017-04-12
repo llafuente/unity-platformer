@@ -4,7 +4,7 @@ using UnityEditor;
 #endif
 using System.Collections;
 
-// TODO alignament for image/text
+// TODO Alignment for image/text
 
 namespace UnityPlatformer {
   /// <summary>

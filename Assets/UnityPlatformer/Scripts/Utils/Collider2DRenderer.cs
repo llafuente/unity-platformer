@@ -6,12 +6,16 @@ using UnityEditor;
 
 namespace UnityPlatformer {
   /// <summary>
-  /// Create a mesh for given Collider2D and apply material.
+  /// Create a mesh for given Collider2D and apply it material.
+  ///
   /// NOTE: MeshFilter and MeshRenderer are hidden
   /// </summary>
   [ExecuteInEditMode]
   [RequireComponent(typeof(Collider2D))]
   public class Collider2DRenderer : MonoBehaviour {
+    /// <summary>
+    /// Setter/Getter Mesh material (update MeshRenderer)
+    /// </summary>
     public Material material {
       get { return _material; }
       set {
@@ -21,13 +25,26 @@ namespace UnityPlatformer {
         }
       }
     }
-
+    /// <summary>
+    /// Default material
+    /// </summary>
     static protected Material _default_material;
     [SerializeField]
+    /// <summary>
+    /// Current material
+    /// </summary>
     protected Material _material;
+    /// <summary>
+    /// MeshFilter reference
+    /// </summary>
     protected MeshFilter _mf;
+    /// <summary>
+    /// MeshRenderer reference
+    /// </summary>
     protected MeshRenderer _mr;
-
+    /// <summary>
+    /// Listen to validate event to keep the renderer sane with use input
+    /// </summary>
     void OnValidate() {
       _mf = GetComponent<MeshFilter>();
       _mr = GetComponent<MeshRenderer>();
@@ -49,7 +66,9 @@ namespace UnityPlatformer {
       _mr.hideFlags = HideFlags.HideInInspector;
     }
 
-    // clang-format on
+    /// <summary>
+    ///
+    /// </summary>
     void Start() {
       #if UNITY_EDITOR
       if (_default_material == null) {
@@ -57,7 +76,7 @@ namespace UnityPlatformer {
         //_default_material = Resources.Load("Transparent", typeof(Material)) as
         // Material;
         _default_material = AssetDatabase.LoadAssetAtPath<Material>(
-            "Noboxout/Utils/Materials/Collider2D.mat");
+            "Collider2DRenderer.mat");
         //_default_material = new Material(Shader.Find("Transparent"));
       }
       #endif
@@ -72,7 +91,9 @@ namespace UnityPlatformer {
 
       Update();
     }
-
+    /// <summary>
+    /// Create the mesh
+    /// </summary>
     void Update() {
       #if UNITY_EDITOR
       OnValidate();

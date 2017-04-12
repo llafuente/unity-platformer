@@ -48,7 +48,9 @@ namespace UnityPlatformer {
     //Frozen,
     //FreedomState
   };
-
+  /// <summary>
+  /// States as pure mask no overlapping
+  /// </summary>
   public enum StatesMask {
     None =                0,
     OnGround =            1,

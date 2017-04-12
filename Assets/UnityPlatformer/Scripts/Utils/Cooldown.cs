@@ -4,6 +4,7 @@ using UnityEngine;
 namespace UnityPlatformer {
   /// <summary>
   /// Cooldown helper
+  /// @deprecated use Delay instead
   /// </summary>
   public class Cooldown : IUpdateEntity {
     /// <summary>
@@ -26,6 +27,9 @@ namespace UnityPlatformer {
     /// callbacks
     /// </summary>
     public Action onReady;
+    /// <summary>
+    /// constructor
+    /// </summary>
     public Cooldown(float timeInSeconds) {
       counter = seconds = timeInSeconds;
       wasReady = true;

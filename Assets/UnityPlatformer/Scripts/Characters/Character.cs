@@ -11,6 +11,7 @@ namespace UnityPlatformer {
   ///
   /// Handle all movement logic and transform collider information
   /// into 'readable' information for animations.<para />
+  ///
   /// NOTE executionOrder should be -25
   /// </summary>
   [RequireComponent (typeof (CharacterHealth))]
@@ -22,12 +23,13 @@ namespace UnityPlatformer {
     [Comment("Time to wait before change state to falling.")]
     public float fallingTime = 0.1f;
     /// <summary>
-    /// Delay before exit States.OnGround.
+    /// Delay before exit States.OnGround. Allow late jumps
     /// </summary>
     [Comment("Time before disable OnGround State.")]
     public float groundGraceTime = 0.05f;
     /// <summary>
-    /// Minimum velocity. This is not a magnitude.
+    /// Minimum velocity. This is not a magnitude is per axis.
+    /// Prevent Character flickering
     /// </summary>
     public float minVelocity = 0.05f;
     /// <summary>
@@ -235,9 +237,14 @@ namespace UnityPlatformer {
     /// </summary>
     [HideInInspector]
     public Bounds colBounds;
-
+    /// <summary>
+    /// last active action
+    /// </summary>
     [HideInInspector]
     public CharacterAction lastAction;
+    /// <summary>
+    /// Melee attack in progress
+    /// </summary>
     [HideInInspector]
     public CharacterAction meleeInProgress;
     /// <summary>

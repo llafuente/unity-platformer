@@ -24,7 +24,9 @@ namespace UnityPlatformer {
     /// NOTE need to oppose gravity, so greater in other direction
     /// </summary>
     public Vector2 buoyancy = Vector2.zero;
-
+    /// <summary>
+    /// How much buoyancy apply when close to surface
+    /// </summary>
     public float buoyancySurfaceFactor = 0.5f;
     /// <summary>
     /// BoxCollider2D

@@ -12,7 +12,8 @@ namespace UnityPlatformer {
   /// Fake input for AI.
   ///
   /// Allow to manually (by code) control input/actions.\n
-  /// This way a AI is exactly like a playable character and no code duplication :)
+  /// This way a AI is exactly like a playable character
+  /// so no code duplication :)
   /// </summary>
   public class AIInput : PlatformerInput {
     /// <summary>

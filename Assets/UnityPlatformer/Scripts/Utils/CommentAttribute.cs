@@ -14,7 +14,6 @@ namespace UnityPlatformer {
     /// Comment
     /// </summary>
     public readonly string comment;
-    public readonly MessageType messageType = MessageType.Info;
     /// <summary>
     /// Constructor
     /// </summary>
@@ -51,8 +50,6 @@ namespace UnityPlatformer {
     /// Draw
     /// </summary>
     public override void OnGUI(Rect position) {
-      // this include an icon, not needed...
-      //EditorGUI.HelpBox(position, commentAttribute.comment, commentAttribute.messageType);
       EditorGUI.LabelField(position, commentAttribute.comment, EditorStyles.helpBox);
     }
   }
