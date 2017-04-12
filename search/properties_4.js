@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['size',['size',['../class_unity_platformer_1_1_box_trigger2_d.html#a36c2757ac2177f4f2920acf168a5b057',1,'UnityPlatformer::BoxTrigger2D']]]
+  ['instance',['instance',['../class_unity_platformer_1_1_log.html#a2a649c88cc282b966a0f63292938eb49',1,'UnityPlatformer.Log.instance()'],['../class_unity_platformer_1_1_m_b_singleton.html#af17293aebef0e3ddae3838686e88ef7a',1,'UnityPlatformer.MBSingleton.instance()']]]
 ];

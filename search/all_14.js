@@ -1,10 +1,14 @@
 var searchData=
 [
-  ['velocity',['velocity',['../class_unity_platformer_1_1_platformer_collider2_d_1_1_collision_info.html#a2cdd40a8e2158ba5180b1a2ef1cd62e1',1,'UnityPlatformer.PlatformerCollider2D.CollisionInfo.velocity()'],['../class_unity_platformer_1_1_projectile.html#a1b498775f6e9f4c961efd5b768de0755',1,'UnityPlatformer.Projectile.velocity()'],['../class_unity_platformer_1_1_track.html#a5893ce678390f005cde0fb2e3d7909dc',1,'UnityPlatformer.Track.velocity()']]],
-  ['verbose',['Verbose',['../class_unity_platformer_1_1_log.html#a3cea70bc59d392a427eacf25cb3351ce',1,'UnityPlatformer::Log']]],
-  ['verticaloffset',['verticalOffset',['../class_unity_platformer_1_1_camera_follow.html#af125aaeef8b25608814b5acc113e4e5b',1,'UnityPlatformer::CameraFollow']]],
-  ['verticalray',['VerticalRay',['../class_unity_platformer_1_1_raycast_controller.html#ab530cb0ac392e101aafe7da623800661',1,'UnityPlatformer::RaycastController']]],
-  ['verticalraycount',['verticalRayCount',['../class_unity_platformer_1_1_raycast_controller.html#ad57522beed6a59d2de811b524b1fc0c5',1,'UnityPlatformer::RaycastController']]],
-  ['verticalsmoothtime',['verticalSmoothTime',['../class_unity_platformer_1_1_camera_follow.html#ad3a2e0295334d042beed6afa7400e7d3',1,'UnityPlatformer::CameraFollow']]],
-  ['viscosity',['viscosity',['../class_unity_platformer_1_1_liquid.html#ac4b1be31d7cc3537bc7669893d441b30',1,'UnityPlatformer::Liquid']]]
+  ['unity_2dplatformer',['unity-platformer',['../index.html',1,'']]],
+  ['unityplatformer',['UnityPlatformer',['../namespace_unity_platformer.html',1,'']]],
+  ['update',['Update',['../class_unity_platformer_1_1_default_input.html#a4367bbb9098116dd014b4828a9473fd2',1,'UnityPlatformer.DefaultInput.Update()'],['../class_unity_platformer_1_1_platformer_input.html#ab9c7b25af51b620368fc426f0c24f3c6',1,'UnityPlatformer.PlatformerInput.Update()'],['../class_unity_platformer_1_1_character_monitor.html#a8cb751df9b037cada977baee51dccd90',1,'UnityPlatformer.CharacterMonitor.Update()'],['../class_unity_platformer_1_1_input_monitor.html#a9f8b7c522e2a9af434479e0f6c86c215',1,'UnityPlatformer.InputMonitor.Update()'],['../class_unity_platformer_1_1_platformer_collider2_d_monitor.html#a50e2cf44c3a2362f9bb0963ef989ac07',1,'UnityPlatformer.PlatformerCollider2DMonitor.Update()']]],
+  ['updateinnerbounds',['UpdateInnerBounds',['../class_unity_platformer_1_1_raycast_controller.html#a3870b0379fd6cbf9e3c1c476afb649d7',1,'UnityPlatformer::RaycastController']]],
+  ['updatemanager',['UpdateManager',['../class_unity_platformer_1_1_update_manager.html',1,'UnityPlatformer']]],
+  ['updateraycastorigins',['UpdateRaycastOrigins',['../class_unity_platformer_1_1_raycast_controller.html#a0e6aacd0b7ffed5405a257acab675ce6',1,'UnityPlatformer::RaycastController']]],
+  ['updaterotation',['UpdateRotation',['../class_unity_platformer_1_1_rope.html#a7d68b48ec2cf0a1802501a9e3c08b6d1',1,'UnityPlatformer::Rope']]],
+  ['use',['Use',['../class_unity_platformer_1_1_item.html#a24c3be34bcd00d797c6855ca103c2b64',1,'UnityPlatformer.Item.Use()'],['../class_unity_platformer_1_1_item_moving_platform_controller.html#a5d3253152706315b80707f4c6c248517',1,'UnityPlatformer.ItemMovingPlatformController.Use()']]],
+  ['usedfixedposition',['usedFixedPosition',['../class_unity_platformer_1_1_rope.html#a2539e20ffc41098323c07a78bbc4e202',1,'UnityPlatformer::Rope']]],
+  ['useglobalmask',['useGlobalMask',['../class_unity_platformer_1_1_hit_box.html#a2719727952c00e2cc161df188b4b87f5',1,'UnityPlatformer::HitBox']]],
+  ['userigidbody2d',['useRigidbody2D',['../class_unity_platformer_1_1_platformer_collider2_d.html#aee31177f6f86de340e3deb7e772881ce',1,'UnityPlatformer::PlatformerCollider2D']]]
 ];

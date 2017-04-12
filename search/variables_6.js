@@ -1,11 +1,24 @@
 var searchData=
 [
-  ['grabagaincooldown',['grabAgainCooldown',['../class_unity_platformer_1_1_character_action_grab.html#ac308bc024c86c5b764c573c732b6720c',1,'UnityPlatformer.CharacterActionGrab.grabAgainCooldown()'],['../class_unity_platformer_1_1_character_action_rope.html#a7abcf617d242688f9fac32def2bbea0c',1,'UnityPlatformer.CharacterActionRope.grabAgainCooldown()']]],
-  ['grabbingoffset',['grabbingOffset',['../class_unity_platformer_1_1_character_action_grab.html#a978acc8163dbe56bdf78a135e1cf3ffc',1,'UnityPlatformer.CharacterActionGrab.grabbingOffset()'],['../class_unity_platformer_1_1_character_action_rope.html#a0119f80fe713e8c361baf172adcc65a5',1,'UnityPlatformer.CharacterActionRope.grabbingOffset()']]],
-  ['grabheld',['grabHeld',['../class_unity_platformer_1_1_character_action_fence.html#a366f140e6694d0c826b1995ade4d2d41',1,'UnityPlatformer::CharacterActionFence']]],
-  ['gracejumptime',['graceJumpTime',['../class_unity_platformer_1_1_jump_variable_height_properties.html#a6707eeb5baf3caff687ccc57a56cdf5b',1,'UnityPlatformer::JumpVariableHeightProperties']]],
-  ['gravity',['gravity',['../class_unity_platformer_1_1_configuration.html#a87f11004babe54db5bc9a3d6e1acf8b5',1,'UnityPlatformer.Configuration.gravity()'],['../class_unity_platformer_1_1_projectile.html#a7b2312498baff31139d2eb4c045013bb',1,'UnityPlatformer.Projectile.gravity()']]],
-  ['gravityoverride',['gravityOverride',['../class_unity_platformer_1_1_platformer_collider2_d.html#a89bc348588d8c31b34bb9b0eebbdfb83',1,'UnityPlatformer::PlatformerCollider2D']]],
-  ['groundgracetime',['groundGraceTime',['../class_unity_platformer_1_1_character.html#a9971e8aca6d088991bb211ba72eb8856',1,'UnityPlatformer::Character']]],
-  ['guistyle',['guiStyle',['../class_unity_platformer_1_1_monitor.html#ac8df5da05df71e07fa99edbf48ecf24e',1,'UnityPlatformer::Monitor']]]
+  ['facedir',['faceDir',['../class_unity_platformer_1_1_character.html#a6b05c553859ad1057a51f542abefefe5',1,'UnityPlatformer::Character']]],
+  ['facing',['facing',['../class_unity_platformer_1_1_item.html#a0da6b69ae31b7979ce92df55c6a46b18',1,'UnityPlatformer::Item']]],
+  ['fallingthroughplatform',['fallingThroughPlatform',['../class_unity_platformer_1_1_platformer_collider2_d_1_1_collision_info.html#a8c19c3e2ffa5d19c3d9f671781db552b',1,'UnityPlatformer::PlatformerCollider2D::CollisionInfo']]],
+  ['fallingtime',['fallingTime',['../class_unity_platformer_1_1_character.html#a83757962bd6be1cd4707afdcd78b2a2a',1,'UnityPlatformer::Character']]],
+  ['fence',['fence',['../class_unity_platformer_1_1_character.html#a46b447dc7e89ef13c47cc04fb59ce92c',1,'UnityPlatformer::Character']]],
+  ['fenceslayername',['fencesLayerName',['../class_unity_platformer_1_1_configuration.html#a174b50a562080deb8bf4ab2a53f45ab5',1,'UnityPlatformer::Configuration']]],
+  ['fencesmask',['fencesMask',['../class_unity_platformer_1_1_configuration.html#a68bfc3894da6859a9c706a95a1613c2a',1,'UnityPlatformer::Configuration']]],
+  ['firedelay',['fireDelay',['../class_unity_platformer_1_1_a_i_cannon.html#af15eedf20fa1aa70ba160a3d36c5f821',1,'UnityPlatformer.AICannon.fireDelay()'],['../class_unity_platformer_1_1_character_action_projectile.html#a601c194edcefac8864954221e04433a5',1,'UnityPlatformer.CharacterActionProjectile.fireDelay()']]],
+  ['firemode',['fireMode',['../class_unity_platformer_1_1_character_action_projectile.html#aabc3bd62a58f6c5967c02adc7b0c41ca',1,'UnityPlatformer::CharacterActionProjectile']]],
+  ['flagproperty',['flagProperty',['../class_unity_platformer_1_1_disable_if_attribute.html#aea2710b14fac66640bbbcc2bdb5c1a64',1,'UnityPlatformer::DisableIfAttribute']]],
+  ['focusareasize',['focusAreaSize',['../class_unity_platformer_1_1_camera_follow.html#afb031b8c545dcd3dfd103c1d36cadfaa',1,'UnityPlatformer::CameraFollow']]],
+  ['forbiddenstates',['forbiddenStates',['../class_unity_platformer_1_1_character_states_check.html#a30b75f9d95ad301411b81abb2ef8eebb',1,'UnityPlatformer::CharacterStatesCheck']]],
+  ['forbidverticalmovement',['forbidVerticalMovement',['../class_unity_platformer_1_1_character_action_pull.html#ade8e7738271589eacb79a395aedb5712',1,'UnityPlatformer.CharacterActionPull.forbidVerticalMovement()'],['../class_unity_platformer_1_1_character_action_push.html#a98396ce16aae0063f43131426202d620',1,'UnityPlatformer.CharacterActionPush.forbidVerticalMovement()']]],
+  ['forceanimation',['forceAnimation',['../class_unity_platformer_1_1_character.html#af72ed5fa0efb15f2935b8160d7d6b2ac',1,'UnityPlatformer.Character.forceAnimation()'],['../class_unity_platformer_1_1_character_action_melee.html#a978b195baf1f13159c2907e170d0c54d',1,'UnityPlatformer.CharacterActionMelee.forceAnimation()']]],
+  ['forcefixeddeltatime',['forceFixedDeltaTime',['../class_unity_platformer_1_1_update_manager.html#afa811be224c01081ec87d0ed0bb15263',1,'UnityPlatformer::UpdateManager']]],
+  ['frame',['frame',['../class_unity_platformer_1_1_update_manager.html#ab01c9b7613192e4de81b359b2457b6f8',1,'UnityPlatformer::UpdateManager']]],
+  ['freedelays',['freeDelays',['../class_unity_platformer_1_1_update_manager.html#a2d1fd64bab1d96877dbaa361020a4161',1,'UnityPlatformer::UpdateManager']]],
+  ['freedelayscount',['freeDelaysCount',['../class_unity_platformer_1_1_update_manager.html#a83a35164270374760af998e827654563',1,'UnityPlatformer::UpdateManager']]],
+  ['friendlyfire',['friendlyFire',['../class_unity_platformer_1_1_character_health.html#ad975818c88303a734b9dddfcc0452d5f',1,'UnityPlatformer::CharacterHealth']]],
+  ['fromwaypointindex',['fromWaypointIndex',['../class_unity_platformer_1_1_moving_platform.html#aec79cfd725cfe24b479dd30152c30b86',1,'UnityPlatformer::MovingPlatform']]],
+  ['frozen',['frozen',['../class_unity_platformer_1_1_character.html#addde82dde9e6bff8a5a007b6ca83c1fd',1,'UnityPlatformer::Character']]]
 ];

@@ -1,9 +1,22 @@
 var searchData=
 [
-  ['easeamount',['easeAmount',['../class_unity_platformer_1_1_moving_platform.html#a76e4dc4bac2453e4b18a06a019be89c6',1,'UnityPlatformer::MovingPlatform']]],
-  ['easing',['easing',['../class_unity_platformer_1_1_rope.html#a4ce0c6a12b2baf46091bbfd7c475ff8a',1,'UnityPlatformer::Rope']]],
-  ['enableslopes',['enableSlopes',['../class_unity_platformer_1_1_platformer_collider2_d.html#a4961db2117d10ba1d291a33d373625f2',1,'UnityPlatformer::PlatformerCollider2D']]],
-  ['enablewalljumps',['enableWallJumps',['../class_unity_platformer_1_1_character_action_wall_stick.html#a2b747de937f60dc173917c6e3db2f6d7',1,'UnityPlatformer::CharacterActionWallStick']]],
-  ['enemiespriority',['enemiesPriority',['../class_unity_platformer_1_1_configuration.html#a11a9ca1f571e4c94645882761b546963',1,'UnityPlatformer::Configuration']]],
-  ['enemytag',['enemyTag',['../class_unity_platformer_1_1_configuration.html#ae7a9de8ac77ad1cb90d5f067bf65b9ed',1,'UnityPlatformer::Configuration']]]
+  ['damageareas',['damageAreas',['../class_unity_platformer_1_1_character_action_melee.html#ae5e810c61b1309faea636969633345ae',1,'UnityPlatformer::CharacterActionMelee']]],
+  ['dealdamagemask',['dealDamageMask',['../class_unity_platformer_1_1_configuration.html#af081ff887163464764c77bc850984de9',1,'UnityPlatformer::Configuration']]],
+  ['dealdamagetoself',['dealDamageToSelf',['../class_unity_platformer_1_1_hit_box.html#aeafa7b88897e8d0dd81ba29e793af461',1,'UnityPlatformer::HitBox']]],
+  ['debug',['debug',['../class_unity_platformer_1_1_update_manager.html#a1b8ed087e4275718430a9baa25d544f7',1,'UnityPlatformer.UpdateManager.debug()'],['../class_unity_platformer_1_1_camera_follow.html#a3be006b11b72056b0d4ea98c9c198be1',1,'UnityPlatformer.CameraFollow.debug()'],['../class_unity_platformer_1_1_raycast_controller.html#a96c408fb6ee3b8b9d67c4e27b1fee4ee',1,'UnityPlatformer.RaycastController.debug()'],['../class_unity_platformer_1_1_physhic2_d_mono_behaviour.html#a9f45ae300ceedb13dfbbf8b6da03215c',1,'UnityPlatformer.Physhic2DMonoBehaviour.debug()']]],
+  ['debugfontsize',['debugFontSize',['../class_unity_platformer_1_1_monitor.html#a37fc5898009d4b7fcd33a8f95e1de80f',1,'UnityPlatformer::Monitor']]],
+  ['defaultpriority',['defaultPriority',['../class_unity_platformer_1_1_configuration.html#a6ef04fca5bd21c02f793c759d475b812',1,'UnityPlatformer::Configuration']]],
+  ['delay',['delay',['../struct_unity_platformer_1_1_character_action_projectile_1_1_projectile_cfg.html#aa2e50a0468ff99211a32382f0c7a7d8b',1,'UnityPlatformer::CharacterActionProjectile::ProjectileCfg']]],
+  ['delays',['delays',['../class_unity_platformer_1_1_update_manager.html#a810469cdd1c9cc138ca2f2aca6377b3a',1,'UnityPlatformer::UpdateManager']]],
+  ['delayscount',['delaysCount',['../class_unity_platformer_1_1_update_manager.html#ab150a66a4858c993eaa7a7e7e8c6d2f0',1,'UnityPlatformer::UpdateManager']]],
+  ['descendingslope',['descendingSlope',['../class_unity_platformer_1_1_platformer_collider2_d_1_1_collision_info.html#a5148fb7b4a057431e4d60257e9eee3e2',1,'UnityPlatformer::PlatformerCollider2D::CollisionInfo']]],
+  ['destroydelay',['destroyDelay',['../class_unity_platformer_1_1_projectile.html#a3b3b779392e2555ab8fa03b383877e5d',1,'UnityPlatformer::Projectile']]],
+  ['dir',['dir',['../class_unity_platformer_1_1_platformer_collider2_d_1_1_contacts.html#a5ea34060fbfe1f332142174cb672a669',1,'UnityPlatformer::PlatformerCollider2D::Contacts']]],
+  ['direction',['direction',['../class_unity_platformer_1_1_damage.html#a736c218ae304fdc416b5e1d965cf1694',1,'UnityPlatformer::Damage']]],
+  ['disabledownraycast',['disableDownRayCast',['../class_unity_platformer_1_1_moving_platform.html#a2043a5ed8905a1bd2219a299f9959666',1,'UnityPlatformer::MovingPlatform']]],
+  ['dismountjumping',['dismountJumping',['../class_unity_platformer_1_1_character_action_fence.html#a4ce666ff408547fe9e9790a2ca818d0e',1,'UnityPlatformer.CharacterActionFence.dismountJumping()'],['../class_unity_platformer_1_1_character_action_grab.html#a7cc09ffa9f6452b3209002ce0d9c8ed6',1,'UnityPlatformer.CharacterActionGrab.dismountJumping()'],['../class_unity_platformer_1_1_character_action_ladder.html#a79ba65ab6944ff3891ca4ecbaced020c',1,'UnityPlatformer.CharacterActionLadder.dismountJumping()'],['../class_unity_platformer_1_1_character_action_rope.html#a5508c213b4d4eb71ed1a35b379010c23',1,'UnityPlatformer.CharacterActionRope.dismountJumping()']]],
+  ['dismountpressingdown',['dismountPressingDown',['../class_unity_platformer_1_1_character_action_grab.html#a6f0821675246062ec6f9eef9f439d639',1,'UnityPlatformer::CharacterActionGrab']]],
+  ['dismounttime',['dismountTime',['../class_unity_platformer_1_1_character_action_ladder.html#a4ec7269115b966bcaf88d7686fd3a4e4',1,'UnityPlatformer::CharacterActionLadder']]],
+  ['donotfall',['doNotFall',['../class_unity_platformer_1_1_a_i_patrol.html#ae94a9f80e481e3204ace82cca2a7729e',1,'UnityPlatformer::AIPatrol']]],
+  ['durationtime',['durationTime',['../class_unity_platformer_1_1_character_action_timed.html#add0bceb9c74a511dd4fc17fe4bf8ed00',1,'UnityPlatformer::CharacterActionTimed']]]
 ];

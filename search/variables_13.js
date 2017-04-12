@@ -1,8 +1,25 @@
 var searchData=
 [
-  ['velocity',['velocity',['../class_unity_platformer_1_1_platformer_collider2_d_1_1_collision_info.html#a2cdd40a8e2158ba5180b1a2ef1cd62e1',1,'UnityPlatformer.PlatformerCollider2D.CollisionInfo.velocity()'],['../class_unity_platformer_1_1_projectile.html#a1b498775f6e9f4c961efd5b768de0755',1,'UnityPlatformer.Projectile.velocity()'],['../class_unity_platformer_1_1_track.html#a5893ce678390f005cde0fb2e3d7909dc',1,'UnityPlatformer.Track.velocity()']]],
-  ['verticaloffset',['verticalOffset',['../class_unity_platformer_1_1_camera_follow.html#af125aaeef8b25608814b5acc113e4e5b',1,'UnityPlatformer::CameraFollow']]],
-  ['verticalraycount',['verticalRayCount',['../class_unity_platformer_1_1_raycast_controller.html#ad57522beed6a59d2de811b524b1fc0c5',1,'UnityPlatformer::RaycastController']]],
-  ['verticalsmoothtime',['verticalSmoothTime',['../class_unity_platformer_1_1_camera_follow.html#ad3a2e0295334d042beed6afa7400e7d3',1,'UnityPlatformer::CameraFollow']]],
-  ['viscosity',['viscosity',['../class_unity_platformer_1_1_liquid.html#ac4b1be31d7cc3537bc7669893d441b30',1,'UnityPlatformer::Liquid']]]
+  ['target',['target',['../class_unity_platformer_1_1_camera_follow.html#a77a36eed8da50438e0e835b8d7b7926f',1,'UnityPlatformer::CameraFollow']]],
+  ['targetinput',['targetInput',['../class_unity_platformer_1_1_camera_follow.html#ac0393d205ec9919e40287bec75e9e41a',1,'UnityPlatformer::CameraFollow']]],
+  ['targets',['targets',['../class_unity_platformer_1_1_item_moving_platform_controller.html#a4f85ad6038376bbcaf4d32ad852e2e4c',1,'UnityPlatformer.ItemMovingPlatformController.targets()'],['../class_unity_platformer_1_1_moving_platform_controller.html#ad6e9070de5ff63330441e3c45b09524d',1,'UnityPlatformer.MovingPlatformController.targets()']]],
+  ['terminalvelocity',['terminalVelocity',['../class_unity_platformer_1_1_platformer_collider2_d.html#a2c09be6b277c7df70cb69029fd78303e',1,'UnityPlatformer::PlatformerCollider2D']]],
+  ['terminalydown',['terminalYDown',['../class_unity_platformer_1_1_character_action_liquid_movement.html#aa1cab5dbebe6aa0a063dc79a52b8ee4c',1,'UnityPlatformer::CharacterActionLiquidMovement']]],
+  ['terminalyup',['terminalYUP',['../class_unity_platformer_1_1_character_action_liquid_movement.html#a6d04c6d9ac86c58b2a1e0dc9206844b8',1,'UnityPlatformer::CharacterActionLiquidMovement']]],
+  ['text',['text',['../class_unity_platformer_1_1_monitor.html#a1d0421694071d0d7084c88095936b660',1,'UnityPlatformer::Monitor']]],
+  ['textcolor',['textColor',['../class_unity_platformer_1_1_monitor.html#ace5e33fca99aa1952c80657d5df76d0c',1,'UnityPlatformer::Monitor']]],
+  ['ticks',['ticks',['../class_unity_platformer_1_1_jump.html#aa6c2ea585113e7247e3cb5081fcfc982',1,'UnityPlatformer::Jump']]],
+  ['timetojumpapex',['timeToJumpApex',['../class_unity_platformer_1_1_jump_variable_height_properties.html#a0f5730c4736c6b9201e45a5cb4ab91a7',1,'UnityPlatformer::JumpVariableHeightProperties']]],
+  ['topcenter',['topCenter',['../struct_unity_platformer_1_1_raycast_controller_1_1_raycast_origins.html#af79d19b8da74512aa888cd625fc79d38',1,'UnityPlatformer::RaycastController::RaycastOrigins']]],
+  ['topdismount',['topDismount',['../class_unity_platformer_1_1_ladder.html#a7c5f92b28ec45812b595452c06e1c227',1,'UnityPlatformer::Ladder']]],
+  ['topleft',['topLeft',['../struct_unity_platformer_1_1_raycast_controller_1_1_raycast_origins.html#a05180f8e6940a4fb44959bb830b98ee3',1,'UnityPlatformer::RaycastController::RaycastOrigins']]],
+  ['topright',['topRight',['../struct_unity_platformer_1_1_raycast_controller_1_1_raycast_origins.html#adf4a7b16e36e7816aa68c268c15353fe',1,'UnityPlatformer::RaycastController::RaycastOrigins']]],
+  ['towardsspeed',['towardsSpeed',['../class_unity_platformer_1_1_character_action_grab.html#a1d226aaec31a7dc2f1c0db97cb764a92',1,'UnityPlatformer.CharacterActionGrab.towardsSpeed()'],['../class_unity_platformer_1_1_character_action_ladder.html#a83a56f5ae364c48e2a1151971851a99b',1,'UnityPlatformer.CharacterActionLadder.towardsSpeed()'],['../class_unity_platformer_1_1_character_action_rope.html#add605d52dd671247083978e3960f7fe8',1,'UnityPlatformer.CharacterActionRope.towardsSpeed()']]],
+  ['towardstime',['towardsTime',['../class_unity_platformer_1_1_character_action_grab.html#a0f55aa68031977d2a84c9d8bf1106247',1,'UnityPlatformer.CharacterActionGrab.towardsTime()'],['../class_unity_platformer_1_1_character_action_ladder.html#a151a14704109e0c33ac6c65dfa8eecf6',1,'UnityPlatformer.CharacterActionLadder.towardsTime()'],['../class_unity_platformer_1_1_character_action_rope.html#a44c6669f5fc6ef1b5de2b97151cd9dcd',1,'UnityPlatformer.CharacterActionRope.towardsTime()']]],
+  ['track',['track',['../class_unity_platformer_1_1_character.html#acf6955dae25e76cdac3c90c1072e8fc4',1,'UnityPlatformer.Character.track()'],['../class_unity_platformer_1_1_track_data.html#a9c107bf6024d5a517314dc20c54e7f1b',1,'UnityPlatformer.TrackData.track()']]],
+  ['trackslayername',['tracksLayerName',['../class_unity_platformer_1_1_configuration.html#a4dc3fd291a9d622f964904cf15f759db',1,'UnityPlatformer::Configuration']]],
+  ['tracksmask',['tracksMask',['../class_unity_platformer_1_1_configuration.html#ad9a2b96ca2c6b5b0fdd923e546048231',1,'UnityPlatformer::Configuration']]],
+  ['transform',['transform',['../struct_unity_platformer_1_1_moving_platform_1_1_passenger_movement.html#a8b4cde853e3563125d9dfa33a11cd2ea',1,'UnityPlatformer::MovingPlatform::PassengerMovement']]],
+  ['turnallowed',['turnAllowed',['../class_unity_platformer_1_1_character.html#a0c25cd3531fbeb1e8ce6e09a3e4b9066',1,'UnityPlatformer::Character']]],
+  ['type',['type',['../class_unity_platformer_1_1_damage.html#a28b1a33ee5cfd7eb39481594d308c01d',1,'UnityPlatformer.Damage.type()'],['../class_unity_platformer_1_1_hit_box.html#a5f848d6f7cbe12cd2c1cca9243d00d55',1,'UnityPlatformer.HitBox.type()']]]
 ];

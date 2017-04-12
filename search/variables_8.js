@@ -1,11 +1,13 @@
 var searchData=
 [
-  ['immunity',['immunity',['../class_unity_platformer_1_1_character_health.html#a499b4a2aa02e9692db90950716549ae0',1,'UnityPlatformer::CharacterHealth']]],
-  ['index',['index',['../class_unity_platformer_1_1_rope_section.html#a60e6834fc849926b47a3aae04a5a1cbc',1,'UnityPlatformer::RopeSection']]],
-  ['initialfacing',['initialFacing',['../class_unity_platformer_1_1_a_i_goomba.html#a0bd0aa6f91ea18179bb46247866280ca',1,'UnityPlatformer::AIGoomba']]],
-  ['initialtime',['initialTime',['../class_unity_platformer_1_1_rope.html#a646106afa878c7caac88cc6da88c91fa',1,'UnityPlatformer::Rope']]],
-  ['initialvelocity',['initialVelocity',['../class_unity_platformer_1_1_jump_constant_properties.html#a6559e980e8615c672171fb6a4f007afe',1,'UnityPlatformer.JumpConstantProperties.initialVelocity()'],['../class_unity_platformer_1_1_jump_constant.html#a6f6d88054f10e17b42f5d8582a00bfa8',1,'UnityPlatformer.JumpConstant.initialVelocity()'],['../class_unity_platformer_1_1_jump_constant_spring_properties.html#a89ea9af8d03c12ac2bde019562d34fda',1,'UnityPlatformer.JumpConstantSpringProperties.initialVelocity()'],['../class_unity_platformer_1_1_jump_constant_spring.html#a29abcc3976abf1171f6d058f54a193c5',1,'UnityPlatformer.JumpConstantSpring.initialVelocity()']]],
-  ['input',['input',['../class_unity_platformer_1_1_enemy.html#abad2a19e6168c77dc72ecdbd58a7a015',1,'UnityPlatformer.Enemy.input()'],['../class_unity_platformer_1_1_character_action.html#a6ad9f3a8b6ea04bf92e9f2f8a996f565',1,'UnityPlatformer.CharacterAction.input()'],['../class_unity_platformer_1_1_input_monitor.html#aed52ebdce5692299fac8048a93725f0b',1,'UnityPlatformer.InputMonitor.input()']]],
-  ['inputsmap',['inputsMap',['../class_unity_platformer_1_1_default_input.html#a2b18ab45ed50d3292206d577dbfe2f68',1,'UnityPlatformer::DefaultInput']]],
-  ['invulnerabilitytimeafterdamage',['invulnerabilityTimeAfterDamage',['../class_unity_platformer_1_1_character_health.html#a68a89c62e04232a8210eb283640e8953',1,'UnityPlatformer::CharacterHealth']]]
+  ['handheld',['handheld',['../class_unity_platformer_1_1_default_input_1_1_input_mapping.html#a067af6dc1278dcc4181a167c74eec173',1,'UnityPlatformer::DefaultInput::InputMapping']]],
+  ['hangframes',['hangFrames',['../class_unity_platformer_1_1_jump_variable_height.html#a0ea57096ba27686ed59832adef82ccb9',1,'UnityPlatformer::JumpVariableHeight']]],
+  ['hangtime',['hangTime',['../class_unity_platformer_1_1_jump_variable_height_properties.html#a081240f5b1406b062b139ddbd12f06a2',1,'UnityPlatformer::JumpVariableHeightProperties']]],
+  ['health',['health',['../class_unity_platformer_1_1_character.html#aa7384b59382894ac7d8f5e0043f0dab5',1,'UnityPlatformer.Character.health()'],['../class_unity_platformer_1_1_character_health.html#a5c9fca96ccac484cfcf171db46780471',1,'UnityPlatformer.CharacterHealth.health()']]],
+  ['height',['height',['../class_unity_platformer_1_1_raycast_controller.html#af377887aef489fee7ec85ef5674be8a3',1,'UnityPlatformer::RaycastController']]],
+  ['help',['Help',['../class_unity_platformer_1_1_help_attribute.html#a04ac56a1727bd0a6b132efdf345fd008',1,'UnityPlatformer::HelpAttribute']]],
+  ['hit',['hit',['../class_unity_platformer_1_1_platformer_collider2_d_1_1_contacts.html#a4a239b9feb4df8d43bebb45ac0e819a9',1,'UnityPlatformer::PlatformerCollider2D::Contacts']]],
+  ['hitboxeslayername',['hitBoxesLayerName',['../class_unity_platformer_1_1_configuration.html#a91c3c7f79cbf195d6b90ffc4dca4a5bf',1,'UnityPlatformer::Configuration']]],
+  ['hitboxesmask',['hitBoxesMask',['../class_unity_platformer_1_1_configuration.html#a88ef8847b33efd115b4b6fd1982c42fb',1,'UnityPlatformer::Configuration']]],
+  ['horizontalraycount',['horizontalRayCount',['../class_unity_platformer_1_1_raycast_controller.html#afe937a5a56d96fea6991625029eae382',1,'UnityPlatformer::RaycastController']]]
 ];
