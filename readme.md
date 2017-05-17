@@ -8,20 +8,11 @@ Based on https://github.com/SebLague/2DPlatformer-Tutorial evolve
 in it's own beast.
 
 This project is 5.5, I cannot garantee 5.4 compatibility of Assets but code
-should be OK.
+should be OK as unit-test pass on 5.4
 
-## API documentation
+## API & documentation & Installation
 
 [unity-platformer API](http://llafuente.github.io/unity-platformer/)
-
-## Installation
-
-A package will be available soon, when everything is rather stable.
-
-I don't even have develop/master setup... there is no stable version
-I'm still developing and reshaping the API.
-
-Require Unity-Test-Tools to be installed in the project (or delete Assets/Tests)
 
 ## Features
 
@@ -76,15 +67,6 @@ Input (Assets/UnityPlatformer/Scripts/Input/)
 
 [https://github.com/llafuente/unity-platformer/labels/caveat](https://github.com/llafuente/unity-platformer/labels/caveat)
 
-## Wiki
-
-The wiki contains the documentation along with the issues above
-
-* [Introduction](https://github.com/llafuente/unity-platformer/wiki)
-* [Character setup](https://github.com/llafuente/unity-platformer/wiki/Character-setup)
-* [FAQ](https://github.com/llafuente/unity-platformer/wiki/FAQ)
-* [Scene setup](https://github.com/llafuente/unity-platformer/wiki/Scene-setup)
-* [Usage](https://github.com/llafuente/unity-platformer/wiki/Usage)
 
 ## Hotswapping
 

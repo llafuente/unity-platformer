@@ -18,7 +18,7 @@ namespace UnityPlatformer {
     /// </summary>
     public Alignment alignment = Alignment.None;
     /// <summary>
-    /// Can recieve Damage from friends (same alignment)
+    /// Can recieve Damage from friends? (same alignment)
     /// </summary>
     public bool friendlyFire = false;
     /// <summary>
@@ -137,11 +137,11 @@ namespace UnityPlatformer {
     /// check missconfiguration and initialization
     /// </summary>
     public void Start() {
-      Assert.IsFalse(startingHealth < maxHealth, "(CharacterHealth) startingHealth < maxHealth: " + gameObject.name);
-      Assert.IsFalse(startingLives < maxLives, "(CharacterHealth) startingLives < maxLives: " + gameObject.name);
+      Assert.IsFalse(startingHealth < maxHealth, "(CharacterHealth) startingHealth < maxHealth: " + gameObject.GetFullName());
+      Assert.IsFalse(startingLives < maxLives, "(CharacterHealth) startingLives < maxLives: " + gameObject.GetFullName());
 
       character = GetComponent<Character>();
-      Assert.IsNotNull(character, "(CharacterHealth) Character is required: " + gameObject.name);
+      Assert.IsNotNull(character, "(CharacterHealth) Character is required: " + gameObject.GetFullName());
 
       Heal(startingHealth);
       lives = startingLives;
@@ -194,8 +194,15 @@ namespace UnityPlatformer {
       Debug.LogFormat("Object: {0} recieve damage {1} health {2} from: {3}",
         gameObject.GetFullName(), dmg.amount, health, dmg.causer.gameObject.GetFullName());
 
+      Assert.IsNotNull(dmg.causer, "(CharacterHealth) Damage without causer: " + dmg.gameObject.GetFullName());
+
+      if (friendlyFire && dmg.causer.alignment == alignment && !dmg.friendlyFire) {
+        Debug.LogFormat("Damage is not meant for friends, ignore");
+        return;
+      }
+
       if (Damage(dmg.amount, dmg.type, dmg.causer)) {
-        if (dmg.causer != null && dmg.causer.onHurt != null) {
+        if (dmg.causer.onHurt != null) {
           dmg.causer.onHurt(dmg, this);
         }
       }

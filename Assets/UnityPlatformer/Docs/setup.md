@@ -77,9 +77,18 @@ many classes rely on them being initialized before.
 
 ## External libraries {#external-libraries}
 
-`unity-platformer` require UnityTestTools or remove the `Assets/Test` folder.
+`unity-platformer` is unit tested.
 
-The rest of libraries are optional. And handled with a macros
+It require UnityTestTools or `Assets/Test` folder to be removed.
+
+UnityTestTools can be installed from:
+
+* https://bitbucket.org/Unity-Technologies/unitytesttools/get/5.5.zip
+* https://bitbucket.org/Unity-Technologies/unitytesttools/get/5.3.zip
+* or Unity Asset store...
+
+The rest of libraries are optional. And handled with a macros at the top
+of each file.
 
 * `CharacterAnimatorSpriter.cs`
 

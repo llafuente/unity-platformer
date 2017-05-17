@@ -10,9 +10,6 @@ namespace UnityPlatformer.Test {
   [TestFixture]
   [Category("Character")]
   class CharacterHealthTest {
-    Character character;
-    CharacterHealth health;
-    PlatformerCollider2D col2d;
     bool onHealCalled = false;
     bool onDamageCalled = false;
     bool onImmunityCalled = false;
@@ -28,12 +25,13 @@ namespace UnityPlatformer.Test {
     Configuration config;
     UpdateManager umgr;
 
-    void FixtureCreateHealth() {
+    CharacterHealth FixtureCreateHealth(string characterName) {
       Configuration.ClearInstance();
       UpdateManager.ClearInstance();
       System.GC.Collect();
 
       var obj = new GameObject();
+      obj.name = characterName;
       config = obj.AddComponent<Configuration>();
       Assert.NotNull(config);
       umgr = obj.AddComponent<UpdateManager>();
@@ -41,13 +39,17 @@ namespace UnityPlatformer.Test {
 
 
       var objx = new GameObject();
-      character = objx.AddComponent<Character>();
+      Character character = objx.AddComponent<Character>();
       Assert.NotNull(character);
-      health = objx.GetComponent<CharacterHealth>();
+      CharacterHealth health = objx.GetComponent<CharacterHealth>();
       Assert.NotNull(health);
-      col2d = objx.GetComponent<PlatformerCollider2D>();
+      PlatformerCollider2D col2d = objx.GetComponent<PlatformerCollider2D>();
       Assert.NotNull(col2d);
 
+      return health;
+    }
+
+    void AttachEvents(CharacterHealth health) {
       health.onHeal += () => { onHealCalled = true; };
       health.onDamage += () => { onDamageCalled = true; };
       health.onImmunity += () => { onImmunityCalled = true; };
@@ -79,7 +81,8 @@ namespace UnityPlatformer.Test {
 
     [Test]
     public void DamageTest() {
-      FixtureCreateHealth();
+      CharacterHealth health = FixtureCreateHealth("testchar");
+      AttachEvents(health);
 
       health.startingHealth = 2;
       health.maxHealth = 2;
@@ -173,7 +176,8 @@ namespace UnityPlatformer.Test {
 
     [Test]
     public void DamageUpdateManagerKillTest() {
-      FixtureCreateHealth();
+      CharacterHealth health = FixtureCreateHealth("testchar");
+      AttachEvents(health);
 
       health.startingLives = 2;
       health.maxLives = 2;
@@ -282,6 +286,105 @@ namespace UnityPlatformer.Test {
       Assert.That(onDeathCalled, Is.EqualTo(true));
       Assert.That(onGameOverCalled, Is.EqualTo(true));
       Assert.That(onInvulnerabilityStartCalled, Is.EqualTo(false));
+      Assert.That(onRespawnCalled, Is.EqualTo(false));
+    }
+
+    [Test]
+    public void AlignamentTest() {
+      CharacterHealth health = FixtureCreateHealth("testchar");
+      AttachEvents(health);
+      ResetCallbacks();
+
+      health.startingLives = 2;
+      health.maxLives = 2;
+      health.startingHealth = 2;
+      health.maxHealth = 2;
+      health.alignment = Alignment.Enemy;
+
+      health.Start();
+
+      CharacterHealth health2 = FixtureCreateHealth("testchar2");
+      health2.startingLives = 2;
+      health2.maxLives = 2;
+      health2.startingHealth = 2;
+      health2.maxHealth = 2;
+      health2.alignment = Alignment.Enemy;
+      Damage damage = health2.gameObject.AddComponent<Damage>();
+
+      health2.Start();
+
+
+      //------------------------------------------
+      // DAMAGE NOT DEALT
+      // cannot recieve damage from friends
+      health.friendlyFire = false;
+      ResetCallbacks();
+
+      Assert.That(health.lives, Is.EqualTo(2));
+      Assert.That(health.health, Is.EqualTo(2));
+
+      health.Damage(damage);
+
+      Assert.That(health.lives, Is.EqualTo(2));
+      Assert.That(health.health, Is.EqualTo(2));
+
+      Assert.That(onHealCalled, Is.EqualTo(false));
+      Assert.That(onDamageCalled, Is.EqualTo(false));
+      Assert.That(onImmunityCalled, Is.EqualTo(false));
+      Assert.That(onMaxHealthCalled, Is.EqualTo(false));
+      Assert.That(onInjuredCalled, Is.EqualTo(false));
+      Assert.That(onHurtCalled, Is.EqualTo(false));
+      Assert.That(onDeathCalled, Is.EqualTo(false));
+      Assert.That(onGameOverCalled, Is.EqualTo(false));
+      Assert.That(onInvulnerabilityStartCalled, Is.EqualTo(false));
+      Assert.That(onRespawnCalled, Is.EqualTo(false));
+
+      //------------------------------------------
+      // DAMAGE NOT DEALT
+      // can recieve damage but the damage is not meant for friends
+      damage.friendlyFire = false;
+      health.friendlyFire = true;
+
+      health.Damage(damage);
+
+      Assert.That(health.lives, Is.EqualTo(2));
+      Assert.That(health.health, Is.EqualTo(2));
+
+      Assert.That(onHealCalled, Is.EqualTo(false));
+      Assert.That(onDamageCalled, Is.EqualTo(false));
+      Assert.That(onImmunityCalled, Is.EqualTo(false));
+      Assert.That(onMaxHealthCalled, Is.EqualTo(false));
+      Assert.That(onInjuredCalled, Is.EqualTo(false));
+      Assert.That(onHurtCalled, Is.EqualTo(false));
+      Assert.That(onDeathCalled, Is.EqualTo(false));
+      Assert.That(onGameOverCalled, Is.EqualTo(false));
+      Assert.That(onInvulnerabilityStartCalled, Is.EqualTo(false));
+      Assert.That(onRespawnCalled, Is.EqualTo(false));
+
+
+      //------------------------------------------
+      // DAMAGE DEALT
+      // we can recieve damage from friends and damage is unfrienly!
+      damage.friendlyFire = true;
+      health.friendlyFire = true;
+
+      Assert.That(health.lives, Is.EqualTo(2));
+      Assert.That(health.health, Is.EqualTo(2));
+
+      health.Damage(damage);
+
+      Assert.That(health.lives, Is.EqualTo(2));
+      Assert.That(health.health, Is.EqualTo(1));
+
+      Assert.That(onHealCalled, Is.EqualTo(false));
+      Assert.That(onDamageCalled, Is.EqualTo(true));
+      Assert.That(onImmunityCalled, Is.EqualTo(false));
+      Assert.That(onMaxHealthCalled, Is.EqualTo(false));
+      Assert.That(onInjuredCalled, Is.EqualTo(true));
+      Assert.That(onHurtCalled, Is.EqualTo(false));
+      Assert.That(onDeathCalled, Is.EqualTo(false));
+      Assert.That(onGameOverCalled, Is.EqualTo(false));
+      Assert.That(onInvulnerabilityStartCalled, Is.EqualTo(true));
       Assert.That(onRespawnCalled, Is.EqualTo(false));
     }
   }

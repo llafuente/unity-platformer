@@ -26,6 +26,11 @@ namespace UnityPlatformer {
     [HideInInspector]
     public Vector3 direction;
     /// <summary>
+    /// Can deal Damage to friends (same alignment)\n
+    /// NOTE: that require CharacterHealth.friendlyFire to be on.
+    /// </summary>
+    public bool friendlyFire = false;
+    /// <summary>
     /// check missconfiguration
     /// </summary>
     public void Start() {
