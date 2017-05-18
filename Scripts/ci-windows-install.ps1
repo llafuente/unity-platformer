@@ -26,13 +26,13 @@ $password = $env:UNITY_PASSWORD
 
 $password = $password -split ''
 
-$pass_commands = "Send, {" + ($password[1..($password.Length-2)] -join "}`nSleep, 100`nSend, {") + "}`n"
+$pass_commands = "ControlSend, , {" + ($password[1..($password.Length-2)] -join "}, Unity`nSleep, 100`nControlSend, , {") + "}, Unity`n"
 
 $username = $env:UNITY_USERNAME
 
 $username = $username -split ''
 
-$user_commands = "Send, {" + ($username[1..($username.Length-2)] -join "}`nSleep, 100`nSend, {") + "}`n"
+$user_commands = "ControlSend, , {" + ($username[1..($username.Length-2)] -join "}, Unity`nSleep, 100`nControlSend, , {") + "}, Unity`n"
 
 (Get-Content C:\projects\unity-platformer\Scripts\unity.ahk).replace('; username', $user_commands).replace('; password', $pass_commands) | Set-Content C:\projects\unity-platformer\unity.ahk
 
