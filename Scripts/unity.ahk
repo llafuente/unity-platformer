@@ -20,67 +20,34 @@ LOGFile = C:\projects\unity-platformer\autohotkey.txt
 Run, C:\Program Files\Unity\Editor\Unity.exe, , , PID
 Sleep, 5000
 ; App window in CI never get active...
-
-; method 1, activate by name
+FileAppend, Waited 5 seconds, %LOGFile%
+; A window's title can contain WinTitle anywhere inside it to be a match.
 SetTitleMatchMode 2
-WinActivate Unity
-WinWaitActive, ahk_pid %PID%, , 2
-Err = %ErrorLevel%
-FileAppend, Method 1 fail with %Err%, %LOGFile%
 
-if (Err <> 0)
-{
-  ; method 2, activate by PID
-  WinActivate, ahk_pid %PID%
-  WinWaitActive, ahk_pid %PID%, , 2
-  Err = %ErrorLevel%
-  FileAppend, Method 2 fail with %Err%, %LOGFile%
-  if (Err <> 0)
-  {
-    ; method 3, activate last
-    Send !{ESC}
-    WinWaitActive, ahk_pid %PID%, , 2
-    Err = %ErrorLevel%
-    FileAppend, Method 3 fail with %Err%, %LOGFile%
-    if (Err <> 0)
-    {
-      ; method 4, position in the center of the screen and click
-      CoordMode, Mouse, Screen
-      ;MouseMove, (A_ScreenWidth / 2), (A_ScreenHeight / 2)
-      Click, (A_ScreenWidth / 2), (A_ScreenHeight / 2)
-      WinWaitActive, ahk_pid %PID%, , 2
-      Err = %ErrorLevel%
-      FileAppend, Method 4 fail with %Err%, %LOGFile%
-    }
-  }
-}
-
-
-SetTitleMatchMode 1
 Sleep, 3500
 ; username
 Sleep, 100
 ; move to next input, password
-Send, {Tab}
+ControlSend, , {Tab}, Unity
 ; password
 Sleep, 100
 ; tab to submit
-Send, {Tab}
+ControlSend, , {Tab}, Unity
 Sleep, 100
-Send, {Tab}
+ControlSend, , {Tab}, Unity
 Sleep, 100
 ; submit!
-Send, {Enter}
+ControlSend, , {Enter}, Unity
 ; wait and close
 Sleep, 7500
 ;CoordMode, Mouse, Window
-Click 700, 290 ; Unity personal
-Click 700, 430 ; Next
+ControlClick x700 y290, Unity ; Unity personal
+ControlClick x700 y430, Unity ; Next
 Sleep, 2500
-Click 268, 346 ; I don't use Unity in a professional capacity
-Click 700, 430 ; Next
+ControlClick x268 y346, Unity ; I don't use Unity in a professional capacity
+ControlClick x700 y430, Unity ; Next
 Sleep, 2500
-Click 500, 390 ; Start Using Unity
+ControlClick x500 y390, Unity ; Start Using Unity
 Sleep, 2500
 WinClose, ahk_pid %PID%
 Sleep, 333
